@@ -44,7 +44,7 @@ import com.google.common.io.ByteStreams;
 /**
  * Represents a Java plugin
  */
-public class JavaPlugin extends PluginBase {
+public class JavaPlugin extends PluginBase { // Pore: remove abstract modifier
     private boolean isEnabled = false;
     private PluginLoader loader = null;
     private Server server = null;
@@ -82,7 +82,7 @@ public class JavaPlugin extends PluginBase {
         init(loader, server, description, dataFolder, file, classLoader);
     }
 
-    public JavaPlugin(final JavaPluginLoader loader, final PluginDescriptionFile description, final File dataFolder, final File file) { // Pore: protected -> public
+    protected JavaPlugin(final JavaPluginLoader loader, final PluginDescriptionFile description, final File dataFolder, final File file) {
         final ClassLoader classLoader = this.getClass().getClassLoader();
         if (classLoader instanceof PluginClassLoader) {
             throw new IllegalStateException("Cannot use initialization constructor at runtime");

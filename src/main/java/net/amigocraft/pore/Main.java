@@ -1,8 +1,7 @@
 package net.amigocraft.pore;
 
+import net.amigocraft.pore.implementation.PoreServer;
 import org.bukkit.Server;
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.InvalidDescriptionException;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginLoader;
@@ -10,8 +9,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 
 import java.io.*;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -42,7 +39,7 @@ public class Main {
 	public static void initialize(){
 		//TODO: initialize as plugin
 
-		server = new Server();
+		server = new PoreServer();
 		loader = new JavaPluginLoader(server);
 
 		File serverDir = null; //TODO: use actual server directory
