@@ -113,7 +113,7 @@ public class PoreServer implements Server {
 	}
 
 	@Override
-	public Set<PoreOfflinePlayer> getWhitelistedPlayers(){
+	public Set<OfflinePlayer> getWhitelistedPlayers(){
 		return null; //TODO: bridge
 	}
 
@@ -353,7 +353,7 @@ public class PoreServer implements Server {
 	}
 
 	@Override
-	public Set<PoreOfflinePlayer> getBannedPlayers(){
+	public Set<OfflinePlayer> getBannedPlayers(){
 		return null; //TODO: bridge
 	}
 
@@ -363,7 +363,7 @@ public class PoreServer implements Server {
 	}
 
 	@Override
-	public Set<PoreOfflinePlayer> getOperators(){
+	public Set<OfflinePlayer> getOperators(){
 		return null; //TODO: bridge
 	}
 
