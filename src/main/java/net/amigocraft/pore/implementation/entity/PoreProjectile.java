@@ -1,35 +1,13 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Projectile;
 import org.bukkit.projectiles.ProjectileSource;
 
 /**
  * Created by russjr08 on 9/8/14.
  */
-public class PoreArrow extends AbstractProjectile implements Arrow {
-    // TODO: Bridge
-
-    @Override
-    public int getKnockbackStrength() {
-        return 0;
-    }
-
-    @Override
-    public void setKnockbackStrength(int knockbackStrength) {
-
-    }
-
-    @Override
-    public boolean isCritical() {
-        return false;
-    }
-
-    @Override
-    public void setCritical(boolean critical) {
-
-    }
-
+public class PoreProjectile extends AbstractProjectile implements Projectile {
     @Override
     public LivingEntity _INVALID_getShooter() {
         return null;
@@ -59,6 +37,4 @@ public class PoreArrow extends AbstractProjectile implements Arrow {
     public void setBounce(boolean doesBounce) {
 
     }
-
-
 }

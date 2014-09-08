@@ -1,33 +1,42 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.projectiles.ProjectileSource;
+import org.bukkit.util.Vector;
 
 /**
  * Created by russjr08 on 9/8/14.
  */
-public class PoreArrow extends AbstractProjectile implements Arrow {
-    // TODO: Bridge
+public class PoreFireball extends AbstractProjectile implements Fireball {
+    @Override
+    public void setDirection(Vector direction) {
+
+    }
 
     @Override
-    public int getKnockbackStrength() {
+    public Vector getDirection() {
+        return null;
+    }
+
+    @Override
+    public void setYield(float yield) {
+
+    }
+
+    @Override
+    public float getYield() {
         return 0;
     }
 
     @Override
-    public void setKnockbackStrength(int knockbackStrength) {
+    public void setIsIncendiary(boolean isIncendiary) {
 
     }
 
     @Override
-    public boolean isCritical() {
+    public boolean isIncendiary() {
         return false;
-    }
-
-    @Override
-    public void setCritical(boolean critical) {
-
     }
 
     @Override
@@ -59,6 +68,4 @@ public class PoreArrow extends AbstractProjectile implements Arrow {
     public void setBounce(boolean doesBounce) {
 
     }
-
-
 }
