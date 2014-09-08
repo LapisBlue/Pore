@@ -11,32 +11,32 @@ public class PoreScore implements Score {
 
 	@Override
 	public OfflinePlayer getPlayer() {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public String getEntry() {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public Objective getObjective() {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public int getScore() throws IllegalStateException {
-		return 0; 
+		return 0;
 	}
 
 	@Override
 	public void setScore(int score) throws IllegalStateException {
-		 
+
 	}
 
 	@Override
 	public Scoreboard getScoreboard() {
-		return null; 
+		return null;
 	}
 
 }

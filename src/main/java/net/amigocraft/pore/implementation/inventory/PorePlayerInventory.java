@@ -8,83 +8,83 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class PorePlayerInventory extends PoreInventory implements PlayerInventory {
 
-    @Override
-    public ItemStack[] getArmorContents() {
-        return new ItemStack[0];
-    }
+	@Override
+	public ItemStack[] getArmorContents() {
+		return new ItemStack[0];
+	}
 
-    @Override
-    public ItemStack getHelmet() {
-        return null;
-    }
+	@Override
+	public ItemStack getHelmet() {
+		return null;
+	}
 
-    @Override
-    public ItemStack getChestplate() {
-        return null;
-    }
+	@Override
+	public ItemStack getChestplate() {
+		return null;
+	}
 
-    @Override
-    public ItemStack getLeggings() {
-        return null;
-    }
+	@Override
+	public ItemStack getLeggings() {
+		return null;
+	}
 
-    @Override
-    public ItemStack getBoots() {
-        return null;
-    }
+	@Override
+	public ItemStack getBoots() {
+		return null;
+	}
 
-    @Override
-    public void setArmorContents(ItemStack[] items) {
+	@Override
+	public void setArmorContents(ItemStack[] items) {
 
-    }
+	}
 
-    @Override
-    public void setHelmet(ItemStack helmet) {
+	@Override
+	public void setHelmet(ItemStack helmet) {
 
-    }
+	}
 
-    @Override
-    public void setChestplate(ItemStack chestplate) {
+	@Override
+	public void setChestplate(ItemStack chestplate) {
 
-    }
+	}
 
-    @Override
-    public void setLeggings(ItemStack leggings) {
+	@Override
+	public void setLeggings(ItemStack leggings) {
 
-    }
+	}
 
-    @Override
-    public void setBoots(ItemStack boots) {
+	@Override
+	public void setBoots(ItemStack boots) {
 
-    }
+	}
 
-    @Override
-    public ItemStack getItemInHand() {
-        return null;
-    }
+	@Override
+	public ItemStack getItemInHand() {
+		return null;
+	}
 
-    @Override
-    public void setItemInHand(ItemStack stack) {
+	@Override
+	public void setItemInHand(ItemStack stack) {
 
-    }
+	}
 
-    @Override
-    public int getHeldItemSlot() {
-        return 0;
-    }
+	@Override
+	public int getHeldItemSlot() {
+		return 0;
+	}
 
-    @Override
-    public void setHeldItemSlot(int slot) {
+	@Override
+	public void setHeldItemSlot(int slot) {
 
-    }
+	}
 
-    @Override
-    public int clear(int id, int data) {
-        return 0;
-    }
+	@Override
+	public int clear(int id, int data) {
+		return 0;
+	}
 
-    @Override
-    public Player getHolder() {
-        return null;
-    }
+	@Override
+	public Player getHolder() {
+		return null;
+	}
 }

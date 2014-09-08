@@ -11,17 +11,17 @@ public class PoreConfiguration extends PoreConfigurationSection implements Confi
 
 	@Override
 	public void addDefaults(Map<String, Object> defaults) {
-		
+
 	}
 
 	@Override
 	public void addDefaults(Configuration defaults) {
-		
+
 	}
 
 	@Override
 	public void setDefaults(Configuration defaults) {
-		
+
 	}
 
 	@Override

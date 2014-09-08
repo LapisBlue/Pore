@@ -8,18 +8,18 @@ import org.bukkit.inventory.ItemStack;
 
 public class PoreBrewerInventory extends PoreInventory implements BrewerInventory {
 
-    @Override
-    public ItemStack getIngredient() {
-        return null;
-    }
+	@Override
+	public ItemStack getIngredient() {
+		return null;
+	}
 
-    @Override
-    public void setIngredient(ItemStack ingredient) {
+	@Override
+	public void setIngredient(ItemStack ingredient) {
 
-    }
+	}
 
-    @Override
-    public BrewingStand getHolder() {
-        return null;
-    }
+	@Override
+	public BrewingStand getHolder() {
+		return null;
+	}
 }

@@ -18,12 +18,12 @@ import java.util.List;
 public class PoreDropper extends PoreBlockState implements Dropper {
 
 	@Override
-	public void drop(){
+	public void drop() {
 
 	}
 
 	@Override
-	public Inventory getInventory(){
+	public Inventory getInventory() {
 		return null;
 	}
 }

@@ -5,66 +5,67 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.util.Vector;
 
-
-
 public class PoreFireball extends AbstractProjectile implements Fireball {
-    @Override
-    public void setDirection(Vector direction) {
 
-    }
+	//TODO: Bridge
 
-    @Override
-    public Vector getDirection() {
-        return null;
-    }
+	@Override
+	public void setDirection(Vector direction) {
 
-    @Override
-    public void setYield(float yield) {
+	}
 
-    }
+	@Override
+	public Vector getDirection() {
+		return null;
+	}
 
-    @Override
-    public float getYield() {
-        return 0;
-    }
+	@Override
+	public void setYield(float yield) {
 
-    @Override
-    public void setIsIncendiary(boolean isIncendiary) {
+	}
 
-    }
+	@Override
+	public float getYield() {
+		return 0;
+	}
 
-    @Override
-    public boolean isIncendiary() {
-        return false;
-    }
+	@Override
+	public void setIsIncendiary(boolean isIncendiary) {
 
-    @Override
-    public LivingEntity _INVALID_getShooter() {
-        return null;
-    }
+	}
 
-    @Override
-    public ProjectileSource getShooter() {
-        return null;
-    }
+	@Override
+	public boolean isIncendiary() {
+		return false;
+	}
 
-    @Override
-    public void _INVALID_setShooter(LivingEntity shooter) {
+	@Override
+	public LivingEntity _INVALID_getShooter() {
+		return null;
+	}
 
-    }
+	@Override
+	public ProjectileSource getShooter() {
+		return null;
+	}
 
-    @Override
-    public void setShooter(ProjectileSource source) {
+	@Override
+	public void _INVALID_setShooter(LivingEntity shooter) {
 
-    }
+	}
 
-    @Override
-    public boolean doesBounce() {
-        return false;
-    }
+	@Override
+	public void setShooter(ProjectileSource source) {
 
-    @Override
-    public void setBounce(boolean doesBounce) {
+	}
 
-    }
+	@Override
+	public boolean doesBounce() {
+		return false;
+	}
+
+	@Override
+	public void setBounce(boolean doesBounce) {
+
+	}
 }

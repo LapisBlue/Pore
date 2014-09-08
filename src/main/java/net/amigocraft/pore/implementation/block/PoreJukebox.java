@@ -17,22 +17,22 @@ import java.util.List;
 public class PoreJukebox extends PoreBlockState implements Jukebox {
 
 	@Override
-	public Material getPlaying(){
+	public Material getPlaying() {
 		return null;
 	}
 
 	@Override
-	public void setPlaying(Material record){
+	public void setPlaying(Material record) {
 
 	}
 
 	@Override
-	public boolean isPlaying(){
+	public boolean isPlaying() {
 		return false;
 	}
 
 	@Override
-	public boolean eject(){
+	public boolean eject() {
 		return false;
 	}
 }

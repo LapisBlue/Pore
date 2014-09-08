@@ -18,7 +18,7 @@ import java.util.List;
 public class PoreBeacon extends PoreBlockState implements Beacon {
 
 	@Override
-	public Inventory getInventory(){
+	public Inventory getInventory() {
 		return null;
 	}
 }

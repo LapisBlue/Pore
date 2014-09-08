@@ -19,17 +19,17 @@ public class PoreMessenger implements Messenger {
 
 	@Override
 	public void registerOutgoingPluginChannel(Plugin plugin, String channel) {
-		
+
 	}
 
 	@Override
 	public void unregisterOutgoingPluginChannel(Plugin plugin, String channel) {
-		
+
 	}
 
 	@Override
 	public void unregisterOutgoingPluginChannel(Plugin plugin) {
-		
+
 	}
 
 	@Override
@@ -39,17 +39,17 @@ public class PoreMessenger implements Messenger {
 
 	@Override
 	public void unregisterIncomingPluginChannel(Plugin plugin, String channel, PluginMessageListener listener) {
-		
+
 	}
 
 	@Override
 	public void unregisterIncomingPluginChannel(Plugin plugin, String channel) {
-		
+
 	}
 
 	@Override
 	public void unregisterIncomingPluginChannel(Plugin plugin) {
-		
+
 	}
 
 	@Override
@@ -104,7 +104,7 @@ public class PoreMessenger implements Messenger {
 
 	@Override
 	public void dispatchIncomingMessage(Player source, String channel, byte[] message) {
-		
+
 	}
 
 }

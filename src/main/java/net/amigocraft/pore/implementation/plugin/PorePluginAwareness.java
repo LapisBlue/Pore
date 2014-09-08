@@ -4,4 +4,5 @@ import org.bukkit.plugin.PluginAwareness;
 
 //TODO: Bridge
 
-public class PorePluginAwareness implements PluginAwareness { }
+public class PorePluginAwareness implements PluginAwareness {
+}

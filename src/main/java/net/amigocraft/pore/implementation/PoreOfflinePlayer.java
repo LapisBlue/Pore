@@ -6,80 +6,82 @@ import org.bukkit.entity.Player;
 import java.util.Map;
 import java.util.UUID;
 
+//TODO: skeleton implementation
+
 public class PoreOfflinePlayer implements org.bukkit.OfflinePlayer {
 
 	@Override
-	public boolean isOnline(){
-		return false; //TODO: bridge
+	public boolean isOnline() {
+		return false;
 	}
 
 	@Override
-	public String getName(){
-		return null; //TODO: bridge
+	public String getName() {
+		return null;
 	}
 
 	@Override
-	public UUID getUniqueId(){
-		return null; //TODO: bridge
+	public UUID getUniqueId() {
+		return null;
 	}
 
 	@Override
-	public boolean isBanned(){
-		return false; //TODO: bridge
+	public boolean isBanned() {
+		return false;
 	}
 
 	@Override
-	public void setBanned(boolean banned){
-		//TODO: bridge
+	public void setBanned(boolean banned) {
+		
 	}
 
 	@Override
-	public boolean isWhitelisted(){
-		return false; //TODO: bridge
+	public boolean isWhitelisted() {
+		return false;
 	}
 
 	@Override
-	public void setWhitelisted(boolean value){
-		//TODO: bridge
+	public void setWhitelisted(boolean value) {
+		
 	}
 
 	@Override
-	public Player getPlayer(){
-		return null; //TODO: bridge
+	public Player getPlayer() {
+		return null;
 	}
 
 	@Override
-	public long getFirstPlayed(){
-		return 0; //TODO: bridge
+	public long getFirstPlayed() {
+		return 0;
 	}
 
 	@Override
-	public long getLastPlayed(){
-		return 0; //TODO: bridge
+	public long getLastPlayed() {
+		return 0;
 	}
 
 	@Override
-	public boolean hasPlayedBefore(){
-		return false; //TODO: bridge
+	public boolean hasPlayedBefore() {
+		return false;
 	}
 
 	@Override
-	public Location getBedSpawnLocation(){
-		return null; //TODO: bridge
+	public Location getBedSpawnLocation() {
+		return null;
 	}
 
 	@Override
-	public Map<String, Object> serialize(){
-		return null; //TODO: bridge
+	public Map<String, Object> serialize() {
+		return null;
 	}
 
 	@Override
-	public boolean isOp(){
-		return false; //TODO: bridge
+	public boolean isOp() {
+		return false;
 	}
 
 	@Override
-	public void setOp(boolean value){
-		//TODO: bridge
+	public void setOp(boolean value) {
+		
 	}
 }

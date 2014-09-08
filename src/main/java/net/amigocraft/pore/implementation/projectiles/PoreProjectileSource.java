@@ -10,7 +10,7 @@ public class PoreProjectileSource implements ProjectileSource {
 
 	@Override
 	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile) {
-		return null; 
+		return null;
 	}
 
 	@Override

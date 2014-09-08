@@ -9,12 +9,12 @@ public class PoreScoreboardManager implements ScoreboardManager {
 
 	@Override
 	public Scoreboard getMainScoreboard() {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public Scoreboard getNewScoreboard() {
-		return null; 
+		return null;
 	}
 
 }

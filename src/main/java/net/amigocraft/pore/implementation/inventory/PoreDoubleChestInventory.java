@@ -8,18 +8,18 @@ import org.bukkit.inventory.Inventory;
 
 public class PoreDoubleChestInventory extends PoreInventory implements DoubleChestInventory {
 
-    @Override
-    public Inventory getLeftSide() {
-        return null;
-    }
+	@Override
+	public Inventory getLeftSide() {
+		return null;
+	}
 
-    @Override
-    public Inventory getRightSide() {
-        return null;
-    }
+	@Override
+	public Inventory getRightSide() {
+		return null;
+	}
 
-    @Override
-    public DoubleChest getHolder() {
-        return null;
-    }
+	@Override
+	public DoubleChest getHolder() {
+		return null;
+	}
 }

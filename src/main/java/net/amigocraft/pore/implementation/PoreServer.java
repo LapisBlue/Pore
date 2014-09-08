@@ -24,491 +24,492 @@ import java.io.File;
 import java.util.*;
 import java.util.logging.Logger;
 
+//TODO: skeleton implementation
+
 public class PoreServer implements Server {
 
-
 	@Override
-	public String getName(){
-		return null; //TODO: bridge
+	public String getName() {
+		return null;
 	}
 
 	@Override
-	public String getVersion(){
-		return null; //TODO: bridge
+	public String getVersion() {
+		return null;
 	}
 
 	@Override
-	public String getBukkitVersion(){
-		return null; //TODO: bridge
+	public String getBukkitVersion() {
+		return null;
 	}
 
 	@Override
-	public Player[] _INVALID_getOnlinePlayers(){
-		return new Player[0]; //TODO: bridge
+	public Player[] _INVALID_getOnlinePlayers() {
+		return new Player[0];
 	}
 
 	@Override
-	public Collection<? extends Player> getOnlinePlayers(){
-		return null; //TODO: bridge
+	public Collection<? extends Player> getOnlinePlayers() {
+		return null;
 	}
 
 	@Override
-	public int getMaxPlayers(){
-		return 0; //TODO: bridge
+	public int getMaxPlayers() {
+		return 0;
 	}
 
 	@Override
-	public int getPort(){
-		return 0; //TODO: bridge
+	public int getPort() {
+		return 0;
 	}
 
 	@Override
-	public int getViewDistance(){
-		return 0; //TODO: bridge
+	public int getViewDistance() {
+		return 0;
 	}
 
 	@Override
-	public String getIp(){
-		return null; //TODO: bridge
+	public String getIp() {
+		return null;
 	}
 
 	@Override
-	public String getServerName(){
-		return null; //TODO: bridge
+	public String getServerName() {
+		return null;
 	}
 
 	@Override
-	public String getServerId(){
-		return null; //TODO: bridge
+	public String getServerId() {
+		return null;
 	}
 
 	@Override
-	public String getWorldType(){
-		return null; //TODO: bridge
+	public String getWorldType() {
+		return null;
 	}
 
 	@Override
-	public boolean getGenerateStructures(){
-		return false; //TODO: bridge
+	public boolean getGenerateStructures() {
+		return false;
 	}
 
 	@Override
-	public boolean getAllowEnd(){
-		return false; //TODO: bridge
+	public boolean getAllowEnd() {
+		return false;
 	}
 
 	@Override
-	public boolean getAllowNether(){
-		return false; //TODO: bridge
+	public boolean getAllowNether() {
+		return false;
 	}
 
 	@Override
-	public boolean hasWhitelist(){
-		return false; //TODO: bridge
+	public boolean hasWhitelist() {
+		return false;
 	}
 
 	@Override
-	public void setWhitelist(boolean value){
-		//TODO: bridge
+	public void setWhitelist(boolean value) {
+		
 	}
 
 	@Override
-	public Set<OfflinePlayer> getWhitelistedPlayers(){
-		return null; //TODO: bridge
+	public Set<OfflinePlayer> getWhitelistedPlayers() {
+		return null;
 	}
 
 	@Override
-	public void reloadWhitelist(){
-		//TODO: bridge
+	public void reloadWhitelist() {
+		
 	}
 
 	@Override
-	public int broadcastMessage(String message){
-		return 0; //TODO: bridge
+	public int broadcastMessage(String message) {
+		return 0;
 	}
 
 	@Override
-	public String getUpdateFolder(){
-		return null; //TODO: bridge
+	public String getUpdateFolder() {
+		return null;
 	}
 
 	@Override
-	public File getUpdateFolderFile(){
-		return null; //TODO: bridge
+	public File getUpdateFolderFile() {
+		return null;
 	}
 
 	@Override
-	public long getConnectionThrottle(){
-		return 0; //TODO: bridge
+	public long getConnectionThrottle() {
+		return 0;
 	}
 
 	@Override
-	public int getTicksPerAnimalSpawns(){
-		return 0; //TODO: bridge
+	public int getTicksPerAnimalSpawns() {
+		return 0;
 	}
 
 	@Override
-	public int getTicksPerMonsterSpawns(){
-		return 0; //TODO: bridge
+	public int getTicksPerMonsterSpawns() {
+		return 0;
 	}
 
 	@Override
-	public Player getPlayer(String name){
-		return null; //TODO: bridge
+	public Player getPlayer(String name) {
+		return null;
 	}
 
 	@Override
-	public Player getPlayerExact(String name){
-		return null; //TODO: bridge
+	public Player getPlayerExact(String name) {
+		return null;
 	}
 
 	@Override
-	public List<Player> matchPlayer(String name){
-		return null; //TODO: bridge
+	public List<Player> matchPlayer(String name) {
+		return null;
 	}
 
 	@Override
-	public Player getPlayer(UUID id){
-		return null; //TODO: bridge
+	public Player getPlayer(UUID id) {
+		return null;
 	}
 
 	@Override
-	public PluginManager getPluginManager(){
-		return null; //TODO: bridge
+	public PluginManager getPluginManager() {
+		return null;
 	}
 
 	@Override
-	public BukkitScheduler getScheduler(){
-		return null; //TODO: bridge
+	public BukkitScheduler getScheduler() {
+		return null;
 	}
 
 	@Override
-	public ServicesManager getServicesManager(){
-		return null; //TODO: bridge
+	public ServicesManager getServicesManager() {
+		return null;
 	}
 
 	@Override
-	public List<World> getWorlds(){
-		return null; //TODO: bridge
+	public List<World> getWorlds() {
+		return null;
 	}
 
 	@Override
-	public World createWorld(WorldCreator creator){
-		return null; //TODO: bridge
+	public World createWorld(WorldCreator creator) {
+		return null;
 	}
 
 	@Override
-	public boolean unloadWorld(String name, boolean save){
-		return false; //TODO: bridge
+	public boolean unloadWorld(String name, boolean save) {
+		return false;
 	}
 
 	@Override
-	public boolean unloadWorld(World world, boolean save){
-		return false; //TODO: bridge
+	public boolean unloadWorld(World world, boolean save) {
+		return false;
 	}
 
 	@Override
-	public World getWorld(String name){
-		return null; //TODO: bridge
+	public World getWorld(String name) {
+		return null;
 	}
 
 	@Override
-	public World getWorld(UUID uid){
-		return null; //TODO: bridge
+	public World getWorld(UUID uid) {
+		return null;
 	}
 
 	@Override
-	public MapView getMap(short id){
-		return null; //TODO: bridge
+	public MapView getMap(short id) {
+		return null;
 	}
 
 	@Override
-	public MapView createMap(World world){
-		return null; //TODO: bridge
+	public MapView createMap(World world) {
+		return null;
 	}
 
 	@Override
-	public void reload(){
-		//TODO: bridge
+	public void reload() {
+		
 	}
 
 	@Override
-	public Logger getLogger(){
-		return null; //TODO: bridge
+	public Logger getLogger() {
+		return null;
 	}
 
 	@Override
-	public PluginCommand getPluginCommand(String name){
-		return null; //TODO: bridge
+	public PluginCommand getPluginCommand(String name) {
+		return null;
 	}
 
 	@Override
-	public void savePlayers(){
-		//TODO: bridge
+	public void savePlayers() {
+		
 	}
 
 	@Override
-	public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException{
-		return false; //TODO: bridge
+	public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException {
+		return false;
 	}
 
 	@Override
-	public void configureDbConfig(ServerConfig config){
-		//TODO: bridge
+	public void configureDbConfig(ServerConfig config) {
+		
 	}
 
 	@Override
-	public boolean addRecipe(Recipe recipe){
-		return false; //TODO: bridge
+	public boolean addRecipe(Recipe recipe) {
+		return false;
 	}
 
 	@Override
-	public List<Recipe> getRecipesFor(ItemStack result){
-		return null; //TODO: bridge
+	public List<Recipe> getRecipesFor(ItemStack result) {
+		return null;
 	}
 
 	@Override
-	public Iterator<Recipe> recipeIterator(){
-		return null; //TODO: bridge
+	public Iterator<Recipe> recipeIterator() {
+		return null;
 	}
 
 	@Override
-	public void clearRecipes(){
-		//TODO: bridge
+	public void clearRecipes() {
+		
 	}
 
 	@Override
-	public void resetRecipes(){
-		//TODO: bridge
+	public void resetRecipes() {
+		
 	}
 
 	@Override
-	public Map<String, String[]> getCommandAliases(){
-		return null; //TODO: bridge
+	public Map<String, String[]> getCommandAliases() {
+		return null;
 	}
 
 	@Override
-	public int getSpawnRadius(){
-		return 0; //TODO: bridge
+	public int getSpawnRadius() {
+		return 0;
 	}
 
 	@Override
-	public void setSpawnRadius(int value){
-		//TODO: bridge
+	public void setSpawnRadius(int value) {
+		
 	}
 
 	@Override
-	public boolean getOnlineMode(){
-		return false; //TODO: bridge
+	public boolean getOnlineMode() {
+		return false;
 	}
 
 	@Override
-	public boolean getAllowFlight(){
-		return false; //TODO: bridge
+	public boolean getAllowFlight() {
+		return false;
 	}
 
 	@Override
-	public boolean isHardcore(){
-		return false; //TODO: bridge
+	public boolean isHardcore() {
+		return false;
 	}
 
 	@Override
-	public boolean useExactLoginLocation(){
-		return false; //TODO: bridge
+	public boolean useExactLoginLocation() {
+		return false;
 	}
 
 	@Override
-	public void shutdown(){
-		//TODO: bridge
+	public void shutdown() {
+		
 	}
 
 	@Override
-	public int broadcast(String message, String permission){
-		return 0; //TODO: bridge
+	public int broadcast(String message, String permission) {
+		return 0;
 	}
 
 	@Override
-	public PoreOfflinePlayer getOfflinePlayer(String name){
-		return null; //TODO: bridge
+	public PoreOfflinePlayer getOfflinePlayer(String name) {
+		return null;
 	}
 
 	@Override
-	public PoreOfflinePlayer getOfflinePlayer(UUID id){
-		return null; //TODO: bridge
+	public PoreOfflinePlayer getOfflinePlayer(UUID id) {
+		return null;
 	}
 
 	@Override
-	public Set<String> getIPBans(){
-		return null; //TODO: bridge
+	public Set<String> getIPBans() {
+		return null;
 	}
 
 	@Override
-	public void banIP(String address){
-		//TODO: bridge
+	public void banIP(String address) {
+		
 	}
 
 	@Override
-	public void unbanIP(String address){
-		//TODO: bridge
+	public void unbanIP(String address) {
+		
 	}
 
 	@Override
-	public Set<OfflinePlayer> getBannedPlayers(){
-		return null; //TODO: bridge
+	public Set<OfflinePlayer> getBannedPlayers() {
+		return null;
 	}
 
 	@Override
-	public BanList getBanList(BanList.Type type){
-		return null; //TODO: bridge
+	public BanList getBanList(BanList.Type type) {
+		return null;
 	}
 
 	@Override
-	public Set<OfflinePlayer> getOperators(){
-		return null; //TODO: bridge
+	public Set<OfflinePlayer> getOperators() {
+		return null;
 	}
 
 	@Override
-	public GameMode getDefaultGameMode(){
-		return null; //TODO: bridge
+	public GameMode getDefaultGameMode() {
+		return null;
 	}
 
 	@Override
-	public void setDefaultGameMode(GameMode mode){
-		//TODO: bridge
+	public void setDefaultGameMode(GameMode mode) {
+		
 	}
 
 	@Override
-	public ConsoleCommandSender getConsoleSender(){
-		return null; //TODO: bridge
+	public ConsoleCommandSender getConsoleSender() {
+		return null;
 	}
 
 	@Override
-	public File getWorldContainer(){
-		return null; //TODO: bridge
+	public File getWorldContainer() {
+		return null;
 	}
 
 	@Override
-	public PoreOfflinePlayer[] getOfflinePlayers(){
-		return new PoreOfflinePlayer[0]; //TODO: bridge
+	public PoreOfflinePlayer[] getOfflinePlayers() {
+		return new PoreOfflinePlayer[0];
 	}
 
 	@Override
-	public Messenger getMessenger(){
-		return null; //TODO: bridge
+	public Messenger getMessenger() {
+		return null;
 	}
 
 	@Override
-	public HelpMap getHelpMap(){
-		return null; //TODO: bridge
+	public HelpMap getHelpMap() {
+		return null;
 	}
 
 	@Override
-	public Inventory createInventory(InventoryHolder owner, InventoryType type){
-		return null; //TODO: bridge
+	public Inventory createInventory(InventoryHolder owner, InventoryType type) {
+		return null;
 	}
 
 	@Override
-	public Inventory createInventory(InventoryHolder owner, InventoryType type, String title){
-		return null; //TODO: bridge
+	public Inventory createInventory(InventoryHolder owner, InventoryType type, String title) {
+		return null;
 	}
 
 	@Override
-	public Inventory createInventory(InventoryHolder owner, int size) throws IllegalArgumentException{
-		return null; //TODO: bridge
+	public Inventory createInventory(InventoryHolder owner, int size) throws IllegalArgumentException {
+		return null;
 	}
 
 	@Override
-	public Inventory createInventory(InventoryHolder owner, int size, String title) throws IllegalArgumentException{
-		return null; //TODO: bridge
+	public Inventory createInventory(InventoryHolder owner, int size, String title) throws IllegalArgumentException {
+		return null;
 	}
 
 	@Override
-	public int getMonsterSpawnLimit(){
-		return 0; //TODO: bridge
+	public int getMonsterSpawnLimit() {
+		return 0;
 	}
 
 	@Override
-	public int getAnimalSpawnLimit(){
-		return 0; //TODO: bridge
+	public int getAnimalSpawnLimit() {
+		return 0;
 	}
 
 	@Override
-	public int getWaterAnimalSpawnLimit(){
-		return 0; //TODO: bridge
+	public int getWaterAnimalSpawnLimit() {
+		return 0;
 	}
 
 	@Override
-	public int getAmbientSpawnLimit(){
-		return 0; //TODO: bridge
+	public int getAmbientSpawnLimit() {
+		return 0;
 	}
 
 	@Override
-	public boolean isPrimaryThread(){
-		return false; //TODO: bridge
+	public boolean isPrimaryThread() {
+		return false;
 	}
 
 	@Override
-	public String getMotd(){
-		return null; //TODO: bridge
+	public String getMotd() {
+		return null;
 	}
 
 	@Override
-	public String getShutdownMessage(){
-		return null; //TODO: bridge
+	public String getShutdownMessage() {
+		return null;
 	}
 
 	@Override
-	public Warning.WarningState getWarningState(){
-		return null; //TODO: bridge
+	public Warning.WarningState getWarningState() {
+		return null;
 	}
 
 	@Override
-	public ItemFactory getItemFactory(){
-		return null; //TODO: bridge
+	public ItemFactory getItemFactory() {
+		return null;
 	}
 
 	@Override
-	public ScoreboardManager getScoreboardManager(){
-		return null; //TODO: bridge
+	public ScoreboardManager getScoreboardManager() {
+		return null;
 	}
 
 	@Override
-	public CachedServerIcon getServerIcon(){
-		return null; //TODO: bridge
+	public CachedServerIcon getServerIcon() {
+		return null;
 	}
 
 	@Override
-	public CachedServerIcon loadServerIcon(File file) throws IllegalArgumentException, Exception{
-		return null; //TODO: bridge
+	public CachedServerIcon loadServerIcon(File file) throws IllegalArgumentException, Exception {
+		return null;
 	}
 
 	@Override
-	public CachedServerIcon loadServerIcon(BufferedImage image) throws IllegalArgumentException, Exception{
-		return null; //TODO: bridge
+	public CachedServerIcon loadServerIcon(BufferedImage image) throws IllegalArgumentException, Exception {
+		return null;
 	}
 
 	@Override
-	public void setIdleTimeout(int threshold){
-		//TODO: bridge
+	public void setIdleTimeout(int threshold) {
+		
 	}
 
 	@Override
-	public int getIdleTimeout(){
-		return 0; //TODO: bridge
+	public int getIdleTimeout() {
+		return 0;
 	}
 
 	@Override
-	public UnsafeValues getUnsafe(){
-		return null; //TODO: bridge
+	public UnsafeValues getUnsafe() {
+		return null;
 	}
 
 	@Override
-	public void sendPluginMessage(Plugin source, String channel, byte[] message){
-		//TODO: bridge
+	public void sendPluginMessage(Plugin source, String channel, byte[] message) {
+		
 	}
 
 	@Override
-	public Set<String> getListeningPluginChannels(){
-		return null; //TODO: bridge
+	public Set<String> getListeningPluginChannels() {
+		return null;
 	}
 }

@@ -67,7 +67,7 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public void set(String path, Object value) {
-		
+
 	}
 
 	@Override
@@ -297,7 +297,7 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public void addDefault(String path, Object value) {
-		
+
 	}
 
 }

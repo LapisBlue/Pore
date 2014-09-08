@@ -9,7 +9,7 @@ import org.bukkit.map.MapView;
 public class PoreMapView implements MapView {
 
 	// TODO: Bridge
-	
+
 	@Override
 	public short getId() {
 		return 0;
@@ -27,7 +27,7 @@ public class PoreMapView implements MapView {
 
 	@Override
 	public void setScale(Scale scale) {
-		
+
 	}
 
 	@Override
@@ -42,12 +42,12 @@ public class PoreMapView implements MapView {
 
 	@Override
 	public void setCenterX(int x) {
-		
+
 	}
 
 	@Override
 	public void setCenterZ(int z) {
-		
+
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class PoreMapView implements MapView {
 
 	@Override
 	public void setWorld(World world) {
-		
+
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class PoreMapView implements MapView {
 
 	@Override
 	public void addRenderer(MapRenderer renderer) {
-		
+
 	}
 
 	@Override

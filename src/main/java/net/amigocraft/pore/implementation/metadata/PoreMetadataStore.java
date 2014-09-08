@@ -26,12 +26,12 @@ public class PoreMetadataStore<T> implements MetadataStore<T> {
 
 	@Override
 	public void removeMetadata(T subject, String metadataKey, Plugin owningPlugin) {
-		
+
 	}
 
 	@Override
 	public void invalidateAll(Plugin owningPlugin) {
-		
+
 	}
 
 

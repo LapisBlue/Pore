@@ -11,7 +11,7 @@ public class PorePluginMessageRecipient implements PluginMessageRecipient {
 
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message) {
-		
+
 	}
 
 	@Override

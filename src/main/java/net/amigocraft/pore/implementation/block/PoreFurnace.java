@@ -18,27 +18,27 @@ import java.util.List;
 public class PoreFurnace extends PoreBlockState implements Furnace {
 
 	@Override
-	public short getBurnTime(){
+	public short getBurnTime() {
 		return 0;
 	}
 
 	@Override
-	public void setBurnTime(short burnTime){
+	public void setBurnTime(short burnTime) {
 
 	}
 
 	@Override
-	public short getCookTime(){
+	public short getCookTime() {
 		return 0;
 	}
 
 	@Override
-	public void setCookTime(short cookTime){
+	public void setCookTime(short cookTime) {
 
 	}
 
 	@Override
-	public FurnaceInventory getInventory(){
+	public FurnaceInventory getInventory() {
 		return null;
 	}
 }

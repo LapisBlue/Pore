@@ -15,7 +15,7 @@ public class PoreColorable implements Colorable {
 
 	@Override
 	public void setColor(DyeColor color) {
-		
+
 	}
 
 }

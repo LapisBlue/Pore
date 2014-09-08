@@ -21,32 +21,32 @@ public class PorePluginLoader implements PluginLoader {
 
 	@Override
 	public Plugin loadPlugin(File file) throws InvalidPluginException, UnknownDependencyException {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public PluginDescriptionFile getPluginDescription(File file) throws InvalidDescriptionException {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public Pattern[] getPluginFileFilters() {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public Map<Class<? extends Event>, Set<RegisteredListener>> createRegisteredListeners(Listener listener, Plugin plugin) {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public void enablePlugin(Plugin plugin) {
-		 
+
 	}
 
 	@Override
 	public void disablePlugin(Plugin plugin) {
-		 
+
 	}
 
 }

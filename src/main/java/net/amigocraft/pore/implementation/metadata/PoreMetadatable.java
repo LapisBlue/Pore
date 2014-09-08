@@ -12,7 +12,7 @@ public class PoreMetadatable implements Metadatable {
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-		
+
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class PoreMetadatable implements Metadatable {
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-		
+
 	}
 
 }

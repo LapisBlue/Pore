@@ -12,5 +12,5 @@ public class PoreHelpTopicFactory<TCommand extends Command> implements HelpTopic
 	public HelpTopic createTopic(TCommand command) {
 		return null;
 	}
-	
+
 }

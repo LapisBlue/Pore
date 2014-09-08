@@ -11,17 +11,17 @@ public class PoreBlockProjectileSource implements BlockProjectileSource {
 
 	@Override
 	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile) {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public <T extends Projectile> T launchProjectile(Class<? extends T> projectile, Vector velocity) {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public Block getBlock() {
-		return null; 
+		return null;
 	}
 
 }

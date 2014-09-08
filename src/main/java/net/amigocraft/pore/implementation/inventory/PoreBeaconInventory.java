@@ -7,13 +7,13 @@ import org.bukkit.inventory.ItemStack;
 
 public class PoreBeaconInventory extends PoreInventory implements BeaconInventory {
 
-    @Override
-    public void setItem(ItemStack item) {
+	@Override
+	public void setItem(ItemStack item) {
 
-    }
+	}
 
-    @Override
-    public ItemStack getItem() {
-        return null;
-    }
+	@Override
+	public ItemStack getItem() {
+		return null;
+	}
 }

@@ -2,51 +2,52 @@ package net.amigocraft.pore.implementation.entity;
 
 import org.bukkit.entity.Ageable;
 
-
-
 public class PoreAgeable extends PoreCreature implements Ageable {
-    @Override
-    public int getAge() {
-        return 0;
-    }
 
-    @Override
-    public void setAge(int age) {
+	//TODO: Bridge
 
-    }
+	@Override
+	public int getAge() {
+		return 0;
+	}
 
-    @Override
-    public void setAgeLock(boolean lock) {
+	@Override
+	public void setAge(int age) {
 
-    }
+	}
 
-    @Override
-    public boolean getAgeLock() {
-        return false;
-    }
+	@Override
+	public void setAgeLock(boolean lock) {
 
-    @Override
-    public void setBaby() {
+	}
 
-    }
+	@Override
+	public boolean getAgeLock() {
+		return false;
+	}
 
-    @Override
-    public void setAdult() {
+	@Override
+	public void setBaby() {
 
-    }
+	}
 
-    @Override
-    public boolean isAdult() {
-        return false;
-    }
+	@Override
+	public void setAdult() {
 
-    @Override
-    public boolean canBreed() {
-        return false;
-    }
+	}
 
-    @Override
-    public void setBreed(boolean breed) {
+	@Override
+	public boolean isAdult() {
+		return false;
+	}
 
-    }
+	@Override
+	public boolean canBreed() {
+		return false;
+	}
+
+	@Override
+	public void setBreed(boolean breed) {
+
+	}
 }

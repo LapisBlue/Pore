@@ -7,10 +7,10 @@ import org.bukkit.conversations.ConversationContext;
 public class PoreConversationCanceller implements ConversationCanceller {
 
 	// TODO: Bridge
-	
+
 	@Override
 	public void setConversation(Conversation conversation) {
-		
+
 	}
 
 	@Override
@@ -19,8 +19,8 @@ public class PoreConversationCanceller implements ConversationCanceller {
 	}
 
 
-    public ConversationCanceller clone() {
-    	return null;
-    }
-	
+	public ConversationCanceller clone() {
+		return null;
+	}
+
 }

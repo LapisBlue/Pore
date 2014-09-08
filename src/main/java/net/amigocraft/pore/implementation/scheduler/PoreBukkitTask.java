@@ -24,7 +24,7 @@ public class PoreBukkitTask implements BukkitTask {
 
 	@Override
 	public void cancel() {
-		
+
 	}
 
 }

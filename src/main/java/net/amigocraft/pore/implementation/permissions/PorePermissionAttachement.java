@@ -11,48 +11,48 @@ import org.bukkit.plugin.Plugin;
 
 public class PorePermissionAttachement {
 
-    public PorePermissionAttachement(Plugin plugin, Permissible Permissible) {
-    }
+	public PorePermissionAttachement(Plugin plugin, Permissible Permissible) {
+	}
 
-    public Plugin getPlugin() {
-    	return null;
-    }
+	public Plugin getPlugin() {
+		return null;
+	}
 
-    public void setRemovalCallback(PermissionRemovedExecutor ex) {
-        
-    }
-    
-    public PermissionRemovedExecutor getRemovalCallback() {
-        return null;
-    }
+	public void setRemovalCallback(PermissionRemovedExecutor ex) {
 
-    public Permissible getPermissible() {
-        return null;
-    }
+	}
 
-    public Map<String, Boolean> getPermissions() {
-        return null;
-    }
+	public PermissionRemovedExecutor getRemovalCallback() {
+		return null;
+	}
 
-    public void setPermission(String name, boolean value) {
+	public Permissible getPermissible() {
+		return null;
+	}
 
-    }
+	public Map<String, Boolean> getPermissions() {
+		return null;
+	}
 
-    public void setPermission(Permission perm, boolean value) {
+	public void setPermission(String name, boolean value) {
 
-    }
+	}
 
-    public void unsetPermission(String name) {
+	public void setPermission(Permission perm, boolean value) {
 
-    }
+	}
 
-    public void unsetPermission(Permission perm) {
+	public void unsetPermission(String name) {
 
-    }
+	}
 
-    public boolean remove() {
-    	return false;
-    }
+	public void unsetPermission(Permission perm) {
+
+	}
+
+	public boolean remove() {
+		return false;
+	}
 
 
 }

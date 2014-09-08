@@ -6,7 +6,7 @@ import org.bukkit.plugin.Plugin;
 public class PoreMetadataValue implements MetadataValue {
 
 	// TODO: Bridge
-	
+
 	@Override
 	public Object value() {
 		return null;
@@ -59,7 +59,7 @@ public class PoreMetadataValue implements MetadataValue {
 
 	@Override
 	public void invalidate() {
-		
+
 	}
 
 }

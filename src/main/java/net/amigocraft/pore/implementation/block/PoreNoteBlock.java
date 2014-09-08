@@ -14,37 +14,37 @@ import java.util.List;
 public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
 
 	@Override
-	public Note getNote(){
+	public Note getNote() {
 		return null;
 	}
 
 	@Override
-	public byte getRawNote(){
+	public byte getRawNote() {
 		return 0;
 	}
 
 	@Override
-	public void setNote(Note note){
+	public void setNote(Note note) {
 
 	}
 
 	@Override
-	public void setRawNote(byte note){
+	public void setRawNote(byte note) {
 
 	}
 
 	@Override
-	public boolean play(){
+	public boolean play() {
 		return false;
 	}
 
 	@Override
-	public boolean play(byte instrument, byte note){
+	public boolean play(byte instrument, byte note) {
 		return false;
 	}
 
 	@Override
-	public boolean play(Instrument instrument, Note note){
+	public boolean play(Instrument instrument, Note note) {
 		return false;
 	}
 }

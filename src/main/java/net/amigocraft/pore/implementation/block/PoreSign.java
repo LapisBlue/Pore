@@ -17,17 +17,17 @@ import java.util.List;
 public class PoreSign extends PoreBlockState implements Sign {
 
 	@Override
-	public String[] getLines(){
+	public String[] getLines() {
 		return new String[0];
 	}
 
 	@Override
-	public String getLine(int index) throws IndexOutOfBoundsException{
+	public String getLine(int index) throws IndexOutOfBoundsException {
 		return null;
 	}
 
 	@Override
-	public void setLine(int index, String line) throws IndexOutOfBoundsException{
+	public void setLine(int index, String line) throws IndexOutOfBoundsException {
 
 	}
 }

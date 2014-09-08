@@ -20,116 +20,116 @@ import com.avaje.ebean.EbeanServer;
 
 //TODO: Bridge
 
-public class PorePlugin extends PoreTabExecutor implements Plugin  {
+public class PorePlugin extends PoreTabExecutor implements Plugin {
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		return false; 
+		return false;
 	}
 
 	@Override
 	public File getDataFolder() {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public PluginDescriptionFile getDescription() {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public FileConfiguration getConfig() {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public InputStream getResource(String filename) {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public void saveConfig() {
-		 
+
 	}
 
 	@Override
 	public void saveDefaultConfig() {
-		 
+
 	}
 
 	@Override
 	public void saveResource(String resourcePath, boolean replace) {
-		 
+
 	}
 
 	@Override
 	public void reloadConfig() {
-		 
+
 	}
 
 	@Override
 	public PluginLoader getPluginLoader() {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public Server getServer() {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return false; 
+		return false;
 	}
 
 	@Override
 	public void onDisable() {
-		 
+
 	}
 
 	@Override
 	public void onLoad() {
-		 
+
 	}
 
 	@Override
 	public void onEnable() {
-		 
+
 	}
 
 	@Override
 	public boolean isNaggable() {
-		return false; 
+		return false;
 	}
 
 	@Override
 	public void setNaggable(boolean canNag) {
-		 
+
 	}
 
 	@Override
 	public EbeanServer getDatabase() {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public Logger getLogger() {
-		return null; 
+		return null;
 	}
 
 	@Override
 	public String getName() {
-		return null; 
+		return null;
 	}
 
 }

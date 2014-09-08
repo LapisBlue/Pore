@@ -19,52 +19,52 @@ import java.util.List;
 public class PoreCreatureSpawner extends PoreBlockState implements CreatureSpawner {
 
 	@Override
-	public CreatureType getCreatureType(){
+	public CreatureType getCreatureType() {
 		return null;
 	}
 
 	@Override
-	public EntityType getSpawnedType(){
+	public EntityType getSpawnedType() {
 		return null;
 	}
 
 	@Override
-	public void setSpawnedType(EntityType creatureType){
+	public void setSpawnedType(EntityType creatureType) {
 
 	}
 
 	@Override
-	public void setCreatureType(CreatureType creatureType){
+	public void setCreatureType(CreatureType creatureType) {
 
 	}
 
 	@Override
-	public String getCreatureTypeId(){
+	public String getCreatureTypeId() {
 		return null;
 	}
 
 	@Override
-	public void setCreatureTypeByName(String creatureType){
+	public void setCreatureTypeByName(String creatureType) {
 
 	}
 
 	@Override
-	public String getCreatureTypeName(){
+	public String getCreatureTypeName() {
 		return null;
 	}
 
 	@Override
-	public void setCreatureTypeId(String creatureType){
+	public void setCreatureTypeId(String creatureType) {
 
 	}
 
 	@Override
-	public int getDelay(){
+	public int getDelay() {
 		return 0;
 	}
 
 	@Override
-	public void setDelay(int delay){
+	public void setDelay(int delay) {
 
 	}
 }
