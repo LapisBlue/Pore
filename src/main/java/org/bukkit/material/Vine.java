@@ -9,7 +9,7 @@ import org.bukkit.block.BlockFace;
 /**
  * Represents a vine
  */
-public class Vine extends MaterialData {
+public class /* Do it for the */ Vine extends MaterialData {
     private static final int VINE_NORTH = 0x4;
     private static final int VINE_EAST = 0x8;
     private static final int VINE_WEST = 0x2;
