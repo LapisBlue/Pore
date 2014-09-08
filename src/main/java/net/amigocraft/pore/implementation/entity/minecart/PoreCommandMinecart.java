@@ -9,9 +9,8 @@ import org.bukkit.plugin.Plugin;
 
 import java.util.Set;
 
-/**
- * Created by russjr08 on 9/8/14.
- */
+
+
 public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart {
     // TODO: Bridge
 
