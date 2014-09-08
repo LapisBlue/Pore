@@ -1,9 +1,6 @@
 package net.amigocraft.pore.implementation.permissions;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
-
-import net.amigocraft.pore.implementation.plugin.PorePlugin;
 
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
