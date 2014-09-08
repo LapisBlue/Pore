@@ -14,7 +14,7 @@ import org.bukkit.plugin.Plugin;
 public class PorePermissibleBase implements Permissible {
 
 	public PorePermissibleBase(ServerOperator opable) {
-		
+
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class PorePermissibleBase implements Permissible {
 
 	@Override
 	public void setOp(boolean value) {
-		
+
 	}
 
 	@Override
@@ -69,17 +69,17 @@ public class PorePermissibleBase implements Permissible {
 
 	@Override
 	public void removeAttachment(PermissionAttachment attachment) {
-		
+
 	}
 
 	@Override
 	public void recalculatePermissions() {
-		
+
 	}
 
 	@Override
 	public Set<PermissionAttachmentInfo> getEffectivePermissions() {
 		return null;
 	}
-	
+
 }

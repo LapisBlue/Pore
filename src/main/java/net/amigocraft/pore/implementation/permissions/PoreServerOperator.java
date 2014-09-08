@@ -13,7 +13,7 @@ public class PoreServerOperator implements ServerOperator {
 
 	@Override
 	public void setOp(boolean value) {
-		
+
 	}
 
 }

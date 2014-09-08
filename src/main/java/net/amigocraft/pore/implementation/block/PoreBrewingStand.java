@@ -18,17 +18,17 @@ import java.util.List;
 public class PoreBrewingStand extends PoreBlockState implements BrewingStand {
 
 	@Override
-	public int getBrewingTime(){
+	public int getBrewingTime() {
 		return 0;
 	}
 
 	@Override
-	public void setBrewingTime(int brewTime){
+	public void setBrewingTime(int brewTime) {
 
 	}
 
 	@Override
-	public BrewerInventory getInventory(){
+	public BrewerInventory getInventory() {
 		return null;
 	}
 }

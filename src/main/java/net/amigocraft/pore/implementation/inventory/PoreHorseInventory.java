@@ -7,23 +7,23 @@ import org.bukkit.inventory.ItemStack;
 
 public class PoreHorseInventory extends PoreInventory implements HorseInventory {
 
-    @Override
-    public ItemStack getSaddle() {
-        return null;
-    }
+	@Override
+	public ItemStack getSaddle() {
+		return null;
+	}
 
-    @Override
-    public ItemStack getArmor() {
-        return null;
-    }
+	@Override
+	public ItemStack getArmor() {
+		return null;
+	}
 
-    @Override
-    public void setSaddle(ItemStack stack) {
+	@Override
+	public void setSaddle(ItemStack stack) {
 
-    }
+	}
 
-    @Override
-    public void setArmor(ItemStack stack) {
+	@Override
+	public void setArmor(ItemStack stack) {
 
-    }
+	}
 }

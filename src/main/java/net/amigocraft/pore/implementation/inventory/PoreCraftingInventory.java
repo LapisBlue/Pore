@@ -8,28 +8,28 @@ import org.bukkit.inventory.Recipe;
 
 public class PoreCraftingInventory extends PoreInventory implements CraftingInventory {
 
-    @Override
-    public ItemStack getResult() {
-        return null;
-    }
+	@Override
+	public ItemStack getResult() {
+		return null;
+	}
 
-    @Override
-    public ItemStack[] getMatrix() {
-        return new ItemStack[0];
-    }
+	@Override
+	public ItemStack[] getMatrix() {
+		return new ItemStack[0];
+	}
 
-    @Override
-    public void setResult(ItemStack newResult) {
+	@Override
+	public void setResult(ItemStack newResult) {
 
-    }
+	}
 
-    @Override
-    public void setMatrix(ItemStack[] contents) {
+	@Override
+	public void setMatrix(ItemStack[] contents) {
 
-    }
+	}
 
-    @Override
-    public Recipe getRecipe() {
-        return null;
-    }
+	@Override
+	public Recipe getRecipe() {
+		return null;
+	}
 }

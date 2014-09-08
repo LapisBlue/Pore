@@ -6,61 +6,63 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 
+//TODO: Bridge
+
 public class PoreObjective implements Objective {
 
 	@Override
 	public String getName() throws IllegalStateException {
-		return null; //TODO: Bridge
+		return null;
 	}
 
 	@Override
 	public String getDisplayName() throws IllegalStateException {
-		return null; //TODO: Bridge
+		return null;
 	}
 
 	@Override
 	public void setDisplayName(String displayName) throws IllegalStateException, IllegalArgumentException {
-		 //TODO: Bridge
+
 	}
 
 	@Override
 	public String getCriteria() throws IllegalStateException {
-		return null; //TODO: Bridge
+		return null;
 	}
 
 	@Override
 	public boolean isModifiable() throws IllegalStateException {
-		return false; //TODO: Bridge
+		return false;
 	}
 
 	@Override
 	public Scoreboard getScoreboard() {
-		return null; //TODO: Bridge
+		return null;
 	}
 
 	@Override
 	public void unregister() throws IllegalStateException {
-		 //TODO: Bridge
+
 	}
 
 	@Override
 	public void setDisplaySlot(DisplaySlot slot) throws IllegalStateException {
-		 //TODO: Bridge
+
 	}
 
 	@Override
 	public DisplaySlot getDisplaySlot() throws IllegalStateException {
-		return null; //TODO: Bridge
+		return null;
 	}
 
 	@Override
 	public Score getScore(OfflinePlayer player) throws IllegalArgumentException, IllegalStateException {
-		return null; //TODO: Bridge
+		return null;
 	}
 
 	@Override
 	public Score getScore(String entry) throws IllegalArgumentException, IllegalStateException {
-		return null; //TODO: Bridge
+		return null;
 	}
 
 }

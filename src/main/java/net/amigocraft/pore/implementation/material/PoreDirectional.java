@@ -10,7 +10,7 @@ public class PoreDirectional implements Directional {
 
 	@Override
 	public void setFacingDirection(BlockFace face) {
-		
+
 	}
 
 	@Override

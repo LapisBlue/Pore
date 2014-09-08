@@ -3,19 +3,19 @@ package net.amigocraft.pore.implementation.entity;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
 
-
-
 public class PoreCreature extends PoreLivingEntity implements Creature {
 
-    // Implemented from Creature
+	//TODO: Bridge
 
-    @Override
-    public void setTarget(LivingEntity target) {
+	// Implemented from Creature
 
-    }
+	@Override
+	public void setTarget(LivingEntity target) {
 
-    @Override
-    public LivingEntity getTarget() {
-        return null;
-    }
+	}
+
+	@Override
+	public LivingEntity getTarget() {
+		return null;
+	}
 }

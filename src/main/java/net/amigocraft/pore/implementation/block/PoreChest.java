@@ -18,12 +18,12 @@ import java.util.List;
 public class PoreChest extends PoreBlockState implements Chest {
 
 	@Override
-	public Inventory getBlockInventory(){
+	public Inventory getBlockInventory() {
 		return null;
 	}
 
 	@Override
-	public Inventory getInventory(){
+	public Inventory getInventory() {
 		return null;
 	}
 }

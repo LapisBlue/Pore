@@ -10,7 +10,7 @@ import org.bukkit.map.MapView;
 public class PoreMapCanvas implements MapCanvas {
 
 	// TODO: Bridge
-	
+
 	@Override
 	public MapView getMapView() {
 		return null;
@@ -23,12 +23,12 @@ public class PoreMapCanvas implements MapCanvas {
 
 	@Override
 	public void setCursors(MapCursorCollection cursors) {
-		
+
 	}
 
 	@Override
 	public void setPixel(int x, int y, byte color) {
-		
+
 	}
 
 	@Override
@@ -43,12 +43,12 @@ public class PoreMapCanvas implements MapCanvas {
 
 	@Override
 	public void drawImage(int x, int y, Image image) {
-		
+
 	}
 
 	@Override
 	public void drawText(int x, int y, MapFont font, String text) {
-		
+
 	}
 
 }

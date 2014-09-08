@@ -3,6 +3,8 @@ package net.amigocraft.pore.implementation.scheduler;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 
+// TODO: Bridge
+
 public class PoreBukkitTask implements BukkitTask {
 
 	@Override
@@ -22,7 +24,7 @@ public class PoreBukkitTask implements BukkitTask {
 
 	@Override
 	public void cancel() {
-		
+
 	}
 
 }

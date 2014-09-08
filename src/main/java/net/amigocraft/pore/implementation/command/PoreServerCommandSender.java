@@ -18,60 +18,60 @@ import org.bukkit.plugin.Plugin;
 public class PoreServerCommandSender extends PoreCommandSender implements CommandSender {
 
 	private PorePermissibleBase perm = new PorePermissibleBase(this);
-	
-    public PoreServerCommandSender() {
-    }
 
-    public boolean isPermissionSet(String name) {
-        return perm.isPermissionSet(name);
-    }
+	public PoreServerCommandSender() {
+	}
 
-    public boolean isPermissionSet(Permission perm) {
-        return this.perm.isPermissionSet(perm);
-    }
+	public boolean isPermissionSet(String name) {
+		return perm.isPermissionSet(name);
+	}
 
-    public boolean hasPermission(String name) {
-        return perm.hasPermission(name);
-    }
+	public boolean isPermissionSet(Permission perm) {
+		return this.perm.isPermissionSet(perm);
+	}
 
-    public boolean hasPermission(Permission perm) {
-        return this.perm.hasPermission(perm);
-    }
+	public boolean hasPermission(String name) {
+		return perm.hasPermission(name);
+	}
 
-    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
-        return perm.addAttachment(plugin, name, value);
-    }
+	public boolean hasPermission(Permission perm) {
+		return this.perm.hasPermission(perm);
+	}
 
-    public PermissionAttachment addAttachment(Plugin plugin) {
-        return perm.addAttachment(plugin);
-    }
+	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
+		return perm.addAttachment(plugin, name, value);
+	}
 
-    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
-        return perm.addAttachment(plugin, name, value, ticks);
-    }
+	public PermissionAttachment addAttachment(Plugin plugin) {
+		return perm.addAttachment(plugin);
+	}
 
-    public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
-        return perm.addAttachment(plugin, ticks);
-    }
+	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
+		return perm.addAttachment(plugin, name, value, ticks);
+	}
 
-    public void removeAttachment(PermissionAttachment attachment) {
-        perm.removeAttachment(attachment);
-    }
+	public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
+		return perm.addAttachment(plugin, ticks);
+	}
 
-    public void recalculatePermissions() {
-        perm.recalculatePermissions();
-    }
+	public void removeAttachment(PermissionAttachment attachment) {
+		perm.removeAttachment(attachment);
+	}
 
-    public Set<PermissionAttachmentInfo> getEffectivePermissions() {
-        return perm.getEffectivePermissions();
-    }
+	public void recalculatePermissions() {
+		perm.recalculatePermissions();
+	}
 
-    public boolean isPlayer() {
-        return false;
-    }
+	public Set<PermissionAttachmentInfo> getEffectivePermissions() {
+		return perm.getEffectivePermissions();
+	}
 
-    public Server getServer() {
-    	return null;
-    }
+	public boolean isPlayer() {
+		return false;
+	}
+
+	public Server getServer() {
+		return null;
+	}
 
 }

@@ -19,17 +19,17 @@ import java.util.List;
 public class PoreDispenser extends PoreBlockState implements Dispenser {
 
 	@Override
-	public BlockProjectileSource getBlockProjectileSource(){
+	public BlockProjectileSource getBlockProjectileSource() {
 		return null;
 	}
 
 	@Override
-	public boolean dispense(){
+	public boolean dispense() {
 		return false;
 	}
 
 	@Override
-	public Inventory getInventory(){
+	public Inventory getInventory() {
 		return null;
 	}
 }

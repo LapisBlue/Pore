@@ -17,602 +17,604 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+//TODO: skeleton implementation
+
 public class PoreWorld implements World {
 
 	//TODO: associate with Sponge's implementation of the world
 
 	@Override
-	public Block getBlockAt(int x, int y, int z){
-		return null; //TODO: bridge
+	public Block getBlockAt(int x, int y, int z) {
+		return null;
 	}
 
 	@Override
-	public Block getBlockAt(Location location){
-		return null; //TODO: bridge
+	public Block getBlockAt(Location location) {
+		return null;
 	}
 
 	@Override
-	public int getBlockTypeIdAt(int x, int y, int z){
-		return 0; //TODO: bridge
+	public int getBlockTypeIdAt(int x, int y, int z) {
+		return 0;
 	}
 
 	@Override
-	public int getBlockTypeIdAt(Location location){
-		return 0; //TODO: bridge
+	public int getBlockTypeIdAt(Location location) {
+		return 0;
 	}
 
 	@Override
-	public int getHighestBlockYAt(int x, int z){
-		return 0; //TODO: bridge
+	public int getHighestBlockYAt(int x, int z) {
+		return 0;
 	}
 
 	@Override
-	public int getHighestBlockYAt(Location location){
-		return 0; //TODO: bridge
+	public int getHighestBlockYAt(Location location) {
+		return 0;
 	}
 
 	@Override
-	public Block getHighestBlockAt(int x, int z){
-		return null; //TODO: bridge
+	public Block getHighestBlockAt(int x, int z) {
+		return null;
 	}
 
 	@Override
-	public Block getHighestBlockAt(Location location){
-		return null; //TODO: bridge
+	public Block getHighestBlockAt(Location location) {
+		return null;
 	}
 
 	@Override
-	public Chunk getChunkAt(int x, int z){
-		return null; //TODO: bridge
+	public Chunk getChunkAt(int x, int z) {
+		return null;
 	}
 
 	@Override
-	public Chunk getChunkAt(Location location){
-		return null; //TODO: bridge
+	public Chunk getChunkAt(Location location) {
+		return null;
 	}
 
 	@Override
-	public Chunk getChunkAt(Block block){
-		return null; //TODO: bridge
+	public Chunk getChunkAt(Block block) {
+		return null;
 	}
 
 	@Override
-	public boolean isChunkLoaded(Chunk chunk){
-		return false; //TODO: bridge
+	public boolean isChunkLoaded(Chunk chunk) {
+		return false;
 	}
 
 	@Override
-	public Chunk[] getLoadedChunks(){
-		return new Chunk[0]; //TODO: bridge
+	public Chunk[] getLoadedChunks() {
+		return new Chunk[0];
 	}
 
 	@Override
-	public void loadChunk(Chunk chunk){
-		//TODO: bridge
+	public void loadChunk(Chunk chunk) {
+		
 	}
 
 	@Override
-	public boolean isChunkLoaded(int x, int z){
-		return false; //TODO: bridge
+	public boolean isChunkLoaded(int x, int z) {
+		return false;
 	}
 
 	@Override
-	public boolean isChunkInUse(int x, int z){
-		return false; //TODO: bridge
+	public boolean isChunkInUse(int x, int z) {
+		return false;
 	}
 
 	@Override
-	public void loadChunk(int x, int z){
-		//TODO: bridge
+	public void loadChunk(int x, int z) {
+		
 	}
 
 	@Override
-	public boolean loadChunk(int x, int z, boolean generate){
-		return false; //TODO: bridge
+	public boolean loadChunk(int x, int z, boolean generate) {
+		return false;
 	}
 
 	@Override
-	public boolean unloadChunk(Chunk chunk){
-		return false; //TODO: bridge
+	public boolean unloadChunk(Chunk chunk) {
+		return false;
 	}
 
 	@Override
-	public boolean unloadChunk(int x, int z){
-		return false; //TODO: bridge
+	public boolean unloadChunk(int x, int z) {
+		return false;
 	}
 
 	@Override
-	public boolean unloadChunk(int x, int z, boolean save){
-		return false; //TODO: bridge
+	public boolean unloadChunk(int x, int z, boolean save) {
+		return false;
 	}
 
 	@Override
-	public boolean unloadChunk(int x, int z, boolean save, boolean safe){
-		return false; //TODO: bridge
+	public boolean unloadChunk(int x, int z, boolean save, boolean safe) {
+		return false;
 	}
 
 	@Override
-	public boolean unloadChunkRequest(int x, int z){
-		return false; //TODO: bridge
+	public boolean unloadChunkRequest(int x, int z) {
+		return false;
 	}
 
 	@Override
-	public boolean unloadChunkRequest(int x, int z, boolean safe){
-		return false; //TODO: bridge
+	public boolean unloadChunkRequest(int x, int z, boolean safe) {
+		return false;
 	}
 
 	@Override
-	public boolean regenerateChunk(int x, int z){
-		return false; //TODO: bridge
+	public boolean regenerateChunk(int x, int z) {
+		return false;
 	}
 
 	@Override
-	public boolean refreshChunk(int x, int z){
-		return false; //TODO: bridge
+	public boolean refreshChunk(int x, int z) {
+		return false;
 	}
 
 	@Override
-	public Item dropItem(Location location, ItemStack item){
-		return null; //TODO: bridge
+	public Item dropItem(Location location, ItemStack item) {
+		return null;
 	}
 
 	@Override
-	public Item dropItemNaturally(Location location, ItemStack item){
-		return null; //TODO: bridge
+	public Item dropItemNaturally(Location location, ItemStack item) {
+		return null;
 	}
 
 	@Override
-	public Arrow spawnArrow(Location location, Vector direction, float speed, float spread){
-		return null; //TODO: bridge
+	public Arrow spawnArrow(Location location, Vector direction, float speed, float spread) {
+		return null;
 	}
 
 	@Override
-	public boolean generateTree(Location location, TreeType type){
-		return false; //TODO: bridge
+	public boolean generateTree(Location location, TreeType type) {
+		return false;
 	}
 
 	@Override
-	public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate){
-		return false; //TODO: bridge
+	public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate) {
+		return false;
 	}
 
 	@Override
-	public Entity spawnEntity(Location loc, EntityType type){
-		return null; //TODO: bridge
+	public Entity spawnEntity(Location loc, EntityType type) {
+		return null;
 	}
 
 	@Override
-	public LivingEntity spawnCreature(Location loc, EntityType type){
-		return null; //TODO: bridge
+	public LivingEntity spawnCreature(Location loc, EntityType type) {
+		return null;
 	}
 
 	@Override
-	public LivingEntity spawnCreature(Location loc, CreatureType type){
-		return null; //TODO: bridge
+	public LivingEntity spawnCreature(Location loc, CreatureType type) {
+		return null;
 	}
 
 	@Override
-	public LightningStrike strikeLightning(Location loc){
-		return null; //TODO: bridge
+	public LightningStrike strikeLightning(Location loc) {
+		return null;
 	}
 
 	@Override
-	public LightningStrike strikeLightningEffect(Location loc){
-		return null; //TODO: bridge
+	public LightningStrike strikeLightningEffect(Location loc) {
+		return null;
 	}
 
 	@Override
-	public List<Entity> getEntities(){
-		return null; //TODO: bridge
+	public List<Entity> getEntities() {
+		return null;
 	}
 
 	@Override
-	public List<LivingEntity> getLivingEntities(){
-		return null; //TODO: bridge
+	public List<LivingEntity> getLivingEntities() {
+		return null;
 	}
 
 	@Override
-	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes){
-		return null; //TODO: bridge
+	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes) {
+		return null;
 	}
 
 	@Override
-	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls){
-		return null; //TODO: bridge
+	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls) {
+		return null;
 	}
 
 	@Override
-	public Collection<Entity> getEntitiesByClasses(Class<?>... classes){
-		return null; //TODO: bridge
+	public Collection<Entity> getEntitiesByClasses(Class<?>... classes) {
+		return null;
 	}
 
 	@Override
-	public List<Player> getPlayers(){
-		return null; //TODO: bridge
+	public List<Player> getPlayers() {
+		return null;
 	}
 
 	@Override
-	public String getName(){
-		return null; //TODO: bridge
+	public String getName() {
+		return null;
 	}
 
 	@Override
-	public UUID getUID(){
-		return null; //TODO: bridge
+	public UUID getUID() {
+		return null;
 	}
 
 	@Override
-	public Location getSpawnLocation(){
-		return null; //TODO: bridge
+	public Location getSpawnLocation() {
+		return null;
 	}
 
 	@Override
-	public boolean setSpawnLocation(int x, int y, int z){
-		return false; //TODO: bridge
+	public boolean setSpawnLocation(int x, int y, int z) {
+		return false;
 	}
 
 	@Override
-	public long getTime(){
-		return 0; //TODO: bridge
+	public long getTime() {
+		return 0;
 	}
 
 	@Override
-	public void setTime(long time){
-		//TODO: bridge
+	public void setTime(long time) {
+		
 	}
 
 	@Override
-	public long getFullTime(){
-		return 0; //TODO: bridge
+	public long getFullTime() {
+		return 0;
 	}
 
 	@Override
-	public void setFullTime(long time){
-		//TODO: bridge
+	public void setFullTime(long time) {
+		
 	}
 
 	@Override
-	public boolean hasStorm(){
-		return false; //TODO: bridge
+	public boolean hasStorm() {
+		return false;
 	}
 
 	@Override
-	public void setStorm(boolean hasStorm){
-		//TODO: bridge
+	public void setStorm(boolean hasStorm) {
+		
 	}
 
 	@Override
-	public int getWeatherDuration(){
-		return 0; //TODO: bridge
+	public int getWeatherDuration() {
+		return 0;
 	}
 
 	@Override
-	public void setWeatherDuration(int duration){
-		//TODO: bridge
+	public void setWeatherDuration(int duration) {
+		
 	}
 
 	@Override
-	public boolean isThundering(){
-		return false; //TODO: bridge
+	public boolean isThundering() {
+		return false;
 	}
 
 	@Override
-	public void setThundering(boolean thundering){
-		//TODO: bridge
+	public void setThundering(boolean thundering) {
+		
 	}
 
 	@Override
-	public int getThunderDuration(){
-		return 0; //TODO: bridge
+	public int getThunderDuration() {
+		return 0;
 	}
 
 	@Override
-	public void setThunderDuration(int duration){
-		//TODO: bridge
+	public void setThunderDuration(int duration) {
+		
 	}
 
 	@Override
-	public boolean createExplosion(double x, double y, double z, float power){
-		return false; //TODO: bridge
+	public boolean createExplosion(double x, double y, double z, float power) {
+		return false;
 	}
 
 	@Override
-	public boolean createExplosion(double x, double y, double z, float power, boolean setFire){
-		return false; //TODO: bridge
+	public boolean createExplosion(double x, double y, double z, float power, boolean setFire) {
+		return false;
 	}
 
 	@Override
-	public boolean createExplosion(double x, double y, double z, float power, boolean setFire, boolean breakBlocks){
-		return false; //TODO: bridge
+	public boolean createExplosion(double x, double y, double z, float power, boolean setFire, boolean breakBlocks) {
+		return false;
 	}
 
 	@Override
-	public boolean createExplosion(Location loc, float power){
-		return false; //TODO: bridge
+	public boolean createExplosion(Location loc, float power) {
+		return false;
 	}
 
 	@Override
-	public boolean createExplosion(Location loc, float power, boolean setFire){
-		return false; //TODO: bridge
+	public boolean createExplosion(Location loc, float power, boolean setFire) {
+		return false;
 	}
 
 	@Override
-	public Environment getEnvironment(){
-		return null; //TODO: bridge
+	public Environment getEnvironment() {
+		return null;
 	}
 
 	@Override
-	public long getSeed(){
-		return 0; //TODO: bridge
+	public long getSeed() {
+		return 0;
 	}
 
 	@Override
-	public boolean getPVP(){
-		return false; //TODO: bridge
+	public boolean getPVP() {
+		return false;
 	}
 
 	@Override
-	public void setPVP(boolean pvp){
-		//TODO: bridge
+	public void setPVP(boolean pvp) {
+		
 	}
 
 	@Override
-	public ChunkGenerator getGenerator(){
-		return null; //TODO: bridge
+	public ChunkGenerator getGenerator() {
+		return null;
 	}
 
 	@Override
-	public void save(){
-		//TODO: bridge
+	public void save() {
+		
 	}
 
 	@Override
-	public List<BlockPopulator> getPopulators(){
-		return null; //TODO: bridge
+	public List<BlockPopulator> getPopulators() {
+		return null;
 	}
 
 	@Override
-	public <T extends Entity> T spawn(Location location, Class<T> clazz) throws IllegalArgumentException{
-		return null; //TODO: bridge
+	public <T extends Entity> T spawn(Location location, Class<T> clazz) throws IllegalArgumentException {
+		return null;
 	}
 
 	@Override
-	public FallingBlock spawnFallingBlock(Location location, Material material, byte data) throws IllegalArgumentException{
-		return null; //TODO: bridge
+	public FallingBlock spawnFallingBlock(Location location, Material material, byte data) throws IllegalArgumentException {
+		return null;
 	}
 
 	@Override
-	public FallingBlock spawnFallingBlock(Location location, int blockId, byte blockData) throws IllegalArgumentException{
-		return null; //TODO: bridge
+	public FallingBlock spawnFallingBlock(Location location, int blockId, byte blockData) throws IllegalArgumentException {
+		return null;
 	}
 
 	@Override
-	public void playEffect(Location location, Effect effect, int data){
-		//TODO: bridge
+	public void playEffect(Location location, Effect effect, int data) {
+		
 	}
 
 	@Override
-	public void playEffect(Location location, Effect effect, int data, int radius){
-		//TODO: bridge
+	public void playEffect(Location location, Effect effect, int data, int radius) {
+		
 	}
 
 	@Override
-	public <T> void playEffect(Location location, Effect effect, T data){
-		//TODO: bridge
+	public <T> void playEffect(Location location, Effect effect, T data) {
+		
 	}
 
 	@Override
-	public <T> void playEffect(Location location, Effect effect, T data, int radius){
-		//TODO: bridge
+	public <T> void playEffect(Location location, Effect effect, T data, int radius) {
+		
 	}
 
 	@Override
-	public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain){
-		return null; //TODO: bridge
+	public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain) {
+		return null;
 	}
 
 	@Override
-	public void setSpawnFlags(boolean allowMonsters, boolean allowAnimals){
-		//TODO: bridge
+	public void setSpawnFlags(boolean allowMonsters, boolean allowAnimals) {
+		
 	}
 
 	@Override
-	public boolean getAllowAnimals(){
-		return false; //TODO: bridge
+	public boolean getAllowAnimals() {
+		return false;
 	}
 
 	@Override
-	public boolean getAllowMonsters(){
-		return false; //TODO: bridge
+	public boolean getAllowMonsters() {
+		return false;
 	}
 
 	@Override
-	public Biome getBiome(int x, int z){
-		return null; //TODO: bridge
+	public Biome getBiome(int x, int z) {
+		return null;
 	}
 
 	@Override
-	public void setBiome(int x, int z, Biome bio){
-		//TODO: bridge
+	public void setBiome(int x, int z, Biome bio) {
+		
 	}
 
 	@Override
-	public double getTemperature(int x, int z){
-		return 0; //TODO: bridge
+	public double getTemperature(int x, int z) {
+		return 0;
 	}
 
 	@Override
-	public double getHumidity(int x, int z){
-		return 0; //TODO: bridge
+	public double getHumidity(int x, int z) {
+		return 0;
 	}
 
 	@Override
-	public int getMaxHeight(){
-		return 0; //TODO: bridge
+	public int getMaxHeight() {
+		return 0;
 	}
 
 	@Override
-	public int getSeaLevel(){
-		return 0; //TODO: bridge
+	public int getSeaLevel() {
+		return 0;
 	}
 
 	@Override
-	public boolean getKeepSpawnInMemory(){
-		return false; //TODO: bridge
+	public boolean getKeepSpawnInMemory() {
+		return false;
 	}
 
 	@Override
-	public void setKeepSpawnInMemory(boolean keepLoaded){
-		//TODO: bridge
+	public void setKeepSpawnInMemory(boolean keepLoaded) {
+		
 	}
 
 	@Override
-	public boolean isAutoSave(){
-		return false; //TODO: bridge
+	public boolean isAutoSave() {
+		return false;
 	}
 
 	@Override
-	public void setAutoSave(boolean value){
-		//TODO: bridge
+	public void setAutoSave(boolean value) {
+		
 	}
 
 	@Override
-	public void setDifficulty(Difficulty difficulty){
-		//TODO: bridge
+	public void setDifficulty(Difficulty difficulty) {
+		
 	}
 
 	@Override
-	public Difficulty getDifficulty(){
-		return null; //TODO: bridge
+	public Difficulty getDifficulty() {
+		return null;
 	}
 
 	@Override
-	public File getWorldFolder(){
-		return null; //TODO: bridge
+	public File getWorldFolder() {
+		return null;
 	}
 
 	@Override
-	public WorldType getWorldType(){
-		return null; //TODO: bridge
+	public WorldType getWorldType() {
+		return null;
 	}
 
 	@Override
-	public boolean canGenerateStructures(){
-		return false; //TODO: bridge
+	public boolean canGenerateStructures() {
+		return false;
 	}
 
 	@Override
-	public long getTicksPerAnimalSpawns(){
-		return 0; //TODO: bridge
+	public long getTicksPerAnimalSpawns() {
+		return 0;
 	}
 
 	@Override
-	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns){
-		//TODO: bridge
+	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns) {
+		
 	}
 
 	@Override
-	public long getTicksPerMonsterSpawns(){
-		return 0; //TODO: bridge
+	public long getTicksPerMonsterSpawns() {
+		return 0;
 	}
 
 	@Override
-	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns){
-		//TODO: bridge
+	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns) {
+		
 	}
 
 	@Override
-	public int getMonsterSpawnLimit(){
-		return 0; //TODO: bridge
+	public int getMonsterSpawnLimit() {
+		return 0;
 	}
 
 	@Override
-	public void setMonsterSpawnLimit(int limit){
-		//TODO: bridge
+	public void setMonsterSpawnLimit(int limit) {
+		
 	}
 
 	@Override
-	public int getAnimalSpawnLimit(){
-		return 0; //TODO: bridge
+	public int getAnimalSpawnLimit() {
+		return 0;
 	}
 
 	@Override
-	public void setAnimalSpawnLimit(int limit){
-		//TODO: bridge
+	public void setAnimalSpawnLimit(int limit) {
+		
 	}
 
 	@Override
-	public int getWaterAnimalSpawnLimit(){
-		return 0; //TODO: bridge
+	public int getWaterAnimalSpawnLimit() {
+		return 0;
 	}
 
 	@Override
-	public void setWaterAnimalSpawnLimit(int limit){
-		//TODO: bridge
+	public void setWaterAnimalSpawnLimit(int limit) {
+		
 	}
 
 	@Override
-	public int getAmbientSpawnLimit(){
-		return 0; //TODO: bridge
+	public int getAmbientSpawnLimit() {
+		return 0;
 	}
 
 	@Override
-	public void setAmbientSpawnLimit(int limit){
-		//TODO: bridge
+	public void setAmbientSpawnLimit(int limit) {
+		
 	}
 
 	@Override
-	public void playSound(Location location, Sound sound, float volume, float pitch){
-		//TODO: bridge
+	public void playSound(Location location, Sound sound, float volume, float pitch) {
+		
 	}
 
 	@Override
-	public String[] getGameRules(){
-		return new String[0]; //TODO: bridge
+	public String[] getGameRules() {
+		return new String[0];
 	}
 
 	@Override
-	public String getGameRuleValue(String rule){
-		return null; //TODO: bridge
+	public String getGameRuleValue(String rule) {
+		return null;
 	}
 
 	@Override
-	public boolean setGameRuleValue(String rule, String value){
-		return false; //TODO: bridge
+	public boolean setGameRuleValue(String rule, String value) {
+		return false;
 	}
 
 	@Override
-	public boolean isGameRule(String rule){
-		return false; //TODO: bridge
+	public boolean isGameRule(String rule) {
+		return false;
 	}
 
 	@Override
-	public void setMetadata(String metadataKey, MetadataValue newMetadataValue){
-		//TODO: bridge
+	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
+		
 	}
 
 	@Override
-	public List<MetadataValue> getMetadata(String metadataKey){
-		return null; //TODO: bridge
+	public List<MetadataValue> getMetadata(String metadataKey) {
+		return null;
 	}
 
 	@Override
-	public boolean hasMetadata(String metadataKey){
-		return false; //TODO: bridge
+	public boolean hasMetadata(String metadataKey) {
+		return false;
 	}
 
 	@Override
-	public void removeMetadata(String metadataKey, Plugin owningPlugin){
-		//TODO: bridge
+	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
+		
 	}
 
 	@Override
-	public void sendPluginMessage(Plugin source, String channel, byte[] message){
-		//TODO: bridge
+	public void sendPluginMessage(Plugin source, String channel, byte[] message) {
+		
 	}
 
 	@Override
-	public Set<String> getListeningPluginChannels(){
-		return null; //TODO: bridge
+	public Set<String> getListeningPluginChannels() {
+		return null;
 	}
 }

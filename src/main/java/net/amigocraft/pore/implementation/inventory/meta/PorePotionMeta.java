@@ -10,44 +10,44 @@ import java.util.List;
 
 public class PorePotionMeta extends PoreItemMeta implements PotionMeta {
 
-    @Override
-    public boolean hasCustomEffects() {
-        return false;
-    }
+	@Override
+	public boolean hasCustomEffects() {
+		return false;
+	}
 
-    @Override
-    public List<PotionEffect> getCustomEffects() {
-        return null;
-    }
+	@Override
+	public List<PotionEffect> getCustomEffects() {
+		return null;
+	}
 
-    @Override
-    public boolean addCustomEffect(PotionEffect effect, boolean overwrite) {
-        return false;
-    }
+	@Override
+	public boolean addCustomEffect(PotionEffect effect, boolean overwrite) {
+		return false;
+	}
 
-    @Override
-    public boolean removeCustomEffect(PotionEffectType type) {
-        return false;
-    }
+	@Override
+	public boolean removeCustomEffect(PotionEffectType type) {
+		return false;
+	}
 
-    @Override
-    public boolean hasCustomEffect(PotionEffectType type) {
-        return false;
-    }
+	@Override
+	public boolean hasCustomEffect(PotionEffectType type) {
+		return false;
+	}
 
-    @Override
-    public boolean setMainEffect(PotionEffectType type) {
-        return false;
-    }
+	@Override
+	public boolean setMainEffect(PotionEffectType type) {
+		return false;
+	}
 
-    @Override
-    public boolean clearCustomEffects() {
-        return false;
-    }
+	@Override
+	public boolean clearCustomEffects() {
+		return false;
+	}
 
-    @Override
-    public PotionMeta clone() {
-        return null;
-    }
+	@Override
+	public PotionMeta clone() {
+		return null;
+	}
 
 }

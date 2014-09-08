@@ -6,8 +6,8 @@ import org.bukkit.inventory.Recipe;
 // TODO: bridge
 
 public class PoreRecipe implements Recipe {
-    @Override
-    public ItemStack getResult() {
-        return null;
-    }
+	@Override
+	public ItemStack getResult() {
+		return null;
+	}
 }

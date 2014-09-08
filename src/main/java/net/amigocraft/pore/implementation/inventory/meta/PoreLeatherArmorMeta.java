@@ -7,19 +7,19 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public class PoreLeatherArmorMeta extends PoreItemMeta implements LeatherArmorMeta {
 
-    @Override
-    public Color getColor() {
-        return null;
-    }
+	@Override
+	public Color getColor() {
+		return null;
+	}
 
-    @Override
-    public void setColor(Color color) {
+	@Override
+	public void setColor(Color color) {
 
-    }
+	}
 
-    @Override
-    public LeatherArmorMeta clone() {
-        return null;
-    }
+	@Override
+	public LeatherArmorMeta clone() {
+		return null;
+	}
 
 }

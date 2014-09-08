@@ -4,36 +4,37 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Projectile;
 import org.bukkit.projectiles.ProjectileSource;
 
-
-
 public class PoreProjectile extends AbstractProjectile implements Projectile {
-    @Override
-    public LivingEntity _INVALID_getShooter() {
-        return null;
-    }
 
-    @Override
-    public ProjectileSource getShooter() {
-        return null;
-    }
+	//TODO: Bridge
 
-    @Override
-    public void _INVALID_setShooter(LivingEntity shooter) {
+	@Override
+	public LivingEntity _INVALID_getShooter() {
+		return null;
+	}
 
-    }
+	@Override
+	public ProjectileSource getShooter() {
+		return null;
+	}
 
-    @Override
-    public void setShooter(ProjectileSource source) {
+	@Override
+	public void _INVALID_setShooter(LivingEntity shooter) {
 
-    }
+	}
 
-    @Override
-    public boolean doesBounce() {
-        return false;
-    }
+	@Override
+	public void setShooter(ProjectileSource source) {
 
-    @Override
-    public void setBounce(boolean doesBounce) {
+	}
 
-    }
+	@Override
+	public boolean doesBounce() {
+		return false;
+	}
+
+	@Override
+	public void setBounce(boolean doesBounce) {
+
+	}
 }

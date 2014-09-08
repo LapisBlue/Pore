@@ -15,7 +15,7 @@ public class PoreConsoleCommandSender extends PoreServerCommandSender implements
 
 	@Override
 	public void acceptConversationInput(String input) {
-		
+
 	}
 
 	@Override
@@ -25,17 +25,17 @@ public class PoreConsoleCommandSender extends PoreServerCommandSender implements
 
 	@Override
 	public void abandonConversation(Conversation conversation) {
-		
+
 	}
 
 	@Override
 	public void abandonConversation(Conversation conversation, ConversationAbandonedEvent details) {
-		
+
 	}
 
 	@Override
 	public void sendRawMessage(String message) {
-		
+
 	}
 
 }

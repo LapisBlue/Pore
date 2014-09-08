@@ -15,37 +15,37 @@ import java.util.List;
 public class PoreSkull extends PoreBlockState implements Skull {
 
 	@Override
-	public boolean hasOwner(){
+	public boolean hasOwner() {
 		return false;
 	}
 
 	@Override
-	public String getOwner(){
+	public String getOwner() {
 		return null;
 	}
 
 	@Override
-	public boolean setOwner(String name){
+	public boolean setOwner(String name) {
 		return false;
 	}
 
 	@Override
-	public BlockFace getRotation(){
+	public BlockFace getRotation() {
 		return null;
 	}
 
 	@Override
-	public void setRotation(BlockFace rotation){
+	public void setRotation(BlockFace rotation) {
 
 	}
 
 	@Override
-	public SkullType getSkullType(){
+	public SkullType getSkullType() {
 		return null;
 	}
 
 	@Override
-	public void setSkullType(SkullType skullType){
+	public void setSkullType(SkullType skullType) {
 
 	}
 }

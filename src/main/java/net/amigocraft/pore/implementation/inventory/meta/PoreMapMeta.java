@@ -6,19 +6,19 @@ import org.bukkit.inventory.meta.MapMeta;
 
 public class PoreMapMeta extends PoreItemMeta implements MapMeta {
 
-    @Override
-    public boolean isScaling() {
-        return false;
-    }
+	@Override
+	public boolean isScaling() {
+		return false;
+	}
 
-    @Override
-    public void setScaling(boolean value) {
+	@Override
+	public void setScaling(boolean value) {
 
-    }
+	}
 
-    @Override
-    public MapMeta clone() {
-        return null;
-    }
+	@Override
+	public MapMeta clone() {
+		return null;
+	}
 
 }

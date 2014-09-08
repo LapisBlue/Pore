@@ -18,7 +18,7 @@ import java.util.List;
 public class PoreHopper extends PoreBlockState implements Hopper {
 
 	@Override
-	public Inventory getInventory(){
+	public Inventory getInventory() {
 		return null;
 	}
 }

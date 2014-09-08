@@ -17,22 +17,22 @@ import java.util.List;
 public class PoreCommandBlock extends PoreBlockState implements CommandBlock {
 
 	@Override
-	public String getCommand(){
+	public String getCommand() {
 		return null;
 	}
 
 	@Override
-	public void setCommand(String command){
+	public void setCommand(String command) {
 
 	}
 
 	@Override
-	public String getName(){
+	public String getName() {
 		return null;
 	}
 
 	@Override
-	public void setName(String name){
+	public void setName(String name) {
 
 	}
 }
