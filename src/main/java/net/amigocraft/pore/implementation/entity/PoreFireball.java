@@ -5,9 +5,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.util.Vector;
 
-/**
- * Created by russjr08 on 9/8/14.
- */
+
+
 public class PoreFireball extends AbstractProjectile implements Fireball {
     @Override
     public void setDirection(Vector direction) {

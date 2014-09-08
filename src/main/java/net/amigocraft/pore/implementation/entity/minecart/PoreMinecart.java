@@ -4,9 +4,8 @@ import net.amigocraft.pore.implementation.entity.PoreVehicle;
 import org.bukkit.entity.Minecart;
 import org.bukkit.util.Vector;
 
-/**
- * Created by russjr08 on 9/8/14.
- */
+
+
 public class PoreMinecart extends PoreVehicle implements Minecart {
     @Override
     public void _INVALID_setDamage(int damage) {

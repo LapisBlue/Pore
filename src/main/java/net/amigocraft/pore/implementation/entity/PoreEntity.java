@@ -15,9 +15,8 @@ import org.bukkit.util.Vector;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by russjr08 on 9/8/14.
- */
+
+
 public class PoreEntity implements Entity {
     // TODO: Bridge
 

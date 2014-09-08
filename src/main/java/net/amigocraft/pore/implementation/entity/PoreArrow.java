@@ -4,9 +4,8 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.projectiles.ProjectileSource;
 
-/**
- * Created by russjr08 on 9/8/14.
- */
+
+
 public class PoreArrow extends AbstractProjectile implements Arrow {
     // TODO: Bridge
 

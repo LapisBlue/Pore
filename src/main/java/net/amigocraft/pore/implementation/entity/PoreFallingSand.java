@@ -4,9 +4,8 @@ import net.amigocraft.pore.implementation.entity.PoreEntity;
 import org.bukkit.Material;
 import org.bukkit.entity.FallingSand;
 
-/**
- * Created by russjr08 on 9/8/14.
- */
+
+ 
 public class PoreFallingSand extends PoreEntity implements FallingSand {
 
     @Override
