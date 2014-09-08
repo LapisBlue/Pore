@@ -14,4 +14,4 @@ Maven is used to handle dependencies.
 Licensing
 ---------
 
-Pore is made available under the GPLv3 license. You may do as you wish with the software within its bounds.
+Pore is made available under the MIT license. You may do as you wish with the software within its bounds.
