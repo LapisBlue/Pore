@@ -3,6 +3,8 @@ package net.amigocraft.pore.implementation.scheduler;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitWorker;
 
+// TODO: Bridge
+
 public class PoreBukkitWorker implements BukkitWorker {
 
 	@Override

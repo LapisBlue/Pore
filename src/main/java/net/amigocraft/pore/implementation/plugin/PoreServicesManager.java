@@ -10,54 +10,56 @@ import org.bukkit.plugin.ServicesManager;
 
 public class PoreServicesManager implements ServicesManager {
 
+	//TODO: Bridge
+	
 	@Override
 	public <T> void register(Class<T> service, T provider, Plugin plugin, ServicePriority priority) {
-		 //TODO: Bridge
+		 
 	}
 
 	@Override
 	public void unregisterAll(Plugin plugin) {
-		 //TODO: Bridge
+		 
 	}
 
 	@Override
 	public void unregister(Class<?> service, Object provider) {
-		 //TODO: Bridge
+		 
 	}
 
 	@Override
 	public void unregister(Object provider) {
-		 //TODO: Bridge
+		 
 	}
 
 	@Override
 	public <T> T load(Class<T> service) {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 	@Override
 	public <T> RegisteredServiceProvider<T> getRegistration(Class<T> service) {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 	@Override
 	public List<RegisteredServiceProvider<?>> getRegistrations(Plugin plugin) {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 	@Override
 	public <T> Collection<RegisteredServiceProvider<T>> getRegistrations(Class<T> service) {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 	@Override
 	public Collection<Class<?>> getKnownServices() {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 	@Override
 	public <T> boolean isProvidedFor(Class<T> service) {
-		return false; //TODO: Bridge
+		return false; 
 	}
 
 }

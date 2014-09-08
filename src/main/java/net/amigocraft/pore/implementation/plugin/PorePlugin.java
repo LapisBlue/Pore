@@ -18,116 +18,118 @@ import org.bukkit.plugin.PluginLoader;
 
 import com.avaje.ebean.EbeanServer;
 
+//TODO: Bridge
+
 public class PorePlugin extends PoreTabExecutor implements Plugin  {
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		return false; //TODO: Bridge
+		return false; 
 	}
 
 	@Override
 	public File getDataFolder() {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 	@Override
 	public PluginDescriptionFile getDescription() {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 	@Override
 	public FileConfiguration getConfig() {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 	@Override
 	public InputStream getResource(String filename) {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 	@Override
 	public void saveConfig() {
-		 //TODO: Bridge
+		 
 	}
 
 	@Override
 	public void saveDefaultConfig() {
-		 //TODO: Bridge
+		 
 	}
 
 	@Override
 	public void saveResource(String resourcePath, boolean replace) {
-		 //TODO: Bridge
+		 
 	}
 
 	@Override
 	public void reloadConfig() {
-		 //TODO: Bridge
+		 
 	}
 
 	@Override
 	public PluginLoader getPluginLoader() {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 	@Override
 	public Server getServer() {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return false; //TODO: Bridge
+		return false; 
 	}
 
 	@Override
 	public void onDisable() {
-		 //TODO: Bridge
+		 
 	}
 
 	@Override
 	public void onLoad() {
-		 //TODO: Bridge
+		 
 	}
 
 	@Override
 	public void onEnable() {
-		 //TODO: Bridge
+		 
 	}
 
 	@Override
 	public boolean isNaggable() {
-		return false; //TODO: Bridge
+		return false; 
 	}
 
 	@Override
 	public void setNaggable(boolean canNag) {
-		 //TODO: Bridge
+		 
 	}
 
 	@Override
 	public EbeanServer getDatabase() {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 	@Override
 	public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 	@Override
 	public Logger getLogger() {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 	@Override
 	public String getName() {
-		return null; //TODO: Bridge
+		return null; 
 	}
 
 }
