@@ -21,7 +21,7 @@ import java.util.UUID;
 /**
  * Created by russjr08 on 9/8/14.
  */
-public class PoreArrow implements Arrow {
+public class PoreArrow extends AbstractProjectile implements Arrow {
     // TODO: Bridge
 
     // Overrided from Arrow

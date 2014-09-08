@@ -18,7 +18,7 @@ import java.util.UUID;
 /**
  * Created by russjr08 on 9/8/14.
  */
-public abstract class PoreEntity implements Entity {
+public class PoreEntity implements Entity {
     // TODO: Bridge
 
     // Overrided from Entity
