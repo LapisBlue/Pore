@@ -8,7 +8,9 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 
-public class PorePermissable implements Permissible {
+//TODO: Bridge
+
+public class PorePermissible implements Permissible {
 
 	@Override
 	public boolean isOp() {

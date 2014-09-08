@@ -1,5 +1,9 @@
 package net.amigocraft.pore.implementation.command;
 
-public class PoreRemoteConsoleCommandSender {
+import org.bukkit.command.RemoteConsoleCommandSender;
+
+//TODO: Bridge
+
+public class PoreRemoteConsoleCommandSender extends PoreCommandSender implements RemoteConsoleCommandSender {
 
 }

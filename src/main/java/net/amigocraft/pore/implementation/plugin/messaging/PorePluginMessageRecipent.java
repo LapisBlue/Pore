@@ -1,5 +1,5 @@
 package net.amigocraft.pore.implementation.plugin.messaging;
 
-public class PluginMessenger {
+public class PorePluginMessageRecipent {
 
 }

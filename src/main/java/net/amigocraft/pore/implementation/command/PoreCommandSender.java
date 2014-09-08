@@ -3,9 +3,9 @@ package net.amigocraft.pore.implementation.command;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 
-import net.amigocraft.pore.implementation.permissions.PorePermissable;
+import net.amigocraft.pore.implementation.permissions.PorePermissible;
 
-public class PoreCommandSender extends PorePermissable implements CommandSender {
+public class PoreCommandSender extends PorePermissible implements CommandSender {
 
 	@Override
 	public void sendMessage(String message) {

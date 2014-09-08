@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Logger;
 
+import net.amigocraft.pore.implementation.command.PoreTabExecutor;
+
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -16,7 +18,7 @@ import org.bukkit.plugin.PluginLoader;
 
 import com.avaje.ebean.EbeanServer;
 
-public class PorePlugin extends PoreTabExecutor implements Plugin {
+public class PorePlugin extends PoreTabExecutor implements Plugin  {
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
