@@ -13,6 +13,9 @@ import java.util.List;
 //TODO: skeleton implementation
 
 public class PoreSkull extends PoreBlockState implements Skull {
+	public PoreSkull(org.spongepowered.api.block.Block spongeBlock) {
+		super(spongeBlock);
+	}
 
 	@Override
 	public boolean hasOwner() {

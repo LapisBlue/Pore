@@ -1,17 +1,15 @@
 package net.amigocraft.pore.implementation.block;
 
-import org.bukkit.*;
-import org.bukkit.block.Block;
+import org.bukkit.Instrument;
+import org.bukkit.Note;
 import org.bukkit.block.NoteBlock;
-import org.bukkit.material.MaterialData;
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.plugin.Plugin;
-
-import java.util.List;
 
 //TODO: skeleton implementation
 
 public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
+	public PoreNoteBlock(org.spongepowered.api.block.Block spongeBlock) {
+		super(spongeBlock);
+	}
 
 	@Override
 	public Note getNote() {

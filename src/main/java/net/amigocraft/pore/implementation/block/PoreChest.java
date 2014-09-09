@@ -16,6 +16,9 @@ import java.util.List;
 //TODO: skeleton implementation
 
 public class PoreChest extends PoreBlockState implements Chest {
+	public PoreChest(org.spongepowered.api.block.Block spongeBlock) {
+		super(spongeBlock);
+	}
 
 	@Override
 	public Inventory getBlockInventory() {

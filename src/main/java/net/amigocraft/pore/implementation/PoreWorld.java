@@ -1,9 +1,35 @@
 package net.amigocraft.pore.implementation;
 
-import org.bukkit.*;
+import java.io.File;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
+import net.amigocraft.pore.implementation.block.PoreBlock;
+
+import org.bukkit.BlockChangeDelegate;
+import org.bukkit.Chunk;
+import org.bukkit.ChunkSnapshot;
+import org.bukkit.Difficulty;
+import org.bukkit.Effect;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.TreeType;
+import org.bukkit.World;
+import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.CreatureType;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.FallingBlock;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.LightningStrike;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
@@ -11,26 +37,21 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
-import java.io.File;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
-//TODO: skeleton implementation
-
 public class PoreWorld implements World {
-
-	//TODO: associate with Sponge's implementation of the world
-
-	@Override
-	public Block getBlockAt(int x, int y, int z) {
-		return null;
+	private org.spongepowered.api.world.World handle;
+    
+	public PoreWorld(org.spongepowered.api.world.World spongeWorld) {
+		this.handle = spongeWorld;
 	}
 
 	@Override
-	public Block getBlockAt(Location location) {
-		return null;
+	public Block getBlockAt(int x, int y, int z){
+		return new PoreBlock(handle.getBlock(x, y, z));
+	}
+
+	@Override
+	public Block getBlockAt(Location location){
+		return getBlockAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 
 	@Override
@@ -64,18 +85,18 @@ public class PoreWorld implements World {
 	}
 
 	@Override
-	public Chunk getChunkAt(int x, int z) {
-		return null;
+	public Chunk getChunkAt(int x, int z){
+		return new PoreChunk(handle.getChunk(x, z));
 	}
 
 	@Override
-	public Chunk getChunkAt(Location location) {
-		return null;
+	public Chunk getChunkAt(Location location){
+		return getChunkAt(location.getBlockX(), location.getBlockZ());
 	}
 
 	@Override
-	public Chunk getChunkAt(Block block) {
-		return null;
+	public Chunk getChunkAt(Block block){
+		return getChunkAt(block.getLocation().getBlockX(), block.getLocation().getBlockZ());
 	}
 
 	@Override
@@ -234,13 +255,13 @@ public class PoreWorld implements World {
 	}
 
 	@Override
-	public String getName() {
-		return null;
+	public String getName(){
+		return handle.getName();
 	}
 
 	@Override
-	public UUID getUID() {
-		return null;
+	public UUID getUID(){
+		return handle.getUniqueID();
 	}
 
 	@Override

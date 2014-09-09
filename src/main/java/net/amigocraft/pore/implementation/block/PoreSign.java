@@ -15,6 +15,9 @@ import java.util.List;
 //TODO: skeleton implementation
 
 public class PoreSign extends PoreBlockState implements Sign {
+	public PoreSign(org.spongepowered.api.block.Block spongeBlock) {
+		super(spongeBlock);
+	}
 
 	@Override
 	public String[] getLines() {

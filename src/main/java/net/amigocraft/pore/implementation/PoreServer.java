@@ -1,7 +1,25 @@
 package net.amigocraft.pore.implementation;
 
-import com.avaje.ebean.config.ServerConfig;
-import org.bukkit.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.logging.Logger;
+
+import org.apache.commons.lang.Validate;
+import org.bukkit.BanList;
+import org.bukkit.GameMode;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Server;
+import org.bukkit.UnsafeValues;
+import org.bukkit.Warning;
+import org.bukkit.World;
+import org.bukkit.WorldCreator;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -9,38 +27,42 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.help.HelpMap;
-import org.bukkit.inventory.*;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemFactory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.map.MapView;
+import org.bukkit.permissions.Permissible;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.messaging.Messenger;
+import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.*;
-import java.util.logging.Logger;
+import com.avaje.ebean.config.ServerConfig;
 
 //TODO: skeleton implementation
 
 public class PoreServer implements Server {
+	private org.spongepowered.api.Game handle;
 
 	@Override
 	public String getName() {
-		return null;
+		return "Sponge";
 	}
 
 	@Override
 	public String getVersion() {
-		return null;
+		return handle.getImplementationVersion();
 	}
 
 	@Override
 	public String getBukkitVersion() {
-		return null;
+		return "Pore-"+getVersion();
 	}
 
 	@Override
@@ -110,7 +132,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void setWhitelist(boolean value) {
-		
+
 	}
 
 	@Override
@@ -120,12 +142,12 @@ public class PoreServer implements Server {
 
 	@Override
 	public void reloadWhitelist() {
-		
+
 	}
 
 	@Override
 	public int broadcastMessage(String message) {
-		return 0;
+		return broadcast(message, BROADCAST_CHANNEL_USERS);
 	}
 
 	@Override
@@ -160,6 +182,16 @@ public class PoreServer implements Server {
 
 	@Override
 	public Player getPlayerExact(String name) {
+		Validate.notNull(name, "Name cannot be null");
+
+		String lname = name.toLowerCase();
+
+		for (Player player : getOnlinePlayers()) {
+			if (player.getName().equalsIgnoreCase(lname)) {
+				return player;
+			}
+		}
+
 		return null;
 	}
 
@@ -230,7 +262,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void reload() {
-		
+
 	}
 
 	@Override
@@ -245,7 +277,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void savePlayers() {
-		
+
 	}
 
 	@Override
@@ -255,7 +287,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void configureDbConfig(ServerConfig config) {
-		
+
 	}
 
 	@Override
@@ -275,12 +307,12 @@ public class PoreServer implements Server {
 
 	@Override
 	public void clearRecipes() {
-		
+
 	}
 
 	@Override
 	public void resetRecipes() {
-		
+
 	}
 
 	@Override
@@ -295,7 +327,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void setSpawnRadius(int value) {
-		
+
 	}
 
 	@Override
@@ -320,21 +352,32 @@ public class PoreServer implements Server {
 
 	@Override
 	public void shutdown() {
-		
+
 	}
 
 	@Override
 	public int broadcast(String message, String permission) {
-		return 0;
+		int count = 0;
+		Set<Permissible> permissibles = getPluginManager().getPermissionSubscriptions(permission);
+
+		for (Permissible permissible : permissibles) {
+			if (permissible instanceof CommandSender && permissible.hasPermission(permission)) {
+				CommandSender user = (CommandSender) permissible;
+				user.sendMessage(message);
+				count++;
+			}
+		}
+
+		return count;
 	}
 
 	@Override
-	public PoreOfflinePlayer getOfflinePlayer(String name) {
+	public OfflinePlayer getOfflinePlayer(String name) {
 		return null;
 	}
 
 	@Override
-	public PoreOfflinePlayer getOfflinePlayer(UUID id) {
+	public OfflinePlayer getOfflinePlayer(UUID id) {
 		return null;
 	}
 
@@ -345,12 +388,12 @@ public class PoreServer implements Server {
 
 	@Override
 	public void banIP(String address) {
-		
+
 	}
 
 	@Override
 	public void unbanIP(String address) {
-		
+
 	}
 
 	@Override
@@ -375,7 +418,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void setDefaultGameMode(GameMode mode) {
-		
+
 	}
 
 	@Override
@@ -490,7 +533,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void setIdleTimeout(int threshold) {
-		
+
 	}
 
 	@Override
@@ -498,18 +541,29 @@ public class PoreServer implements Server {
 		return 0;
 	}
 
+	@Deprecated
 	@Override
 	public UnsafeValues getUnsafe() {
-		return null;
+		return new PoreUnsafeValues();
 	}
 
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message) {
-		
+		StandardMessenger.validatePluginMessage(getMessenger(), source, channel, message);
+
+		for (Player player : getOnlinePlayers()) {
+			player.sendPluginMessage(source, channel, message);
+		}
 	}
 
 	@Override
 	public Set<String> getListeningPluginChannels() {
-		return null;
+		Set<String> result = new HashSet<String>();
+
+		for (Player player : getOnlinePlayers()) {
+			result.addAll(player.getListeningPluginChannels());
+		}
+
+		return result;
 	}
 }

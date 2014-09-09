@@ -1,14 +1,10 @@
 package net.amigocraft.pore;
 
-import net.amigocraft.pore.implementation.PoreServer;
-import org.bukkit.Server;
-import org.bukkit.plugin.InvalidDescriptionException;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.PluginLoader;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.java.JavaPluginLoader;
-
-import java.io.*;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -17,6 +13,20 @@ import java.util.List;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+
+import net.amigocraft.pore.implementation.PoreServer;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Server;
+import org.bukkit.plugin.InvalidDescriptionException;
+import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.PluginLoader;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.java.JavaPluginLoader;
+import org.spongepowered.api.event.SpongeEventHandler;
+import org.spongepowered.api.event.state.SpongeInitializationEvent;
+import org.spongepowered.api.event.state.SpongeServerStoppingEvent;
+import org.spongepowered.api.plugin.Plugin;
 
 /**
  * @author Maxim Roncacé
@@ -29,20 +39,21 @@ import java.util.zip.ZipInputStream;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+@Plugin(id = "Pore", name = "Pore")
 public class Main {
+	private Server server;
+	private PluginLoader loader;
 
-	private static Server server;
-	private static PluginLoader loader;
+	private List<JavaPlugin> plugins = new ArrayList<JavaPlugin>();
 
-	private static List<JavaPlugin> plugins = new ArrayList<JavaPlugin>();
-
-	public static void initialize() {
-		//TODO: initialize as plugin
-
+	@SpongeEventHandler
+	public void onInitialization(SpongeInitializationEvent event) {
 		server = new PoreServer();
 		loader = new JavaPluginLoader(server);
+		
+		Bukkit.setServer(server); //Set the Bukkit API to use our server instance
 
-		File serverDir = null; //TODO: use actual server directory
+		File serverDir = new File("."); //TODO: use actual server directory, currently set to working directory
 		File bukkitDir = new File(serverDir, "bukkit-plugins");
 		for (File f : bukkitDir.listFiles()) {
 			if (!f.isDirectory() && f.getName().endsWith(".jar")) {
@@ -84,6 +95,13 @@ public class Main {
 			}
 		}
 	}
+	
+	@SpongeEventHandler
+	public void onShutdown(SpongeServerStoppingEvent event){
+		for (JavaPlugin plugin : plugins){
+			plugin.onDisable(); //Disable plugin
+		}
+	}
 
 	private static InputStream getInputStream(File zip, String entry) throws IOException {
 		ZipInputStream zin = new ZipInputStream(new FileInputStream(zip));
@@ -94,7 +112,5 @@ public class Main {
 		}
 		throw new EOFException("Cannot find " + entry);
 	}
-
-	//TODO: disable plugins
 
 }
