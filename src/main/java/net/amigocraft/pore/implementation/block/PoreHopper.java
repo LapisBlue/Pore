@@ -16,6 +16,9 @@ import java.util.List;
 //TODO: skeleton implementation
 
 public class PoreHopper extends PoreBlockState implements Hopper {
+	public PoreHopper(org.spongepowered.api.block.Block spongeBlock) {
+		super(spongeBlock);
+	}
 
 	@Override
 	public Inventory getInventory() {
