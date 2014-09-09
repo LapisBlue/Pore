@@ -1,5 +1,7 @@
 package net.amigocraft.pore.implementation;
 
+import net.amigocraft.pore.implementation.block.PoreBlock;
+
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
@@ -8,17 +10,20 @@ import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 
 public class PoreChunk implements Chunk {
-
-	//TODO: reference Sponge's chunk pore
+    private org.spongepowered.api.world.Chunk handle;
+    
+    public PoreChunk(org.spongepowered.api.world.Chunk spongeChunk) {
+    	this.handle = spongeChunk;
+    }
 
 	@Override
 	public int getX(){
-		return 0; //TODO: bridge
+		return handle.getX();
 	}
 
 	@Override
 	public int getZ(){
-		return 0; //TODO: bridge
+		return handle.getZ();
 	}
 
 	@Override
@@ -28,7 +33,7 @@ public class PoreChunk implements Chunk {
 
 	@Override
 	public Block getBlock(int x, int y, int z){
-		return null; //TODO: bridge
+		return new PoreBlock(handle.getBlock(x, y, z));
 	}
 
 	@Override
