@@ -16,6 +16,9 @@ import java.util.List;
 //TODO: wireframe implementation
 
 public class PoreDropper extends PoreBlockState implements Dropper {
+	public PoreDropper(org.spongepowered.api.block.Block spongeBlock) {
+		super(spongeBlock);
+	}
 
 	@Override
 	public void drop() {

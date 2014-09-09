@@ -16,6 +16,9 @@ import java.util.List;
 //TODO: skeleton implementation
 
 public class PoreBrewingStand extends PoreBlockState implements BrewingStand {
+	public PoreBrewingStand(org.spongepowered.api.block.Block spongeBlock) {
+		super(spongeBlock);
+	}
 
 	@Override
 	public int getBrewingTime() {

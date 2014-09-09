@@ -1,22 +1,15 @@
 package net.amigocraft.pore.implementation.block;
 
-import org.bukkit.Chunk;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.EntityType;
-import org.bukkit.material.MaterialData;
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.plugin.Plugin;
-
-import java.util.List;
 
 //TODO: skeleton implementation
 
 public class PoreCreatureSpawner extends PoreBlockState implements CreatureSpawner {
+	public PoreCreatureSpawner(org.spongepowered.api.block.Block spongeBlock) {
+		super(spongeBlock);
+	}
 
 	@Override
 	public CreatureType getCreatureType() {

@@ -13,12 +13,15 @@ import org.bukkit.plugin.Plugin;
 import java.util.List;
 
 public class PoreBlockState implements BlockState {
-
-	//TODO: possibly associate with something in Sponge
+	private org.spongepowered.api.block.Block handle;
+	
+	public PoreBlockState(org.spongepowered.api.block.Block spongeBlock) {
+		this.handle = spongeBlock;
+	}
 
 	@Override
 	public Block getBlock() {
-		return null;
+		return new PoreBlock(handle);
 	}
 
 	@Override
