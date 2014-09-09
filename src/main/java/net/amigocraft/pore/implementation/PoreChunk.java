@@ -10,11 +10,11 @@ import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 
 public class PoreChunk implements Chunk {
-    private org.spongepowered.api.world.Chunk handle;
+	private org.spongepowered.api.world.Chunk handle;
     
-    public PoreChunk(org.spongepowered.api.world.Chunk spongeChunk) {
-    	this.handle = spongeChunk;
-    }
+	public PoreChunk(org.spongepowered.api.world.Chunk spongeChunk) {
+		this.handle = spongeChunk;
+	}
 
 	@Override
 	public int getX(){

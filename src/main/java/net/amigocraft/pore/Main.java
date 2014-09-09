@@ -47,7 +47,7 @@ public class Main {
 	private List<JavaPlugin> plugins = new ArrayList<JavaPlugin>();
 
 	@SpongeEventHandler
-    public void onInitialization(SpongeInitializationEvent event) {
+	public void onInitialization(SpongeInitializationEvent event) {
 		server = new PoreServer();
 		loader = new JavaPluginLoader(server);
 		

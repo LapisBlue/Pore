@@ -38,11 +38,11 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
 public class PoreWorld implements World {
-    private org.spongepowered.api.world.World handle;
+	private org.spongepowered.api.world.World handle;
     
-    public PoreWorld(org.spongepowered.api.world.World spongeWorld) {
-    	this.handle = spongeWorld;
-    }
+	public PoreWorld(org.spongepowered.api.world.World spongeWorld) {
+		this.handle = spongeWorld;
+	}
 
 	@Override
 	public Block getBlockAt(int x, int y, int z){

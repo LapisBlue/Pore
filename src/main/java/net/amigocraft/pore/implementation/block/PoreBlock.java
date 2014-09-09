@@ -16,8 +16,8 @@ public class PoreBlock implements Block {
 	private org.spongepowered.api.block.Block handle;
 	
 	public PoreBlock(org.spongepowered.api.block.Block spongeBlock) {
-    	this.handle = spongeBlock;
-    }
+		this.handle = spongeBlock;
+	}
 	
 	@Override
 	public byte getData(){
