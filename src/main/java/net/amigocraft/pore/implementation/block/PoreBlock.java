@@ -13,9 +13,12 @@ import java.util.Collection;
 import java.util.List;
 
 public class PoreBlock implements Block {
-
-	//TODO: associate with Sponge's implementation of blocks
-
+	private org.spongepowered.api.block.Block handle;
+	
+	public PoreBlock(org.spongepowered.api.block.Block spongeBlock) {
+		this.handle = spongeBlock;
+	}
+	
 	@Override
 	public byte getData() {
 		return 0; //TODO: bridge
