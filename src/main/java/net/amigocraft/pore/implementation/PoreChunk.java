@@ -12,19 +12,20 @@ import org.bukkit.entity.Entity;
 //TODO: skeleton implementation
 
 public class PoreChunk implements Chunk {
+
 	private org.spongepowered.api.world.Chunk handle;
-    
+
 	public PoreChunk(org.spongepowered.api.world.Chunk spongeChunk) {
 		this.handle = spongeChunk;
 	}
 
 	@Override
-	public int getX(){
+	public int getX() {
 		return handle.getX();
 	}
 
 	@Override
-	public int getZ(){
+	public int getZ() {
 		return handle.getZ();
 	}
 
@@ -34,7 +35,7 @@ public class PoreChunk implements Chunk {
 	}
 
 	@Override
-	public Block getBlock(int x, int y, int z){
+	public Block getBlock(int x, int y, int z) {
 		return new PoreBlock(handle.getBlock(x, y, z));
 	}
 

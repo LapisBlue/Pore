@@ -19,6 +19,7 @@ import net.amigocraft.pore.implementation.PoreServer;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.plugin.InvalidDescriptionException;
+import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginLoader;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -41,24 +42,29 @@ import org.spongepowered.api.plugin.Plugin;
  */
 @Plugin(id = "Pore", name = "Pore")
 public class Main {
+
 	private Server server;
 	private PluginLoader loader;
 
-	private List<JavaPlugin> plugins = new ArrayList<JavaPlugin>();
+	private List<org.bukkit.plugin.Plugin> plugins = new ArrayList<org.bukkit.plugin.Plugin>();
 
 	@SpongeEventHandler
 	public void onInitialization(SpongeInitializationEvent event) {
+
 		server = new PoreServer();
 		loader = new JavaPluginLoader(server);
-		
+
 		Bukkit.setServer(server); //Set the Bukkit API to use our server instance
+
+		System.out.println("[Pore] Loading Bukkit plugins, please wait...");
 
 		File serverDir = new File("."); //TODO: use actual server directory, currently set to working directory
 		File bukkitDir = new File(serverDir, "bukkit-plugins");
 		for (File f : bukkitDir.listFiles()) {
 			if (!f.isDirectory() && f.getName().endsWith(".jar")) {
 				try {
-					JarFile pluginJar = new JarFile(f); // get JAR
+					plugins.add(loader.loadPlugin(f));
+					/*JarFile pluginJar = new JarFile(f); // get JAR
 					ZipEntry pluginDesc = pluginJar.getEntry("plugin.yml"); // get plugin description
 					if (pluginDesc == null) { // not a plugin
 						System.err.println("[Pore] Failed to load plugin.yml for " + f.getName() + "!");
@@ -73,10 +79,13 @@ public class Main {
 					Class<?> clazz = Class.forName(main, true, cLoader); // get the main class
 					Class<? extends JavaPlugin> pluginClass = clazz.asSubclass(JavaPlugin.class);
 					JavaPlugin plugin = pluginClass.cast(new JavaPlugin(loader, server, pdf, new File(bukkitDir, pdf.getName()), f));
-					plugin.onEnable(); // synthesize the standard onEnable call
-					plugins.add(plugin);
+					plugins.add(plugin);*/
 				}
-				catch (InvalidDescriptionException ex) {
+				catch (InvalidPluginException ex) {
+					ex.printStackTrace();
+					System.err.println("[Pore] Failed to load plugin " + f.getName() + "!");
+				}
+				/*catch (InvalidDescriptionException ex) {
 					ex.printStackTrace();
 					System.err.println("[Pore] Failed to load plugin description for " + f.getName() + "!");
 				}
@@ -91,16 +100,28 @@ public class Main {
 				catch (IOException ex) {
 					ex.printStackTrace();
 					System.err.println("[Pore] Failed to load " + f.getName() + "!");
-				}
+				}*/
 			}
 		}
+
+		System.out.println("[Pore] Finished loading Bukkit plugins!");
+		System.out.println("Enabling loaded plugins...");
+
+		for (org.bukkit.plugin.Plugin plugin : plugins) {
+			loader.enablePlugin(plugin);
+		}
 	}
-	
+
 	@SpongeEventHandler
 	public void onShutdown(SpongeServerStoppingEvent event){
-		for (JavaPlugin plugin : plugins){
-			plugin.onDisable(); //Disable plugin
+		for (org.bukkit.plugin.Plugin plugin : plugins){
+			loader.disablePlugin(plugin);
 		}
+
+		// clear static references
+		plugins.clear();
+		loader = null;
+		server = null;
 	}
 
 	private static InputStream getInputStream(File zip, String entry) throws IOException {
