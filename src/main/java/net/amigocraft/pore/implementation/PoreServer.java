@@ -132,7 +132,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void setWhitelist(boolean value) {
-		
+
 	}
 
 	@Override
@@ -142,7 +142,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void reloadWhitelist() {
-		
+
 	}
 
 	@Override
@@ -184,15 +184,15 @@ public class PoreServer implements Server {
 	public Player getPlayerExact(String name) {
 		Validate.notNull(name, "Name cannot be null");
 
-        String lname = name.toLowerCase();
+		String lname = name.toLowerCase();
 
-        for (Player player : getOnlinePlayers()) {
-            if (player.getName().equalsIgnoreCase(lname)) {
-                return player;
-            }
-        }
+		for (Player player : getOnlinePlayers()) {
+			if (player.getName().equalsIgnoreCase(lname)) {
+				return player;
+			}
+		}
 
-        return null;
+		return null;
 	}
 
 	@Override
@@ -262,7 +262,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void reload() {
-		
+
 	}
 
 	@Override
@@ -277,7 +277,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void savePlayers() {
-		
+
 	}
 
 	@Override
@@ -287,7 +287,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void configureDbConfig(ServerConfig config) {
-		
+
 	}
 
 	@Override
@@ -307,12 +307,12 @@ public class PoreServer implements Server {
 
 	@Override
 	public void clearRecipes() {
-		
+
 	}
 
 	@Override
 	public void resetRecipes() {
-		
+
 	}
 
 	@Override
@@ -327,7 +327,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void setSpawnRadius(int value) {
-		
+
 	}
 
 	@Override
@@ -352,23 +352,23 @@ public class PoreServer implements Server {
 
 	@Override
 	public void shutdown() {
-		
+
 	}
-	
+
 	@Override
 	public int broadcast(String message, String permission) {
 		int count = 0;
-        Set<Permissible> permissibles = getPluginManager().getPermissionSubscriptions(permission);
+		Set<Permissible> permissibles = getPluginManager().getPermissionSubscriptions(permission);
 
-        for (Permissible permissible : permissibles) {
-            if (permissible instanceof CommandSender && permissible.hasPermission(permission)) {
-                CommandSender user = (CommandSender) permissible;
-                user.sendMessage(message);
-                count++;
-            }
-        }
+		for (Permissible permissible : permissibles) {
+			if (permissible instanceof CommandSender && permissible.hasPermission(permission)) {
+				CommandSender user = (CommandSender) permissible;
+				user.sendMessage(message);
+				count++;
+			}
+		}
 
-        return count;
+		return count;
 	}
 
 	@Override
@@ -388,12 +388,12 @@ public class PoreServer implements Server {
 
 	@Override
 	public void banIP(String address) {
-		
+
 	}
 
 	@Override
 	public void unbanIP(String address) {
-		
+
 	}
 
 	@Override
@@ -418,7 +418,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void setDefaultGameMode(GameMode mode) {
-		
+
 	}
 
 	@Override
@@ -533,7 +533,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void setIdleTimeout(int threshold) {
-		
+
 	}
 
 	@Override
@@ -551,19 +551,19 @@ public class PoreServer implements Server {
 	public void sendPluginMessage(Plugin source, String channel, byte[] message) {
 		StandardMessenger.validatePluginMessage(getMessenger(), source, channel, message);
 
-        for (Player player : getOnlinePlayers()) {
-            player.sendPluginMessage(source, channel, message);
-        }
+		for (Player player : getOnlinePlayers()) {
+			player.sendPluginMessage(source, channel, message);
+		}
 	}
 
 	@Override
 	public Set<String> getListeningPluginChannels() {
 		Set<String> result = new HashSet<String>();
 
-        for (Player player : getOnlinePlayers()) {
-            result.addAll(player.getListeningPluginChannels());
-        }
+		for (Player player : getOnlinePlayers()) {
+			result.addAll(player.getListeningPluginChannels());
+		}
 
-        return result;
+		return result;
 	}
 }
