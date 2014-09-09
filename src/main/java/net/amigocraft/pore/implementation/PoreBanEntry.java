@@ -4,55 +4,57 @@ import org.bukkit.BanEntry;
 
 import java.util.Date;
 
+//TODO: skeleton implementation
+
 public class PoreBanEntry implements BanEntry {
 
 	@Override
-	public String getTarget(){
-		return null; //TODO: bridge
+	public String getTarget() {
+		return null;
 	}
 
 	@Override
-	public Date getCreated(){
-		return null; //TODO: bridge
+	public Date getCreated() {
+		return null;
 	}
 
 	@Override
-	public void setCreated(Date created){
-		//TODO: bridge
+	public void setCreated(Date created) {
+		
 	}
 
 	@Override
-	public String getSource(){
-		return null; //TODO: bridge
+	public String getSource() {
+		return null;
 	}
 
 	@Override
-	public void setSource(String source){
-		//TODO: bridge
+	public void setSource(String source) {
+		
 	}
 
 	@Override
-	public Date getExpiration(){
-		return null; //TODO: bridge
+	public Date getExpiration() {
+		return null;
 	}
 
 	@Override
-	public void setExpiration(Date expiration){
-		//TODO: bridge
+	public void setExpiration(Date expiration) {
+		
 	}
 
 	@Override
-	public String getReason(){
-		return null; //TODO: bridge
+	public String getReason() {
+		return null;
 	}
 
 	@Override
-	public void setReason(String reason){
-		//TODO: bridge
+	public void setReason(String reason) {
+		
 	}
 
 	@Override
-	public void save(){
-		//TODO: bridge
+	public void save() {
+		
 	}
 }

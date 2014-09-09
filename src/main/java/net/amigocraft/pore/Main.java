@@ -55,12 +55,12 @@ public class Main {
 
 		File serverDir = new File("."); //TODO: use actual server directory, currently set to working directory
 		File bukkitDir = new File(serverDir, "bukkit-plugins");
-		for (File f : bukkitDir.listFiles()){
-			if (!f.isDirectory() && f.getName().endsWith(".jar")){
+		for (File f : bukkitDir.listFiles()) {
+			if (!f.isDirectory() && f.getName().endsWith(".jar")) {
 				try {
 					JarFile pluginJar = new JarFile(f); // get JAR
 					ZipEntry pluginDesc = pluginJar.getEntry("plugin.yml"); // get plugin description
-					if (pluginDesc == null){ // not a plugin
+					if (pluginDesc == null) { // not a plugin
 						System.err.println("[Pore] Failed to load plugin.yml for " + f.getName() + "!");
 						continue;
 					}
@@ -76,19 +76,19 @@ public class Main {
 					plugin.onEnable(); // synthesize the standard onEnable call
 					plugins.add(plugin);
 				}
-				catch (InvalidDescriptionException ex){
+				catch (InvalidDescriptionException ex) {
 					ex.printStackTrace();
 					System.err.println("[Pore] Failed to load plugin description for " + f.getName() + "!");
 				}
-				catch (MalformedURLException ex){
+				catch (MalformedURLException ex) {
 					ex.printStackTrace();
 					System.err.println("[Pore] An exception occurred while loading " + f.getName());
 				}
-				catch (ClassNotFoundException ex){
+				catch (ClassNotFoundException ex) {
 					ex.printStackTrace();
 					System.err.println("[Pore] Failed to load main class for " + f.getName() + "!");
 				}
-				catch (IOException ex){
+				catch (IOException ex) {
 					ex.printStackTrace();
 					System.err.println("[Pore] Failed to load " + f.getName() + "!");
 				}
@@ -105,7 +105,7 @@ public class Main {
 
 	private static InputStream getInputStream(File zip, String entry) throws IOException {
 		ZipInputStream zin = new ZipInputStream(new FileInputStream(zip));
-		for (ZipEntry e; (e = zin.getNextEntry()) != null;) {
+		for (ZipEntry e; (e = zin.getNextEntry()) != null; ) {
 			if (e.getName().equals(entry)) {
 				return zin;
 			}

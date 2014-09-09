@@ -20,228 +20,228 @@ public class PoreBlock implements Block {
 	}
 	
 	@Override
-	public byte getData(){
+	public byte getData() {
 		return 0; //TODO: bridge
 	}
 
 	@Override
-	public Block getRelative(int modX, int modY, int modZ){
+	public Block getRelative(int modX, int modY, int modZ) {
 		return null; //TODO: bridge
 	}
 
 	@Override
-	public Block getRelative(BlockFace face){
+	public Block getRelative(BlockFace face) {
 		return null; //TODO: bridge
 	}
 
 	@Override
-	public Block getRelative(BlockFace face, int distance){
+	public Block getRelative(BlockFace face, int distance) {
 		return null; //TODO: bridge
 	}
 
 	@Override
-	public Material getType(){
+	public Material getType() {
 		return null; //TODO: bridge
 	}
 
 	@Override
-	public int getTypeId(){
+	public int getTypeId() {
 		return 0; //TODO: bridge
 	}
 
 	@Override
-	public byte getLightLevel(){
+	public byte getLightLevel() {
 		return 0; //TODO: bridge
 	}
 
 	@Override
-	public byte getLightFromSky(){
+	public byte getLightFromSky() {
 		return 0; //TODO: bridge
 	}
 
 	@Override
-	public byte getLightFromBlocks(){
+	public byte getLightFromBlocks() {
 		return 0; //TODO: bridge
 	}
 
 	@Override
-	public World getWorld(){
+	public World getWorld() {
 		return null; //TODO: bridge
 	}
 
 	@Override
-	public int getX(){
+	public int getX() {
 		return 0; //TODO: bridge
 	}
 
 	@Override
-	public int getY(){
+	public int getY() {
 		return 0; //TODO: bridge
 	}
 
 	@Override
-	public int getZ(){
+	public int getZ() {
 		return 0; //TODO: bridge
 	}
 
 	@Override
-	public Location getLocation(){
+	public Location getLocation() {
 		return null; //TODO: bridge
 	}
 
 	@Override
-	public Location getLocation(Location loc){
+	public Location getLocation(Location loc) {
 		return null; //TODO: bridge
 	}
 
 	@Override
-	public Chunk getChunk(){
+	public Chunk getChunk() {
 		return null; //TODO: bridge
 	}
 
 	@Override
-	public void setData(byte data){
+	public void setData(byte data) {
 		//TODO: bridge
 	}
 
 	@Override
-	public void setData(byte data, boolean applyPhysics){
+	public void setData(byte data, boolean applyPhysics) {
 		//TODO: bridge
 	}
 
 	@Override
-	public void setType(Material type){
+	public void setType(Material type) {
 		//TODO: bridge
 	}
 
 	@Override
-	public boolean setTypeId(int type){
+	public boolean setTypeId(int type) {
 		return false; //TODO: bridge //TODO: bridge
 	}
 
 	@Override
-	public boolean setTypeId(int type, boolean applyPhysics){
+	public boolean setTypeId(int type, boolean applyPhysics) {
 		return false; //TODO: bridge
 	}
 
 	@Override
-	public boolean setTypeIdAndData(int type, byte data, boolean applyPhysics){
+	public boolean setTypeIdAndData(int type, byte data, boolean applyPhysics) {
 		return false; //TODO: bridge
 	}
 
 	@Override
-	public BlockFace getFace(Block block){
+	public BlockFace getFace(Block block) {
 		return null; //TODO: bridge
 	}
 
 	@Override
-	public PoreBlockState getState(){
+	public PoreBlockState getState() {
 		return null; //TODO: bridge
 	}
 
 	@Override
-	public Biome getBiome(){
+	public Biome getBiome() {
 		return null; //TODO: bridge
 	}
 
 	@Override
-	public void setBiome(Biome bio){
+	public void setBiome(Biome bio) {
 		//TODO: bridge
 	}
 
 	@Override
-	public boolean isBlockPowered(){
+	public boolean isBlockPowered() {
 		return false; //TODO: bridge
 	}
 
 	@Override
-	public boolean isBlockIndirectlyPowered(){
+	public boolean isBlockIndirectlyPowered() {
 		return false; //TODO: bridge
 	}
 
 	@Override
-	public boolean isBlockFacePowered(BlockFace face){
+	public boolean isBlockFacePowered(BlockFace face) {
 		return false; //TODO: bridge
 	}
 
 	@Override
-	public boolean isBlockFaceIndirectlyPowered(BlockFace face){
+	public boolean isBlockFaceIndirectlyPowered(BlockFace face) {
 		return false; //TODO: bridge
 	}
 
 	@Override
-	public int getBlockPower(BlockFace face){
+	public int getBlockPower(BlockFace face) {
 		return 0; //TODO: bridge
 	}
 
 	@Override
-	public int getBlockPower(){
+	public int getBlockPower() {
 		return 0; //TODO: bridge
 	}
 
 	@Override
-	public boolean isEmpty(){
+	public boolean isEmpty() {
 		return false; //TODO: bridge
 	}
 
 	@Override
-	public boolean isLiquid(){
+	public boolean isLiquid() {
 		return false; //TODO: bridge
 	}
 
 	@Override
-	public double getTemperature(){
+	public double getTemperature() {
 		return 0; //TODO: bridge
 	}
 
 	@Override
-	public double getHumidity(){
+	public double getHumidity() {
 		return 0; //TODO: bridge
 	}
 
 	@Override
-	public PistonMoveReaction getPistonMoveReaction(){
+	public PistonMoveReaction getPistonMoveReaction() {
 		return null; //TODO: bridge
 	}
 
 	@Override
-	public boolean breakNaturally(){
+	public boolean breakNaturally() {
 		return false; //TODO: bridge
 	}
 
 	@Override
-	public boolean breakNaturally(ItemStack tool){
+	public boolean breakNaturally(ItemStack tool) {
 		return false; //TODO: bridge
 	}
 
 	@Override
-	public Collection<ItemStack> getDrops(){
+	public Collection<ItemStack> getDrops() {
 		return null; //TODO: bridge
 	}
 
 	@Override
-	public Collection<ItemStack> getDrops(ItemStack tool){
+	public Collection<ItemStack> getDrops(ItemStack tool) {
 		return null; //TODO: bridge
 	}
 
 	@Override
-	public void setMetadata(String metadataKey, MetadataValue newMetadataValue){
+	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
 		//TODO: bridge
 	}
 
 	@Override
-	public List<MetadataValue> getMetadata(String metadataKey){
+	public List<MetadataValue> getMetadata(String metadataKey) {
 		return null; //TODO: bridge
 	}
 
 	@Override
-	public boolean hasMetadata(String metadataKey){
+	public boolean hasMetadata(String metadataKey) {
 		return false; //TODO: bridge
 	}
 
 	@Override
-	public void removeMetadata(String metadataKey, Plugin owningPlugin){
+	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
 		//TODO: bridge
 	}
-	
+
 }

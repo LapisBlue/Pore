@@ -9,6 +9,8 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 
+//TODO: skeleton implementation
+
 public class PoreChunk implements Chunk {
 	private org.spongepowered.api.world.Chunk handle;
     
@@ -27,8 +29,8 @@ public class PoreChunk implements Chunk {
 	}
 
 	@Override
-	public World getWorld(){
-		return null; //TODO: bridge
+	public World getWorld() {
+		return null;
 	}
 
 	@Override
@@ -37,52 +39,52 @@ public class PoreChunk implements Chunk {
 	}
 
 	@Override
-	public ChunkSnapshot getChunkSnapshot(){
-		return null; //TODO: bridge
+	public ChunkSnapshot getChunkSnapshot() {
+		return null;
 	}
 
 	@Override
-	public ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain){
-		return null; //TODO: bridge
+	public ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain) {
+		return null;
 	}
 
 	@Override
-	public Entity[] getEntities(){
-		return new Entity[0]; //TODO: bridge
+	public Entity[] getEntities() {
+		return new Entity[0];
 	}
 
 	@Override
-	public BlockState[] getTileEntities(){
-		return new BlockState[0]; //TODO: bridge
+	public BlockState[] getTileEntities() {
+		return new BlockState[0];
 	}
 
 	@Override
-	public boolean isLoaded(){
-		return false; //TODO: bridge
+	public boolean isLoaded() {
+		return false;
 	}
 
 	@Override
-	public boolean load(boolean generate){
-		return false; //TODO: bridge
+	public boolean load(boolean generate) {
+		return false;
 	}
 
 	@Override
-	public boolean load(){
-		return false; //TODO: bridge
+	public boolean load() {
+		return false;
 	}
 
 	@Override
-	public boolean unload(boolean save, boolean safe){
-		return false; //TODO: bridge
+	public boolean unload(boolean save, boolean safe) {
+		return false;
 	}
 
 	@Override
-	public boolean unload(boolean save){
-		return false; //TODO: bridge
+	public boolean unload(boolean save) {
+		return false;
 	}
 
 	@Override
-	public boolean unload(){
-		return false; //TODO: bridge
+	public boolean unload() {
+		return false;
 	}
 }
