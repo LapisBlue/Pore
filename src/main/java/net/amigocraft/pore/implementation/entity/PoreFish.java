@@ -5,6 +5,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.projectiles.ProjectileSource;
 
 public class PoreFish extends AbstractProjectile implements Fish {
+    // TODO: Bridge
     @Override
     public double getBiteChance() {
         return 0;

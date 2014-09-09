@@ -3,6 +3,7 @@ package net.amigocraft.pore.implementation.entity;
 import org.bukkit.entity.Ocelot;
 
 public class PoreOcelot extends PoreTameableAnimal implements Ocelot {
+    // TODO: Bridge
     @Override
     public Type getCatType() {
         return null;

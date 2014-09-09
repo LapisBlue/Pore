@@ -5,6 +5,7 @@ import org.bukkit.entity.Creature;
 import org.bukkit.entity.Tameable;
 
 public class PoreTameableAnimal extends PoreAnimals implements Tameable, Creature {
+    // TODO: Bridge
     @Override
     public boolean isTamed() {
         return false;

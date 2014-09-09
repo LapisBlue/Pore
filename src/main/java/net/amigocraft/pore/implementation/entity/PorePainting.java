@@ -4,6 +4,7 @@ import org.bukkit.Art;
 import org.bukkit.entity.Painting;
 
 public class PorePainting extends PoreHanging implements Painting {
+    // TODO: Bridge
     @Override
     public Art getArt() {
         return null;

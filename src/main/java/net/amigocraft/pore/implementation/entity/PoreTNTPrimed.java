@@ -4,6 +4,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.TNTPrimed;
 
 public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
+    // TODO: Bridge
     @Override
     public void setFuseTicks(int fuseTicks) {
 

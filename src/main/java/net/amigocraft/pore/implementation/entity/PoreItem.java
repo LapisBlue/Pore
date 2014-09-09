@@ -4,6 +4,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 
 public class PoreItem extends PoreEntity implements Item {
+    // TODO: Bridge
     @Override
     public ItemStack getItemStack() {
         return null;

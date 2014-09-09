@@ -5,6 +5,7 @@ import org.bukkit.entity.ItemFrame;
 import org.bukkit.inventory.ItemStack;
 
 public class PoreItemFrame extends PoreHanging implements ItemFrame {
+    // TODO: Bridge
     @Override
     public ItemStack getItem() {
         return null;

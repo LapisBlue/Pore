@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class PorePlayer extends PoreHumanEntity implements Player {
+    // TODO: Bridge
     @Override
     public String getDisplayName() {
         return null;

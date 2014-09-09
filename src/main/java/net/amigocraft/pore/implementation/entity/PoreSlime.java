@@ -3,6 +3,7 @@ package net.amigocraft.pore.implementation.entity;
 import org.bukkit.entity.Slime;
 
 public class PoreSlime extends PoreLivingEntity implements Slime {
+    // TODO: Bridge
     @Override
     public int getSize() {
         return 0;

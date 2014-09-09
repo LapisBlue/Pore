@@ -3,6 +3,7 @@ package net.amigocraft.pore.implementation.entity;
 import org.bukkit.entity.PigZombie;
 
 public class PorePigZombie extends PoreZombie implements PigZombie {
+    // TODO: Bridge
     @Override
     public int getAnger() {
         return 0;

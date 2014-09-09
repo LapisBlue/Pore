@@ -4,6 +4,7 @@ import org.bukkit.DyeColor;
 import org.bukkit.entity.Wolf;
 
 public class PoreWolf extends PoreTameableAnimal implements Wolf {
+    // TODO: Bridge
     @Override
     public boolean isAngry() {
         return false;

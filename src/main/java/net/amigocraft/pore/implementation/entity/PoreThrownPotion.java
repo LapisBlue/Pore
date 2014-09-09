@@ -7,6 +7,7 @@ import org.bukkit.potion.PotionEffect;
 import java.util.Collection;
 
 public class PoreThrownPotion extends PoreProjectile implements ThrownPotion {
+    // TODO: Bridge
     @Override
     public Collection<PotionEffect> getEffects() {
         return null;

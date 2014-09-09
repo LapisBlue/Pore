@@ -4,6 +4,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Hanging;
 
 public class PoreHanging extends PoreEntity implements Hanging {
+    // TODO: Bridge
     @Override
     public boolean setFacingDirection(BlockFace face, boolean force) {
         return false;

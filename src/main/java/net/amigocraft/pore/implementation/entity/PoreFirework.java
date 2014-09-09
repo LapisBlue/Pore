@@ -4,6 +4,7 @@ import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
 
 public class PoreFirework extends PoreEntity implements Firework {
+    // TODO: Bridge
     @Override
     public FireworkMeta getFireworkMeta() {
         return null;

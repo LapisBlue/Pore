@@ -15,6 +15,7 @@ import org.bukkit.plugin.Plugin;
 import java.util.Set;
 
 public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
+    // TODO: Bridge
     @Override
     public String getName() {
         return null;
