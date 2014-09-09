@@ -14,6 +14,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+	<repositories>
+        <repository>
+            <id>spongeapi-temp-repo</id>
+            <url>http://repo.amigocraft.net/content/repositories/spongeapi/</url>
+        </repository>
+    </repositories>
     <build>
         <defaultGoal>clean install</defaultGoal>
         <plugins>
@@ -25,10 +31,6 @@
                     <source>1.6</source>
                     <target>1.6</target>
                     <encoding>UTF-8</encoding>
-                    <excludes>
-                        <!--<exclude>org/bukkit/*.java</exclude>
-                        <exclude>org/bukkit/**/*.java</exclude>-->
-                    </excludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -54,6 +56,13 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
+						<configuration>
+							<artifactSet>
+								<excludes>
+									<exclude>org.spongepowered:spongeapi</exclude>
+								</excludes>
+							</artifactSet>
+						</configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -105,6 +114,13 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
+		<dependency>
+			<groupId>org.spongepowered</groupId>
+			<artifactId>spongeapi</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
