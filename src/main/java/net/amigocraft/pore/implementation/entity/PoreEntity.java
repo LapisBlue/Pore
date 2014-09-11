@@ -17,7 +17,15 @@ import java.util.UUID;
 
 public class PoreEntity implements Entity {
 
-	// TODO: Bridge
+	private org.spongepowered.api.entity.Entity handle;
+
+	public PoreEntity(org.spongepowered.api.entity.Entity handle){
+		this.handle = handle;
+	}
+
+	public org.spongepowered.api.entity.Entity getHandle() {
+		return handle;
+	}
 
 	// Overrided from Entity
 	@Override
@@ -157,7 +165,7 @@ public class PoreEntity implements Entity {
 
 	@Override
 	public UUID getUniqueId() {
-		return null;
+		return getHandle().getUniqueID();
 	}
 
 	@Override

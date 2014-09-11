@@ -14,11 +14,18 @@ import org.bukkit.plugin.Plugin;
 
 import java.util.Set;
 
+//TODO: bridge
 public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
-    // TODO: Bridge
+
+	public PoreHumanEntity(org.spongepowered.api.entity.HumanEntity handle) {
+		super(handle);
+	}
+
     @Override
     public String getName() {
-        return null;
+        if (getHandle() instanceof org.spongepowered.api.entity.Player)
+			return ((org.spongepowered.api.entity.Player)getHandle()).getName();
+		return null;
     }
 
     @Override
