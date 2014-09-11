@@ -6,4 +6,8 @@ public class PoreMonster extends PoreCreature implements Monster {
 
 	//TODO: Bridge
 
+	public PoreMonster(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 }

@@ -6,6 +6,10 @@ public class PoreCreeper extends PoreMonster implements Creeper {
 
 	//TODO: Bridge
 
+	public PoreCreeper(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 	@Override
 	public boolean isPowered() {
 		return false;

@@ -5,7 +5,13 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.projectiles.ProjectileSource;
 
 public class PoreFish extends AbstractProjectile implements Fish {
+
     // TODO: Bridge
+
+	public PoreFish(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
     @Override
     public double getBiteChance() {
         return 0;

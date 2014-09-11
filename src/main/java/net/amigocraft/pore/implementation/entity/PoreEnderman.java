@@ -7,6 +7,10 @@ public class PoreEnderman extends PoreMonster implements Enderman {
 
 	//TODO: Bridge
 
+	public PoreEnderman(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 	@Override
 	public MaterialData getCarriedMaterial() {
 		return null;

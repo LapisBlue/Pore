@@ -7,7 +7,9 @@ public class PoreCreature extends PoreLivingEntity implements Creature {
 
 	//TODO: Bridge
 
-	// Implemented from Creature
+	public PoreCreature(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
 
 	@Override
 	public void setTarget(LivingEntity target) {

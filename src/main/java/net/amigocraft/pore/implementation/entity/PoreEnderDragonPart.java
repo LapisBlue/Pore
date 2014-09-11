@@ -7,6 +7,10 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements EnderD
 
 	//TODO: Bridge
 
+	public PoreEnderDragonPart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 	@Override
 	public void damage(double amount) {
 

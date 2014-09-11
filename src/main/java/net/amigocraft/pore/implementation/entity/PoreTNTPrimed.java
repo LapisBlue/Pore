@@ -4,7 +4,13 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.TNTPrimed;
 
 public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
+
     // TODO: Bridge
+
+	public PoreTNTPrimed(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
     @Override
     public void setFuseTicks(int fuseTicks) {
 

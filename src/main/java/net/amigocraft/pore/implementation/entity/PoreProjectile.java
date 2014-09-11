@@ -8,6 +8,10 @@ public class PoreProjectile extends AbstractProjectile implements Projectile {
 
 	//TODO: Bridge
 
+	public PoreProjectile(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 	@Override
 	public LivingEntity _INVALID_getShooter() {
 		return null;

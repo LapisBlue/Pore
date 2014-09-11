@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.*;
 import org.spongepowered.api.event.SpongeEventHandler;
-import org.spongepowered.api.event.player.*;
+import org.spongepowered.api.event.entity.*;
 import org.spongepowered.api.event.player.AsyncPlayerChatEvent;
 import org.spongepowered.api.event.world.*;
 

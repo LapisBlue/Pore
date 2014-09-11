@@ -6,4 +6,8 @@ public abstract class PoreComplexLivingEntity extends PoreLivingEntity implement
 
 	//TODO: Bridge
 
+	public PoreComplexLivingEntity(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 }

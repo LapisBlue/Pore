@@ -7,4 +7,8 @@ public class PoreSpawnerMinecart extends PoreMinecart implements SpawnerMinecart
 
 	// TODO: Bridge
 
+	public PoreSpawnerMinecart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 }

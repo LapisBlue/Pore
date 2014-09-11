@@ -7,6 +7,10 @@ public class PoreComplexEntityPart extends PoreEntity implements ComplexEntityPa
 
 	//TODO: Bridge
 
+	public PoreComplexEntityPart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 	@Override
 	public EnderDragon getParent() {
 		return null;

@@ -6,4 +6,8 @@ public class PoreSpider extends PoreMonster implements Spider {
 
 	//TODO: Bridge
 
+	public PoreSpider(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 }

@@ -9,6 +9,10 @@ public class PoreFireball extends AbstractProjectile implements Fireball {
 
 	//TODO: Bridge
 
+	public PoreFireball(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 	@Override
 	public void setDirection(Vector direction) {
 

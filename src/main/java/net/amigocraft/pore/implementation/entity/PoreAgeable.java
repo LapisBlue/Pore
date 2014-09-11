@@ -6,6 +6,10 @@ public class PoreAgeable extends PoreCreature implements Ageable {
 
 	//TODO: Bridge
 
+	public PoreAgeable(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 	@Override
 	public int getAge() {
 		return 0;

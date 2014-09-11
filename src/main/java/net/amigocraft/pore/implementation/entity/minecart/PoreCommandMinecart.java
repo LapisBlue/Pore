@@ -12,6 +12,10 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
 
 	// TODO: Bridge
 
+	public PoreCommandMinecart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 	@Override
 	public String getCommand() {
 		return null;

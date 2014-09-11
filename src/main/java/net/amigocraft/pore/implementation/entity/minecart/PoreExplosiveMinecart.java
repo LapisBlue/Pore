@@ -6,4 +6,8 @@ public class PoreExplosiveMinecart extends PoreMinecart implements ExplosiveMine
 
 	// TODO: Bridge
 
+	public PoreExplosiveMinecart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 }

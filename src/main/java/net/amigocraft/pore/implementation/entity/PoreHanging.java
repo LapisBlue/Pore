@@ -4,7 +4,13 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Hanging;
 
 public class PoreHanging extends PoreEntity implements Hanging {
+
     // TODO: Bridge
+
+	public PoreHanging(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
     @Override
     public boolean setFacingDirection(BlockFace face, boolean force) {
         return false;

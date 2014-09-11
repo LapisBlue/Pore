@@ -6,6 +6,10 @@ public class PoreBat extends PoreAmbient implements Bat {
 
 	// TODO: Bridge
 
+	public PoreBat(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 	// Overrided from Bat
 
 	@Override

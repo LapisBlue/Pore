@@ -5,6 +5,11 @@ import org.bukkit.entity.Horse;
 import org.bukkit.inventory.HorseInventory;
 
 public class PoreHorse extends PoreAnimals implements Horse {
+
+	public PoreHorse(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
     // TODO: Bridge
     @Override
     public Variant getVariant() {

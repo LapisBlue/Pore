@@ -7,6 +7,10 @@ public class PoreStorageMinecart extends PoreMinecart implements StorageMinecart
 
 	// TODO: Bridge
 
+	public PoreStorageMinecart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 	@Override
 	public Inventory getInventory() {
 		return null;

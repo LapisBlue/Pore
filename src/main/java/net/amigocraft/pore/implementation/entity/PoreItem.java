@@ -4,7 +4,13 @@ import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 
 public class PoreItem extends PoreEntity implements Item {
+
     // TODO: Bridge
+
+	public PoreItem(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
     @Override
     public ItemStack getItemStack() {
         return null;

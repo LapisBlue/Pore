@@ -7,7 +7,13 @@ import org.bukkit.potion.PotionEffect;
 import java.util.Collection;
 
 public class PoreThrownPotion extends PoreProjectile implements ThrownPotion {
+
     // TODO: Bridge
+
+	public PoreThrownPotion(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
     @Override
     public Collection<PotionEffect> getEffects() {
         return null;

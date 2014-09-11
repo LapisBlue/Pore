@@ -8,6 +8,10 @@ public class PoreMinecart extends PoreVehicle implements Minecart {
 
 	//TODO: Bridge
 
+	public PoreMinecart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 	@Override
 	public void _INVALID_setDamage(int damage) {
 

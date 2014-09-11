@@ -6,7 +6,9 @@ public class PoreBoat extends PoreVehicle implements Boat {
 
 	// TODO: Bridge
 
-	// Overrided from Boat
+	public PoreBoat(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
 
 	@Override
 	public double getMaxSpeed() {

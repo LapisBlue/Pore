@@ -5,7 +5,13 @@ import org.bukkit.entity.ItemFrame;
 import org.bukkit.inventory.ItemStack;
 
 public class PoreItemFrame extends PoreHanging implements ItemFrame {
+
     // TODO: Bridge
+
+	public PoreItemFrame(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
     @Override
     public ItemStack getItem() {
         return null;

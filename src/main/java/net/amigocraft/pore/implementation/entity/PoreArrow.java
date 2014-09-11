@@ -8,6 +8,10 @@ public class PoreArrow extends AbstractProjectile implements Arrow {
 
 	// TODO: Bridge
 
+	public PoreArrow(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 	@Override
 	public int getKnockbackStrength() {
 		return 0;

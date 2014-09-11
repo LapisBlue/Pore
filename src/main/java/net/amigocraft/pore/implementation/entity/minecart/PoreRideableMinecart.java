@@ -6,4 +6,8 @@ public class PoreRideableMinecart extends PoreMinecart implements RideableMineca
 
 	// TODO: Bridge
 
+	public PoreRideableMinecart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+		super(handle);
+	}
+
 }
