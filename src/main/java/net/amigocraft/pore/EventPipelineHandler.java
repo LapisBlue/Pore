@@ -5,14 +5,11 @@ import net.amigocraft.pore.implementation.PoreWorld;
 import net.amigocraft.pore.implementation.entity.PorePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.*;
 import org.spongepowered.api.event.SpongeEventHandler;
-import org.spongepowered.api.event.entity.*;
 import org.spongepowered.api.event.player.AsyncPlayerChatEvent;
 import org.spongepowered.api.event.world.*;
 
 import java.util.HashSet;
-import java.util.Set;
 
 public class EventPipelineHandler {
 

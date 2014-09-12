@@ -18,12 +18,11 @@ import net.amigocraft.pore.implementation.PoreServer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
-import org.bukkit.plugin.InvalidDescriptionException;
-import org.bukkit.plugin.InvalidPluginException;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.PluginLoader;
+import org.bukkit.command.CommandMap;
+import org.bukkit.plugin.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
+import org.spongepowered.api.event.Event;
 import org.spongepowered.api.event.SpongeEventHandler;
 import org.spongepowered.api.event.state.SpongeInitializationEvent;
 import org.spongepowered.api.event.state.SpongeServerStoppingEvent;
@@ -51,8 +50,7 @@ public class Main {
 	@SpongeEventHandler
 	public void onInitialization(SpongeInitializationEvent event) {
 
-		server = new PoreServer();
-		loader = new JavaPluginLoader(server);
+		server = new PoreServer(((Event)event).getGame());
 
 		Bukkit.setServer(server); //Set the Bukkit API to use our server instance
 
@@ -60,11 +58,11 @@ public class Main {
 
 		File serverDir = new File("."); //TODO: use actual server directory, currently set to working directory
 		File bukkitDir = new File(serverDir, "bukkit-plugins");
-		for (File f : bukkitDir.listFiles()) {
+		/*for (File f : bukkitDir.listFiles()) {
 			if (!f.isDirectory() && f.getName().endsWith(".jar")) {
 				try {
 					plugins.add(loader.loadPlugin(f));
-					/*JarFile pluginJar = new JarFile(f); // get JAR
+					JarFile pluginJar = new JarFile(f); // get JAR
 					ZipEntry pluginDesc = pluginJar.getEntry("plugin.yml"); // get plugin description
 					if (pluginDesc == null) { // not a plugin
 						System.err.println("[Pore] Failed to load plugin.yml for " + f.getName() + "!");
@@ -79,7 +77,7 @@ public class Main {
 					Class<?> clazz = Class.forName(main, true, cLoader); // get the main class
 					Class<? extends JavaPlugin> pluginClass = clazz.asSubclass(JavaPlugin.class);
 					JavaPlugin plugin = pluginClass.cast(new JavaPlugin(loader, server, pdf, new File(bukkitDir, pdf.getName()), f));
-					plugins.add(plugin);*/
+					plugins.add(plugin);
 				}
 				catch (InvalidPluginException ex) {
 					ex.printStackTrace();
@@ -100,9 +98,11 @@ public class Main {
 				catch (IOException ex) {
 					ex.printStackTrace();
 					System.err.println("[Pore] Failed to load " + f.getName() + "!");
-				}*/
+				}
 			}
-		}
+		}*/
+
+		server.getPluginManager().loadPlugins(bukkitDir);
 
 		System.out.println("[Pore] Finished loading Bukkit plugins!");
 		System.out.println("Enabling loaded plugins...");

@@ -2,15 +2,10 @@ package net.amigocraft.pore.implementation;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Logger;
 
+import net.amigocraft.pore.implementation.entity.PorePlayer;
 import org.apache.commons.lang.Validate;
 import org.bukkit.BanList;
 import org.bukkit.GameMode;
@@ -20,10 +15,7 @@ import org.bukkit.UnsafeValues;
 import org.bukkit.Warning;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
-import org.bukkit.command.CommandException;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.command.PluginCommand;
+import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.help.HelpMap;
@@ -37,6 +29,7 @@ import org.bukkit.permissions.Permissible;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicesManager;
+import org.bukkit.plugin.SimplePluginManager;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -48,7 +41,15 @@ import com.avaje.ebean.config.ServerConfig;
 //TODO: skeleton implementation
 
 public class PoreServer implements Server {
+
 	private org.spongepowered.api.Game handle;
+
+	private PluginManager pluginManager;
+
+	public PoreServer(org.spongepowered.api.Game handle){
+		this.handle = handle;
+		this.pluginManager = new SimplePluginManager(this, new SimpleCommandMap(this));
+	}
 
 	@Override
 	public String getName() {
@@ -67,17 +68,18 @@ public class PoreServer implements Server {
 
 	@Override
 	public Player[] _INVALID_getOnlinePlayers() {
-		return new Player[0];
+		return getOnlinePlayers().toArray(new Player[]{});
 	}
 
 	@Override
 	public Collection<? extends Player> getOnlinePlayers() {
+		//TODO: figure out how to create a goddamn collection
 		return null;
 	}
 
 	@Override
 	public int getMaxPlayers() {
-		return 0;
+		return handle.getMaxPlayers();
 	}
 
 	@Override
@@ -202,7 +204,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public Player getPlayer(UUID id) {
-		return null;
+		return new PorePlayer(handle.getPlayer(id));
 	}
 
 	@Override
@@ -222,7 +224,10 @@ public class PoreServer implements Server {
 
 	@Override
 	public List<World> getWorlds() {
-		return null;
+		List<World> worldList = new ArrayList<World>();
+		for (org.spongepowered.api.world.World w : handle.getWorlds())
+			worldList.add(new PoreWorld(w));
+		return worldList;
 	}
 
 	@Override
@@ -242,12 +247,12 @@ public class PoreServer implements Server {
 
 	@Override
 	public World getWorld(String name) {
-		return null;
+		return new PoreWorld(handle.getWorld(name));
 	}
 
 	@Override
 	public World getWorld(UUID uid) {
-		return null;
+		return new PoreWorld(handle.getWorld(uid));
 	}
 
 	@Override
