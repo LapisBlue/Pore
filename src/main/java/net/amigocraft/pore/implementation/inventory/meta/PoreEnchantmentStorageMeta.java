@@ -2,6 +2,7 @@ package net.amigocraft.pore.implementation.inventory.meta;
 
 // TODO: bridge
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
@@ -25,7 +26,7 @@ public class PoreEnchantmentStorageMeta extends PoreItemMeta implements Enchantm
 
 	@Override
 	public Map<Enchantment, Integer> getStoredEnchants() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -45,6 +46,6 @@ public class PoreEnchantmentStorageMeta extends PoreItemMeta implements Enchantm
 
 	@Override
 	public EnchantmentStorageMeta clone() {
-		return null;
+		throw new NotImplementedException();
 	}
 }

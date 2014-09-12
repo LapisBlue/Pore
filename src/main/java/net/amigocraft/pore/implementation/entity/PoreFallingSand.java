@@ -1,6 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
-import net.amigocraft.pore.implementation.entity.PoreEntity;
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.entity.FallingSand;
 
@@ -14,7 +14,7 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
 
 	@Override
 	public Material getMaterial() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -34,6 +34,6 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
 
 	@Override
 	public void setDropItem(boolean drop) {
-
+		throw new NotImplementedException();
 	}
 }

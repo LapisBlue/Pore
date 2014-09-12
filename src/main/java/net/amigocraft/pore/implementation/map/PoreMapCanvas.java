@@ -1,11 +1,12 @@
 package net.amigocraft.pore.implementation.map;
 
-import java.awt.Image;
-
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapCursorCollection;
 import org.bukkit.map.MapFont;
 import org.bukkit.map.MapView;
+
+import java.awt.*;
 
 public class PoreMapCanvas implements MapCanvas {
 
@@ -13,22 +14,22 @@ public class PoreMapCanvas implements MapCanvas {
 
 	@Override
 	public MapView getMapView() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public MapCursorCollection getCursors() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setCursors(MapCursorCollection cursors) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setPixel(int x, int y, byte color) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -43,12 +44,12 @@ public class PoreMapCanvas implements MapCanvas {
 
 	@Override
 	public void drawImage(int x, int y, Image image) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void drawText(int x, int y, MapFont font, String text) {
-
+		throw new NotImplementedException();
 	}
 
 }

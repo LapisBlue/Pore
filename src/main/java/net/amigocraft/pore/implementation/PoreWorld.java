@@ -1,35 +1,11 @@
 package net.amigocraft.pore.implementation;
 
-import java.io.File;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
 import net.amigocraft.pore.implementation.block.PoreBlock;
-
-import org.bukkit.BlockChangeDelegate;
-import org.bukkit.Chunk;
-import org.bukkit.ChunkSnapshot;
-import org.bukkit.Difficulty;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
-import org.bukkit.TreeType;
-import org.bukkit.World;
-import org.bukkit.WorldType;
+import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.CreatureType;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.FallingBlock;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.LightningStrike;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
@@ -37,20 +13,26 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
+import java.io.File;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 public class PoreWorld implements World {
 	private org.spongepowered.api.world.World handle;
-    
+
 	public PoreWorld(org.spongepowered.api.world.World spongeWorld) {
 		this.handle = spongeWorld;
 	}
 
 	@Override
-	public Block getBlockAt(int x, int y, int z){
+	public Block getBlockAt(int x, int y, int z) {
 		return new PoreBlock(handle.getBlock(x, y, z));
 	}
 
 	@Override
-	public Block getBlockAt(Location location){
+	public Block getBlockAt(Location location) {
 		return getBlockAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 
@@ -76,26 +58,26 @@ public class PoreWorld implements World {
 
 	@Override
 	public Block getHighestBlockAt(int x, int z) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Block getHighestBlockAt(Location location) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
-	public Chunk getChunkAt(int x, int z){
+	public Chunk getChunkAt(int x, int z) {
 		return new PoreChunk(handle.getChunk(x, z));
 	}
 
 	@Override
-	public Chunk getChunkAt(Location location){
+	public Chunk getChunkAt(Location location) {
 		return getChunkAt(location.getBlockX(), location.getBlockZ());
 	}
 
 	@Override
-	public Chunk getChunkAt(Block block){
+	public Chunk getChunkAt(Block block) {
 		return getChunkAt(block.getLocation().getBlockX(), block.getLocation().getBlockZ());
 	}
 
@@ -111,7 +93,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public void loadChunk(Chunk chunk) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -126,7 +108,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public void loadChunk(int x, int z) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -176,17 +158,17 @@ public class PoreWorld implements World {
 
 	@Override
 	public Item dropItem(Location location, ItemStack item) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Item dropItemNaturally(Location location, ItemStack item) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Arrow spawnArrow(Location location, Vector direction, float speed, float spread) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -201,72 +183,72 @@ public class PoreWorld implements World {
 
 	@Override
 	public Entity spawnEntity(Location loc, EntityType type) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public LivingEntity spawnCreature(Location loc, EntityType type) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public LivingEntity spawnCreature(Location loc, CreatureType type) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public LightningStrike strikeLightning(Location loc) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public LightningStrike strikeLightningEffect(Location loc) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<Entity> getEntities() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<LivingEntity> getLivingEntities() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Collection<Entity> getEntitiesByClasses(Class<?>... classes) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<Player> getPlayers() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
-	public String getName(){
+	public String getName() {
 		return handle.getName();
 	}
 
 	@Override
-	public UUID getUID(){
+	public UUID getUID() {
 		return handle.getUniqueID();
 	}
 
 	@Override
 	public Location getSpawnLocation() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -281,7 +263,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setTime(long time) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -291,7 +273,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setFullTime(long time) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -301,7 +283,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setStorm(boolean hasStorm) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -311,7 +293,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setWeatherDuration(int duration) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -321,7 +303,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setThundering(boolean thundering) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -331,7 +313,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setThunderDuration(int duration) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -361,7 +343,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public Environment getEnvironment() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -376,67 +358,67 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setPVP(boolean pvp) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ChunkGenerator getGenerator() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void save() {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<BlockPopulator> getPopulators() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public <T extends Entity> T spawn(Location location, Class<T> clazz) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public FallingBlock spawnFallingBlock(Location location, Material material, byte data) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public FallingBlock spawnFallingBlock(Location location, int blockId, byte blockData) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void playEffect(Location location, Effect effect, int data) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void playEffect(Location location, Effect effect, int data, int radius) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public <T> void playEffect(Location location, Effect effect, T data) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public <T> void playEffect(Location location, Effect effect, T data, int radius) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome, boolean includeBiomeTempRain) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setSpawnFlags(boolean allowMonsters, boolean allowAnimals) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -451,12 +433,12 @@ public class PoreWorld implements World {
 
 	@Override
 	public Biome getBiome(int x, int z) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setBiome(int x, int z, Biome bio) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -486,7 +468,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setKeepSpawnInMemory(boolean keepLoaded) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -496,27 +478,27 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setAutoSave(boolean value) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setDifficulty(Difficulty difficulty) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Difficulty getDifficulty() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public File getWorldFolder() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public WorldType getWorldType() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -531,7 +513,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -541,7 +523,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -551,7 +533,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setMonsterSpawnLimit(int limit) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -561,7 +543,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setAnimalSpawnLimit(int limit) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -571,7 +553,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setWaterAnimalSpawnLimit(int limit) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -581,12 +563,12 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setAmbientSpawnLimit(int limit) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void playSound(Location location, Sound sound, float volume, float pitch) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -596,7 +578,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public String getGameRuleValue(String rule) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -611,12 +593,12 @@ public class PoreWorld implements World {
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -626,16 +608,16 @@ public class PoreWorld implements World {
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Set<String> getListeningPluginChannels() {
-		return null;
+		throw new NotImplementedException();
 	}
 }

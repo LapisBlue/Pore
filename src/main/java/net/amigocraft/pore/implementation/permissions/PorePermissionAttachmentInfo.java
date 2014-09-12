@@ -1,22 +1,25 @@
 package net.amigocraft.pore.implementation.permissions;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.PermissionAttachment;
+
+//TODO: Bridge
 
 //TODO: Bridge
 
 public class PorePermissionAttachmentInfo {
 
 	public PorePermissionAttachmentInfo(Permissible permissible, String permission) {
-
+		throw new NotImplementedException();
 	}
 
 	public Permissible getPermissible() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	public PermissionAttachment getAttachement() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	public boolean getValue() {

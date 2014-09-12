@@ -1,10 +1,13 @@
 package net.amigocraft.pore.implementation.metadata;
 
-import java.util.List;
-
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.metadata.Metadatable;
 import org.bukkit.plugin.Plugin;
+
+import java.util.List;
+
+// TODO: Bridge
 
 // TODO: Bridge
 
@@ -12,12 +15,12 @@ public class PoreMetadatable implements Metadatable {
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -27,7 +30,7 @@ public class PoreMetadatable implements Metadatable {
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-
+		throw new NotImplementedException();
 	}
 
 }

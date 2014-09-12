@@ -1,8 +1,11 @@
 package net.amigocraft.pore.implementation.block;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
 import org.bukkit.block.NoteBlock;
+
+//TODO: skeleton implementation
 
 //TODO: skeleton implementation
 
@@ -13,7 +16,7 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
 
 	@Override
 	public Note getNote() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -23,12 +26,12 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
 
 	@Override
 	public void setNote(Note note) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setRawNote(byte note) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override

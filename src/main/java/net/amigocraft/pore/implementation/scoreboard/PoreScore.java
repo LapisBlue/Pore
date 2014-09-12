@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.scoreboard;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
@@ -7,21 +8,23 @@ import org.bukkit.scoreboard.Scoreboard;
 
 // TODO: Bridge
 
+// TODO: Bridge
+
 public class PoreScore implements Score {
 
 	@Override
 	public OfflinePlayer getPlayer() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public String getEntry() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Objective getObjective() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -31,12 +34,12 @@ public class PoreScore implements Score {
 
 	@Override
 	public void setScore(int score) throws IllegalStateException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Scoreboard getScoreboard() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 }

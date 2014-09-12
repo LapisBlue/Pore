@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Enderman;
 import org.bukkit.material.MaterialData;
 
@@ -13,11 +14,11 @@ public class PoreEnderman extends PoreMonster implements Enderman {
 
 	@Override
 	public MaterialData getCarriedMaterial() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setCarriedMaterial(MaterialData material) {
-
+		throw new NotImplementedException();
 	}
 }

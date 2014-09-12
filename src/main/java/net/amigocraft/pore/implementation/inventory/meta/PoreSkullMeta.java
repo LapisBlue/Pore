@@ -1,6 +1,9 @@
 package net.amigocraft.pore.implementation.inventory.meta;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.inventory.meta.SkullMeta;
+
+// TODO: bridge
 
 // TODO: bridge
 
@@ -8,7 +11,7 @@ public class PoreSkullMeta extends PoreItemMeta implements SkullMeta {
 
 	@Override
 	public String getOwner() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -23,7 +26,7 @@ public class PoreSkullMeta extends PoreItemMeta implements SkullMeta {
 
 	@Override
 	public SkullMeta clone() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 }

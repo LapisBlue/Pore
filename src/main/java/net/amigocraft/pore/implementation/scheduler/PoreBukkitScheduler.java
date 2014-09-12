@@ -1,14 +1,17 @@
 package net.amigocraft.pore.implementation.scheduler;
 
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.Future;
-
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
+
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
+
+// TODO: Bridge
 
 // TODO: Bridge
 
@@ -61,22 +64,22 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 
 	@Override
 	public <T> Future<T> callSyncMethod(Plugin plugin, Callable<T> task) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void cancelTask(int taskId) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void cancelTasks(Plugin plugin) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void cancelAllTasks() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -91,71 +94,71 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 
 	@Override
 	public List<BukkitWorker> getActiveWorkers() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<BukkitTask> getPendingTasks() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BukkitTask runTask(Plugin plugin, Runnable task) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BukkitTask runTask(Plugin plugin, BukkitRunnable task) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BukkitTask runTaskAsynchronously(Plugin plugin, Runnable task) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BukkitTask runTaskAsynchronously(Plugin plugin, BukkitRunnable task) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BukkitTask runTaskLater(Plugin plugin, Runnable task, long delay) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BukkitTask runTaskLater(Plugin plugin, BukkitRunnable task, long delay) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BukkitTask runTaskLaterAsynchronously(Plugin plugin, Runnable task, long delay) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BukkitTask runTaskLaterAsynchronously(Plugin plugin, BukkitRunnable task, long delay) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BukkitTask runTaskTimer(Plugin plugin, Runnable task, long delay, long period) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BukkitTask runTaskTimer(Plugin plugin, BukkitRunnable task, long delay, long period) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BukkitTask runTaskTimerAsynchronously(Plugin plugin, Runnable task, long delay, long period) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BukkitTask runTaskTimerAsynchronously(Plugin plugin, BukkitRunnable task, long delay, long period) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 }

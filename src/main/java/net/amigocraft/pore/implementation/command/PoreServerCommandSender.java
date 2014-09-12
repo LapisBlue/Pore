@@ -1,17 +1,17 @@
 package net.amigocraft.pore.implementation.command;
 
-import java.util.Set;
-
 import net.amigocraft.pore.implementation.permissions.PorePermissibleBase;
-
-import org.bukkit.Bukkit;
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
-import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
+
+import java.util.Set;
+
+// TODO: Bridge
 
 // TODO: Bridge
 
@@ -71,7 +71,7 @@ public class PoreServerCommandSender extends PoreCommandSender implements Comman
 	}
 
 	public Server getServer() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 }

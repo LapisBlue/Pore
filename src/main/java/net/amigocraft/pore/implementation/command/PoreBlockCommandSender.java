@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.command;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.command.BlockCommandSender;
 
@@ -7,7 +8,7 @@ public class PoreBlockCommandSender extends PoreCommandSender implements BlockCo
 
 	@Override
 	public Block getBlock() {
-		return null; // TODO: Bridge
+		throw new NotImplementedException(); // TODO: Bridge
 	}
 
 }

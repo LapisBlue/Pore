@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.ExperienceOrb;
 
 public class PoreExperienceOrb extends PoreEntity implements ExperienceOrb {
@@ -17,6 +18,6 @@ public class PoreExperienceOrb extends PoreEntity implements ExperienceOrb {
 
 	@Override
 	public void setExperience(int value) {
-
+		throw new NotImplementedException();
 	}
 }

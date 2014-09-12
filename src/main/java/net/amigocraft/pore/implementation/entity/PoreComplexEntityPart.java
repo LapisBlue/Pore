@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.ComplexEntityPart;
 import org.bukkit.entity.EnderDragon;
 
@@ -13,6 +14,6 @@ public class PoreComplexEntityPart extends PoreEntity implements ComplexEntityPa
 
 	@Override
 	public EnderDragon getParent() {
-		return null;
+		throw new NotImplementedException();
 	}
 }

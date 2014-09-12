@@ -1,8 +1,11 @@
 package net.amigocraft.pore.implementation.block;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Dispenser;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.projectiles.BlockProjectileSource;
+
+//TODO: skeleton implementation
 
 //TODO: skeleton implementation
 
@@ -13,7 +16,7 @@ public class PoreDispenser extends PoreBlockState implements Dispenser {
 
 	@Override
 	public BlockProjectileSource getBlockProjectileSource() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -23,6 +26,6 @@ public class PoreDispenser extends PoreBlockState implements Dispenser {
 
 	@Override
 	public Inventory getInventory() {
-		return null;
+		throw new NotImplementedException();
 	}
 }

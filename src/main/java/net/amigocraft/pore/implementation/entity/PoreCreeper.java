@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Creeper;
 
 public class PoreCreeper extends PoreMonster implements Creeper {
@@ -17,6 +18,6 @@ public class PoreCreeper extends PoreMonster implements Creeper {
 
 	@Override
 	public void setPowered(boolean value) {
-
+		throw new NotImplementedException();
 	}
 }

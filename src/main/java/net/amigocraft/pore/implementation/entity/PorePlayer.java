@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
@@ -15,6 +16,9 @@ import java.util.Set;
 import java.util.UUID;
 
 //TODO: bridge
+
+//TODO: bridge
+
 public class PorePlayer extends PoreHumanEntity implements Player {
 
 	public PorePlayer(org.spongepowered.api.entity.Player handle) {
@@ -23,37 +27,37 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public String getDisplayName() {
-		return ((org.spongepowered.api.entity.Player)getHandle()).getDisplayName();
+		return ((org.spongepowered.api.entity.Player) getHandle()).getDisplayName();
 	}
 
 	@Override
 	public void setDisplayName(String name) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public String getPlayerListName() {
-		return ((org.spongepowered.api.entity.Player)getHandle()).getDisplayName(); //TODO: temporary measure
+		return ((org.spongepowered.api.entity.Player) getHandle()).getDisplayName(); //TODO: temporary measure
 	}
 
 	@Override
 	public void setPlayerListName(String name) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setCompassTarget(Location loc) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Location getCompassTarget() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public InetSocketAddress getAddress() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -63,7 +67,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void acceptConversationInput(String input) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -73,27 +77,27 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void abandonConversation(Conversation conversation) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void abandonConversation(Conversation conversation, ConversationAbandonedEvent details) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void sendRawMessage(String message) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void kickPlayer(String message) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void chat(String msg) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -108,7 +112,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void setSneaking(boolean sneak) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -118,22 +122,22 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void setSprinting(boolean sprinting) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void saveData() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void loadData() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setSleepingIgnored(boolean isSleeping) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -143,37 +147,37 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void playNote(Location loc, byte instrument, byte note) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void playNote(Location loc, Instrument instrument, Note note) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void playSound(Location location, Sound sound, float volume, float pitch) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void playSound(Location location, String sound, float volume, float pitch) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void playEffect(Location loc, Effect effect, int data) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public <T> void playEffect(Location loc, Effect effect, T data) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void sendBlockChange(Location loc, Material material, byte data) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -183,32 +187,32 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void sendBlockChange(Location loc, int material, byte data) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void sendSignChange(Location loc, String[] lines) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void sendMap(MapView map) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void updateInventory() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void awardAchievement(Achievement achievement) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void removeAchievement(Achievement achievement) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -218,27 +222,27 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void incrementStatistic(Statistic statistic) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void decrementStatistic(Statistic statistic) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void incrementStatistic(Statistic statistic, int amount) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void decrementStatistic(Statistic statistic, int amount) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setStatistic(Statistic statistic, int newValue) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -248,12 +252,12 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void incrementStatistic(Statistic statistic, Material material) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void decrementStatistic(Statistic statistic, Material material) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -263,27 +267,27 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void incrementStatistic(Statistic statistic, Material material, int amount) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void decrementStatistic(Statistic statistic, Material material, int amount) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setStatistic(Statistic statistic, Material material, int newValue) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void incrementStatistic(Statistic statistic, EntityType entityType) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void decrementStatistic(Statistic statistic, EntityType entityType) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -293,22 +297,22 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void incrementStatistic(Statistic statistic, EntityType entityType, int amount) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void decrementStatistic(Statistic statistic, EntityType entityType, int amount) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setStatistic(Statistic statistic, EntityType entityType, int newValue) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setPlayerTime(long time, boolean relative) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -328,32 +332,32 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void resetPlayerTime() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setPlayerWeather(WeatherType type) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public WeatherType getPlayerWeather() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void resetPlayerWeather() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void giveExp(int amount) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void giveExpLevels(int amount) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -363,7 +367,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void setExp(float exp) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -373,7 +377,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void setLevel(int level) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -383,7 +387,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void setTotalExperience(int exp) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -393,7 +397,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void setExhaustion(float value) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -403,7 +407,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void setSaturation(float value) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -413,7 +417,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void setFoodLevel(int value) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -428,7 +432,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void setBanned(boolean banned) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -438,12 +442,12 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void setWhitelisted(boolean value) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Player getPlayer() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -463,17 +467,17 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public Location getBedSpawnLocation() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setBedSpawnLocation(Location location) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setBedSpawnLocation(Location location, boolean force) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -483,17 +487,17 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void setAllowFlight(boolean flight) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void hidePlayer(Player player) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void showPlayer(Player player) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -508,17 +512,17 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void setFlying(boolean value) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setFlySpeed(float value) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setWalkSpeed(float value) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -533,22 +537,22 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void setTexturePack(String url) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setResourcePack(String url) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Scoreboard getScoreboard() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setScoreboard(Scoreboard scoreboard) throws IllegalArgumentException, IllegalStateException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -558,12 +562,12 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void setHealthScaled(boolean scale) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setHealthScale(double scale) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -573,31 +577,31 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void sendMessage(String message) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void sendMessage(String[] messages) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Map<String, Object> serialize() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void sendPluginMessage(Plugin source, String channel, byte[] message) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Set<String> getListeningPluginChannels() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
-	public UUID getUniqueId(){
-		return ((org.spongepowered.api.entity.Player)getHandle()).getUniqueID();
+	public UUID getUniqueId() {
+		return ((org.spongepowered.api.entity.Player) getHandle()).getUniqueID();
 	}
 }

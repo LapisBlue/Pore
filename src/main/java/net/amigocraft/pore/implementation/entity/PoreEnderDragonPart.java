@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EnderDragonPart;
 import org.bukkit.entity.Entity;
 
@@ -13,22 +14,22 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements EnderD
 
 	@Override
 	public void damage(double amount) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void _INVALID_damage(int amount) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void damage(double amount, Entity source) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void _INVALID_damage(int amount, Entity source) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -43,12 +44,12 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements EnderD
 
 	@Override
 	public void setHealth(double health) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void _INVALID_setHealth(int health) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -63,16 +64,16 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements EnderD
 
 	@Override
 	public void setMaxHealth(double health) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void _INVALID_setMaxHealth(int health) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void resetMaxHealth() {
-
+		throw new NotImplementedException();
 	}
 }

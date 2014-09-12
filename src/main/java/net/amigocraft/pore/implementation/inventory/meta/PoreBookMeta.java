@@ -1,8 +1,11 @@
 package net.amigocraft.pore.implementation.inventory.meta;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.inventory.meta.BookMeta;
 
 import java.util.List;
+
+// TODO: bridge
 
 // TODO: bridge
 
@@ -15,7 +18,7 @@ public class PoreBookMeta extends PoreItemMeta implements BookMeta {
 
 	@Override
 	public String getTitle() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -30,12 +33,12 @@ public class PoreBookMeta extends PoreItemMeta implements BookMeta {
 
 	@Override
 	public String getAuthor() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setAuthor(String author) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -45,32 +48,32 @@ public class PoreBookMeta extends PoreItemMeta implements BookMeta {
 
 	@Override
 	public String getPage(int page) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setPage(int page, String data) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<String> getPages() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setPages(List<String> pages) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setPages(String... pages) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void addPage(String... pages) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -80,6 +83,6 @@ public class PoreBookMeta extends PoreItemMeta implements BookMeta {
 
 	@Override
 	public BookMeta clone() {
-		return null;
+		throw new NotImplementedException();
 	}
 }

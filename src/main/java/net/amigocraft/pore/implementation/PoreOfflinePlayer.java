@@ -1,10 +1,13 @@
 package net.amigocraft.pore.implementation;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
 import java.util.UUID;
+
+//TODO: skeleton implementation
 
 //TODO: skeleton implementation
 
@@ -17,12 +20,12 @@ public class PoreOfflinePlayer implements org.bukkit.OfflinePlayer {
 
 	@Override
 	public String getName() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public UUID getUniqueId() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -32,7 +35,7 @@ public class PoreOfflinePlayer implements org.bukkit.OfflinePlayer {
 
 	@Override
 	public void setBanned(boolean banned) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -42,12 +45,12 @@ public class PoreOfflinePlayer implements org.bukkit.OfflinePlayer {
 
 	@Override
 	public void setWhitelisted(boolean value) {
-		
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Player getPlayer() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -67,12 +70,12 @@ public class PoreOfflinePlayer implements org.bukkit.OfflinePlayer {
 
 	@Override
 	public Location getBedSpawnLocation() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Map<String, Object> serialize() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -82,6 +85,6 @@ public class PoreOfflinePlayer implements org.bukkit.OfflinePlayer {
 
 	@Override
 	public void setOp(boolean value) {
-		
+		throw new NotImplementedException();
 	}
 }

@@ -1,7 +1,10 @@
 package net.amigocraft.pore.implementation.inventory.meta;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+
+// TODO: bridge
 
 // TODO: bridge
 
@@ -9,17 +12,17 @@ public class PoreLeatherArmorMeta extends PoreItemMeta implements LeatherArmorMe
 
 	@Override
 	public Color getColor() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setColor(Color color) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public LeatherArmorMeta clone() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 }

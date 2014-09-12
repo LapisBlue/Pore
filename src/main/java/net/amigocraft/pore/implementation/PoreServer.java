@@ -1,29 +1,15 @@
 package net.amigocraft.pore.implementation;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.*;
-import java.util.logging.Logger;
-
+import com.avaje.ebean.config.ServerConfig;
 import net.amigocraft.pore.implementation.entity.PorePlayer;
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.Validate;
-import org.bukkit.BanList;
-import org.bukkit.GameMode;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.Server;
-import org.bukkit.UnsafeValues;
-import org.bukkit.Warning;
-import org.bukkit.World;
-import org.bukkit.WorldCreator;
+import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.help.HelpMap;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.ItemFactory;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.*;
 import org.bukkit.map.MapView;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.plugin.Plugin;
@@ -36,7 +22,12 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
 
-import com.avaje.ebean.config.ServerConfig;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.*;
+import java.util.logging.Logger;
+
+//TODO: skeleton implementation
 
 //TODO: skeleton implementation
 
@@ -46,7 +37,7 @@ public class PoreServer implements Server {
 
 	private PluginManager pluginManager;
 
-	public PoreServer(org.spongepowered.api.Game handle){
+	public PoreServer(org.spongepowered.api.Game handle) {
 		this.handle = handle;
 		this.pluginManager = new SimplePluginManager(this, new SimpleCommandMap(this));
 	}
@@ -63,7 +54,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public String getBukkitVersion() {
-		return "Pore-"+getVersion();
+		return "Pore-" + getVersion();
 	}
 
 	@Override
@@ -74,7 +65,7 @@ public class PoreServer implements Server {
 	@Override
 	public Collection<? extends Player> getOnlinePlayers() {
 		//TODO: figure out how to create a goddamn collection
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -94,22 +85,22 @@ public class PoreServer implements Server {
 
 	@Override
 	public String getIp() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public String getServerName() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public String getServerId() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public String getWorldType() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -134,17 +125,17 @@ public class PoreServer implements Server {
 
 	@Override
 	public void setWhitelist(boolean value) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Set<OfflinePlayer> getWhitelistedPlayers() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void reloadWhitelist() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -154,12 +145,12 @@ public class PoreServer implements Server {
 
 	@Override
 	public String getUpdateFolder() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public File getUpdateFolderFile() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -179,7 +170,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public Player getPlayer(String name) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -194,12 +185,12 @@ public class PoreServer implements Server {
 			}
 		}
 
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<Player> matchPlayer(String name) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -209,17 +200,17 @@ public class PoreServer implements Server {
 
 	@Override
 	public PluginManager getPluginManager() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BukkitScheduler getScheduler() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ServicesManager getServicesManager() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -232,7 +223,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public World createWorld(WorldCreator creator) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -257,32 +248,32 @@ public class PoreServer implements Server {
 
 	@Override
 	public MapView getMap(short id) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public MapView createMap(World world) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void reload() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Logger getLogger() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public PluginCommand getPluginCommand(String name) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void savePlayers() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -292,7 +283,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void configureDbConfig(ServerConfig config) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -302,27 +293,27 @@ public class PoreServer implements Server {
 
 	@Override
 	public List<Recipe> getRecipesFor(ItemStack result) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Iterator<Recipe> recipeIterator() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void clearRecipes() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void resetRecipes() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Map<String, String[]> getCommandAliases() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -332,7 +323,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void setSpawnRadius(int value) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -357,7 +348,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public void shutdown() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -378,62 +369,62 @@ public class PoreServer implements Server {
 
 	@Override
 	public OfflinePlayer getOfflinePlayer(String name) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public OfflinePlayer getOfflinePlayer(UUID id) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Set<String> getIPBans() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void banIP(String address) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void unbanIP(String address) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Set<OfflinePlayer> getBannedPlayers() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BanList getBanList(BanList.Type type) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Set<OfflinePlayer> getOperators() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public GameMode getDefaultGameMode() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setDefaultGameMode(GameMode mode) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ConsoleCommandSender getConsoleSender() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public File getWorldContainer() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -443,32 +434,32 @@ public class PoreServer implements Server {
 
 	@Override
 	public Messenger getMessenger() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public HelpMap getHelpMap() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Inventory createInventory(InventoryHolder owner, InventoryType type) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Inventory createInventory(InventoryHolder owner, InventoryType type, String title) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Inventory createInventory(InventoryHolder owner, int size) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Inventory createInventory(InventoryHolder owner, int size, String title) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -498,47 +489,47 @@ public class PoreServer implements Server {
 
 	@Override
 	public String getMotd() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public String getShutdownMessage() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Warning.WarningState getWarningState() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ItemFactory getItemFactory() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ScoreboardManager getScoreboardManager() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public CachedServerIcon getServerIcon() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public CachedServerIcon loadServerIcon(File file) throws IllegalArgumentException, Exception {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public CachedServerIcon loadServerIcon(BufferedImage image) throws IllegalArgumentException, Exception {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setIdleTimeout(int threshold) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override

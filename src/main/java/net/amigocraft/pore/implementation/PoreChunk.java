@@ -1,13 +1,15 @@
 package net.amigocraft.pore.implementation;
 
 import net.amigocraft.pore.implementation.block.PoreBlock;
-
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
+
+//TODO: skeleton implementation
 
 //TODO: skeleton implementation
 
@@ -31,7 +33,7 @@ public class PoreChunk implements Chunk {
 
 	@Override
 	public World getWorld() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -41,12 +43,12 @@ public class PoreChunk implements Chunk {
 
 	@Override
 	public ChunkSnapshot getChunkSnapshot() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override

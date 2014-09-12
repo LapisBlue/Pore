@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Server;
@@ -19,7 +20,7 @@ public class PoreEntity implements Entity {
 
 	private org.spongepowered.api.entity.Entity handle;
 
-	public PoreEntity(org.spongepowered.api.entity.Entity handle){
+	public PoreEntity(org.spongepowered.api.entity.Entity handle) {
 		this.handle = handle;
 	}
 
@@ -30,22 +31,22 @@ public class PoreEntity implements Entity {
 	// Overrided from Entity
 	@Override
 	public Location getLocation() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Location getLocation(Location loc) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setVelocity(Vector velocity) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Vector getVelocity() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class PoreEntity implements Entity {
 
 	@Override
 	public World getWorld() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -80,7 +81,7 @@ public class PoreEntity implements Entity {
 
 	@Override
 	public List<Entity> getNearbyEntities(double x, double y, double z) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -100,12 +101,12 @@ public class PoreEntity implements Entity {
 
 	@Override
 	public void setFireTicks(int ticks) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void remove() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -120,12 +121,12 @@ public class PoreEntity implements Entity {
 
 	@Override
 	public Server getServer() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Entity getPassenger() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -150,17 +151,17 @@ public class PoreEntity implements Entity {
 
 	@Override
 	public void setFallDistance(float distance) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setLastDamageCause(EntityDamageEvent event) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public EntityDamageEvent getLastDamageCause() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -175,17 +176,17 @@ public class PoreEntity implements Entity {
 
 	@Override
 	public void setTicksLived(int value) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void playEffect(EntityEffect type) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public EntityType getType() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -200,18 +201,18 @@ public class PoreEntity implements Entity {
 
 	@Override
 	public Entity getVehicle() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	// Overrided from Metadatable
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -221,6 +222,6 @@ public class PoreEntity implements Entity {
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-
+		throw new NotImplementedException();
 	}
 }
