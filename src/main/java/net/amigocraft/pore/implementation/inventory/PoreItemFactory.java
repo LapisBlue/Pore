@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.inventory;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFactory;
@@ -8,11 +9,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 // TODO: bridge
 
+// TODO: bridge
+
 public class PoreItemFactory implements ItemFactory {
 
 	@Override
 	public ItemMeta getItemMeta(Material material) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -32,16 +35,16 @@ public class PoreItemFactory implements ItemFactory {
 
 	@Override
 	public ItemMeta asMetaFor(ItemMeta meta, ItemStack stack) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ItemMeta asMetaFor(ItemMeta meta, Material material) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Color getDefaultLeatherColor() {
-		return null;
+		throw new NotImplementedException();
 	}
 }

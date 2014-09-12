@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Bat;
 
 public class PoreBat extends PoreAmbient implements Bat {
@@ -19,7 +20,7 @@ public class PoreBat extends PoreAmbient implements Bat {
 
 	@Override
 	public void setAwake(boolean state) {
-
+		throw new NotImplementedException();
 	}
 
 }

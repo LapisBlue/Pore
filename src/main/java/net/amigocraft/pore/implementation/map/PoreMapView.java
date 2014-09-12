@@ -1,10 +1,11 @@
 package net.amigocraft.pore.implementation.map;
 
-import java.util.List;
-
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.World;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
+
+import java.util.List;
 
 public class PoreMapView implements MapView {
 
@@ -22,12 +23,12 @@ public class PoreMapView implements MapView {
 
 	@Override
 	public Scale getScale() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setScale(Scale scale) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -42,32 +43,32 @@ public class PoreMapView implements MapView {
 
 	@Override
 	public void setCenterX(int x) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setCenterZ(int z) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public World getWorld() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setWorld(World world) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<MapRenderer> getRenderers() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void addRenderer(MapRenderer renderer) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override

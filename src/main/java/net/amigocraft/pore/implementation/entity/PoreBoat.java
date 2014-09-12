@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Boat;
 
 public class PoreBoat extends PoreVehicle implements Boat {
@@ -17,7 +18,7 @@ public class PoreBoat extends PoreVehicle implements Boat {
 
 	@Override
 	public void setMaxSpeed(double speed) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class PoreBoat extends PoreVehicle implements Boat {
 
 	@Override
 	public void setOccupiedDeceleration(double rate) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class PoreBoat extends PoreVehicle implements Boat {
 
 	@Override
 	public void setUnoccupiedDeceleration(double rate) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -47,7 +48,7 @@ public class PoreBoat extends PoreVehicle implements Boat {
 
 	@Override
 	public void setWorkOnLand(boolean workOnLand) {
-
+		throw new NotImplementedException();
 	}
 
 }

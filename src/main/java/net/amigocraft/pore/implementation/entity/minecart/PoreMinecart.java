@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity.minecart;
 
 import net.amigocraft.pore.implementation.entity.PoreVehicle;
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Minecart;
 import org.bukkit.util.Vector;
 
@@ -14,12 +15,12 @@ public class PoreMinecart extends PoreVehicle implements Minecart {
 
 	@Override
 	public void _INVALID_setDamage(int damage) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setDamage(double damage) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -39,7 +40,7 @@ public class PoreMinecart extends PoreVehicle implements Minecart {
 
 	@Override
 	public void setMaxSpeed(double speed) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -49,26 +50,26 @@ public class PoreMinecart extends PoreVehicle implements Minecart {
 
 	@Override
 	public void setSlowWhenEmpty(boolean slow) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Vector getFlyingVelocityMod() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setFlyingVelocityMod(Vector flying) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Vector getDerailedVelocityMod() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setDerailedVelocityMod(Vector derailed) {
-
+		throw new NotImplementedException();
 	}
 }

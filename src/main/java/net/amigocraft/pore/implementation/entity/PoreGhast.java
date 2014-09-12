@@ -4,7 +4,7 @@ import org.bukkit.entity.Ghast;
 
 public class PoreGhast extends PoreFlying implements Ghast {
 
-    // TODO: Bridge
+	// TODO: Bridge
 
 	public PoreGhast(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
 		super(handle);

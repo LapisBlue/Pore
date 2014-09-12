@@ -1,7 +1,10 @@
 package net.amigocraft.pore.implementation;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.block.Biome;
+
+//TODO: skeleton implementation
 
 //TODO: skeleton implementation
 
@@ -19,7 +22,7 @@ public class PoreChunkSnapshot implements ChunkSnapshot {
 
 	@Override
 	public String getWorldName() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -49,7 +52,7 @@ public class PoreChunkSnapshot implements ChunkSnapshot {
 
 	@Override
 	public Biome getBiome(int x, int z) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override

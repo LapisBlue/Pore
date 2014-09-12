@@ -1,7 +1,10 @@
 package net.amigocraft.pore.implementation.inventory;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.inventory.BeaconInventory;
 import org.bukkit.inventory.ItemStack;
+
+// TODO: bridge
 
 // TODO: bridge
 
@@ -9,11 +12,11 @@ public class PoreBeaconInventory extends PoreInventory implements BeaconInventor
 
 	@Override
 	public void setItem(ItemStack item) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ItemStack getItem() {
-		return null;
+		throw new NotImplementedException();
 	}
 }

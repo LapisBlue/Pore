@@ -2,6 +2,7 @@ package net.amigocraft.pore.implementation.inventory.meta;
 
 // TODO: bridge
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -17,12 +18,12 @@ public class PoreItemMeta implements ItemMeta {
 
 	@Override
 	public String getDisplayName() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setDisplayName(String name) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -32,12 +33,12 @@ public class PoreItemMeta implements ItemMeta {
 
 	@Override
 	public List<String> getLore() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setLore(List<String> lore) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -57,7 +58,7 @@ public class PoreItemMeta implements ItemMeta {
 
 	@Override
 	public Map<Enchantment, Integer> getEnchants() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -77,11 +78,11 @@ public class PoreItemMeta implements ItemMeta {
 
 	@Override
 	public ItemMeta clone() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Map<String, Object> serialize() {
-		return null;
+		throw new NotImplementedException();
 	}
 }

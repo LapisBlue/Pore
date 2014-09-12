@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.conversations;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationCanceller;
 import org.bukkit.conversations.ConversationContext;
@@ -10,7 +11,7 @@ public class PoreConversationCanceller implements ConversationCanceller {
 
 	@Override
 	public void setConversation(Conversation conversation) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -20,7 +21,7 @@ public class PoreConversationCanceller implements ConversationCanceller {
 
 
 	public ConversationCanceller clone() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 }

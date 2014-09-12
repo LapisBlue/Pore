@@ -1,9 +1,12 @@
 package net.amigocraft.pore.implementation.configuration;
 
-import java.util.Map;
-
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationOptions;
+
+import java.util.Map;
+
+// TODO: Bridge
 
 // TODO: Bridge
 
@@ -11,27 +14,27 @@ public class PoreConfiguration extends PoreConfigurationSection implements Confi
 
 	@Override
 	public void addDefaults(Map<String, Object> defaults) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void addDefaults(Configuration defaults) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setDefaults(Configuration defaults) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Configuration getDefaults() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ConfigurationOptions options() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 }

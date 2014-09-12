@@ -1,10 +1,14 @@
 package net.amigocraft.pore.implementation.block;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.*;
+import org.bukkit.block.Biome;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
@@ -14,11 +18,11 @@ import java.util.List;
 
 public class PoreBlock implements Block {
 	private org.spongepowered.api.block.Block handle;
-	
+
 	public PoreBlock(org.spongepowered.api.block.Block spongeBlock) {
 		this.handle = spongeBlock;
 	}
-	
+
 	@Override
 	public byte getData() {
 		return 0; //TODO: bridge
@@ -26,22 +30,22 @@ public class PoreBlock implements Block {
 
 	@Override
 	public Block getRelative(int modX, int modY, int modZ) {
-		return null; //TODO: bridge
+		throw new NotImplementedException(); //TODO: bridge
 	}
 
 	@Override
 	public Block getRelative(BlockFace face) {
-		return null; //TODO: bridge
+		throw new NotImplementedException(); //TODO: bridge
 	}
 
 	@Override
 	public Block getRelative(BlockFace face, int distance) {
-		return null; //TODO: bridge
+		throw new NotImplementedException(); //TODO: bridge
 	}
 
 	@Override
 	public Material getType() {
-		return null; //TODO: bridge
+		throw new NotImplementedException(); //TODO: bridge
 	}
 
 	@Override
@@ -66,7 +70,7 @@ public class PoreBlock implements Block {
 
 	@Override
 	public World getWorld() {
-		return null; //TODO: bridge
+		throw new NotImplementedException(); //TODO: bridge
 	}
 
 	@Override
@@ -86,17 +90,17 @@ public class PoreBlock implements Block {
 
 	@Override
 	public Location getLocation() {
-		return null; //TODO: bridge
+		throw new NotImplementedException(); //TODO: bridge
 	}
 
 	@Override
 	public Location getLocation(Location loc) {
-		return null; //TODO: bridge
+		throw new NotImplementedException(); //TODO: bridge
 	}
 
 	@Override
 	public Chunk getChunk() {
-		return null; //TODO: bridge
+		throw new NotImplementedException(); //TODO: bridge
 	}
 
 	@Override
@@ -131,17 +135,17 @@ public class PoreBlock implements Block {
 
 	@Override
 	public BlockFace getFace(Block block) {
-		return null; //TODO: bridge
+		throw new NotImplementedException(); //TODO: bridge
 	}
 
 	@Override
 	public PoreBlockState getState() {
-		return null; //TODO: bridge
+		throw new NotImplementedException(); //TODO: bridge
 	}
 
 	@Override
 	public Biome getBiome() {
-		return null; //TODO: bridge
+		throw new NotImplementedException(); //TODO: bridge
 	}
 
 	@Override
@@ -201,7 +205,7 @@ public class PoreBlock implements Block {
 
 	@Override
 	public PistonMoveReaction getPistonMoveReaction() {
-		return null; //TODO: bridge
+		throw new NotImplementedException(); //TODO: bridge
 	}
 
 	@Override
@@ -216,12 +220,12 @@ public class PoreBlock implements Block {
 
 	@Override
 	public Collection<ItemStack> getDrops() {
-		return null; //TODO: bridge
+		throw new NotImplementedException(); //TODO: bridge
 	}
 
 	@Override
 	public Collection<ItemStack> getDrops(ItemStack tool) {
-		return null; //TODO: bridge
+		throw new NotImplementedException(); //TODO: bridge
 	}
 
 	@Override
@@ -231,7 +235,7 @@ public class PoreBlock implements Block {
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
-		return null; //TODO: bridge
+		throw new NotImplementedException(); //TODO: bridge
 	}
 
 	@Override

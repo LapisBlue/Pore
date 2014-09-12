@@ -1,8 +1,11 @@
 package net.amigocraft.pore.implementation.inventory;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+
+// TODO: bridge
 
 // TODO: bridge
 
@@ -15,57 +18,57 @@ public class PorePlayerInventory extends PoreInventory implements PlayerInventor
 
 	@Override
 	public ItemStack getHelmet() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ItemStack getChestplate() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ItemStack getLeggings() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ItemStack getBoots() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setArmorContents(ItemStack[] items) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setHelmet(ItemStack helmet) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setChestplate(ItemStack chestplate) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setLeggings(ItemStack leggings) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setBoots(ItemStack boots) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ItemStack getItemInHand() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setItemInHand(ItemStack stack) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -75,7 +78,7 @@ public class PorePlayerInventory extends PoreInventory implements PlayerInventor
 
 	@Override
 	public void setHeldItemSlot(int slot) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -85,6 +88,6 @@ public class PorePlayerInventory extends PoreInventory implements PlayerInventor
 
 	@Override
 	public Player getHolder() {
-		return null;
+		throw new NotImplementedException();
 	}
 }

@@ -1,7 +1,10 @@
 package net.amigocraft.pore.implementation.block;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Furnace;
 import org.bukkit.inventory.FurnaceInventory;
+
+//TODO: skeleton implementation
 
 //TODO: skeleton implementation
 
@@ -17,7 +20,7 @@ public class PoreFurnace extends PoreBlockState implements Furnace {
 
 	@Override
 	public void setBurnTime(short burnTime) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -27,11 +30,11 @@ public class PoreFurnace extends PoreBlockState implements Furnace {
 
 	@Override
 	public void setCookTime(short cookTime) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public FurnaceInventory getInventory() {
-		return null;
+		throw new NotImplementedException();
 	}
 }

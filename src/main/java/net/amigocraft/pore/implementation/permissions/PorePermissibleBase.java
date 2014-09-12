@@ -1,20 +1,19 @@
 package net.amigocraft.pore.implementation.permissions;
 
+import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.permissions.*;
+import org.bukkit.plugin.Plugin;
+
 import java.util.Set;
 
-import org.bukkit.permissions.Permissible;
-import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionAttachment;
-import org.bukkit.permissions.PermissionAttachmentInfo;
-import org.bukkit.permissions.ServerOperator;
-import org.bukkit.plugin.Plugin;
+// TODO: Bridge
 
 // TODO: Bridge
 
 public class PorePermissibleBase implements Permissible {
 
 	public PorePermissibleBase(ServerOperator opable) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -24,7 +23,7 @@ public class PorePermissibleBase implements Permissible {
 
 	@Override
 	public void setOp(boolean value) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -49,37 +48,37 @@ public class PorePermissibleBase implements Permissible {
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin plugin) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void removeAttachment(PermissionAttachment attachment) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void recalculatePermissions() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Set<PermissionAttachmentInfo> getEffectivePermissions() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 }

@@ -1,10 +1,11 @@
 package net.amigocraft.pore.implementation.command;
 
-import java.util.List;
-
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCommandExecutor;
+
+import java.util.List;
 
 //TODO: Bridge
 
@@ -18,7 +19,7 @@ public class PoreTabCommandExecutor implements TabCommandExecutor {
 
 	@Override
 	public List<String> onTabComplete() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 }

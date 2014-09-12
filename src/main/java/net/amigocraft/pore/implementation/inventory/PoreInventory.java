@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.inventory;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
@@ -10,6 +11,8 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
+
+// TODO: bridge
 
 // TODO: bridge
 
@@ -27,32 +30,32 @@ public class PoreInventory implements Inventory {
 
 	@Override
 	public void setMaxStackSize(int size) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public String getName() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ItemStack getItem(int index) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setItem(int index, ItemStack item) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public HashMap<Integer, ItemStack> addItem(ItemStack... items) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -62,7 +65,7 @@ public class PoreInventory implements Inventory {
 
 	@Override
 	public void setContents(ItemStack[] items) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -102,17 +105,17 @@ public class PoreInventory implements Inventory {
 
 	@Override
 	public HashMap<Integer, ? extends ItemStack> all(int materialId) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public HashMap<Integer, ? extends ItemStack> all(Material material) throws IllegalArgumentException {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public HashMap<Integer, ? extends ItemStack> all(ItemStack item) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -137,56 +140,56 @@ public class PoreInventory implements Inventory {
 
 	@Override
 	public void remove(int materialId) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void remove(Material material) throws IllegalArgumentException {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void remove(ItemStack item) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void clear(int index) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void clear() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<HumanEntity> getViewers() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public String getTitle() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public InventoryType getType() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public InventoryHolder getHolder() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ListIterator<ItemStack> iterator() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ListIterator<ItemStack> iterator(int index) {
-		return null;
+		throw new NotImplementedException();
 	}
 }

@@ -4,7 +4,7 @@ import org.bukkit.entity.SmallFireball;
 
 public class PoreSmallFireball extends PoreFireball implements SmallFireball {
 
-    // TODO: Bridge
+	// TODO: Bridge
 
 	public PoreSmallFireball(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
 		super(handle);

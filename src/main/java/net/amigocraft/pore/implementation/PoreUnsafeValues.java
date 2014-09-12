@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Achievement;
 import org.bukkit.Material;
 import org.bukkit.Statistic;
@@ -10,35 +11,37 @@ import java.util.List;
 
 //TODO: skeleton implementation
 
+//TODO: skeleton implementation
+
 public class PoreUnsafeValues implements UnsafeValues {
 
 	@Override
 	public Material getMaterialFromInternalName(String name) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<String> tabCompleteInternalMaterialName(String token, List<String> completions) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ItemStack modifyItemStack(ItemStack stack, String arguments) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Statistic getStatisticFromInternalName(String name) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Achievement getAchievementFromInternalName(String name) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<String> tabCompleteInternalStatisticOrAchievementName(String token, List<String> completions) {
-		return null;
+		throw new NotImplementedException();
 	}
 }

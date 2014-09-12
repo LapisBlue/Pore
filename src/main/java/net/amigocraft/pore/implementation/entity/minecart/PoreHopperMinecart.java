@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity.minecart;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.minecart.HopperMinecart;
 import org.bukkit.inventory.Inventory;
 
@@ -13,7 +14,7 @@ public class PoreHopperMinecart extends PoreMinecart implements HopperMinecart {
 
 	@Override
 	public Inventory getInventory() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 }

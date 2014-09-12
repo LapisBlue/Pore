@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.block;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class PoreBlockState implements BlockState {
 	private org.spongepowered.api.block.Block handle;
-	
+
 	public PoreBlockState(org.spongepowered.api.block.Block spongeBlock) {
 		this.handle = spongeBlock;
 	}
@@ -26,12 +27,12 @@ public class PoreBlockState implements BlockState {
 
 	@Override
 	public MaterialData getData() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Material getType() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class PoreBlockState implements BlockState {
 
 	@Override
 	public World getWorld() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -66,27 +67,27 @@ public class PoreBlockState implements BlockState {
 
 	@Override
 	public Location getLocation() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Location getLocation(Location loc) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Chunk getChunk() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setData(MaterialData data) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setType(Material type) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -116,17 +117,17 @@ public class PoreBlockState implements BlockState {
 
 	@Override
 	public void setRawData(byte data) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -136,6 +137,6 @@ public class PoreBlockState implements BlockState {
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-
+		throw new NotImplementedException();
 	}
 }

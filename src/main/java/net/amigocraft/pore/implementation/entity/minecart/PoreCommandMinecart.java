@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity.minecart;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.minecart.CommandMinecart;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
@@ -18,32 +19,32 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
 
 	@Override
 	public String getCommand() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setCommand(String command) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setName(String name) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void sendMessage(String message) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void sendMessage(String[] messages) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public String getName() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -68,37 +69,37 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin plugin) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void removeAttachment(PermissionAttachment attachment) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void recalculatePermissions() {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Set<PermissionAttachmentInfo> getEffectivePermissions() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -108,7 +109,7 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
 
 	@Override
 	public void setOp(boolean value) {
-
+		throw new NotImplementedException();
 	}
 
 

@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.metadata;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 
@@ -9,7 +10,7 @@ public class PoreMetadataValue implements MetadataValue {
 
 	@Override
 	public Object value() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -49,17 +50,17 @@ public class PoreMetadataValue implements MetadataValue {
 
 	@Override
 	public String asString() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Plugin getOwningPlugin() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void invalidate() {
-
+		throw new NotImplementedException();
 	}
 
 }

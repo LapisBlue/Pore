@@ -1,7 +1,10 @@
 package net.amigocraft.pore.implementation.block;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.block.Jukebox;
+
+//TODO: skeleton implementation
 
 //TODO: skeleton implementation
 
@@ -12,12 +15,12 @@ public class PoreJukebox extends PoreBlockState implements Jukebox {
 
 	@Override
 	public Material getPlaying() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setPlaying(Material record) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override

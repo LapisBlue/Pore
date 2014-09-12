@@ -1,8 +1,11 @@
 package net.amigocraft.pore.implementation.block;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.EntityType;
+
+//TODO: skeleton implementation
 
 //TODO: skeleton implementation
 
@@ -13,42 +16,42 @@ public class PoreCreatureSpawner extends PoreBlockState implements CreatureSpawn
 
 	@Override
 	public CreatureType getCreatureType() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public EntityType getSpawnedType() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setSpawnedType(EntityType creatureType) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setCreatureType(CreatureType creatureType) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public String getCreatureTypeId() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setCreatureTypeByName(String creatureType) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public String getCreatureTypeName() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setCreatureTypeId(String creatureType) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -58,6 +61,6 @@ public class PoreCreatureSpawner extends PoreBlockState implements CreatureSpawn
 
 	@Override
 	public void setDelay(int delay) {
-
+		throw new NotImplementedException();
 	}
 }

@@ -1,9 +1,6 @@
 package net.amigocraft.pore.implementation.configuration;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Color;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.Configuration;
@@ -11,18 +8,24 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+// TODO: Bridge
+
 // TODO: Bridge
 
 public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public Set<String> getKeys(boolean deep) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Map<String, Object> getValues(boolean deep) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -37,57 +40,57 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public String getCurrentPath() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public String getName() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Configuration getRoot() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ConfigurationSection getParent() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Object get(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Object get(String path, Object def) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void set(String path, Object value) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ConfigurationSection createSection(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ConfigurationSection createSection(String path, Map<?, ?> map) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public String getString(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public String getString(String path, String def) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -157,12 +160,12 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public List<?> getList(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<?> getList(String path, List<?> def) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -172,62 +175,62 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public List<String> getStringList(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<Integer> getIntegerList(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<Boolean> getBooleanList(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<Double> getDoubleList(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<Float> getFloatList(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<Long> getLongList(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<Byte> getByteList(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<Character> getCharacterList(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<Short> getShortList(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<Map<?, ?>> getMapList(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Vector getVector(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Vector getVector(String path, Vector def) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -237,12 +240,12 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public OfflinePlayer getOfflinePlayer(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public OfflinePlayer getOfflinePlayer(String path, OfflinePlayer def) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -252,12 +255,12 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public ItemStack getItemStack(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ItemStack getItemStack(String path, ItemStack def) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -267,12 +270,12 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public Color getColor(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Color getColor(String path, Color def) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -282,7 +285,7 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public ConfigurationSection getConfigurationSection(String path) {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -292,12 +295,12 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public ConfigurationSection getDefaultSection() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void addDefault(String path, Object value) {
-
+		throw new NotImplementedException();
 	}
 
 }

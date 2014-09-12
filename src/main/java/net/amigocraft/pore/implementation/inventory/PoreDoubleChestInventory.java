@@ -1,8 +1,11 @@
 package net.amigocraft.pore.implementation.inventory;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.DoubleChest;
 import org.bukkit.inventory.DoubleChestInventory;
 import org.bukkit.inventory.Inventory;
+
+// TODO: bridge
 
 // TODO: bridge
 
@@ -10,16 +13,16 @@ public class PoreDoubleChestInventory extends PoreInventory implements DoubleChe
 
 	@Override
 	public Inventory getLeftSide() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Inventory getRightSide() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public DoubleChest getHolder() {
-		return null;
+		throw new NotImplementedException();
 	}
 }

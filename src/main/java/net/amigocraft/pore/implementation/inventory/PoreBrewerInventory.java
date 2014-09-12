@@ -2,6 +2,7 @@ package net.amigocraft.pore.implementation.inventory;
 
 // TODO: bridge
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
@@ -10,16 +11,16 @@ public class PoreBrewerInventory extends PoreInventory implements BrewerInventor
 
 	@Override
 	public ItemStack getIngredient() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setIngredient(ItemStack ingredient) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BrewingStand getHolder() {
-		return null;
+		throw new NotImplementedException();
 	}
 }

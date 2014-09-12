@@ -1,7 +1,10 @@
 package net.amigocraft.pore.implementation.scoreboard;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
+
+//TODO: Bridge
 
 //TODO: Bridge
 
@@ -9,12 +12,12 @@ public class PoreScoreboardManager implements ScoreboardManager {
 
 	@Override
 	public Scoreboard getMainScoreboard() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Scoreboard getNewScoreboard() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 }

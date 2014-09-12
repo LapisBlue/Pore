@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.projectiles.ProjectileSource;
@@ -15,17 +16,17 @@ public class PoreFireball extends AbstractProjectile implements Fireball {
 
 	@Override
 	public void setDirection(Vector direction) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Vector getDirection() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setYield(float yield) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -35,7 +36,7 @@ public class PoreFireball extends AbstractProjectile implements Fireball {
 
 	@Override
 	public void setIsIncendiary(boolean isIncendiary) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -45,22 +46,22 @@ public class PoreFireball extends AbstractProjectile implements Fireball {
 
 	@Override
 	public LivingEntity _INVALID_getShooter() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public ProjectileSource getShooter() {
-		return null;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void _INVALID_setShooter(LivingEntity shooter) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setShooter(ProjectileSource source) {
-
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -70,6 +71,6 @@ public class PoreFireball extends AbstractProjectile implements Fireball {
 
 	@Override
 	public void setBounce(boolean doesBounce) {
-
+		throw new NotImplementedException();
 	}
 }
