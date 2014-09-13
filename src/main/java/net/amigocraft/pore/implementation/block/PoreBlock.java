@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class PoreBlock implements Block {
+
 	private org.spongepowered.api.block.Block handle;
 
 	public PoreBlock(org.spongepowered.api.block.Block spongeBlock) {
@@ -25,227 +26,227 @@ public class PoreBlock implements Block {
 
 	@Override
 	public byte getData() {
-		return 0; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Block getRelative(int modX, int modY, int modZ) {
-		throw new NotImplementedException(); //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Block getRelative(BlockFace face) {
-		throw new NotImplementedException(); //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Block getRelative(BlockFace face, int distance) {
-		throw new NotImplementedException(); //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Material getType() {
-		throw new NotImplementedException(); //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getTypeId() {
-		return 0; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public byte getLightLevel() {
-		return 0; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public byte getLightFromSky() {
-		return 0; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public byte getLightFromBlocks() {
-		return 0; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public World getWorld() {
-		throw new NotImplementedException(); //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getX() {
-		return 0; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getY() {
-		return 0; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getZ() {
-		return 0; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Location getLocation() {
-		throw new NotImplementedException(); //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Location getLocation(Location loc) {
-		throw new NotImplementedException(); //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Chunk getChunk() {
-		throw new NotImplementedException(); //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setData(byte data) {
-		//TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setData(byte data, boolean applyPhysics) {
-		//TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setType(Material type) {
-		//TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean setTypeId(int type) {
-		return false; //TODO: bridge //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean setTypeId(int type, boolean applyPhysics) {
-		return false; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean setTypeIdAndData(int type, byte data, boolean applyPhysics) {
-		return false; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public BlockFace getFace(Block block) {
-		throw new NotImplementedException(); //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public PoreBlockState getState() {
-		throw new NotImplementedException(); //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Biome getBiome() {
-		throw new NotImplementedException(); //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setBiome(Biome bio) {
-		//TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isBlockPowered() {
-		return false; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isBlockIndirectlyPowered() {
-		return false; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isBlockFacePowered(BlockFace face) {
-		return false; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isBlockFaceIndirectlyPowered(BlockFace face) {
-		return false; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getBlockPower(BlockFace face) {
-		return 0; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getBlockPower() {
-		return 0; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return false; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isLiquid() {
-		return false; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public double getTemperature() {
-		return 0; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public double getHumidity() {
-		return 0; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public PistonMoveReaction getPistonMoveReaction() {
-		throw new NotImplementedException(); //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean breakNaturally() {
-		return false; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean breakNaturally(ItemStack tool) {
-		return false; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Collection<ItemStack> getDrops() {
-		throw new NotImplementedException(); //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Collection<ItemStack> getDrops(ItemStack tool) {
-		throw new NotImplementedException(); //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-		//TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public List<MetadataValue> getMetadata(String metadataKey) {
-		throw new NotImplementedException(); //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean hasMetadata(String metadataKey) {
-		return false; //TODO: bridge
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-		//TODO: bridge
+		throw new NotImplementedException();
 	}
 
 }

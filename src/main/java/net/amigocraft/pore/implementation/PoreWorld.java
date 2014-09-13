@@ -38,22 +38,22 @@ public class PoreWorld implements World {
 
 	@Override
 	public int getBlockTypeIdAt(int x, int y, int z) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getBlockTypeIdAt(Location location) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getHighestBlockYAt(int x, int z) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getHighestBlockYAt(Location location) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -83,12 +83,12 @@ public class PoreWorld implements World {
 
 	@Override
 	public boolean isChunkLoaded(Chunk chunk) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public Chunk[] getLoadedChunks() {
-		return new Chunk[0];
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -98,62 +98,62 @@ public class PoreWorld implements World {
 
 	@Override
 	public boolean isChunkLoaded(int x, int z) {
-		return false;
-	}
-
-	@Override
-	public boolean isChunkInUse(int x, int z) {
-		return false;
-	}
-
-	@Override
-	public void loadChunk(int x, int z) {
 		throw new NotImplementedException();
 	}
 
 	@Override
+	public boolean isChunkInUse(int x, int z) {
+		throw new NotImplementedException();
+	}
+
+	@Override
+	public void loadChunk(int x, int z) {
+		handle.loadChunk(x, z, true);
+	}
+
+	@Override
 	public boolean loadChunk(int x, int z, boolean generate) {
-		return false;
+		return handle.loadChunk(x, z, generate) != null;
 	}
 
 	@Override
 	public boolean unloadChunk(Chunk chunk) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z, boolean save) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z, boolean save, boolean safe) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean unloadChunkRequest(int x, int z) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean unloadChunkRequest(int x, int z, boolean safe) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean regenerateChunk(int x, int z) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean refreshChunk(int x, int z) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -173,12 +173,12 @@ public class PoreWorld implements World {
 
 	@Override
 	public boolean generateTree(Location location, TreeType type) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -253,12 +253,12 @@ public class PoreWorld implements World {
 
 	@Override
 	public boolean setSpawnLocation(int x, int y, int z) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public long getTime() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -268,7 +268,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public long getFullTime() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -278,7 +278,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public boolean hasStorm() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -288,7 +288,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public int getWeatherDuration() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -298,7 +298,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public boolean isThundering() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -308,7 +308,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public int getThunderDuration() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -318,27 +318,27 @@ public class PoreWorld implements World {
 
 	@Override
 	public boolean createExplosion(double x, double y, double z, float power) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean createExplosion(double x, double y, double z, float power, boolean setFire) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean createExplosion(double x, double y, double z, float power, boolean setFire, boolean breakBlocks) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean createExplosion(Location loc, float power) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean createExplosion(Location loc, float power, boolean setFire) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -348,12 +348,12 @@ public class PoreWorld implements World {
 
 	@Override
 	public long getSeed() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean getPVP() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -423,12 +423,12 @@ public class PoreWorld implements World {
 
 	@Override
 	public boolean getAllowAnimals() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean getAllowMonsters() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -443,27 +443,27 @@ public class PoreWorld implements World {
 
 	@Override
 	public double getTemperature(int x, int z) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public double getHumidity(int x, int z) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getMaxHeight() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getSeaLevel() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean getKeepSpawnInMemory() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -473,7 +473,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public boolean isAutoSave() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -503,12 +503,12 @@ public class PoreWorld implements World {
 
 	@Override
 	public boolean canGenerateStructures() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public long getTicksPerAnimalSpawns() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -518,7 +518,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public long getTicksPerMonsterSpawns() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -528,7 +528,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public int getMonsterSpawnLimit() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -538,7 +538,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public int getAnimalSpawnLimit() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -548,7 +548,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public int getWaterAnimalSpawnLimit() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -558,7 +558,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public int getAmbientSpawnLimit() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -583,12 +583,12 @@ public class PoreWorld implements World {
 
 	@Override
 	public boolean setGameRuleValue(String rule, String value) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isGameRule(String rule) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -603,7 +603,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public boolean hasMetadata(String metadataKey) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
