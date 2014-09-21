@@ -42,6 +42,7 @@ public class Main {
 	@SpongeEventHandler
 	public void onShutdown(SpongeServerStoppingEvent event){
 		// clear static references
+		server.disablePlugins();
 		server = null;
 	}
 }
