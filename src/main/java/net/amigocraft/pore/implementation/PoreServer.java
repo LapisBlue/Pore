@@ -1,7 +1,9 @@
 package net.amigocraft.pore.implementation;
 
 import com.avaje.ebean.config.ServerConfig;
+
 import net.amigocraft.pore.implementation.entity.PorePlayer;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.Validate;
 import org.bukkit.*;
@@ -12,10 +14,12 @@ import org.bukkit.help.HelpMap;
 import org.bukkit.inventory.*;
 import org.bukkit.map.MapView;
 import org.bukkit.permissions.Permissible;
+import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicesManager;
 import org.bukkit.plugin.SimplePluginManager;
+import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -32,14 +36,58 @@ import java.util.logging.Logger;
 //TODO: skeleton implementation
 
 public class PoreServer implements Server {
-
 	private org.spongepowered.api.Game handle;
-
 	private PluginManager pluginManager;
+	private File pluginsDir = new File(".", "bukkit-plugins"); //TODO: use actual server directory, currently set to working directory
 
 	public PoreServer(org.spongepowered.api.Game handle) {
 		this.handle = handle;
 		this.pluginManager = new SimplePluginManager(this, new SimpleCommandMap(this));
+	}
+	
+	public void loadPlugins() {
+		pluginManager.registerInterface(JavaPluginLoader.class);
+		
+		Plugin[] plugins = pluginManager.loadPlugins(pluginsDir );
+		for (Plugin plugin : plugins) {
+			try {
+				String message = String.format("Loading %s", plugin.getDescription().getFullName());
+				System.out.println(message);
+				plugin.onLoad();
+			} catch (Throwable ex) {
+				System.out.println(ex.getMessage() + " initializing " + plugin.getDescription().getFullName() + " (Is it up to date?)");
+			}
+		}
+	}
+	
+	private void loadPlugin(Plugin plugin) {
+		try {
+			pluginManager.enablePlugin(plugin);
+			
+			List<Permission> perms = plugin.getDescription().getPermissions();
+			for (Permission perm : perms) {
+				try {
+					pluginManager.addPermission(perm);
+				} catch (IllegalArgumentException ex) {
+					System.out.println("Plugin " + plugin.getDescription().getFullName() + " tried to register permission '" + perm.getName() + "' but it's already registered");
+				}
+			}
+		} catch (Throwable ex) {
+			System.out.println(ex.getMessage() + " loading " + plugin.getDescription().getFullName() + " (Is it up to date?)");
+		}
+	}
+	
+	public void enablePlugins() {
+		Plugin[] plugins = pluginManager.getPlugins();
+		for (Plugin plugin : plugins) {
+			if ((!plugin.isEnabled())) {
+				loadPlugin(plugin);
+			}
+		}
+	}
+
+	public void disablePlugins() {
+		pluginManager.disablePlugins();
 	}
 
 	@Override
@@ -200,7 +248,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public PluginManager getPluginManager() {
-		throw new NotImplementedException();
+		return pluginManager;
 	}
 
 	@Override
