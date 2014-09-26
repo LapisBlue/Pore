@@ -23,12 +23,12 @@ public class PoreChunk implements Chunk {
 
 	@Override
 	public int getX() {
-		return handle.getX();
+		return handle.getPosition().getX();
 	}
 
 	@Override
 	public int getZ() {
-		return handle.getZ();
+		return handle.getPosition().getZ(); //TODO: getPosition will probably be changed to return a Vector2i at some point
 	}
 
 	@Override
@@ -38,7 +38,8 @@ public class PoreChunk implements Chunk {
 
 	@Override
 	public Block getBlock(int x, int y, int z) {
-		return new PoreBlock(handle.getBlock(x, y, z));
+		//return new PoreBlock(handle.getBlock(x, y, z));
+		throw new NotImplementedException();
 	}
 
 	@Override

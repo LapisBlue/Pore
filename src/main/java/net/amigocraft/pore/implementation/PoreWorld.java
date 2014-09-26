@@ -28,7 +28,8 @@ public class PoreWorld implements World {
 
 	@Override
 	public Block getBlockAt(int x, int y, int z) {
-		return new PoreBlock(handle.getBlock(x, y, z));
+		//return new PoreBlock(handle.getBlock(x, y, z));
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -68,7 +69,8 @@ public class PoreWorld implements World {
 
 	@Override
 	public Chunk getChunkAt(int x, int z) {
-		return new PoreChunk(handle.getChunk(x, z));
+		//return new PoreChunk(handle.getChunk(x, z));
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -108,12 +110,14 @@ public class PoreWorld implements World {
 
 	@Override
 	public void loadChunk(int x, int z) {
-		handle.loadChunk(x, z, true);
+		//handle.loadChunk(x, z, true);
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean loadChunk(int x, int z, boolean generate) {
-		return handle.loadChunk(x, z, generate) != null;
+		//return handle.loadChunk(x, z, generate) != null;
+		throw new NotImplementedException();
 	}
 
 	@Override

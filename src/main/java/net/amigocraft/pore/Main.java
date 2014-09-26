@@ -22,11 +22,12 @@ import org.spongepowered.api.plugin.Plugin;
  */
 @Plugin(id = "Pore", name = "Pore")
 public class Main {
+
 	private PoreServer server;
 
 	@SpongeEventHandler
 	public void onInitialization(SpongeInitializationEvent event) {
-		server = new PoreServer(((Event)event).getGame());
+		server = new PoreServer(event.game);
 		Bukkit.setServer(server); //Set the Bukkit API to use our server instance
 
 		System.out.println("[Pore] Loading Bukkit plugins, please wait...");

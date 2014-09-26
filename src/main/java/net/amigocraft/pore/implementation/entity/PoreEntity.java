@@ -166,7 +166,7 @@ public class PoreEntity implements Entity {
 
 	@Override
 	public UUID getUniqueId() {
-		return getHandle().getUniqueID();
+		return getHandle().getUniqueId();
 	}
 
 	@Override

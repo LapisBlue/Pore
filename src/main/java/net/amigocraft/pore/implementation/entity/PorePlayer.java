@@ -602,6 +602,6 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public UUID getUniqueId() {
-		return ((org.spongepowered.api.entity.Player) getHandle()).getUniqueID();
+		return ((org.spongepowered.api.entity.Player) getHandle()).getUniqueId();
 	}
 }
