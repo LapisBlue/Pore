@@ -3,10 +3,9 @@ package net.amigocraft.pore;
 import net.amigocraft.pore.implementation.PoreServer;
 
 import org.bukkit.Bukkit;
-import org.spongepowered.api.event.Event;
 import org.spongepowered.api.event.SpongeEventHandler;
-import org.spongepowered.api.event.state.SpongeInitializationEvent;
-import org.spongepowered.api.event.state.SpongeServerStoppingEvent;
+import org.spongepowered.api.event.state.PreInitializationEvent;
+import org.spongepowered.api.event.state.ServerStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
 
 /**
@@ -26,8 +25,8 @@ public class Main {
 	private PoreServer server;
 
 	@SpongeEventHandler
-	public void onInitialization(SpongeInitializationEvent event) {
-		server = new PoreServer(event.game);
+	public void onInitialization(PreInitializationEvent event) {
+		server = new PoreServer(event.getGame());
 		Bukkit.setServer(server); //Set the Bukkit API to use our server instance
 
 		System.out.println("[Pore] Loading Bukkit plugins, please wait...");
@@ -41,7 +40,7 @@ public class Main {
 	}
 
 	@SpongeEventHandler
-	public void onShutdown(SpongeServerStoppingEvent event){
+	public void onShutdown(ServerStoppingEvent event){
 		// clear static references
 		server.disablePlugins();
 		server = null;
