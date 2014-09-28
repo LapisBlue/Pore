@@ -8,7 +8,7 @@ if [ "$TRAVIS_JDK_VERSION" = "oraclejdk8" ]; then
         git rm -r pore
         cp -r ../target/site/apidocs/ pore
         git add -A
-        git commit -m "Update to $(date)"
+        git commit -m "Update to $TRAVIS_REPO_SLUG@$TRAVIS_COMMIT (Build $TRAVIS_BUILD_NUMBER)"
         git push origin gh-pages
     }
 fi
