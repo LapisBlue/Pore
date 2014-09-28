@@ -1,6 +1,8 @@
 Pore
 =====
 
+[![travis badge](https://travis-ci.org/LapisBlue/Pore.svg)](https://travis-ci.org/LapisBlue/Pore)
+
 A plugin for the up-and-coming Sponge project which serves as a bridge between the Bukkit and Sponge APIs.
 
 Compilation
