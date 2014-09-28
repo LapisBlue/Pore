@@ -1,0 +1,13 @@
+language: java
+jdk:
+- openjdk6
+- openjdk7
+- oraclejdk7
+- oraclejdk8
+notifications:
+  email: false
+env:
+  global:
+  - secure: TGSwtG1TD4+6gjuk+3D0c5EChfjhF4bj3f7JEjjU7eAn/gW28jLEvqnn0Yt9QAD3yBVQs5gYpgUdHKOW0//iH0wQtV3+t79ARlBriXAbTlxdv9pZedLsC/l3s45KCEe/+YAjq7nE8+itExRYs7nH8vsBszhP5XjGfYRbn+tg4EM=
+after_success:
+- "./extra/scripts/travis_javadocs.sh"
