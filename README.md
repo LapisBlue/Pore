@@ -8,10 +8,11 @@ A plugin for the up-and-coming Sponge project which serves as a bridge between t
 Compilation
 -----------
 
-Maven is used to handle dependencies.
+Gradle is used to handle dependencies.
 
-* Install [Maven 3](http://maven.apache.org/download.html)
-* Check out this repo and: `mvn clean install`
+- Clone the repo: `git clone https://github.com/LapisBlue/Pore.git`
+- Initialize the [SpongeAPI](https://github.com/SpongePowered/SpongeAPI) dependency: `git submodule update --init`
+- Compile the project using the Gradle wrapper: `./gradlew`
 
 Licensing
 ---------
