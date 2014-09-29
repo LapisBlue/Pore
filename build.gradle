@@ -1,10 +1,9 @@
 buildscript {
     repositories {
-        maven { url 'http://repo.glowstone.net/content/groups/public' }
+        maven { url 'http://repo.lapis.blue/releases' }
     }
     dependencies {
-        classpath 'net.glowstone:remapper:1.1'
-        classpath 'org.ow2.asm:asm:5.0.3'
+        classpath 'blue.lapis:remapper:1.1-jdk6'
     }
 }
 
