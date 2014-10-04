@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
+import org.spongepowered.api.util.Identifiable;
 
 import java.net.InetSocketAddress;
 import java.util.Map;
@@ -602,6 +603,11 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public UUID getUniqueId() {
-		return ((org.spongepowered.api.entity.Player) getHandle()).getUniqueId();
+		if (this.getHandle() instanceof Identifiable) { // this should never return false, but it checks just in case
+			return ((Identifiable)getHandle()).getUniqueId();
+		}
+		else {
+			throw new UnsupportedOperationException("getUniqueId called on non-identifiable object");
+		}
 	}
 }

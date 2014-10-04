@@ -2,6 +2,7 @@ package net.amigocraft.pore.implementation;
 
 import com.avaje.ebean.config.ServerConfig;
 
+import com.google.common.collect.Lists;
 import net.amigocraft.pore.implementation.entity.PorePlayer;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -33,16 +34,20 @@ import java.util.logging.Logger;
 
 //TODO: skeleton implementation
 
-//TODO: skeleton implementation
-
 public class PoreServer implements Server {
+
 	private org.spongepowered.api.Game handle;
+
 	private PluginManager pluginManager;
 	private File pluginsDir = new File(".", "bukkit-plugins"); //TODO: use actual server directory, currently set to working directory
 
 	public PoreServer(org.spongepowered.api.Game handle) {
 		this.handle = handle;
 		this.pluginManager = new SimplePluginManager(this, new SimpleCommandMap(this));
+	}
+
+	public org.spongepowered.api.Game getHandle() {
+		return handle;
 	}
 	
 	public void loadPlugins() {
@@ -112,8 +117,11 @@ public class PoreServer implements Server {
 
 	@Override
 	public Collection<? extends Player> getOnlinePlayers() {
-		//TODO: figure out how to create a goddamn collection
-		throw new NotImplementedException();
+		List<Player> players = new ArrayList<Player>();
+		for (org.spongepowered.api.entity.Player pl : this.getHandle().getOnlinePlayers()){
+			players.add(new PorePlayer(pl));
+		}
+		return Collections.unmodifiableList(players);
 	}
 
 	@Override

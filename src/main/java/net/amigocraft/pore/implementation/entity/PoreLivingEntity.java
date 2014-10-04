@@ -25,8 +25,6 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 		super(handle);
 	}
 
-	// Overrided from LivingEntity
-
 	@Override
 	public double getEyeHeight() {
 		return 0;

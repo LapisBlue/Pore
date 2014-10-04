@@ -7,9 +7,8 @@ import org.bukkit.plugin.Plugin;
 
 import java.util.List;
 
-// TODO: Bridge
-
-// TODO: Bridge
+//TODO: Bridge
+//TODO: determine whether this class is necessary
 
 public class PoreMetadatable implements Metadatable {
 
