@@ -6,24 +6,46 @@ import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+import org.spongepowered.api.entity.*;
 
 import java.io.File;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class PoreWorld implements World {
-	private org.spongepowered.api.world.World handle;
 
-	public PoreWorld(org.spongepowered.api.world.World spongeWorld) {
-		this.handle = spongeWorld;
+	private static WeakHashMap<org.spongepowered.api.world.World, PoreWorld> instances =
+			new WeakHashMap<org.spongepowered.api.world.World, PoreWorld>();
+
+	protected org.spongepowered.api.world.World handle;
+
+	private PoreWorld(org.spongepowered.api.world.World handle) {
+		this.handle = handle;
+		instances.put(handle, this);
+	}
+
+	//TODO: This class is somewhat of an guinea pig. We might change how we do this in the future.
+	/**
+	 * Gets a new instance of the class from the given handle. If possible, an existing instance will be reused;
+	 * otherwise, a new one will be created.
+	 * @return the retrieved or created instance.
+	 */
+	public static PoreWorld getInstance(org.spongepowered.api.world.World handle){
+		if (!instances.containsKey(handle)) {
+			return new PoreWorld(handle);
+		}
+		else {
+			return instances.get(handle);
+		}
 	}
 
 	@Override
