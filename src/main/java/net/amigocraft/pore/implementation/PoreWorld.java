@@ -1,8 +1,12 @@
 package net.amigocraft.pore.implementation;
 
 import net.amigocraft.pore.implementation.block.PoreBlock;
+import net.amigocraft.pore.util.Cache;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
@@ -17,6 +21,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.entity.*;
+import org.spongepowered.api.world.*;
 
 import java.io.File;
 import java.util.*;
@@ -28,24 +33,24 @@ public class PoreWorld implements World {
 
 	protected org.spongepowered.api.world.World handle;
 
-	private PoreWorld(org.spongepowered.api.world.World handle) {
+	private static final Cache<org.spongepowered.api.world.World, PoreWorld> CACHE = new Cache<org.spongepowered.api.world.World, PoreWorld>() {
+		@Override
+		protected PoreWorld construct(org.spongepowered.api.world.World spongeObject) {
+			return new PoreWorld(spongeObject);
+		}
+	};
+
+	private PoreWorld(org.spongepowered.api.world.World handle){
 		this.handle = handle;
-		instances.put(handle, this);
 	}
 
-	//TODO: This class is somewhat of an guinea pig. We might change how we do this in the future.
 	/**
 	 * Gets a new instance of the class from the given handle. If possible, an existing instance will be reused;
 	 * otherwise, a new one will be created.
 	 * @return the retrieved or created instance.
 	 */
-	public static PoreWorld getInstance(org.spongepowered.api.world.World handle){
-		if (!instances.containsKey(handle)) {
-			return new PoreWorld(handle);
-		}
-		else {
-			return instances.get(handle);
-		}
+	public static PoreWorld of(org.spongepowered.api.world.World handle) {
+		return CACHE.get(handle);
 	}
 
 	@Override

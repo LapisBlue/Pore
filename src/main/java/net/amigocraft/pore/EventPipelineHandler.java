@@ -29,12 +29,12 @@ public class EventPipelineHandler {
 
 	@SpongeEventHandler
 	public void onWorldEvent(WorldLoadEvent event) {
-		Bukkit.getPluginManager().callEvent(new org.bukkit.event.world.WorldLoadEvent(PoreWorld.getInstance(event.getWorld())));
+		Bukkit.getPluginManager().callEvent(new org.bukkit.event.world.WorldLoadEvent(PoreWorld.of(event.getWorld())));
 	}
 
 	@SpongeEventHandler
 	public void onWorldUnload(WorldUnloadEvent event) {
-		Bukkit.getPluginManager().callEvent(new org.bukkit.event.world.WorldUnloadEvent(PoreWorld.getInstance(event.getWorld())));
+		Bukkit.getPluginManager().callEvent(new org.bukkit.event.world.WorldUnloadEvent(PoreWorld.of(event.getWorld())));
 	}
 
 	@SpongeEventHandler

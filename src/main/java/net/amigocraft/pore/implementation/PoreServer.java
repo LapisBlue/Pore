@@ -273,7 +273,7 @@ public class PoreServer implements Server {
 	public List<World> getWorlds() {
 		List<World> worldList = new ArrayList<World>();
 		for (org.spongepowered.api.world.World w : handle.getWorlds())
-			worldList.add(PoreWorld.getInstance(w));
+			worldList.add(PoreWorld.of(w));
 		return worldList;
 	}
 
@@ -294,12 +294,12 @@ public class PoreServer implements Server {
 
 	@Override
 	public World getWorld(String name) {
-		return PoreWorld.getInstance(handle.getWorld(name));
+		return PoreWorld.of(handle.getWorld(name));
 	}
 
 	@Override
 	public World getWorld(UUID uid) {
-		return PoreWorld.getInstance(handle.getWorld(uid));
+		return PoreWorld.of(handle.getWorld(uid));
 	}
 
 	@Override
