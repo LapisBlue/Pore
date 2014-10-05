@@ -23,13 +23,33 @@ import org.spongepowered.api.util.Identifiable;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.WeakHashMap;
 
 public class PoreEntity extends PoreMetadatable implements Entity { //TODO: determine if metadata methods should be implemented manually
 
+	private static WeakHashMap<org.spongepowered.api.entity.Entity, PoreEntity> instances =
+			new WeakHashMap<org.spongepowered.api.entity.Entity, PoreEntity>();
+
 	private org.spongepowered.api.entity.Entity handle;
 
-	public PoreEntity(org.spongepowered.api.entity.Entity handle) {
+	private PoreEntity(org.spongepowered.api.entity.Entity handle) {
 		this.handle = handle;
+		instances.put(handle, this);
+	}
+
+	//TODO: This class is somewhat of an guinea pig. We might change how we do this in the future.
+	/**
+	 * Gets a new instance of the class from the given handle. If possible, an existing instance will be reused;
+	 * otherwise, a new one will be created.
+	 * @return the retrieved or created instance.
+	 */
+	public static PoreEntity getInstance(org.spongepowered.api.entity.Entity handle){
+		if (!instances.containsKey(handle)) {
+			return new PoreEntity(handle);
+		}
+		else {
+			return instances.get(handle);
+		}
 	}
 
 	public org.spongepowered.api.entity.Entity getHandle() {
