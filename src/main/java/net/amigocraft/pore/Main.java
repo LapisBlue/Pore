@@ -4,6 +4,7 @@ import net.amigocraft.pore.implementation.PoreServer;
 
 import org.bukkit.Bukkit;
 import org.spongepowered.api.event.SpongeEventHandler;
+import org.spongepowered.api.event.message.CommandEvent;
 import org.spongepowered.api.event.state.PreInitializationEvent;
 import org.spongepowered.api.event.state.ServerStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
@@ -45,4 +46,11 @@ public class Main {
 		server.disablePlugins();
 		server = null;
 	}
+
+    @SpongeEventHandler
+    public void onCommand(CommandEvent event) {
+//        for (org.bukkit.plugin.Plugin plugin : server.getPluginManager().getPlugins()) {
+//            // Call plugin.onCommand() with appropriate params.
+//        }
+    }
 }
