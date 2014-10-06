@@ -1,6 +1,10 @@
 package net.amigocraft.pore.implementation;
 
+import net.amigocraft.pore.Main;
 import net.amigocraft.pore.implementation.block.PoreBlock;
+import net.amigocraft.pore.implementation.entity.PoreEntity;
+import net.amigocraft.pore.implementation.entity.PoreLivingEntity;
+import net.amigocraft.pore.implementation.entity.PorePlayer;
 import net.amigocraft.pore.util.Cache;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
@@ -21,15 +25,13 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.entity.*;
+import org.spongepowered.api.math.Vectors;
 import org.spongepowered.api.world.*;
 
 import java.io.File;
 import java.util.*;
 
 public class PoreWorld implements World {
-
-	private static WeakHashMap<org.spongepowered.api.world.World, PoreWorld> instances =
-			new WeakHashMap<org.spongepowered.api.world.World, PoreWorld>();
 
 	protected org.spongepowered.api.world.World handle;
 
@@ -45,7 +47,7 @@ public class PoreWorld implements World {
 	}
 
 	/**
-	 * Gets a new instance of the class from the given handle. If possible, an existing instance will be reused;
+	 * Gets an instance of the class from the given handle. If possible, an existing instance will be reused;
 	 * otherwise, a new one will be created.
 	 * @return the retrieved or created instance.
 	 */
@@ -55,8 +57,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public Block getBlockAt(int x, int y, int z) {
-		//return new PoreBlock(handle.getBlock(x, y, z));
-		throw new NotImplementedException();
+		return new PoreBlock(handle.getBlock(x, y, z));
 	}
 
 	@Override
@@ -66,12 +67,12 @@ public class PoreWorld implements World {
 
 	@Override
 	public int getBlockTypeIdAt(int x, int y, int z) {
-		throw new NotImplementedException();
+		return getBlockAt(x, y, z).getTypeId(); //TODO: possibly rewrite this depending on how IDs are implemented in Sponge
 	}
 
 	@Override
 	public int getBlockTypeIdAt(Location location) {
-		throw new NotImplementedException();
+		return getBlockTypeIdAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 
 	@Override
@@ -96,8 +97,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public Chunk getChunkAt(int x, int z) {
-		//return new PoreChunk(handle.getChunk(x, z));
-		throw new NotImplementedException();
+		return new PoreChunk(handle.getChunk(Vectors.create2i(x, z)));
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public void loadChunk(Chunk chunk) {
-		throw new NotImplementedException();
+		loadChunk(chunk.getX(), chunk.getZ());
 	}
 
 	@Override
@@ -137,14 +137,13 @@ public class PoreWorld implements World {
 
 	@Override
 	public void loadChunk(int x, int z) {
-		//handle.loadChunk(x, z, true);
-		throw new NotImplementedException();
+		loadChunk(x, z, true);
 	}
 
 	@Override
 	public boolean loadChunk(int x, int z, boolean generate) {
-		//return handle.loadChunk(x, z, generate) != null;
-		throw new NotImplementedException();
+		handle.loadChunk(Vectors.create2i(x, z), generate);
+		return true; //TODO
 	}
 
 	@Override
@@ -239,17 +238,27 @@ public class PoreWorld implements World {
 
 	@Override
 	public List<Entity> getEntities() {
-		throw new NotImplementedException();
+		List<Entity> entities = new ArrayList<Entity>();
+		for (org.spongepowered.api.entity.Entity e : handle.getEntities()){
+			entities.add(new PoreEntity(e));
+		}
+		return entities;
 	}
 
 	@Override
 	public List<LivingEntity> getLivingEntities() {
-		throw new NotImplementedException();
+		List<LivingEntity> entities = new ArrayList<LivingEntity>();
+		for (org.spongepowered.api.entity.Entity e : handle.getEntities()){
+			if (e instanceof LivingEntity) {
+				entities.add(new PoreLivingEntity((org.spongepowered.api.entity.LivingEntity)e));
+			}
+		}
+		return entities;
 	}
 
 	@Override
 	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes) {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO: will we need to map the entity classes?
 	}
 
 	@Override
@@ -264,7 +273,14 @@ public class PoreWorld implements World {
 
 	@Override
 	public List<Player> getPlayers() {
-		throw new NotImplementedException();
+		//TODO: possibly optimize this
+		List<Player> players = new ArrayList<Player>();
+		for (org.spongepowered.api.entity.Entity e : handle.getEntities()){
+			if (e instanceof org.spongepowered.api.entity.Player){
+				players.add(new PorePlayer((org.spongepowered.api.entity.Player)e));
+			}
+		}
+		return players;
 	}
 
 	@Override
@@ -464,6 +480,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public Biome getBiome(int x, int z) {
+		//return handle.getBiome(Vectors.create3d(x, 0, z)); //TODO: needs to be wrapped (should we map biomes?)
 		throw new NotImplementedException();
 	}
 
@@ -524,7 +541,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public File getWorldFolder() {
-		throw new NotImplementedException();
+		return new File(Bukkit.getWorldContainer(), handle.getName()); //TODO: not sure this will always work
 	}
 
 	@Override
@@ -604,7 +621,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public String[] getGameRules() {
-		return new String[0];
+		throw new NotImplementedException();
 	}
 
 	@Override
