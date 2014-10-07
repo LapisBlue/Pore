@@ -28,10 +28,6 @@ public abstract class Cache<S, B> {
 		return result;
 	}
 
-	public void put(S spongeObject, B bukkitObject){
-		instances.put(spongeObject, bukkitObject);
-	}
-
 	protected abstract B construct(S handle);
 
 }

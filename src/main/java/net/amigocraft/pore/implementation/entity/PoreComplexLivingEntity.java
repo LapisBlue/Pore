@@ -4,10 +4,13 @@ import org.bukkit.entity.ComplexLivingEntity;
 
 public abstract class PoreComplexLivingEntity extends PoreLivingEntity implements ComplexLivingEntity {
 
-	//TODO: Bridge
-
-	public PoreComplexLivingEntity(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreComplexLivingEntity(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreComplexLivingEntity of(org.spongepowered.api.entity.Entity handle){
+		return (PoreComplexLivingEntity)PoreLivingEntity.of(handle);
 	}
 
 }

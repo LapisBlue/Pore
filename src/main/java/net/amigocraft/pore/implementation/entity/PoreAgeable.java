@@ -2,13 +2,19 @@ package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Ageable;
+import org.spongepowered.api.entity.LivingEntity;
 
 public class PoreAgeable extends PoreCreature implements Ageable {
 
 	//TODO: Bridge
 
-	public PoreAgeable(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreAgeable(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreAgeable of(org.spongepowered.api.entity.Entity handle){
+		return (PoreAgeable)PoreLivingEntity.of(handle);
 	}
 
 	@Override

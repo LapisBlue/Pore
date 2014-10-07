@@ -4,10 +4,13 @@ import org.bukkit.entity.Squid;
 
 public class PoreSquid extends PoreWaterMob implements Squid {
 
-	// TODO: Bridge
-
-	public PoreSquid(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreSquid(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreSquid of(org.spongepowered.api.entity.Entity handle){
+		return (PoreSquid)PoreWaterMob.of(handle);
 	}
 
 }

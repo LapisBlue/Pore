@@ -4,10 +4,13 @@ import org.bukkit.entity.minecart.ExplosiveMinecart;
 
 public class PoreExplosiveMinecart extends PoreMinecart implements ExplosiveMinecart {
 
-	// TODO: Bridge
-
-	public PoreExplosiveMinecart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreExplosiveMinecart(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreExplosiveMinecart of(org.spongepowered.api.entity.Entity handle){
+		return (PoreExplosiveMinecart)PoreMinecart.of(handle);
 	}
 
 }

@@ -4,10 +4,13 @@ import org.bukkit.entity.minecart.RideableMinecart;
 
 public class PoreRideableMinecart extends PoreMinecart implements RideableMinecart {
 
-	// TODO: Bridge
-
-	public PoreRideableMinecart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreRideableMinecart(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreRideableMinecart of(org.spongepowered.api.entity.Entity handle){
+		return (PoreRideableMinecart) PoreMinecart.of(handle);
 	}
 
 }

@@ -53,7 +53,6 @@ public class PoreServer implements Server {
 	protected PoreServer(org.spongepowered.api.Game handle){
 		this.handle = handle;
 		this.pluginManager = new SimplePluginManager(this, new SimpleCommandMap(this));
-		CACHE.put(handle, this);
 	}
 
 	/**
@@ -139,7 +138,7 @@ public class PoreServer implements Server {
 	public Collection<? extends Player> getOnlinePlayers() {
 		List<Player> players = new ArrayList<Player>();
 		for (org.spongepowered.api.entity.Player pl : this.getHandle().getOnlinePlayers()){
-			players.add(new PorePlayer(pl));
+			players.add(PorePlayer.of(pl));
 		}
 		return Collections.unmodifiableList(players);
 	}
@@ -271,7 +270,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public Player getPlayer(UUID id) {
-		return new PorePlayer(handle.getPlayer(id));
+		return PorePlayer.of(handle.getPlayer(id));
 	}
 
 	@Override

@@ -9,8 +9,13 @@ public class PoreItemFrame extends PoreHanging implements ItemFrame {
 
 	// TODO: Bridge
 
-	public PoreItemFrame(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreItemFrame(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreItemFrame of(org.spongepowered.api.entity.Entity handle){
+		return (PoreItemFrame)PoreHanging.of(handle);
 	}
 
 	@Override

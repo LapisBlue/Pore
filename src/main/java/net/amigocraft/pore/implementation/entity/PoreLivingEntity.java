@@ -16,9 +16,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-//TODO: bridge
-
 public class PoreLivingEntity extends PoreEntity implements LivingEntity {
+
+	//TODO: bridge
 
 	protected PoreLivingEntity(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);

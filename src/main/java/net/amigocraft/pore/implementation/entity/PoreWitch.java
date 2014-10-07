@@ -4,10 +4,13 @@ import org.bukkit.entity.Witch;
 
 public class PoreWitch extends PoreMonster implements Witch {
 
-	// TODO: Bridge
-
-	public PoreWitch(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreWitch(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreWitch of(org.spongepowered.api.entity.Entity handle){
+		return (PoreWitch)PoreMonster.of(handle);
 	}
 
 }

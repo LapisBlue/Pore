@@ -4,10 +4,13 @@ import org.bukkit.entity.MagmaCube;
 
 public class PoreMagmaSlime extends PoreSlime implements MagmaCube {
 
-	// TODO: Bridge
-
-	public PoreMagmaSlime(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreMagmaSlime(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreMagmaSlime of(org.spongepowered.api.entity.Entity handle){
+		return (PoreMagmaSlime)PoreSlime.of(handle);
 	}
 
 }

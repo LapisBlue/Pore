@@ -7,11 +7,14 @@ public class PoreBat extends PoreAmbient implements Bat {
 
 	// TODO: Bridge
 
-	public PoreBat(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreBat(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
 	}
 
-	// Overrided from Bat
+	public static PoreBat of(org.spongepowered.api.entity.Entity handle){
+		return (PoreBat)PoreAmbient.of(handle);
+	}
 
 	@Override
 	public boolean isAwake() {

@@ -4,10 +4,13 @@ import org.bukkit.entity.Monster;
 
 public class PoreMonster extends PoreCreature implements Monster {
 
-	//TODO: Bridge
-
-	public PoreMonster(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreMonster(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreMonster of(org.spongepowered.api.entity.Entity handle){
+		return (PoreMonster)PoreCreature.of(handle);
 	}
 
 }

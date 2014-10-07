@@ -9,8 +9,13 @@ public class PoreMinecart extends PoreVehicle implements Minecart {
 
 	//TODO: Bridge
 
-	public PoreMinecart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreMinecart(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreMinecart of(org.spongepowered.api.entity.Entity handle){
+		return (PoreMinecart)PoreVehicle.of(handle);
 	}
 
 	@Override

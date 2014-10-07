@@ -8,8 +8,13 @@ public class PoreCreature extends PoreLivingEntity implements Creature {
 
 	//TODO: Bridge
 
-	public PoreCreature(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreCreature(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreCreature of(org.spongepowered.api.entity.Entity handle){
+		return (PoreCreature)PoreLivingEntity.of(handle);
 	}
 
 	@Override

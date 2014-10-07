@@ -4,10 +4,13 @@ import org.bukkit.entity.EnderPearl;
 
 public class PoreEnderPearl extends PoreProjectile implements EnderPearl {
 
-	//TODO: Bridge
-
-	public PoreEnderPearl(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreEnderPearl(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreEnderPearl of(org.spongepowered.api.entity.Entity handle){
+		return (PoreEnderPearl)PoreProjectile.of(handle);
 	}
 
 }

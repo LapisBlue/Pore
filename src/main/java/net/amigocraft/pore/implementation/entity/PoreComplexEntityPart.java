@@ -8,12 +8,17 @@ public class PoreComplexEntityPart extends PoreEntity implements ComplexEntityPa
 
 	//TODO: Bridge
 
-	public PoreComplexEntityPart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreComplexEntityPart(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreComplexEntityPart of(org.spongepowered.api.entity.Entity handle){
+		return (PoreComplexEntityPart)PoreEntity.of(handle);
 	}
 
 	@Override
 	public EnderDragon getParent() {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO: should we store this as a global?
 	}
 }

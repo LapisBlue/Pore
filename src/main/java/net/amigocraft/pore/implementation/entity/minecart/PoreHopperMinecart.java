@@ -8,8 +8,13 @@ public class PoreHopperMinecart extends PoreMinecart implements HopperMinecart {
 
 	// TODO: Bridge
 
-	public PoreHopperMinecart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreHopperMinecart(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreHopperMinecart of(org.spongepowered.api.entity.Entity handle){
+		return (PoreHopperMinecart)PoreMinecart.of(handle);
 	}
 
 	@Override

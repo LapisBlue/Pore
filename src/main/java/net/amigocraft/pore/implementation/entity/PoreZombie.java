@@ -7,8 +7,13 @@ public class PoreZombie extends PoreMonster implements Zombie {
 
 	// TODO: Bridge
 
-	public PoreZombie(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreZombie(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreZombie of(org.spongepowered.api.entity.Entity handle){
+		return (PoreZombie)PoreMonster.of(handle);
 	}
 
 	@Override

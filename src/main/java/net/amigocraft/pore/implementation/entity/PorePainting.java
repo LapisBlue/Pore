@@ -8,8 +8,13 @@ public class PorePainting extends PoreHanging implements Painting {
 
 	// TODO: Bridge
 
-	public PorePainting(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PorePainting(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PorePainting of(org.spongepowered.api.entity.Entity handle){
+		return (PorePainting)PoreHanging.of(handle);
 	}
 
 	@Override

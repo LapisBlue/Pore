@@ -31,7 +31,6 @@ public class PoreBlock implements Block {
 
 	private PoreBlock(org.spongepowered.api.block.Block handle){
 		this.handle = handle;
-		CACHE.put(handle, this);
 	}
 
 	/**

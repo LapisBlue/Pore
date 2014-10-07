@@ -8,8 +8,13 @@ public class PoreItem extends PoreEntity implements Item {
 
 	// TODO: Bridge
 
-	public PoreItem(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreItem(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreItem of(org.spongepowered.api.entity.Entity handle){
+		return (PoreItem)PoreEntity.of(handle);
 	}
 
 	@Override

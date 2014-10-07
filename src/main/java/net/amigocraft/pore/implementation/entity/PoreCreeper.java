@@ -2,18 +2,24 @@ package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Creeper;
+import org.spongepowered.api.component.attribute.Powerable;
 
 public class PoreCreeper extends PoreMonster implements Creeper {
 
 	//TODO: Bridge
 
-	public PoreCreeper(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreCreeper(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreCreeper of(org.spongepowered.api.entity.Entity handle){
+		return (PoreCreeper)PoreMonster.of(handle);
 	}
 
 	@Override
 	public boolean isPowered() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

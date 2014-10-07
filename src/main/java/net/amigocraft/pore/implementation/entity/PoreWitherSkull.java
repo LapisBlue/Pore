@@ -5,10 +5,13 @@ import org.bukkit.entity.WitherSkull;
 
 public class PoreWitherSkull extends PoreFireball implements WitherSkull {
 
-	// TODO: Bridge
-
-	public PoreWitherSkull(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreWitherSkull(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreWitherSkull of(org.spongepowered.api.entity.Entity handle){
+		return (PoreWitherSkull)PoreFireball.of(handle);
 	}
 
 	@Override

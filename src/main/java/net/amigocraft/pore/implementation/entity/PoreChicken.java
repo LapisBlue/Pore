@@ -4,10 +4,13 @@ import org.bukkit.entity.Chicken;
 
 public class PoreChicken extends PoreAnimals implements Chicken {
 
-	//TODO: Bridge
-
-	public PoreChicken(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreChicken(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreChicken of(org.spongepowered.api.entity.Entity handle){
+		return (PoreChicken)PoreAnimals.of(handle);
 	}
 
 }

@@ -6,10 +6,13 @@ import org.bukkit.entity.FallingSand;
 
 public class PoreFallingSand extends PoreEntity implements FallingSand {
 
-	//TODO: Bridge
-
-	public PoreFallingSand(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreFallingSand(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreFallingSand of(org.spongepowered.api.entity.Entity handle){
+		return (PoreFallingSand)PoreEntity.of(handle);
 	}
 
 	@Override

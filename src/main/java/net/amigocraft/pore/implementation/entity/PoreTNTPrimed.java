@@ -8,8 +8,13 @@ public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
 
 	// TODO: Bridge
 
-	public PoreTNTPrimed(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreTNTPrimed(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreTNTPrimed of(org.spongepowered.api.entity.Entity handle){
+		return (PoreTNTPrimed)PoreEntity.of(handle);
 	}
 
 	@Override

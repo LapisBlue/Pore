@@ -4,10 +4,13 @@ import org.bukkit.entity.minecart.SpawnerMinecart;
 
 public class PoreSpawnerMinecart extends PoreMinecart implements SpawnerMinecart {
 
-	// TODO: Bridge
-
-	public PoreSpawnerMinecart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreSpawnerMinecart(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreSpawnerMinecart of(org.spongepowered.api.entity.Entity handle){
+		return (PoreSpawnerMinecart) PoreMinecart.of(handle);
 	}
 
 }

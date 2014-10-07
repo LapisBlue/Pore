@@ -4,10 +4,13 @@ import org.bukkit.entity.LeashHitch;
 
 public class PoreLeash extends PoreHanging implements LeashHitch {
 
-	// TODO: Bridge
-
-	public PoreLeash(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreLeash(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreLeash of(org.spongepowered.api.entity.Entity handle){
+		return (PoreLeash)PoreHanging.of(handle);
 	}
 
 }

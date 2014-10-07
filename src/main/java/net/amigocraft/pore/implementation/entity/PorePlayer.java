@@ -20,8 +20,18 @@ import java.util.UUID;
 
 public class PorePlayer extends PoreHumanEntity implements Player {
 
-	public PorePlayer(org.spongepowered.api.entity.Player handle) {
+	//TODO: make constructor as specific as possible
+	protected PorePlayer(org.spongepowered.api.entity.Player handle){
 		super(handle);
+	}
+
+	public static PorePlayer of(org.spongepowered.api.entity.Entity handle){
+		if (handle instanceof Player) {
+			return (PorePlayer) PoreHumanEntity.of(handle);
+		}
+		else {
+			throw new IllegalArgumentException();
+		}
 	}
 
 	@Override

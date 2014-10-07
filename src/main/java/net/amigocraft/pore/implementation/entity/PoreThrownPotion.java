@@ -11,8 +11,13 @@ public class PoreThrownPotion extends PoreProjectile implements ThrownPotion {
 
 	// TODO: Bridge
 
-	public PoreThrownPotion(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreThrownPotion(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreThrownPotion of(org.spongepowered.api.entity.Entity handle){
+		return (PoreThrownPotion)PoreProjectile.of(handle);
 	}
 
 	@Override

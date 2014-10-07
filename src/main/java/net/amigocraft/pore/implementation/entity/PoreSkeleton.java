@@ -7,8 +7,13 @@ public class PoreSkeleton extends PoreMonster implements Skeleton {
 
 	// TODO: Bridge
 
-	public PoreSkeleton(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreSkeleton(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreSkeleton of(org.spongepowered.api.entity.Entity handle){
+		return (PoreSkeleton)PoreMonster.of(handle);
 	}
 
 	@Override

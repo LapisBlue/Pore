@@ -276,7 +276,7 @@ public class PoreWorld implements World {
 		List<Player> players = new ArrayList<Player>();
 		for (org.spongepowered.api.entity.Entity e : handle.getEntities()){
 			if (e instanceof org.spongepowered.api.entity.Player){
-				players.add(new PorePlayer((org.spongepowered.api.entity.Player)e));
+				players.add(PorePlayer.of((org.spongepowered.api.entity.Player)e));
 			}
 		}
 		return players;

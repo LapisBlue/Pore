@@ -4,10 +4,13 @@ import org.bukkit.entity.CaveSpider;
 
 public class PoreCaveSpider extends PoreSpider implements CaveSpider {
 
-	// TODO: Bridge
-
-	public PoreCaveSpider(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreCaveSpider(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreCaveSpider of(org.spongepowered.api.entity.Entity handle){
+		return (PoreCaveSpider)PoreSpider.of(handle);
 	}
 
 }

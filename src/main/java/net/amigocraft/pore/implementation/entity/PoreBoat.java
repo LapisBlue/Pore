@@ -7,8 +7,13 @@ public class PoreBoat extends PoreVehicle implements Boat {
 
 	// TODO: Bridge
 
-	public PoreBoat(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreBoat(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreBoat of(org.spongepowered.api.entity.Entity handle){
+		return (PoreBoat)PoreVehicle.of(handle);
 	}
 
 	@Override

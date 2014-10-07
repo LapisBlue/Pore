@@ -4,10 +4,13 @@ import org.bukkit.entity.Silverfish;
 
 public class PoreSilverfish extends PoreMonster implements Silverfish {
 
-	// TODO: Bridge
-
-	public PoreSilverfish(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreSilverfish(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreSilverfish of(org.spongepowered.api.entity.Entity handle){
+		return (PoreSilverfish)PoreMonster.of(handle);
 	}
 
 }

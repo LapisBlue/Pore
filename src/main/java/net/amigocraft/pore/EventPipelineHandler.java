@@ -41,7 +41,7 @@ public class EventPipelineHandler {
 	public void onAsyncPlayerChat(AsyncPlayerChatEvent event) {
 		Bukkit.getPluginManager().callEvent(
 				new org.bukkit.event.player.AsyncPlayerChatEvent(
-						false, new PorePlayer(event.getPlayer()), event.getMessage(), new HashSet<Player>())); //TODO
+						false, PorePlayer.of(event.getPlayer()), event.getMessage(), new HashSet<Player>())); //TODO
 	}
 
 }

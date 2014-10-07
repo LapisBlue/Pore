@@ -4,10 +4,13 @@ import org.bukkit.entity.Ghast;
 
 public class PoreGhast extends PoreFlying implements Ghast {
 
-	// TODO: Bridge
-
-	public PoreGhast(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreGhast(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreGhast of(org.spongepowered.api.entity.Entity handle){
+		return (PoreGhast)PoreFlying.of(handle);
 	}
 
 }

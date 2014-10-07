@@ -4,10 +4,13 @@ import org.bukkit.entity.Snowball;
 
 public class PoreSnowball extends PoreProjectile implements Snowball {
 
-	// TODO: Bridge
-
-	public PoreSnowball(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreSnowball(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreSnowball of(org.spongepowered.api.entity.Entity handle){
+		return (PoreSnowball)PoreProjectile.of(handle);
 	}
 
 }

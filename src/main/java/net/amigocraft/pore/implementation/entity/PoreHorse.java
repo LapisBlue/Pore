@@ -7,11 +7,17 @@ import org.bukkit.inventory.HorseInventory;
 
 public class PoreHorse extends PoreAnimals implements Horse {
 
-	public PoreHorse(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	// TODO: Bridge
+
+	//TODO: make constructor as specific as possible
+	protected PoreHorse(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
 	}
 
-	// TODO: Bridge
+	public static PoreHorse of(org.spongepowered.api.entity.Entity handle){
+		return (PoreHorse)PoreAnimals.of(handle);
+	}
+
 	@Override
 	public Variant getVariant() {
 		throw new NotImplementedException();

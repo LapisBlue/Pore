@@ -7,8 +7,13 @@ public class PoreVillager extends PoreAgeable implements Villager {
 
 	// TODO: Bridge
 
-	public PoreVillager(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreVillager(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreVillager of(org.spongepowered.api.entity.Entity handle){
+		return (PoreVillager)PoreAgeable.of(handle);
 	}
 
 	@Override

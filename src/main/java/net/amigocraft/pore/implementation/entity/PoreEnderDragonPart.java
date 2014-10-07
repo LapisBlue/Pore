@@ -8,8 +8,13 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements EnderD
 
 	//TODO: Bridge
 
-	public PoreEnderDragonPart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreEnderDragonPart(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreEnderDragonPart of(org.spongepowered.api.entity.Entity handle){
+		return (PoreEnderDragonPart)PoreComplexEntityPart.of(handle);
 	}
 
 	@Override
@@ -34,12 +39,12 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements EnderD
 
 	@Override
 	public double getHealth() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int _INVALID_getHealth() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -54,12 +59,12 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements EnderD
 
 	@Override
 	public double getMaxHealth() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int _INVALID_getMaxHealth() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

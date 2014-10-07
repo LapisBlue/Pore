@@ -8,8 +8,13 @@ public class PoreFirework extends PoreEntity implements Firework {
 
 	// TODO: Bridge
 
-	public PoreFirework(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreFirework(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreFirework of(org.spongepowered.api.entity.Entity handle){
+		return (PoreFirework)PoreEntity.of(handle);
 	}
 
 	@Override

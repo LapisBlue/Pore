@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity.minecart;
 
+import net.amigocraft.pore.implementation.entity.PoreMonster;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.minecart.CommandMinecart;
 import org.bukkit.permissions.Permission;
@@ -13,8 +14,13 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
 
 	// TODO: Bridge
 
-	public PoreCommandMinecart(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreCommandMinecart(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreCommandMinecart of(org.spongepowered.api.entity.Entity handle){
+		return (PoreCommandMinecart)PoreMinecart.of(handle);
 	}
 
 	@Override

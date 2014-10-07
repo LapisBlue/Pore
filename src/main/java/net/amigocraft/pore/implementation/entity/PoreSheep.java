@@ -8,8 +8,13 @@ public class PoreSheep extends PoreAnimals implements Sheep {
 
 	// TODO: Bridge
 
-	public PoreSheep(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreSheep(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreSheep of(org.spongepowered.api.entity.Entity handle){
+		return (PoreSheep)PoreAnimals.of(handle);
 	}
 
 	@Override

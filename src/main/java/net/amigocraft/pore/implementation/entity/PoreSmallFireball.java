@@ -4,10 +4,13 @@ import org.bukkit.entity.SmallFireball;
 
 public class PoreSmallFireball extends PoreFireball implements SmallFireball {
 
-	// TODO: Bridge
-
-	public PoreSmallFireball(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreSmallFireball(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreSmallFireball of(org.spongepowered.api.entity.Entity handle){
+		return (PoreSmallFireball)PoreFireball.of(handle);
 	}
 
 }

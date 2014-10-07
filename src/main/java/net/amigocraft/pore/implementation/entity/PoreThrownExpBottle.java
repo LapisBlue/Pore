@@ -4,10 +4,13 @@ import org.bukkit.entity.ThrownExpBottle;
 
 public class PoreThrownExpBottle extends PoreProjectile implements ThrownExpBottle {
 
-	// TODO: Bridge
-
-	public PoreThrownExpBottle(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreThrownExpBottle(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreThrownExpBottle of(org.spongepowered.api.entity.Entity handle){
+		return (PoreThrownExpBottle)PoreProjectile.of(handle);
 	}
 
 }

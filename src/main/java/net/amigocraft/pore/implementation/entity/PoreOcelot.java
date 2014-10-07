@@ -7,8 +7,13 @@ public class PoreOcelot extends PoreTameableAnimal implements Ocelot {
 
 	// TODO: Bridge
 
-	public PoreOcelot(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreOcelot(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreOcelot of(org.spongepowered.api.entity.Entity handle){
+		return (PoreOcelot)PoreTameableAnimal.of(handle);
 	}
 
 	@Override

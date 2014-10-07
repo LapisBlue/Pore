@@ -16,14 +16,17 @@ import org.spongepowered.api.entity.Player;
 
 import java.util.Set;
 
-//TODO: bridge
-
-//TODO: bridge
-
 public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
-	public PoreHumanEntity(org.spongepowered.api.entity.HumanEntity handle) {
+	//TODO: bridge
+
+	//TODO: make constructor as specific as possible
+	protected PoreHumanEntity(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreHumanEntity of(org.spongepowered.api.entity.Entity handle){
+		return (PoreHumanEntity)PoreLivingEntity.of(handle);
 	}
 
 	@Override

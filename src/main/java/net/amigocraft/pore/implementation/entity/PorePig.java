@@ -7,8 +7,13 @@ public class PorePig extends PoreAnimals implements Pig {
 
 	// TODO: Bridge
 
-	public PorePig(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PorePig(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PorePig of(org.spongepowered.api.entity.Entity handle){
+		return (PorePig)PoreAnimals.of(handle);
 	}
 
 	@Override

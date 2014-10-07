@@ -4,10 +4,13 @@ import org.bukkit.entity.Animals;
 
 public class PoreAnimals extends PoreAgeable implements Animals {
 
-	//TODO: Bridge
-
-	public PoreAnimals(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreAnimals(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreAnimals of(org.spongepowered.api.entity.Entity handle){
+		return (PoreAnimals)PoreAgeable.of(handle);
 	}
 
 }

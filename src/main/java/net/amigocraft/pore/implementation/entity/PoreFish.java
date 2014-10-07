@@ -5,12 +5,17 @@ import org.bukkit.entity.Fish;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.projectiles.ProjectileSource;
 
-public class PoreFish extends AbstractProjectile implements Fish {
+public class PoreFish extends PoreAbstractProjectile implements Fish {
 
 	// TODO: Bridge
 
-	public PoreFish(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreFish(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreFish of(org.spongepowered.api.entity.Entity handle){
+		return (PoreFish)PoreAbstractProjectile.of(handle);
 	}
 
 	@Override

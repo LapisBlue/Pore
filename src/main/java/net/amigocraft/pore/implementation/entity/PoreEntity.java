@@ -32,7 +32,6 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 
 	protected PoreEntity(org.spongepowered.api.entity.Entity handle) {
 		this.handle = handle;
-		CACHE.put(handle, this);
 	}
 
 	/**

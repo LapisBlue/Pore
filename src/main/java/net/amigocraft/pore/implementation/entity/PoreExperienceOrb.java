@@ -7,8 +7,13 @@ public class PoreExperienceOrb extends PoreEntity implements ExperienceOrb {
 
 	//TODO: Bridge
 
-	public PoreExperienceOrb(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreExperienceOrb(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreExperienceOrb of(org.spongepowered.api.entity.Entity handle){
+		return (PoreExperienceOrb)PoreEntity.of(handle);
 	}
 
 	@Override

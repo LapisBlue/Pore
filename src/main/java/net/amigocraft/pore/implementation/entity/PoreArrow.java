@@ -5,12 +5,17 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.projectiles.ProjectileSource;
 
-public class PoreArrow extends AbstractProjectile implements Arrow {
+public class PoreArrow extends PoreAbstractProjectile implements Arrow {
 
 	// TODO: Bridge
 
-	public PoreArrow(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreArrow(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreArrow of(org.spongepowered.api.entity.Entity handle){
+		return (PoreArrow)PoreAbstractProjectile.of(handle);
 	}
 
 	@Override

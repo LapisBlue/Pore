@@ -7,8 +7,13 @@ public class PoreSlime extends PoreLivingEntity implements Slime {
 
 	// TODO: Bridge
 
-	public PoreSlime(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreSlime(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreSlime of(org.spongepowered.api.entity.Entity handle){
+		return (PoreSlime)PoreLivingEntity.of(handle);
 	}
 
 	@Override

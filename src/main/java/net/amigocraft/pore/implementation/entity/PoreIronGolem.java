@@ -5,10 +5,15 @@ import org.bukkit.entity.IronGolem;
 
 public class PoreIronGolem extends PoreGolem implements IronGolem {
 
-	// TODO: Bridge
+	//TODO: bridge
 
-	public PoreIronGolem(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreIronGolem(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreIronGolem of(org.spongepowered.api.entity.Entity handle){
+		return (PoreIronGolem)PoreGolem.of(handle);
 	}
 
 	@Override

@@ -4,9 +4,12 @@ import org.bukkit.entity.Flying;
 
 public class PoreFlying extends PoreLivingEntity implements Flying {
 
-	// TODO: Bridge
-
-	public PoreFlying(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreFlying(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreFlying of(org.spongepowered.api.entity.Entity handle){
+		return (PoreFlying)PoreLivingEntity.of(handle);
 	}
 }

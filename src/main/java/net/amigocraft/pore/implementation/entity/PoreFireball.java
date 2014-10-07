@@ -6,12 +6,17 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.util.Vector;
 
-public class PoreFireball extends AbstractProjectile implements Fireball {
+public class PoreFireball extends PoreAbstractProjectile implements Fireball {
 
 	//TODO: Bridge
 
-	public PoreFireball(org.spongepowered.api.entity.Entity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreFireball(org.spongepowered.api.entity.Entity handle){
 		super(handle);
+	}
+
+	public static PoreFireball of(org.spongepowered.api.entity.Entity handle){
+		return (PoreFireball)PoreAbstractProjectile.of(handle);
 	}
 
 	@Override

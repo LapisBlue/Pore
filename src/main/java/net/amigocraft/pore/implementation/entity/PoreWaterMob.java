@@ -4,10 +4,13 @@ import org.bukkit.entity.WaterMob;
 
 public class PoreWaterMob extends PoreCreature implements WaterMob {
 
-	// TODO: Bridge
-
-	public PoreWaterMob(org.spongepowered.api.entity.LivingEntity handle) { //TODO: accept most specfific type
+	//TODO: make constructor as specific as possible
+	protected PoreWaterMob(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreWaterMob of(org.spongepowered.api.entity.Entity handle){
+		return (PoreWaterMob)PoreCreature.of(handle);
 	}
 
 }
