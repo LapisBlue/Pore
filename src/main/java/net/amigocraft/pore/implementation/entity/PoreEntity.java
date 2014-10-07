@@ -26,7 +26,6 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 		@Override
 		protected PoreEntity construct(org.spongepowered.api.entity.Entity spongeObject) {
 			PoreEntity wrapper = new PoreEntity(spongeObject);
-			CACHE.put(spongeObject, wrapper);
 			return wrapper;
 		}
 	};

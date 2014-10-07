@@ -24,7 +24,6 @@ public class PoreChunk implements Chunk {
 		@Override
 		protected PoreChunk construct(org.spongepowered.api.world.Chunk spongeObject) {
 			PoreChunk wrapper = new PoreChunk(spongeObject);
-			CACHE.put(spongeObject, wrapper);
 			return wrapper;
 		}
 	};

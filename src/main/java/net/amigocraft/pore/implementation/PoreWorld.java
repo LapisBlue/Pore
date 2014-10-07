@@ -36,7 +36,6 @@ public class PoreWorld implements World {
 		@Override
 		protected PoreWorld construct(org.spongepowered.api.world.World spongeObject) {
 			PoreWorld wrapper = new PoreWorld(spongeObject);
-			CACHE.put(spongeObject, wrapper);
 			return wrapper;
 		}
 	};

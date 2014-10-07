@@ -46,7 +46,6 @@ public class PoreServer implements Server {
 		@Override
 		protected PoreServer construct(org.spongepowered.api.Game spongeObject) {
 			PoreServer wrapper = new PoreServer(spongeObject);
-			CACHE.put(spongeObject, wrapper);
 			return wrapper;
 		}
 	};

@@ -25,7 +25,6 @@ public class PoreBlock implements Block {
 		@Override
 		protected PoreBlock construct(org.spongepowered.api.block.Block spongeObject) {
 			PoreBlock wrapper = new PoreBlock(spongeObject);
-			CACHE.put(spongeObject, wrapper);
 			return wrapper;
 		}
 	};
