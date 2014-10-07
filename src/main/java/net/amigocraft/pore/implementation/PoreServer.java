@@ -2,12 +2,13 @@ package net.amigocraft.pore.implementation;
 
 import com.avaje.ebean.config.ServerConfig;
 
-import com.google.common.collect.Lists;
 import net.amigocraft.pore.implementation.entity.PorePlayer;
 
+import net.amigocraft.pore.util.Cache;
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.Validate;
 import org.bukkit.*;
+import org.bukkit.World;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -36,14 +37,34 @@ import java.util.logging.Logger;
 
 public class PoreServer implements Server {
 
-	private org.spongepowered.api.Game handle;
+	protected org.spongepowered.api.Game handle;
 
 	private PluginManager pluginManager;
 	private File pluginsDir = new File(".", "bukkit-plugins"); //TODO: use actual server directory, currently set to working directory
 
-	public PoreServer(org.spongepowered.api.Game handle) {
+	private static final Cache<org.spongepowered.api.Game, PoreServer> CACHE = new Cache<org.spongepowered.api.Game, PoreServer>() {
+		@Override
+		protected PoreServer construct(org.spongepowered.api.Game spongeObject) {
+			PoreServer wrapper = new PoreServer(spongeObject);
+			CACHE.put(spongeObject, wrapper);
+			return wrapper;
+		}
+	};
+
+	protected PoreServer(org.spongepowered.api.Game handle){
 		this.handle = handle;
 		this.pluginManager = new SimplePluginManager(this, new SimpleCommandMap(this));
+		CACHE.put(handle, this);
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreServer of(org.spongepowered.api.Game handle) {
+		return CACHE.get(handle);
 	}
 
 	public org.spongepowered.api.Game getHandle() {
@@ -112,7 +133,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public Player[] _INVALID_getOnlinePlayers() {
-		return getOnlinePlayers().toArray(new Player[]{});
+		return getOnlinePlayers().toArray(new Player[getOnlinePlayers().size()]);
 	}
 
 	@Override

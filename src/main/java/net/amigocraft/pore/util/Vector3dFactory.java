@@ -3,7 +3,6 @@ package net.amigocraft.pore.util;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.math.Vector3d;
-import org.spongepowered.api.math.Vector3i;
 import org.spongepowered.api.math.Vectors;
 
 public class Vector3dFactory {

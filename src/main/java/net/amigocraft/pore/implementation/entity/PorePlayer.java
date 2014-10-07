@@ -18,8 +18,6 @@ import java.util.UUID;
 
 //TODO: bridge
 
-//TODO: bridge
-
 public class PorePlayer extends PoreHumanEntity implements Player {
 
 	public PorePlayer(org.spongepowered.api.entity.Player handle) {
@@ -28,7 +26,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public String getDisplayName() {
-		return ((org.spongepowered.api.entity.Player) getHandle()).getDisplayName();
+		return ((org.spongepowered.api.entity.Player)handle).getDisplayName();
 	}
 
 	@Override
@@ -38,7 +36,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public String getPlayerListName() {
-		return ((org.spongepowered.api.entity.Player) getHandle()).getDisplayName(); //TODO: temporary measure
+		return ((org.spongepowered.api.entity.Player)handle).getDisplayName(); //TODO: temporary measure
 	}
 
 	@Override
@@ -603,8 +601,8 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public UUID getUniqueId() {
-		if (this.getHandle() instanceof Identifiable) { // this should never return false, but it checks just in case
-			return ((Identifiable)getHandle()).getUniqueId();
+		if (handle instanceof Identifiable) { // this should never return false, but it checks just in case
+			return ((Identifiable)handle).getUniqueId();
 		}
 		else {
 			throw new UnsupportedOperationException("getUniqueId called on non-identifiable object");

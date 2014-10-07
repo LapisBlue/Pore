@@ -28,8 +28,8 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
 	@Override
 	public String getName() {
-		if (getHandle() instanceof Player)
-			return ((Player) getHandle()).getName();
+		if (handle instanceof Player)
+			return ((Player)handle).getName();
 		throw new NotImplementedException();
 	}
 

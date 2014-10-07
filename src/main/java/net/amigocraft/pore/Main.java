@@ -2,6 +2,7 @@ package net.amigocraft.pore;
 
 import net.amigocraft.pore.implementation.PoreServer;
 
+import org.apache.logging.log4j.Logger;
 import org.bukkit.Bukkit;
 import org.spongepowered.api.event.SpongeEventHandler;
 import org.spongepowered.api.event.message.CommandEvent;
@@ -10,7 +11,7 @@ import org.spongepowered.api.event.state.ServerStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
 
 /**
- * @author Maxim Roncacé
+ * @author Maxim Roncacé, Lapis Blue
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -20,30 +21,37 @@ import org.spongepowered.api.plugin.Plugin;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-@Plugin(id = "Pore", name = "Pore")
+@Plugin(id = "pore", name = "Pore")
 public class Main {
 
 	private PoreServer server;
 
+	public Logger logger;
+
 	@SpongeEventHandler
 	public void onInitialization(PreInitializationEvent event) {
-		server = new PoreServer(event.getGame());
-		Bukkit.setServer(server); //Set the Bukkit API to use our server instance
+		server = PoreServer.of(event.getGame());
+		Bukkit.setServer(server); // set the Bukkit API to use our server instance
 
-		System.out.println("[Pore] Loading Bukkit plugins, please wait...");
+		//TODO: there has to be a better way to do this
+		logger = event.getGame().getPluginManager().getLogger(event.getGame().getPluginManager().getPlugin("pore"));
+
+		logger.info("Loading Bukkit plugins, please wait...");
 
 		// Load plugins
 		server.loadPlugins();
 		server.enablePlugins();
 
-		System.out.println("[Pore] Finished loading Bukkit plugins!");
-		System.out.println("Enabling loaded plugins...");
+		logger.info("Finished loading Bukkit plugins!");
+		logger.info("Enabling loaded plugins...");
 	}
 
 	@SpongeEventHandler
 	public void onShutdown(ServerStoppingEvent event){
-		// clear static references
+		logger.info("Disabling Bukkit plugins, please wait...");
 		server.disablePlugins();
+		logger.info("Finished disabling Bukkit plugins!");
+		//TODO: clear static references
 		server = null;
 	}
 

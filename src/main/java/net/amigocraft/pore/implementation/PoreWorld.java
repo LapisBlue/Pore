@@ -1,6 +1,5 @@
 package net.amigocraft.pore.implementation;
 
-import net.amigocraft.pore.Main;
 import net.amigocraft.pore.implementation.block.PoreBlock;
 import net.amigocraft.pore.implementation.entity.PoreEntity;
 import net.amigocraft.pore.implementation.entity.PoreLivingEntity;
@@ -24,9 +23,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.entity.*;
 import org.spongepowered.api.math.Vectors;
-import org.spongepowered.api.world.*;
 
 import java.io.File;
 import java.util.*;
@@ -38,18 +35,21 @@ public class PoreWorld implements World {
 	private static final Cache<org.spongepowered.api.world.World, PoreWorld> CACHE = new Cache<org.spongepowered.api.world.World, PoreWorld>() {
 		@Override
 		protected PoreWorld construct(org.spongepowered.api.world.World spongeObject) {
-			return new PoreWorld(spongeObject);
+			PoreWorld wrapper = new PoreWorld(spongeObject);
+			CACHE.put(spongeObject, wrapper);
+			return wrapper;
 		}
 	};
 
-	private PoreWorld(org.spongepowered.api.world.World handle){
+	protected PoreWorld(org.spongepowered.api.world.World handle){
 		this.handle = handle;
 	}
 
 	/**
-	 * Gets an instance of the class from the given handle. If possible, an existing instance will be reused;
-	 * otherwise, a new one will be created.
-	 * @return the retrieved or created instance.
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
 	 */
 	public static PoreWorld of(org.spongepowered.api.world.World handle) {
 		return CACHE.get(handle);
@@ -57,7 +57,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public Block getBlockAt(int x, int y, int z) {
-		return new PoreBlock(handle.getBlock(x, y, z));
+		return PoreBlock.of(handle.getBlock(x, y, z));
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public Chunk getChunkAt(int x, int z) {
-		return new PoreChunk(handle.getChunk(Vectors.create2i(x, z)));
+		return PoreChunk.of(handle.getChunk(Vectors.create2i(x, z)));
 	}
 
 	@Override
@@ -240,7 +240,7 @@ public class PoreWorld implements World {
 	public List<Entity> getEntities() {
 		List<Entity> entities = new ArrayList<Entity>();
 		for (org.spongepowered.api.entity.Entity e : handle.getEntities()){
-			entities.add(new PoreEntity(e));
+			entities.add(PoreEntity.of(e));
 		}
 		return entities;
 	}
@@ -250,7 +250,7 @@ public class PoreWorld implements World {
 		List<LivingEntity> entities = new ArrayList<LivingEntity>();
 		for (org.spongepowered.api.entity.Entity e : handle.getEntities()){
 			if (e instanceof LivingEntity) {
-				entities.add(new PoreLivingEntity((org.spongepowered.api.entity.LivingEntity)e));
+				entities.add(PoreLivingEntity.of(e));
 			}
 		}
 		return entities;

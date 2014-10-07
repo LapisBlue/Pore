@@ -1,62 +1,71 @@
 package net.amigocraft.pore.implementation.entity;
 
-import net.amigocraft.pore.implementation.PoreWorld;
 import net.amigocraft.pore.implementation.metadata.PoreMetadatable;
-import net.amigocraft.pore.util.BukkitVectorFactory;
-import net.amigocraft.pore.util.LocationFactory;
-import net.amigocraft.pore.util.Vector3dFactory;
-import net.amigocraft.pore.util.Vector3fFactory;
+import net.amigocraft.pore.util.*;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.component.attribute.Flammable;
 import org.spongepowered.api.component.attribute.Movable;
-import org.spongepowered.api.math.Vector3d;
 import org.spongepowered.api.util.Identifiable;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.WeakHashMap;
 
 public class PoreEntity extends PoreMetadatable implements Entity { //TODO: determine if metadata methods should be implemented manually
 
-	private org.spongepowered.api.entity.Entity handle;
+	protected org.spongepowered.api.entity.Entity handle;
 
-	public PoreEntity(org.spongepowered.api.entity.Entity handle) {
+	private static final Cache<org.spongepowered.api.entity.Entity, PoreEntity> CACHE = new Cache<org.spongepowered.api.entity.Entity, PoreEntity>() {
+		@Override
+		protected PoreEntity construct(org.spongepowered.api.entity.Entity spongeObject) {
+			PoreEntity wrapper = new PoreEntity(spongeObject);
+			CACHE.put(spongeObject, wrapper);
+			return wrapper;
+		}
+	};
+
+	protected PoreEntity(org.spongepowered.api.entity.Entity handle) {
 		this.handle = handle;
+		CACHE.put(handle, this);
 	}
 
-	public org.spongepowered.api.entity.Entity getHandle() {
-		return handle;
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreEntity of(org.spongepowered.api.entity.Entity handle) {
+		return CACHE.get(handle);
 	}
 
 	@Override
 	public Location getLocation() {
-		return LocationFactory.fromVector3d(null, this.getHandle().getPosition()); //TODO: fix first parameter when possible
+		return LocationFactory.fromVector3d(null, handle.getPosition()); //TODO: fix first parameter when possible
 	}
 
 	@Override
 	public Location getLocation(Location loc) {
 		loc.setWorld(null); //TODO: correct parameter when possible
-		loc.setX(this.getHandle().getPosition().getX());
-		loc.setY(this.getHandle().getPosition().getX());
-		loc.setZ(this.getHandle().getPosition().getX());
-		loc.setPitch(this.getHandle().getVectorRotation().getX());
-		loc.setYaw(this.getHandle().getVectorRotation().getY());
+		loc.setX(handle.getPosition().getX());
+		loc.setY(handle.getPosition().getX());
+		loc.setZ(handle.getPosition().getX());
+		loc.setPitch(handle.getVectorRotation().getX());
+		loc.setYaw(handle.getVectorRotation().getY());
 		return loc;
 	}
 
 	@Override
 	public void setVelocity(Vector velocity) {
-		if (this.getHandle() instanceof Movable){
-			((Movable)this.getHandle()).setVelocity(Vector3fFactory.fromBukkitVector(velocity));
+		if (handle instanceof Movable){
+			((Movable)handle).setVelocity(Vector3fFactory.fromBukkitVector(velocity));
 		}
 		else {
 			throw new UnsupportedOperationException("setVelocity called on an entity which is not movable"); // TODO: figure out the proper exception to throw
@@ -65,8 +74,8 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 
 	@Override
 	public Vector getVelocity() {
-		if (this.getHandle() instanceof Movable){
-			return BukkitVectorFactory.fromVector3f(((Movable)this.getHandle()).getVelocity());
+		if (handle instanceof Movable){
+			return BukkitVectorFactory.fromVector3f(((Movable)handle).getVelocity());
 		}
 		else {
 			throw new UnsupportedOperationException("getVelocity called on an entity which is not movable"); // TODO: figure out the proper exception to throw
@@ -94,7 +103,7 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 			return false;
 		}
 		this.eject();
-		this.getHandle().setPosition(Vector3dFactory.fromLocation(location));
+		handle.setPosition(Vector3dFactory.fromLocation(location));
 		// Craftbukkit apparently does not throw an event when this method is called
 		return true;
 	}
@@ -131,8 +140,8 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 
 	@Override
 	public void setFireTicks(int ticks) {
-		if (this.getHandle() instanceof Flammable){
-			((Flammable)this.getHandle()).setDuration(ticks);
+		if (handle instanceof Flammable){
+			((Flammable)handle).setDuration(ticks);
 		}
 		else {
 			throw new UnsupportedOperationException("setFireTicks called on non-flammable entity!");
@@ -141,7 +150,7 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 
 	@Override
 	public void remove() {
-		this.getHandle().remove();
+		handle.remove();
 	}
 
 	@Override
@@ -201,7 +210,7 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 
 	@Override
 	public UUID getUniqueId() {
-		return ((Identifiable)getHandle()).getUniqueId(); //TODO: is this the right way to do this?
+		return ((Identifiable)handle).getUniqueId(); //TODO: is this the right way to do this?
 	}
 
 	@Override

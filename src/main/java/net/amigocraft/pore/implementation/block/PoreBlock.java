@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.block;
 
+import net.amigocraft.pore.util.Cache;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -18,10 +19,30 @@ import java.util.List;
 
 public class PoreBlock implements Block {
 
-	private org.spongepowered.api.block.Block handle;
+	protected org.spongepowered.api.block.Block handle;
 
-	public PoreBlock(org.spongepowered.api.block.Block spongeBlock) {
-		this.handle = spongeBlock;
+	private static final Cache<org.spongepowered.api.block.Block, PoreBlock> CACHE = new Cache<org.spongepowered.api.block.Block, PoreBlock>() {
+		@Override
+		protected PoreBlock construct(org.spongepowered.api.block.Block spongeObject) {
+			PoreBlock wrapper = new PoreBlock(spongeObject);
+			CACHE.put(spongeObject, wrapper);
+			return wrapper;
+		}
+	};
+
+	private PoreBlock(org.spongepowered.api.block.Block handle){
+		this.handle = handle;
+		CACHE.put(handle, this);
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreBlock of(org.spongepowered.api.block.Block handle) {
+		return CACHE.get(handle);
 	}
 
 	@Override

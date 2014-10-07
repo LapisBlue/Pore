@@ -19,12 +19,12 @@ public class EventPipelineHandler {
 	@SpongeEventHandler
 	public void onChunkLoad(ChunkLoadEvent event) { //TODO: instanceof WorldEvent according to Bukkit, but not Sponge
 		//TODO: fix second argument when Sponge makes it possible
-		Bukkit.getPluginManager().callEvent(new org.bukkit.event.world.ChunkLoadEvent(new PoreChunk(event.getChunk()), false));
+		Bukkit.getPluginManager().callEvent(new org.bukkit.event.world.ChunkLoadEvent(PoreChunk.of(event.getChunk()), false));
 	}
 
 	@SpongeEventHandler
 	public void onChunkUnload(ChunkUnloadEvent event) {
-		Bukkit.getPluginManager().callEvent(new org.bukkit.event.world.ChunkUnloadEvent(new PoreChunk(event.getChunk())));
+		Bukkit.getPluginManager().callEvent(new org.bukkit.event.world.ChunkUnloadEvent(PoreChunk.of(event.getChunk())));
 	}
 
 	@SpongeEventHandler

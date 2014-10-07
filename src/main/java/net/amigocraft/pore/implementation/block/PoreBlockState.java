@@ -22,7 +22,7 @@ public class PoreBlockState implements BlockState {
 
 	@Override
 	public Block getBlock() {
-		return new PoreBlock(handle);
+		return PoreBlock.of(handle);
 	}
 
 	@Override

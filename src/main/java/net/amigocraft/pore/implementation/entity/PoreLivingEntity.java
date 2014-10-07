@@ -4,6 +4,9 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -15,14 +18,19 @@ import java.util.List;
 
 //TODO: bridge
 
-//TODO: bridge
-
 public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
-	private org.spongepowered.api.entity.LivingEntity handle;
-
-	public PoreLivingEntity(org.spongepowered.api.entity.LivingEntity handle) {
+	protected PoreLivingEntity(org.spongepowered.api.entity.LivingEntity handle){
 		super(handle);
+	}
+
+	public static PoreLivingEntity of(org.spongepowered.api.entity.Entity handle){
+		if (handle instanceof org.spongepowered.api.entity.LivingEntity){
+			return (PoreLivingEntity)PoreEntity.of(handle);
+		}
+		else {
+			throw new IllegalArgumentException();
+		}
 	}
 
 	@Override
@@ -230,16 +238,14 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 		return false;
 	}
 
-	// Overrided from Damageable
-
 	@Override
 	public void damage(double amount) {
-		((org.spongepowered.api.entity.LivingEntity) getHandle()).damage(amount);
+		((LivingEntity)handle).damage(amount);
 	}
 
 	@Override
 	public void _INVALID_damage(int amount) {
-		((org.spongepowered.api.entity.LivingEntity) getHandle()).damage((double) amount);
+		((LivingEntity)handle).damage((double) amount);
 	}
 
 	@Override
@@ -254,22 +260,22 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public double getHealth() {
-		return ((org.spongepowered.api.entity.LivingEntity) getHandle()).getHealth();
+		return ((LivingEntity)handle).getHealth();
 	}
 
 	@Override
 	public int _INVALID_getHealth() {
-		return (int) ((org.spongepowered.api.entity.LivingEntity) getHandle()).getHealth();
+		return (int)((LivingEntity)handle).getHealth();
 	}
 
 	@Override
 	public void setHealth(double health) {
-		((org.spongepowered.api.entity.LivingEntity) getHandle()).setHealth(health);
+		((LivingEntity)handle).setHealth(health);
 	}
 
 	@Override
 	public void _INVALID_setHealth(int health) {
-		((org.spongepowered.api.entity.LivingEntity) getHandle()).setHealth(health);
+		((LivingEntity)handle).setHealth(health);
 	}
 
 	@Override
