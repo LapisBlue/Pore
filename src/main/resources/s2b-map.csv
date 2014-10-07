@@ -1,0 +1,6 @@
+# This file is a part of Pore, licensed under the MIT License.
+# Maps should be listed in order of descending specificness (e.g. LivingEntity should be above Entity)
+org.spongepowered.api.entity.Player,org.bukkit.entity.Player
+org.spongepowered.api.entity.HumanEntity,org.bukkit.entity.HumanEntity
+org.spongepowered.api.entity.LivingEntity,org.bukkit.entity.LivingEntity
+org.spongepowered.api.entity.Entity,org.bukkit.entity.Entity
