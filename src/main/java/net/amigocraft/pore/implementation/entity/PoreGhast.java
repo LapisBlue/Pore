@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ghast;
 
 public class PoreGhast extends PoreFlying implements Ghast {
@@ -11,6 +12,11 @@ public class PoreGhast extends PoreFlying implements Ghast {
 
 	public static PoreGhast of(org.spongepowered.api.entity.Entity handle){
 		return (PoreGhast)PoreFlying.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.GHAST;
 	}
 
 }

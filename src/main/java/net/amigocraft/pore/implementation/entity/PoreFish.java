@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fish;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.projectiles.ProjectileSource;
@@ -16,6 +17,11 @@ public class PoreFish extends PoreAbstractProjectile implements Fish {
 
 	public static PoreFish of(org.spongepowered.api.entity.Entity handle){
 		return (PoreFish)PoreAbstractProjectile.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.FISHING_HOOK;
 	}
 
 	@Override

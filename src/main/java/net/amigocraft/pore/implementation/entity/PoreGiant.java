@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Giant;
 
 public class PoreGiant extends PoreMonster implements Giant {
@@ -11,6 +12,11 @@ public class PoreGiant extends PoreMonster implements Giant {
 
 	public static PoreGiant of(org.spongepowered.api.entity.Entity handle){
 		return (PoreGiant)PoreMonster.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.GIANT;
 	}
 
 }

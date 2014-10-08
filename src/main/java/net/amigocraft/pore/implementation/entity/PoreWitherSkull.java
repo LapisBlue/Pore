@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.WitherSkull;
 
 public class PoreWitherSkull extends PoreFireball implements WitherSkull {
@@ -12,6 +13,11 @@ public class PoreWitherSkull extends PoreFireball implements WitherSkull {
 
 	public static PoreWitherSkull of(org.spongepowered.api.entity.Entity handle){
 		return (PoreWitherSkull)PoreFireball.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.WITHER_SKULL;
 	}
 
 	@Override

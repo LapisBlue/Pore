@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Slime;
 
 public class PoreSlime extends PoreLivingEntity implements Slime {
@@ -14,6 +15,11 @@ public class PoreSlime extends PoreLivingEntity implements Slime {
 
 	public static PoreSlime of(org.spongepowered.api.entity.Entity handle){
 		return (PoreSlime)PoreLivingEntity.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.SLIME;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
 
 public class PoreExperienceOrb extends PoreEntity implements ExperienceOrb {
@@ -14,6 +15,11 @@ public class PoreExperienceOrb extends PoreEntity implements ExperienceOrb {
 
 	public static PoreExperienceOrb of(org.spongepowered.api.entity.Entity handle){
 		return (PoreExperienceOrb)PoreEntity.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.EXPERIENCE_ORB;
 	}
 
 	@Override

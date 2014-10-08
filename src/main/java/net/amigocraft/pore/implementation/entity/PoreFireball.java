@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.projectiles.ProjectileSource;
@@ -17,6 +18,11 @@ public class PoreFireball extends PoreAbstractProjectile implements Fireball {
 
 	public static PoreFireball of(org.spongepowered.api.entity.Entity handle){
 		return (PoreFireball)PoreAbstractProjectile.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.FIREBALL;
 	}
 
 	@Override

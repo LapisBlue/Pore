@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ocelot;
 
 public class PoreOcelot extends PoreTameableAnimal implements Ocelot {
@@ -14,6 +15,11 @@ public class PoreOcelot extends PoreTameableAnimal implements Ocelot {
 
 	public static PoreOcelot of(org.spongepowered.api.entity.Entity handle){
 		return (PoreOcelot)PoreTameableAnimal.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.OCELOT;
 	}
 
 	@Override

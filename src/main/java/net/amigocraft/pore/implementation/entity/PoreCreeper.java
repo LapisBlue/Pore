@@ -2,7 +2,7 @@ package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Creeper;
-import org.spongepowered.api.component.attribute.Powerable;
+import org.bukkit.entity.EntityType;
 
 public class PoreCreeper extends PoreMonster implements Creeper {
 
@@ -15,6 +15,11 @@ public class PoreCreeper extends PoreMonster implements Creeper {
 
 	public static PoreCreeper of(org.spongepowered.api.entity.Entity handle){
 		return (PoreCreeper)PoreMonster.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.CREEPER;
 	}
 
 	@Override

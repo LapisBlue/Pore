@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ThrownExpBottle;
 
 public class PoreThrownExpBottle extends PoreProjectile implements ThrownExpBottle {
@@ -11,6 +12,11 @@ public class PoreThrownExpBottle extends PoreProjectile implements ThrownExpBott
 
 	public static PoreThrownExpBottle of(org.spongepowered.api.entity.Entity handle){
 		return (PoreThrownExpBottle)PoreProjectile.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.THROWN_EXP_BOTTLE;
 	}
 
 }

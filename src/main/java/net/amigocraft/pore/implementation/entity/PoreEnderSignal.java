@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity;
 
 import org.bukkit.entity.EnderSignal;
+import org.bukkit.entity.EntityType;
 
 public class PoreEnderSignal extends PoreEntity implements EnderSignal {
 
@@ -11,6 +12,11 @@ public class PoreEnderSignal extends PoreEntity implements EnderSignal {
 
 	public static PoreEnderSignal of(org.spongepowered.api.entity.Entity handle){
 		return (PoreEnderSignal)PoreEntity.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.ENDER_SIGNAL;
 	}
 
 }

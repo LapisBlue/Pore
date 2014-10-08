@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
 
@@ -15,6 +16,11 @@ public class PoreFirework extends PoreEntity implements Firework {
 
 	public static PoreFirework of(org.spongepowered.api.entity.Entity handle){
 		return (PoreFirework)PoreEntity.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.FIREWORK;
 	}
 
 	@Override

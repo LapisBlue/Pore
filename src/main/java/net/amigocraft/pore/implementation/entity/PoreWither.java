@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Wither;
 
 public class PoreWither extends PoreMonster implements Wither {
@@ -11,6 +12,11 @@ public class PoreWither extends PoreMonster implements Wither {
 
 	public static PoreWither of(org.spongepowered.api.entity.Entity handle){
 		return (PoreWither)PoreMonster.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.WITHER;
 	}
 
 }

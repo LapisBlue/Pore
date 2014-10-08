@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Snowball;
 
 public class PoreSnowball extends PoreProjectile implements Snowball {
@@ -11,6 +12,11 @@ public class PoreSnowball extends PoreProjectile implements Snowball {
 
 	public static PoreSnowball of(org.spongepowered.api.entity.Entity handle){
 		return (PoreSnowball)PoreProjectile.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.SNOWBALL;
 	}
 
 }

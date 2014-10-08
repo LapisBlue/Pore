@@ -1,7 +1,7 @@
 package net.amigocraft.pore.implementation.entity.minecart;
 
-import net.amigocraft.pore.implementation.entity.PoreMonster;
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.CommandMinecart;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
@@ -21,6 +21,11 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
 
 	public static PoreCommandMinecart of(org.spongepowered.api.entity.Entity handle){
 		return (PoreCommandMinecart)PoreMinecart.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.MINECART_COMMAND;
 	}
 
 	@Override

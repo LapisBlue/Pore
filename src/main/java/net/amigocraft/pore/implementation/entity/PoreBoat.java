@@ -2,6 +2,7 @@ package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Boat;
+import org.bukkit.entity.EntityType;
 
 public class PoreBoat extends PoreVehicle implements Boat {
 
@@ -14,6 +15,11 @@ public class PoreBoat extends PoreVehicle implements Boat {
 
 	public static PoreBoat of(org.spongepowered.api.entity.Entity handle){
 		return (PoreBoat)PoreVehicle.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.BOAT;
 	}
 
 	@Override

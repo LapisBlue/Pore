@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity.minecart;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.inventory.Inventory;
 
@@ -15,6 +16,11 @@ public class PoreStorageMinecart extends PoreMinecart implements StorageMinecart
 
 	public static PoreStorageMinecart of(org.spongepowered.api.entity.Entity handle){
 		return (PoreStorageMinecart) PoreMinecart.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.MINECART_CHEST;
 	}
 
 	@Override

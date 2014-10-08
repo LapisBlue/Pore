@@ -2,6 +2,7 @@ package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.AnimalTamer;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.inventory.HorseInventory;
 
@@ -16,6 +17,11 @@ public class PoreHorse extends PoreAnimals implements Horse {
 
 	public static PoreHorse of(org.spongepowered.api.entity.Entity handle){
 		return (PoreHorse)PoreAnimals.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.HORSE;
 	}
 
 	@Override

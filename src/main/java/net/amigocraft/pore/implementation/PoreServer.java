@@ -8,7 +8,6 @@ import net.amigocraft.pore.util.Cache;
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.Validate;
 import org.bukkit.*;
-import org.bukkit.World;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -39,8 +38,8 @@ public class PoreServer implements Server {
 
 	protected org.spongepowered.api.Game handle;
 
-	private PluginManager pluginManager;
-	private File pluginsDir = new File(".", "bukkit-plugins"); //TODO: use actual server directory, currently set to working directory
+	private final PluginManager pluginManager;
+	private final File pluginsDir = new File(".", "bukkit-plugins"); //TODO: use actual server directory, currently set to working directory
 
 	private static final Cache<org.spongepowered.api.Game, PoreServer> CACHE = new Cache<org.spongepowered.api.Game, PoreServer>() {
 		@Override

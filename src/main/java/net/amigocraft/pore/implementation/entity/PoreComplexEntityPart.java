@@ -3,6 +3,7 @@ package net.amigocraft.pore.implementation.entity;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.ComplexEntityPart;
 import org.bukkit.entity.EnderDragon;
+import org.bukkit.entity.EntityType;
 
 public class PoreComplexEntityPart extends PoreEntity implements ComplexEntityPart {
 
@@ -15,6 +16,11 @@ public class PoreComplexEntityPart extends PoreEntity implements ComplexEntityPa
 
 	public static PoreComplexEntityPart of(org.spongepowered.api.entity.Entity handle){
 		return (PoreComplexEntityPart)PoreEntity.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.COMPLEX_PART;
 	}
 
 	@Override

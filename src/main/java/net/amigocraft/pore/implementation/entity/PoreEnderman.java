@@ -2,6 +2,7 @@ package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Enderman;
+import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
 
 public class PoreEnderman extends PoreMonster implements Enderman {
@@ -15,6 +16,11 @@ public class PoreEnderman extends PoreMonster implements Enderman {
 
 	public static PoreEnderman of(org.spongepowered.api.entity.LivingEntity handle){
 		return (PoreEnderman)PoreMonster.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.ENDERMAN;
 	}
 
 	@Override

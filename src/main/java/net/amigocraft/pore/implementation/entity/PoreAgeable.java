@@ -2,7 +2,6 @@ package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Ageable;
-import org.spongepowered.api.entity.LivingEntity;
 
 public class PoreAgeable extends PoreCreature implements Ageable {
 

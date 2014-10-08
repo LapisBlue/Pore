@@ -2,6 +2,7 @@ package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Art;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Painting;
 
 public class PorePainting extends PoreHanging implements Painting {
@@ -15,6 +16,11 @@ public class PorePainting extends PoreHanging implements Painting {
 
 	public static PorePainting of(org.spongepowered.api.entity.Entity handle){
 		return (PorePainting)PoreHanging.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.PAINTING;
 	}
 
 	@Override

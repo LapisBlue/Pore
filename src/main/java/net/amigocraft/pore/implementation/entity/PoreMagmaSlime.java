@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.MagmaCube;
 
 public class PoreMagmaSlime extends PoreSlime implements MagmaCube {
@@ -11,6 +12,11 @@ public class PoreMagmaSlime extends PoreSlime implements MagmaCube {
 
 	public static PoreMagmaSlime of(org.spongepowered.api.entity.Entity handle){
 		return (PoreMagmaSlime)PoreSlime.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.MAGMA_CUBE;
 	}
 
 }

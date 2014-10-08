@@ -2,6 +2,7 @@ package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Rotation;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.inventory.ItemStack;
 
@@ -16,6 +17,11 @@ public class PoreItemFrame extends PoreHanging implements ItemFrame {
 
 	public static PoreItemFrame of(org.spongepowered.api.entity.Entity handle){
 		return (PoreItemFrame)PoreHanging.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.ITEM_FRAME;
 	}
 
 	@Override

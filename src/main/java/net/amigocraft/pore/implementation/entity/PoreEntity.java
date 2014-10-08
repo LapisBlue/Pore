@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import net.amigocraft.pore.Main;
 import net.amigocraft.pore.implementation.metadata.PoreMetadatable;
 import net.amigocraft.pore.util.*;
 import org.apache.commons.lang.NotImplementedException;
@@ -15,6 +16,7 @@ import org.spongepowered.api.component.attribute.Flammable;
 import org.spongepowered.api.component.attribute.Movable;
 import org.spongepowered.api.util.Identifiable;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,11 +24,29 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 
 	protected org.spongepowered.api.entity.Entity handle;
 
+	private static CsvMap map = new CsvMap();
+
+	static {
+		try {
+			map.load(PoreEntity.class.getResourceAsStream("s2b-map.csv"), "s2b-map.csv");
+		}
+		catch (IOException ex){
+			ex.printStackTrace();
+			Main.logger.fatal("Failed to load entity class mappings!");
+		}
+	}
+
 	private static final Cache<org.spongepowered.api.entity.Entity, PoreEntity> CACHE = new Cache<org.spongepowered.api.entity.Entity, PoreEntity>() {
 		@Override
 		protected PoreEntity construct(org.spongepowered.api.entity.Entity spongeObject) {
-			PoreEntity wrapper = new PoreEntity(spongeObject);
-			return wrapper;
+			try {
+				return (PoreEntity)Class.forName(map.get(spongeObject.getClass().getCanonicalName().replace(".", "/")))
+						.getMethod("of", org.spongepowered.api.entity.Entity.class).invoke(spongeObject);
+			}
+			catch (Exception ex) {
+				PoreEntity wrapper = new PoreEntity(spongeObject);
+				return wrapper;
+			}
 		}
 	};
 
@@ -228,7 +248,7 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 
 	@Override
 	public EntityType getType() {
-		throw new NotImplementedException();
+		return EntityType.UNKNOWN; // this will almost always be overridden
 	}
 
 	@Override

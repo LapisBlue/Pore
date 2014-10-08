@@ -1,7 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
 import org.bukkit.entity.Ambient;
-import org.spongepowered.api.entity.LivingEntity;
 
 public class PoreAmbient extends PoreLivingEntity implements Ambient {
 

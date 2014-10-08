@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Spider;
 
 public class PoreSpider extends PoreMonster implements Spider {
@@ -11,6 +12,11 @@ public class PoreSpider extends PoreMonster implements Spider {
 
 	public static PoreSpider of(org.spongepowered.api.entity.Entity handle){
 		return (PoreSpider)PoreMonster.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.SPIDER;
 	}
 
 }

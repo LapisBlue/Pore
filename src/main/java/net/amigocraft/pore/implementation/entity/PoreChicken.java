@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity;
 
 import org.bukkit.entity.Chicken;
+import org.bukkit.entity.EntityType;
 
 public class PoreChicken extends PoreAnimals implements Chicken {
 
@@ -11,6 +12,11 @@ public class PoreChicken extends PoreAnimals implements Chicken {
 
 	public static PoreChicken of(org.spongepowered.api.entity.Entity handle){
 		return (PoreChicken)PoreAnimals.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.CHICKEN;
 	}
 
 }

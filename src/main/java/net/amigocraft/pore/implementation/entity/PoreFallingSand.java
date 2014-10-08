@@ -2,6 +2,7 @@ package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingSand;
 
 public class PoreFallingSand extends PoreEntity implements FallingSand {
@@ -13,6 +14,11 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
 
 	public static PoreFallingSand of(org.spongepowered.api.entity.Entity handle){
 		return (PoreFallingSand)PoreEntity.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.FALLING_BLOCK;
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Weather;
 
 public class PoreWeather extends PoreEntity implements Weather {
@@ -13,6 +14,11 @@ public class PoreWeather extends PoreEntity implements Weather {
 
 	public static PoreWeather of(org.spongepowered.api.entity.Entity handle){
 			return (PoreWeather)PoreEntity.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.WEATHER;
 	}
 
 }

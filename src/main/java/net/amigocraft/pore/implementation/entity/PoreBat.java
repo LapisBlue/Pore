@@ -2,6 +2,7 @@ package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Bat;
+import org.bukkit.entity.EntityType;
 
 public class PoreBat extends PoreAmbient implements Bat {
 
@@ -14,6 +15,11 @@ public class PoreBat extends PoreAmbient implements Bat {
 
 	public static PoreBat of(org.spongepowered.api.entity.Entity handle){
 		return (PoreBat)PoreAmbient.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.BAT;
 	}
 
 	@Override

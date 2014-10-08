@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.IronGolem;
 
 public class PoreIronGolem extends PoreGolem implements IronGolem {
@@ -14,6 +15,11 @@ public class PoreIronGolem extends PoreGolem implements IronGolem {
 
 	public static PoreIronGolem of(org.spongepowered.api.entity.Entity handle){
 		return (PoreIronGolem)PoreGolem.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.IRON_GOLEM;
 	}
 
 	@Override

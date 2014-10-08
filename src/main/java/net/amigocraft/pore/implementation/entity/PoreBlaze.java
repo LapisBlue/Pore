@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity;
 
 import org.bukkit.entity.Blaze;
+import org.bukkit.entity.EntityType;
 
 public class PoreBlaze extends PoreMonster implements Blaze {
 
@@ -11,6 +12,11 @@ public class PoreBlaze extends PoreMonster implements Blaze {
 
 	public static PoreBlaze of(org.spongepowered.api.entity.Entity handle){
 		return (PoreBlaze)PoreMonster.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.BLAZE;
 	}
 
 }

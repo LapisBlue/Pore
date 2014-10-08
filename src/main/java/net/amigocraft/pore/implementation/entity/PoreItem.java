@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 
@@ -15,6 +16,11 @@ public class PoreItem extends PoreEntity implements Item {
 
 	public static PoreItem of(org.spongepowered.api.entity.Entity handle){
 		return (PoreItem)PoreEntity.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.DROPPED_ITEM;
 	}
 
 	@Override

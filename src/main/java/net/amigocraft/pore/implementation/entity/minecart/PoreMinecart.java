@@ -2,6 +2,7 @@ package net.amigocraft.pore.implementation.entity.minecart;
 
 import net.amigocraft.pore.implementation.entity.PoreVehicle;
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Minecart;
 import org.bukkit.util.Vector;
 
@@ -16,6 +17,11 @@ public class PoreMinecart extends PoreVehicle implements Minecart {
 
 	public static PoreMinecart of(org.spongepowered.api.entity.Entity handle){
 		return (PoreMinecart)PoreVehicle.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.MINECART;
 	}
 
 	@Override

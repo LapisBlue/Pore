@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.PigZombie;
 
 public class PorePigZombie extends PoreZombie implements PigZombie {
@@ -14,6 +15,11 @@ public class PorePigZombie extends PoreZombie implements PigZombie {
 
 	public static PorePigZombie of(org.spongepowered.api.entity.Entity handle){
 		return (PorePigZombie)PoreZombie.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.PIG_ZOMBIE;
 	}
 
 	@Override

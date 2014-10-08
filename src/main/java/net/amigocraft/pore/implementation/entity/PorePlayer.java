@@ -35,6 +35,11 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 	}
 
 	@Override
+	public EntityType getType(){
+		return EntityType.PLAYER;
+	}
+
+	@Override
 	public String getDisplayName() {
 		return ((org.spongepowered.api.entity.Player)handle).getDisplayName();
 	}

@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
 
 public class PoreVillager extends PoreAgeable implements Villager {
@@ -14,6 +15,11 @@ public class PoreVillager extends PoreAgeable implements Villager {
 
 	public static PoreVillager of(org.spongepowered.api.entity.Entity handle){
 		return (PoreVillager)PoreAgeable.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.VILLAGER;
 	}
 
 	@Override

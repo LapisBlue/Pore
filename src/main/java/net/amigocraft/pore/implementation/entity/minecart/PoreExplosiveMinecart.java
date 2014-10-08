@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity.minecart;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.ExplosiveMinecart;
 
 public class PoreExplosiveMinecart extends PoreMinecart implements ExplosiveMinecart {
@@ -11,6 +12,11 @@ public class PoreExplosiveMinecart extends PoreMinecart implements ExplosiveMine
 
 	public static PoreExplosiveMinecart of(org.spongepowered.api.entity.Entity handle){
 		return (PoreExplosiveMinecart)PoreMinecart.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.MINECART_TNT;
 	}
 
 }

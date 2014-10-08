@@ -2,6 +2,7 @@ package net.amigocraft.pore.implementation.entity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.DyeColor;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Wolf;
 
 public class PoreWolf extends PoreTameableAnimal implements Wolf {
@@ -15,6 +16,11 @@ public class PoreWolf extends PoreTameableAnimal implements Wolf {
 
 	public static PoreWolf of(org.spongepowered.api.entity.Entity handle){
 		return (PoreWolf)PoreTameableAnimal.of(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.WOLF;
 	}
 
 	@Override
