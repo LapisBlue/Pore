@@ -13,7 +13,7 @@ public class PoreConversable implements Conversable {
 
 	@Override
 	public boolean isConversing() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class PoreConversable implements Conversable {
 
 	@Override
 	public boolean beginConversation(Conversation conversation) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

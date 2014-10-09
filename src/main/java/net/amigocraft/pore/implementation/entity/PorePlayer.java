@@ -20,7 +20,6 @@ import java.util.UUID;
 
 public class PorePlayer extends PoreHumanEntity implements Player {
 
-	//TODO: make constructor as specific as possible
 	protected PorePlayer(org.spongepowered.api.entity.Player handle){
 		super(handle);
 	}
@@ -76,7 +75,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean isConversing() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -86,7 +85,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean beginConversation(Conversation conversation) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -116,12 +115,12 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean performCommand(String command) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isSneaking() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -131,7 +130,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean isSprinting() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -156,7 +155,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean isSleepingIgnored() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -196,7 +195,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean sendChunkChange(Location loc, int sx, int sy, int sz, byte[] data) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -231,7 +230,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean hasAchievement(Achievement achievement) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -261,7 +260,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public int getStatistic(Statistic statistic) throws IllegalArgumentException {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -276,7 +275,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public int getStatistic(Statistic statistic, Material material) throws IllegalArgumentException {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -306,7 +305,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public int getStatistic(Statistic statistic, EntityType entityType) throws IllegalArgumentException {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -331,17 +330,17 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public long getPlayerTime() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public long getPlayerTimeOffset() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isPlayerTimeRelative() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -376,7 +375,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public float getExp() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -386,7 +385,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public int getLevel() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -396,7 +395,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public int getTotalExperience() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -406,7 +405,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public float getExhaustion() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -416,7 +415,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public float getSaturation() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -426,7 +425,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public int getFoodLevel() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -436,12 +435,12 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean isOnline() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isBanned() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -451,7 +450,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean isWhitelisted() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -466,17 +465,17 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public long getFirstPlayed() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public long getLastPlayed() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean hasPlayedBefore() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -496,7 +495,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean getAllowFlight() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -516,12 +515,12 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean canSee(Player player) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isFlying() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -541,12 +540,12 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public float getFlySpeed() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public float getWalkSpeed() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -571,7 +570,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean isHealthScaled() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -586,7 +585,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public double getHealthScale() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

@@ -149,12 +149,12 @@ public class PoreServer implements Server {
 
 	@Override
 	public int getPort() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getViewDistance() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -179,22 +179,22 @@ public class PoreServer implements Server {
 
 	@Override
 	public boolean getGenerateStructures() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean getAllowEnd() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean getAllowNether() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean hasWhitelist() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -229,17 +229,17 @@ public class PoreServer implements Server {
 
 	@Override
 	public long getConnectionThrottle() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getTicksPerAnimalSpawns() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getTicksPerMonsterSpawns() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -302,12 +302,12 @@ public class PoreServer implements Server {
 
 	@Override
 	public boolean unloadWorld(String name, boolean save) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean unloadWorld(World world, boolean save) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -352,7 +352,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -362,7 +362,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public boolean addRecipe(Recipe recipe) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -392,7 +392,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public int getSpawnRadius() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -402,22 +402,22 @@ public class PoreServer implements Server {
 
 	@Override
 	public boolean getOnlineMode() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean getAllowFlight() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isHardcore() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean useExactLoginLocation() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -503,7 +503,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public PoreOfflinePlayer[] getOfflinePlayers() {
-		return new PoreOfflinePlayer[0];
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -538,27 +538,27 @@ public class PoreServer implements Server {
 
 	@Override
 	public int getMonsterSpawnLimit() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getAnimalSpawnLimit() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getWaterAnimalSpawnLimit() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getAmbientSpawnLimit() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isPrimaryThread() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -608,7 +608,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public int getIdleTimeout() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Deprecated

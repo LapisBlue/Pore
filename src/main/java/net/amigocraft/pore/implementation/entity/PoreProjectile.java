@@ -40,7 +40,7 @@ public class PoreProjectile extends PoreAbstractProjectile implements Projectile
 
 	@Override
 	public boolean doesBounce() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

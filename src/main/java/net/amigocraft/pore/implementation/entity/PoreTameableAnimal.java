@@ -20,7 +20,7 @@ public class PoreTameableAnimal extends PoreAnimals implements Tameable, Creatur
 
 	@Override
 	public boolean isTamed() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

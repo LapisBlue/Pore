@@ -24,7 +24,7 @@ public class PoreBoat extends PoreVehicle implements Boat {
 
 	@Override
 	public double getMaxSpeed() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class PoreBoat extends PoreVehicle implements Boat {
 
 	@Override
 	public double getOccupiedDeceleration() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class PoreBoat extends PoreVehicle implements Boat {
 
 	@Override
 	public double getUnoccupiedDeceleration() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class PoreBoat extends PoreVehicle implements Boat {
 
 	@Override
 	public boolean getWorkOnLand() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

@@ -25,11 +25,11 @@ public class PoreJukebox extends PoreBlockState implements Jukebox {
 
 	@Override
 	public boolean isPlaying() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean eject() {
-		return false;
+		throw new NotImplementedException();
 	}
 }

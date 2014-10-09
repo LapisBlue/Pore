@@ -17,7 +17,7 @@ public class PorePermissible implements Permissible {
 
 	@Override
 	public boolean isOp() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -27,22 +27,22 @@ public class PorePermissible implements Permissible {
 
 	@Override
 	public boolean isPermissionSet(String name) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isPermissionSet(Permission perm) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean hasPermission(String name) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean hasPermission(Permission perm) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

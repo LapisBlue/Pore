@@ -24,7 +24,7 @@ public class PoreBat extends PoreAmbient implements Bat {
 
 	@Override
 	public boolean isAwake() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

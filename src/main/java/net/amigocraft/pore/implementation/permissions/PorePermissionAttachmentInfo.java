@@ -23,7 +23,7 @@ public class PorePermissionAttachmentInfo {
 	}
 
 	public boolean getValue() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 }

@@ -26,7 +26,7 @@ public class PoreFish extends PoreAbstractProjectile implements Fish {
 
 	@Override
 	public double getBiteChance() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class PoreFish extends PoreAbstractProjectile implements Fish {
 
 	@Override
 	public boolean doesBounce() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

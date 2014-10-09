@@ -26,7 +26,7 @@ public class PoreArrow extends PoreAbstractProjectile implements Arrow {
 
 	@Override
 	public int getKnockbackStrength() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class PoreArrow extends PoreAbstractProjectile implements Arrow {
 
 	@Override
 	public boolean isCritical() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class PoreArrow extends PoreAbstractProjectile implements Arrow {
 
 	@Override
 	public boolean doesBounce() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

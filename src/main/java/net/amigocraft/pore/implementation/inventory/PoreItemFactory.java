@@ -20,17 +20,17 @@ public class PoreItemFactory implements ItemFactory {
 
 	@Override
 	public boolean isApplicable(ItemMeta meta, ItemStack stack) throws IllegalArgumentException {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isApplicable(ItemMeta meta, Material material) throws IllegalArgumentException {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean equals(ItemMeta meta1, ItemMeta meta2) throws IllegalArgumentException {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

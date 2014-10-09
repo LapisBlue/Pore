@@ -35,7 +35,7 @@ public class PoreObjective implements Objective {
 
 	@Override
 	public boolean isModifiable() throws IllegalStateException {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

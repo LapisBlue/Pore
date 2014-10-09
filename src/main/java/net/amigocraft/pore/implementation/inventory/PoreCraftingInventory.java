@@ -15,7 +15,7 @@ public class PoreCraftingInventory extends PoreInventory implements CraftingInve
 
 	@Override
 	public ItemStack[] getMatrix() {
-		return new ItemStack[0];
+		throw new NotImplementedException();
 	}
 
 	@Override

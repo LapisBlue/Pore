@@ -19,47 +19,47 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 
 	@Override
 	public int scheduleSyncDelayedTask(Plugin plugin, Runnable task, long delay) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int scheduleSyncDelayedTask(Plugin plugin, BukkitRunnable task, long delay) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int scheduleSyncDelayedTask(Plugin plugin, Runnable task) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int scheduleSyncDelayedTask(Plugin plugin, BukkitRunnable task) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int scheduleSyncRepeatingTask(Plugin plugin, Runnable task, long delay, long period) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int scheduleSyncRepeatingTask(Plugin plugin, BukkitRunnable task, long delay, long period) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable task, long delay) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int scheduleAsyncDelayedTask(Plugin plugin, Runnable task) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int scheduleAsyncRepeatingTask(Plugin plugin, Runnable task, long delay, long period) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -84,12 +84,12 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 
 	@Override
 	public boolean isCurrentlyRunning(int taskId) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isQueued(int taskId) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

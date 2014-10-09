@@ -27,6 +27,6 @@ public class PoreWitherSkull extends PoreFireball implements WitherSkull {
 
 	@Override
 	public boolean isCharged() {
-		return false;
+		throw new NotImplementedException();
 	}
 }

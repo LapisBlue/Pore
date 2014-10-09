@@ -18,7 +18,7 @@ public class PoreAgeable extends PoreCreature implements Ageable {
 
 	@Override
 	public int getAge() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class PoreAgeable extends PoreCreature implements Ageable {
 
 	@Override
 	public boolean getAgeLock() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -48,12 +48,12 @@ public class PoreAgeable extends PoreCreature implements Ageable {
 
 	@Override
 	public boolean isAdult() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean canBreed() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class PoreFireworkMeta extends PoreItemMeta implements FireworkMeta {
 
 	@Override
 	public int getEffectsSize() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -49,12 +49,12 @@ public class PoreFireworkMeta extends PoreItemMeta implements FireworkMeta {
 
 	@Override
 	public boolean hasEffects() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getPower() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

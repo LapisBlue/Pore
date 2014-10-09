@@ -24,7 +24,7 @@ public class PoreExperienceOrb extends PoreEntity implements ExperienceOrb {
 
 	@Override
 	public int getExperience() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

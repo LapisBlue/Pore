@@ -19,7 +19,7 @@ public class PoreHanging extends PoreEntity implements Hanging {
 
 	@Override
 	public boolean setFacingDirection(BlockFace face, boolean force) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

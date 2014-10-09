@@ -14,7 +14,7 @@ public class PoreSign extends PoreBlockState implements Sign {
 
 	@Override
 	public String[] getLines() {
-		return new String[0];
+		throw new NotImplementedException();
 	}
 
 	@Override

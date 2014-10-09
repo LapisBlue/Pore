@@ -20,12 +20,12 @@ public class PoreInventory implements Inventory {
 
 	@Override
 	public int getSize() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getMaxStackSize() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class PoreInventory implements Inventory {
 
 	@Override
 	public ItemStack[] getContents() {
-		return new ItemStack[0];
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -70,37 +70,37 @@ public class PoreInventory implements Inventory {
 
 	@Override
 	public boolean contains(int materialId) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean contains(Material material) throws IllegalArgumentException {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean contains(ItemStack item) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean contains(int materialId, int amount) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean contains(Material material, int amount) throws IllegalArgumentException {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean contains(ItemStack item, int amount) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean containsAtLeast(ItemStack item, int amount) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -120,22 +120,22 @@ public class PoreInventory implements Inventory {
 
 	@Override
 	public int first(int materialId) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int first(Material material) throws IllegalArgumentException {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int first(ItemStack item) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int firstEmpty() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

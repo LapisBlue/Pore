@@ -15,7 +15,7 @@ public class PoreBrewingStand extends PoreBlockState implements BrewingStand {
 
 	@Override
 	public int getBrewingTime() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

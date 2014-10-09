@@ -25,7 +25,7 @@ public class PoreWolf extends PoreTameableAnimal implements Wolf {
 
 	@Override
 	public boolean isAngry() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class PoreWolf extends PoreTameableAnimal implements Wolf {
 
 	@Override
 	public boolean isSitting() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

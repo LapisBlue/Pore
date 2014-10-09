@@ -12,7 +12,7 @@ public class PoreBukkitTask implements BukkitTask {
 
 	@Override
 	public int getTaskId() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class PoreBukkitTask implements BukkitTask {
 
 	@Override
 	public boolean isSync() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

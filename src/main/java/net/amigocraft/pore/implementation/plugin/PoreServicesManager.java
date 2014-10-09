@@ -60,7 +60,7 @@ public class PoreServicesManager implements ServicesManager {
 
 	@Override
 	public <T> boolean isProvidedFor(Class<T> service) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 }

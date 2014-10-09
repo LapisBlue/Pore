@@ -12,7 +12,7 @@ public class PoreBukkitWorker implements BukkitWorker {
 
 	@Override
 	public int getTaskId() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

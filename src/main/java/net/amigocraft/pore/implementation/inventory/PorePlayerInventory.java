@@ -13,7 +13,7 @@ public class PorePlayerInventory extends PoreInventory implements PlayerInventor
 
 	@Override
 	public ItemStack[] getArmorContents() {
-		return new ItemStack[0];
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class PorePlayerInventory extends PoreInventory implements PlayerInventor
 
 	@Override
 	public int getHeldItemSlot() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class PorePlayerInventory extends PoreInventory implements PlayerInventor
 
 	@Override
 	public int clear(int id, int data) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

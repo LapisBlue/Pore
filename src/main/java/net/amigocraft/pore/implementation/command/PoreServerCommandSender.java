@@ -67,7 +67,7 @@ public class PoreServerCommandSender extends PoreCommandSender implements Comman
 	}
 
 	public boolean isPlayer() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	public Server getServer() {

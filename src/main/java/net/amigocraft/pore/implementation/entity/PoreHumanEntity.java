@@ -48,7 +48,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
 	@Override
 	public boolean setWindowProperty(InventoryView.Property prop, int value) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -103,12 +103,12 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
 	@Override
 	public boolean isSleeping() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getSleepTicks() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -123,32 +123,32 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
 	@Override
 	public boolean isBlocking() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getExpToLevel() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isPermissionSet(String name) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isPermissionSet(Permission perm) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean hasPermission(String name) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean hasPermission(Permission perm) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -188,7 +188,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
 	@Override
 	public boolean isOp() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

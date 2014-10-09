@@ -251,19 +251,28 @@ public class PoreWorld implements World {
 		return entities;
 	}
 
+	//TODO: review the next three methods for correctness
 	@Override
 	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes) {
-		throw new NotImplementedException(); //TODO: will we need to map the entity classes?
+		List<T> entities = new ArrayList<T>();
+		for (Entity e : getEntities()) {
+			for (Class<T> clazz : classes) {
+				if (clazz.isInstance(e)){
+					entities.add((T)e);
+				}
+			}
+		}
+		return entities;
 	}
 
 	@Override
 	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls) {
-		throw new NotImplementedException();
+		return getEntitiesByClass(cls);
 	}
 
 	@Override
 	public Collection<Entity> getEntitiesByClasses(Class<?>... classes) {
-		throw new NotImplementedException();
+		return getEntitiesByClass((Class<Entity>[])classes);
 	}
 
 	@Override
@@ -272,7 +281,7 @@ public class PoreWorld implements World {
 		List<Player> players = new ArrayList<Player>();
 		for (org.spongepowered.api.entity.Entity e : handle.getEntities()){
 			if (e instanceof org.spongepowered.api.entity.Player){
-				players.add(PorePlayer.of((org.spongepowered.api.entity.Player)e));
+				players.add(PorePlayer.of(e));
 			}
 		}
 		return players;

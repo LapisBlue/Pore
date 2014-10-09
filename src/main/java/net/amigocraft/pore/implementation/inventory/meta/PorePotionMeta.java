@@ -15,7 +15,7 @@ public class PorePotionMeta extends PoreItemMeta implements PotionMeta {
 
 	@Override
 	public boolean hasCustomEffects() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -25,27 +25,27 @@ public class PorePotionMeta extends PoreItemMeta implements PotionMeta {
 
 	@Override
 	public boolean addCustomEffect(PotionEffect effect, boolean overwrite) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean removeCustomEffect(PotionEffectType type) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean hasCustomEffect(PotionEffectType type) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean setMainEffect(PotionEffectType type) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean clearCustomEffects() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

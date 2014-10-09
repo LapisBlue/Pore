@@ -35,7 +35,7 @@ public class PoreItem extends PoreEntity implements Item {
 
 	@Override
 	public int getPickupDelay() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

@@ -33,12 +33,12 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public double getEyeHeight() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public double getEyeHeight(boolean ignoreSneaking) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public int getRemainingAir() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public int getMaximumAir() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public int getMaximumNoDamageTicks() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -108,12 +108,12 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public double getLastDamage() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int _INVALID_getLastDamage() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -128,7 +128,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public int getNoDamageTicks() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -143,22 +143,22 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public boolean addPotionEffect(PotionEffect effect) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean addPotionEffect(PotionEffect effect, boolean force) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean addPotionEffects(Collection<PotionEffect> effects) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean hasPotionEffect(PotionEffectType type) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -173,12 +173,12 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public boolean hasLineOfSight(Entity other) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean getRemoveWhenFarAway() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -198,7 +198,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public boolean getCanPickupItems() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -218,12 +218,12 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public boolean isCustomNameVisible() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isLeashed() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -233,7 +233,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public boolean setLeashHolder(Entity holder) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -278,12 +278,12 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public double getMaxHealth() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int _INVALID_getMaxHealth() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

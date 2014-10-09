@@ -28,17 +28,17 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
 
 	@Override
 	public int getBlockId() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public byte getBlockData() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean getDropItem() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

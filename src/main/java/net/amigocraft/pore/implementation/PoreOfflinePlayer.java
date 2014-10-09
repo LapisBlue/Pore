@@ -15,7 +15,7 @@ public class PoreOfflinePlayer implements org.bukkit.OfflinePlayer {
 
 	@Override
 	public boolean isOnline() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class PoreOfflinePlayer implements org.bukkit.OfflinePlayer {
 
 	@Override
 	public boolean isBanned() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class PoreOfflinePlayer implements org.bukkit.OfflinePlayer {
 
 	@Override
 	public boolean isWhitelisted() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -55,17 +55,17 @@ public class PoreOfflinePlayer implements org.bukkit.OfflinePlayer {
 
 	@Override
 	public long getFirstPlayed() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public long getLastPlayed() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean hasPlayedBefore() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class PoreOfflinePlayer implements org.bukkit.OfflinePlayer {
 
 	@Override
 	public boolean isOp() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

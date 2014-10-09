@@ -24,7 +24,7 @@ public class PoreZombie extends PoreMonster implements Zombie {
 
 	@Override
 	public boolean isBaby() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class PoreZombie extends PoreMonster implements Zombie {
 
 	@Override
 	public boolean isVillager() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

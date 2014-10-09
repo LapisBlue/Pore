@@ -42,7 +42,7 @@ public class PoreFireball extends PoreAbstractProjectile implements Fireball {
 
 	@Override
 	public float getYield() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class PoreFireball extends PoreAbstractProjectile implements Fireball {
 
 	@Override
 	public boolean isIncendiary() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class PoreFireball extends PoreAbstractProjectile implements Fireball {
 
 	@Override
 	public boolean doesBounce() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

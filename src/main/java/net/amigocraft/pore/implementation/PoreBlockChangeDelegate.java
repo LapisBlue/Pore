@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.BlockChangeDelegate;
 
 //TODO: skeleton implementation
@@ -8,36 +9,36 @@ public class PoreBlockChangeDelegate implements BlockChangeDelegate {
 
 	@Override
 	public boolean setRawTypeId(int x, int y, int z, int typeId) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean setRawTypeIdAndData(int x, int y, int z, int typeId, int data) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean setTypeId(int x, int y, int z, int typeId) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean setTypeIdAndData(int x, int y, int z, int typeId, int data) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getTypeId(int x, int y, int z) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getHeight() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isEmpty(int x, int y, int z) {
-		return false;
+		throw new NotImplementedException();
 	}
 }

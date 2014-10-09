@@ -50,7 +50,7 @@ public class PoreTeam implements Team {
 
 	@Override
 	public boolean allowFriendlyFire() throws IllegalStateException {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class PoreTeam implements Team {
 
 	@Override
 	public boolean canSeeFriendlyInvisibles() throws IllegalStateException {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class PoreTeam implements Team {
 
 	@Override
 	public int getSize() throws IllegalStateException {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class PoreTeam implements Team {
 
 	@Override
 	public boolean removePlayer(OfflinePlayer player) throws IllegalStateException, IllegalArgumentException {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class PoreTeam implements Team {
 
 	@Override
 	public boolean hasPlayer(OfflinePlayer player) throws IllegalArgumentException, IllegalStateException {
-		return false;
+		throw new NotImplementedException();
 	}
 
 }

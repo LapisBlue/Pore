@@ -7,6 +7,7 @@ import org.bukkit.command.TabExecutor;
 
 import java.util.List;
 
+//TODO: don't think this is implemented in Craftbukkit
 public class PoreTabExecutor implements TabExecutor {
 
 	@Override
@@ -16,7 +17,7 @@ public class PoreTabExecutor implements TabExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 }

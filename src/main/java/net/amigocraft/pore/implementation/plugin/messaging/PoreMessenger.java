@@ -17,7 +17,7 @@ public class PoreMessenger implements Messenger {
 
 	@Override
 	public boolean isReservedChannel(String channel) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -92,17 +92,17 @@ public class PoreMessenger implements Messenger {
 
 	@Override
 	public boolean isRegistrationValid(PluginMessageListenerRegistration registration) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isIncomingChannelRegistered(Plugin plugin, String channel) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isOutgoingChannelRegistered(Plugin plugin, String channel) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

@@ -15,37 +15,37 @@ public class PoreMetadataValue implements MetadataValue {
 
 	@Override
 	public int asInt() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public float asFloat() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public double asDouble() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public long asLong() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public short asShort() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public byte asByte() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean asBoolean() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

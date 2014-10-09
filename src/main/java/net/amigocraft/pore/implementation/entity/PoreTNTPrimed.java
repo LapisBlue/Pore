@@ -30,7 +30,7 @@ public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
 
 	@Override
 	public int getFuseTicks() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
 
 	@Override
 	public float getYield() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -55,6 +55,6 @@ public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
 
 	@Override
 	public boolean isIncendiary() {
-		return false;
+		throw new NotImplementedException();
 	}
 }

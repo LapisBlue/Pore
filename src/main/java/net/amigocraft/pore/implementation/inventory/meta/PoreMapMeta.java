@@ -11,7 +11,7 @@ public class PoreMapMeta extends PoreItemMeta implements MapMeta {
 
 	@Override
 	public boolean isScaling() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

@@ -7,13 +7,11 @@ import java.util.List;
 
 // TODO: bridge
 
-// TODO: bridge
-
 public class PoreBookMeta extends PoreItemMeta implements BookMeta {
 
 	@Override
 	public boolean hasTitle() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -23,12 +21,12 @@ public class PoreBookMeta extends PoreItemMeta implements BookMeta {
 
 	@Override
 	public boolean setTitle(String title) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean hasAuthor() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -43,7 +41,7 @@ public class PoreBookMeta extends PoreItemMeta implements BookMeta {
 
 	@Override
 	public boolean hasPages() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -78,7 +76,7 @@ public class PoreBookMeta extends PoreItemMeta implements BookMeta {
 
 	@Override
 	public int getPageCount() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

@@ -8,7 +8,7 @@ public class PorePressureSensor implements PressureSensor {
 
 	@Override
 	public boolean isPressed() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 }

@@ -21,7 +21,7 @@ public class PoreDispenser extends PoreBlockState implements Dispenser {
 
 	@Override
 	public boolean dispense() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

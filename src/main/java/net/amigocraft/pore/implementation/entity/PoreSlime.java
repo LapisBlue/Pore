@@ -24,7 +24,7 @@ public class PoreSlime extends PoreLivingEntity implements Slime {
 
 	@Override
 	public int getSize() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

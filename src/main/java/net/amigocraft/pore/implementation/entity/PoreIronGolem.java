@@ -24,7 +24,7 @@ public class PoreIronGolem extends PoreGolem implements IronGolem {
 
 	@Override
 	public boolean isPlayerCreated() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

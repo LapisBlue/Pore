@@ -36,17 +36,17 @@ public class PoreMinecart extends PoreVehicle implements Minecart {
 
 	@Override
 	public int _INVALID_getDamage() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public double getDamage() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public double getMaxSpeed() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class PoreMinecart extends PoreVehicle implements Minecart {
 
 	@Override
 	public boolean isSlowWhenEmpty() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

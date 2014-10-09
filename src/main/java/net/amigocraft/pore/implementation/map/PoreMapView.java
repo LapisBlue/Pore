@@ -13,12 +13,12 @@ public class PoreMapView implements MapView {
 
 	@Override
 	public short getId() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isVirtual() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -33,12 +33,12 @@ public class PoreMapView implements MapView {
 
 	@Override
 	public int getCenterX() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getCenterZ() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class PoreMapView implements MapView {
 
 	@Override
 	public boolean removeRenderer(MapRenderer renderer) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 }

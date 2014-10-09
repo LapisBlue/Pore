@@ -34,7 +34,7 @@ public class PoreOcelot extends PoreTameableAnimal implements Ocelot {
 
 	@Override
 	public boolean isSitting() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

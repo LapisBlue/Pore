@@ -24,7 +24,7 @@ public class PoreMetadataStore<T> implements MetadataStore<T> {
 
 	@Override
 	public boolean hasMetadata(T subject, String metadataKey) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

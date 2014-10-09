@@ -30,7 +30,7 @@ public class PoreBanList implements BanList {
 
 	@Override
 	public boolean isBanned(String target) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

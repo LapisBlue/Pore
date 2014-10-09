@@ -11,7 +11,7 @@ public class PoreServerOperator implements ServerOperator {
 
 	@Override
 	public boolean isOp() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

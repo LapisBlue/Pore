@@ -16,7 +16,7 @@ public class PoreSkull extends PoreBlockState implements Skull {
 
 	@Override
 	public boolean hasOwner() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class PoreSkull extends PoreBlockState implements Skull {
 
 	@Override
 	public boolean setOwner(String name) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

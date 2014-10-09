@@ -30,12 +30,12 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public boolean contains(String path) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isSet(String path) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -95,67 +95,67 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public boolean isString(String path) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getInt(String path) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getInt(String path, int def) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isInt(String path) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean getBoolean(String path) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean getBoolean(String path, boolean def) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isBoolean(String path) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public double getDouble(String path) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public double getDouble(String path, double def) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isDouble(String path) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public long getLong(String path) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public long getLong(String path, long def) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isLong(String path) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public boolean isList(String path) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -235,7 +235,7 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public boolean isVector(String path) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -250,7 +250,7 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public boolean isOfflinePlayer(String path) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -265,7 +265,7 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public boolean isItemStack(String path) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -280,7 +280,7 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public boolean isColor(String path) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -290,7 +290,7 @@ public class PoreConfigurationSection implements ConfigurationSection {
 
 	@Override
 	public boolean isConfigurationSection(String path) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

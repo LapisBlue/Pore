@@ -17,7 +17,7 @@ public class PorePrompt implements Prompt {
 
 	@Override
 	public boolean blocksForInput(ConversationContext context) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

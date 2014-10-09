@@ -30,11 +30,11 @@ public class PorePainting extends PoreHanging implements Painting {
 
 	@Override
 	public boolean setArt(Art art) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean setArt(Art art, boolean force) {
-		return false;
+		throw new NotImplementedException();
 	}
 }

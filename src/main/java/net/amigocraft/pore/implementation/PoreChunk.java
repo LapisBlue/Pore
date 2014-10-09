@@ -83,36 +83,36 @@ public class PoreChunk implements Chunk {
 
 	@Override
 	public BlockState[] getTileEntities() {
-		return new BlockState[0];
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isLoaded() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean load(boolean generate) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean load() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean unload(boolean save, boolean safe) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean unload(boolean save) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean unload() {
-		return false;
+		throw new NotImplementedException();
 	}
 }

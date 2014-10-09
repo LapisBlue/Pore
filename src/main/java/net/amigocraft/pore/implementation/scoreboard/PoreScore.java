@@ -29,7 +29,7 @@ public class PoreScore implements Score {
 
 	@Override
 	public int getScore() throws IllegalStateException {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

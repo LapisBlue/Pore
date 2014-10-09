@@ -24,7 +24,7 @@ public class PoreMetadatable implements Metadatable {
 
 	@Override
 	public boolean hasMetadata(String metadataKey) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

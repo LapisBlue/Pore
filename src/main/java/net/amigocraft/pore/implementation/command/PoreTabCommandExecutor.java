@@ -14,7 +14,7 @@ public class PoreTabCommandExecutor implements TabCommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

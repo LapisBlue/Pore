@@ -56,7 +56,7 @@ public class PoreCreatureSpawner extends PoreBlockState implements CreatureSpawn
 
 	@Override
 	public int getDelay() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

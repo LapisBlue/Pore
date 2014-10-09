@@ -34,12 +34,12 @@ public class PoreMapCanvas implements MapCanvas {
 
 	@Override
 	public byte getPixel(int x, int y) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public byte getBasePixel(int x, int y) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

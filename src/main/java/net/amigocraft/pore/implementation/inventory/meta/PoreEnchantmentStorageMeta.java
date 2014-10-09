@@ -11,17 +11,17 @@ import java.util.Map;
 public class PoreEnchantmentStorageMeta extends PoreItemMeta implements EnchantmentStorageMeta {
 	@Override
 	public boolean hasStoredEnchants() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean hasStoredEnchant(Enchantment ench) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getStoredEnchantLevel(Enchantment ench) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -31,17 +31,17 @@ public class PoreEnchantmentStorageMeta extends PoreItemMeta implements Enchantm
 
 	@Override
 	public boolean addStoredEnchant(Enchantment ench, int level, boolean ignoreLevelRestriction) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean removeStoredEnchant(Enchantment ench) throws IllegalArgumentException {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean hasConflictingStoredEnchant(Enchantment ench) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

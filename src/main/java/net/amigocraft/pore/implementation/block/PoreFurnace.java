@@ -15,7 +15,7 @@ public class PoreFurnace extends PoreBlockState implements Furnace {
 
 	@Override
 	public short getBurnTime() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class PoreFurnace extends PoreBlockState implements Furnace {
 
 	@Override
 	public short getCookTime() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override

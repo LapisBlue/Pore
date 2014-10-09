@@ -16,12 +16,12 @@ public class PoreSkullMeta extends PoreItemMeta implements SkullMeta {
 
 	@Override
 	public boolean hasOwner() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean setOwner(String owner) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

@@ -56,7 +56,7 @@ public class PoreHorse extends PoreAnimals implements Horse {
 
 	@Override
 	public boolean isCarryingChest() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class PoreHorse extends PoreAnimals implements Horse {
 
 	@Override
 	public int getDomestication() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class PoreHorse extends PoreAnimals implements Horse {
 
 	@Override
 	public int getMaxDomestication() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class PoreHorse extends PoreAnimals implements Horse {
 
 	@Override
 	public double getJumpStrength() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class PoreHorse extends PoreAnimals implements Horse {
 
 	@Override
 	public boolean isTamed() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

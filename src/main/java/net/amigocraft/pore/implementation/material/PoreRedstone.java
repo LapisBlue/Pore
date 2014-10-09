@@ -8,7 +8,7 @@ public class PoreRedstone implements Redstone {
 
 	@Override
 	public boolean isPowered() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 }

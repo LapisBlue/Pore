@@ -25,7 +25,7 @@ public class PoreSheep extends PoreAnimals implements Sheep {
 
 	@Override
 	public boolean isSheared() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

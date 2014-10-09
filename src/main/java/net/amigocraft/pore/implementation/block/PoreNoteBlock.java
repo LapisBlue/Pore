@@ -21,7 +21,7 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
 
 	@Override
 	public byte getRawNote() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -36,16 +36,16 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
 
 	@Override
 	public boolean play() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean play(byte instrument, byte note) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean play(Instrument instrument, Note note) {
-		return false;
+		throw new NotImplementedException();
 	}
 }

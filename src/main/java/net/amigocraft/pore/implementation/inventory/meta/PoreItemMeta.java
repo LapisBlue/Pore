@@ -13,7 +13,7 @@ public class PoreItemMeta implements ItemMeta {
 
 	@Override
 	public boolean hasDisplayName() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class PoreItemMeta implements ItemMeta {
 
 	@Override
 	public boolean hasLore() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -43,17 +43,17 @@ public class PoreItemMeta implements ItemMeta {
 
 	@Override
 	public boolean hasEnchants() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean hasEnchant(Enchantment ench) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getEnchantLevel(Enchantment ench) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -63,17 +63,17 @@ public class PoreItemMeta implements ItemMeta {
 
 	@Override
 	public boolean addEnchant(Enchantment ench, int level, boolean ignoreLevelRestriction) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean removeEnchant(Enchantment ench) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean hasConflictingEnchant(Enchantment ench) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

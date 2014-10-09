@@ -8,7 +8,7 @@ public class PoreOpenable implements Openable {
 
 	@Override
 	public boolean isOpen() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

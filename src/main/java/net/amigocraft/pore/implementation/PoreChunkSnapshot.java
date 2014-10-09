@@ -12,12 +12,12 @@ public class PoreChunkSnapshot implements ChunkSnapshot {
 
 	@Override
 	public int getX() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getZ() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -27,27 +27,27 @@ public class PoreChunkSnapshot implements ChunkSnapshot {
 
 	@Override
 	public int getBlockTypeId(int x, int y, int z) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getBlockData(int x, int y, int z) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getBlockSkyLight(int x, int y, int z) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getBlockEmittedLight(int x, int y, int z) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getHighestBlockYAt(int x, int z) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -57,22 +57,22 @@ public class PoreChunkSnapshot implements ChunkSnapshot {
 
 	@Override
 	public double getRawBiomeTemperature(int x, int z) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public double getRawBiomeRainfall(int x, int z) {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public long getCaptureFullTime() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean isSectionEmpty(int sy) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	//TODO: Placeholder class, may just call PoreChunk's methods

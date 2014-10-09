@@ -37,12 +37,12 @@ public class PoreBlockState implements BlockState {
 
 	@Override
 	public int getTypeId() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public byte getLightLevel() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -52,17 +52,17 @@ public class PoreBlockState implements BlockState {
 
 	@Override
 	public int getX() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getY() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getZ() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -92,27 +92,27 @@ public class PoreBlockState implements BlockState {
 
 	@Override
 	public boolean setTypeId(int type) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean update() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean update(boolean force) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public boolean update(boolean force, boolean applyPhysics) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override
 	public byte getRawData() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class PoreBlockState implements BlockState {
 
 	@Override
 	public boolean hasMetadata(String metadataKey) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

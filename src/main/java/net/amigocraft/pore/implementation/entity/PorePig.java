@@ -24,7 +24,7 @@ public class PorePig extends PoreAnimals implements Pig {
 
 	@Override
 	public boolean hasSaddle() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 	@Override

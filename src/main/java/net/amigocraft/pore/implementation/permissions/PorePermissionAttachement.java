@@ -51,7 +51,7 @@ public class PorePermissionAttachement {
 	}
 
 	public boolean remove() {
-		return false;
+		throw new NotImplementedException();
 	}
 
 

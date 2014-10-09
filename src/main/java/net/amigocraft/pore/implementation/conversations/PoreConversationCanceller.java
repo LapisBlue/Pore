@@ -16,7 +16,7 @@ public class PoreConversationCanceller implements ConversationCanceller {
 
 	@Override
 	public boolean cancelBasedOnInput(ConversationContext context, String input) {
-		return false;
+		throw new NotImplementedException();
 	}
 
 

@@ -24,7 +24,7 @@ public class PorePigZombie extends PoreZombie implements PigZombie {
 
 	@Override
 	public int getAnger() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -39,6 +39,6 @@ public class PorePigZombie extends PoreZombie implements PigZombie {
 
 	@Override
 	public boolean isAngry() {
-		return false;
+		throw new NotImplementedException();
 	}
 }

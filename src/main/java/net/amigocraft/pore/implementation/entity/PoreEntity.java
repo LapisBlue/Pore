@@ -24,11 +24,11 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 
 	protected org.spongepowered.api.entity.Entity handle;
 
-	private static CsvMap map = new CsvMap();
+	private static CsvMap typeMap = new CsvMap();
 
 	static {
 		try {
-			map.load(PoreEntity.class.getResourceAsStream("s2b-map.csv"), "s2b-map.csv");
+			typeMap.load(PoreEntity.class.getResourceAsStream("s2b-map.csv"), "s2b-map.csv");
 		}
 		catch (IOException ex){
 			ex.printStackTrace();
@@ -40,7 +40,7 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 		@Override
 		protected PoreEntity construct(org.spongepowered.api.entity.Entity spongeObject) {
 			try {
-				return (PoreEntity)Class.forName(map.get(spongeObject.getClass().getCanonicalName().replace(".", "/")))
+				return (PoreEntity)Class.forName(typeMap.get(spongeObject.getClass().getCanonicalName().replace(".", "/")))
 						.getMethod("of", org.spongepowered.api.entity.Entity.class).invoke(spongeObject);
 			}
 			catch (Exception ex) {
@@ -148,7 +148,12 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 
 	@Override
 	public int getFireTicks() {
-		throw new NotImplementedException();
+		if (handle instanceof Flammable){
+			return ((Flammable)handle).getDuration();
+		}
+		else {
+			throw new UnsupportedOperationException("getFireTicks called on non-flammable entity");
+		}
 	}
 
 	@Override
@@ -162,7 +167,7 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 			((Flammable)handle).setDuration(ticks);
 		}
 		else {
-			throw new UnsupportedOperationException("setFireTicks called on non-flammable entity!");
+			throw new UnsupportedOperationException("setFireTicks called on non-flammable entity");
 		}
 	}
 
@@ -183,7 +188,7 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 
 	@Override
 	public Server getServer() {
-		throw new NotImplementedException();
+		return Bukkit.getServer();
 	}
 
 	@Override

@@ -63,7 +63,7 @@ public class PoreEntityEquipment implements EntityEquipment {
 
 	@Override
 	public ItemStack[] getArmorContents() {
-		return new ItemStack[0];
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class PoreEntityEquipment implements EntityEquipment {
 
 	@Override
 	public float getItemInHandDropChance() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class PoreEntityEquipment implements EntityEquipment {
 
 	@Override
 	public float getHelmetDropChance() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class PoreEntityEquipment implements EntityEquipment {
 
 	@Override
 	public float getChestplateDropChance() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class PoreEntityEquipment implements EntityEquipment {
 
 	@Override
 	public float getLeggingsDropChance() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class PoreEntityEquipment implements EntityEquipment {
 
 	@Override
 	public float getBootsDropChance() {
-		return 0;
+		throw new NotImplementedException();
 	}
 
 	@Override
