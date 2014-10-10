@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.material;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.material.Openable;
 
 //TODO: Bridge
