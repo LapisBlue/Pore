@@ -32,6 +32,7 @@ targetCompatibility = 1.6
 // Read source files using UTF-8
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+    options.deprecation = true
 }
 
 // Project repositories
@@ -77,3 +78,11 @@ shadowJar {
         java = 'SLASHSTAR_STYLE'
     }
 }*/
+
+// Disable tests for SpongeAPI
+project(':SpongeAPI') {
+    //licenseFormat.enabled = false
+    tasks.withType(VerificationTask) {
+        enabled = false
+    }
+}
