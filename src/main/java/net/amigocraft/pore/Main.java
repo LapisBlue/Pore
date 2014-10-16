@@ -40,8 +40,7 @@ public class Main {
 		server = PoreServer.of(event.getGame());
 		Bukkit.setServer(server); // set the Bukkit API to use our server instance
 
-		//TODO: there has to be a better way to do this
-		logger = event.getGame().getPluginManager().getLogger(event.getGame().getPluginManager().getPlugin("pore"));
+		logger = event.getPluginLog();
 
 		logger.info("Loading Bukkit plugins, please wait...");
 
