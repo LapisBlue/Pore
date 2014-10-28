@@ -37,13 +37,13 @@ tasks.withType(JavaCompile) {
 // Project repositories
 repositories {
     mavenCentral()
-    maven { url 'http://repo.amigocraft.net/content/groups/public' }
+    maven { url 'http://repo.lapis.blue/thirdparty' }
 }
 
 // Project dependencies
 dependencies {
     compile project('SpongeAPI') // TODO: Change to Sponge's Maven repo in the future
-    compile 'org.bukkit:bukkit:1.7.10-R0.1-SNAPSHOT'
+    compile 'org.bukkit:bukkit:1.7.10-R0.1'
 
     testCompile 'junit:junit:4.11'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
