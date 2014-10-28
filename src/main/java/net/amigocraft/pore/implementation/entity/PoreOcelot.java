@@ -14,7 +14,7 @@ public class PoreOcelot extends PoreTameableAnimal implements Ocelot {
 	}
 
 	public static PoreOcelot of(org.spongepowered.api.entity.Entity handle){
-		return (PoreOcelot)PoreTameableAnimal.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

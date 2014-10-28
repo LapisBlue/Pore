@@ -15,7 +15,7 @@ public class PoreTameableAnimal extends PoreAnimals implements Tameable, Creatur
 	}
 
 	public static PoreTameableAnimal of(org.spongepowered.api.entity.Entity handle){
-		return (PoreTameableAnimal)PoreAnimals.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

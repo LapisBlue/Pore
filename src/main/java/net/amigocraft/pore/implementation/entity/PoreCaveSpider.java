@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.CaveSpider;
 import org.bukkit.entity.EntityType;
 
@@ -11,7 +12,7 @@ public class PoreCaveSpider extends PoreSpider implements CaveSpider {
 	}
 
 	public static PoreCaveSpider of(org.spongepowered.api.entity.Entity handle){
-		return (PoreCaveSpider)PoreSpider.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

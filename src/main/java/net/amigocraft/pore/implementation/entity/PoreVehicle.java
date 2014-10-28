@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Vehicle;
 
 public abstract class PoreVehicle extends PoreEntity implements Vehicle {
@@ -10,7 +11,7 @@ public abstract class PoreVehicle extends PoreEntity implements Vehicle {
 	}
 
 	public static PoreVehicle of(org.spongepowered.api.entity.Entity handle){
-		return (PoreVehicle)PoreEntity.of(handle);
+		throw new NotImplementedException();
 	}
 
 }

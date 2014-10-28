@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Squid;
 
@@ -11,7 +12,7 @@ public class PoreSquid extends PoreWaterMob implements Squid {
 	}
 
 	public static PoreSquid of(org.spongepowered.api.entity.Entity handle){
-		return (PoreSquid)PoreWaterMob.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

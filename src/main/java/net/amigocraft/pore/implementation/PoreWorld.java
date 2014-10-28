@@ -5,7 +5,8 @@ import net.amigocraft.pore.implementation.block.PoreBlock;
 import net.amigocraft.pore.implementation.entity.PoreEntity;
 import net.amigocraft.pore.implementation.entity.PoreLivingEntity;
 import net.amigocraft.pore.implementation.entity.PorePlayer;
-import net.amigocraft.pore.util.Cache;
+import net.amigocraft.pore.util.Converter;
+import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
 import org.bukkit.Chunk;
@@ -14,31 +15,40 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+import org.spongepowered.api.entity.*;
 import org.spongepowered.api.math.Vectors;
 
 import java.io.File;
 import java.util.*;
 
-public class PoreWorld implements World {
+public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> implements World {
+	private static Converter<org.spongepowered.api.world.World, PoreWorld> converter;
 
-	protected org.spongepowered.api.world.World handle;
-
-	private static final Cache<org.spongepowered.api.world.World, PoreWorld> CACHE = new Cache<org.spongepowered.api.world.World, PoreWorld>() {
-		@Override
-		protected PoreWorld construct(org.spongepowered.api.world.World spongeObject) {
-			PoreWorld wrapper = new PoreWorld(spongeObject);
-			return wrapper;
+	static Converter<org.spongepowered.api.world.World, PoreWorld> getConverter() {
+		if (converter == null) {
+			converter = new Converter<org.spongepowered.api.world.World, PoreWorld>() {
+				@Override
+				protected PoreWorld convert(org.spongepowered.api.world.World handle) {
+					return new PoreWorld(handle);
+				}
+			};
 		}
-	};
 
-	protected PoreWorld(org.spongepowered.api.world.World handle){
-		this.handle = handle;
+		return converter;
+	}
+
+	protected PoreWorld(org.spongepowered.api.world.World handle) {
+		super(handle);
 	}
 
 	/**
@@ -48,12 +58,12 @@ public class PoreWorld implements World {
 	 * @return A Pore wrapper for the given Sponge object.
 	 */
 	public static PoreWorld of(org.spongepowered.api.world.World handle) {
-		return CACHE.get(handle);
+		return getConverter().apply(handle);
 	}
 
 	@Override
 	public Block getBlockAt(int x, int y, int z) {
-		return PoreBlock.of(handle.getBlock(x, y, z));
+		return PoreBlock.of(getHandle().getBlock(x, y, z));
 	}
 
 	@Override
@@ -93,7 +103,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public Chunk getChunkAt(int x, int z) {
-		Optional<org.spongepowered.api.world.Chunk> chunk = handle.getChunk(Vectors.create2i(x, z));
+		Optional<org.spongepowered.api.world.Chunk> chunk = getHandle().getChunk(Vectors.create2i(x, z));
 		return chunk.isPresent() ? PoreChunk.of(chunk.get()) : null;
 	}
 
@@ -139,7 +149,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public boolean loadChunk(int x, int z, boolean generate) {
-		handle.loadChunk(Vectors.create2i(x, z), generate);
+		getHandle().loadChunk(Vectors.create2i(x, z), generate);
 		return true; //TODO
 	}
 
@@ -236,7 +246,7 @@ public class PoreWorld implements World {
 	@Override
 	public List<Entity> getEntities() {
 		List<Entity> entities = new ArrayList<Entity>();
-		for (org.spongepowered.api.entity.Entity e : handle.getEntities()){
+		for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()){
 			entities.add(PoreEntity.of(e));
 		}
 		return entities;
@@ -245,9 +255,9 @@ public class PoreWorld implements World {
 	@Override
 	public List<LivingEntity> getLivingEntities() {
 		List<LivingEntity> entities = new ArrayList<LivingEntity>();
-		for (org.spongepowered.api.entity.Entity e : handle.getEntities()){
+		for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()){
 			if (e instanceof LivingEntity) {
-				entities.add(PoreLivingEntity.of(e));
+				entities.add((LivingEntity) PoreLivingEntity.of(e));
 			}
 		}
 		return entities;
@@ -281,9 +291,9 @@ public class PoreWorld implements World {
 	public List<Player> getPlayers() {
 		//TODO: possibly optimize this
 		List<Player> players = new ArrayList<Player>();
-		for (org.spongepowered.api.entity.Entity e : handle.getEntities()){
+		for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()){
 			if (e instanceof org.spongepowered.api.entity.Player){
-				players.add(PorePlayer.of(e));
+				players.add(PorePlayer.of((org.spongepowered.api.entity.Player) e));
 			}
 		}
 		return players;
@@ -291,12 +301,12 @@ public class PoreWorld implements World {
 
 	@Override
 	public String getName() {
-		return handle.getName();
+		return getHandle().getName();
 	}
 
 	@Override
 	public UUID getUID() {
-		return handle.getUniqueID();
+		return getHandle().getUniqueID();
 	}
 
 	@Override
@@ -547,7 +557,7 @@ public class PoreWorld implements World {
 
 	@Override
 	public File getWorldFolder() {
-		return new File(Bukkit.getWorldContainer(), handle.getName()); //TODO: not sure this will always work
+		return new File(Bukkit.getWorldContainer(), getHandle().getName()); //TODO: not sure this will always work
 	}
 
 	@Override

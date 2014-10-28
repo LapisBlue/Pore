@@ -16,7 +16,7 @@ public class PoreItemFrame extends PoreHanging implements ItemFrame {
 	}
 
 	public static PoreItemFrame of(org.spongepowered.api.entity.Entity handle){
-		return (PoreItemFrame)PoreHanging.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

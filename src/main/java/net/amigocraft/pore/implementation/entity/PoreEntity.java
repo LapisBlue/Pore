@@ -1,7 +1,5 @@
 package net.amigocraft.pore.implementation.entity;
 
-import net.amigocraft.pore.Main;
-import net.amigocraft.pore.implementation.metadata.PoreMetadatable;
 import net.amigocraft.pore.util.*;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
@@ -11,47 +9,37 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.component.attribute.Flammable;
 import org.spongepowered.api.component.attribute.Movable;
+import org.spongepowered.api.entity.LivingEntity;
 import org.spongepowered.api.util.Identifiable;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-public class PoreEntity extends PoreMetadatable implements Entity { //TODO: determine if metadata methods should be implemented manually
+public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity> implements Entity { //TODO: determine if metadata methods should be implemented manually
+	private static Converter<org.spongepowered.api.entity.Entity, PoreEntity> converter;
 
-	protected org.spongepowered.api.entity.Entity handle;
-
-	private static CsvMap typeMap = new CsvMap();
-
-	static {
-		try {
-			typeMap.load(PoreEntity.class.getResourceAsStream("s2b-map.csv"), "s2b-map.csv");
+	public static Converter<org.spongepowered.api.entity.Entity, PoreEntity> getConverter() {
+		if (converter == null) {
+			converter = new ParentConverter<org.spongepowered.api.entity.Entity, PoreEntity>(
+					LivingEntity.class, PoreLivingEntity.getLivingEntityConverter()
+			) {
+				@Override
+				protected PoreEntity convert(org.spongepowered.api.entity.Entity handle) {
+					return new PoreEntity(handle);
+				}
+			};
 		}
-		catch (IOException ex){
-			ex.printStackTrace();
-			Main.logger.fatal("Failed to load entity class mappings!");
-		}
+
+		return converter;
 	}
 
-	private static final Cache<org.spongepowered.api.entity.Entity, PoreEntity> CACHE = new Cache<org.spongepowered.api.entity.Entity, PoreEntity>() {
-		@Override
-		protected PoreEntity construct(org.spongepowered.api.entity.Entity spongeObject) {
-			try {
-				return (PoreEntity)Class.forName(typeMap.get(spongeObject.getClass().getCanonicalName().replace(".", "/")))
-						.getMethod("of", org.spongepowered.api.entity.Entity.class).invoke(spongeObject);
-			}
-			catch (Exception ex) {
-				PoreEntity wrapper = new PoreEntity(spongeObject);
-				return wrapper;
-			}
-		}
-	};
-
 	protected PoreEntity(org.spongepowered.api.entity.Entity handle) {
-		this.handle = handle;
+		super(handle);
 	}
 
 	/**
@@ -61,29 +49,29 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 	 * @return A Pore wrapper for the given Sponge object.
 	 */
 	public static PoreEntity of(org.spongepowered.api.entity.Entity handle) {
-		return CACHE.get(handle);
+		return getConverter().apply(handle);
 	}
 
 	@Override
 	public Location getLocation() {
-		return LocationFactory.fromVector3d(null, handle.getPosition()); //TODO: fix first parameter when possible
+		return LocationFactory.fromVector3d(null, getHandle().getPosition()); //TODO: fix first parameter when possible
 	}
 
 	@Override
 	public Location getLocation(Location loc) {
 		loc.setWorld(null); //TODO: correct parameter when possible
-		loc.setX(handle.getPosition().getX());
-		loc.setY(handle.getPosition().getX());
-		loc.setZ(handle.getPosition().getX());
-		loc.setPitch(handle.getVectorRotation().getX());
-		loc.setYaw(handle.getVectorRotation().getY());
+		loc.setX(getHandle().getPosition().getX());
+		loc.setY(getHandle().getPosition().getX());
+		loc.setZ(getHandle().getPosition().getX());
+		loc.setPitch(getHandle().getVectorRotation().getX());
+		loc.setYaw(getHandle().getVectorRotation().getY());
 		return loc;
 	}
 
 	@Override
 	public void setVelocity(Vector velocity) {
-		if (handle instanceof Movable){
-			((Movable)handle).setVelocity(Vector3fFactory.fromBukkitVector(velocity));
+		if (getHandle() instanceof Movable){
+			((Movable)getHandle()).setVelocity(Vector3fFactory.fromBukkitVector(velocity));
 		}
 		else {
 			throw new UnsupportedOperationException("setVelocity called on an entity which is not movable"); // TODO: figure out the proper exception to throw
@@ -92,8 +80,8 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 
 	@Override
 	public Vector getVelocity() {
-		if (handle instanceof Movable){
-			return BukkitVectorFactory.fromVector3f(((Movable)handle).getVelocity());
+		if (getHandle() instanceof Movable){
+			return BukkitVectorFactory.fromVector3f(((Movable)getHandle()).getVelocity());
 		}
 		else {
 			throw new UnsupportedOperationException("getVelocity called on an entity which is not movable"); // TODO: figure out the proper exception to throw
@@ -121,7 +109,7 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 			return false;
 		}
 		this.eject();
-		handle.setPosition(Vector3dFactory.fromLocation(location));
+		getHandle().setPosition(Vector3dFactory.fromLocation(location));
 		// Craftbukkit apparently does not throw an event when this method is called
 		return true;
 	}
@@ -148,8 +136,8 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 
 	@Override
 	public int getFireTicks() {
-		if (handle instanceof Flammable){
-			return ((Flammable)handle).getDuration();
+		if (getHandle() instanceof Flammable){
+			return ((Flammable)getHandle()).getDuration();
 		}
 		else {
 			throw new UnsupportedOperationException("getFireTicks called on non-flammable entity");
@@ -163,8 +151,8 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 
 	@Override
 	public void setFireTicks(int ticks) {
-		if (handle instanceof Flammable){
-			((Flammable)handle).setDuration(ticks);
+		if (getHandle() instanceof Flammable){
+			((Flammable)getHandle()).setDuration(ticks);
 		}
 		else {
 			throw new UnsupportedOperationException("setFireTicks called on non-flammable entity");
@@ -173,7 +161,7 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 
 	@Override
 	public void remove() {
-		handle.remove();
+		getHandle().remove();
 	}
 
 	@Override
@@ -233,7 +221,7 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 
 	@Override
 	public UUID getUniqueId() {
-		return ((Identifiable)handle).getUniqueId(); //TODO: is this the right way to do this?
+		return ((Identifiable)getHandle()).getUniqueId(); //TODO: is this the right way to do this?
 	}
 
 	@Override
@@ -271,4 +259,23 @@ public class PoreEntity extends PoreMetadatable implements Entity { //TODO: dete
 		throw new NotImplementedException();
 	}
 
+	@Override
+	public void setMetadata(String s, MetadataValue metadataValue) {
+		throw new NotImplementedException();
+	}
+
+	@Override
+	public List<MetadataValue> getMetadata(String s) {
+		throw new NotImplementedException();
+	}
+
+	@Override
+	public boolean hasMetadata(String s) {
+		throw new NotImplementedException();
+	}
+
+	@Override
+	public void removeMetadata(String s, Plugin plugin) {
+		throw new NotImplementedException();
+	}
 }

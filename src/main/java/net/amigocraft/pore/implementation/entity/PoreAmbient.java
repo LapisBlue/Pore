@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Ambient;
 
 public class PoreAmbient extends PoreLivingEntity implements Ambient {
@@ -10,7 +11,7 @@ public class PoreAmbient extends PoreLivingEntity implements Ambient {
 	}
 
 	public static PoreAmbient of(org.spongepowered.api.entity.Entity handle){
-		return (PoreAmbient)PoreLivingEntity.of(handle);
+		throw new NotImplementedException();
 	}
 
 }

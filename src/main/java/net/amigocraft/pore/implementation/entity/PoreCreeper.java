@@ -14,7 +14,7 @@ public class PoreCreeper extends PoreMonster implements Creeper {
 	}
 
 	public static PoreCreeper of(org.spongepowered.api.entity.Entity handle){
-		return (PoreCreeper)PoreMonster.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

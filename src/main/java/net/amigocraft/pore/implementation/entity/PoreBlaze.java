@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Blaze;
 import org.bukkit.entity.EntityType;
 
@@ -11,7 +12,7 @@ public class PoreBlaze extends PoreMonster implements Blaze {
 	}
 
 	public static PoreBlaze of(org.spongepowered.api.entity.Entity handle){
-		return (PoreBlaze)PoreMonster.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

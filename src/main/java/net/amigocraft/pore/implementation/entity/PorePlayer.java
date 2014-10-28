@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import net.amigocraft.pore.util.Converter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
 import org.bukkit.conversations.Conversation;
@@ -19,18 +20,32 @@ import java.util.UUID;
 //TODO: bridge
 
 public class PorePlayer extends PoreHumanEntity implements Player {
+	private static Converter<org.spongepowered.api.entity.Player, PorePlayer> converter;
+
+	static Converter<org.spongepowered.api.entity.Player, PorePlayer> getPlayerConverter() {
+		if (converter == null) {
+			converter = new Converter<org.spongepowered.api.entity.Player, PorePlayer>() {
+				@Override
+				protected PorePlayer convert(org.spongepowered.api.entity.Player handle) {
+					return new PorePlayer(handle);
+				}
+			};
+		}
+
+		return converter;
+	}
 
 	protected PorePlayer(org.spongepowered.api.entity.Player handle){
 		super(handle);
 	}
 
-	public static PorePlayer of(org.spongepowered.api.entity.Entity handle){
-		if (handle instanceof Player) {
-			return (PorePlayer) PoreHumanEntity.of(handle);
-		}
-		else {
-			throw new IllegalArgumentException();
-		}
+	@Override
+	public org.spongepowered.api.entity.Player getHandle() {
+		return (org.spongepowered.api.entity.Player) super.getHandle();
+	}
+
+	public static PorePlayer of(org.spongepowered.api.entity.Player handle) {
+		return getPlayerConverter().apply(handle);
 	}
 
 	@Override
@@ -40,7 +55,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public String getDisplayName() {
-		return ((org.spongepowered.api.entity.Player)handle).getDisplayName();
+		return getHandle().getDisplayName();
 	}
 
 	@Override
@@ -50,7 +65,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public String getPlayerListName() {
-		return ((org.spongepowered.api.entity.Player)handle).getDisplayName(); //TODO: temporary measure
+		return getHandle().getDisplayName(); //TODO: temporary measure
 	}
 
 	@Override
@@ -615,8 +630,8 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public UUID getUniqueId() {
-		if (handle instanceof Identifiable) { // this should never return false, but it checks just in case
-			return ((Identifiable)handle).getUniqueId();
+		if (getHandle() instanceof Identifiable) { // this should never return false, but it checks just in case
+			return ((Identifiable)getHandle()).getUniqueId();
 		}
 		else {
 			throw new UnsupportedOperationException("getUniqueId called on non-identifiable object");

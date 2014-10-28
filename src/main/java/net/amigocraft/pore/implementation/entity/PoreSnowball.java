@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Snowball;
 
@@ -11,7 +12,7 @@ public class PoreSnowball extends PoreProjectile implements Snowball {
 	}
 
 	public static PoreSnowball of(org.spongepowered.api.entity.Entity handle){
-		return (PoreSnowball)PoreProjectile.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

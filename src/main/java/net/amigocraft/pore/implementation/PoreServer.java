@@ -5,7 +5,7 @@ import com.avaje.ebean.config.ServerConfig;
 import com.google.common.base.Optional;
 import net.amigocraft.pore.implementation.entity.PorePlayer;
 
-import net.amigocraft.pore.util.Cache;
+import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.Validate;
 import org.bukkit.*;
@@ -17,70 +17,51 @@ import org.bukkit.inventory.*;
 import org.bukkit.map.MapView;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.ServicesManager;
-import org.bukkit.plugin.SimplePluginManager;
+import org.bukkit.plugin.*;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
+import org.spongepowered.api.Game;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //TODO: skeleton implementation
 
-public class PoreServer implements Server {
-
-	protected org.spongepowered.api.Game handle;
-
+public class PoreServer extends PoreWrapper<Game> implements Server {
 	private final PluginManager pluginManager;
 	private final File pluginsDir = new File(".", "bukkit-plugins"); //TODO: use actual server directory, currently set to working directory
 
-	private static final Cache<org.spongepowered.api.Game, PoreServer> CACHE = new Cache<org.spongepowered.api.Game, PoreServer>() {
-		@Override
-		protected PoreServer construct(org.spongepowered.api.Game spongeObject) {
-			PoreServer wrapper = new PoreServer(spongeObject);
-			return wrapper;
-		}
-	};
-
-	protected PoreServer(org.spongepowered.api.Game handle){
-		this.handle = handle;
+	public PoreServer(org.spongepowered.api.Game handle) {
+		super(handle);
 		this.pluginManager = new SimplePluginManager(this, new SimpleCommandMap(this));
-	}
+		Bukkit.setServer(this);
 
-	/**
-	 * Returns a Pore wrapper for the given handle.
-	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-	 * @param handle The Sponge object to wrap.
-	 * @return A Pore wrapper for the given Sponge object.
-	 */
-	public static PoreServer of(org.spongepowered.api.Game handle) {
-		return CACHE.get(handle);
-	}
-
-	public org.spongepowered.api.Game getHandle() {
-		return handle;
+		getLogger().info("Loading plugins");
+		loadPlugins();
 	}
 	
 	public void loadPlugins() {
 		pluginManager.registerInterface(JavaPluginLoader.class);
-		
-		Plugin[] plugins = pluginManager.loadPlugins(pluginsDir );
-		for (Plugin plugin : plugins) {
-			try {
-				String message = String.format("Loading %s", plugin.getDescription().getFullName());
-				System.out.println(message);
-				plugin.onLoad();
-			} catch (Throwable ex) {
-				System.out.println(ex.getMessage() + " initializing " + plugin.getDescription().getFullName() + " (Is it up to date?)");
+
+		if (pluginsDir.exists()) {
+			Plugin[] plugins = pluginManager.loadPlugins(pluginsDir);
+			for (Plugin plugin : plugins) {
+				try {
+					getLogger().info(String.format("Loading %s", plugin.getDescription().getFullName()));
+					plugin.onLoad();
+				} catch (Throwable ex) {
+					getLogger().log(Level.SEVERE, ex.getMessage() + " initializing " + plugin.getDescription().getFullName() + " (Is it up to date?)", ex);
+				}
 			}
+		} else {
+			pluginsDir.mkdir();
 		}
 	}
 	
@@ -101,7 +82,7 @@ public class PoreServer implements Server {
 		}
 	}
 	
-	public void enablePlugins() {
+	public void enablePlugins(PluginLoadOrder type) { // TODO: Load plugins before or after world loading
 		Plugin[] plugins = pluginManager.getPlugins();
 		for (Plugin plugin : plugins) {
 			if ((!plugin.isEnabled())) {
@@ -121,7 +102,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public String getVersion() {
-		return handle.getImplementationVersion();
+		return getHandle().getImplementationVersion();
 	}
 
 	@Override
@@ -145,7 +126,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public int getMaxPlayers() {
-		return handle.getMaxPlayers();
+		return getHandle().getMaxPlayers();
 	}
 
 	@Override
@@ -268,7 +249,7 @@ public class PoreServer implements Server {
 
 	@Override
 	public Player getPlayer(UUID id) {
-		Optional<org.spongepowered.api.entity.Player> player = handle.getPlayer(id);
+		Optional<org.spongepowered.api.entity.Player> player = getHandle().getPlayer(id);
 		return player.isPresent() ? PorePlayer.of(player.get()) : null;
 	}
 
@@ -290,7 +271,7 @@ public class PoreServer implements Server {
 	@Override
 	public List<World> getWorlds() {
 		List<World> worldList = new ArrayList<World>();
-		for (org.spongepowered.api.world.World w : handle.getWorlds())
+		for (org.spongepowered.api.world.World w : getHandle().getWorlds())
 			worldList.add(PoreWorld.of(w));
 		return worldList;
 	}
@@ -312,12 +293,12 @@ public class PoreServer implements Server {
 
 	@Override
 	public World getWorld(String name) {
-		return PoreWorld.of(handle.getWorld(name));
+		return PoreWorld.of(getHandle().getWorld(name));
 	}
 
 	@Override
 	public World getWorld(UUID uid) {
-		return PoreWorld.of(handle.getWorld(uid));
+		return PoreWorld.of(getHandle().getWorld(uid));
 	}
 
 	@Override

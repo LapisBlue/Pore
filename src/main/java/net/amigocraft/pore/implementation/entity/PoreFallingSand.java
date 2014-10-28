@@ -13,7 +13,7 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
 	}
 
 	public static PoreFallingSand of(org.spongepowered.api.entity.Entity handle){
-		return (PoreFallingSand)PoreEntity.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

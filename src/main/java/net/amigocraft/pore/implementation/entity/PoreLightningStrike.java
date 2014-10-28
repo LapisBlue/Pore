@@ -14,7 +14,7 @@ public class PoreLightningStrike extends PoreEntity implements LightningStrike {
 	}
 
 	public static PoreLightningStrike of(org.spongepowered.api.entity.Entity handle){
-		return (PoreLightningStrike)PoreEntity.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

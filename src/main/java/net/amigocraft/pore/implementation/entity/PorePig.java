@@ -14,7 +14,7 @@ public class PorePig extends PoreAnimals implements Pig {
 	}
 
 	public static PorePig of(org.spongepowered.api.entity.Entity handle){
-		return (PorePig)PoreAnimals.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.EntityType;
 
@@ -11,7 +12,7 @@ public class PoreEgg extends PoreProjectile implements Egg {
 	}
 
 	public static PoreEgg of(org.spongepowered.api.entity.Entity handle){
-		return (PoreEgg)PoreProjectile.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

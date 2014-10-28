@@ -1,10 +1,14 @@
 package net.amigocraft.pore.implementation.entity;
 
+import net.amigocraft.pore.util.Converter;
+import net.amigocraft.pore.util.ParentConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -15,20 +19,34 @@ import java.util.HashSet;
 import java.util.List;
 
 public class PoreLivingEntity extends PoreEntity implements LivingEntity {
+	private static Converter<org.spongepowered.api.entity.LivingEntity, PoreLivingEntity> converter;
 
-	//TODO: bridge
+	static Converter<org.spongepowered.api.entity.LivingEntity, PoreLivingEntity> getLivingEntityConverter() {
+		if (converter == null) {
+			converter = new ParentConverter<org.spongepowered.api.entity.LivingEntity, PoreLivingEntity>(
+					org.spongepowered.api.entity.HumanEntity.class, PoreHumanEntity.getHumanEntityConverter()
+			) {
+				@Override
+				protected PoreLivingEntity convert(org.spongepowered.api.entity.LivingEntity handle) {
+					return new PoreLivingEntity(handle);
+				}
+			};
+		}
 
-	protected PoreLivingEntity(org.spongepowered.api.entity.LivingEntity handle){
+		return converter;
+	}
+
+	protected PoreLivingEntity(org.spongepowered.api.entity.LivingEntity handle) {
 		super(handle);
 	}
 
-	public static PoreLivingEntity of(org.spongepowered.api.entity.Entity handle){
-		if (handle instanceof org.spongepowered.api.entity.LivingEntity){
-			return (PoreLivingEntity)PoreEntity.of(handle);
-		}
-		else {
-			throw new IllegalArgumentException();
-		}
+	@Override
+	public org.spongepowered.api.entity.LivingEntity getHandle() {
+		return (org.spongepowered.api.entity.LivingEntity) super.getHandle();
+	}
+
+	public static PoreLivingEntity of(org.spongepowered.api.entity.LivingEntity handle) {
+		return getLivingEntityConverter().apply(handle);
 	}
 
 	@Override
@@ -238,12 +256,12 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public void damage(double amount) {
-		((LivingEntity)handle).damage(amount);
+		getHandle().damage(amount);
 	}
 
 	@Override
 	public void _INVALID_damage(int amount) {
-		((LivingEntity)handle).damage((double) amount);
+		getHandle().damage((double) amount);
 	}
 
 	@Override
@@ -258,22 +276,22 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public double getHealth() {
-		return ((LivingEntity)handle).getHealth();
+		return getHandle().getHealth();
 	}
 
 	@Override
 	public int _INVALID_getHealth() {
-		return (int)((LivingEntity)handle).getHealth();
+		return (int)getHandle().getHealth();
 	}
 
 	@Override
 	public void setHealth(double health) {
-		((LivingEntity)handle).setHealth(health);
+		getHandle().setHealth(health);
 	}
 
 	@Override
 	public void _INVALID_setHealth(int health) {
-		((LivingEntity)handle).setHealth(health);
+		getHandle().setHealth(health);
 	}
 
 	@Override

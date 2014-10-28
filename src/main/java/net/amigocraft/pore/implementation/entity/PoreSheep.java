@@ -15,7 +15,7 @@ public class PoreSheep extends PoreAnimals implements Sheep {
 	}
 
 	public static PoreSheep of(org.spongepowered.api.entity.Entity handle){
-		return (PoreSheep)PoreAnimals.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

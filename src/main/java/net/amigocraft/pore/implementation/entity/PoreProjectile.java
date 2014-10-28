@@ -15,7 +15,7 @@ public class PoreProjectile extends PoreAbstractProjectile implements Projectile
 	}
 
 	public static PoreProjectile of(org.spongepowered.api.entity.Entity handle){
-		return (PoreProjectile)PoreAbstractProjectile.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

@@ -14,7 +14,7 @@ public class PoreSlime extends PoreLivingEntity implements Slime {
 	}
 
 	public static PoreSlime of(org.spongepowered.api.entity.Entity handle){
-		return (PoreSlime)PoreLivingEntity.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

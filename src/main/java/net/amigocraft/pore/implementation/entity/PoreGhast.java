@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ghast;
 
@@ -11,7 +12,7 @@ public class PoreGhast extends PoreFlying implements Ghast {
 	}
 
 	public static PoreGhast of(org.spongepowered.api.entity.Entity handle){
-		return (PoreGhast)PoreFlying.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

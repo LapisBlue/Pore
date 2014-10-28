@@ -14,7 +14,7 @@ public class PoreHanging extends PoreEntity implements Hanging {
 	}
 
 	public static PoreHanging of(org.spongepowered.api.entity.Entity handle){
-		return (PoreHanging)PoreEntity.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

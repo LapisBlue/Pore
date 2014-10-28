@@ -15,7 +15,7 @@ public class PoreWolf extends PoreTameableAnimal implements Wolf {
 	}
 
 	public static PoreWolf of(org.spongepowered.api.entity.Entity handle){
-		return (PoreWolf)PoreTameableAnimal.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Monster;
 
 public class PoreMonster extends PoreCreature implements Monster {
@@ -10,7 +11,7 @@ public class PoreMonster extends PoreCreature implements Monster {
 	}
 
 	public static PoreMonster of(org.spongepowered.api.entity.Entity handle){
-		return (PoreMonster)PoreCreature.of(handle);
+		throw new NotImplementedException();
 	}
 
 }

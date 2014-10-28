@@ -15,7 +15,7 @@ public class PorePainting extends PoreHanging implements Painting {
 	}
 
 	public static PorePainting of(org.spongepowered.api.entity.Entity handle){
-		return (PorePainting)PoreHanging.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

@@ -15,7 +15,7 @@ public class PoreFirework extends PoreEntity implements Firework {
 	}
 
 	public static PoreFirework of(org.spongepowered.api.entity.Entity handle){
-		return (PoreFirework)PoreEntity.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

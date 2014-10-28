@@ -12,7 +12,7 @@ public class PoreWitherSkull extends PoreFireball implements WitherSkull {
 	}
 
 	public static PoreWitherSkull of(org.spongepowered.api.entity.Entity handle){
-		return (PoreWitherSkull)PoreFireball.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

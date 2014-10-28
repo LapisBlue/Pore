@@ -18,7 +18,7 @@ public class PoreThrownPotion extends PoreProjectile implements ThrownPotion {
 	}
 
 	public static PoreThrownPotion of(org.spongepowered.api.entity.Entity handle){
-		return (PoreThrownPotion)PoreProjectile.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

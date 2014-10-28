@@ -13,7 +13,7 @@ public class PoreAgeable extends PoreCreature implements Ageable {
 	}
 
 	public static PoreAgeable of(org.spongepowered.api.entity.Entity handle){
-		return (PoreAgeable)PoreLivingEntity.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

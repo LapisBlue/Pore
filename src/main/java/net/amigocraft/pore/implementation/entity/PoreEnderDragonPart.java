@@ -14,7 +14,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements EnderD
 	}
 
 	public static PoreEnderDragonPart of(org.spongepowered.api.entity.Entity handle){
-		return (PoreEnderDragonPart)PoreComplexEntityPart.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

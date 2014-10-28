@@ -14,7 +14,7 @@ public class PoreVillager extends PoreAgeable implements Villager {
 	}
 
 	public static PoreVillager of(org.spongepowered.api.entity.Entity handle){
-		return (PoreVillager)PoreAgeable.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

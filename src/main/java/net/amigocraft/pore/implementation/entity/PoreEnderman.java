@@ -15,7 +15,7 @@ public class PoreEnderman extends PoreMonster implements Enderman {
 	}
 
 	public static PoreEnderman of(org.spongepowered.api.entity.LivingEntity handle){
-		return (PoreEnderman)PoreMonster.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

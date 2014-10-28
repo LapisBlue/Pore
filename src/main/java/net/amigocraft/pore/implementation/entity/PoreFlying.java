@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Flying;
 
 public class PoreFlying extends PoreLivingEntity implements Flying {
@@ -10,6 +11,6 @@ public class PoreFlying extends PoreLivingEntity implements Flying {
 	}
 
 	public static PoreFlying of(org.spongepowered.api.entity.Entity handle){
-		return (PoreFlying)PoreLivingEntity.of(handle);
+		throw new NotImplementedException();
 	}
 }

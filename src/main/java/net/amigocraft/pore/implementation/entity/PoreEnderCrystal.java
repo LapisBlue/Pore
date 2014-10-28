@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EnderCrystal;
 import org.bukkit.entity.EntityType;
 
@@ -11,7 +12,7 @@ public class PoreEnderCrystal extends PoreEntity implements EnderCrystal {
 	}
 
 	public static PoreEnderCrystal of(org.spongepowered.api.entity.Entity handle){
-		return (PoreEnderCrystal)PoreEntity.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

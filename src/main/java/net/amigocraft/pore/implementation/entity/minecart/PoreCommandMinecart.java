@@ -20,7 +20,7 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
 	}
 
 	public static PoreCommandMinecart of(org.spongepowered.api.entity.Entity handle){
-		return (PoreCommandMinecart)PoreMinecart.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity.minecart;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.RideableMinecart;
 
@@ -11,7 +12,7 @@ public class PoreRideableMinecart extends PoreMinecart implements RideableMineca
 	}
 
 	public static PoreRideableMinecart of(org.spongepowered.api.entity.Entity handle){
-		return (PoreRideableMinecart) PoreMinecart.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

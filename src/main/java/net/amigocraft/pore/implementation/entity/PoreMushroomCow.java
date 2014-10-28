@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.MushroomCow;
 
@@ -11,7 +12,7 @@ public class PoreMushroomCow extends PoreCow implements MushroomCow {
 	}
 
 	public static PoreMushroomCow of(org.spongepowered.api.entity.Entity handle){
-		return (PoreMushroomCow)PoreCow.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

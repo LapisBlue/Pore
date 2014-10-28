@@ -16,7 +16,7 @@ public class PoreFish extends PoreAbstractProjectile implements Fish {
 	}
 
 	public static PoreFish of(org.spongepowered.api.entity.Entity handle){
-		return (PoreFish)PoreAbstractProjectile.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

@@ -14,7 +14,7 @@ public class PoreCreature extends PoreLivingEntity implements Creature {
 	}
 
 	public static PoreCreature of(org.spongepowered.api.entity.Entity handle){
-		return (PoreCreature)PoreLivingEntity.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.ComplexLivingEntity;
 
 public abstract class PoreComplexLivingEntity extends PoreLivingEntity implements ComplexLivingEntity {
@@ -10,7 +11,7 @@ public abstract class PoreComplexLivingEntity extends PoreLivingEntity implement
 	}
 
 	public static PoreComplexLivingEntity of(org.spongepowered.api.entity.Entity handle){
-		return (PoreComplexLivingEntity)PoreLivingEntity.of(handle);
+		throw new NotImplementedException();
 	}
 
 }

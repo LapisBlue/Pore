@@ -15,7 +15,7 @@ public class PoreHopperMinecart extends PoreMinecart implements HopperMinecart {
 	}
 
 	public static PoreHopperMinecart of(org.spongepowered.api.entity.Entity handle){
-		return (PoreHopperMinecart)PoreMinecart.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

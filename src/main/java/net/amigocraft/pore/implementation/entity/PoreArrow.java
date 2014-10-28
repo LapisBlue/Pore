@@ -16,7 +16,7 @@ public class PoreArrow extends PoreAbstractProjectile implements Arrow {
 	}
 
 	public static PoreArrow of(org.spongepowered.api.entity.Entity handle){
-		return (PoreArrow)PoreAbstractProjectile.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

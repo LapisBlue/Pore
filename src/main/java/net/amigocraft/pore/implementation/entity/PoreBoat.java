@@ -14,7 +14,7 @@ public class PoreBoat extends PoreVehicle implements Boat {
 	}
 
 	public static PoreBoat of(org.spongepowered.api.entity.Entity handle){
-		return (PoreBoat)PoreVehicle.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

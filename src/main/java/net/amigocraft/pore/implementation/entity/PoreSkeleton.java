@@ -14,7 +14,7 @@ public class PoreSkeleton extends PoreMonster implements Skeleton {
 	}
 
 	public static PoreSkeleton of(org.spongepowered.api.entity.Entity handle){
-		return (PoreSkeleton)PoreMonster.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

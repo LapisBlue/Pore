@@ -15,7 +15,7 @@ public class PoreItem extends PoreEntity implements Item {
 	}
 
 	public static PoreItem of(org.spongepowered.api.entity.Entity handle){
-		return (PoreItem)PoreEntity.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

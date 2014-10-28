@@ -15,7 +15,7 @@ public class PoreComplexEntityPart extends PoreEntity implements ComplexEntityPa
 	}
 
 	public static PoreComplexEntityPart of(org.spongepowered.api.entity.Entity handle){
-		return (PoreComplexEntityPart)PoreEntity.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

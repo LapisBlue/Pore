@@ -14,7 +14,7 @@ public class PoreBat extends PoreAmbient implements Bat {
 	}
 
 	public static PoreBat of(org.spongepowered.api.entity.Entity handle){
-		return (PoreBat)PoreAmbient.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

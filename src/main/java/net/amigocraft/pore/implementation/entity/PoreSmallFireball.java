@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.SmallFireball;
 
@@ -11,7 +12,7 @@ public class PoreSmallFireball extends PoreFireball implements SmallFireball {
 	}
 
 	public static PoreSmallFireball of(org.spongepowered.api.entity.Entity handle){
-		return (PoreSmallFireball)PoreFireball.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

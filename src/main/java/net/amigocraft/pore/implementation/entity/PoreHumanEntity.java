@@ -1,5 +1,8 @@
 package net.amigocraft.pore.implementation.entity;
 
+import com.google.common.collect.ImmutableMap;
+import net.amigocraft.pore.util.Converter;
+import net.amigocraft.pore.util.ParentConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -17,22 +20,42 @@ import org.spongepowered.api.entity.Player;
 import java.util.Set;
 
 public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
+	private static Converter<org.spongepowered.api.entity.HumanEntity, PoreHumanEntity> converter;
+
+	static Converter<org.spongepowered.api.entity.HumanEntity, PoreHumanEntity> getHumanEntityConverter() {
+		if (converter == null) {
+			converter = new ParentConverter<org.spongepowered.api.entity.HumanEntity, PoreHumanEntity>(
+					Player.class, PorePlayer.getPlayerConverter()
+			) {
+				@Override
+				protected PoreHumanEntity convert(org.spongepowered.api.entity.HumanEntity handle) {
+					return new PoreHumanEntity(handle);
+				}
+			};
+		}
+
+		return converter;
+	}
 
 	//TODO: bridge
 
-	//TODO: make constructor as specific as possible
-	protected PoreHumanEntity(org.spongepowered.api.entity.LivingEntity handle){
+	protected PoreHumanEntity(org.spongepowered.api.entity.HumanEntity handle) {
 		super(handle);
 	}
 
-	public static PoreHumanEntity of(org.spongepowered.api.entity.Entity handle){
-		return (PoreHumanEntity)PoreLivingEntity.of(handle);
+	@Override
+	public org.spongepowered.api.entity.HumanEntity getHandle() {
+		return (org.spongepowered.api.entity.HumanEntity) super.getHandle();
+	}
+
+	public static PoreHumanEntity of(org.spongepowered.api.entity.HumanEntity handle) {
+		return getHumanEntityConverter().apply(handle);
 	}
 
 	@Override
 	public String getName() {
-		if (handle instanceof Player)
-			return ((Player)handle).getName();
+		if (getHandle() instanceof Player)
+			return ((Player)getHandle()).getName();
 		throw new NotImplementedException();
 	}
 

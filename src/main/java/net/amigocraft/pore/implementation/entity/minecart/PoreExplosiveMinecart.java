@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation.entity.minecart;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.ExplosiveMinecart;
 
@@ -11,7 +12,7 @@ public class PoreExplosiveMinecart extends PoreMinecart implements ExplosiveMine
 	}
 
 	public static PoreExplosiveMinecart of(org.spongepowered.api.entity.Entity handle){
-		return (PoreExplosiveMinecart)PoreMinecart.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

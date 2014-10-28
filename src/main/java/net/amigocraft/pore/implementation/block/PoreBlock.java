@@ -1,6 +1,7 @@
 package net.amigocraft.pore.implementation.block;
 
-import net.amigocraft.pore.util.Cache;
+import net.amigocraft.pore.util.Converter;
+import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -17,20 +18,24 @@ import org.bukkit.plugin.Plugin;
 import java.util.Collection;
 import java.util.List;
 
-public class PoreBlock implements Block {
+public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> implements Block {
+	private static Converter<org.spongepowered.api.block.Block, PoreBlock> converter;
 
-	protected org.spongepowered.api.block.Block handle;
-
-	private static final Cache<org.spongepowered.api.block.Block, PoreBlock> CACHE = new Cache<org.spongepowered.api.block.Block, PoreBlock>() {
-		@Override
-		protected PoreBlock construct(org.spongepowered.api.block.Block spongeObject) {
-			PoreBlock wrapper = new PoreBlock(spongeObject);
-			return wrapper;
+	static Converter<org.spongepowered.api.block.Block, PoreBlock> getConverter() {
+		if (converter == null) {
+			converter = new Converter<org.spongepowered.api.block.Block, PoreBlock>() {
+				@Override
+				protected PoreBlock convert(org.spongepowered.api.block.Block handle) {
+					return new PoreBlock(handle);
+				}
+			};
 		}
-	};
 
-	private PoreBlock(org.spongepowered.api.block.Block handle){
-		this.handle = handle;
+		return converter;
+	}
+
+	private PoreBlock(org.spongepowered.api.block.Block handle) {
+		super(handle);
 	}
 
 	/**
@@ -40,7 +45,7 @@ public class PoreBlock implements Block {
 	 * @return A Pore wrapper for the given Sponge object.
 	 */
 	public static PoreBlock of(org.spongepowered.api.block.Block handle) {
-		return CACHE.get(handle);
+		return getConverter().apply(handle);
 	}
 
 	@Override

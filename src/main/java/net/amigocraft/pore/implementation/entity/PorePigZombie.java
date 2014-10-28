@@ -14,7 +14,7 @@ public class PorePigZombie extends PoreZombie implements PigZombie {
 	}
 
 	public static PorePigZombie of(org.spongepowered.api.entity.Entity handle){
-		return (PorePigZombie)PoreZombie.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

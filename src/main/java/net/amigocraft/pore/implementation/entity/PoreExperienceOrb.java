@@ -14,7 +14,7 @@ public class PoreExperienceOrb extends PoreEntity implements ExperienceOrb {
 	}
 
 	public static PoreExperienceOrb of(org.spongepowered.api.entity.Entity handle){
-		return (PoreExperienceOrb)PoreEntity.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

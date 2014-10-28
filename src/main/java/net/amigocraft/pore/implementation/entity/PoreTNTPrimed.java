@@ -15,7 +15,7 @@ public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
 	}
 
 	public static PoreTNTPrimed of(org.spongepowered.api.entity.Entity handle){
-		return (PoreTNTPrimed)PoreEntity.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

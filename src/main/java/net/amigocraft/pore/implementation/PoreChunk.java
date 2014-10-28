@@ -1,8 +1,10 @@
 package net.amigocraft.pore.implementation;
 
+import com.google.common.collect.Collections2;
 import net.amigocraft.pore.implementation.block.PoreBlock;
 import net.amigocraft.pore.implementation.entity.PoreEntity;
-import net.amigocraft.pore.util.Cache;
+import net.amigocraft.pore.util.Converter;
+import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
@@ -12,24 +14,29 @@ import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 //TODO: skeleton implementation
 
-public class PoreChunk implements Chunk {
+public class PoreChunk extends PoreWrapper<org.spongepowered.api.world.Chunk> implements Chunk {
+	private static Converter<org.spongepowered.api.world.Chunk, PoreChunk> converter;
 
-	protected org.spongepowered.api.world.Chunk handle;
-
-	private static final Cache<org.spongepowered.api.world.Chunk, PoreChunk> CACHE = new Cache<org.spongepowered.api.world.Chunk, PoreChunk>() {
-		@Override
-		protected PoreChunk construct(org.spongepowered.api.world.Chunk spongeObject) {
-			PoreChunk wrapper = new PoreChunk(spongeObject);
-			return wrapper;
+	static Converter<org.spongepowered.api.world.Chunk, PoreChunk> getConverter() {
+		if (converter == null) {
+			converter = new Converter<org.spongepowered.api.world.Chunk, PoreChunk>() {
+				@Override
+				protected PoreChunk convert(org.spongepowered.api.world.Chunk handle) {
+					return new PoreChunk(handle);
+				}
+			};
 		}
-	};
+
+		return converter;
+	}
 
 	protected PoreChunk(org.spongepowered.api.world.Chunk handle){
-		this.handle = handle;
+		super(handle);
 	}
 
 	/**
@@ -39,17 +46,17 @@ public class PoreChunk implements Chunk {
 	 * @return A Pore wrapper for the given Sponge object.
 	 */
 	public static PoreChunk of(org.spongepowered.api.world.Chunk handle) {
-		return CACHE.get(handle);
+		return getConverter().apply(handle);
 	}
 
 	@Override
 	public int getX() {
-		return handle.getPosition().getX();
+		return getHandle().getPosition().getX();
 	}
 
 	@Override
 	public int getZ() {
-		return handle.getPosition().getZ();
+		return getHandle().getPosition().getZ();
 	}
 
 	@Override
@@ -59,7 +66,7 @@ public class PoreChunk implements Chunk {
 
 	@Override
 	public Block getBlock(int x, int y, int z) {
-		return PoreBlock.of(handle.getBlock(x, y, z));
+		return PoreBlock.of(getHandle().getBlock(x, y, z));
 	}
 
 	@Override
@@ -74,11 +81,8 @@ public class PoreChunk implements Chunk {
 
 	@Override
 	public Entity[] getEntities() {
-		List<Entity> entities = new ArrayList<Entity>();
-		for (org.spongepowered.api.entity.Entity e : handle.getEntities()){
-			entities.add(PoreEntity.of(e));
-		}
-		return entities.toArray(new Entity[entities.size()]);
+		Collection<org.spongepowered.api.entity.Entity> entities = getHandle().getEntities();
+		return Collections2.transform(entities, PoreEntity.getConverter()).toArray(new Entity[entities.size()]);
 	}
 
 	@Override

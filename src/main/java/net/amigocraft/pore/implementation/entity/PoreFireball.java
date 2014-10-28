@@ -17,7 +17,7 @@ public class PoreFireball extends PoreAbstractProjectile implements Fireball {
 	}
 
 	public static PoreFireball of(org.spongepowered.api.entity.Entity handle){
-		return (PoreFireball)PoreAbstractProjectile.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override

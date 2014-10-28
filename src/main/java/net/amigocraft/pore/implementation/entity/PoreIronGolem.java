@@ -14,7 +14,7 @@ public class PoreIronGolem extends PoreGolem implements IronGolem {
 	}
 
 	public static PoreIronGolem of(org.spongepowered.api.entity.Entity handle){
-		return (PoreIronGolem)PoreGolem.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override
