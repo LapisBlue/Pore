@@ -1,6 +1,5 @@
 package net.amigocraft.pore.implementation.entity;
 
-import com.google.common.collect.ImmutableMap;
 import net.amigocraft.pore.util.Converter;
 import net.amigocraft.pore.util.ParentConverter;
 import org.apache.commons.lang.NotImplementedException;

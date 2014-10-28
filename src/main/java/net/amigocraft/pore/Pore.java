@@ -16,9 +16,7 @@
 package net.amigocraft.pore;
 
 import net.amigocraft.pore.implementation.PoreServer;
-
 import org.apache.logging.log4j.Logger;
-import org.bukkit.Bukkit;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.event.SpongeEventHandler;
 import org.spongepowered.api.event.message.CommandEvent;

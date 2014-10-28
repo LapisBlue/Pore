@@ -3,7 +3,6 @@ package net.amigocraft.pore.util;
 import net.amigocraft.pore.implementation.entity.PoreEntity;
 import net.amigocraft.pore.implementation.entity.PoreLivingEntity;
 import net.amigocraft.pore.implementation.entity.PorePlayer;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.spongepowered.api.entity.Entity;

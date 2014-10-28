@@ -1,18 +1,14 @@
 package net.amigocraft.pore.implementation;
 
 import com.avaje.ebean.config.ServerConfig;
-
 import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
 import net.amigocraft.pore.implementation.entity.PorePlayer;
-
 import net.amigocraft.pore.util.PoreCollections;
 import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.Validate;
 import org.bukkit.*;
-import org.bukkit.World;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;

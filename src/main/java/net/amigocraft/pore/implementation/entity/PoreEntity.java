@@ -3,8 +3,6 @@ package net.amigocraft.pore.implementation.entity;
 import net.amigocraft.pore.util.*;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
-import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageEvent;

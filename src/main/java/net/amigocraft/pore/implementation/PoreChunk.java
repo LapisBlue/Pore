@@ -13,9 +13,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 //TODO: skeleton implementation
 
