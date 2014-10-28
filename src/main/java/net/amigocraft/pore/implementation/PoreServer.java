@@ -3,12 +3,16 @@ package net.amigocraft.pore.implementation;
 import com.avaje.ebean.config.ServerConfig;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import net.amigocraft.pore.implementation.entity.PorePlayer;
 
+import net.amigocraft.pore.util.PoreCollections;
 import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.Validate;
 import org.bukkit.*;
+import org.bukkit.World;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -112,16 +116,13 @@ public class PoreServer extends PoreWrapper<Game> implements Server {
 
 	@Override
 	public Player[] _INVALID_getOnlinePlayers() {
-		return getOnlinePlayers().toArray(new Player[getOnlinePlayers().size()]);
+		Collection<? extends Player> online = getOnlinePlayers();
+		return online.toArray(new Player[online.size()]);
 	}
 
 	@Override
 	public Collection<? extends Player> getOnlinePlayers() {
-		List<Player> players = new ArrayList<Player>();
-		for (org.spongepowered.api.entity.Player pl : this.getHandle().getOnlinePlayers()){
-			players.add(PorePlayer.of(pl));
-		}
-		return Collections.unmodifiableList(players);
+		return Collections2.transform(getHandle().getOnlinePlayers(), PorePlayer.getPlayerConverter());
 	}
 
 	@Override
@@ -270,10 +271,8 @@ public class PoreServer extends PoreWrapper<Game> implements Server {
 
 	@Override
 	public List<World> getWorlds() {
-		List<World> worldList = new ArrayList<World>();
-		for (org.spongepowered.api.world.World w : getHandle().getWorlds())
-			worldList.add(PoreWorld.of(w));
-		return worldList;
+		// TODO: Should this be unmodifiable?
+		return PoreCollections.<org.spongepowered.api.world.World, World>transformToList(getHandle().getWorlds(), PoreWorld.getConverter());
 	}
 
 	@Override

@@ -22,7 +22,7 @@ import java.util.UUID;
 public class PorePlayer extends PoreHumanEntity implements Player {
 	private static Converter<org.spongepowered.api.entity.Player, PorePlayer> converter;
 
-	static Converter<org.spongepowered.api.entity.Player, PorePlayer> getPlayerConverter() {
+	public static Converter<org.spongepowered.api.entity.Player, PorePlayer> getPlayerConverter() {
 		if (converter == null) {
 			converter = new Converter<org.spongepowered.api.entity.Player, PorePlayer>() {
 				@Override

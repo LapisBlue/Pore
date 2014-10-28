@@ -1,11 +1,16 @@
 package net.amigocraft.pore.implementation;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import net.amigocraft.pore.implementation.block.PoreBlock;
 import net.amigocraft.pore.implementation.entity.PoreEntity;
 import net.amigocraft.pore.implementation.entity.PoreLivingEntity;
 import net.amigocraft.pore.implementation.entity.PorePlayer;
 import net.amigocraft.pore.util.Converter;
+import net.amigocraft.pore.util.PoreCollections;
 import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
@@ -28,6 +33,7 @@ import org.bukkit.util.Vector;
 import org.spongepowered.api.entity.*;
 import org.spongepowered.api.math.Vectors;
 
+import javax.annotation.Nullable;
 import java.io.File;
 import java.util.*;
 
@@ -245,52 +251,61 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
 	@Override
 	public List<Entity> getEntities() {
-		List<Entity> entities = new ArrayList<Entity>();
-		for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()){
-			entities.add(PoreEntity.of(e));
-		}
-		return entities;
+		// TODO: Should this be unmodifiable?
+		return PoreCollections.<org.spongepowered.api.entity.Entity, Entity>transformToList(getHandle().getEntities(), PoreEntity.getConverter());
 	}
 
 	@Override
 	public List<LivingEntity> getLivingEntities() {
-		List<LivingEntity> entities = new ArrayList<LivingEntity>();
-		for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()){
-			if (e instanceof LivingEntity) {
-				entities.add((LivingEntity) PoreLivingEntity.of(e));
+		// This is basically copying every time, unfortunately there is no real better way because we can't filter Lists using Guava
+		List<LivingEntity> living = Lists.newArrayList();
+		for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()) {
+			if (e instanceof org.spongepowered.api.entity.LivingEntity) {
+				living.add(PoreLivingEntity.of((org.spongepowered.api.entity.LivingEntity) e));
 			}
 		}
-		return entities;
+		return living;
 	}
 
-	//TODO: review the next three methods for correctness
+	// TODO: review the next three methods for correctness -- isInstance or isAssignable?
+	// TODO: Verify behaviour with unit tests
 	@Override
-	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T>... classes) {
-		List<T> entities = new ArrayList<T>();
-		for (Entity e : getEntities()) {
-			for (Class<T> clazz : classes) {
-				if (clazz.isInstance(e)){
-					entities.add((T)e);
+	@SuppressWarnings("unchecked")
+	public <T extends Entity> Collection<T> getEntitiesByClass(final Class<T>... classes) {
+		// Predicates.instanceOf() would be great here, but supports only one class
+		return (Collection<T>) Collections2.filter(getEntities(), new Predicate<Entity>() {
+			@Override
+			public boolean apply(@Nullable Entity entity) {
+				if (entity != null) {
+					for (Class<T> clazz : classes) {
+						if (clazz.isInstance(entity)) {
+							return true;
+						}
+					}
 				}
+
+				return false;
 			}
-		}
-		return entities;
+		});
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls) {
-		return getEntitiesByClass(cls);
+		return (Collection<T>) Collections2.filter(getEntities(), Predicates.instanceOf(cls));
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public Collection<Entity> getEntitiesByClasses(Class<?>... classes) {
 		return getEntitiesByClass((Class<Entity>[])classes);
 	}
 
 	@Override
 	public List<Player> getPlayers() {
-		//TODO: possibly optimize this
-		List<Player> players = new ArrayList<Player>();
+		//TODO: possibly optimize this (there is no real way other than Sponge implementing something to help with that)
+		// see getLivingEntities() for explanation
+		List<Player> players = Lists.newArrayList();
 		for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()){
 			if (e instanceof org.spongepowered.api.entity.Player){
 				players.add(PorePlayer.of((org.spongepowered.api.entity.Player) e));
