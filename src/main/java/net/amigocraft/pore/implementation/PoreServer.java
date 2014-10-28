@@ -2,6 +2,7 @@ package net.amigocraft.pore.implementation;
 
 import com.avaje.ebean.config.ServerConfig;
 
+import com.google.common.base.Optional;
 import net.amigocraft.pore.implementation.entity.PorePlayer;
 
 import net.amigocraft.pore.util.Cache;
@@ -251,10 +252,8 @@ public class PoreServer implements Server {
 	public Player getPlayerExact(String name) {
 		Validate.notNull(name, "Name cannot be null");
 
-		String lname = name.toLowerCase();
-
 		for (Player player : getOnlinePlayers()) {
-			if (player.getName().equalsIgnoreCase(lname)) {
+			if (player.getName().equalsIgnoreCase(name)) {
 				return player;
 			}
 		}
@@ -269,7 +268,8 @@ public class PoreServer implements Server {
 
 	@Override
 	public Player getPlayer(UUID id) {
-		return PorePlayer.of(handle.getPlayer(id));
+		Optional<org.spongepowered.api.entity.Player> player = handle.getPlayer(id);
+		return player.isPresent() ? PorePlayer.of(player.get()) : null;
 	}
 
 	@Override

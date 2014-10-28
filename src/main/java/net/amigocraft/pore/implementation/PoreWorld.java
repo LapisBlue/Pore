@@ -1,5 +1,6 @@
 package net.amigocraft.pore.implementation;
 
+import com.google.common.base.Optional;
 import net.amigocraft.pore.implementation.block.PoreBlock;
 import net.amigocraft.pore.implementation.entity.PoreEntity;
 import net.amigocraft.pore.implementation.entity.PoreLivingEntity;
@@ -92,7 +93,8 @@ public class PoreWorld implements World {
 
 	@Override
 	public Chunk getChunkAt(int x, int z) {
-		return PoreChunk.of(handle.getChunk(Vectors.create2i(x, z)));
+		Optional<org.spongepowered.api.world.Chunk> chunk = handle.getChunk(Vectors.create2i(x, z));
+		return chunk.isPresent() ? PoreChunk.of(chunk.get()) : null;
 	}
 
 	@Override
