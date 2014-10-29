@@ -15,8 +15,8 @@ import static org.mockito.Mockito.mock;
 public class ConverterTest {
 
 	@Before
-	public void initCaches() {
-		// Initialize the caches
+	public void initConverters() {
+		// Initialize the converters
 		PoreEntity.getConverter();
 	}
 

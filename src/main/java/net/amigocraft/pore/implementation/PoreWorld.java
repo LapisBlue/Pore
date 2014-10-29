@@ -264,25 +264,6 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
 	// TODO: review the next three methods for correctness -- isInstance or isAssignable?
 	// TODO: Verify behaviour with unit tests
-	@Override
-	@SuppressWarnings("unchecked")
-	public <T extends Entity> Collection<T> getEntitiesByClass(final Class<T>... classes) {
-		// Predicates.instanceOf() would be great here, but supports only one class
-		return (Collection<T>) Collections2.filter(getEntities(), new Predicate<Entity>() {
-			@Override
-			public boolean apply(@Nullable Entity entity) {
-				if (entity != null) {
-					for (Class<T> clazz : classes) {
-						if (clazz.isInstance(entity)) {
-							return true;
-						}
-					}
-				}
-
-				return false;
-			}
-		});
-	}
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -292,8 +273,25 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public Collection<Entity> getEntitiesByClasses(Class<?>... classes) {
-		return getEntitiesByClass((Class<Entity>[])classes);
+	@Deprecated
+	public <T extends Entity> Collection<T> getEntitiesByClass(final Class<T>... classes) {
+		return (Collection<T>) getEntitiesByClasses(classes);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public Collection<Entity> getEntitiesByClasses(final Class<?>... classes) {
+		return Collections2.filter(getEntities(), new Predicate<Entity>() {
+			@Override
+			public boolean apply(@Nullable Entity entity) {
+				for (Class<?> clazz : classes) {
+					if (clazz.isInstance(entity))
+						return true;
+				}
+
+				return false;
+			}
+		});
 	}
 
 	@Override
