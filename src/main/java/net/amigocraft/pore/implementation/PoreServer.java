@@ -2,7 +2,6 @@ package net.amigocraft.pore.implementation;
 
 import com.avaje.ebean.config.ServerConfig;
 import com.google.common.base.Optional;
-import com.google.common.collect.Collections2;
 import net.amigocraft.pore.implementation.entity.PorePlayer;
 import net.amigocraft.pore.util.PoreCollections;
 import net.amigocraft.pore.util.PoreWrapper;
@@ -118,7 +117,7 @@ public class PoreServer extends PoreWrapper<Game> implements Server {
 
 	@Override
 	public Collection<? extends Player> getOnlinePlayers() {
-		return Collections2.transform(getHandle().getOnlinePlayers(), PorePlayer.getPlayerConverter());
+		return PoreCollections.transform(getHandle().getOnlinePlayers(), PorePlayer.getPlayerConverter());
 	}
 
 	@Override

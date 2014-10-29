@@ -262,9 +262,6 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 		return living;
 	}
 
-	// TODO: review the next three methods for correctness -- isInstance or isAssignable?
-	// TODO: Verify behaviour with unit tests
-
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls) {
