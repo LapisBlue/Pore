@@ -83,9 +83,14 @@ shadowJar {
 }*/
 
 // Disable tests for SpongeAPI
-project(':SpongeAPI') {
-    //licenseFormat.enabled = false
-    tasks.withType(VerificationTask) {
-        enabled = false
+project('SpongeAPI') {
+    afterEvaluate { project ->
+        javadoc.enabled = false
+        javadocJar.enabled = false
+        sourceJar.enabled = false
+        licenseFormat.enabled = false
+        tasks.withType(VerificationTask) {
+            enabled = false
+        }
     }
 }

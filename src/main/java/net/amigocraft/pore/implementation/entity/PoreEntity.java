@@ -10,8 +10,6 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.component.attribute.Flammable;
-import org.spongepowered.api.component.attribute.Movable;
 import org.spongepowered.api.entity.LivingEntity;
 import org.spongepowered.api.util.Identifiable;
 
@@ -68,22 +66,22 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
 	@Override
 	public void setVelocity(Vector velocity) {
-		if (getHandle() instanceof Movable){
+		/*if (getHandle() instanceof Movable){
 			((Movable)getHandle()).setVelocity(Vector3fFactory.fromBukkitVector(velocity));
 		}
-		else {
+		else {*/
 			throw new UnsupportedOperationException("setVelocity called on an entity which is not movable"); // TODO: figure out the proper exception to throw
-		}
+		//}
 	}
 
 	@Override
 	public Vector getVelocity() {
-		if (getHandle() instanceof Movable){
+		/*if (getHandle() instanceof Movable){
 			return BukkitVectorFactory.fromVector3f(((Movable)getHandle()).getVelocity());
 		}
-		else {
+		else {*/
 			throw new UnsupportedOperationException("getVelocity called on an entity which is not movable"); // TODO: figure out the proper exception to throw
-		}
+		//}
 	}
 
 	@Override
@@ -134,12 +132,12 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
 	@Override
 	public int getFireTicks() {
-		if (getHandle() instanceof Flammable){
+		/*if (getHandle() instanceof Flammable){
 			return ((Flammable)getHandle()).getDuration();
 		}
-		else {
+		else {*/
 			throw new UnsupportedOperationException("getFireTicks called on non-flammable entity");
-		}
+		//}
 	}
 
 	@Override
@@ -149,12 +147,12 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
 	@Override
 	public void setFireTicks(int ticks) {
-		if (getHandle() instanceof Flammable){
+		/*if (getHandle() instanceof Flammable){
 			((Flammable)getHandle()).setDuration(ticks);
 		}
-		else {
+		else {*/
 			throw new UnsupportedOperationException("setFireTicks called on non-flammable entity");
-		}
+		//}
 	}
 
 	@Override
