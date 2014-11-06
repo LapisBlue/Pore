@@ -115,7 +115,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void sendRawMessage(String message) {
-		throw new NotImplementedException();
+		sendMessage(message);
 	}
 
 	@Override
@@ -605,12 +605,12 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public void sendMessage(String message) {
-		throw new NotImplementedException();
+		getHandle().sendMessage(message);
 	}
 
 	@Override
 	public void sendMessage(String[] messages) {
-		throw new NotImplementedException();
+		getHandle().sendMessage(messages);
 	}
 
 	@Override
