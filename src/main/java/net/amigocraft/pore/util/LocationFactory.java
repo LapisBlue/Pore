@@ -24,6 +24,19 @@ import org.spongepowered.api.world.World;
 
 public class LocationFactory {
 
+	public static Location apply(Location loc, org.spongepowered.api.world.Location spongeLocation) {
+		loc.setWorld(PoreWorld.of(spongeLocation.getExtent()));
+		loc.setX(spongeLocation.getPosition().getX());
+		loc.setY(spongeLocation.getPosition().getY());
+		loc.setZ(spongeLocation.getPosition().getZ());
+		return loc;
+	}
+
+	public static Location of(org.spongepowered.api.world.Location location) {
+		return new Location(PoreWorld.of(location.getExtent()), location.getPosition().getX(),
+				location.getPosition().getY(), location.getPosition().getZ());
+	}
+
 	public static Location fromVector3i(World world, Vector3i locationVector){
 		return new Location(PoreWorld.of(world), locationVector.getX(), locationVector.getY(), locationVector.getZ());
 	}

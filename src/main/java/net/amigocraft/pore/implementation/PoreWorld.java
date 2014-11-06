@@ -14,6 +14,9 @@ import net.amigocraft.pore.util.PoreCollections;
 import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
+import org.bukkit.Chunk;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
@@ -24,6 +27,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.math.Vectors;
+import org.spongepowered.api.world.extent.Extent;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -60,6 +64,14 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 	 */
 	public static PoreWorld of(org.spongepowered.api.world.World handle) {
 		return getConverter().apply(handle);
+	}
+
+	public static PoreWorld of(Extent handle) {
+		if (handle instanceof org.spongepowered.api.world.World) {
+			return of((org.spongepowered.api.world.World) handle);
+		}
+
+		throw new UnsupportedOperationException(); // TODO
 	}
 
 	@Override

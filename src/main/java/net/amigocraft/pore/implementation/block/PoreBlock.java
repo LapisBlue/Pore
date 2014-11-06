@@ -1,6 +1,8 @@
 package net.amigocraft.pore.implementation.block;
 
+import net.amigocraft.pore.implementation.PoreWorld;
 import net.amigocraft.pore.util.Converter;
+import net.amigocraft.pore.util.LocationFactory;
 import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
@@ -50,7 +52,7 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> im
 
 	@Override
 	public byte getData() {
-		throw new NotImplementedException();
+		return getHandle().getDataValue();
 	}
 
 	@Override
@@ -80,47 +82,47 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> im
 
 	@Override
 	public byte getLightLevel() {
-		throw new NotImplementedException();
+		return getHandle().getLuminance();
 	}
 
 	@Override
 	public byte getLightFromSky() {
-		throw new NotImplementedException();
+		return getHandle().getLuminanceFromSky();
 	}
 
 	@Override
 	public byte getLightFromBlocks() {
-		throw new NotImplementedException();
+		return getHandle().getLuminanceFromGround();
 	}
 
 	@Override
 	public World getWorld() {
-		throw new NotImplementedException();
+		return PoreWorld.of(getHandle().getExtent());
 	}
 
 	@Override
 	public int getX() {
-		throw new NotImplementedException();
+		return getHandle().getX();
 	}
 
 	@Override
 	public int getY() {
-		throw new NotImplementedException();
+		return getHandle().getY();
 	}
 
 	@Override
 	public int getZ() {
-		throw new NotImplementedException();
+		return getHandle().getZ();
 	}
 
 	@Override
 	public Location getLocation() {
-		throw new NotImplementedException();
+		return LocationFactory.of(getHandle().getLocation());
 	}
 
 	@Override
 	public Location getLocation(Location loc) {
-		throw new NotImplementedException();
+		return LocationFactory.apply(loc, getHandle().getLocation());
 	}
 
 	@Override
@@ -180,12 +182,12 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> im
 
 	@Override
 	public boolean isBlockPowered() {
-		throw new NotImplementedException();
+		return getHandle().isPowered();
 	}
 
 	@Override
 	public boolean isBlockIndirectlyPowered() {
-		throw new NotImplementedException();
+		return getHandle().isIndirectlyPowered();
 	}
 
 	@Override
