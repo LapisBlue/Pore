@@ -2,6 +2,7 @@ package net.amigocraft.pore.implementation.block;
 
 import net.amigocraft.pore.implementation.PoreWorld;
 import net.amigocraft.pore.util.Converter;
+import net.amigocraft.pore.util.Directions;
 import net.amigocraft.pore.util.LocationFactory;
 import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
@@ -36,10 +37,6 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> im
 		return converter;
 	}
 
-	private PoreBlock(org.spongepowered.api.block.Block handle) {
-		super(handle);
-	}
-
 	/**
 	 * Returns a Pore wrapper for the given handle.
 	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
@@ -50,34 +47,48 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> im
 		return getConverter().apply(handle);
 	}
 
+	private PoreBlock(org.spongepowered.api.block.Block handle) {
+		super(handle);
+	}
+
 	@Override
 	public byte getData() {
 		return getHandle().getDataValue();
 	}
 
 	@Override
+	public void setData(byte data) {
+		getHandle().replaceWith(getHandle().getType().getStateFromDataValue(data));
+	}
+
+	@Override
 	public Block getRelative(int modX, int modY, int modZ) {
-		throw new NotImplementedException();
+		return getWorld().getBlockAt(getX() + modX, getY() + modY, getZ() + modZ);
 	}
 
 	@Override
 	public Block getRelative(BlockFace face) {
-		throw new NotImplementedException();
+		return getRelative(face, 1);
 	}
 
 	@Override
 	public Block getRelative(BlockFace face, int distance) {
-		throw new NotImplementedException();
+		return getRelative(face.getModX() * distance, face.getModY() * distance, face.getModZ() * distance);
 	}
 
 	@Override
 	public Material getType() {
+		throw new NotImplementedException(); // TODO
+	}
+
+	@Override
+	public void setType(Material type) {
 		throw new NotImplementedException();
 	}
 
 	@Override
 	public int getTypeId() {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); // TODO
 	}
 
 	@Override
@@ -131,18 +142,9 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> im
 	}
 
 	@Override
-	public void setData(byte data) {
-		throw new NotImplementedException();
-	}
-
-	@Override
 	public void setData(byte data, boolean applyPhysics) {
-		throw new NotImplementedException();
-	}
-
-	@Override
-	public void setType(Material type) {
-		throw new NotImplementedException();
+		// TODO: applyPhysics
+		setData(data);
 	}
 
 	@Override
@@ -152,7 +154,8 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> im
 
 	@Override
 	public boolean setTypeId(int type, boolean applyPhysics) {
-		throw new NotImplementedException();
+		// TODO: applyPhysics
+		return setTypeId(type);
 	}
 
 	@Override
@@ -192,12 +195,12 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> im
 
 	@Override
 	public boolean isBlockFacePowered(BlockFace face) {
-		throw new NotImplementedException();
+		return getHandle().isFacePowered(Directions.of(face));
 	}
 
 	@Override
 	public boolean isBlockFaceIndirectlyPowered(BlockFace face) {
-		throw new NotImplementedException();
+		return getHandle().isFaceIndirectlyPowered(Directions.of(face));
 	}
 
 	@Override
