@@ -18,7 +18,7 @@ package net.amigocraft.pore;
 import net.amigocraft.pore.implementation.PoreServer;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.api.Game;
-import org.spongepowered.api.event.SpongeEventHandler;
+import org.spongepowered.api.event.Subscribe;
 import org.spongepowered.api.event.message.CommandEvent;
 import org.spongepowered.api.event.state.PreInitializationEvent;
 import org.spongepowered.api.event.state.ServerStoppingEvent;
@@ -33,7 +33,7 @@ public class Pore {
 	private static Logger logger;
 	private static PoreServer server;
 
-	@SpongeEventHandler
+	@Subscribe
 	public void onInitialization(PreInitializationEvent event) {
 		instance = this;
 		logger = event.getPluginLog();
@@ -43,7 +43,7 @@ public class Pore {
 		// TODO: Enable plugins
 	}
 
-	@SpongeEventHandler
+	@Subscribe
 	public void onShutdown(ServerStoppingEvent event){
 		logger.info("Disabling Bukkit plugins, please wait...");
 		server.disablePlugins();
@@ -70,7 +70,7 @@ public class Pore {
 		return server.getHandle();
 	}
 
-    @SpongeEventHandler
+	@Subscribe
     public void onCommand(CommandEvent event) {
 //        for (org.bukkit.plugin.Plugin plugin : server.getPluginManager().getPlugins()) {
 //            // Call plugin.onCommand() with appropriate params.
