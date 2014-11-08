@@ -16,6 +16,7 @@
 package net.amigocraft.pore;
 
 import net.amigocraft.pore.implementation.PoreServer;
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.logging.log4j.Logger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.event.Subscribe;
@@ -23,6 +24,7 @@ import org.spongepowered.api.event.message.CommandEvent;
 import org.spongepowered.api.event.state.PreInitializationEvent;
 import org.spongepowered.api.event.state.ServerStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.plugin.PluginContainer;
 
 /**
  * @author Maxim Roncacé, Lapis Blue
@@ -68,6 +70,10 @@ public class Pore {
 
 	public static Game getGame() {
 		return server.getHandle();
+	}
+
+	public static PluginContainer getPlugin(org.bukkit.plugin.Plugin plugin) {
+		throw new NotImplementedException(); // TODO
 	}
 
 	@Subscribe
