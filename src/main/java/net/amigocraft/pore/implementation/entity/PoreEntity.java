@@ -217,7 +217,8 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
 	@Override
 	public UUID getUniqueId() {
-		return ((Identifiable)getHandle()).getUniqueId(); //TODO: is this the right way to do this?
+		//return ((Identifiable)getHandle()).getUniqueId(); //TODO: is this the right way to do this?
+		throw new NotImplementedException();
 	}
 
 	@Override

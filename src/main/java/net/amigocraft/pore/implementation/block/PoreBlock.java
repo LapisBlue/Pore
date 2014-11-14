@@ -1,10 +1,7 @@
 package net.amigocraft.pore.implementation.block;
 
 import net.amigocraft.pore.implementation.PoreWorld;
-import net.amigocraft.pore.util.Converter;
-import net.amigocraft.pore.util.Directions;
-import net.amigocraft.pore.util.LocationFactory;
-import net.amigocraft.pore.util.PoreWrapper;
+import net.amigocraft.pore.util.*;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -17,11 +14,13 @@ import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.spongepowered.api.block.BlockType;
 
 import java.util.Collection;
 import java.util.List;
 
 public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> implements Block {
+
 	private static Converter<org.spongepowered.api.block.Block, PoreBlock> converter;
 
 	static Converter<org.spongepowered.api.block.Block, PoreBlock> getConverter() {
@@ -78,17 +77,17 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> im
 
 	@Override
 	public Material getType() {
-		throw new NotImplementedException(); // TODO
+		return MaterialConverter.toBukkitMaterial(getHandle().getType());
 	}
 
 	@Override
 	public void setType(Material type) {
-		throw new NotImplementedException();
+		getHandle().replaceWith(MaterialConverter.toBlockType(type));
 	}
 
 	@Override
 	public int getTypeId() {
-		throw new NotImplementedException(); // TODO
+		return MaterialConverter.toBukkitMaterial(getHandle().getType()).getId();
 	}
 
 	@Override
@@ -149,6 +148,7 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> im
 
 	@Override
 	public boolean setTypeId(int type) {
+		BlockType blockType = MaterialConverter.toBlockType(Material.getMaterial(type));
 		throw new NotImplementedException();
 	}
 
