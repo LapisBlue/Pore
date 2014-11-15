@@ -44,7 +44,7 @@ public class PorePermissible extends PoreWrapper<Subject> implements Permissible
 		return getConverter().apply(handle);
 	}
 
-	private PorePermissible(Subject handle) {
+	protected PorePermissible(Subject handle) {
 		super(handle);
 	}
 

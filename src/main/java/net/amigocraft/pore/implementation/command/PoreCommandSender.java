@@ -4,8 +4,14 @@ import net.amigocraft.pore.implementation.permissions.PorePermissible;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
+import org.spongepowered.api.service.permission.Subject;
 
 public class PoreCommandSender extends PorePermissible implements CommandSender {
+
+	// TODO
+	protected PoreCommandSender(Subject handle) {
+		super(handle);
+	}
 
 	@Override
 	public void sendMessage(String message) {
