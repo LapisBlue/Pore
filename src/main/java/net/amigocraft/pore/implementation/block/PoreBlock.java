@@ -52,12 +52,12 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> im
 
 	@Override
 	public byte getData() {
-		return getHandle().getDataValue();
+		return getHandle().getState().getDataValue();
 	}
 
 	@Override
 	public void setData(byte data) {
-		getHandle().replaceWith(getHandle().getType().getStateFromDataValue(data));
+		getHandle().replaceWith(getHandle().getState().getType().getStateFromDataValue(data));
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> im
 
 	@Override
 	public Material getType() {
-		return MaterialConverter.toBukkitMaterial(getHandle().getType());
+		return MaterialConverter.toBukkitMaterial(getHandle().getState().getType());
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> im
 
 	@Override
 	public int getTypeId() {
-		return MaterialConverter.toBukkitMaterial(getHandle().getType()).getId();
+		return MaterialConverter.toBukkitMaterial(getHandle().getState().getType()).getId();
 	}
 
 	@Override

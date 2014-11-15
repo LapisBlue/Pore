@@ -45,11 +45,11 @@ public class MaterialConverter {
 				}
 				catch (IllegalAccessException ex){
 					ex.printStackTrace();
-					Pore.getLogger().fatal("Material mapping for \"" + e.getKey() + "\" is invalid!");
+					Pore.getLogger().error("Material mapping for \"" + e.getKey() + "\" is invalid!");
 				}
 				catch (NoSuchFieldException ex){
 					ex.printStackTrace();
-					Pore.getLogger().fatal("Material mapping for \"" + e.getKey() + "\" is invalid!");
+					Pore.getLogger().error("Material mapping for \"" + e.getKey() + "\" is invalid!");
 				}
 			}
 
@@ -63,7 +63,7 @@ public class MaterialConverter {
 			}
 		}
 		catch (IOException ex){
-			Pore.getLogger().fatal("Failed to initialize material mappings!");
+			Pore.getLogger().error("Failed to initialize material mappings!");
 		}
 		try {
 			CsvMap iCsv = new CsvMap();
@@ -74,11 +74,11 @@ public class MaterialConverter {
 				}
 				catch (IllegalAccessException ex){
 					ex.printStackTrace();
-					Pore.getLogger().fatal("Material mapping for \"" + e.getKey() + "\" is invalid!");
+					Pore.getLogger().error("Material mapping for \"" + e.getKey() + "\" is invalid!");
 				}
 				catch (NoSuchFieldException ex){
 					ex.printStackTrace();
-					Pore.getLogger().fatal("Material mapping for \"" + e.getKey() + "\" is invalid!");
+					Pore.getLogger().error("Material mapping for \"" + e.getKey() + "\" is invalid!");
 				}
 			}
 
@@ -94,7 +94,7 @@ public class MaterialConverter {
 			}
 		}
 		catch (IOException ex){
-			Pore.getLogger().fatal("Failed to initialize material mappings!");
+			Pore.getLogger().error("Failed to initialize material mappings!");
 		}
 	}
 

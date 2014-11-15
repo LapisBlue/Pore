@@ -17,7 +17,7 @@ package net.amigocraft.pore;
 
 import net.amigocraft.pore.implementation.PoreServer;
 import org.apache.commons.lang.NotImplementedException;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.event.Subscribe;
 import org.spongepowered.api.event.message.CommandEvent;
