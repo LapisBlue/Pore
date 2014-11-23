@@ -21,7 +21,7 @@ import net.amigocraft.pore.implementation.entity.PorePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.spongepowered.api.event.Subscribe;
-import org.spongepowered.api.event.player.AsyncPlayerChatEvent;
+import org.spongepowered.api.event.player.PlayerChatEvent;
 import org.spongepowered.api.event.world.ChunkLoadEvent;
 import org.spongepowered.api.event.world.ChunkUnloadEvent;
 import org.spongepowered.api.event.world.WorldLoadEvent;
@@ -53,7 +53,7 @@ public class EventPipelineHandler {
 	}
 
 	@Subscribe
-	public void onAsyncPlayerChat(AsyncPlayerChatEvent event) {
+	public void onAsyncPlayerChat(PlayerChatEvent event) {
 		Bukkit.getPluginManager().callEvent(
 				new org.bukkit.event.player.AsyncPlayerChatEvent(
 						false, PorePlayer.of(event.getPlayer()), event.getMessage(), new HashSet<Player>())); //TODO
