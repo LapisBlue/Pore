@@ -510,12 +510,12 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean getAllowFlight() {
-		throw new NotImplementedException();
+		return getHandle().getAllowFlight();
 	}
 
 	@Override
 	public void setAllowFlight(boolean flight) {
-		throw new NotImplementedException();
+		getHandle().setAllowFlight(flight);
 	}
 
 	@Override
