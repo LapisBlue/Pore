@@ -53,7 +53,7 @@ public class EventPipelineHandler {
 	}
 
 	@Subscribe
-	public void onAsyncPlayerChat(PlayerChatEvent event) {
+	public void onPlayerChat(PlayerChatEvent event) {
 		Bukkit.getPluginManager().callEvent(
 				new org.bukkit.event.player.AsyncPlayerChatEvent(
 						false, PorePlayer.of(event.getPlayer()), event.getMessage(), new HashSet<Player>())); //TODO
