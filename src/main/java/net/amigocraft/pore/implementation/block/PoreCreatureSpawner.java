@@ -4,13 +4,12 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.EntityType;
-
-//TODO: skeleton implementation
+import org.spongepowered.api.block.BlockLoc;
 
 //TODO: skeleton implementation
 
 public class PoreCreatureSpawner extends PoreBlockState implements CreatureSpawner {
-	public PoreCreatureSpawner(org.spongepowered.api.block.Block spongeBlock) {
+	public PoreCreatureSpawner(BlockLoc spongeBlock) {
 		super(spongeBlock);
 	}
 

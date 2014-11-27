@@ -4,13 +4,12 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.SkullType;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Skull;
-
-//TODO: skeleton implementation
+import org.spongepowered.api.block.BlockLoc;
 
 //TODO: skeleton implementation
 
 public class PoreSkull extends PoreBlockState implements Skull {
-	public PoreSkull(org.spongepowered.api.block.Block spongeBlock) {
+	public PoreSkull(BlockLoc spongeBlock) {
 		super(spongeBlock);
 	}
 

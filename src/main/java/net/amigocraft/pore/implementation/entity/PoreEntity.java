@@ -1,6 +1,11 @@
 package net.amigocraft.pore.implementation.entity;
 
+import com.google.common.collect.ImmutableMap;
+import net.amigocraft.pore.implementation.PoreWorld;
 import net.amigocraft.pore.util.*;
+import net.amigocraft.pore.util.converter.vector.LocationFactory;
+import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.vector.Vector3dFactory;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
@@ -10,19 +15,49 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.entity.LivingEntity;
-import org.spongepowered.api.util.Identifiable;
+import org.spongepowered.api.entity.EnderCrystal;
+import org.spongepowered.api.entity.ExperienceOrb;
+import org.spongepowered.api.entity.FallingBlock;
+import org.spongepowered.api.entity.Item;
+import org.spongepowered.api.entity.explosive.PrimedTNT;
+import org.spongepowered.api.entity.hanging.Hanging;
+import org.spongepowered.api.entity.living.Living;
+import org.spongepowered.api.entity.living.complex.ComplexLivingPart;
+import org.spongepowered.api.entity.projectile.EyeOfEnder;
+import org.spongepowered.api.entity.projectile.Firework;
+import org.spongepowered.api.entity.projectile.Projectile;
+import org.spongepowered.api.entity.weather.Lightning;
+import org.spongepowered.api.entity.weather.WeatherEffect;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity> implements Entity { //TODO: determine if metadata methods should be implemented manually
-	private static Converter<org.spongepowered.api.entity.Entity, PoreEntity> converter;
+//TODO: determine if metadata methods should be implemented manually
+public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity> implements Entity {
 
-	public static Converter<org.spongepowered.api.entity.Entity, PoreEntity> getConverter() {
+	private static TypeConverter<org.spongepowered.api.entity.Entity, PoreEntity> converter;
+
+	@SuppressWarnings("unchecked")
+	public static TypeConverter<org.spongepowered.api.entity.Entity, PoreEntity> getConverter() {
 		if (converter == null) {
-			converter = new ParentConverter<org.spongepowered.api.entity.Entity, PoreEntity>(
-					LivingEntity.class, PoreLivingEntity.getLivingEntityConverter()
+			converter = new TypeConverter<org.spongepowered.api.entity.Entity, PoreEntity>(
+					(ImmutableMap)ImmutableMap.builder()
+							.put(ComplexLivingPart.class, PoreComplexEntityPart.getComplexEntityPartConverter())
+							.put(EnderCrystal.class, PoreEnderCrystal.getEnderCrystalConverter())
+							.put(EyeOfEnder.class, PoreEnderSignal.getEnderSignalConverter())
+							.put(ExperienceOrb.class, PoreExperienceOrb.getExperienceOrbConverter())
+							.put(FallingBlock.class, PoreFallingSand.getFallingSandConverter())
+							.put(Firework.class, PoreFirework.getFireworkConverter())
+							.put(Hanging.class, PoreHanging.getHangingConverter())
+							.put(Item.class, PoreItem.getItemConverter())
+							.put(Lightning.class, PoreLightningStrike.getLightningStrikeConverter())
+							.put(Projectile.class, PoreProjectile.getProjectileConverter())
+							.put(PrimedTNT.class, PoreTNTPrimed.getTNTPrimedConverter())
+									//.put(Entity.class, PoreVehicle.getVehicleConverter())
+							.put(WeatherEffect.class, PoreWeather.getWeatherConverter())
+							.put(Living.class, PoreLivingEntity.getLivingEntityConverter())
+							.build()
 			) {
 				@Override
 				protected PoreEntity convert(org.spongepowered.api.entity.Entity handle) {
@@ -38,6 +73,11 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 		super(handle);
 	}
 
+	@Override
+	public org.spongepowered.api.entity.Entity getHandle() {
+		return super.getHandle();
+	}
+
 	/**
 	 * Returns a Pore wrapper for the given handle.
 	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
@@ -46,6 +86,11 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 	 */
 	public static PoreEntity of(org.spongepowered.api.entity.Entity handle) {
 		return getConverter().apply(handle);
+	}
+
+	@Override
+	public EntityType getType(){
+		return EntityType.UNKNOWN;
 	}
 
 	@Override
@@ -66,32 +111,22 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
 	@Override
 	public void setVelocity(Vector velocity) {
-		/*if (getHandle() instanceof Movable){
-			((Movable)getHandle()).setVelocity(Vector3fFactory.fromBukkitVector(velocity));
-		}
-		else {*/
-			throw new UnsupportedOperationException("setVelocity called on an entity which is not movable"); // TODO: figure out the proper exception to throw
-		//}
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public Vector getVelocity() {
-		/*if (getHandle() instanceof Movable){
-			return BukkitVectorFactory.fromVector3f(((Movable)getHandle()).getVelocity());
-		}
-		else {*/
-			throw new UnsupportedOperationException("getVelocity called on an entity which is not movable"); // TODO: figure out the proper exception to throw
-		//}
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public boolean isOnGround() {
-		throw new NotImplementedException();
+		return getHandle().isOnGround();
 	}
 
 	@Override
 	public World getWorld() {
-		throw new NotImplementedException();
+		return PoreWorld.of(getHandle().getWorld());
 	}
 
 	@Override
@@ -105,7 +140,7 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 			return false;
 		}
 		this.eject();
-		getHandle().setPosition(Vector3dFactory.fromLocation(location));
+		getHandle().teleport(Vector3dFactory.fromLocation(location), ((PoreWorld)location.getWorld()).getHandle());
 		// Craftbukkit apparently does not throw an event when this method is called
 		return true;
 	}
@@ -122,37 +157,38 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
 	@Override
 	public List<Entity> getNearbyEntities(double x, double y, double z) {
-		throw new NotImplementedException();
+		List<Entity> worldEntities = getWorld().getEntities();
+		List<Entity> nearby = new ArrayList<Entity>();
+		for (Entity e : worldEntities){
+			Location loc1 = e.getLocation();
+			Location loc2 = this.getLocation();
+			if (Math.abs(loc1.getX() - loc2.getX()) <= x &&
+					Math.abs(loc1.getY() - loc2.getY()) <= y &&
+					Math.abs(loc1.getZ() - loc2.getZ()) <= z) {
+				nearby.add(e);
+			}
+		}
+		return nearby;
 	}
 
 	@Override
-	public int getEntityId() { // note to self - this is unique to Bukkit and not the same as a unique ID
-		throw new NotImplementedException();
+	public int getEntityId() { // note to self - this is the ID of the entity in the world, and unrelated to its UUID
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public int getFireTicks() {
-		/*if (getHandle() instanceof Flammable){
-			return ((Flammable)getHandle()).getDuration();
-		}
-		else {*/
-			throw new UnsupportedOperationException("getFireTicks called on non-flammable entity");
-		//}
+		return getHandle().getFireTicks();
 	}
 
 	@Override
 	public int getMaxFireTicks() {
-		throw new NotImplementedException();
+		return getHandle().getMaxFireTicks();
 	}
 
 	@Override
 	public void setFireTicks(int ticks) {
-		/*if (getHandle() instanceof Flammable){
-			((Flammable)getHandle()).setDuration(ticks);
-		}
-		else {*/
-			throw new UnsupportedOperationException("setFireTicks called on non-flammable entity");
-		//}
+		getHandle().setFireTicks(ticks);
 	}
 
 	@Override
@@ -162,12 +198,12 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
 	@Override
 	public boolean isDead() {
-		throw new NotImplementedException(); //TODO: determine how to implement this for non-living entities
+		return getHandle().isDead();
 	}
 
 	@Override
 	public boolean isValid() {
-		throw new NotImplementedException();
+		return getHandle().isValid();
 	}
 
 	@Override
@@ -177,58 +213,69 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
 	@Override
 	public Entity getPassenger() {
-		throw new NotImplementedException();
+		return PoreEntity.of(getHandle().getRider().get());
 	}
 
 	@Override
 	public boolean setPassenger(Entity passenger) {
-		throw new NotImplementedException();
+		if (getHandle().getRider().get() == null) {
+			((PoreEntity)passenger).getHandle().mount(getHandle());
+			return true;
+		}
+		else if (passenger == null){
+			getHandle().eject();
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		throw new NotImplementedException();
+		return getHandle().getRider().get() == null;
 	}
 
 	@Override
 	public boolean eject() {
-		throw new NotImplementedException();
+		if (getHandle().getRider().get() != null) {
+			getHandle().eject();
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public float getFallDistance() {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public void setFallDistance(float distance) {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public void setLastDamageCause(EntityDamageEvent event) {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO: Sponge counterpart planned for 1.1
 	}
 
 	@Override
 	public EntityDamageEvent getLastDamageCause() {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO: Sponge counterpart planned for 1.1
 	}
 
 	@Override
 	public UUID getUniqueId() {
-		//return ((Identifiable)getHandle()).getUniqueId(); //TODO: is this the right way to do this?
-		throw new NotImplementedException();
+		return getHandle().getUniqueId();
 	}
 
 	@Override
 	public int getTicksLived() {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public void setTicksLived(int value) {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
@@ -237,42 +284,41 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 	}
 
 	@Override
-	public EntityType getType() {
-		return EntityType.UNKNOWN; // this will almost always be overridden
-	}
-
-	@Override
 	public boolean isInsideVehicle() {
-		throw new NotImplementedException();
+		return getHandle().getRiding().get() != null;
 	}
 
 	@Override
 	public boolean leaveVehicle() {
-		throw new NotImplementedException();
+		if (getHandle().getRiding().get() != null) {
+			getHandle().dismount();
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public Entity getVehicle() {
-		throw new NotImplementedException();
+		return PoreEntity.of(getHandle().getRiding().get());
 	}
 
 	@Override
 	public void setMetadata(String s, MetadataValue metadataValue) {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public List<MetadataValue> getMetadata(String s) {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public boolean hasMetadata(String s) {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public void removeMetadata(String s, Plugin plugin) {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 }

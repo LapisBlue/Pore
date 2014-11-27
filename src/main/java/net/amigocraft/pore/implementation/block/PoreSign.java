@@ -2,13 +2,12 @@ package net.amigocraft.pore.implementation.block;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Sign;
-
-//TODO: skeleton implementation
+import org.spongepowered.api.block.BlockLoc;
 
 //TODO: skeleton implementation
 
 public class PoreSign extends PoreBlockState implements Sign {
-	public PoreSign(org.spongepowered.api.block.Block spongeBlock) {
+	public PoreSign(BlockLoc spongeBlock) {
 		super(spongeBlock);
 	}
 

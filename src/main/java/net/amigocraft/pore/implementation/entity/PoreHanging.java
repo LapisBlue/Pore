@@ -1,39 +1,75 @@
 package net.amigocraft.pore.implementation.entity;
 
+import com.google.common.collect.ImmutableMap;
+import net.amigocraft.pore.util.converter.DirectionConverter;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.Hanging;
+import org.spongepowered.api.entity.hanging.Hanging;
+import org.spongepowered.api.entity.hanging.ItemFrame;
+import org.spongepowered.api.entity.hanging.LeashHitch;
+import org.spongepowered.api.entity.hanging.Painting;
 
-public class PoreHanging extends PoreEntity implements Hanging {
+public class PoreHanging extends PoreEntity implements org.bukkit.entity.Hanging {
 
-	// TODO: Bridge
+	private static TypeConverter<Hanging, PoreHanging> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PoreHanging(org.spongepowered.api.entity.Entity handle){
+	@SuppressWarnings("unchecked")
+	static TypeConverter<Hanging, PoreHanging> getHangingConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<Hanging, PoreHanging>(
+					(ImmutableMap)ImmutableMap.builder()
+							.put(ItemFrame.class, PoreItemFrame.getItemFrameConverter())
+							.put(LeashHitch.class, PoreLeashHitch.getLeashHitchConverter())
+							.put(Painting.class, PorePainting.getPaintingConverter())
+							.build()
+			){
+				@Override
+				protected PoreHanging convert(Hanging handle) {
+					return new PoreHanging(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreHanging(Hanging handle) {
 		super(handle);
 	}
 
-	public static PoreHanging of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public Hanging getHandle() {
+		return (Hanging)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreHanging of(Hanging handle) {
+		return converter.apply(handle);
 	}
 
 	@Override
 	public boolean setFacingDirection(BlockFace face, boolean force) {
-		throw new NotImplementedException();
+		getHandle().setHangingDirection(DirectionConverter.of(face), force);
+		return true; //TODO
 	}
 
 	@Override
 	public BlockFace getAttachedFace() {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public void setFacingDirection(BlockFace face) {
-		throw new NotImplementedException();
+		setFacingDirection(face, false);
 	}
 
 	@Override
 	public BlockFace getFacing() {
-		throw new NotImplementedException();
+		return DirectionConverter.of(getHandle().getHangingDirection());
 	}
 }

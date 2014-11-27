@@ -13,7 +13,7 @@
  * THE SOFTWARE.
  */
 
-package net.amigocraft.pore.util;
+package net.amigocraft.pore.util.converter.vector;
 
 import net.amigocraft.pore.implementation.PoreWorld;
 import org.bukkit.Location;

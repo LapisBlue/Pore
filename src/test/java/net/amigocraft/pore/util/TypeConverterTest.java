@@ -6,13 +6,13 @@ import net.amigocraft.pore.implementation.entity.PorePlayer;
 import org.junit.Before;
 import org.junit.Test;
 import org.spongepowered.api.entity.Entity;
-import org.spongepowered.api.entity.LivingEntity;
-import org.spongepowered.api.entity.Player;
+import org.spongepowered.api.entity.living.Living;
+import org.spongepowered.api.entity.player.Player;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
-public class ConverterTest {
+public class TypeConverterTest {
 
 	@Before
 	public void initConverters() {
@@ -28,7 +28,7 @@ public class ConverterTest {
 
 	@Test
 	public void resolveLivingEntity() {
-		Entity living = mock(LivingEntity.class);
+		Entity living = mock(Living.class);
 		assertEquals(PoreEntity.of(living).getClass(), PoreLivingEntity.class);
 	}
 
@@ -40,7 +40,7 @@ public class ConverterTest {
 
 	@Test
 	public void resolveLivingEntityDirectly() {
-		LivingEntity living = mock(LivingEntity.class);
+		Living living = mock(Living.class);
 		assertEquals(PoreLivingEntity.of(living).getClass(), PoreLivingEntity.class);
 	}
 

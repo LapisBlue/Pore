@@ -1,11 +1,11 @@
-package net.amigocraft.pore.util;
+package net.amigocraft.pore.util.converter;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import org.bukkit.block.BlockFace;
 import org.spongepowered.api.util.Direction;
 
-public class Directions {
+public class DirectionConverter {
 	private static final BiMap<BlockFace, Direction> LOOKUP = ImmutableBiMap.<BlockFace, Direction>builder()
 			.put(BlockFace.NORTH, Direction.NORTH)
 			.put(BlockFace.EAST, Direction.EAST)

@@ -4,13 +4,12 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Instrument;
 import org.bukkit.Note;
 import org.bukkit.block.NoteBlock;
-
-//TODO: skeleton implementation
+import org.spongepowered.api.block.BlockLoc;
 
 //TODO: skeleton implementation
 
 public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
-	public PoreNoteBlock(org.spongepowered.api.block.Block spongeBlock) {
+	public PoreNoteBlock(BlockLoc spongeBlock) {
 		super(spongeBlock);
 	}
 

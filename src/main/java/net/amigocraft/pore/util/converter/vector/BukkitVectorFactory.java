@@ -13,21 +13,25 @@
  * THE SOFTWARE.
  */
 
-package net.amigocraft.pore.util;
+package net.amigocraft.pore.util.converter.vector;
 
-import org.bukkit.Location;
 import org.bukkit.util.Vector;
+import org.spongepowered.api.math.Vector3d;
+import org.spongepowered.api.math.Vector3f;
 import org.spongepowered.api.math.Vector3i;
-import org.spongepowered.api.math.Vectors;
 
-public class Vector3iFactory {
+public class BukkitVectorFactory {
 
-	public static Vector3i fromLocation(Location location){
-		return Vectors.create3i((int)location.getX(), (int)location.getY(), (int)location.getZ());
+	public static Vector fromVector3i(Vector3i vector){
+		return new Vector(vector.getX(), vector.getY(), vector.getZ());
 	}
 
-	public static Vector3i fromBukkitVector(Vector vector){
-		return Vectors.create3i(vector.getBlockX(), vector.getBlockY(), vector.getBlockZ());
+	public static Vector fromVector3d(Vector3d vector){
+		return new Vector(vector.getX(), vector.getY(), vector.getZ());
+	}
+
+	public static Vector fromVector3f(Vector3f vector){
+		return new Vector(vector.getX(), vector.getY(), vector.getZ());
 	}
 
 }

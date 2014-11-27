@@ -245,7 +245,7 @@ public class PoreServer extends PoreWrapper<Game> implements Server {
 
 	@Override
 	public Player getPlayer(UUID id) {
-		Optional<org.spongepowered.api.entity.Player> player = getHandle().getPlayer(id);
+		Optional<org.spongepowered.api.entity.player.Player> player = getHandle().getPlayer(id);
 		return player.isPresent() ? PorePlayer.of(player.get()) : null;
 	}
 

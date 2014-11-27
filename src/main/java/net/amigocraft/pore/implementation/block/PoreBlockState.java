@@ -10,13 +10,14 @@ import org.bukkit.block.BlockState;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.spongepowered.api.block.BlockLoc;
 
 import java.util.List;
 
 public class PoreBlockState implements BlockState {
-	private org.spongepowered.api.block.Block handle;
+	private BlockLoc handle;
 
-	public PoreBlockState(org.spongepowered.api.block.Block spongeBlock) {
+	public PoreBlockState(BlockLoc spongeBlock) {
 		this.handle = spongeBlock;
 	}
 

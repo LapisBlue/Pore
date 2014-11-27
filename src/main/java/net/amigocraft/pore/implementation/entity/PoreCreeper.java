@@ -1,20 +1,43 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EntityType;
 
 public class PoreCreeper extends PoreMonster implements Creeper {
 
-	//TODO: Bridge
+	private static TypeConverter<org.spongepowered.api.entity.living.monster.Creeper, PoreCreeper> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PoreCreeper(org.spongepowered.api.entity.LivingEntity handle){
+	@SuppressWarnings("unchecked")
+	static TypeConverter<org.spongepowered.api.entity.living.monster.Creeper, PoreCreeper> getCreeperConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<org.spongepowered.api.entity.living.monster.Creeper, PoreCreeper>(){
+				@Override
+				protected PoreCreeper convert(org.spongepowered.api.entity.living.monster.Creeper handle) {
+					return new PoreCreeper(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreCreeper(org.spongepowered.api.entity.living.monster.Creeper handle) {
 		super(handle);
 	}
 
-	public static PoreCreeper of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public org.spongepowered.api.entity.living.monster.Creeper getHandle() {
+		return (org.spongepowered.api.entity.living.monster.Creeper)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreCreeper of(org.spongepowered.api.entity.living.monster.Creeper handle) {
+		return converter.apply(handle);
 	}
 
 	@Override
@@ -24,11 +47,11 @@ public class PoreCreeper extends PoreMonster implements Creeper {
 
 	@Override
 	public boolean isPowered() {
-		throw new NotImplementedException();
+		return getHandle().isPowered();
 	}
 
 	@Override
 	public void setPowered(boolean value) {
-		throw new NotImplementedException();
+		getHandle().setPowered(value);
 	}
 }

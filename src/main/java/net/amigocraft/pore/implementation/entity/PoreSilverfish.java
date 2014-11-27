@@ -1,18 +1,43 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Silverfish;
+import org.spongepowered.api.entity.living.monster.Silverfish;
 
-public class PoreSilverfish extends PoreMonster implements Silverfish {
+public class PoreSilverfish extends PoreMonster implements org.bukkit.entity.Silverfish {
 
-	//TODO: make constructor as specific as possible
-	protected PoreSilverfish(org.spongepowered.api.entity.LivingEntity handle){
+	private static TypeConverter<Silverfish, PoreSilverfish> converter;
+
+	@SuppressWarnings("unchecked")
+	static TypeConverter<Silverfish, PoreSilverfish> getSilverfishConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<Silverfish, PoreSilverfish>(){
+				@Override
+				protected PoreSilverfish convert(Silverfish handle) {
+					return new PoreSilverfish(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreSilverfish(Silverfish handle) {
 		super(handle);
 	}
 
-	public static PoreSilverfish of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public Silverfish getHandle() {
+		return (Silverfish)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreSilverfish of(Silverfish handle) {
+		return converter.apply(handle);
 	}
 
 	@Override

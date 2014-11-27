@@ -13,9 +13,10 @@
  * THE SOFTWARE.
  */
 
-package net.amigocraft.pore.util;
+package net.amigocraft.pore.util.converter;
 
 import net.amigocraft.pore.Pore;
+import net.amigocraft.pore.util.CsvMap;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.spongepowered.api.block.BlockType;
@@ -32,6 +33,7 @@ public class MaterialConverter {
 	private static HashMap<BlockType, Material> blockMap = new HashMap<BlockType, Material>();
 	private static HashMap<ItemType, Material> itemMap = new HashMap<ItemType, Material>();
 
+	// note: BiMap is unsuitable because some values are not unique
 	private static HashMap<Material, BlockType> reverseBlockMap = new HashMap<Material, BlockType>();
 	private static HashMap<Material, ItemType> reverseItemMap = new HashMap<Material, ItemType>();
 

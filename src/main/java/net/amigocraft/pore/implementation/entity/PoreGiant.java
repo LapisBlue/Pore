@@ -1,18 +1,43 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Giant;
+import org.spongepowered.api.entity.living.monster.Giant;
 
-public class PoreGiant extends PoreMonster implements Giant {
+public class PoreGiant extends PoreMonster implements org.bukkit.entity.Giant {
 
-	//TODO: make constructor as specific as possible
-	protected PoreGiant(org.spongepowered.api.entity.LivingEntity handle){
+	private static TypeConverter<Giant, PoreGiant> converter;
+
+	@SuppressWarnings("unchecked")
+	static TypeConverter<Giant, PoreGiant> getGiantConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<Giant, PoreGiant>(){
+				@Override
+				protected PoreGiant convert(Giant handle) {
+					return new PoreGiant(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreGiant(Giant handle) {
 		super(handle);
 	}
 
-	public static PoreGiant of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public Giant getHandle() {
+		return (Giant)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreGiant of(Giant handle) {
+		return converter.apply(handle);
 	}
 
 	@Override

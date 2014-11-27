@@ -1,18 +1,43 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Squid;
+import org.spongepowered.api.entity.living.animal.Squid;
 
-public class PoreSquid extends PoreWaterMob implements Squid {
+public class PoreSquid extends PoreWaterMob implements org.bukkit.entity.Squid {
 
-	//TODO: make constructor as specific as possible
-	protected PoreSquid(org.spongepowered.api.entity.LivingEntity handle){
+	private static TypeConverter<Squid, PoreSquid> converter;
+
+	@SuppressWarnings("unchecked")
+	static TypeConverter<Squid, PoreSquid> getSquidConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<Squid, PoreSquid>(){
+				@Override
+				protected PoreSquid convert(Squid handle) {
+					return new PoreSquid(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreSquid(Squid handle) {
 		super(handle);
 	}
 
-	public static PoreSquid of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public Squid getHandle() {
+		return (Squid)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreSquid of(Squid handle) {
+		return converter.apply(handle);
 	}
 
 	@Override

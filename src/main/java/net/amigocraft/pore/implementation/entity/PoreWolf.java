@@ -1,21 +1,46 @@
 package net.amigocraft.pore.implementation.entity;
 
+import net.amigocraft.pore.util.converter.DyeColorConverter;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Wolf;
+import org.spongepowered.api.entity.living.animal.Wolf;
 
-public class PoreWolf extends PoreTameableAnimal implements Wolf {
+public class PoreWolf extends PoreTameable implements org.bukkit.entity.Wolf {
 
-	// TODO: Bridge
+	private static TypeConverter<Wolf, PoreWolf> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PoreWolf(org.spongepowered.api.entity.LivingEntity handle){
+	@SuppressWarnings("unchecked")
+	static TypeConverter<Wolf, PoreWolf> getWolfConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<Wolf, PoreWolf>(){
+				@Override
+				protected PoreWolf convert(Wolf handle) {
+					return new PoreWolf(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreWolf(Wolf handle) {
 		super(handle);
 	}
 
-	public static PoreWolf of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public Wolf getHandle() {
+		return (Wolf)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreWolf of(Wolf handle) {
+		return converter.apply(handle);
 	}
 
 	@Override
@@ -25,31 +50,31 @@ public class PoreWolf extends PoreTameableAnimal implements Wolf {
 
 	@Override
 	public boolean isAngry() {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public void setAngry(boolean angry) {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public boolean isSitting() {
-		throw new NotImplementedException();
+		return getHandle().isSitting();
 	}
 
 	@Override
 	public void setSitting(boolean sitting) {
-		throw new NotImplementedException();
+		getHandle().setSitting(sitting);
 	}
 
 	@Override
 	public DyeColor getCollarColor() {
-		throw new NotImplementedException();
+		return DyeColorConverter.of(getHandle().getColor());
 	}
 
 	@Override
 	public void setCollarColor(DyeColor color) {
-		throw new NotImplementedException();
+		getHandle().setColor(DyeColorConverter.of(color));
 	}
 }

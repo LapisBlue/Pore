@@ -4,13 +4,12 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Dispenser;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.projectiles.BlockProjectileSource;
-
-//TODO: skeleton implementation
+import org.spongepowered.api.block.BlockLoc;
 
 //TODO: skeleton implementation
 
 public class PoreDispenser extends PoreBlockState implements Dispenser {
-	public PoreDispenser(org.spongepowered.api.block.Block spongeBlock) {
+	public PoreDispenser(BlockLoc spongeBlock) {
 		super(spongeBlock);
 	}
 

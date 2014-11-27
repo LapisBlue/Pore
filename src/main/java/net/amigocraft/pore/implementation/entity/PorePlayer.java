@@ -1,32 +1,33 @@
 package net.amigocraft.pore.implementation.entity;
 
-import net.amigocraft.pore.util.Converter;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
-import org.spongepowered.api.util.Identifiable;
+import org.spongepowered.api.entity.player.Player;
 
 import java.net.InetSocketAddress;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-//TODO: bridge
+//TODO: still a ton of work to be done here
 
-public class PorePlayer extends PoreHumanEntity implements Player {
-	private static Converter<org.spongepowered.api.entity.Player, PorePlayer> converter;
+public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Player {
 
-	public static Converter<org.spongepowered.api.entity.Player, PorePlayer> getPlayerConverter() {
+	private static TypeConverter<Player, PorePlayer> converter;
+
+	public static TypeConverter<Player, PorePlayer> getPlayerConverter() {
 		if (converter == null) {
-			converter = new Converter<org.spongepowered.api.entity.Player, PorePlayer>() {
+			converter = new TypeConverter<Player, PorePlayer>() {
 				@Override
-				protected PorePlayer convert(org.spongepowered.api.entity.Player handle) {
+				protected PorePlayer convert(Player handle) {
 					return new PorePlayer(handle);
 				}
 			};
@@ -35,17 +36,17 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 		return converter;
 	}
 
-	protected PorePlayer(org.spongepowered.api.entity.Player handle){
+	protected PorePlayer(Player handle){
 		super(handle);
 	}
 
 	@Override
-	public org.spongepowered.api.entity.Player getHandle() {
-		return (org.spongepowered.api.entity.Player) super.getHandle();
+	public Player getHandle() {
+		return (Player) super.getHandle();
 	}
 
-	public static PorePlayer of(org.spongepowered.api.entity.Player handle) {
-		return getPlayerConverter().apply(handle);
+	public static PorePlayer of(Player handle) {
+		return converter.apply(handle);
 	}
 
 	@Override
@@ -450,12 +451,12 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean isOnline() {
-		throw new NotImplementedException();
+		return getHandle().isOnline();
 	}
 
 	@Override
 	public boolean isBanned() {
-		throw new NotImplementedException();
+		return getHandle().isBanned();
 	}
 
 	@Override
@@ -465,7 +466,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean isWhitelisted() {
-		throw new NotImplementedException();
+		return getHandle().isWhitelisted();
 	}
 
 	@Override
@@ -474,8 +475,8 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 	}
 
 	@Override
-	public Player getPlayer() {
-		throw new NotImplementedException();
+	public org.bukkit.entity.Player getPlayer() {
+		return this;
 	}
 
 	@Override
@@ -490,7 +491,7 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public boolean hasPlayedBefore() {
-		throw new NotImplementedException();
+		return getHandle().hasJoinedBefore();
 	}
 
 	@Override
@@ -519,17 +520,17 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 	}
 
 	@Override
-	public void hidePlayer(Player player) {
+	public void hidePlayer(org.bukkit.entity.Player player) {
 		throw new NotImplementedException();
 	}
 
 	@Override
-	public void showPlayer(Player player) {
+	public void showPlayer(org.bukkit.entity.Player player) {
 		throw new NotImplementedException();
 	}
 
 	@Override
-	public boolean canSee(Player player) {
+	public boolean canSee(org.bukkit.entity.Player player) {
 		throw new NotImplementedException();
 	}
 
@@ -615,7 +616,9 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public Map<String, Object> serialize() {
-		throw new NotImplementedException();
+		Map<String, Object> result = new LinkedHashMap<String, Object>();
+		result.put("name", getName());
+		return result;
 	}
 
 	@Override
@@ -630,11 +633,6 @@ public class PorePlayer extends PoreHumanEntity implements Player {
 
 	@Override
 	public UUID getUniqueId() {
-		if (getHandle() instanceof Identifiable) { // this should never return false, but it checks just in case
-			return ((Identifiable)getHandle()).getUniqueId();
-		}
-		else {
-			throw new UnsupportedOperationException("getUniqueId called on non-identifiable object");
-		}
+		return getHandle().getUniqueId();
 	}
 }

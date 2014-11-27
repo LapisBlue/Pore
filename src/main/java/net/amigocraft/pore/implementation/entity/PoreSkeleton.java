@@ -1,20 +1,44 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.entity.SkeletonConverter;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Skeleton;
+import org.spongepowered.api.entity.living.monster.Skeleton;
 
-public class PoreSkeleton extends PoreMonster implements Skeleton {
+public class PoreSkeleton extends PoreMonster implements org.bukkit.entity.Skeleton {
 
-	// TODO: Bridge
+	private static TypeConverter<Skeleton, PoreSkeleton> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PoreSkeleton(org.spongepowered.api.entity.LivingEntity handle){
+	@SuppressWarnings("unchecked")
+	static TypeConverter<Skeleton, PoreSkeleton> getSkeletonConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<Skeleton, PoreSkeleton>(){
+				@Override
+				protected PoreSkeleton convert(Skeleton handle) {
+					return new PoreSkeleton(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreSkeleton(Skeleton handle) {
 		super(handle);
 	}
 
-	public static PoreSkeleton of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public Skeleton getHandle() {
+		return (Skeleton)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreSkeleton of(Skeleton handle) {
+		return converter.apply(handle);
 	}
 
 	@Override
@@ -24,11 +48,11 @@ public class PoreSkeleton extends PoreMonster implements Skeleton {
 
 	@Override
 	public SkeletonType getSkeletonType() {
-		throw new NotImplementedException();
+		return SkeletonConverter.of(getHandle().getSkeletonType());
 	}
 
 	@Override
 	public void setSkeletonType(SkeletonType type) {
-		throw new NotImplementedException();
+		getHandle().setSkeletonType(SkeletonConverter.of(type));
 	}
 }

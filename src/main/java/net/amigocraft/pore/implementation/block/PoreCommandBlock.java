@@ -2,13 +2,12 @@ package net.amigocraft.pore.implementation.block;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.CommandBlock;
-
-//TODO: skeleton implementation
+import org.spongepowered.api.block.BlockLoc;
 
 //TODO: skeleton implementation
 
 public class PoreCommandBlock extends PoreBlockState implements CommandBlock {
-	public PoreCommandBlock(org.spongepowered.api.block.Block spongeBlock) {
+	public PoreCommandBlock(BlockLoc spongeBlock) {
 		super(spongeBlock);
 	}
 

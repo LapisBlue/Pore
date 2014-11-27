@@ -3,13 +3,12 @@ package net.amigocraft.pore.implementation.block;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Furnace;
 import org.bukkit.inventory.FurnaceInventory;
-
-//TODO: skeleton implementation
+import org.spongepowered.api.block.BlockLoc;
 
 //TODO: skeleton implementation
 
 public class PoreFurnace extends PoreBlockState implements Furnace {
-	public PoreFurnace(org.spongepowered.api.block.Block spongeBlock) {
+	public PoreFurnace(BlockLoc spongeBlock) {
 		super(spongeBlock);
 	}
 

@@ -20,7 +20,7 @@ import net.amigocraft.pore.implementation.PoreWorld;
 import net.amigocraft.pore.implementation.entity.PorePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.spongepowered.api.event.Subscribe;
+import org.spongepowered.api.util.event.Subscribe;
 import org.spongepowered.api.event.player.PlayerChatEvent;
 import org.spongepowered.api.event.world.ChunkLoadEvent;
 import org.spongepowered.api.event.world.ChunkUnloadEvent;

@@ -1,6 +1,6 @@
 package net.amigocraft.pore.implementation.permissions;
 
-import net.amigocraft.pore.util.Converter;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.permissions.Permissible;
@@ -8,7 +8,6 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
-import org.spongepowered.api.block.Block;
 import org.spongepowered.api.service.permission.Subject;
 
 import java.util.Set;
@@ -19,11 +18,11 @@ import java.util.Set;
 
 public class PorePermissible extends PoreWrapper<Subject> implements Permissible {
 
-	private static Converter<Subject, PorePermissible> converter;
+	private static TypeConverter<Subject, PorePermissible> converter;
 
-	static Converter<Subject, PorePermissible> getConverter() {
+	static TypeConverter<Subject, PorePermissible> getConverter() {
 		if (converter == null) {
-			converter = new Converter<Subject, PorePermissible>() {
+			converter = new TypeConverter<Subject, PorePermissible>() {
 				@Override
 				protected PorePermissible convert(Subject handle) {
 					return new PorePermissible(handle);

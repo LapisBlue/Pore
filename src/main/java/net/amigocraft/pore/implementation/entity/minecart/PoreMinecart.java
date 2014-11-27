@@ -1,23 +1,60 @@
 package net.amigocraft.pore.implementation.entity.minecart;
 
+import com.google.common.collect.ImmutableMap;
 import net.amigocraft.pore.implementation.entity.PoreVehicle;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Minecart;
 import org.bukkit.util.Vector;
+import org.spongepowered.api.entity.vehicle.minecart.*;
 
-public class PoreMinecart extends PoreVehicle implements Minecart {
+public class PoreMinecart extends PoreVehicle implements org.bukkit.entity.Minecart {
 
-	//TODO: Bridge
+	private static TypeConverter<Minecart, PoreMinecart> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PoreMinecart(org.spongepowered.api.entity.LivingEntity handle){
+	@SuppressWarnings("unchecked")
+	public static TypeConverter<Minecart, PoreMinecart> getMinecartConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<Minecart, PoreMinecart>(
+					(ImmutableMap)ImmutableMap.builder()
+							.put(MinecartCommandBlock.class, PoreCommandMinecart.getCommandMinecartConverter())
+							.put(MinecartTNT.class, PoreExplosiveMinecart.getExplosiveMinecartConverter())
+							.put(MinecartHopper.class, PoreHopperMinecart.getHopperMinecartConverter())
+							.put(MinecartFurnace.class, PorePoweredMinecart.getPoweredMinecartConverter())
+							.put(MinecartRideable.class, PoreRideableMinecart.getRideableMinecartConverter())
+							.put(MinecartMobSpawner.class, PoreRideableMinecart.getRideableMinecartConverter())
+							.put(MinecartChest.class, PoreStorageMinecart.getStorageMinecartConverter())
+							.build()
+			){
+				@Override
+				protected PoreMinecart convert(Minecart handle) {
+					return new PoreMinecart(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreMinecart(Minecart handle) {
 		super(handle);
 	}
 
-	public static PoreMinecart of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public Minecart getHandle() {
+		return (Minecart)super.getHandle();
 	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreMinecart of(Minecart handle) {
+		return converter.apply(handle);
+	}
+
+	//TODO: bridge
 
 	@Override
 	public EntityType getType(){

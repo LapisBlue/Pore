@@ -1,20 +1,56 @@
 package net.amigocraft.pore.implementation.entity;
 
+import com.google.common.collect.ImmutableMap;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
+import org.spongepowered.api.entity.living.Ageable;
+import org.spongepowered.api.entity.living.Agent;
+import org.spongepowered.api.entity.living.golem.Golem;
+import org.spongepowered.api.entity.living.monster.Monster;
 
 public class PoreCreature extends PoreLivingEntity implements Creature {
 
-	//TODO: Bridge
+	private static TypeConverter<Agent, PoreCreature> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PoreCreature(org.spongepowered.api.entity.LivingEntity handle){
+	@SuppressWarnings("unchecked")
+	static TypeConverter<Agent, PoreCreature> getCreatureConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<Agent, PoreCreature>(
+					(ImmutableMap)ImmutableMap.builder() // generified for simplicity and readability
+							.put(Ageable.class, PoreAgeable.getAgeableConverter())
+							.put(Golem.class, PoreGolem.getGolemConverter())
+							.put(Monster.class, PoreMonster.getMonsterConverter())
+							//.put(Agent.class, PoreWaterMob.getWaterMobConverter())
+							.build()
+			){
+				@Override
+				protected PoreCreature convert(Agent handle) {
+					return new PoreCreature(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreCreature(Agent handle) {
 		super(handle);
 	}
 
-	public static PoreCreature of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public Agent getHandle() {
+		return (Agent)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreCreature of(Agent handle) {
+		return converter.apply(handle);
 	}
 
 	@Override

@@ -3,13 +3,12 @@ package net.amigocraft.pore.implementation.block;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.block.Jukebox;
-
-//TODO: skeleton implementation
+import org.spongepowered.api.block.BlockLoc;
 
 //TODO: skeleton implementation
 
 public class PoreJukebox extends PoreBlockState implements Jukebox {
-	public PoreJukebox(org.spongepowered.api.block.Block spongeBlock) {
+	public PoreJukebox(BlockLoc spongeBlock) {
 		super(spongeBlock);
 	}
 

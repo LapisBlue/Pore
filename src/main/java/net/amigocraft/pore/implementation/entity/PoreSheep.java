@@ -1,21 +1,45 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.amigocraft.pore.util.converter.DyeColorConverter;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Sheep;
+import org.spongepowered.api.entity.living.animal.Sheep;
 
-public class PoreSheep extends PoreAnimals implements Sheep {
+public class PoreSheep extends PoreAnimals implements org.bukkit.entity.Sheep {
 
-	// TODO: Bridge
+	private static TypeConverter<Sheep, PoreSheep> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PoreSheep(org.spongepowered.api.entity.LivingEntity handle){
+	@SuppressWarnings("unchecked")
+	static TypeConverter<Sheep, PoreSheep> getSheepConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<Sheep, PoreSheep>(){
+				@Override
+				protected PoreSheep convert(Sheep handle) {
+					return new PoreSheep(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreSheep(Sheep handle) {
 		super(handle);
 	}
 
-	public static PoreSheep of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public Sheep getHandle() {
+		return (Sheep)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreSheep of(Sheep handle) {
+		return converter.apply(handle);
 	}
 
 	@Override
@@ -25,21 +49,21 @@ public class PoreSheep extends PoreAnimals implements Sheep {
 
 	@Override
 	public boolean isSheared() {
-		throw new NotImplementedException();
+		return getHandle().isSheared();
 	}
 
 	@Override
 	public void setSheared(boolean flag) {
-		throw new NotImplementedException();
+		getHandle().setSheared(flag);
 	}
 
 	@Override
 	public DyeColor getColor() {
-		throw new NotImplementedException();
+		return DyeColorConverter.of(getHandle().getColor());
 	}
 
 	@Override
 	public void setColor(DyeColor color) {
-		throw new NotImplementedException();
+		getHandle().setColor(DyeColorConverter.of(color));
 	}
 }

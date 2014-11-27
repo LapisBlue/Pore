@@ -1,21 +1,48 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.amigocraft.pore.util.converter.ProfessionConverter;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Villager;
+import org.spongepowered.api.entity.living.villager.Careers;
+import org.spongepowered.api.entity.living.villager.Villager;
 
-public class PoreVillager extends PoreAgeable implements Villager {
+public class PoreVillager extends PoreAgeable implements org.bukkit.entity.Villager {
 
-	// TODO: Bridge
+	private static TypeConverter<Villager, PoreVillager> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PoreVillager(org.spongepowered.api.entity.LivingEntity handle){
+	@SuppressWarnings("unchecked")
+	static TypeConverter<Villager, PoreVillager> getVillagerConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<Villager, PoreVillager>(){
+				@Override
+				protected PoreVillager convert(Villager handle) {
+					return new PoreVillager(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreVillager(Villager handle) {
 		super(handle);
 	}
 
-	public static PoreVillager of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public Villager getHandle() {
+		return (Villager)super.getHandle();
 	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreVillager of(Villager handle) {
+		return converter.apply(handle);
+	}
+
+	//TODO: bridge
 
 	@Override
 	public EntityType getType(){
@@ -24,11 +51,12 @@ public class PoreVillager extends PoreAgeable implements Villager {
 
 	@Override
 	public Profession getProfession() {
-		throw new NotImplementedException();
+		return ProfessionConverter.of(getHandle().getCareer().getProfession());
 	}
 
 	@Override
 	public void setProfession(Profession profession) {
-		throw new NotImplementedException();
+		//TODO: not really sure what to do here
+		getHandle().setCareer(Careers.getCareersForProfession(ProfessionConverter.of(profession)).get(0));
 	}
 }

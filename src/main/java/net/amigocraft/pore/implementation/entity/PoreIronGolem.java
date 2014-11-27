@@ -1,20 +1,47 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import com.google.common.collect.ImmutableMap;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.IronGolem;
+import org.spongepowered.api.entity.living.golem.IronGolem;
 
-public class PoreIronGolem extends PoreGolem implements IronGolem {
+public class PoreIronGolem extends PoreGolem implements org.bukkit.entity.IronGolem {
 
-	//TODO: bridge
+	private static TypeConverter<IronGolem, PoreIronGolem> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PoreIronGolem(org.spongepowered.api.entity.LivingEntity handle){
+	@SuppressWarnings("unchecked")
+	static TypeConverter<IronGolem, PoreIronGolem> getIronGolemConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<IronGolem, PoreIronGolem>(
+					(ImmutableMap)ImmutableMap.builder() // generified for simplicity and readability
+							.build()
+			){
+				@Override
+				protected PoreIronGolem convert(IronGolem handle) {
+					return new PoreIronGolem(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreIronGolem(IronGolem handle) {
 		super(handle);
 	}
 
-	public static PoreIronGolem of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public IronGolem getHandle() {
+		return (IronGolem)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreIronGolem of(IronGolem handle) {
+		return converter.apply(handle);
 	}
 
 	@Override
@@ -24,11 +51,11 @@ public class PoreIronGolem extends PoreGolem implements IronGolem {
 
 	@Override
 	public boolean isPlayerCreated() {
-		throw new NotImplementedException();
+		return getHandle().isPlayerCreated();
 	}
 
 	@Override
 	public void setPlayerCreated(boolean playerCreated) {
-		throw new NotImplementedException();
+		getHandle().setPlayerCreated(playerCreated);
 	}
 }

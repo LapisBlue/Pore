@@ -1,20 +1,44 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LightningStrike;
+import org.spongepowered.api.entity.weather.Lightning;
 
 public class PoreLightningStrike extends PoreEntity implements LightningStrike {
 
-	// TODO: Bridge
+	private static TypeConverter<Lightning, PoreLightningStrike> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PoreLightningStrike(org.spongepowered.api.entity.Entity handle){
+	@SuppressWarnings("unchecked")
+	static TypeConverter<Lightning, PoreLightningStrike> getLightningStrikeConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<Lightning, PoreLightningStrike>(){
+				@Override
+				protected PoreLightningStrike convert(Lightning handle) {
+					return new PoreLightningStrike(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreLightningStrike(Lightning handle) {
 		super(handle);
 	}
 
-	public static PoreLightningStrike of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public Lightning getHandle() {
+		return (Lightning)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreLightningStrike of(Lightning handle) {
+		return converter.apply(handle);
 	}
 
 	@Override
@@ -24,6 +48,6 @@ public class PoreLightningStrike extends PoreEntity implements LightningStrike {
 
 	@Override
 	public boolean isEffect() {
-		throw new NotImplementedException();
+		return getHandle().isEffect();
 	}
 }

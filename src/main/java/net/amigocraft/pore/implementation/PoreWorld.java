@@ -9,7 +9,7 @@ import net.amigocraft.pore.implementation.block.PoreBlock;
 import net.amigocraft.pore.implementation.entity.PoreEntity;
 import net.amigocraft.pore.implementation.entity.PoreLivingEntity;
 import net.amigocraft.pore.implementation.entity.PorePlayer;
-import net.amigocraft.pore.util.Converter;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import net.amigocraft.pore.util.PoreCollections;
 import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
@@ -37,11 +37,11 @@ import java.util.Set;
 import java.util.UUID;
 
 public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> implements World {
-	private static Converter<org.spongepowered.api.world.World, PoreWorld> converter;
+	private static TypeConverter<org.spongepowered.api.world.World, PoreWorld> converter;
 
-	static Converter<org.spongepowered.api.world.World, PoreWorld> getConverter() {
+	static TypeConverter<org.spongepowered.api.world.World, PoreWorld> getConverter() {
 		if (converter == null) {
-			converter = new Converter<org.spongepowered.api.world.World, PoreWorld>() {
+			converter = new TypeConverter<org.spongepowered.api.world.World, PoreWorld>() {
 				@Override
 				protected PoreWorld convert(org.spongepowered.api.world.World handle) {
 					return new PoreWorld(handle);
@@ -70,7 +70,6 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 		if (handle instanceof org.spongepowered.api.world.World) {
 			return of((org.spongepowered.api.world.World) handle);
 		}
-
 		throw new UnsupportedOperationException(); // TODO
 	}
 
@@ -86,7 +85,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
 	@Override
 	public int getBlockTypeIdAt(int x, int y, int z) {
-		return getBlockAt(x, y, z).getTypeId(); //TODO: possibly rewrite this depending on how IDs are implemented in Sponge
+		return getBlockAt(x, y, z).getTypeId();
 	}
 
 	@Override
@@ -168,22 +167,22 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
 	@Override
 	public boolean unloadChunk(Chunk chunk) {
-		throw new NotImplementedException();
+		return chunk.unload();
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z) {
-		throw new NotImplementedException();
+		return unloadChunk(x, z, true);
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z, boolean save) {
-		throw new NotImplementedException();
+		return unloadChunk(x, z, save, false);
 	}
 
 	@Override
 	public boolean unloadChunk(int x, int z, boolean save, boolean safe) {
-		throw new NotImplementedException();
+		return getChunkAt(x, z).unload(save, safe);
 	}
 
 	@Override
@@ -259,16 +258,19 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 	@Override
 	public List<Entity> getEntities() {
 		// TODO: Should this be unmodifiable?
-		return PoreCollections.<org.spongepowered.api.entity.Entity, Entity>transformToList(getHandle().getEntities(), PoreEntity.getConverter());
+		return PoreCollections.<org.spongepowered.api.entity.Entity, Entity>transformToList(
+				getHandle().getEntities(), PoreEntity.getConverter()
+		);
 	}
 
 	@Override
 	public List<LivingEntity> getLivingEntities() {
-		// This is basically copying every time, unfortunately there is no real better way because we can't filter Lists using Guava
+		// This is basically copying every time, unfortunately there is no real better way because we can't filter
+		// Lists using Guava
 		List<LivingEntity> living = Lists.newArrayList();
 		for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()) {
-			if (e instanceof org.spongepowered.api.entity.LivingEntity) {
-				living.add(PoreLivingEntity.of((org.spongepowered.api.entity.LivingEntity) e));
+			if (e instanceof org.spongepowered.api.entity.living.Living) {
+				living.add(PoreLivingEntity.of((org.spongepowered.api.entity.living.Living) e));
 			}
 		}
 		return living;
@@ -309,8 +311,8 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 		// see getLivingEntities() for explanation
 		List<Player> players = Lists.newArrayList();
 		for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()){
-			if (e instanceof org.spongepowered.api.entity.Player){
-				players.add(PorePlayer.of((org.spongepowered.api.entity.Player) e));
+			if (e instanceof org.spongepowered.api.entity.player.Player){
+				players.add(PorePlayer.of((org.spongepowered.api.entity.player.Player) e));
 			}
 		}
 		return players;

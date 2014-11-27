@@ -1,21 +1,46 @@
 package net.amigocraft.pore.implementation.entity;
 
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.TNTPrimed;
+import org.spongepowered.api.entity.explosive.PrimedTNT;
 
 public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
 
-	// TODO: Bridge
+	private static TypeConverter<PrimedTNT, PoreTNTPrimed> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PoreTNTPrimed(org.spongepowered.api.entity.Entity handle){
+	@SuppressWarnings("unchecked")
+	static TypeConverter<PrimedTNT, PoreTNTPrimed> getTNTPrimedConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<PrimedTNT, PoreTNTPrimed>(){
+				@Override
+				protected PoreTNTPrimed convert(PrimedTNT handle) {
+					return new PoreTNTPrimed(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreTNTPrimed(PrimedTNT handle) {
 		super(handle);
 	}
 
-	public static PoreTNTPrimed of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public PrimedTNT getHandle() {
+		return (PrimedTNT)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreTNTPrimed of(PrimedTNT handle) {
+		return converter.apply(handle);
 	}
 
 	@Override
@@ -25,36 +50,36 @@ public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
 
 	@Override
 	public void setFuseTicks(int fuseTicks) {
-		throw new NotImplementedException();
+		getHandle().setFuseDuration(fuseTicks);
 	}
 
 	@Override
 	public int getFuseTicks() {
-		throw new NotImplementedException();
+		return getHandle().getFuseDuration();
 	}
 
 	@Override
 	public Entity getSource() {
-		throw new NotImplementedException();
+		return PoreEntity.of(getHandle().getDetonator().get());
 	}
 
 	@Override
 	public void setYield(float yield) {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public float getYield() {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public void setIsIncendiary(boolean isIncendiary) {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public boolean isIncendiary() {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 }

@@ -1,20 +1,44 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.entity.OcelotConverter;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Ocelot;
+import org.spongepowered.api.entity.living.animal.Ocelot;
 
-public class PoreOcelot extends PoreTameableAnimal implements Ocelot {
+public class PoreOcelot extends PoreTameable implements org.bukkit.entity.Ocelot {
 
-	// TODO: Bridge
+	private static TypeConverter<Ocelot, PoreOcelot> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PoreOcelot(org.spongepowered.api.entity.LivingEntity handle){
+	@SuppressWarnings("unchecked")
+	static TypeConverter<Ocelot, PoreOcelot> getOcelotConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<Ocelot, PoreOcelot>(){
+				@Override
+				protected PoreOcelot convert(Ocelot handle) {
+					return new PoreOcelot(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreOcelot(Ocelot handle) {
 		super(handle);
 	}
 
-	public static PoreOcelot of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public Ocelot getHandle() {
+		return (Ocelot)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreOcelot of(Ocelot handle) {
+		return converter.apply(handle);
 	}
 
 	@Override
@@ -24,21 +48,21 @@ public class PoreOcelot extends PoreTameableAnimal implements Ocelot {
 
 	@Override
 	public Type getCatType() {
-		throw new NotImplementedException();
+		return OcelotConverter.of(getHandle().getOcelotType());
 	}
 
 	@Override
 	public void setCatType(Type type) {
-		throw new NotImplementedException();
+		getHandle().setOcelotType(OcelotConverter.of(type));
 	}
 
 	@Override
 	public boolean isSitting() {
-		throw new NotImplementedException();
+		return getHandle().isSitting();
 	}
 
 	@Override
 	public void setSitting(boolean sitting) {
-		throw new NotImplementedException();
+		getHandle().setSitting(sitting);
 	}
 }

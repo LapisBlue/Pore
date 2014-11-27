@@ -1,22 +1,47 @@
 package net.amigocraft.pore.implementation.entity;
 
+import net.amigocraft.pore.util.converter.ItemStackConverter;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Rotation;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.ItemFrame;
 import org.bukkit.inventory.ItemStack;
+import org.spongepowered.api.entity.hanging.ItemFrame;
 
-public class PoreItemFrame extends PoreHanging implements ItemFrame {
+public class PoreItemFrame extends PoreHanging implements org.bukkit.entity.ItemFrame {
 
-	// TODO: Bridge
+	private static TypeConverter<ItemFrame, PoreItemFrame> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PoreItemFrame(org.spongepowered.api.entity.Entity handle){
+	@SuppressWarnings("unchecked")
+	static TypeConverter<ItemFrame, PoreItemFrame> getItemFrameConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<ItemFrame, PoreItemFrame>(){
+				@Override
+				protected PoreItemFrame convert(ItemFrame handle) {
+					return new PoreItemFrame(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreItemFrame(ItemFrame handle) {
 		super(handle);
 	}
 
-	public static PoreItemFrame of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public ItemFrame getHandle() {
+		return (ItemFrame)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreItemFrame of(ItemFrame handle) {
+		return converter.apply(handle);
 	}
 
 	@Override
@@ -26,21 +51,21 @@ public class PoreItemFrame extends PoreHanging implements ItemFrame {
 
 	@Override
 	public ItemStack getItem() {
-		throw new NotImplementedException();
+		return ItemStackConverter.of(getHandle().getItem().get());
 	}
 
 	@Override
 	public void setItem(ItemStack item) {
-		throw new NotImplementedException();
+		getHandle().setItem(ItemStackConverter.of(item));
 	}
 
 	@Override
 	public Rotation getRotation() {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 
 	@Override
 	public void setRotation(Rotation rotation) throws IllegalArgumentException {
-		throw new NotImplementedException();
+		throw new NotImplementedException(); //TODO
 	}
 }

@@ -1,18 +1,43 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.SmallFireball;
+import org.spongepowered.api.entity.projectile.fireball.SmallFireball;
 
-public class PoreSmallFireball extends PoreFireball implements SmallFireball {
+public class PoreSmallFireball extends PoreFireball implements org.bukkit.entity.SmallFireball {
 
-	//TODO: make constructor as specific as possible
-	protected PoreSmallFireball(org.spongepowered.api.entity.Entity handle){
+	private static TypeConverter<SmallFireball, PoreSmallFireball> converter;
+
+	@SuppressWarnings("unchecked")
+	static TypeConverter<SmallFireball, PoreSmallFireball> getSmallFireballConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<SmallFireball, PoreSmallFireball>(){
+				@Override
+				protected PoreSmallFireball convert(SmallFireball handle) {
+					return new PoreSmallFireball(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreSmallFireball(SmallFireball handle) {
 		super(handle);
 	}
 
-	public static PoreSmallFireball of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public SmallFireball getHandle() {
+		return (SmallFireball)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreSmallFireball of(SmallFireball handle) {
+		return converter.apply(handle);
 	}
 
 	@Override

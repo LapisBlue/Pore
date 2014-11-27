@@ -1,18 +1,43 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Ghast;
+import org.spongepowered.api.entity.living.monster.Ghast;
 
-public class PoreGhast extends PoreFlying implements Ghast {
+public class PoreGhast extends PoreFlying implements org.bukkit.entity.Ghast {
 
-	//TODO: make constructor as specific as possible
-	protected PoreGhast(org.spongepowered.api.entity.LivingEntity handle){
+	private static TypeConverter<Ghast, PoreGhast> converter;
+
+	@SuppressWarnings("unchecked")
+	static TypeConverter<Ghast, PoreGhast> getGhastConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<Ghast, PoreGhast>(){
+				@Override
+				protected PoreGhast convert(Ghast handle) {
+					return new PoreGhast(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreGhast(Ghast handle) {
 		super(handle);
 	}
 
-	public static PoreGhast of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public Ghast getHandle() {
+		return (Ghast)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreGhast of(Ghast handle) {
+		return converter.apply(handle);
 	}
 
 	@Override

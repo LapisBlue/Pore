@@ -1,21 +1,46 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.Boat;
 import org.bukkit.entity.EntityType;
 
 public class PoreBoat extends PoreVehicle implements Boat {
 
-	// TODO: Bridge
+	private static TypeConverter<org.spongepowered.api.entity.vehicle.Boat, PoreBoat> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PoreBoat(org.spongepowered.api.entity.Entity handle){
+	@SuppressWarnings("unchecked")
+	static TypeConverter<org.spongepowered.api.entity.vehicle.Boat, PoreBoat> getBoatConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<org.spongepowered.api.entity.vehicle.Boat, PoreBoat>(){
+				@Override
+				protected PoreBoat convert(org.spongepowered.api.entity.vehicle.Boat handle) {
+					return new PoreBoat(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreBoat(org.spongepowered.api.entity.vehicle.Boat handle) {
 		super(handle);
 	}
 
-	public static PoreBoat of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public org.spongepowered.api.entity.vehicle.Boat getHandle() {
+		return (org.spongepowered.api.entity.vehicle.Boat)super.getHandle();
 	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreBoat of(org.spongepowered.api.entity.vehicle.Boat handle) {
+		return converter.apply(handle);
+	}
+
+	//TODO: bridge
 
 	@Override
 	public EntityType getType(){
@@ -24,42 +49,42 @@ public class PoreBoat extends PoreVehicle implements Boat {
 
 	@Override
 	public double getMaxSpeed() {
-		throw new NotImplementedException();
+		return getHandle().getMaxSpeed();
 	}
 
 	@Override
 	public void setMaxSpeed(double speed) {
-		throw new NotImplementedException();
+		getHandle().setMaxSpeed(speed);
 	}
 
 	@Override
 	public double getOccupiedDeceleration() {
-		throw new NotImplementedException();
+		return getHandle().getOccupiedDeceleration();
 	}
 
 	@Override
 	public void setOccupiedDeceleration(double rate) {
-		throw new NotImplementedException();
+		getHandle().setOccupiedDeceleration(rate);
 	}
 
 	@Override
 	public double getUnoccupiedDeceleration() {
-		throw new NotImplementedException();
+		return getHandle().getUnoccupiedDeceleration();
 	}
 
 	@Override
 	public void setUnoccupiedDeceleration(double rate) {
-		throw new NotImplementedException();
+		getHandle().setUnoccupiedDeceleration(rate);
 	}
 
 	@Override
 	public boolean getWorkOnLand() {
-		throw new NotImplementedException();
+		return getHandle().canMoveOnLand();
 	}
 
 	@Override
 	public void setWorkOnLand(boolean workOnLand) {
-		throw new NotImplementedException();
+		getHandle().setMoveOnLand(workOnLand);
 	}
 
 }

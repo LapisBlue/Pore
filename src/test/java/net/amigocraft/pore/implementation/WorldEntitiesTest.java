@@ -2,10 +2,7 @@ package net.amigocraft.pore.implementation;
 
 import com.google.common.collect.ImmutableList;
 import net.amigocraft.pore.implementation.entity.PoreEntity;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.spongepowered.api.world.World;
@@ -31,18 +28,20 @@ public class WorldEntitiesTest {
 		// Initialize world
 		world = PoreWorld.of(mock(World.class));
 		when(world.getHandle().getEntities()).thenReturn(ImmutableList.of(
-				mock(org.spongepowered.api.entity.Player.class),
+				mock(org.spongepowered.api.entity.player.Player.class),
 				mock(org.spongepowered.api.entity.Entity.class),
-				mock(org.spongepowered.api.entity.HumanEntity.class),
-				mock(org.spongepowered.api.entity.Player.class),
-				mock(org.spongepowered.api.entity.LivingEntity.class),
-				mock(org.spongepowered.api.entity.Player.class),
-				mock(org.spongepowered.api.entity.Player.class),
-				mock(org.spongepowered.api.entity.LivingEntity.class),
-				mock(org.spongepowered.api.entity.LivingEntity.class),
+				mock(org.spongepowered.api.entity.living.Human.class),
+				mock(org.spongepowered.api.entity.player.Player.class),
+				mock(org.spongepowered.api.entity.living.Living.class),
+				mock(org.spongepowered.api.entity.player.Player.class),
+				mock(org.spongepowered.api.entity.player.Player.class),
+				mock(org.spongepowered.api.entity.living.Living.class),
+				mock(org.spongepowered.api.entity.living.Living.class),
 				mock(org.spongepowered.api.entity.Entity.class),
-				mock(org.spongepowered.api.entity.HumanEntity.class),
-				mock(org.spongepowered.api.entity.Player.class)
+				mock(org.spongepowered.api.entity.living.Human.class),
+				mock(org.spongepowered.api.entity.player.Player.class),
+				mock(org.spongepowered.api.entity.living.animal.Cow.class),
+				mock(org.spongepowered.api.entity.living.animal.Pig.class)
 		));
 	}
 
@@ -51,25 +50,28 @@ public class WorldEntitiesTest {
 		List<Entity> entities = world.getEntities();
 
 		// All of the entities should be an instance of Entity
-		assertEquals(12, filter(entities, instanceOf(Entity.class)).size());
-		assertEquals(10, filter(entities, instanceOf(LivingEntity.class)).size());
+		assertEquals(14, filter(entities, instanceOf(Entity.class)).size());
+		assertEquals(12, filter(entities, instanceOf(LivingEntity.class)).size());
 		assertEquals(7, filter(entities, instanceOf(HumanEntity.class)).size());
 		assertEquals(5, filter(entities, instanceOf(Player.class)).size());
+		assertEquals(2, filter(entities, instanceOf(Animals.class)).size());
 	}
 
 	@Test
 	public void checkEntitiesByClassCounts() {
 		// This is the same as above actually
-		assertEquals(12, world.getEntitiesByClass(Entity.class).size());
-		assertEquals(10, world.getEntitiesByClass(LivingEntity.class).size());
+		assertEquals(14, world.getEntitiesByClass(Entity.class).size());
+		assertEquals(12, world.getEntitiesByClass(LivingEntity.class).size());
+		Collection list = world.getEntitiesByClass(Entity.class);
 		assertEquals(7, world.getEntitiesByClass(HumanEntity.class).size());
 		assertEquals(5, world.getEntitiesByClass(Player.class).size());
+		assertEquals(2, world.getEntitiesByClass(Animals.class).size());
 	}
 
 	@Test
 	public void checkEntitiesByClassesCounts() {
 		// This should still return all entities
-		assertEquals(12, world.getEntitiesByClasses(Entity.class, LivingEntity.class).size());
+		assertEquals(14, world.getEntitiesByClasses(Entity.class, LivingEntity.class).size());
 		// TODO: Add more tests, not possible right now
 	}
 
@@ -80,6 +82,7 @@ public class WorldEntitiesTest {
 		checkEntityTypes(world.getEntitiesByClass(LivingEntity.class), LivingEntity.class);
 		checkEntityTypes(world.getEntitiesByClass(HumanEntity.class), HumanEntity.class);
 		checkEntityTypes(world.getEntitiesByClass(Player.class), Player.class);
+		checkEntityTypes(world.getEntitiesByClass(Animals.class), Animals.class);
 	}
 
 	@Test

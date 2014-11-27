@@ -1,20 +1,44 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Weather;
+import org.spongepowered.api.entity.weather.WeatherEffect;
 
 public class PoreWeather extends PoreEntity implements Weather {
 
-	// TODO: Bridge
+	private static TypeConverter<WeatherEffect, PoreWeather> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PoreWeather(org.spongepowered.api.entity.Entity handle){
+	@SuppressWarnings("unchecked")
+	static TypeConverter<WeatherEffect, PoreWeather> getWeatherConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<WeatherEffect, PoreWeather>(){
+				@Override
+				protected PoreWeather convert(WeatherEffect handle) {
+					return new PoreWeather(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreWeather(WeatherEffect handle) {
 		super(handle);
 	}
 
-	public static PoreWeather of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public WeatherEffect getHandle() {
+		return (WeatherEffect)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreWeather of(WeatherEffect handle) {
+		return converter.apply(handle);
 	}
 
 	@Override

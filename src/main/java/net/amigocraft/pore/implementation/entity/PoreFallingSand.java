@@ -1,20 +1,49 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.amigocraft.pore.util.converter.MaterialConverter;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingSand;
+import org.spongepowered.api.entity.FallingBlock;
 
 public class PoreFallingSand extends PoreEntity implements FallingSand {
 
-	//TODO: make constructor as specific as possible
-	protected PoreFallingSand(org.spongepowered.api.entity.Entity handle){
+	private static TypeConverter<FallingBlock, PoreFallingSand> converter;
+
+	@SuppressWarnings("unchecked")
+	static TypeConverter<FallingBlock, PoreFallingSand> getFallingSandConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<FallingBlock, PoreFallingSand>(){
+				@Override
+				protected PoreFallingSand convert(FallingBlock handle) {
+					return new PoreFallingSand(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PoreFallingSand(FallingBlock handle) {
 		super(handle);
 	}
 
-	public static PoreFallingSand of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public FallingBlock getHandle() {
+		return (FallingBlock)super.getHandle();
 	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreFallingSand of(FallingBlock handle) {
+		return converter.apply(handle);
+	}
+
+	//TODO: bridge
 
 	@Override
 	public EntityType getType(){
@@ -23,26 +52,26 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
 
 	@Override
 	public Material getMaterial() {
-		throw new NotImplementedException();
+		return MaterialConverter.toBukkitMaterial(getHandle().getBlockState().getType());
 	}
 
 	@Override
 	public int getBlockId() {
-		throw new NotImplementedException();
+		return MaterialConverter.toBukkitMaterial(getHandle().getBlockState().getType()).getId();
 	}
 
 	@Override
 	public byte getBlockData() {
-		throw new NotImplementedException();
+		return getHandle().getBlockState().getDataValue();
 	}
 
 	@Override
 	public boolean getDropItem() {
-		throw new NotImplementedException();
+		return getHandle().getCanDropAsItem();
 	}
 
 	@Override
 	public void setDropItem(boolean drop) {
-		throw new NotImplementedException();
+		getHandle().setCanDropAsItem(drop);
 	}
 }

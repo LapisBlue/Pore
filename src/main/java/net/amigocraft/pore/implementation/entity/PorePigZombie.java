@@ -1,20 +1,44 @@
 package net.amigocraft.pore.implementation.entity;
 
-import org.apache.commons.lang.NotImplementedException;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.PigZombie;
+import org.spongepowered.api.entity.living.monster.ZombiePigman;
 
 public class PorePigZombie extends PoreZombie implements PigZombie {
 
-	// TODO: Bridge
+	private static TypeConverter<ZombiePigman, PorePigZombie> converter;
 
-	//TODO: make constructor as specific as possible
-	protected PorePigZombie(org.spongepowered.api.entity.LivingEntity handle){
+	@SuppressWarnings("unchecked")
+	static TypeConverter<ZombiePigman, PorePigZombie> getPigZombieConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<ZombiePigman, PorePigZombie>(){
+				@Override
+				protected PorePigZombie convert(ZombiePigman handle) {
+					return new PorePigZombie(handle);
+				}
+			};
+		}
+		return converter;
+	}
+
+	protected PorePigZombie(ZombiePigman handle) {
 		super(handle);
 	}
 
-	public static PorePigZombie of(org.spongepowered.api.entity.Entity handle){
-		throw new NotImplementedException();
+	@Override
+	public ZombiePigman getHandle() {
+		return (ZombiePigman)super.getHandle();
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PorePigZombie of(ZombiePigman handle) {
+		return converter.apply(handle);
 	}
 
 	@Override
@@ -24,21 +48,21 @@ public class PorePigZombie extends PoreZombie implements PigZombie {
 
 	@Override
 	public int getAnger() {
-		throw new NotImplementedException();
+		return getHandle().getAngerLevel();
 	}
 
 	@Override
 	public void setAnger(int level) {
-		throw new NotImplementedException();
+		getHandle().setAngerLevel(level);
 	}
 
 	@Override
 	public void setAngry(boolean angry) {
-		throw new NotImplementedException();
+		setAnger(angry ? 400 : 0);
 	}
 
 	@Override
 	public boolean isAngry() {
-		throw new NotImplementedException();
+		return getAnger() > 0;
 	}
 }

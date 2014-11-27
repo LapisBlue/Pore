@@ -2,6 +2,10 @@ package net.amigocraft.pore.implementation.block;
 
 import net.amigocraft.pore.implementation.PoreWorld;
 import net.amigocraft.pore.util.*;
+import net.amigocraft.pore.util.converter.DirectionConverter;
+import net.amigocraft.pore.util.converter.vector.LocationFactory;
+import net.amigocraft.pore.util.converter.MaterialConverter;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -19,15 +23,15 @@ import org.spongepowered.api.block.BlockType;
 import java.util.Collection;
 import java.util.List;
 
-public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> implements Block {
+public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.BlockLoc> implements Block {
 
-	private static Converter<org.spongepowered.api.block.Block, PoreBlock> converter;
+	private static TypeConverter<org.spongepowered.api.block.BlockLoc, PoreBlock> converter;
 
-	static Converter<org.spongepowered.api.block.Block, PoreBlock> getConverter() {
+	static TypeConverter<org.spongepowered.api.block.BlockLoc, PoreBlock> getConverter() {
 		if (converter == null) {
-			converter = new Converter<org.spongepowered.api.block.Block, PoreBlock>() {
+			converter = new TypeConverter<org.spongepowered.api.block.BlockLoc, PoreBlock>() {
 				@Override
-				protected PoreBlock convert(org.spongepowered.api.block.Block handle) {
+				protected PoreBlock convert(org.spongepowered.api.block.BlockLoc handle) {
 					return new PoreBlock(handle);
 				}
 			};
@@ -42,11 +46,11 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> im
 	 * @param handle The Sponge object to wrap.
 	 * @return A Pore wrapper for the given Sponge object.
 	 */
-	public static PoreBlock of(org.spongepowered.api.block.Block handle) {
+	public static PoreBlock of(org.spongepowered.api.block.BlockLoc handle) {
 		return getConverter().apply(handle);
 	}
 
-	private PoreBlock(org.spongepowered.api.block.Block handle) {
+	private PoreBlock(org.spongepowered.api.block.BlockLoc handle) {
 		super(handle);
 	}
 
@@ -195,12 +199,12 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.Block> im
 
 	@Override
 	public boolean isBlockFacePowered(BlockFace face) {
-		return getHandle().isFacePowered(Directions.of(face));
+		return getHandle().isFacePowered(DirectionConverter.of(face));
 	}
 
 	@Override
 	public boolean isBlockFaceIndirectlyPowered(BlockFace face) {
-		return getHandle().isFaceIndirectlyPowered(Directions.of(face));
+		return getHandle().isFaceIndirectlyPowered(DirectionConverter.of(face));
 	}
 
 	@Override
