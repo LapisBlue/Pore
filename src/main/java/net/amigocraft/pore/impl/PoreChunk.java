@@ -90,7 +90,7 @@ public class PoreChunk extends PoreWrapper<org.spongepowered.api.world.Chunk> im
 
 	@Override
 	public boolean isLoaded() {
-		return load(true);
+		return getHandle().isLoaded();
 	}
 
 	@Override
