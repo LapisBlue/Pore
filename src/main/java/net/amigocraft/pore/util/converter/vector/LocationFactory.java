@@ -15,7 +15,7 @@
 
 package net.amigocraft.pore.util.converter.vector;
 
-import net.amigocraft.pore.implementation.PoreWorld;
+import net.amigocraft.pore.impl.PoreWorld;
 import org.bukkit.Location;
 import org.spongepowered.api.math.Vector3d;
 import org.spongepowered.api.math.Vector3f;

@@ -15,9 +15,9 @@
 
 package net.amigocraft.pore;
 
-import net.amigocraft.pore.implementation.PoreChunk;
-import net.amigocraft.pore.implementation.PoreWorld;
-import net.amigocraft.pore.implementation.entity.PorePlayer;
+import net.amigocraft.pore.impl.PoreChunk;
+import net.amigocraft.pore.impl.PoreWorld;
+import net.amigocraft.pore.impl.entity.PorePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.spongepowered.api.util.event.Subscribe;

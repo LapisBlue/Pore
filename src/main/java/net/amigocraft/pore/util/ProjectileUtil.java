@@ -1,6 +1,6 @@
 package net.amigocraft.pore.util;
 
-import net.amigocraft.pore.implementation.entity.PoreFireball;
+import net.amigocraft.pore.impl.entity.PoreFireball;
 import net.amigocraft.pore.util.converter.vector.Vector3fFactory;
 import org.bukkit.entity.*;
 import org.bukkit.util.Vector;
