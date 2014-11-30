@@ -52,7 +52,8 @@ public class PoreEnderman extends PoreMonster implements Enderman {
 
 	@Override
 	public MaterialData getCarriedMaterial() {
-		return new MaterialData(MaterialConverter.toBukkitMaterial(getHandle().getCarriedBlock().get()));
+		return getHandle().getCarriedBlock().isPresent() ?
+				new MaterialData(MaterialConverter.toBukkitMaterial(getHandle().getCarriedBlock().get())) : null;
 	}
 
 	@Override

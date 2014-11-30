@@ -294,7 +294,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public Entity getLeashHolder() throws IllegalStateException {
-		return PoreEntity.of(getHandle().getLeashHolder().get());
+		return getHandle().getLeashHolder().isPresent() ? PoreEntity.of(getHandle().getLeashHolder().get()) : null;
 	}
 
 	@Override

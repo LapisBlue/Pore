@@ -1,5 +1,6 @@
 package net.amigocraft.pore.impl.scheduler;
 
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import net.amigocraft.pore.Pore;
 import org.apache.commons.lang.NotImplementedException;
@@ -9,6 +10,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
+import org.spongepowered.api.service.scheduler.RepeatingTask;
 import org.spongepowered.api.service.scheduler.Scheduler;
 import org.spongepowered.api.service.scheduler.Task;
 
@@ -79,7 +81,8 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 	@Override
 	public BukkitTask runTask(Plugin plugin, Runnable task) throws IllegalArgumentException {
 		validate(plugin, task);
-		return new PoreBukkitTask(getHandle().runTask(Pore.getPlugin(plugin), task).get());
+		Optional<Task> spongeTask = getHandle().runTask(Pore.getPlugin(plugin), task);
+		return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get()) : null;
 	}
 
 	@Override
@@ -91,7 +94,8 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 	@Override
 	public BukkitTask runTaskLater(Plugin plugin, Runnable task, long delay) throws IllegalArgumentException {
 		validate(plugin, task);
-		return new PoreBukkitTask(getHandle().runTaskAfter(Pore.getPlugin(plugin), task, delay).get());
+		Optional<Task> spongeTask = getHandle().runTaskAfter(Pore.getPlugin(plugin), task, delay);
+		return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get()) : null;
 	}
 
 	@Override
@@ -103,7 +107,8 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 	@Override
 	public BukkitTask runTaskTimer(Plugin plugin, Runnable task, long delay, long period) throws IllegalArgumentException {
 		validate(plugin, task);
-		return new PoreBukkitTask(getHandle().runRepeatingTaskAfter(Pore.getPlugin(plugin), task, delay, period).get());
+		Optional<RepeatingTask> spongeTask = getHandle().runRepeatingTaskAfter(Pore.getPlugin(plugin), task, delay, period);
+		return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get()) : null;
 	}
 
 	@Override

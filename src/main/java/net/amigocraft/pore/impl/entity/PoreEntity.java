@@ -213,12 +213,12 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
 	@Override
 	public Entity getPassenger() {
-		return PoreEntity.of(getHandle().getRider().get());
+		return getHandle().getRider().isPresent() ? PoreEntity.of(getHandle().getRider().get()) : null;
 	}
 
 	@Override
 	public boolean setPassenger(Entity passenger) {
-		if (getHandle().getRider().get() == null) {
+		if (!getHandle().getRider().isPresent()) {
 			((PoreEntity)passenger).getHandle().mount(getHandle());
 			return true;
 		}
@@ -231,12 +231,12 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
 	@Override
 	public boolean isEmpty() {
-		return getHandle().getRider().get() == null;
+		return !getHandle().getRider().isPresent();
 	}
 
 	@Override
 	public boolean eject() {
-		if (getHandle().getRider().get() != null) {
+		if (getHandle().getRider().isPresent()) {
 			getHandle().eject();
 			return true;
 		}
@@ -285,12 +285,12 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
 	@Override
 	public boolean isInsideVehicle() {
-		return getHandle().getRiding().get() != null;
+		return getHandle().getRiding().isPresent();
 	}
 
 	@Override
 	public boolean leaveVehicle() {
-		if (getHandle().getRiding().get() != null) {
+		if (getHandle().getRiding().isPresent()) {
 			getHandle().dismount();
 			return true;
 		}
@@ -299,7 +299,7 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
 	@Override
 	public Entity getVehicle() {
-		return PoreEntity.of(getHandle().getRiding().get());
+		return getHandle().getRiding().isPresent() ? PoreEntity.of(getHandle().getRiding().get()) : null;
 	}
 
 	@Override

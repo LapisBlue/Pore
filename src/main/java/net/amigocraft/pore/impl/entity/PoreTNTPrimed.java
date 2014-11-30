@@ -60,7 +60,7 @@ public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
 
 	@Override
 	public Entity getSource() {
-		return PoreEntity.of(getHandle().getDetonator().get());
+		return getHandle().getDetonator().isPresent() ? PoreEntity.of(getHandle().getDetonator().get()) : null;
 	}
 
 	@Override

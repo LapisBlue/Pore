@@ -51,7 +51,7 @@ public class PoreItemFrame extends PoreHanging implements org.bukkit.entity.Item
 
 	@Override
 	public ItemStack getItem() {
-		return ItemStackConverter.of(getHandle().getItem().get());
+		return getHandle().getItem().isPresent() ? ItemStackConverter.of(getHandle().getItem().get()) : null;
 	}
 
 	@Override

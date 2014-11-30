@@ -6,11 +6,13 @@ import org.bukkit.entity.*;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.entity.projectile.source.ProjectileSource;
 
+import javax.annotation.Nullable;
+
 public class ProjectileUtil {
 
 	@SuppressWarnings("unchecked")
 	public static <T extends Projectile> T
-	launchProjectile(ProjectileSource source, Class<? extends T> projectile, Vector velocity){
+	launchProjectile(ProjectileSource source, Class<? extends T> projectile, @Nullable Vector velocity){
 		if (projectile.isAssignableFrom(Arrow.class)){
 			return (T)PoreFireball.of(source.launchProjectile(
 					org.spongepowered.api.entity.projectile.Arrow.class,
