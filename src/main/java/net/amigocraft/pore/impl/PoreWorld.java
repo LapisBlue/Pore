@@ -30,6 +30,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.math.Vectors;
 import org.spongepowered.api.world.extent.Extent;
+import org.spongepowered.api.world.weather.Weathers;
 
 import javax.annotation.Nullable;
 import java.io.File;
@@ -362,42 +363,44 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
 	@Override
 	public boolean hasStorm() {
-		throw new NotImplementedException();
+		return getHandle().getWeather().equals(Weathers.RAIN);
 	}
 
 	@Override
 	public void setStorm(boolean hasStorm) {
-		throw new NotImplementedException();
+		getHandle().forecast(hasStorm ? Weathers.RAIN : Weathers.CLEAR);
 	}
 
 	@Override
 	public int getWeatherDuration() {
-		throw new NotImplementedException();
+		return (int) getHandle().getRemainingDuration();
 	}
 
 	@Override
 	public void setWeatherDuration(int duration) {
-		throw new NotImplementedException();
+		getHandle().forecast(getHandle().getWeather(), duration);
 	}
 
 	@Override
 	public boolean isThundering() {
-		throw new NotImplementedException();
+		return getHandle().getWeather().equals(Weathers.THUNDER_STORM);
 	}
 
 	@Override
 	public void setThundering(boolean thundering) {
-		throw new NotImplementedException();
+		getHandle().forecast(Weathers.THUNDER_STORM);
 	}
+
+	// TODO: Verify behaviour of this
 
 	@Override
 	public int getThunderDuration() {
-		throw new NotImplementedException();
+		return isThundering() ? (int) getHandle().getRemainingDuration() : 0;
 	}
 
 	@Override
 	public void setThunderDuration(int duration) {
-		throw new NotImplementedException();
+		getHandle().forecast(Weathers.THUNDER_STORM, duration);
 	}
 
 	@Override
