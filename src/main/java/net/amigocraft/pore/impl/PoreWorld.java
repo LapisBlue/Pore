@@ -9,9 +9,11 @@ import net.amigocraft.pore.impl.block.PoreBlock;
 import net.amigocraft.pore.impl.entity.PoreEntity;
 import net.amigocraft.pore.impl.entity.PoreLivingEntity;
 import net.amigocraft.pore.impl.entity.PorePlayer;
+import net.amigocraft.pore.util.converter.SoundConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
 import net.amigocraft.pore.util.PoreCollections;
 import net.amigocraft.pore.util.PoreWrapper;
+import net.amigocraft.pore.util.converter.vector.Vector3dFactory;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
 import org.bukkit.Chunk;
@@ -131,7 +133,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
 	@Override
 	public boolean isChunkLoaded(Chunk chunk) {
-		throw new NotImplementedException();
+		return chunk.isLoaded();
 	}
 
 	@Override
@@ -146,7 +148,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
 	@Override
 	public boolean isChunkLoaded(int x, int z) {
-		throw new NotImplementedException();
+		return getHandle().getChunk(Vectors.create2i(x, z)).isPresent();
 	}
 
 	@Override
@@ -651,7 +653,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
 	@Override
 	public void playSound(Location location, Sound sound, float volume, float pitch) {
-		throw new NotImplementedException();
+		getHandle().playSound(SoundConverter.of(sound), Vector3dFactory.fromLocation(location), (double) volume, (double) pitch);
 	}
 
 	@Override

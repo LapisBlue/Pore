@@ -1,6 +1,8 @@
 package net.amigocraft.pore.impl.entity;
 
+import net.amigocraft.pore.util.converter.SoundConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.vector.Vector3dFactory;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
 import org.bukkit.conversations.Conversation;
@@ -9,6 +11,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
+import org.spongepowered.api.effect.Sounds;
 import org.spongepowered.api.entity.player.Player;
 
 import java.net.InetSocketAddress;
@@ -186,12 +189,13 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
 	@Override
 	public void playSound(Location location, Sound sound, float volume, float pitch) {
-		throw new NotImplementedException();
+		getHandle().playSound(SoundConverter.of(sound), Vector3dFactory.fromLocation(location), (double) volume, (double) pitch);
 	}
 
 	@Override
 	public void playSound(Location location, String sound, float volume, float pitch) {
-		throw new NotImplementedException();
+		// TODO: Isn't the String sound the ID and not the name?
+		getHandle().playSound(Sounds.getByName(sound).get(), Vector3dFactory.fromLocation(location), (double) volume, (double) pitch);
 	}
 
 	@Override
@@ -421,22 +425,22 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
 	@Override
 	public float getExhaustion() {
-		throw new NotImplementedException();
+		return getHandle().getHunger();
 	}
 
 	@Override
 	public void setExhaustion(float value) {
-		throw new NotImplementedException();
+		getHandle().setHunger(value);
 	}
 
 	@Override
 	public float getSaturation() {
-		throw new NotImplementedException();
+		return getHandle().getSaturation();
 	}
 
 	@Override
 	public void setSaturation(float value) {
-		throw new NotImplementedException();
+		getHandle().setSaturation(value);
 	}
 
 	@Override
