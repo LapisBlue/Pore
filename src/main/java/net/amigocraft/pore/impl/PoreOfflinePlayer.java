@@ -1,36 +1,59 @@
 package net.amigocraft.pore.impl;
 
+import com.google.common.base.Optional;
+import net.amigocraft.pore.impl.entity.PorePlayer;
+import net.amigocraft.pore.util.PoreWrapper;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.spongepowered.api.entity.player.User;
 
 import java.util.Map;
 import java.util.UUID;
 
-//TODO: skeleton implementation
+public class PoreOfflinePlayer extends PoreWrapper<User> implements org.bukkit.OfflinePlayer {
+	private static TypeConverter<User, PoreOfflinePlayer> converter;
 
-//TODO: skeleton implementation
+	static TypeConverter<User, PoreOfflinePlayer> getConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<User, PoreOfflinePlayer>() {
+				@Override
+				protected PoreOfflinePlayer convert(User handle) {
+					return new PoreOfflinePlayer(handle);
+				}
+			};
+		}
 
-public class PoreOfflinePlayer implements org.bukkit.OfflinePlayer {
+		return converter;
+	}
+
+	protected PoreOfflinePlayer(User handle) {
+		super(handle);
+	}
+
+	public static PoreOfflinePlayer of(User user) {
+		return converter.apply(user);
+	}
 
 	@Override
 	public boolean isOnline() {
-		throw new NotImplementedException();
+		return getHandle().isOnline();
 	}
 
 	@Override
 	public String getName() {
-		throw new NotImplementedException();
+		return getHandle().getName();
 	}
 
 	@Override
 	public UUID getUniqueId() {
-		throw new NotImplementedException();
+		return getHandle().getUniqueId();
 	}
 
 	@Override
 	public boolean isBanned() {
-		throw new NotImplementedException();
+		return getHandle().isBanned();
 	}
 
 	@Override
@@ -40,7 +63,7 @@ public class PoreOfflinePlayer implements org.bukkit.OfflinePlayer {
 
 	@Override
 	public boolean isWhitelisted() {
-		throw new NotImplementedException();
+		return getHandle().isWhitelisted();
 	}
 
 	@Override
@@ -50,7 +73,12 @@ public class PoreOfflinePlayer implements org.bukkit.OfflinePlayer {
 
 	@Override
 	public Player getPlayer() {
-		throw new NotImplementedException();
+		Optional<org.spongepowered.api.entity.player.Player> player = getHandle().getPlayer();
+		if (player.isPresent()) {
+			return PorePlayer.of(player.get());
+		} else {
+			return null;
+		}
 	}
 
 	@Override
