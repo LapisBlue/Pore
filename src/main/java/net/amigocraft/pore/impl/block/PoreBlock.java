@@ -3,6 +3,7 @@ package net.amigocraft.pore.impl.block;
 import net.amigocraft.pore.impl.PoreWorld;
 import net.amigocraft.pore.util.*;
 import net.amigocraft.pore.util.converter.DirectionConverter;
+import net.amigocraft.pore.util.converter.ItemStackConverter;
 import net.amigocraft.pore.util.converter.vector.LocationFactory;
 import net.amigocraft.pore.util.converter.MaterialConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
@@ -11,27 +12,26 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Biome;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.PistonMoveReaction;
+import org.bukkit.block.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.spongepowered.api.block.BlockLoc;
 import org.spongepowered.api.block.BlockType;
+import org.spongepowered.api.block.BlockTypes;
 
 import java.util.Collection;
 import java.util.List;
 
-public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.BlockLoc> implements Block {
+public class PoreBlock extends PoreWrapper<BlockLoc> implements Block {
 
-	private static TypeConverter<org.spongepowered.api.block.BlockLoc, PoreBlock> converter;
+	private static TypeConverter<BlockLoc, PoreBlock> converter;
 
-	static TypeConverter<org.spongepowered.api.block.BlockLoc, PoreBlock> getConverter() {
+	static TypeConverter<BlockLoc, PoreBlock> getConverter() {
 		if (converter == null) {
-			converter = new TypeConverter<org.spongepowered.api.block.BlockLoc, PoreBlock>() {
+			converter = new TypeConverter<BlockLoc, PoreBlock>() {
 				@Override
-				protected PoreBlock convert(org.spongepowered.api.block.BlockLoc handle) {
+				protected PoreBlock convert(BlockLoc handle) {
 					return new PoreBlock(handle);
 				}
 			};
@@ -46,11 +46,11 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.BlockLoc>
 	 * @param handle The Sponge object to wrap.
 	 * @return A Pore wrapper for the given Sponge object.
 	 */
-	public static PoreBlock of(org.spongepowered.api.block.BlockLoc handle) {
+	public static PoreBlock of(BlockLoc handle) {
 		return getConverter().apply(handle);
 	}
 
-	private PoreBlock(org.spongepowered.api.block.BlockLoc handle) {
+	private PoreBlock(BlockLoc handle) {
 		super(handle);
 	}
 
@@ -146,25 +146,26 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.BlockLoc>
 
 	@Override
 	public void setData(byte data, boolean applyPhysics) {
-		// TODO: applyPhysics
-		setData(data);
+		throw new NotImplementedException(); //TODO: probably going to need some custom data mapping for BlockStates
 	}
 
 	@Override
 	public boolean setTypeId(int type) {
-		BlockType blockType = MaterialConverter.toBlockType(Material.getMaterial(type));
-		throw new NotImplementedException();
+		return this.setTypeId(type, true);
 	}
 
 	@Override
 	public boolean setTypeId(int type, boolean applyPhysics) {
-		// TODO: applyPhysics
-		return setTypeId(type);
+		//TODO: applyPhysics
+		BlockType blockType = MaterialConverter.toBlockType(Material.getMaterial(type));
+		getHandle().replaceWith(blockType);
+		return getHandle().getType().equals(blockType);
 	}
 
 	@Override
 	public boolean setTypeIdAndData(int type, byte data, boolean applyPhysics) {
-		throw new NotImplementedException();
+		this.setData(data, applyPhysics);
+		return this.setTypeId(type, applyPhysics);
 	}
 
 	@Override
@@ -173,8 +174,8 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.BlockLoc>
 	}
 
 	@Override
-	public PoreBlockState getState() {
-		throw new NotImplementedException();
+	public BlockState getState() {
+		return PoreBlockState.of(getHandle().getState());
 	}
 
 	@Override
@@ -219,12 +220,16 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.BlockLoc>
 
 	@Override
 	public boolean isEmpty() {
-		throw new NotImplementedException();
+		return getHandle().getType() == BlockTypes.AIR;
 	}
 
 	@Override
 	public boolean isLiquid() {
-		throw new NotImplementedException();
+		return
+				getHandle().getType() == BlockTypes.FLOWING_WATER ||
+				getHandle().getType() == BlockTypes.WATER ||
+				getHandle().getType() == BlockTypes.FLOWING_LAVA ||
+				getHandle().getType() == BlockTypes.LAVA;
 	}
 
 	@Override
@@ -244,12 +249,12 @@ public class PoreBlock extends PoreWrapper<org.spongepowered.api.block.BlockLoc>
 
 	@Override
 	public boolean breakNaturally() {
-		throw new NotImplementedException();
+		return getHandle().dig();
 	}
 
 	@Override
 	public boolean breakNaturally(ItemStack tool) {
-		throw new NotImplementedException();
+		return getHandle().digWith(ItemStackConverter.of(tool));
 	}
 
 	@Override

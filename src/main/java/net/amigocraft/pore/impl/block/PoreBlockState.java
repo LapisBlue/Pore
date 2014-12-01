@@ -1,5 +1,8 @@
 package net.amigocraft.pore.impl.block;
 
+import net.amigocraft.pore.util.PoreWrapper;
+import net.amigocraft.pore.util.converter.MaterialConverter;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
@@ -11,19 +14,46 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.block.BlockLoc;
+import org.spongepowered.api.block.BlockProperty;
 
 import java.util.List;
 
-public class PoreBlockState implements BlockState {
-	private BlockLoc handle;
+public class PoreBlockState extends PoreWrapper<org.spongepowered.api.block.BlockState> implements BlockState {
 
-	public PoreBlockState(BlockLoc spongeBlock) {
-		this.handle = spongeBlock;
+	//TODO: possibly store the parent BlockLoc in the wrapper object
+
+	private static TypeConverter<org.spongepowered.api.block.BlockState, PoreBlockState> converter;
+
+	static TypeConverter<org.spongepowered.api.block.BlockState, PoreBlockState> getConverter() {
+		if (converter == null) {
+			converter = new TypeConverter<org.spongepowered.api.block.BlockState, PoreBlockState>() {
+				@Override
+				protected PoreBlockState convert(org.spongepowered.api.block.BlockState handle) {
+					return new PoreBlockState(handle);
+				}
+			};
+		}
+
+		return converter;
+	}
+
+	/**
+	 * Returns a Pore wrapper for the given handle.
+	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+	 * @param handle The Sponge object to wrap.
+	 * @return A Pore wrapper for the given Sponge object.
+	 */
+	public static PoreBlockState of(org.spongepowered.api.block.BlockState handle) {
+		return getConverter().apply(handle);
+	}
+
+	private PoreBlockState(org.spongepowered.api.block.BlockState handle) {
+		super(handle);
 	}
 
 	@Override
 	public Block getBlock() {
-		return PoreBlock.of(handle);
+		throw new NotImplementedException();
 	}
 
 	@Override
@@ -33,12 +63,12 @@ public class PoreBlockState implements BlockState {
 
 	@Override
 	public Material getType() {
-		throw new NotImplementedException();
+		return MaterialConverter.toBukkitMaterial(getHandle().getType());
 	}
 
 	@Override
 	public int getTypeId() {
-		throw new NotImplementedException();
+		return MaterialConverter.toBukkitMaterial(getHandle().getType()).getId();
 	}
 
 	@Override
@@ -113,7 +143,7 @@ public class PoreBlockState implements BlockState {
 
 	@Override
 	public byte getRawData() {
-		throw new NotImplementedException();
+		return getHandle().getDataValue();
 	}
 
 	@Override
