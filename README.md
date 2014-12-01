@@ -11,7 +11,7 @@ Compilation
 Gradle is used to handle dependencies.
 
 - Clone the repo: `git clone https://github.com/LapisBlue/Pore.git`
-- Compile the project using the Gradle wrapper: `./gradlew`
+- Compile the project using the Gradle wrapper: `./gradlew` (`gradlew` on Windows)
 
 Licensing
 ---------
