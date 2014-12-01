@@ -37,11 +37,13 @@ ext {
 repositories {
     mavenCentral()
     maven { url 'http://repo.lapis.blue/thirdparty' }
+    maven { url 'http://repo.spongepowered.org/Sponge/maven' }
+
 }
 
 // Project dependencies
 dependencies {
-    compile project('SpongeAPI') // TODO: Change to Sponge's Maven repo in the future
+    compile 'org.spongepowered:spongeapi:1.1-SNAPSHOT'
     compile bukkit
 
     testCompile 'junit:junit:4.11'
@@ -81,16 +83,3 @@ shadowJar {
         java = 'SLASHSTAR_STYLE'
     }
 }*/
-
-// Disable tests for SpongeAPI
-project('SpongeAPI') {
-    afterEvaluate { project ->
-        javadoc.enabled = false
-        javadocJar.enabled = false
-        sourceJar.enabled = false
-        licenseFormat.enabled = false
-        tasks.withType(VerificationTask) {
-            enabled = false
-        }
-    }
-}
