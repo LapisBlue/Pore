@@ -13,8 +13,6 @@ import org.bukkit.block.BlockState;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
-import org.spongepowered.api.block.BlockLoc;
-import org.spongepowered.api.block.BlockProperty;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class PoreBlockState extends PoreWrapper<org.spongepowered.api.block.Bloc
 
 	private static TypeConverter<org.spongepowered.api.block.BlockState, PoreBlockState> converter;
 
-	static TypeConverter<org.spongepowered.api.block.BlockState, PoreBlockState> getConverter() {
+	static TypeConverter<org.spongepowered.api.block.BlockState, PoreBlockState> getBlockStateConverter() {
 		if (converter == null) {
 			converter = new TypeConverter<org.spongepowered.api.block.BlockState, PoreBlockState>() {
 				@Override
@@ -44,10 +42,10 @@ public class PoreBlockState extends PoreWrapper<org.spongepowered.api.block.Bloc
 	 * @return A Pore wrapper for the given Sponge object.
 	 */
 	public static PoreBlockState of(org.spongepowered.api.block.BlockState handle) {
-		return getConverter().apply(handle);
+		return converter.apply(handle);
 	}
 
-	private PoreBlockState(org.spongepowered.api.block.BlockState handle) {
+	protected PoreBlockState(org.spongepowered.api.block.BlockState handle) {
 		super(handle);
 	}
 

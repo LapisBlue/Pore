@@ -47,7 +47,7 @@ public class PoreBlock extends PoreWrapper<BlockLoc> implements Block {
 	 * @return A Pore wrapper for the given Sponge object.
 	 */
 	public static PoreBlock of(BlockLoc handle) {
-		return getConverter().apply(handle);
+		return converter.apply(handle);
 	}
 
 	private PoreBlock(BlockLoc handle) {
