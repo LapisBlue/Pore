@@ -1,6 +1,7 @@
 package net.amigocraft.pore.impl.entity;
 
 import net.amigocraft.pore.util.converter.ItemStackConverter;
+import net.amigocraft.pore.util.converter.RotationConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Rotation;
@@ -61,11 +62,11 @@ public class PoreItemFrame extends PoreHanging implements org.bukkit.entity.Item
 
 	@Override
 	public Rotation getRotation() {
-		throw new NotImplementedException(); //TODO
+		return RotationConverter.of(getHandle().getItemRotation());
 	}
 
 	@Override
 	public void setRotation(Rotation rotation) throws IllegalArgumentException {
-		throw new NotImplementedException(); //TODO
+		getHandle().setRotation(RotationConverter.of(rotation));
 	}
 }
