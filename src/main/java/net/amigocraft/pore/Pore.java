@@ -19,6 +19,7 @@ import net.amigocraft.pore.impl.PoreServer;
 import org.apache.commons.lang.NotImplementedException;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
+import org.spongepowered.api.Server;
 import org.spongepowered.api.util.event.Subscribe;
 import org.spongepowered.api.event.message.CommandEvent;
 import org.spongepowered.api.event.state.PreInitializationEvent;
@@ -69,7 +70,7 @@ public class Pore {
 	}
 
 	public static Game getGame() {
-		return server.getHandle();
+		return server.getGame();
 	}
 
 	public static PluginContainer getPlugin(org.bukkit.plugin.Plugin plugin) {

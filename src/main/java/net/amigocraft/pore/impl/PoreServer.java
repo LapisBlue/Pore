@@ -8,6 +8,8 @@ import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.Validate;
 import org.bukkit.*;
+import org.bukkit.Server;
+import org.bukkit.World;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
@@ -23,7 +25,8 @@ import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
-import org.spongepowered.api.Game;
+import org.spongepowered.api.*;
+import org.spongepowered.api.world.*;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -33,17 +36,23 @@ import java.util.logging.Logger;
 
 //TODO: skeleton implementation
 
-public class PoreServer extends PoreWrapper<Game> implements Server {
+public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implements Server {
+	private final Game game;
 	private final PluginManager pluginManager;
 	private final File pluginsDir = new File(".", "bukkit-plugins"); //TODO: use actual server directory, currently set to working directory
 
 	public PoreServer(org.spongepowered.api.Game handle) {
-		super(handle);
+		super(handle.getServer().get());
+		this.game = handle;
 		this.pluginManager = new SimplePluginManager(this, new SimpleCommandMap(this));
 		Bukkit.setServer(this);
 
 		getLogger().info("Loading plugins");
 		loadPlugins();
+	}
+
+	public Game getGame() {
+		return game;
 	}
 	
 	public void loadPlugins() {
@@ -101,7 +110,7 @@ public class PoreServer extends PoreWrapper<Game> implements Server {
 
 	@Override
 	public String getVersion() {
-		return getHandle().getImplementationVersion();
+		return game.getImplementationVersion();
 	}
 
 	@Override
@@ -287,12 +296,14 @@ public class PoreServer extends PoreWrapper<Game> implements Server {
 
 	@Override
 	public World getWorld(String name) {
-		return PoreWorld.of(getHandle().getWorld(name));
+		Optional<org.spongepowered.api.world.World> world = getHandle().getWorld(name);
+		return world.isPresent() ? PoreWorld.of(world.get()) : null;
 	}
 
 	@Override
 	public World getWorld(UUID uid) {
-		return PoreWorld.of(getHandle().getWorld(uid));
+		Optional<org.spongepowered.api.world.World> world = getHandle().getWorld(uid);
+		return world.isPresent() ? PoreWorld.of(world.get()) : null;
 	}
 
 	@Override
