@@ -164,7 +164,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
 	@Override
 	public double getLastDamage() {
-		return getHandle().getLastDamage();
+		return getHandle().getLasDamage();
 	}
 
 	@Override

@@ -1,1 +1,3 @@
 rootProject.name = 'Pore'
+include 'SpongeAPI'
+project(':SpongeAPI').projectDir = file('lib/SpongeAPI')
