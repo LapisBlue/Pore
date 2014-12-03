@@ -485,12 +485,12 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
 	@Override
 	public long getFirstPlayed() {
-		throw new NotImplementedException();
+		return getHandle().getFirstPlayed().getTime();
 	}
 
 	@Override
 	public long getLastPlayed() {
-		throw new NotImplementedException();
+		return getHandle().getLastPlayed().getTime();
 	}
 
 	@Override

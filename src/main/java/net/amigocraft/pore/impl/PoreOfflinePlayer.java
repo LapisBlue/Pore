@@ -83,17 +83,17 @@ public class PoreOfflinePlayer extends PoreWrapper<User> implements org.bukkit.O
 
 	@Override
 	public long getFirstPlayed() {
-		throw new NotImplementedException();
+		return getHandle().getFirstPlayed().getTime();
 	}
 
 	@Override
 	public long getLastPlayed() {
-		throw new NotImplementedException();
+		return getHandle().getLastPlayed().getTime();
 	}
 
 	@Override
 	public boolean hasPlayedBefore() {
-		throw new NotImplementedException();
+		return getHandle().hasJoinedBefore();
 	}
 
 	@Override
