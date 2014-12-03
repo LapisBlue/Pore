@@ -18,7 +18,6 @@ public class PoreAnimals extends PoreAgeable implements Animals {
 					(ImmutableMap)ImmutableMap.builder() // generified for simplicity and readability
 							.put(Chicken.class, PoreChicken.getChickenConverter())
 							.put(Cow.class, PoreCow.getCowConverter())
-							.put(Horse.class, PoreHorse.getHorseConverter())
 							.put(Pig.class, PorePig.getPigConverter())
 							.put(Sheep.class, PoreSheep.getSheepConverter())
 							.put(Tameable.class, PoreTameable.getTameableConverter())

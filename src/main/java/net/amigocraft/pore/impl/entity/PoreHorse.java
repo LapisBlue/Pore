@@ -1,5 +1,6 @@
 package net.amigocraft.pore.impl.entity;
 
+import net.amigocraft.pore.util.converter.HorseConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.AnimalTamer;
@@ -7,7 +8,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.HorseInventory;
 import org.spongepowered.api.entity.living.animal.Horse;
 
-public class PoreHorse extends PoreAnimals implements org.bukkit.entity.Horse {
+public class PoreHorse extends PoreTameable implements org.bukkit.entity.Horse {
 
 	private static TypeConverter<Horse, PoreHorse> converter;
 
@@ -52,32 +53,32 @@ public class PoreHorse extends PoreAnimals implements org.bukkit.entity.Horse {
 
 	@Override
 	public Variant getVariant() {
-		throw new NotImplementedException();
+		return HorseConverter.of(getHandle().getVariant());
 	}
 
 	@Override
 	public void setVariant(Variant variant) {
-		throw new NotImplementedException();
+		getHandle().setVariant(HorseConverter.of(variant));
 	}
 
 	@Override
 	public Color getColor() {
-		throw new NotImplementedException();
+		return HorseConverter.of(getHandle().getColor());
 	}
 
 	@Override
 	public void setColor(Color color) {
-		throw new NotImplementedException();
+		getHandle().setColor(HorseConverter.of(color));
 	}
 
 	@Override
 	public Style getStyle() {
-		throw new NotImplementedException();
+		return HorseConverter.of(getHandle().getStyle());
 	}
 
 	@Override
 	public void setStyle(Style style) {
-		throw new NotImplementedException();
+		getHandle().setStyle(HorseConverter.of(style));
 	}
 
 	@Override
@@ -125,23 +126,4 @@ public class PoreHorse extends PoreAnimals implements org.bukkit.entity.Horse {
 		throw new NotImplementedException();
 	}
 
-	@Override
-	public boolean isTamed() {
-		throw new NotImplementedException();
-	}
-
-	@Override
-	public void setTamed(boolean tame) {
-		throw new NotImplementedException();
-	}
-
-	@Override
-	public AnimalTamer getOwner() {
-		throw new NotImplementedException();
-	}
-
-	@Override
-	public void setOwner(AnimalTamer tamer) {
-		throw new NotImplementedException();
-	}
 }

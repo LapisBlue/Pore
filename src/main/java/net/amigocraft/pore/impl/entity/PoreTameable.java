@@ -6,6 +6,7 @@ import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Creature;
 import org.spongepowered.api.entity.living.Tameable;
 import org.spongepowered.api.entity.living.animal.Animal;
+import org.spongepowered.api.entity.living.animal.Horse;
 import org.spongepowered.api.entity.living.animal.Ocelot;
 import org.spongepowered.api.entity.living.animal.Wolf;
 
@@ -24,6 +25,7 @@ public class PoreTameable extends PoreAnimals implements org.bukkit.entity.Tamea
 					(ImmutableMap)ImmutableMap.builder()
 							.put(Ocelot.class, PoreOcelot.getOcelotConverter())
 							.put(Wolf.class, PoreWolf.getWolfConverter())
+							.put(Horse.class, PoreHorse.getHorseConverter())
 							.build()
 			){
 				@Override
