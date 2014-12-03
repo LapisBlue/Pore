@@ -5,7 +5,9 @@ import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import net.amigocraft.pore.Pore;
 import net.amigocraft.pore.impl.entity.PorePlayer;
+import net.amigocraft.pore.logging.PoreLogger;
 import net.amigocraft.pore.util.PoreCollections;
 import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
@@ -41,12 +43,14 @@ import java.util.logging.Logger;
 
 public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implements Server {
 	private final Game game;
+	private final Logger logger;
 	private final PluginManager pluginManager;
 	private final File pluginsDir = new File(".", "bukkit-plugins"); //TODO: use actual server directory, currently set to working directory
 
-	public PoreServer(org.spongepowered.api.Game handle) {
+	public PoreServer(org.spongepowered.api.Game handle, org.slf4j.Logger logger) {
 		super(handle.getServer().get());
 		this.game = handle;
+		this.logger = new PoreLogger(logger);
 		this.pluginManager = new SimplePluginManager(this, new SimpleCommandMap(this));
 		Bukkit.setServer(this);
 
@@ -353,7 +357,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
 	@Override
 	public Logger getLogger() {
-		throw new NotImplementedException();
+		return logger;
 	}
 
 	@Override

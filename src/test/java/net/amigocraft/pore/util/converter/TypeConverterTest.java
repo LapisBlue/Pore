@@ -1,4 +1,4 @@
-package net.amigocraft.pore.util;
+package net.amigocraft.pore.util.converter;
 
 import net.amigocraft.pore.impl.entity.PoreEntity;
 import net.amigocraft.pore.impl.entity.PoreLivingEntity;

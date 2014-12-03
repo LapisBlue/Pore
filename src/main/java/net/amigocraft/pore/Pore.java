@@ -19,7 +19,6 @@ import net.amigocraft.pore.impl.PoreServer;
 import org.apache.commons.lang.NotImplementedException;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
-import org.spongepowered.api.Server;
 import org.spongepowered.api.util.event.Subscribe;
 import org.spongepowered.api.event.message.CommandEvent;
 import org.spongepowered.api.event.state.PreInitializationEvent;
@@ -42,7 +41,7 @@ public class Pore {
 		logger = event.getPluginLog();
 
 		getLogger().info("Loading Pore server, please wait...");
-		server = new PoreServer(event.getGame());
+		server = new PoreServer(event.getGame(), logger);
 		// TODO: Enable plugins
 	}
 
