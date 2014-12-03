@@ -2,11 +2,13 @@ package net.amigocraft.pore.impl;
 
 import com.avaje.ebean.config.ServerConfig;
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import net.amigocraft.pore.impl.entity.PorePlayer;
 import net.amigocraft.pore.util.PoreCollections;
 import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
-import org.apache.commons.lang.Validate;
 import org.bukkit.*;
 import org.bukkit.Server;
 import org.bukkit.World;
@@ -25,6 +27,7 @@ import org.bukkit.plugin.messaging.StandardMessenger;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
+import org.bukkit.util.StringUtil;
 import org.spongepowered.api.*;
 import org.spongepowered.api.world.*;
 
@@ -231,25 +234,52 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
 	@Override
 	public Player getPlayer(String name) {
-		throw new NotImplementedException();
+		Preconditions.checkNotNull(name, "name");
+
+		org.spongepowered.api.entity.player.Player result = null;
+		int delta = Integer.MAX_VALUE;
+		for (org.spongepowered.api.entity.player.Player player : getHandle().getOnlinePlayers()) {
+			if (StringUtil.startsWithIgnoreCase(player.getName(), name)) {
+				int newDelta = player.getName().length() - name.length();
+				if (newDelta < delta) {
+					result = player;
+					delta = newDelta;
+				}
+
+				if (newDelta == 0) break;
+			}
+		}
+
+		return result != null ? PorePlayer.of(result) : null;
 	}
 
 	@Override
 	public Player getPlayerExact(String name) {
-		Validate.notNull(name, "Name cannot be null");
-
-		for (Player player : getOnlinePlayers()) {
-			if (player.getName().equalsIgnoreCase(name)) {
-				return player;
-			}
-		}
-
-		throw new NotImplementedException();
+		Optional<org.spongepowered.api.entity.player.Player> player = getHandle().getPlayer(name);
+		return player.isPresent() ? PorePlayer.of(player.get()) : null;
 	}
 
 	@Override
 	public List<Player> matchPlayer(String name) {
-		throw new NotImplementedException();
+		Preconditions.checkNotNull(name, "name");
+		name = name.toLowerCase();
+
+		List<Player> result = Lists.newArrayList();
+		for (org.spongepowered.api.entity.player.Player player : getHandle().getOnlinePlayers()) {
+			String playerName = player.getName().toLowerCase();
+
+			if (name.equals(playerName)) {
+				// Exact match
+				return ImmutableList.<Player>of(PorePlayer.of(player));
+			}
+
+			if (playerName.contains(name)) {
+				// Partial match
+				result.add(PorePlayer.of(player));
+			}
+		}
+
+		return result;
 	}
 
 	@Override
