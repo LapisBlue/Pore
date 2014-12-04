@@ -1,14 +1,16 @@
 package net.amigocraft.pore.util.converter;
 
+import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
+import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.spongepowered.api.potion.PotionEffectTypes;
 
-public class PotionEffectTypeConverter {
+public class PotionConverter {
 
-	private static ImmutableBiMap<org.bukkit.potion.PotionEffectType, org.spongepowered.api.potion.PotionEffectType> map =
-			ImmutableBiMap
-					.<PotionEffectType, org.spongepowered.api.potion.PotionEffectType>builder()
+	private static BiMap<PotionEffectType, org.spongepowered.api.potion.PotionEffectType> TYPES =
+			ImmutableBiMap.<PotionEffectType, org.spongepowered.api.potion.PotionEffectType>builder()
 					.put(PotionEffectType.SPEED,                PotionEffectTypes.SPEED)
 					.put(PotionEffectType.SLOW,                 PotionEffectTypes.SLOWNESS)
 					.put(PotionEffectType.FAST_DIGGING,         PotionEffectTypes.HASTE)
@@ -34,12 +36,19 @@ public class PotionEffectTypeConverter {
 					.put(PotionEffectType.SATURATION,           PotionEffectTypes.SATURATION)
 					.build();
 
-	public static org.spongepowered.api.potion.PotionEffectType of(org.bukkit.potion.PotionEffectType type){
-		return map.get(type);
+	public static org.spongepowered.api.potion.PotionEffectType of(PotionEffectType type) {
+		return TYPES.get(type);
 	}
 
-	public static org.bukkit.potion.PotionEffectType of(org.spongepowered.api.potion.PotionEffectType type){
-		return map.inverse().get(type);
+	public static PotionEffectType of(org.spongepowered.api.potion.PotionEffectType type){
+		return TYPES.inverse().get(type);
 	}
 
+	public static PotionEffect of(org.spongepowered.api.potion.PotionEffect effect) {
+		return new PotionEffect(of(effect.getType()), effect.getDuration(), effect.getAmplifier(), effect.isAmbient());
+	}
+
+	public static org.spongepowered.api.potion.PotionEffect of(PotionEffect effect) {
+		throw new NotImplementedException(); // TODO
+	}
 }
