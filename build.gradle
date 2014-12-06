@@ -63,11 +63,19 @@ remap {
 
 jar { // The Pore classes will be created in Pore-VERSION-base.jar first
     classifier = 'base'
+    from (".") {
+        include('LICENSE.txt')
+		include('GPLv3.txt')
+    }
 }
 
 shadowJar {
     dependencies {
         include dependency(bukkit)
+    }
+    from (".") {
+        include('LICENSE.txt')
+		include('GPLv3.txt')
     }
 }
 
