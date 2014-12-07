@@ -1,8 +1,17 @@
-/**
- * This file is a part of Pore, licensed under the MIT License.
+/*
+ * Pore
+ * Copyright (c) 2014, Maxim Roncacé <http://bitbucket.org/mproncace>
+ * Copyright (c) 2014, Lapis <https://github.com/LapisBlue>
  *
- * Copyright (c) Maxim Roncacé
- * Copyright (c) Lapis Blue
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -12,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package net.amigocraft.pore.util.converter.vector;
 
 import org.bukkit.Location;
@@ -22,12 +30,12 @@ import org.spongepowered.api.math.Vectors;
 
 public class Vector3iFactory {
 
-	public static Vector3i fromLocation(Location location){
-		return Vectors.create3i((int)location.getX(), (int)location.getY(), (int)location.getZ());
-	}
+    public static Vector3i fromLocation(Location location) {
+        return Vectors.create3i((int) location.getX(), (int) location.getY(), (int) location.getZ());
+    }
 
-	public static Vector3i fromBukkitVector(Vector vector){
-		return Vectors.create3i(vector.getBlockX(), vector.getBlockY(), vector.getBlockZ());
-	}
+    public static Vector3i fromBukkitVector(Vector vector) {
+        return Vectors.create3i(vector.getBlockX(), vector.getBlockY(), vector.getBlockZ());
+    }
 
 }

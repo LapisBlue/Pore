@@ -1,3 +1,26 @@
+/*
+ * Pore
+ * Copyright (c) 2014, Maxim Roncacé <http://bitbucket.org/mproncace>
+ * Copyright (c) 2014, Lapis <https://github.com/LapisBlue>
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
 package net.amigocraft.pore.impl.entity;
 
 import com.google.common.collect.ImmutableMap;
@@ -36,289 +59,292 @@ import java.util.UUID;
 //TODO: determine if metadata methods should be implemented manually
 public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity> implements Entity {
 
-	private static TypeConverter<org.spongepowered.api.entity.Entity, PoreEntity> converter;
+    private static TypeConverter<org.spongepowered.api.entity.Entity, PoreEntity> converter;
 
-	@SuppressWarnings("unchecked")
-	public static TypeConverter<org.spongepowered.api.entity.Entity, PoreEntity> getConverter() {
-		if (converter == null) {
-			converter = new TypeConverter<org.spongepowered.api.entity.Entity, PoreEntity>(
-					(ImmutableMap)ImmutableMap.builder()
-							.put(ComplexLivingPart.class, PoreComplexEntityPart.getComplexEntityPartConverter())
-							.put(EnderCrystal.class, PoreEnderCrystal.getEnderCrystalConverter())
-							.put(EyeOfEnder.class, PoreEnderSignal.getEnderSignalConverter())
-							.put(ExperienceOrb.class, PoreExperienceOrb.getExperienceOrbConverter())
-							.put(FallingBlock.class, PoreFallingSand.getFallingSandConverter())
-							.put(Firework.class, PoreFirework.getFireworkConverter())
-							.put(Hanging.class, PoreHanging.getHangingConverter())
-							.put(Item.class, PoreItem.getItemConverter())
-							.put(Lightning.class, PoreLightningStrike.getLightningStrikeConverter())
-							.put(Projectile.class, PoreProjectile.getProjectileConverter())
-							.put(PrimedTNT.class, PoreTNTPrimed.getTNTPrimedConverter())
-									//.put(Entity.class, PoreVehicle.getVehicleConverter())
-							.put(WeatherEffect.class, PoreWeather.getWeatherConverter())
-							.put(Living.class, PoreLivingEntity.getLivingEntityConverter())
-							.build()
-			) {
-				@Override
-				protected PoreEntity convert(org.spongepowered.api.entity.Entity handle) {
-					return new PoreEntity(handle);
-				}
-			};
-		}
+    @SuppressWarnings("unchecked")
+    public static TypeConverter<org.spongepowered.api.entity.Entity, PoreEntity> getConverter() {
+        if (converter == null) {
+            converter = new TypeConverter<org.spongepowered.api.entity.Entity, PoreEntity>(
+                    (ImmutableMap) ImmutableMap.builder()
+                            .put(ComplexLivingPart.class, PoreComplexEntityPart.getComplexEntityPartConverter())
+                            .put(EnderCrystal.class, PoreEnderCrystal.getEnderCrystalConverter())
+                            .put(EyeOfEnder.class, PoreEnderSignal.getEnderSignalConverter())
+                            .put(ExperienceOrb.class, PoreExperienceOrb.getExperienceOrbConverter())
+                            .put(FallingBlock.class, PoreFallingSand.getFallingSandConverter())
+                            .put(Firework.class, PoreFirework.getFireworkConverter())
+                            .put(Hanging.class, PoreHanging.getHangingConverter())
+                            .put(Item.class, PoreItem.getItemConverter())
+                            .put(Lightning.class, PoreLightningStrike.getLightningStrikeConverter())
+                            .put(Projectile.class, PoreProjectile.getProjectileConverter())
+                            .put(PrimedTNT.class, PoreTNTPrimed.getTNTPrimedConverter())
+                                    //.put(Entity.class, PoreVehicle.getVehicleConverter())
+                            .put(WeatherEffect.class, PoreWeather.getWeatherConverter())
+                            .put(Living.class, PoreLivingEntity.getLivingEntityConverter())
+                            .build()
+            ) {
+                @Override
+                protected PoreEntity convert(org.spongepowered.api.entity.Entity handle) {
+                    return new PoreEntity(handle);
+                }
+            };
+        }
 
-		return converter;
-	}
+        return converter;
+    }
 
-	protected PoreEntity(org.spongepowered.api.entity.Entity handle) {
-		super(handle);
-	}
+    protected PoreEntity(org.spongepowered.api.entity.Entity handle) {
+        super(handle);
+    }
 
-	@Override
-	public org.spongepowered.api.entity.Entity getHandle() {
-		return super.getHandle();
-	}
+    @Override
+    public org.spongepowered.api.entity.Entity getHandle() {
+        return super.getHandle();
+    }
 
-	/**
-	 * Returns a Pore wrapper for the given handle.
-	 * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-	 * @param handle The Sponge object to wrap.
-	 * @return A Pore wrapper for the given Sponge object.
-	 */
-	public static PoreEntity of(org.spongepowered.api.entity.Entity handle) {
-		return getConverter().apply(handle);
-	}
+    /**
+     * Returns a Pore wrapper for the given handle.
+     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
+     *
+     * @param handle The Sponge object to wrap.
+     * @return A Pore wrapper for the given Sponge object.
+     */
+    public static PoreEntity of(org.spongepowered.api.entity.Entity handle) {
+        return getConverter().apply(handle);
+    }
 
-	@Override
-	public EntityType getType(){
-		return EntityType.UNKNOWN;
-	}
+    @Override
+    public EntityType getType() {
+        return EntityType.UNKNOWN;
+    }
 
-	@Override
-	public Location getLocation() {
-		return LocationFactory.fromVector3d(null, getHandle().getPosition()); //TODO: fix first parameter when possible
-	}
+    @Override
+    public Location getLocation() {
+        return LocationFactory
+                .fromVector3d(null, getHandle().getPosition()); //TODO: fix first parameter when possible
+    }
 
-	@Override
-	public Location getLocation(Location loc) {
-		loc.setWorld(null); //TODO: correct parameter when possible
-		loc.setX(getHandle().getPosition().getX());
-		loc.setY(getHandle().getPosition().getX());
-		loc.setZ(getHandle().getPosition().getX());
-		loc.setPitch(getHandle().getVectorRotation().getX());
-		loc.setYaw(getHandle().getVectorRotation().getY());
-		return loc;
-	}
+    @Override
+    public Location getLocation(Location loc) {
+        loc.setWorld(null); //TODO: correct parameter when possible
+        loc.setX(getHandle().getPosition().getX());
+        loc.setY(getHandle().getPosition().getX());
+        loc.setZ(getHandle().getPosition().getX());
+        loc.setPitch(getHandle().getVectorRotation().getX());
+        loc.setYaw(getHandle().getVectorRotation().getY());
+        return loc;
+    }
 
-	@Override
-	public void setVelocity(Vector velocity) {
-		throw new NotImplementedException(); //TODO
-	}
+    @Override
+    public void setVelocity(Vector velocity) {
+        throw new NotImplementedException(); //TODO
+    }
 
-	@Override
-	public Vector getVelocity() {
-		throw new NotImplementedException(); //TODO
-	}
+    @Override
+    public Vector getVelocity() {
+        throw new NotImplementedException(); //TODO
+    }
 
-	@Override
-	public boolean isOnGround() {
-		return getHandle().isOnGround();
-	}
+    @Override
+    public boolean isOnGround() {
+        return getHandle().isOnGround();
+    }
 
-	@Override
-	public World getWorld() {
-		return PoreWorld.of(getHandle().getWorld());
-	}
+    @Override
+    public World getWorld() {
+        return PoreWorld.of(getHandle().getWorld());
+    }
 
-	@Override
-	public boolean teleport(Location location) {
-		return this.teleport(location, PlayerTeleportEvent.TeleportCause.PLUGIN);
-	}
+    @Override
+    public boolean teleport(Location location) {
+        return this.teleport(location, PlayerTeleportEvent.TeleportCause.PLUGIN);
+    }
 
-	@Override
-	public boolean teleport(Location location, PlayerTeleportEvent.TeleportCause cause) {
-		if (this.getPassenger() != null || this.isDead()){
-			return false;
-		}
-		this.eject();
-		getHandle().teleport(Vector3dFactory.fromLocation(location), ((PoreWorld)location.getWorld()).getHandle());
-		// Craftbukkit apparently does not throw an event when this method is called
-		return true;
-	}
+    @Override
+    public boolean teleport(Location location, PlayerTeleportEvent.TeleportCause cause) {
+        if (this.getPassenger() != null || this.isDead()) {
+            return false;
+        }
+        this.eject();
+        getHandle().teleport(Vector3dFactory.fromLocation(location),
+                ((PoreWorld) location.getWorld()).getHandle());
+        // Craftbukkit apparently does not throw an event when this method is called
+        return true;
+    }
 
-	@Override
-	public boolean teleport(Entity destination) {
-		return this.teleport(destination.getLocation());
-	}
+    @Override
+    public boolean teleport(Entity destination) {
+        return this.teleport(destination.getLocation());
+    }
 
-	@Override
-	public boolean teleport(Entity destination, PlayerTeleportEvent.TeleportCause cause) {
-		return this.teleport(destination.getLocation(), cause);
-	}
+    @Override
+    public boolean teleport(Entity destination, PlayerTeleportEvent.TeleportCause cause) {
+        return this.teleport(destination.getLocation(), cause);
+    }
 
-	@Override
-	public List<Entity> getNearbyEntities(double x, double y, double z) {
-		List<Entity> worldEntities = getWorld().getEntities();
-		List<Entity> nearby = new ArrayList<Entity>();
-		for (Entity e : worldEntities){
-			Location loc1 = e.getLocation();
-			Location loc2 = this.getLocation();
-			if (Math.abs(loc1.getX() - loc2.getX()) <= x &&
-					Math.abs(loc1.getY() - loc2.getY()) <= y &&
-					Math.abs(loc1.getZ() - loc2.getZ()) <= z) {
-				nearby.add(e);
-			}
-		}
-		return nearby;
-	}
+    @Override
+    public List<Entity> getNearbyEntities(double x, double y, double z) {
+        List<Entity> worldEntities = getWorld().getEntities();
+        List<Entity> nearby = new ArrayList<Entity>();
+        for (Entity e : worldEntities) {
+            Location loc1 = e.getLocation();
+            Location loc2 = this.getLocation();
+            if (Math.abs(loc1.getX() - loc2.getX()) <= x &&
+                    Math.abs(loc1.getY() - loc2.getY()) <= y &&
+                    Math.abs(loc1.getZ() - loc2.getZ()) <= z) {
+                nearby.add(e);
+            }
+        }
+        return nearby;
+    }
 
-	@Override
-	public int getEntityId() { // note to self - this is the ID of the entity in the world, and unrelated to its UUID
-		throw new NotImplementedException(); //TODO
-	}
+    @Override
+    public int getEntityId() { // note to self - this is the ID of the entity in the world, and unrelated to
+        // its UUID
+        throw new NotImplementedException(); //TODO
+    }
 
-	@Override
-	public int getFireTicks() {
-		return getHandle().getFireTicks();
-	}
+    @Override
+    public int getFireTicks() {
+        return getHandle().getFireTicks();
+    }
 
-	@Override
-	public int getMaxFireTicks() {
-		return getHandle().getMaxFireTicks();
-	}
+    @Override
+    public int getMaxFireTicks() {
+        return getHandle().getMaxFireTicks();
+    }
 
-	@Override
-	public void setFireTicks(int ticks) {
-		getHandle().setFireTicks(ticks);
-	}
+    @Override
+    public void setFireTicks(int ticks) {
+        getHandle().setFireTicks(ticks);
+    }
 
-	@Override
-	public void remove() {
-		getHandle().remove();
-	}
+    @Override
+    public void remove() {
+        getHandle().remove();
+    }
 
-	@Override
-	public boolean isDead() {
-		return getHandle().isDead();
-	}
+    @Override
+    public boolean isDead() {
+        return getHandle().isDead();
+    }
 
-	@Override
-	public boolean isValid() {
-		return getHandle().isValid();
-	}
+    @Override
+    public boolean isValid() {
+        return getHandle().isValid();
+    }
 
-	@Override
-	public Server getServer() {
-		return Bukkit.getServer();
-	}
+    @Override
+    public Server getServer() {
+        return Bukkit.getServer();
+    }
 
-	@Override
-	public Entity getPassenger() {
-		return getHandle().getRider().isPresent() ? PoreEntity.of(getHandle().getRider().get()) : null;
-	}
+    @Override
+    public Entity getPassenger() {
+        return getHandle().getRider().isPresent() ? PoreEntity.of(getHandle().getRider().get()) : null;
+    }
 
-	@Override
-	public boolean setPassenger(Entity passenger) {
-		if (!getHandle().getRider().isPresent()) {
-			((PoreEntity)passenger).getHandle().mount(getHandle());
-			return true;
-		}
-		else if (passenger == null){
-			getHandle().eject();
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean setPassenger(Entity passenger) {
+        if (!getHandle().getRider().isPresent()) {
+            ((PoreEntity) passenger).getHandle().mount(getHandle());
+            return true;
+        } else if (passenger == null) {
+            getHandle().eject();
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean isEmpty() {
-		return !getHandle().getRider().isPresent();
-	}
+    @Override
+    public boolean isEmpty() {
+        return !getHandle().getRider().isPresent();
+    }
 
-	@Override
-	public boolean eject() {
-		if (getHandle().getRider().isPresent()) {
-			getHandle().eject();
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean eject() {
+        if (getHandle().getRider().isPresent()) {
+            getHandle().eject();
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public float getFallDistance() {
-		throw new NotImplementedException(); //TODO
-	}
+    @Override
+    public float getFallDistance() {
+        throw new NotImplementedException(); //TODO
+    }
 
-	@Override
-	public void setFallDistance(float distance) {
-		throw new NotImplementedException(); //TODO
-	}
+    @Override
+    public void setFallDistance(float distance) {
+        throw new NotImplementedException(); //TODO
+    }
 
-	@Override
-	public void setLastDamageCause(EntityDamageEvent event) {
-		throw new NotImplementedException(); //TODO: Sponge counterpart planned for 1.1
-	}
+    @Override
+    public void setLastDamageCause(EntityDamageEvent event) {
+        throw new NotImplementedException(); //TODO: Sponge counterpart planned for 1.1
+    }
 
-	@Override
-	public EntityDamageEvent getLastDamageCause() {
-		throw new NotImplementedException(); //TODO: Sponge counterpart planned for 1.1
-	}
+    @Override
+    public EntityDamageEvent getLastDamageCause() {
+        throw new NotImplementedException(); //TODO: Sponge counterpart planned for 1.1
+    }
 
-	@Override
-	public UUID getUniqueId() {
-		return getHandle().getUniqueId();
-	}
+    @Override
+    public UUID getUniqueId() {
+        return getHandle().getUniqueId();
+    }
 
-	@Override
-	public int getTicksLived() {
-		throw new NotImplementedException(); //TODO
-	}
+    @Override
+    public int getTicksLived() {
+        throw new NotImplementedException(); //TODO
+    }
 
-	@Override
-	public void setTicksLived(int value) {
-		throw new NotImplementedException(); //TODO
-	}
+    @Override
+    public void setTicksLived(int value) {
+        throw new NotImplementedException(); //TODO
+    }
 
-	@Override
-	public void playEffect(EntityEffect type) {
-		throw new NotImplementedException();
-	}
+    @Override
+    public void playEffect(EntityEffect type) {
+        throw new NotImplementedException();
+    }
 
-	@Override
-	public boolean isInsideVehicle() {
-		return getHandle().getRiding().isPresent();
-	}
+    @Override
+    public boolean isInsideVehicle() {
+        return getHandle().getRiding().isPresent();
+    }
 
-	@Override
-	public boolean leaveVehicle() {
-		if (getHandle().getRiding().isPresent()) {
-			getHandle().dismount();
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean leaveVehicle() {
+        if (getHandle().getRiding().isPresent()) {
+            getHandle().dismount();
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public Entity getVehicle() {
-		return getHandle().getRiding().isPresent() ? PoreEntity.of(getHandle().getRiding().get()) : null;
-	}
+    @Override
+    public Entity getVehicle() {
+        return getHandle().getRiding().isPresent() ? PoreEntity.of(getHandle().getRiding().get()) : null;
+    }
 
-	@Override
-	public void setMetadata(String s, MetadataValue metadataValue) {
-		throw new NotImplementedException(); //TODO
-	}
+    @Override
+    public void setMetadata(String s, MetadataValue metadataValue) {
+        throw new NotImplementedException(); //TODO
+    }
 
-	@Override
-	public List<MetadataValue> getMetadata(String s) {
-		throw new NotImplementedException(); //TODO
-	}
+    @Override
+    public List<MetadataValue> getMetadata(String s) {
+        throw new NotImplementedException(); //TODO
+    }
 
-	@Override
-	public boolean hasMetadata(String s) {
-		throw new NotImplementedException(); //TODO
-	}
+    @Override
+    public boolean hasMetadata(String s) {
+        throw new NotImplementedException(); //TODO
+    }
 
-	@Override
-	public void removeMetadata(String s, Plugin plugin) {
-		throw new NotImplementedException(); //TODO
-	}
+    @Override
+    public void removeMetadata(String s, Plugin plugin) {
+        throw new NotImplementedException(); //TODO
+    }
 }

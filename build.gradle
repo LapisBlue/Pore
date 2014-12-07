@@ -13,14 +13,14 @@ plugins {
     id 'eclipse'
     id 'idea'
 
-    //id 'com.github.hierynomus.license' version '0.11.0'
+    id 'com.github.hierynomus.license' version '0.11.0'
     id 'com.github.johnrengelman.shadow' version '1.2.0'
 }
 
 // Remapper is not available in the Gradle plugins repository so we need to use the old syntax for that
 apply plugin: 'net.glowstone.remapper'
 
-defaultTasks 'clean', /*'licenseFormat',*/ 'build', 'remap'
+defaultTasks 'clean', 'licenseFormat', 'build', 'remap'
 
 // Project information
 group = 'net.amigocraft.pore'
@@ -63,24 +63,16 @@ remap {
 
 jar { // The Pore classes will be created in Pore-VERSION-base.jar first
     classifier = 'base'
-    from (".") {
-        include('LICENSE.txt')
-		include('GPLv3.txt')
-    }
 }
 
 shadowJar {
     dependencies {
         include dependency(bukkit)
     }
-    from (".") {
-        include('LICENSE.txt')
-		include('GPLv3.txt')
-    }
 }
 
 // License header formatting
-/*license {
+license {
     header file('LICENSE')
     sourceSets = project.sourceSets
     ignoreFailures false
@@ -88,7 +80,7 @@ shadowJar {
     mapping {
         java = 'SLASHSTAR_STYLE'
     }
-}*/
+}
 
 // Disable tests for SpongeAPI
 project('SpongeAPI') {

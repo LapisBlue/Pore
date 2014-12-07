@@ -1,8 +1,17 @@
-/**
- * This file is a part of Pore, licensed under the MIT License.
+/*
+ * Pore
+ * Copyright (c) 2014, Maxim Roncacé <http://bitbucket.org/mproncace>
+ * Copyright (c) 2014, Lapis <https://github.com/LapisBlue>
  *
- * Copyright (c) Maxim Roncacé
- * Copyright (c) Lapis Blue
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -12,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package net.amigocraft.pore;
 
 import net.amigocraft.pore.impl.PoreServer;
@@ -31,52 +39,52 @@ import org.spongepowered.api.plugin.PluginContainer;
  */
 @Plugin(id = "pore", name = "Pore")
 public class Pore {
-	private static Pore instance;
-	private static Logger logger;
-	private static PoreServer server;
+    private static Pore instance;
+    private static Logger logger;
+    private static PoreServer server;
 
-	@Subscribe
-	public void onInitialization(PreInitializationEvent event) {
-		instance = this;
-		logger = event.getPluginLog();
+    @Subscribe
+    public void onInitialization(PreInitializationEvent event) {
+        instance = this;
+        logger = event.getPluginLog();
 
-		getLogger().info("Loading Pore server, please wait...");
-		server = new PoreServer(event.getGame(), logger);
-		// TODO: Enable plugins
-	}
+        getLogger().info("Loading Pore server, please wait...");
+        server = new PoreServer(event.getGame(), logger);
+        // TODO: Enable plugins
+    }
 
-	@Subscribe
-	public void onShutdown(ServerStoppingEvent event){
-		logger.info("Disabling Bukkit plugins, please wait...");
-		server.disablePlugins();
-		logger.info("Finished disabling Bukkit plugins!");
+    @Subscribe
+    public void onShutdown(ServerStoppingEvent event) {
+        logger.info("Disabling Bukkit plugins, please wait...");
+        server.disablePlugins();
+        logger.info("Finished disabling Bukkit plugins!");
 
-		instance = null;
-		server = null;
-		logger = null;
-	}
+        instance = null;
+        server = null;
+        logger = null;
+    }
 
-	public static Pore getInstance() {
-		return instance;
-	}
+    public static Pore getInstance() {
+        return instance;
+    }
 
-	public static Logger getLogger() {
-		return logger;
-	}
+    public static Logger getLogger() {
+        return logger;
+    }
 
-	public static PoreServer getServer() {
-		return server;
-	}
+    public static PoreServer getServer() {
+        return server;
+    }
 
-	public static Game getGame() {
-		return server.getGame();
-	}
+    public static Game getGame() {
+        return server.getGame();
+    }
 
-	public static PluginContainer getPlugin(org.bukkit.plugin.Plugin plugin) {
-		throw new NotImplementedException(); // TODO
-	}
+    public static PluginContainer getPlugin(org.bukkit.plugin.Plugin plugin) {
+        throw new NotImplementedException(); // TODO
+    }
 
-	@Subscribe
+    @Subscribe
     public void onCommand(CommandEvent event) {
 //        for (org.bukkit.plugin.Plugin plugin : server.getPluginManager().getPlugins()) {
 //            // Call plugin.onCommand() with appropriate params.
