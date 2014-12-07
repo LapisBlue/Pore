@@ -40,8 +40,11 @@ import org.spongepowered.api.service.scheduler.Task;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class PoreBukkitScheduler implements BukkitScheduler {
+
+    private AtomicInteger id;
 
     private static Scheduler getHandle() {
         return Pore.getGame().getScheduler();
@@ -112,7 +115,7 @@ public class PoreBukkitScheduler implements BukkitScheduler {
     public BukkitTask runTask(Plugin plugin, Runnable task) throws IllegalArgumentException {
         validate(plugin, task);
         Optional<Task> spongeTask = getHandle().runTask(Pore.getPlugin(plugin), task);
-        return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get()) : null;
+        return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get(), id.incrementAndGet()) : null;
     }
 
     @Override
@@ -125,7 +128,7 @@ public class PoreBukkitScheduler implements BukkitScheduler {
     public BukkitTask runTaskLater(Plugin plugin, Runnable task, long delay) throws IllegalArgumentException {
         validate(plugin, task);
         Optional<Task> spongeTask = getHandle().runTaskAfter(Pore.getPlugin(plugin), task, delay);
-        return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get()) : null;
+        return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get(), id.incrementAndGet()) : null;
     }
 
     @Override
@@ -141,7 +144,7 @@ public class PoreBukkitScheduler implements BukkitScheduler {
         validate(plugin, task);
         Optional<RepeatingTask> spongeTask =
                 getHandle().runRepeatingTaskAfter(Pore.getPlugin(plugin), task, delay, period);
-        return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get()) : null;
+        return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get(), id.incrementAndGet()) : null;
     }
 
     @Override

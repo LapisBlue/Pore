@@ -64,8 +64,6 @@ public class PoreExperienceOrb extends PoreEntity implements org.bukkit.entity.E
         return converter.apply(handle);
     }
 
-    //TODO: bridge
-
     @Override
     public EntityType getType() {
         return EntityType.EXPERIENCE_ORB;

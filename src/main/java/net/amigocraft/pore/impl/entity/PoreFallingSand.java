@@ -67,8 +67,6 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
         return converter.apply(handle);
     }
 
-    //TODO: bridge
-
     @Override
     public EntityType getType() {
         return EntityType.FALLING_BLOCK;

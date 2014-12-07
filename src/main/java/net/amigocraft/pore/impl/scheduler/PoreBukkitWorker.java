@@ -29,8 +29,6 @@ import org.bukkit.scheduler.BukkitWorker;
 
 // TODO: Bridge
 
-// TODO: Bridge
-
 public class PoreBukkitWorker implements BukkitWorker {
 
     @Override

@@ -31,13 +31,17 @@ import org.bukkit.scheduler.BukkitTask;
 import org.spongepowered.api.service.scheduler.Task;
 
 public class PoreBukkitTask extends PoreWrapper<Task> implements BukkitTask {
-    public PoreBukkitTask(Task handle) {
+
+    private int id;
+
+    public PoreBukkitTask(Task handle, int id) {
         super(handle);
+        this.id = id; //TODO: verify the ID isn't being reassigned if an instance already exists
     }
 
     @Override
     public int getTaskId() {
-        throw new NotImplementedException(); // TODO
+        return this.id;
     }
 
     @Override
@@ -47,7 +51,7 @@ public class PoreBukkitTask extends PoreWrapper<Task> implements BukkitTask {
 
     @Override
     public boolean isSync() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException();
     }
 
     @Override

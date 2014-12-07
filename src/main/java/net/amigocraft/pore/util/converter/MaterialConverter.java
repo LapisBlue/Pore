@@ -38,12 +38,12 @@ import java.util.Map;
 
 public class MaterialConverter {
 
-    private static HashMap<BlockType, Material> blockMap = new HashMap<BlockType, Material>();
-    private static HashMap<ItemType, Material> itemMap = new HashMap<ItemType, Material>();
+    static HashMap<BlockType, Material> blockMap = new HashMap<BlockType, Material>();
+    static HashMap<ItemType, Material> itemMap = new HashMap<ItemType, Material>();
 
     // note: BiMap is unsuitable because some values are not unique
-    private static HashMap<Material, BlockType> reverseBlockMap = new HashMap<Material, BlockType>();
-    private static HashMap<Material, ItemType> reverseItemMap = new HashMap<Material, ItemType>();
+    static HashMap<Material, BlockType> reverseBlockMap = new HashMap<Material, BlockType>();
+    static HashMap<Material, ItemType> reverseItemMap = new HashMap<Material, ItemType>();
 
     static {
         try {
