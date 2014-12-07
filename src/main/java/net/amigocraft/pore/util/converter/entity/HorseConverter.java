@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package net.amigocraft.pore.util.converter;
+package net.amigocraft.pore.util.converter.entity;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;

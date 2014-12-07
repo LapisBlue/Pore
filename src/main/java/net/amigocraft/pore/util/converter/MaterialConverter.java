@@ -51,14 +51,13 @@ public class MaterialConverter {
             bCsv.load(MaterialConverter.class.getResourceAsStream("block-map.csv"), "block-map");
             for (Map.Entry<String, String> e : bCsv.entrySet()) {
                 try {
-                    blockMap.put((BlockType) BlockTypes.class.getField(e.getValue()).get(null),
-                            Material.valueOf(e.getKey()));
+                    blockMap.put((BlockType) BlockTypes.class.getField(e.getKey()).get(null),
+                            Material.valueOf(e.getValue()));
                 } catch (IllegalAccessException ex) {
                     ex.printStackTrace();
-                    Pore.getLogger().error("Material mapping for \"" + e.getKey() + "\" is invalid!");
+                    Pore.getLogger().error("Material mapping for BlockType." + e.getKey() + " is invalid!");
                 } catch (NoSuchFieldException ex) {
-                    ex.printStackTrace();
-                    Pore.getLogger().error("Material mapping for \"" + e.getKey() + "\" is invalid!");
+                    Pore.getLogger().error("Material mapping for BlockType." + e.getKey() + " is invalid!");
                 }
             }
 
@@ -78,14 +77,14 @@ public class MaterialConverter {
             iCsv.load(MaterialConverter.class.getResourceAsStream("item-map.csv"), "item-map");
             for (Map.Entry<String, String> e : iCsv.entrySet()) {
                 try {
-                    itemMap.put((ItemType) ItemTypes.class.getField(e.getValue()).get(null),
-                            Material.valueOf(e.getKey()));
+                    itemMap.put((ItemType) ItemTypes.class.getField(e.getKey()).get(null),
+                            Material.valueOf(e.getValue()));
                 } catch (IllegalAccessException ex) {
                     ex.printStackTrace();
-                    Pore.getLogger().error("Material mapping for \"" + e.getKey() + "\" is invalid!");
+                    Pore.getLogger().error("Material mapping for ItemType." + e.getKey() + " is invalid!");
                 } catch (NoSuchFieldException ex) {
                     ex.printStackTrace();
-                    Pore.getLogger().error("Material mapping for \"" + e.getKey() + "\" is invalid!");
+                    Pore.getLogger().error("Material mapping for ItemType" + e.getKey() + " is invalid!");
                 }
             }
 
