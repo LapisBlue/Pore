@@ -30,15 +30,15 @@ sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
 ext {
-    bukkit = 'org.bukkit:bukkit:1.7.10-R0.1'
+    bukkit = 'org.bukkit:bukkit:1.8-R0.1-SNAPSHOT'
 }
 
 // Project repositories
 repositories {
     mavenCentral()
-    maven { url 'http://repo.lapis.blue/thirdparty' }
     // TODO: Remove this when Sponge fixes their dependencies
     maven { url 'https://oss.sonatype.org/content/groups/public' }
+    maven { url 'https://hub.spigotmc.org/nexus/content/groups/public' }
 }
 
 // Project dependencies

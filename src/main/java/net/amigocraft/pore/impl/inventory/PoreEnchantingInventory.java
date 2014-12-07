@@ -39,4 +39,14 @@ public class PoreEnchantingInventory extends PoreInventory implements Enchanting
     public ItemStack getItem() {
         throw new NotImplementedException();
     }
+
+    @Override
+    public void setSecondary(ItemStack item) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public ItemStack getSecondary() {
+        throw new NotImplementedException();
+    }
 }

@@ -327,6 +327,26 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
     }
 
     @Override
+    public void setCustomName(String name) {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public String getCustomName() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public void setCustomNameVisible(boolean flag) {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public boolean isCustomNameVisible() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
     public void setMetadata(String s, MetadataValue metadataValue) {
         throw new NotImplementedException(); //TODO
     }
