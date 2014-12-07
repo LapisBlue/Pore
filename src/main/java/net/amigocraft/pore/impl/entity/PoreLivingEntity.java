@@ -30,7 +30,7 @@ import com.google.common.collect.Lists;
 import net.amigocraft.pore.util.ProjectileUtil;
 import net.amigocraft.pore.util.converter.PotionConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
-import net.amigocraft.pore.util.converter.vector.LocationFactory;
+import net.amigocraft.pore.util.converter.vector.LocationConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -104,7 +104,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public Location getEyeLocation() {
-        return LocationFactory.fromVector3f(getHandle().getWorld(), getHandle().getEyeLocation());
+        return LocationConverter.fromVector3f(getHandle().getWorld(), getHandle().getEyeLocation());
     }
 
     @Override

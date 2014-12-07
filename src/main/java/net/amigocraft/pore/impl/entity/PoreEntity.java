@@ -26,9 +26,8 @@ package net.amigocraft.pore.impl.entity;
 import com.google.common.collect.ImmutableMap;
 import net.amigocraft.pore.impl.PoreWorld;
 import net.amigocraft.pore.util.*;
-import net.amigocraft.pore.util.converter.vector.LocationFactory;
+import net.amigocraft.pore.util.converter.vector.LocationConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
-import net.amigocraft.pore.util.converter.vector.Vector3dFactory;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
@@ -119,7 +118,7 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
     @Override
     public Location getLocation() {
-        return LocationFactory
+        return LocationConverter
                 .fromVector3d(null, getHandle().getPosition()); //TODO: fix first parameter when possible
     }
 
@@ -165,9 +164,8 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
             return false;
         }
         this.eject();
-        getHandle().teleport(Vector3dFactory.fromLocation(location),
-                ((PoreWorld) location.getWorld()).getHandle());
-        // Craftbukkit apparently does not throw an event when this method is called
+        getHandle().teleport(LocationConverter.of(location));
+        // CraftBukkit apparently does not throw an event when this method is called
         return true;
     }
 
@@ -210,7 +208,7 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
     @Override
     public int getMaxFireTicks() {
-        return getHandle().getMaxFireTicks();
+        return getHandle().getFireDelay(); // TODO: This was renamed, but is this still the same?
     }
 
     @Override

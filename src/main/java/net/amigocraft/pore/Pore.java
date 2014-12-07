@@ -23,6 +23,8 @@
  */
 package net.amigocraft.pore;
 
+import com.google.common.base.Preconditions;
+import com.google.inject.Inject;
 import net.amigocraft.pore.impl.PoreServer;
 import org.apache.commons.lang.NotImplementedException;
 import org.slf4j.Logger;
@@ -40,15 +42,25 @@ import org.spongepowered.api.plugin.PluginContainer;
 @Plugin(id = "pore", name = "Pore")
 public class Pore {
     private static Pore instance;
-    private static Logger logger;
-    private static PoreServer server;
+
+    private final Game game;
+    private final PluginContainer container;
+
+    @Inject
+    private Logger logger;
+    private PoreServer server;
+
+    @Inject
+    public Pore(Game game, PluginContainer container) {
+        this.game = game;
+        this.container = container;
+    }
 
     @Subscribe
     public void onInitialization(PreInitializationEvent event) {
         instance = this;
-        logger = event.getPluginLog();
 
-        getLogger().info("Loading Pore server, please wait...");
+        logger.info("Loading Pore server, please wait...");
         server = new PoreServer(event.getGame(), logger);
         // TODO: Enable plugins
     }
@@ -65,19 +77,19 @@ public class Pore {
     }
 
     public static Pore getInstance() {
-        return instance;
+        return Preconditions.checkNotNull(instance);
     }
 
     public static Logger getLogger() {
-        return logger;
+        return getInstance().logger;
     }
 
     public static PoreServer getServer() {
-        return server;
+        return getInstance().server;
     }
 
     public static Game getGame() {
-        return server.getGame();
+        return getInstance().game;
     }
 
     public static PluginContainer getPlugin(org.bukkit.plugin.Plugin plugin) {

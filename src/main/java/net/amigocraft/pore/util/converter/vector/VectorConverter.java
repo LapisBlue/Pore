@@ -23,19 +23,19 @@
  */
 package net.amigocraft.pore.util.converter.vector;
 
+import com.flowpowered.math.vector.Vector3d;
+import com.flowpowered.math.vector.Vector3f;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.math.Vector3i;
-import org.spongepowered.api.math.Vectors;
 
-public class Vector3iFactory {
+public class VectorConverter {
 
-    public static Vector3i fromLocation(Location location) {
-        return Vectors.create3i((int) location.getX(), (int) location.getY(), (int) location.getZ());
+    public static Vector3d create3d(Location location) {
+        return new Vector3d(location.getX(), location.getY(), location.getZ());
     }
 
-    public static Vector3i fromBukkitVector(Vector vector) {
-        return Vectors.create3i(vector.getBlockX(), vector.getBlockY(), vector.getBlockZ());
+    public static Vector3f create3f(Vector vector) {
+        return new Vector3f(vector.getX(), vector.getY(), vector.getZ());
     }
 
 }

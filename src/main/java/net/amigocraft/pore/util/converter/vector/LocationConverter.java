@@ -23,14 +23,14 @@
  */
 package net.amigocraft.pore.util.converter.vector;
 
+import com.flowpowered.math.vector.Vector3d;
+import com.flowpowered.math.vector.Vector3f;
+import com.flowpowered.math.vector.Vector3i;
 import net.amigocraft.pore.impl.PoreWorld;
 import org.bukkit.Location;
-import org.spongepowered.api.math.Vector3d;
-import org.spongepowered.api.math.Vector3f;
-import org.spongepowered.api.math.Vector3i;
 import org.spongepowered.api.world.World;
 
-public class LocationFactory {
+public class LocationConverter {
 
     public static Location apply(Location loc, org.spongepowered.api.world.Location spongeLocation) {
         loc.setWorld(PoreWorld.of(spongeLocation.getExtent()));
@@ -43,6 +43,11 @@ public class LocationFactory {
     public static Location of(org.spongepowered.api.world.Location location) {
         return new Location(PoreWorld.of(location.getExtent()), location.getPosition().getX(),
                 location.getPosition().getY(), location.getPosition().getZ());
+    }
+
+    public static org.spongepowered.api.world.Location of(Location location) {
+        return new org.spongepowered.api.world.Location(((PoreWorld) location.getWorld()).getHandle(),
+                VectorConverter.create3d(location));
     }
 
     public static Location fromVector3i(World world, Vector3i locationVector) {

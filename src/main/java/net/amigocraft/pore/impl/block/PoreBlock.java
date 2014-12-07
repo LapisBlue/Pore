@@ -27,7 +27,7 @@ import net.amigocraft.pore.impl.PoreWorld;
 import net.amigocraft.pore.util.*;
 import net.amigocraft.pore.util.converter.DirectionConverter;
 import net.amigocraft.pore.util.converter.ItemStackConverter;
-import net.amigocraft.pore.util.converter.vector.LocationFactory;
+import net.amigocraft.pore.util.converter.vector.LocationConverter;
 import net.amigocraft.pore.util.converter.MaterialConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
@@ -155,12 +155,12 @@ public class PoreBlock extends PoreWrapper<BlockLoc> implements Block {
 
     @Override
     public Location getLocation() {
-        return LocationFactory.of(getHandle().getLocation());
+        return LocationConverter.of(getHandle().getLocation());
     }
 
     @Override
     public Location getLocation(Location loc) {
-        return LocationFactory.apply(loc, getHandle().getLocation());
+        return LocationConverter.apply(loc, getHandle().getLocation());
     }
 
     @Override

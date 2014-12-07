@@ -23,6 +23,7 @@
  */
 package net.amigocraft.pore.impl;
 
+import com.flowpowered.math.vector.Vector2i;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -36,7 +37,7 @@ import net.amigocraft.pore.util.converter.SoundConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
 import net.amigocraft.pore.util.PoreCollections;
 import net.amigocraft.pore.util.PoreWrapper;
-import net.amigocraft.pore.util.converter.vector.Vector3dFactory;
+import net.amigocraft.pore.util.converter.vector.VectorConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
 import org.bukkit.Chunk;
@@ -51,7 +52,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.math.Vectors;
 import org.spongepowered.api.world.extent.Extent;
 import org.spongepowered.api.world.weather.Weathers;
 
@@ -142,7 +142,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
     @Override
     public Chunk getChunkAt(int x, int z) {
-        Optional<org.spongepowered.api.world.Chunk> chunk = getHandle().getChunk(Vectors.create2i(x, z));
+        Optional<org.spongepowered.api.world.Chunk> chunk = getHandle().getChunk(new Vector2i(x, z));
         return chunk.isPresent() ? PoreChunk.of(chunk.get()) : null;
     }
 
@@ -173,7 +173,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
     @Override
     public boolean isChunkLoaded(int x, int z) {
-        return getHandle().getChunk(Vectors.create2i(x, z)).isPresent();
+        return getHandle().getChunk(new Vector2i(x, z)).isPresent();
     }
 
     @Override
@@ -188,7 +188,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
     @Override
     public boolean loadChunk(int x, int z, boolean generate) {
-        getHandle().loadChunk(Vectors.create2i(x, z), generate);
+        getHandle().loadChunk(new Vector2i(x, z), generate);
         return true; //TODO
     }
 
@@ -687,7 +687,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
     @Override
     public void playSound(Location location, Sound sound, float volume, float pitch) {
-        getHandle().playSound(SoundConverter.of(sound), Vector3dFactory.fromLocation(location), (double) volume,
+        getHandle().playSound(SoundConverter.of(sound), VectorConverter.create3d(location), (double) volume,
                 (double) pitch);
     }
 

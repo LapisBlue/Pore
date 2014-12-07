@@ -25,7 +25,7 @@ package net.amigocraft.pore.impl.entity;
 
 import net.amigocraft.pore.util.converter.SoundConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
-import net.amigocraft.pore.util.converter.vector.Vector3dFactory;
+import net.amigocraft.pore.util.converter.vector.VectorConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.*;
 import org.bukkit.conversations.Conversation;
@@ -82,7 +82,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public String getDisplayName() {
-        return getHandle().getDisplayName();
+        return getHandle().getDisplayName().toString(); // TODO: Change to legacy format
     }
 
     @Override
@@ -92,7 +92,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public String getPlayerListName() {
-        return getHandle().getDisplayName(); //TODO: temporary measure
+        return getDisplayName(); //TODO: temporary measure
     }
 
     @Override
@@ -212,14 +212,14 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void playSound(Location location, Sound sound, float volume, float pitch) {
-        getHandle().playSound(SoundConverter.of(sound), Vector3dFactory.fromLocation(location), (double) volume,
+        getHandle().playSound(SoundConverter.of(sound), VectorConverter.create3d(location), (double) volume,
                 (double) pitch);
     }
 
     @Override
     public void playSound(Location location, String sound, float volume, float pitch) {
         // TODO: Isn't the String sound the ID and not the name?
-        getHandle().playSound(Sounds.getByName(sound).get(), Vector3dFactory.fromLocation(location),
+        getHandle().playSound(Sounds.getByName(sound).get(), VectorConverter.create3d(location),
                 (double) volume, (double) pitch);
     }
 

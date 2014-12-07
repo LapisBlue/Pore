@@ -37,6 +37,8 @@ ext {
 repositories {
     mavenCentral()
     maven { url 'http://repo.lapis.blue/thirdparty' }
+    // TODO: Remove this when Sponge fixes their dependencies
+    maven { url 'https://oss.sonatype.org/content/groups/public' }
 }
 
 // Project dependencies
