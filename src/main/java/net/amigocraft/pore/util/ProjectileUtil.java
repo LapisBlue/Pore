@@ -25,7 +25,16 @@ package net.amigocraft.pore.util;
 
 import net.amigocraft.pore.impl.entity.PoreFireball;
 import net.amigocraft.pore.util.converter.vector.VectorConverter;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Egg;
+import org.bukkit.entity.EnderPearl;
+import org.bukkit.entity.Fireball;
+import org.bukkit.entity.Fish;
+import org.bukkit.entity.LargeFireball;
+import org.bukkit.entity.Projectile;
+import org.bukkit.entity.Snowball;
+import org.bukkit.entity.ThrownExpBottle;
+import org.bukkit.entity.ThrownPotion;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.entity.projectile.source.ProjectileSource;
 

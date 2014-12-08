@@ -26,7 +26,12 @@ package net.amigocraft.pore.util.converter.entity;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import org.bukkit.entity.Horse;
-import org.spongepowered.api.entity.living.meta.*;
+import org.spongepowered.api.entity.living.meta.HorseColor;
+import org.spongepowered.api.entity.living.meta.HorseColors;
+import org.spongepowered.api.entity.living.meta.HorseStyle;
+import org.spongepowered.api.entity.living.meta.HorseStyles;
+import org.spongepowered.api.entity.living.meta.HorseVariant;
+import org.spongepowered.api.entity.living.meta.HorseVariants;
 
 public class HorseConverter {
 

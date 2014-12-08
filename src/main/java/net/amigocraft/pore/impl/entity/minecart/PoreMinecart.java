@@ -29,7 +29,14 @@ import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.entity.vehicle.minecart.*;
+import org.spongepowered.api.entity.vehicle.minecart.Minecart;
+import org.spongepowered.api.entity.vehicle.minecart.MinecartChest;
+import org.spongepowered.api.entity.vehicle.minecart.MinecartCommandBlock;
+import org.spongepowered.api.entity.vehicle.minecart.MinecartFurnace;
+import org.spongepowered.api.entity.vehicle.minecart.MinecartHopper;
+import org.spongepowered.api.entity.vehicle.minecart.MinecartMobSpawner;
+import org.spongepowered.api.entity.vehicle.minecart.MinecartRideable;
+import org.spongepowered.api.entity.vehicle.minecart.MinecartTNT;
 
 public class PoreMinecart extends PoreVehicle implements org.bukkit.entity.Minecart {
 

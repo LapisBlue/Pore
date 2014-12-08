@@ -24,7 +24,11 @@
 package net.amigocraft.pore.impl.permissions;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.permissions.*;
+import org.bukkit.permissions.Permissible;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionAttachment;
+import org.bukkit.permissions.PermissionAttachmentInfo;
+import org.bukkit.permissions.ServerOperator;
 import org.bukkit.plugin.Plugin;
 
 import java.util.Set;

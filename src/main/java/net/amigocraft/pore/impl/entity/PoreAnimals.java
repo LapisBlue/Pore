@@ -26,9 +26,12 @@ package net.amigocraft.pore.impl.entity;
 import com.google.common.collect.ImmutableMap;
 import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.Animals;
-import org.bukkit.entity.Horse;
 import org.spongepowered.api.entity.living.Tameable;
-import org.spongepowered.api.entity.living.animal.*;
+import org.spongepowered.api.entity.living.animal.Animal;
+import org.spongepowered.api.entity.living.animal.Chicken;
+import org.spongepowered.api.entity.living.animal.Cow;
+import org.spongepowered.api.entity.living.animal.Pig;
+import org.spongepowered.api.entity.living.animal.Sheep;
 
 public class PoreAnimals extends PoreAgeable implements Animals {
 

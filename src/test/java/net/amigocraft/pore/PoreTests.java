@@ -21,33 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package net.amigocraft.pore.util.converter;
+package net.amigocraft.pore;
 
-import org.spongepowered.api.item.ItemType;
-import org.spongepowered.api.item.ItemTypes;
+import org.slf4j.LoggerFactory;
+import org.spongepowered.api.Game;
+import org.spongepowered.api.plugin.PluginContainer;
 
-public class ItemStackConverter {
+import static org.mockito.Mockito.mock;
 
-    public static org.bukkit.inventory.ItemStack of(org.spongepowered.api.item.inventory.ItemStack stack) {
-        return new org.bukkit.inventory.ItemStack(
-                MaterialConverter.toBukkitMaterial(stack.getItem()),
-                stack.getQuantity(),
-                stack.getDamage()
-        );
+public final class PoreTests {
+
+    public static void mockPlugin() {
+        Game gameProxy = mock(Game.class);
+        PluginContainer container = mock(PluginContainer.class);
+        Pore pore = new Pore(gameProxy, container);
+        pore.logger = LoggerFactory.getLogger("Pore");
     }
-
-    public static org.spongepowered.api.item.inventory.ItemStack of(org.bukkit.inventory.ItemStack stack) {
-        ItemType type = MaterialConverter.toItemType(stack.getType());
-        if (type == null)
-            throw new UnsupportedOperationException();
-        // IntelliJ doesn't recognize the above check and thinks withItemType() may throw an NPE
-        //noinspection ConstantConditions
-        return ItemTypes.getItemBuilder()
-                .withItemType(type)
-                .withQuantity(stack.getAmount())
-                .withDamage(stack.getDurability())
-                .withMaxQuantity(stack.getType().getMaxStackSize())
-                .build();
-    }
-
 }

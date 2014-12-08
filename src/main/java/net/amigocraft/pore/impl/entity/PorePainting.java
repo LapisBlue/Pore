@@ -23,8 +23,8 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
 import net.amigocraft.pore.util.converter.ArtConverter;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.Art;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.hanging.Painting;

@@ -24,18 +24,22 @@
 package net.amigocraft.pore.impl.block;
 
 import net.amigocraft.pore.impl.PoreWorld;
-import net.amigocraft.pore.util.*;
+import net.amigocraft.pore.util.PoreWrapper;
 import net.amigocraft.pore.util.converter.DirectionConverter;
 import net.amigocraft.pore.util.converter.ItemStackConverter;
-import net.amigocraft.pore.util.converter.vector.LocationConverter;
 import net.amigocraft.pore.util.converter.MaterialConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.vector.LocationConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.*;
+import org.bukkit.block.Biome;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;

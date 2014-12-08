@@ -25,11 +25,15 @@ package net.amigocraft.pore.impl.entity;
 
 import com.google.common.collect.ImmutableMap;
 import net.amigocraft.pore.impl.PoreWorld;
-import net.amigocraft.pore.util.*;
-import net.amigocraft.pore.util.converter.vector.LocationConverter;
+import net.amigocraft.pore.util.PoreWrapper;
 import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.vector.LocationConverter;
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.EntityEffect;
+import org.bukkit.Location;
+import org.bukkit.Server;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageEvent;

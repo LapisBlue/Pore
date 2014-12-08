@@ -23,6 +23,7 @@
  */
 package net.amigocraft.pore.util.converter;
 
+import net.amigocraft.pore.PoreTests;
 import net.amigocraft.pore.impl.entity.PoreEntity;
 import net.amigocraft.pore.impl.entity.PoreLivingEntity;
 import net.amigocraft.pore.impl.entity.PorePlayer;
@@ -35,41 +36,40 @@ import org.spongepowered.api.entity.player.Player;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
-public class TypeConverterTest {
+public class PoreConverterTest {
 
     @Before
     public void initConverters() {
-        // Initialize the converters
-        PoreEntity.getConverter();
+        PoreTests.mockPlugin();
     }
 
     @Test
     public void resolveEntity() {
         Entity generic = mock(Entity.class);
-        assertEquals(PoreEntity.class, PoreEntity.of(generic).getClass());
+        assertEquals(PoreEntity.class, PoreConverter.of(generic, PoreEntity.class).getClass());
     }
 
     @Test
     public void resolveLivingEntity() {
         Entity living = mock(Living.class);
-        assertEquals(PoreLivingEntity.class, PoreEntity.of(living).getClass());
+        assertEquals(PoreLivingEntity.class, PoreConverter.of(living, PoreEntity.class).getClass());
     }
 
     @Test
     public void resolvePlayer() {
         Entity player = mock(Player.class);
-        assertEquals(PorePlayer.class, PoreEntity.of(player).getClass());
+        assertEquals(PorePlayer.class, PoreConverter.of(player, PoreEntity.class).getClass());
     }
 
     @Test
     public void resolveLivingEntityDirectly() {
         Living living = mock(Living.class);
-        assertEquals(PoreLivingEntity.class, PoreLivingEntity.of(living).getClass());
+        assertEquals(PoreLivingEntity.class, PoreConverter.of(living, PoreLivingEntity.class).getClass());
     }
 
     @Test
     public void resolvePlayerDirectly() {
         Player player = mock(Player.class);
-        assertEquals(PorePlayer.class, PorePlayer.of(player).getClass());
+        assertEquals(PorePlayer.class, PoreConverter.of(player, PorePlayer.class).getClass());
     }
 }

@@ -25,7 +25,17 @@ package net.amigocraft.pore.impl.entity;
 
 import com.google.common.collect.ImmutableMap;
 import net.amigocraft.pore.util.converter.TypeConverter;
-import org.spongepowered.api.entity.living.monster.*;
+import org.spongepowered.api.entity.living.monster.Blaze;
+import org.spongepowered.api.entity.living.monster.Creeper;
+import org.spongepowered.api.entity.living.monster.Enderman;
+import org.spongepowered.api.entity.living.monster.Giant;
+import org.spongepowered.api.entity.living.monster.Monster;
+import org.spongepowered.api.entity.living.monster.Silverfish;
+import org.spongepowered.api.entity.living.monster.Skeleton;
+import org.spongepowered.api.entity.living.monster.Spider;
+import org.spongepowered.api.entity.living.monster.Witch;
+import org.spongepowered.api.entity.living.monster.Wither;
+import org.spongepowered.api.entity.living.monster.Zombie;
 
 public class PoreMonster extends PoreCreature implements org.bukkit.entity.Monster {
 

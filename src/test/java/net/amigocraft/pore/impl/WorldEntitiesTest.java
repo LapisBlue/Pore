@@ -25,7 +25,11 @@ package net.amigocraft.pore.impl;
 
 import com.google.common.collect.ImmutableList;
 import net.amigocraft.pore.impl.entity.PoreEntity;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Animals;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.junit.Before;
 import org.junit.Test;
 import org.spongepowered.api.world.World;

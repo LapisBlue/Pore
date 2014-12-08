@@ -29,12 +29,12 @@ import net.amigocraft.pore.impl.PoreServer;
 import org.apache.commons.lang.NotImplementedException;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
-import org.spongepowered.api.util.event.Subscribe;
 import org.spongepowered.api.event.message.CommandEvent;
 import org.spongepowered.api.event.state.PreInitializationEvent;
 import org.spongepowered.api.event.state.ServerStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
+import org.spongepowered.api.util.event.Subscribe;
 
 /**
  * @author Maxim Roncacé, Lapis Blue
@@ -47,11 +47,13 @@ public class Pore {
     private final PluginContainer container;
 
     @Inject
-    private Logger logger;
+    protected Logger logger;
     private PoreServer server;
 
     @Inject
     public Pore(Game game, PluginContainer container) {
+        instance = this;
+
         this.game = game;
         this.container = container;
     }

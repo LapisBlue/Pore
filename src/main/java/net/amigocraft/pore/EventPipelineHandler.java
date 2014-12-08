@@ -28,12 +28,12 @@ import net.amigocraft.pore.impl.PoreWorld;
 import net.amigocraft.pore.impl.entity.PorePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.spongepowered.api.util.event.Subscribe;
 import org.spongepowered.api.event.player.PlayerChatEvent;
 import org.spongepowered.api.event.world.ChunkLoadEvent;
 import org.spongepowered.api.event.world.ChunkUnloadEvent;
 import org.spongepowered.api.event.world.WorldLoadEvent;
 import org.spongepowered.api.event.world.WorldUnloadEvent;
+import org.spongepowered.api.util.event.Subscribe;
 
 import java.util.HashSet;
 

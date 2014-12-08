@@ -26,7 +26,6 @@ package net.amigocraft.pore.impl.entity;
 import net.amigocraft.pore.util.converter.ItemStackConverter;
 import net.amigocraft.pore.util.converter.RotationConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
-import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Rotation;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;

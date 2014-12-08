@@ -60,12 +60,10 @@ public abstract class TypeConverter<S, B> implements Function<S, B> {
 
         // Get the class of the sponge object
         Class<? extends S> spongeType = (Class<? extends S>) handle.getClass();
-        System.out.println("sponge class: " + spongeType);
 
         // Check for the specific implementation first
         TypeConverter<? extends S, ? extends B> child = children.get(spongeType);
         if (child != null) {
-            System.out.println("child: " + child.getClass());
             // Use the specific cache directly
             return child.applyUnchecked(handle);
         }
@@ -74,7 +72,6 @@ public abstract class TypeConverter<S, B> implements Function<S, B> {
         for (Map.Entry<Class<? extends S>, TypeConverter<? extends S, ? extends B>> entry : children
                 .entrySet()) {
             if (entry.getKey().isAssignableFrom(spongeType)) {
-                System.out.println("matched child: " + entry.getKey());
                 // Use the more accurate cache instead
                 return entry.getValue().applyUnchecked(handle);
             }

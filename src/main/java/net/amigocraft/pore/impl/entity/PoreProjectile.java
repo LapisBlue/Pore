@@ -31,7 +31,14 @@ import org.bukkit.entity.Fireball;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.projectiles.ProjectileSource;
 import org.spongepowered.api.entity.living.Living;
-import org.spongepowered.api.entity.projectile.*;
+import org.spongepowered.api.entity.projectile.Arrow;
+import org.spongepowered.api.entity.projectile.Egg;
+import org.spongepowered.api.entity.projectile.EnderPearl;
+import org.spongepowered.api.entity.projectile.FishHook;
+import org.spongepowered.api.entity.projectile.Projectile;
+import org.spongepowered.api.entity.projectile.Snowball;
+import org.spongepowered.api.entity.projectile.ThrownExpBottle;
+import org.spongepowered.api.entity.projectile.ThrownPotion;
 import org.spongepowered.api.entity.projectile.source.BlockProjectileSource;
 
 public class PoreProjectile extends PoreEntity implements org.bukkit.entity.Projectile {

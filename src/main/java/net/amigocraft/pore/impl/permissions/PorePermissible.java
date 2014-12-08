@@ -23,8 +23,8 @@
  */
 package net.amigocraft.pore.impl.permissions;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
 import net.amigocraft.pore.util.PoreWrapper;
+import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
