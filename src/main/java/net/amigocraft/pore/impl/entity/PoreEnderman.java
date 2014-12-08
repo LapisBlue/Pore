@@ -23,8 +23,10 @@
  */
 package net.amigocraft.pore.impl.entity;
 
+import net.amigocraft.pore.impl.block.PoreBlockState;
 import net.amigocraft.pore.util.converter.MaterialConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
@@ -80,7 +82,7 @@ public class PoreEnderman extends PoreMonster implements Enderman {
     @Override
     public MaterialData getCarriedMaterial() {
         return getHandle().getCarriedBlock().isPresent() ?
-                new MaterialData(MaterialConverter.toBukkitMaterial(getHandle().getCarriedBlock().get())) :
+                PoreBlockState.of(getHandle().getCarriedBlock().get()).getData() :
                 null;
     }
 
@@ -88,7 +90,8 @@ public class PoreEnderman extends PoreMonster implements Enderman {
     public void setCarriedMaterial(MaterialData material) {
         ItemBlock type = (ItemBlock) MaterialConverter.toItemType(material.getItemType());
         if (type != null) {
-            getHandle().setCarriedBlock(type);
+            //getHandle().setCarriedBlock(type); //TODO: not sure of how to create the block state
+            throw new NotImplementedException();
         } else {
             throw new UnsupportedOperationException();
         }
