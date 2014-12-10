@@ -25,11 +25,13 @@ package net.amigocraft.pore;
 
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
+import net.amigocraft.pore.event.PlayerEventHandler;
+import net.amigocraft.pore.event.WorldEventHandler;
 import net.amigocraft.pore.impl.PoreServer;
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.plugin.PluginLoadOrder;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
-import org.spongepowered.api.event.message.CommandEvent;
 import org.spongepowered.api.event.state.PreInitializationEvent;
 import org.spongepowered.api.event.state.ServerStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
@@ -58,26 +60,6 @@ public class Pore {
         this.container = container;
     }
 
-    @Subscribe
-    public void onInitialization(PreInitializationEvent event) {
-        instance = this;
-
-        logger.info("Loading Pore server, please wait...");
-        server = new PoreServer(event.getGame(), logger);
-        // TODO: Enable plugins
-    }
-
-    @Subscribe
-    public void onShutdown(ServerStoppingEvent event) {
-        logger.info("Disabling Bukkit plugins, please wait...");
-        server.disablePlugins();
-        logger.info("Finished disabling Bukkit plugins!");
-
-        instance = null;
-        server = null;
-        logger = null;
-    }
-
     public static Pore getInstance() {
         return Preconditions.checkNotNull(instance);
     }
@@ -95,13 +77,40 @@ public class Pore {
     }
 
     public static PluginContainer getPlugin(org.bukkit.plugin.Plugin plugin) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException();
+    }
+
+    //TODO: possibly move state event handlers to their own class
+    @Subscribe
+    public void onInitialization(PreInitializationEvent event) {
+        instance = this;
+
+        logger.info("Loading Pore server, please wait...");
+
+        initializeEventHandlers();
+
+        server = new PoreServer(event.getGame(), logger);
+        //TODO: initialize plugins with proper load order
     }
 
     @Subscribe
-    public void onCommand(CommandEvent event) {
-//        for (org.bukkit.plugin.Plugin plugin : server.getPluginManager().getPlugins()) {
-//            // Call plugin.onCommand() with appropriate params.
-//        }
+    public void onShutdown(ServerStoppingEvent event) {
+        logger.info("Disabling Bukkit plugins, please wait...");
+        server.disablePlugins();
+        logger.info("Finished disabling Bukkit plugins!");
+
+        instance = null;
+        server = null;
+        logger = null;
     }
+
+    private static void initializeEventHandlers(){
+        // main class
+        getGame().getEventManager().register(getInstance(), getInstance());
+        // player events
+        getGame().getEventManager().register(getInstance(), new PlayerEventHandler());
+        // world events
+        getGame().getEventManager().register(getInstance(), new WorldEventHandler());
+    }
+
 }

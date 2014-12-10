@@ -21,56 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package net.amigocraft.pore;
+package net.amigocraft.pore.event;
 
-import net.amigocraft.pore.impl.PoreChunk;
 import net.amigocraft.pore.impl.PoreWorld;
 import net.amigocraft.pore.impl.entity.PorePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.spongepowered.api.event.player.PlayerChatEvent;
-import org.spongepowered.api.event.world.ChunkLoadEvent;
-import org.spongepowered.api.event.world.ChunkUnloadEvent;
-import org.spongepowered.api.event.world.WorldLoadEvent;
-import org.spongepowered.api.event.world.WorldUnloadEvent;
 import org.spongepowered.api.util.event.Subscribe;
 
 import java.util.HashSet;
+import java.util.Set;
 
-public class EventPipelineHandler {
-
-    @Subscribe
-    public void onChunkLoad(
-            ChunkLoadEvent event) { //TODO: instanceof WorldEvent according to Bukkit, but not Sponge
-        //TODO: fix second argument when Sponge makes it possible
-        Bukkit.getPluginManager()
-                .callEvent(new org.bukkit.event.world.ChunkLoadEvent(PoreChunk.of(event.getChunk()), false));
-    }
-
-    @Subscribe
-    public void onChunkUnload(ChunkUnloadEvent event) {
-        Bukkit.getPluginManager()
-                .callEvent(new org.bukkit.event.world.ChunkUnloadEvent(PoreChunk.of(event.getChunk())));
-    }
-
-    @Subscribe
-    public void onWorldEvent(WorldLoadEvent event) {
-        Bukkit.getPluginManager()
-                .callEvent(new org.bukkit.event.world.WorldLoadEvent(PoreWorld.of(event.getWorld())));
-    }
-
-    @Subscribe
-    public void onWorldUnload(WorldUnloadEvent event) {
-        Bukkit.getPluginManager()
-                .callEvent(new org.bukkit.event.world.WorldUnloadEvent(PoreWorld.of(event.getWorld())));
-    }
+public class PlayerEventHandler {
 
     @Subscribe
     public void onPlayerChat(PlayerChatEvent event) {
+        Set<Player> players = new HashSet<Player>(PoreWorld.of(event.getPlayer().getWorld()).getPlayers());
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.player.AsyncPlayerChatEvent(
-                        false, PorePlayer.of(event.getPlayer()), event.getMessage(),
-                        new HashSet<Player>())); //TODO
+                        false, //TODO: determine if this needs to be changed
+                        PorePlayer.of(event.getPlayer()),
+                        event.getMessage(),
+                        players //TODO: players should only include recipients
+                )
+        );
     }
 
 }
