@@ -23,10 +23,10 @@
  */
 package net.amigocraft.pore.impl.entity;
 
+import net.amigocraft.pore.Pore;
 import net.amigocraft.pore.util.converter.ProfessionConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.entity.living.villager.Careers;
 import org.spongepowered.api.entity.living.villager.Villager;
 
 public class PoreVillager extends PoreAgeable implements org.bukkit.entity.Villager {
@@ -81,6 +81,7 @@ public class PoreVillager extends PoreAgeable implements org.bukkit.entity.Villa
     @Override
     public void setProfession(Profession profession) {
         //TODO: not really sure what to do here
-        getHandle().setCareer(Careers.getCareersForProfession(ProfessionConverter.of(profession)).get(0));
+        getHandle().setCareer(
+                Pore.getGame().getRegistry().getCareers(ProfessionConverter.of(profession)).get(0));
     }
 }

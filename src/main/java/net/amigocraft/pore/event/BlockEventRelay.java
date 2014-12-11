@@ -30,22 +30,27 @@ import net.amigocraft.pore.util.converter.ItemStackConverter;
 import net.amigocraft.pore.util.converter.vector.VectorConverter;
 import org.bukkit.Bukkit;
 import org.bukkit.event.block.BlockFadeEvent;
-import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockGrowEvent;
 import org.spongepowered.api.entity.Entity;
-import org.spongepowered.api.event.block.*;
+import org.spongepowered.api.event.block.BlockBurnEvent;
+import org.spongepowered.api.event.block.BlockChangeEvent;
+import org.spongepowered.api.event.block.BlockDispenseEvent;
+import org.spongepowered.api.event.block.BlockIgniteEvent;
+import org.spongepowered.api.event.block.BlockMoveEvent;
+import org.spongepowered.api.event.block.FloraGrowEvent;
+import org.spongepowered.api.event.block.LeafDecayEvent;
 import org.spongepowered.api.util.event.Subscribe;
 
 public class BlockEventRelay {
 
     @Subscribe
-    public void onBlockBurn(final BlockBurnEvent event){
+    public void onBlockBurn(final BlockBurnEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.block.BlockBurnEvent(
                         PoreBlock.of(event.getBlock())
-                ){
+                ) {
                     @Override
-                    public void setCancelled(boolean cancelled){
+                    public void setCancelled(boolean cancelled) {
                         super.setCancelled(true);
                         //TODO: find a way to cancel the event in Sponge
                     }
@@ -54,20 +59,21 @@ public class BlockEventRelay {
     }
 
     @Subscribe
-    public void onBlockChange(final BlockChangeEvent event){
-        //TODO: umbrella event covering most types of block transformations, can't implement until Causes are ready
+    public void onBlockChange(final BlockChangeEvent event) {
+        //TODO: umbrella event covering most types of block transformations, can't implement until Causes are
+        // ready
     }
 
     @Subscribe
-    public void onBlockDispense(final BlockDispenseEvent event){
+    public void onBlockDispense(final BlockDispenseEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.block.BlockDispenseEvent(
                         PoreBlock.of(event.getBlock()),
                         ItemStackConverter.of(event.getDispensedItem()),
                         VectorConverter.createBukkitVector(event.getVelocity())
-                ){
+                ) {
                     @Override
-                    public void setCancelled(boolean cancelled){
+                    public void setCancelled(boolean cancelled) {
                         super.setCancelled(cancelled);
                         //TODO: find a way to cancel the event in Sponge
                     }
@@ -76,19 +82,20 @@ public class BlockEventRelay {
     }
 
     @Subscribe
-    public void onBlockIgnite(final BlockIgniteEvent event){
+    public void onBlockIgnite(final BlockIgniteEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.block.BlockIgniteEvent(
                         PoreBlock.of(event.getBlock()),
                         null, //TODO: cause (reason); not sure if this can be implemented at the moment
                         event.getCause().isPresent() ? // check if there's a cause (presumably always true)
                                 event.getCause() instanceof Entity ? // check if the cause was an entity
-                                        PoreEntity.of((Entity)event.getCause().get()) // get a wrapper for the entity
+                                        PoreEntity.of((Entity) event.getCause().get())
+                                        // get a wrapper for the entity
                                         : null // cause is not an entity
                                 : null // no cause (not sure if this is possible)
-                ){
+                ) {
                     @Override
-                    public void setCancelled(boolean cancelled){
+                    public void setCancelled(boolean cancelled) {
                         super.setCancelled(cancelled);
                         //TODO: find a way to cancel the event in Sponge
                     }
@@ -97,19 +104,19 @@ public class BlockEventRelay {
     }
 
     @Subscribe
-    public void onBlockMove(final BlockMoveEvent event){
+    public void onBlockMove(final BlockMoveEvent event) {
         //TODO: covers piston and physics, cannot be implemented until Causes are ready
     }
 
     @Subscribe
-    public void onFloraGrow(final FloraGrowEvent event){
+    public void onFloraGrow(final FloraGrowEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new BlockGrowEvent(
                         PoreBlock.of(event.getBlock()),
                         PoreBlockState.of(event.getReplacementBlock().getState())
-                ){
+                ) {
                     @Override
-                    public void setCancelled(boolean cancelled){
+                    public void setCancelled(boolean cancelled) {
                         super.setCancelled(cancelled);
                         //TODO: find a way to cancel the event in Sponge
                     }
@@ -118,14 +125,14 @@ public class BlockEventRelay {
     }
 
     @Subscribe
-    public void onLeafDecay(final LeafDecayEvent event){
+    public void onLeafDecay(final LeafDecayEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new BlockFadeEvent(
                         PoreBlock.of(event.getBlock()),
                         PoreBlockState.of(event.getReplacementBlock().getState())
-                ){
+                ) {
                     @Override
-                    public void setCancelled(boolean cancelled){
+                    public void setCancelled(boolean cancelled) {
                         super.setCancelled(cancelled);
                         //TODO: find a way to cancel the event in Sponge
                     }

@@ -32,7 +32,7 @@ import org.bukkit.util.Vector;
 public class VectorConverter {
 
     public static Vector3d create3i(Location location) {
-        return new Vector3d((int)location.getX(), (int)location.getY(), (int)location.getZ());
+        return new Vector3d((int) location.getX(), (int) location.getY(), (int) location.getZ());
     }
 
     public static Vector3d create3d(Location location) {
@@ -43,15 +43,15 @@ public class VectorConverter {
         return new Vector3f(vector.getX(), vector.getY(), vector.getZ());
     }
 
-    public static Vector createBukkitVector(Vector3i vector){
+    public static Vector createBukkitVector(Vector3i vector) {
         return new Vector(vector.getX(), vector.getY(), vector.getZ());
     }
 
-    public static Vector createBukkitVector(Vector3d vector){
+    public static Vector createBukkitVector(Vector3d vector) {
         return new Vector(vector.getX(), vector.getY(), vector.getZ());
     }
 
-    public static Vector createBukkitVector(Vector3f vector){
+    public static Vector createBukkitVector(Vector3f vector) {
         return new Vector(vector.getX(), vector.getY(), vector.getZ());
     }
 

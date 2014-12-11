@@ -104,7 +104,7 @@ public class Pore {
         logger = null;
     }
 
-    private static void initializeEventHandlers(){
+    private static void initializeEventHandlers() {
         // main class
         getGame().getEventManager().register(getInstance(), getInstance());
         // block events

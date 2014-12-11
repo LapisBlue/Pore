@@ -28,6 +28,7 @@ import net.amigocraft.pore.impl.entity.PoreEntity;
 import net.amigocraft.pore.impl.entity.PoreLivingEntity;
 import net.amigocraft.pore.impl.entity.PorePlayer;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.living.Living;
@@ -55,12 +56,11 @@ public class PoreConverterTest {
         assertEquals(PoreLivingEntity.class, PoreConverter.of(living, PoreEntity.class).getClass());
     }
 
-    //TODO: This test erractically fails. It's commented out so other issues with the build or tests are more obvious.
-    /*@Test
+    @Test @Ignore("TODO: Fix converter to make this test working")
     public void resolvePlayer() {
         Entity player = mock(Player.class);
         assertEquals(PorePlayer.class, PoreConverter.of(player, PoreEntity.class).getClass());
-    }*/
+    }
 
     @Test
     public void resolveLivingEntityDirectly() {

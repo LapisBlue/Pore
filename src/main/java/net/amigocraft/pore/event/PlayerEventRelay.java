@@ -33,15 +33,20 @@ import net.amigocraft.pore.util.converter.ItemStackConverter;
 import net.amigocraft.pore.util.converter.vector.LocationConverter;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.*;
+import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerGameModeChangeEvent;
+import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.api.entity.Entity;
-import org.spongepowered.api.event.player.*;
+import org.spongepowered.api.event.player.PlayerChangeGameModeEvent;
+import org.spongepowered.api.event.player.PlayerChangeWorldEvent;
 import org.spongepowered.api.event.player.PlayerChatEvent;
+import org.spongepowered.api.event.player.PlayerDeathEvent;
 import org.spongepowered.api.event.player.PlayerDropItemEvent;
 import org.spongepowered.api.event.player.PlayerInteractEvent;
 import org.spongepowered.api.event.player.PlayerJoinEvent;
 import org.spongepowered.api.event.player.PlayerMoveEvent;
+import org.spongepowered.api.event.player.PlayerPickUpItemEvent;
 import org.spongepowered.api.event.player.PlayerQuitEvent;
 import org.spongepowered.api.util.event.Subscribe;
 
@@ -52,7 +57,7 @@ import java.util.Set;
 public class PlayerEventRelay {
 
     @Subscribe
-    public void onPlayerChangeGamemode(final PlayerChangeGamemodeEvent event){
+    public void onPlayerChangeGamemode(final PlayerChangeGameModeEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new PlayerGameModeChangeEvent(
                         PorePlayer.of(event.getPlayer()),
@@ -62,7 +67,7 @@ public class PlayerEventRelay {
     }
 
     @Subscribe
-    public void onPlayerChangeWorld(final PlayerChangeWorldEvent event){
+    public void onPlayerChangeWorld(final PlayerChangeWorldEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new PlayerChangedWorldEvent(
                         PorePlayer.of(event.getPlayer()),
@@ -80,9 +85,9 @@ public class PlayerEventRelay {
                         PorePlayer.of(event.getPlayer()),
                         event.getMessage(),
                         players //TODO: players should only include recipients
-                ){
+                ) {
                     @Override
-                    public void setCancelled(boolean cancelled){
+                    public void setCancelled(boolean cancelled) {
                         super.setCancelled(cancelled);
                         //TODO: find a way to cancel the event in Sponge
                     }
@@ -92,7 +97,7 @@ public class PlayerEventRelay {
     }
 
     @Subscribe
-    public void onPlayerDeath(final PlayerDeathEvent event){
+    public void onPlayerDeath(final PlayerDeathEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.entity.PlayerDeathEvent(
                         PorePlayer.of(event.getPlayer()),
@@ -107,14 +112,15 @@ public class PlayerEventRelay {
     }
 
     @Subscribe
-    public void onPlayerDropItem(final PlayerDropItemEvent event){
+    public void onPlayerDropItem(final PlayerDropItemEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.player.PlayerDropItemEvent(
                         PorePlayer.of(event.getPlayer()),
-                        null //TODO: Sponge returns a Collection<ItemStack> but Bukkit accepts an Item entity O.o
-                ){
+                        null
+                        //TODO: Sponge returns a Collection<ItemStack> but Bukkit accepts an Item entity O.o
+                ) {
                     @Override
-                    public void setCancelled(boolean cancelled){
+                    public void setCancelled(boolean cancelled) {
                         super.setCancelled(cancelled);
                         event.setCancelled(cancelled);
                     }
@@ -123,17 +129,17 @@ public class PlayerEventRelay {
     }
 
     @Subscribe
-    public void onPlayerInteractEvent(final PlayerInteractEvent event){
+    public void onPlayerInteractEvent(final PlayerInteractEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.player.PlayerInteractEvent(
                         PorePlayer.of(event.getPlayer()),
-                        ActionConverter.of(event.getInteractionType(), event.getBlock().get()),
+                        ActionConverter.of(event.getInteractionType(), event.getBlock()),
                         ItemStackConverter.of(event.getPlayer().getItemInHand().get()),
-                        PoreBlock.of(event.getBlock().get()),
+                        PoreBlock.of(event.getBlock()),
                         null //TODO: clicked face
-                ){
+                ) {
                     @Override
-                    public void setCancelled(boolean cancelled){
+                    public void setCancelled(boolean cancelled) {
                         super.setCancelled(cancelled);
                         event.setCancelled(cancelled);
                     }
@@ -142,7 +148,7 @@ public class PlayerEventRelay {
     }
 
     @Subscribe
-    public void onPlayerJoin(final PlayerJoinEvent event){
+    public void onPlayerJoin(final PlayerJoinEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.player.PlayerJoinEvent(
                         PorePlayer.of(event.getPlayer()),
@@ -152,15 +158,15 @@ public class PlayerEventRelay {
     }
 
     @Subscribe
-    public void onPlayerMove(final PlayerMoveEvent event){
+    public void onPlayerMove(final PlayerMoveEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.player.PlayerMoveEvent(
                         PorePlayer.of(event.getPlayer()),
                         LocationConverter.of(event.getOldLocation()),
                         LocationConverter.of(event.getNewLocation())
-                ){
+                ) {
                     @Override
-                    public void setCancelled(boolean cancelled){
+                    public void setCancelled(boolean cancelled) {
                         super.setCancelled(cancelled);
                         event.setCancelled(cancelled);
                     }
@@ -169,31 +175,31 @@ public class PlayerEventRelay {
     }
 
     @Subscribe
-    public void onPlayerPickUpItem(final PlayerPickUpItemEvent event){
-        for (Entity drop : event.getItems()) { //TODO: possibly rewrite depending on how Sponge implements the event
+    public void onPlayerPickUpItem(final PlayerPickUpItemEvent event) {
+        for (Entity drop : event
+                .getItems()) { //TODO: possibly rewrite depending on how Sponge implements the event
             if (drop instanceof org.spongepowered.api.entity.Item) {
                 Bukkit.getPluginManager().callEvent(
                         new PlayerPickupItemEvent(
                                 PorePlayer.of(event.getPlayer()),
-                                PoreItem.of((org.spongepowered.api.entity.Item)drop),
+                                PoreItem.of((org.spongepowered.api.entity.Item) drop),
                                 0 //TODO: remaining item count
-                        ){
+                        ) {
                             @Override
-                            public void setCancelled(boolean cancelled){
+                            public void setCancelled(boolean cancelled) {
                                 super.setCancelled(cancelled);
                                 event.setCancelled(cancelled);
                             }
                         }
                 );
-            }
-            else {
+            } else {
                 //TODO: maybe something, not sure what though
             }
         }
     }
 
     @Subscribe
-    public void onPlayerQuit(final PlayerQuitEvent event){
+    public void onPlayerQuit(final PlayerQuitEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.player.PlayerQuitEvent(
                         PorePlayer.of(event.getPlayer()),

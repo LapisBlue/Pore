@@ -35,7 +35,8 @@ import org.spongepowered.api.util.event.Subscribe;
 public class WorldEventRelay {
 
     @Subscribe
-    public void onChunkLoad(final ChunkLoadEvent event) { //TODO: instanceof WorldEvent according to Bukkit, but not Sponge
+    public void onChunkLoad(
+            final ChunkLoadEvent event) { //TODO: instanceof WorldEvent according to Bukkit, but not Sponge
         //TODO: fix second argument when Sponge makes it possible
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.world.ChunkLoadEvent(
@@ -50,9 +51,9 @@ public class WorldEventRelay {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.world.ChunkUnloadEvent(
                         PoreChunk.of(event.getChunk())
-                ){
+                ) {
                     @Override
-                    public void setCancelled(boolean cancelled){
+                    public void setCancelled(boolean cancelled) {
                         super.setCancelled(cancelled);
                         //TODO: find a way to cancel the Sponge event
                     }
@@ -74,9 +75,9 @@ public class WorldEventRelay {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.world.WorldUnloadEvent(
                         PoreWorld.of(event.getWorld())
-                ){
+                ) {
                     @Override
-                    public void setCancelled(boolean cancelled){
+                    public void setCancelled(boolean cancelled) {
                         super.setCancelled(cancelled);
                         //TODO: find a way to cancel the Sponge event
                     }

@@ -23,8 +23,8 @@
  */
 package net.amigocraft.pore.util.converter;
 
+import net.amigocraft.pore.Pore;
 import org.spongepowered.api.item.ItemType;
-import org.spongepowered.api.item.ItemTypes;
 
 public class ItemStackConverter {
 
@@ -42,7 +42,7 @@ public class ItemStackConverter {
             throw new UnsupportedOperationException();
         // IntelliJ doesn't recognize the above check and thinks withItemType() may throw an NPE
         //noinspection ConstantConditions
-        return ItemTypes.getItemBuilder()
+        return Pore.getGame().getRegistry().getItemBuilder() // Eh, this shouldn't be in the registry
                 .withItemType(type)
                 .withQuantity(stack.getAmount())
                 .withDamage(stack.getDurability())

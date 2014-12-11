@@ -38,11 +38,11 @@ public class GameModeConverter {
                     .put(GameMode.SPECTATOR, GameModes.SPECTATOR)
                     .build();
 
-    public static org.spongepowered.api.entity.player.gamemode.GameMode of(org.bukkit.GameMode gameMode){
+    public static org.spongepowered.api.entity.player.gamemode.GameMode of(org.bukkit.GameMode gameMode) {
         return map.get(gameMode);
     }
 
-    public static org.bukkit.GameMode of(org.spongepowered.api.entity.player.gamemode.GameMode gameMode){
+    public static org.bukkit.GameMode of(org.spongepowered.api.entity.player.gamemode.GameMode gameMode) {
         return map.inverse().get(gameMode);
     }
 
