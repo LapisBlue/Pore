@@ -25,10 +25,15 @@ package net.amigocraft.pore.util.converter.vector;
 
 import com.flowpowered.math.vector.Vector3d;
 import com.flowpowered.math.vector.Vector3f;
+import com.flowpowered.math.vector.Vector3i;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
 public class VectorConverter {
+
+    public static Vector3d create3i(Location location) {
+        return new Vector3d((int)location.getX(), (int)location.getY(), (int)location.getZ());
+    }
 
     public static Vector3d create3d(Location location) {
         return new Vector3d(location.getX(), location.getY(), location.getZ());
@@ -36,6 +41,18 @@ public class VectorConverter {
 
     public static Vector3f create3f(Vector vector) {
         return new Vector3f(vector.getX(), vector.getY(), vector.getZ());
+    }
+
+    public static Vector createBukkitVector(Vector3i vector){
+        return new Vector(vector.getX(), vector.getY(), vector.getZ());
+    }
+
+    public static Vector createBukkitVector(Vector3d vector){
+        return new Vector(vector.getX(), vector.getY(), vector.getZ());
+    }
+
+    public static Vector createBukkitVector(Vector3f vector){
+        return new Vector(vector.getX(), vector.getY(), vector.getZ());
     }
 
 }
