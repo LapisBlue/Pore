@@ -709,22 +709,25 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
     @Override
     public String[] getGameRules() {
-        throw new NotImplementedException();
+        Set<String> rules = getHandle().getGameRules().keySet();
+        return rules.toArray(new String[rules.size()]);
     }
 
     @Override
     public String getGameRuleValue(String rule) {
-        throw new NotImplementedException();
+        return getHandle().getGameRule(rule).orNull();
     }
 
     @Override
     public boolean setGameRuleValue(String rule, String value) {
-        throw new NotImplementedException();
+        if (rule == null) return false;
+        getHandle().setGameRule(rule, value);
+        return true;
     }
 
     @Override
     public boolean isGameRule(String rule) {
-        throw new NotImplementedException();
+        return getHandle().getGameRule(rule).isPresent();
     }
 
     @Override
