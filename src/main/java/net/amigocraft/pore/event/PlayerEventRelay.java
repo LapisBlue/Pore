@@ -49,7 +49,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class PlayerEventRelayer {
+public class PlayerEventRelay {
 
     @Subscribe
     public void onPlayerChangeGamemode(final PlayerChangeGamemodeEvent event){

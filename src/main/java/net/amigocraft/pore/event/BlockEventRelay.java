@@ -36,7 +36,7 @@ import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.event.block.*;
 import org.spongepowered.api.util.event.Subscribe;
 
-public class BlockEventRelayer {
+public class BlockEventRelay {
 
     @Subscribe
     public void onBlockBurn(final BlockBurnEvent event){
