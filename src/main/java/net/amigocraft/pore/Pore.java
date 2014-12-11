@@ -26,6 +26,7 @@ package net.amigocraft.pore;
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import net.amigocraft.pore.event.BlockEventRelay;
+import net.amigocraft.pore.event.EntityEventRelay;
 import net.amigocraft.pore.event.PlayerEventRelay;
 import net.amigocraft.pore.event.WorldEventRelay;
 import net.amigocraft.pore.impl.PoreServer;
@@ -109,6 +110,8 @@ public class Pore {
         getGame().getEventManager().register(getInstance(), getInstance());
         // block events
         getGame().getEventManager().register(getInstance(), new BlockEventRelay());
+        // entity events
+        getGame().getEventManager().register(getInstance(), new EntityEventRelay());
         // player events
         getGame().getEventManager().register(getInstance(), new PlayerEventRelay());
         // world events
