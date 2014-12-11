@@ -35,9 +35,8 @@ import org.spongepowered.api.util.event.Subscribe;
 public class WorldEventHandler {
 
     @Subscribe
-    public void onChunkLoad(ChunkLoadEvent event) { //TODO: instanceof WorldEvent according to Bukkit, but not Sponge
+    public void onChunkLoad(final ChunkLoadEvent event) { //TODO: instanceof WorldEvent according to Bukkit, but not Sponge
         //TODO: fix second argument when Sponge makes it possible
-
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.world.ChunkLoadEvent(
                         PoreChunk.of(event.getChunk()),
@@ -47,16 +46,22 @@ public class WorldEventHandler {
     }
 
     @Subscribe
-    public void onChunkUnload(ChunkUnloadEvent event) {
+    public void onChunkUnload(final ChunkUnloadEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.world.ChunkUnloadEvent(
                         PoreChunk.of(event.getChunk())
-                )
+                ){
+                    @Override
+                    public void setCancelled(boolean cancelled){
+                        super.setCancelled(cancelled);
+                        //TODO: find a way to cancel the Sponge event
+                    }
+                }
         );
     }
 
     @Subscribe
-    public void onWorldEvent(WorldLoadEvent event) {
+    public void onWorldLoad(final WorldLoadEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.world.WorldLoadEvent(
                         PoreWorld.of(event.getWorld())
@@ -65,11 +70,17 @@ public class WorldEventHandler {
     }
 
     @Subscribe
-    public void onWorldUnload(WorldUnloadEvent event) {
+    public void onWorldUnload(final WorldUnloadEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.world.WorldUnloadEvent(
                         PoreWorld.of(event.getWorld())
-                )
+                ){
+                    @Override
+                    public void setCancelled(boolean cancelled){
+                        super.setCancelled(cancelled);
+                        //TODO: find a way to cancel the Sponge event
+                    }
+                }
         );
     }
 }

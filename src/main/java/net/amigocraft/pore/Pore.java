@@ -29,7 +29,6 @@ import net.amigocraft.pore.event.PlayerEventHandler;
 import net.amigocraft.pore.event.WorldEventHandler;
 import net.amigocraft.pore.impl.PoreServer;
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.plugin.PluginLoadOrder;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.event.state.PreInitializationEvent;
