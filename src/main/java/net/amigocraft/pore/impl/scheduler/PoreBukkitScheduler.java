@@ -44,7 +44,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class PoreBukkitScheduler implements BukkitScheduler {
 
-    private AtomicInteger id;
+    private static final AtomicInteger id = new AtomicInteger();
 
     private static Scheduler getHandle() {
         return Pore.getGame().getScheduler();
