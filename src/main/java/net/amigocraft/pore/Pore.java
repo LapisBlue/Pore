@@ -25,8 +25,8 @@ package net.amigocraft.pore;
 
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
-import net.amigocraft.pore.event.PlayerEventHandler;
-import net.amigocraft.pore.event.WorldEventHandler;
+import net.amigocraft.pore.event.PlayerEventRelayer;
+import net.amigocraft.pore.event.WorldEventRelayer;
 import net.amigocraft.pore.impl.PoreServer;
 import org.apache.commons.lang.NotImplementedException;
 import org.slf4j.Logger;
@@ -107,9 +107,9 @@ public class Pore {
         // main class
         getGame().getEventManager().register(getInstance(), getInstance());
         // player events
-        getGame().getEventManager().register(getInstance(), new PlayerEventHandler());
+        getGame().getEventManager().register(getInstance(), new PlayerEventRelayer());
         // world events
-        getGame().getEventManager().register(getInstance(), new WorldEventHandler());
+        getGame().getEventManager().register(getInstance(), new WorldEventRelayer());
     }
 
 }

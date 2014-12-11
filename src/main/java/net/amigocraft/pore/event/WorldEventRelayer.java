@@ -32,7 +32,7 @@ import org.spongepowered.api.event.world.WorldLoadEvent;
 import org.spongepowered.api.event.world.WorldUnloadEvent;
 import org.spongepowered.api.util.event.Subscribe;
 
-public class WorldEventHandler {
+public class WorldEventRelayer {
 
     @Subscribe
     public void onChunkLoad(final ChunkLoadEvent event) { //TODO: instanceof WorldEvent according to Bukkit, but not Sponge
