@@ -37,8 +37,7 @@ public class PoreCaveSpider extends PoreSpider implements CaveSpider {
     getCaveSpiderConverter() {
         if (converter == null) {
             converter =
-                    new TypeConverter<org.spongepowered.api.entity.living.monster.CaveSpider, PoreCaveSpider>
-                            () {
+                    new TypeConverter<org.spongepowered.api.entity.living.monster.CaveSpider, PoreCaveSpider>() {
                         @Override
                         protected PoreCaveSpider convert(
                                 org.spongepowered.api.entity.living.monster.CaveSpider handle) {
@@ -68,8 +67,6 @@ public class PoreCaveSpider extends PoreSpider implements CaveSpider {
     public static PoreCaveSpider of(org.spongepowered.api.entity.living.monster.CaveSpider handle) {
         return converter.apply(handle);
     }
-
-    //TODO: bridge
 
     @Override
     public EntityType getType() {

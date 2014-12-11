@@ -32,8 +32,7 @@ public class PoreChicken extends PoreAnimals implements Chicken {
     private static TypeConverter<org.spongepowered.api.entity.living.animal.Chicken, PoreChicken> converter;
 
     @SuppressWarnings("unchecked")
-    static TypeConverter<org.spongepowered.api.entity.living.animal.Chicken, PoreChicken> getChickenConverter
-            () {
+    static TypeConverter<org.spongepowered.api.entity.living.animal.Chicken, PoreChicken> getChickenConverter() {
         if (converter == null) {
             converter = new TypeConverter<org.spongepowered.api.entity.living.animal.Chicken, PoreChicken>() {
                 @Override

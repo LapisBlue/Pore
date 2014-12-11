@@ -49,16 +49,16 @@ import java.util.ArrayList;
 public class EntityEventRelay {
 
     @Subscribe
-    public void onEntityChangeBlock(final EntityChangeBlockEvent event){
+    public void onEntityChangeBlock(final EntityChangeBlockEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.entity.EntityChangeBlockEvent(
                         PoreEntity.of(event.getEntity()),
                         PoreBlock.of(event.getBlock()),
                         MaterialConverter.toBukkitMaterial(event.getReplacementBlock().getState().getType()),
                         event.getReplacementBlock().getState().getDataValue()
-                ){
+                ) {
                     @Override
-                    public void setCancelled(boolean cancelled){
+                    public void setCancelled(boolean cancelled) {
                         super.setCancelled(cancelled);
                         //TODO: find a way to cancel the event in Sponge
                     }
@@ -67,23 +67,22 @@ public class EntityEventRelay {
     }
 
     @Subscribe
-    public void onEntityChangeHealth(final EntityChangeHealthEvent event){
+    public void onEntityChangeHealth(final EntityChangeHealthEvent event) {
         if (event.getNewHealth() > event.getOldHealth()) { // entity has gained health
             Bukkit.getPluginManager().callEvent(
                     new EntityRegainHealthEvent(
                             PoreEntity.of(event.getEntity()),
                             event.getNewHealth() - event.getOldHealth(),
                             null //TODO: reason
-                    ){
+                    ) {
                         @Override
-                        public void setCancelled(boolean cancelled){
+                        public void setCancelled(boolean cancelled) {
                             super.setCancelled(cancelled);
                             event.setCancelled(cancelled);
                         }
                     }
             );
-        }
-        else { // entity has been damaged (lost health)
+        } else { // entity has been damaged (lost health)
             //TODO: check if cause is entity or block
             //TODO: CB passes the raw damage but Sponge has no way to access it, so plugins may behave unexpectedly
             Bukkit.getPluginManager().callEvent(
@@ -91,9 +90,9 @@ public class EntityEventRelay {
                             PoreEntity.of(event.getEntity()),
                             EntityDamageEvent.DamageCause.CUSTOM, //TODO: reason
                             event.getOldHealth() - event.getNewHealth()
-                    ){
+                    ) {
                         @Override
-                        public void setCancelled(boolean cancelled){
+                        public void setCancelled(boolean cancelled) {
                             super.setCancelled(cancelled);
                             event.setCancelled(cancelled);
                         }
@@ -103,16 +102,16 @@ public class EntityEventRelay {
     }
 
     @Subscribe
-    public void onEntityCollisionWithEntity(final EntityCollisionWithEntityEvent event){
+    public void onEntityCollisionWithEntity(final EntityCollisionWithEntityEvent event) {
         // Bukkit only has an event for vehicle collisions against other entities
-        if (event.getEntity() instanceof Minecart || event.getEntity() instanceof Boat){
+        if (event.getEntity() instanceof Minecart || event.getEntity() instanceof Boat) {
             Bukkit.getPluginManager().callEvent(
                     new VehicleEntityCollisionEvent(
                             PoreVehicle.of(event.getEntity()),
                             PoreEntity.of(event.getCollided())
-                    ){
+                    ) {
                         @Override
-                        public void setCancelled(boolean cancelled){
+                        public void setCancelled(boolean cancelled) {
                             super.setCancelled(cancelled);
                             event.setCancelled(cancelled);
                         }
@@ -122,10 +121,10 @@ public class EntityEventRelay {
     }
 
     @Subscribe
-    public void onEntityDeath(final EntityDeathEvent event){
+    public void onEntityDeath(final EntityDeathEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.entity.EntityDeathEvent(
-                        PoreLivingEntity.of((Living)event.getEntity()),
+                        PoreLivingEntity.of((Living) event.getEntity()),
                         new ArrayList<ItemStack>(), //TODO: drops
                         0 //TODO: dropped exp
                 )
@@ -133,15 +132,15 @@ public class EntityEventRelay {
     }
 
     @Subscribe
-    public void onEntitySpawn(final EntitySpawnEvent event){
+    public void onEntitySpawn(final EntitySpawnEvent event) {
         if (event.getEntity() instanceof Agent)
             Bukkit.getPluginManager().callEvent(
                     new CreatureSpawnEvent(
                             PoreCreature.of((Agent) event.getEntity()),
                             CreatureSpawnEvent.SpawnReason.DEFAULT //TODO: reason
-                    ){
+                    ) {
                         @Override
-                        public void setCancelled(boolean cancelled){
+                        public void setCancelled(boolean cancelled) {
                             super.setCancelled(cancelled);
                             event.setCancelled(cancelled);
                         }
@@ -151,14 +150,14 @@ public class EntityEventRelay {
 
     @Subscribe
     public void onEntityTame(final EntityTameEvent event) {
-        if (event.getEntity() instanceof Tameable && ((Tameable)event.getEntity()).getOwner().isPresent()) {
+        if (event.getEntity() instanceof Tameable && ((Tameable) event.getEntity()).getOwner().isPresent()) {
             Bukkit.getPluginManager().callEvent(
                     new org.bukkit.event.entity.EntityTameEvent(
-                            PoreLivingEntity.of((Living)event.getEntity()),
+                            PoreLivingEntity.of((Living) event.getEntity()),
                             PoreAnimalTamer.of(((Tameable) event.getEntity()).getOwner().get())
-                    ){
+                    ) {
                         @Override
-                        public void setCancelled(boolean cancelled){
+                        public void setCancelled(boolean cancelled) {
                             super.setCancelled(cancelled);
                             event.setCancelled(cancelled);
                         }
@@ -168,7 +167,7 @@ public class EntityEventRelay {
     }
 
     @Subscribe
-    public void onEntityTeleport(final EntityTeleportEvent event){
+    public void onEntityTeleport(final EntityTeleportEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.entity.EntityTeleportEvent(
                         PoreEntity.of(event.getEntity()),
@@ -179,7 +178,7 @@ public class EntityEventRelay {
     }
 
     @Subscribe
-    public void onProjectileLaunch(final ProjectileLaunchEvent event){
+    public void onProjectileLaunch(final ProjectileLaunchEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.entity.ProjectileLaunchEvent(
                         PoreEntity.of(event.getEntity())

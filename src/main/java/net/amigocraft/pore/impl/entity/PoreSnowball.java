@@ -31,8 +31,7 @@ public class PoreSnowball extends PoreProjectile implements Snowball {
 
     private static TypeConverter<org.spongepowered.api.entity.projectile.Snowball, PoreSnowball> converter;
 
-    static TypeConverter<org.spongepowered.api.entity.projectile.Snowball, PoreSnowball> getSnowballConverter
-            () {
+    static TypeConverter<org.spongepowered.api.entity.projectile.Snowball, PoreSnowball> getSnowballConverter() {
         if (converter == null) {
             converter = new TypeConverter<org.spongepowered.api.entity.projectile.Snowball, PoreSnowball>(
                     //TODO: children converters

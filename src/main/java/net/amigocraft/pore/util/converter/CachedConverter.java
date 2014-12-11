@@ -154,8 +154,7 @@ public class CachedConverter<B> {
             }
 
             // Check for the most specific type
-            for (Map.Entry<Class<? extends S>, Converter<? extends S, ? extends P>> entry : registry.entrySet
-                    ()) {
+            for (Map.Entry<Class<? extends S>, Converter<? extends S, ? extends P>> entry : registry.entrySet()) {
                 if (entry.getKey().isAssignableFrom(sponge)) {
                     // Let this converter convert it instead
                     return entry.getValue().applyUnchecked(input);

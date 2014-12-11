@@ -19,12 +19,19 @@ plugins {
 
 // Remapper is not available in the Gradle plugins repository so we need to use the old syntax for that
 apply plugin: 'net.glowstone.remapper'
+apply plugin: 'checkstyle'
 
 defaultTasks 'clean', 'licenseFormat', 'build', 'remap'
 
 // Project information
 group = 'net.amigocraft.pore'
 version = '1.0.0-SNAPSHOT'
+
+// Extended project information
+ext.projectName = 'Pore'
+ext.inceptionYear = '2014'
+ext.packaging = 'jar'
+ext.organization = 'Lapis'
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -83,6 +90,16 @@ license {
     mapping {
         java = 'SLASHSTAR_STYLE'
     }
+}
+
+// check code style
+checkstyle {
+    configProperties = [
+            "name"        : project.name,
+            "organization": project.organization,
+            "year"        : project.inceptionYear
+    ]
+    configFile = file("checkstyle.xml")
 }
 
 // Disable tests for SpongeAPI

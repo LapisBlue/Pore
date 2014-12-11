@@ -34,8 +34,7 @@ public class PoreFirework extends PoreEntity implements Firework {
     private static TypeConverter<org.spongepowered.api.entity.projectile.Firework, PoreFirework> converter;
 
     @SuppressWarnings("unchecked")
-    static TypeConverter<org.spongepowered.api.entity.projectile.Firework, PoreFirework> getFireworkConverter
-            () {
+    static TypeConverter<org.spongepowered.api.entity.projectile.Firework, PoreFirework> getFireworkConverter() {
         if (converter == null) {
             converter = new TypeConverter<org.spongepowered.api.entity.projectile.Firework, PoreFirework>() {
                 @Override
