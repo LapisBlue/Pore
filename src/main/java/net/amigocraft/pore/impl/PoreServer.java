@@ -29,6 +29,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import net.amigocraft.pore.impl.entity.PorePlayer;
+import net.amigocraft.pore.impl.scheduler.PoreBukkitScheduler;
 import net.amigocraft.pore.logging.PoreLogger;
 import net.amigocraft.pore.util.PoreCollections;
 import net.amigocraft.pore.util.PoreWrapper;
@@ -74,6 +75,7 @@ import org.spongepowered.api.Game;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.InetSocketAddress;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -92,6 +94,8 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     private final PluginManager pluginManager;
     private final File pluginsDir = new File(".", "bukkit-plugins");
     //TODO: use actual server directory, currently set to working directory
+
+    private final BukkitScheduler scheduler = new PoreBukkitScheduler();
 
     public PoreServer(org.spongepowered.api.Game handle, org.slf4j.Logger logger) {
         super(handle.getServer().get());
@@ -194,7 +198,12 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public int getPort() {
-        throw new NotImplementedException();
+        Optional<InetSocketAddress> address = getHandle().getBoundAddress();
+        if (address.isPresent()) {
+            return address.get().getPort();
+        } else {
+            return -1;
+        }
     }
 
     @Override
@@ -204,7 +213,12 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public String getIp() {
-        throw new NotImplementedException();
+        Optional<InetSocketAddress> address = getHandle().getBoundAddress();
+        if (address.isPresent()) {
+            return address.get().getHostName();
+        } else {
+            return "Unknown";
+        }
     }
 
     @Override
@@ -239,12 +253,12 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public boolean hasWhitelist() {
-        throw new NotImplementedException();
+        return getHandle().hasWhitelist();
     }
 
     @Override
     public void setWhitelist(boolean value) {
-        throw new NotImplementedException();
+        getHandle().setHasWhitelist(value);
     }
 
     @Override
@@ -350,7 +364,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public BukkitScheduler getScheduler() {
-        throw new NotImplementedException();
+        return scheduler;
     }
 
     @Override
@@ -475,7 +489,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public boolean getOnlineMode() {
-        throw new NotImplementedException();
+        return getHandle().getOnlineMode();
     }
 
     @Override
