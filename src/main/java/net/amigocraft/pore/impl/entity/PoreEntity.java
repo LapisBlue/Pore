@@ -24,6 +24,7 @@
 package net.amigocraft.pore.impl.entity;
 
 import com.google.common.collect.ImmutableMap;
+import net.amigocraft.pore.Pore;
 import net.amigocraft.pore.impl.PoreWorld;
 import net.amigocraft.pore.util.PoreWrapper;
 import net.amigocraft.pore.util.converter.TypeConverter;
@@ -41,6 +42,7 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+import org.spongepowered.api.Game;
 import org.spongepowered.api.entity.EnderCrystal;
 import org.spongepowered.api.entity.ExperienceOrb;
 import org.spongepowered.api.entity.FallingBlock;
@@ -54,6 +56,9 @@ import org.spongepowered.api.entity.projectile.Firework;
 import org.spongepowered.api.entity.projectile.Projectile;
 import org.spongepowered.api.entity.weather.Lightning;
 import org.spongepowered.api.entity.weather.WeatherEffect;
+import org.spongepowered.api.event.entity.EntityDismountEvent;
+import org.spongepowered.api.event.entity.EntityMountEvent;
+import org.spongepowered.api.util.event.callback.CallbackList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -246,9 +251,48 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
     }
 
     @Override
-    public boolean setPassenger(Entity passenger) {
+    public boolean setPassenger(final Entity passenger) {
         if (!getHandle().getRider().isPresent()) {
             ((PoreEntity) passenger).getHandle().mount(getHandle());
+            final PoreEntity mounted = this;
+            Pore.getGame().getEventManager().post(new EntityMountEvent() {
+
+                private boolean cancelled = false;
+
+                @Override
+                public org.spongepowered.api.entity.Entity getMounted() {
+                    return mounted.getHandle();
+                }
+
+                @Override
+                public boolean isCancelled() {
+                    return cancelled;
+                }
+
+                @Override
+                public void setCancelled(boolean cancel) {
+                    this.cancelled = cancel;
+                    if (cancel)
+                        mounted.getHandle().eject(); //TODO: avoid triggering an event
+                    else
+                        ((PoreEntity) passenger).getHandle().mount(getHandle()); //TODO: avoid triggering an event
+                }
+
+                @Override
+                public org.spongepowered.api.entity.Entity getEntity() {
+                    return ((PoreEntity) passenger).getHandle();
+                }
+
+                @Override
+                public Game getGame() {
+                    return Pore.getGame();
+                }
+
+                @Override
+                public CallbackList getCallbacks() {
+                    return null; //TODO: determine what to return here
+                }
+            });
             return true;
         } else if (passenger == null) {
             getHandle().eject();
@@ -265,7 +309,47 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
     @Override
     public boolean eject() {
         if (getHandle().getRider().isPresent()) {
+            final org.spongepowered.api.entity.Entity rider = getHandle().getRider().get();
             getHandle().eject();
+            final PoreEntity dismounted = this;
+            Pore.getGame().getEventManager().post(new EntityDismountEvent() {
+
+                private boolean cancelled = false;
+
+                @Override
+                public org.spongepowered.api.entity.Entity getDismounted() {
+                    return dismounted.getHandle();
+                }
+
+                @Override
+                public boolean isCancelled() {
+                    return cancelled;
+                }
+
+                @Override
+                public void setCancelled(boolean cancel) {
+                    this.cancelled = cancel;
+                    if (cancel)
+                        rider.mount(dismounted.getHandle()); //TODO: avoid triggering an event
+                    else
+                        rider.dismount();
+                }
+
+                @Override
+                public org.spongepowered.api.entity.Entity getEntity() {
+                    return rider;
+                }
+
+                @Override
+                public Game getGame() {
+                    return Pore.getGame();
+                }
+
+                @Override
+                public CallbackList getCallbacks() {
+                    return null; //TODO: determine what to return here
+                }
+            });
             return true;
         }
         return false;
