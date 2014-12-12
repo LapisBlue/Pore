@@ -28,6 +28,7 @@ import net.amigocraft.pore.impl.entity.PoreVehicle;
 import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
+import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.entity.vehicle.minecart.Minecart;
 import org.spongepowered.api.entity.vehicle.minecart.MinecartChest;
@@ -149,6 +150,26 @@ public class PoreMinecart extends PoreVehicle implements org.bukkit.entity.Minec
 
     @Override
     public void setDerailedVelocityMod(Vector derailed) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public MaterialData getDisplayBlock() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void setDisplayBlock(MaterialData material) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public int getDisplayBlockOffset() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void setDisplayBlockOffset(int offset) {
         throw new NotImplementedException();
     }
 }
