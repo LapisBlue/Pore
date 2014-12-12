@@ -48,6 +48,7 @@ import org.spongepowered.api.event.player.PlayerJoinEvent;
 import org.spongepowered.api.event.player.PlayerMoveEvent;
 import org.spongepowered.api.event.player.PlayerPickUpItemEvent;
 import org.spongepowered.api.event.player.PlayerQuitEvent;
+import org.spongepowered.api.text.message.Message;
 import org.spongepowered.api.util.event.Subscribe;
 
 import java.util.ArrayList;
@@ -106,7 +107,7 @@ public class PlayerEventRelay {
                         0, //TODO: new player xp
                         0, //TODO: new total player xp
                         0, //TODO: new player level
-                        event.getDeathMessage()
+                        ((Message.Text)event.getDeathMessage()).getContent() //TODO: verify this cast is safe
                 )
         );
     }
@@ -152,7 +153,7 @@ public class PlayerEventRelay {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.player.PlayerJoinEvent(
                         PorePlayer.of(event.getPlayer()),
-                        event.getJoinMessage()
+                        ((Message.Text)event.getJoinMessage()).getContent() //TODO: verify this cast is safe
                 )
         );
     }
@@ -203,7 +204,7 @@ public class PlayerEventRelay {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.player.PlayerQuitEvent(
                         PorePlayer.of(event.getPlayer()),
-                        event.getQuitMessage()
+                        ((Message.Text)event.getQuitMessage()).getContent() //TODO: verify this cast is safe
                 )
         );
     }
