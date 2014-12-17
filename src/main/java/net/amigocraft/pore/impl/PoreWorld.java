@@ -49,6 +49,7 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.TreeType;
 import org.bukkit.World;
+import org.bukkit.WorldBorder;
 import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
@@ -727,6 +728,11 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
     @Override
     public boolean isGameRule(String rule) {
         return getHandle().getGameRule(rule).isPresent();
+    }
+
+    @Override
+    public WorldBorder getWorldBorder() {
+        return PoreWorldBorder.of(getHandle().getWorldBorder());
     }
 
     @Override

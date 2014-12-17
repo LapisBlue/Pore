@@ -1,0 +1,115 @@
+/*
+ * Pore
+ * Copyright (c) 2014, Lapis <https://github.com/LapisBlue>
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+package net.amigocraft.pore.impl;
+
+import net.amigocraft.pore.util.PoreWrapper;
+import net.amigocraft.pore.util.converter.vector.LocationConverter;
+import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.Location;
+import org.bukkit.WorldBorder;
+
+public class PoreWorldBorder extends PoreWrapper<org.spongepowered.api.world.WorldBorder> implements WorldBorder {
+    protected PoreWorldBorder(org.spongepowered.api.world.WorldBorder handle) {
+        super(handle);
+    }
+
+    public static PoreWorldBorder of(org.spongepowered.api.world.WorldBorder border) {
+        return new PoreWorldBorder(border); // TODO
+    }
+
+    @Override
+    public void reset() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public double getSize() {
+        return getHandle().getRadius();
+    }
+
+    @Override
+    public void setSize(double newSize) {
+        getHandle().setRadius(newSize);
+    }
+
+    @Override
+    public void setSize(double newSize, long seconds) {
+        getHandle().setRadius(newSize, seconds);
+    }
+
+    @Override
+    public Location getCenter() {
+        // TODO: Add world?
+        return LocationConverter.fromVector3d(null, getHandle().getCenter());
+    }
+
+    @Override
+    public void setCenter(double x, double z) {
+        getHandle().setCenter(x, z);
+    }
+
+    @Override
+    public void setCenter(Location location) {
+        getHandle().setCenter(location.getX(), location.getZ());
+    }
+
+    @Override
+    public double getDamageBuffer() {
+        return getHandle().getBlockBuffer();
+    }
+
+    @Override
+    public void setDamageBuffer(double blocks) {
+        getHandle().setBlockBuffer((int) blocks);
+    }
+
+    @Override
+    public double getDamageAmount() {
+        return getHandle().getDamageAmount();
+    }
+
+    @Override
+    public void setDamageAmount(double damage) {
+        getHandle().setDamageAmount((int) damage);
+    }
+
+    @Override
+    public int getWarningTime() {
+        return getHandle().getWarningTime();
+    }
+
+    @Override
+    public void setWarningTime(int seconds) {
+        getHandle().setWarningTime(seconds);
+    }
+
+    @Override
+    public int getWarningDistance() {
+        return getHandle().getWarningDistance();
+    }
+
+    @Override
+    public void setWarningDistance(int distance) {
+        getHandle().setWarningDistance(distance);
+    }
+}
