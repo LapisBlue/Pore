@@ -126,18 +126,17 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
     @Override
     public Location getLocation() {
-        return LocationConverter
-                .fromVector3d(null, getHandle().getPosition()); //TODO: fix first parameter when possible
+        return LocationConverter.of(getHandle().getLocation()); //TODO: fix first parameter when possible
     }
 
     @Override
     public Location getLocation(Location loc) {
         loc.setWorld(null); //TODO: correct parameter when possible
-        loc.setX(getHandle().getPosition().getX());
-        loc.setY(getHandle().getPosition().getX());
-        loc.setZ(getHandle().getPosition().getX());
-        loc.setPitch(getHandle().getVectorRotation().getX());
-        loc.setYaw(getHandle().getVectorRotation().getY());
+        loc.setX(getHandle().getLocation().getPosition().getX());
+        loc.setY(getHandle().getLocation().getPosition().getX());
+        loc.setZ(getHandle().getLocation().getPosition().getX());
+        loc.setPitch(getHandle().getRotation().getX());
+        loc.setYaw(getHandle().getRotation().getY());
         return loc;
     }
 
@@ -172,7 +171,7 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
             return false;
         }
         this.eject();
-        getHandle().teleport(LocationConverter.of(location));
+        getHandle().setLocation(LocationConverter.of(location));
         // CraftBukkit apparently does not throw an event when this method is called
         return true;
     }
@@ -216,7 +215,7 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
     @Override
     public int getMaxFireTicks() {
-        return getHandle().getFireDelay(); // TODO: This was renamed, but is this still the same?
+        return getHandle().getFireDelay();
     }
 
     @Override
@@ -231,12 +230,12 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
     @Override
     public boolean isDead() {
-        return getHandle().isDead();
+        return getHandle().isRemoved();
     }
 
     @Override
     public boolean isValid() {
-        return getHandle().isValid();
+        return getHandle().isLoaded();
     }
 
     @Override
@@ -246,20 +245,20 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
     @Override
     public Entity getPassenger() {
-        return getHandle().getRider().isPresent() ? PoreEntity.of(getHandle().getRider().get()) : null;
+        return getHandle().getPassenger().isPresent() ? PoreEntity.of(getHandle().getPassenger().get()) : null;
     }
 
     @Override
     public boolean setPassenger(final Entity passenger) {
-        if (!getHandle().getRider().isPresent()) {
-            ((PoreEntity) passenger).getHandle().mount(getHandle());
+        if (!getHandle().getPassenger().isPresent()) {
+            getHandle().setPassenger(((PoreEntity) passenger).getHandle());
             final PoreEntity mounted = this;
             Pore.getGame().getEventManager().post(new EntityMountEvent() {
 
                 private boolean cancelled = false;
 
                 @Override
-                public org.spongepowered.api.entity.Entity getMounted() {
+                public org.spongepowered.api.entity.Entity getVehicle() {
                     return mounted.getHandle();
                 }
 
@@ -272,9 +271,10 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
                 public void setCancelled(boolean cancel) {
                     this.cancelled = cancel;
                     if (cancel)
-                        mounted.getHandle().eject(); //TODO: avoid triggering an event
+                        mounted.getHandle().setPassenger(null); //TODO: avoid triggering an event
                     else
-                        ((PoreEntity) passenger).getHandle().mount(getHandle()); //TODO: avoid triggering an event
+                        mounted.getHandle().setPassenger(((PoreEntity) passenger).getHandle());
+                        //TODO: avoid triggering event
                 }
 
                 @Override
@@ -294,7 +294,7 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
             });
             return true;
         } else if (passenger == null) {
-            getHandle().eject();
+            getHandle().setPassenger(null);
             return true;
         }
         return false;
@@ -302,14 +302,14 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
     @Override
     public boolean isEmpty() {
-        return !getHandle().getRider().isPresent();
+        return !getHandle().getPassenger().isPresent();
     }
 
     @Override
     public boolean eject() {
-        if (getHandle().getRider().isPresent()) {
-            final org.spongepowered.api.entity.Entity rider = getHandle().getRider().get();
-            getHandle().eject();
+        if (getHandle().getPassenger().isPresent()) {
+            final org.spongepowered.api.entity.Entity rider = getHandle().getPassenger().get();
+            getHandle().setPassenger(null);
             final PoreEntity dismounted = this;
             Pore.getGame().getEventManager().post(new EntityDismountEvent() {
 
@@ -329,9 +329,9 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
                 public void setCancelled(boolean cancel) {
                     this.cancelled = cancel;
                     if (cancel)
-                        rider.mount(dismounted.getHandle()); //TODO: avoid triggering an event
+                        dismounted.getHandle().setPassenger(rider); //TODO: avoid triggering an event
                     else
-                        rider.dismount();
+                        dismounted.setPassenger(null);
                 }
 
                 @Override
@@ -396,13 +396,13 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
     @Override
     public boolean isInsideVehicle() {
-        return getHandle().getRiding().isPresent();
+        return getHandle().getVehicle().isPresent();
     }
 
     @Override
     public boolean leaveVehicle() {
-        if (getHandle().getRiding().isPresent()) {
-            getHandle().dismount();
+        if (getHandle().getVehicle().isPresent()) {
+            getHandle().setVehicle(null);
             return true;
         }
         return false;
@@ -410,7 +410,7 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
 
     @Override
     public Entity getVehicle() {
-        return getHandle().getRiding().isPresent() ? PoreEntity.of(getHandle().getRiding().get()) : null;
+        return getHandle().getVehicle().isPresent() ? PoreEntity.of(getHandle().getVehicle().get()) : null;
     }
 
     @Override

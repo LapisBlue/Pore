@@ -22,17 +22,16 @@
  */
 package net.amigocraft.pore.util.converter.vector;
 
-import org.apache.commons.lang.NotImplementedException;
+import com.flowpowered.math.vector.Vector3f;
 import org.bukkit.util.EulerAngle;
-import org.spongepowered.api.util.EulerDirection;
 
 public class EulerAngleConverter {
 
-    public static EulerAngle of(EulerDirection dir) {
-        throw new NotImplementedException(); // TODO
+    public static EulerAngle of(Vector3f dir) {
+        return new EulerAngle(dir.getX(), dir.getY(), dir.getZ());
     }
 
-    public static EulerDirection of(EulerAngle angle) {
-        throw new NotImplementedException(); // TODO
+    public static Vector3f of(EulerAngle angle) {
+        return new Vector3f(angle.getX(), angle.getY(), angle.getZ());
     }
 }

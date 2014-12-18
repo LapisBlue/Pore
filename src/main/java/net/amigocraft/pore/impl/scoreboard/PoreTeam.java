@@ -24,12 +24,11 @@ package net.amigocraft.pore.impl.scoreboard;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import java.util.Set;
-
-// TODO: Bridge
 
 // TODO: Bridge
 
@@ -87,6 +86,16 @@ public class PoreTeam implements Team {
 
     @Override
     public void setCanSeeFriendlyInvisibles(boolean enabled) throws IllegalStateException {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public NameTagVisibility getNameTagVisibility() throws IllegalArgumentException {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void setNameTagVisibility(NameTagVisibility visibility) throws IllegalArgumentException {
         throw new NotImplementedException();
     }
 
