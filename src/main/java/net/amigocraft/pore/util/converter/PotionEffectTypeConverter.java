@@ -29,7 +29,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.spongepowered.api.potion.PotionEffectTypes;
 
-public class PotionConverter {
+public class PotionEffectTypeConverter {
 
     private static BiMap<PotionEffectType, org.spongepowered.api.potion.PotionEffectType> TYPES =
             ImmutableBiMap.<PotionEffectType, org.spongepowered.api.potion.PotionEffectType>builder()
@@ -64,14 +64,5 @@ public class PotionConverter {
 
     public static PotionEffectType of(org.spongepowered.api.potion.PotionEffectType type) {
         return TYPES.inverse().get(type);
-    }
-
-    public static PotionEffect of(org.spongepowered.api.potion.PotionEffect effect) {
-        return new PotionEffect(of(effect.getType()), effect.getDuration(), effect.getAmplifier(),
-                effect.isAmbient());
-    }
-
-    public static org.spongepowered.api.potion.PotionEffect of(PotionEffect effect) {
-        throw new NotImplementedException(); // TODO
     }
 }

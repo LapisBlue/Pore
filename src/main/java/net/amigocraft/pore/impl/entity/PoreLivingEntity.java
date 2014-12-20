@@ -27,7 +27,8 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import net.amigocraft.pore.util.ProjectileUtil;
-import net.amigocraft.pore.util.converter.PotionConverter;
+import net.amigocraft.pore.util.converter.PotionEffectConverter;
+import net.amigocraft.pore.util.converter.PotionEffectTypeConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
 import net.amigocraft.pore.util.converter.vector.LocationConverter;
 import org.apache.commons.lang.NotImplementedException;
@@ -55,6 +56,7 @@ import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.entity.living.complex.ComplexLiving;
 import org.spongepowered.api.entity.projectile.source.ProjectileSource;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -231,54 +233,44 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public boolean addPotionEffect(PotionEffect effect) {
-        addPotionEffect(effect, false);
-        return true; // We don't know
+        return addPotionEffect(effect, false);
     }
 
     @Override
     public boolean addPotionEffect(PotionEffect effect, boolean force) {
-        getHandle().addPotionEffect(PotionConverter.of(effect), force);
-        return true; // We don't know
+        org.spongepowered.api.potion.PotionEffect eff = PotionEffectConverter.of(effect);
+        getHandle().addPotionEffect(eff, force);
+        return getHandle().hasPotionEffect(eff.getType());
     }
 
     @Override
     public boolean addPotionEffects(Collection<PotionEffect> effects) {
-        getHandle().addPotionEffects(Collections2.transform(effects, EFFECT_CONVERTER.reverse()), false);
-        return true; // We don't know
+        boolean success = true;
+        for (PotionEffect effect : effects){
+            this.addPotionEffect(effect);
+            if (!this.hasPotionEffect(effect.getType()))
+                success = false;
+        }
+        return success;
     }
 
     @Override
     public boolean hasPotionEffect(PotionEffectType type) {
-        org.spongepowered.api.potion.PotionEffectType spongeType = PotionConverter.of(type);
-        for (org.spongepowered.api.potion.PotionEffect effect : getHandle().getPotionEffects()) {
-            if (effect.getType().equals(spongeType)) {
-                return true;
-            }
-        }
-        return false;
+        return getHandle().hasPotionEffect(PotionEffectTypeConverter.of(type));
     }
 
     @Override
     public void removePotionEffect(PotionEffectType type) {
-        getHandle().removePotionEffect(PotionConverter.of(type));
+        getHandle().removePotionEffect(PotionEffectTypeConverter.of(type));
     }
-
-    private static final Converter<org.spongepowered.api.potion.PotionEffect, PotionEffect> EFFECT_CONVERTER =
-            new Converter<org.spongepowered.api.potion.PotionEffect, PotionEffect>() {
-                @Override
-                protected PotionEffect doForward(org.spongepowered.api.potion.PotionEffect potionEffect) {
-                    return PotionConverter.of(potionEffect);
-                }
-
-                @Override
-                protected org.spongepowered.api.potion.PotionEffect doBackward(PotionEffect potionEffect) {
-                    return PotionConverter.of(potionEffect);
-                }
-            };
 
     @Override
     public Collection<PotionEffect> getActivePotionEffects() {
-        return Lists.transform(getHandle().getPotionEffects(), EFFECT_CONVERTER);
+        List<PotionEffect> effects = new ArrayList<PotionEffect>();
+        for (org.spongepowered.api.potion.PotionEffect effect : getHandle().getPotionEffects()){
+            effects.add(PotionEffectConverter.of(effect));
+        }
+        return effects;
     }
 
     @Override
