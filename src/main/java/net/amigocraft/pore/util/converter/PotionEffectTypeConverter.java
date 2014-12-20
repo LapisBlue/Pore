@@ -24,8 +24,6 @@ package net.amigocraft.pore.util.converter;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
-import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.spongepowered.api.potion.PotionEffectTypes;
 

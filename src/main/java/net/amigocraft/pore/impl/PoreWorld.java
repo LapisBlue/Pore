@@ -23,6 +23,7 @@
 package net.amigocraft.pore.impl;
 
 import com.flowpowered.math.vector.Vector2i;
+import com.flowpowered.math.vector.Vector3d;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -34,6 +35,7 @@ import net.amigocraft.pore.impl.entity.PoreLivingEntity;
 import net.amigocraft.pore.impl.entity.PorePlayer;
 import net.amigocraft.pore.util.PoreCollections;
 import net.amigocraft.pore.util.PoreWrapper;
+import net.amigocraft.pore.util.converter.EffectConverter;
 import net.amigocraft.pore.util.converter.SoundConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
 import net.amigocraft.pore.util.converter.vector.VectorConverter;
@@ -68,6 +70,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.world.extent.Extent;
 import org.spongepowered.api.world.weather.Weathers;
 
@@ -138,22 +141,29 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
     @Override
     public int getHighestBlockYAt(int x, int z) {
-        throw new NotImplementedException();
+        for (int y = getMaxHeight(); y >= 0; y++) {
+            if (getHandle().getBlock(x, y, z).getType() != BlockTypes.AIR)
+                return y;
+        }
+        return 0;
     }
 
     @Override
     public int getHighestBlockYAt(Location location) {
-        throw new NotImplementedException();
+        if (location.getWorld() == this) {
+            return getHighestBlockYAt(location.getBlockX(), location.getBlockY());
+        }
+        throw new IllegalArgumentException(); //TODO: should an exception be thrown?
     }
 
     @Override
     public Block getHighestBlockAt(int x, int z) {
-        throw new NotImplementedException();
+        return getBlockAt(x, getHighestBlockYAt(x, z), z);
     }
 
     @Override
     public Block getHighestBlockAt(Location location) {
-        throw new NotImplementedException();
+        return getBlockAt(location.getBlockX(), getHighestBlockYAt(location), location.getBlockZ());
     }
 
     @Override
@@ -525,22 +535,37 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
     @Override
     public void playEffect(Location location, Effect effect, int data) {
-        throw new NotImplementedException();
+        this.playEffect(location, effect, data, 64);
     }
 
     @Override
     public void playEffect(Location location, Effect effect, int data, int radius) {
-        throw new NotImplementedException();
+        if (effect.getType() == Effect.Type.SOUND) {
+            getHandle().playSound(EffectConverter.toSound(effect, data), VectorConverter.create3d(location), radius);
+        } else {
+            getHandle().spawnParticles(
+                    EffectConverter.toParticle(effect),
+                    16, //TODO: determine default count
+                    VectorConverter.create3d(location),
+                    new Vector3d(0, 0, 0), //TODO: determine default offset
+                    1, //TODO: determine default speed
+                    radius
+            );
+        }
     }
 
     @Override
     public <T> void playEffect(Location location, Effect effect, T data) {
-        throw new NotImplementedException();
+        this.playEffect(location, effect, data, 64);
     }
 
     @Override
     public <T> void playEffect(Location location, Effect effect, T data, int radius) {
-        throw new NotImplementedException();
+        if ((data != null && data.getClass().equals(effect.getData())) ||
+                (data == null && effect.getData() == null)) {
+            this.playEffect(location, effect, data == null ? 0 : EffectConverter.getDataValue(effect, data), radius);
+        } else
+            throw new IllegalArgumentException("Invalid data type for effect!");
     }
 
     @Override

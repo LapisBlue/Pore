@@ -31,18 +31,18 @@ public class SoundConverter {
     private static final ImmutableBiMap<Sound, org.spongepowered.api.effect.Sound> map;
 
     static {
-        ImmutableBiMap.Builder<Sound, org.spongepowered.api.effect.Sound> builder = ImmutableBiMap.builder();
+        ImmutableBiMap.Builder<org.bukkit.Sound, org.spongepowered.api.effect.Sound> builder = ImmutableBiMap.builder();
         for (Sound sound : Sound.values()) {
             builder.put(sound, Sounds.getByName(sound.name()).get());
         }
         map = builder.build();
     }
 
-    public static org.spongepowered.api.effect.Sound of(Sound sound) {
+    public static org.spongepowered.api.effect.Sound of(org.bukkit.Sound sound) {
         return map.get(sound);
     }
 
-    public static Sound of(org.spongepowered.api.effect.Sound sound) {
+    public static org.bukkit.Sound of(org.spongepowered.api.effect.Sound sound) {
         return map.inverse().get(sound);
     }
 }

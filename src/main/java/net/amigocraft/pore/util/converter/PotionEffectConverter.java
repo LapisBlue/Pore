@@ -23,14 +23,13 @@
 package net.amigocraft.pore.util.converter;
 
 import net.amigocraft.pore.Pore;
-import org.spongepowered.api.potion.PotionEffect;
 import org.spongepowered.api.potion.PotionEffectBuilder;
 
 public class PotionEffectConverter {
 
     private static PotionEffectBuilder effectBuilder = Pore.getGame().getRegistry().getPotionEffectBuilder();
 
-    public static org.spongepowered.api.potion.PotionEffect of(org.bukkit.potion.PotionEffect effect){
+    public static org.spongepowered.api.potion.PotionEffect of(org.bukkit.potion.PotionEffect effect) {
         return effectBuilder
                 .potionType(PotionEffectTypeConverter.of(effect.getType()))
                 .ambience(effect.isAmbient())
@@ -40,7 +39,7 @@ public class PotionEffectConverter {
                 .build();
     }
 
-    public static org.bukkit.potion.PotionEffect of(org.spongepowered.api.potion.PotionEffect effect){
+    public static org.bukkit.potion.PotionEffect of(org.spongepowered.api.potion.PotionEffect effect) {
         return new org.bukkit.potion.PotionEffect(
                 PotionEffectTypeConverter.of(effect.getType()),
                 effect.getDuration(),

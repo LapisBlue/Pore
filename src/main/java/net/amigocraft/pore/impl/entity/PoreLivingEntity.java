@@ -22,10 +22,7 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import com.google.common.base.Converter;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 import net.amigocraft.pore.util.ProjectileUtil;
 import net.amigocraft.pore.util.converter.PotionEffectConverter;
 import net.amigocraft.pore.util.converter.PotionEffectTypeConverter;
@@ -246,7 +243,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     public boolean addPotionEffects(Collection<PotionEffect> effects) {
         boolean success = true;
-        for (PotionEffect effect : effects){
+        for (PotionEffect effect : effects) {
             this.addPotionEffect(effect);
             if (!this.hasPotionEffect(effect.getType()))
                 success = false;
@@ -267,7 +264,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     public Collection<PotionEffect> getActivePotionEffects() {
         List<PotionEffect> effects = new ArrayList<PotionEffect>();
-        for (org.spongepowered.api.potion.PotionEffect effect : getHandle().getPotionEffects()){
+        for (org.spongepowered.api.potion.PotionEffect effect : getHandle().getPotionEffects()) {
             effects.add(PotionEffectConverter.of(effect));
         }
         return effects;

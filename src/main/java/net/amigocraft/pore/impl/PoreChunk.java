@@ -37,8 +37,6 @@ import org.bukkit.entity.Entity;
 
 import java.util.Collection;
 
-//TODO: skeleton implementation
-
 public class PoreChunk extends PoreWrapper<org.spongepowered.api.world.Chunk> implements Chunk {
     private static TypeConverter<org.spongepowered.api.world.Chunk, PoreChunk> converter;
 
@@ -134,7 +132,7 @@ public class PoreChunk extends PoreWrapper<org.spongepowered.api.world.Chunk> im
 
     @Override
     public boolean unload(boolean save) {
-        return unload(save, false);
+        return unload(save, true);
     }
 
     @Override
