@@ -38,6 +38,7 @@ import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.api.entity.Entity;
+import org.spongepowered.api.event.entity.EntityInteractBlockEvent;
 import org.spongepowered.api.event.player.*;
 import org.spongepowered.api.text.message.Message;
 import org.spongepowered.api.util.event.Subscribe;
@@ -109,7 +110,7 @@ public class PlayerEventRelay {
                 new org.bukkit.event.player.PlayerDropItemEvent(
                         PorePlayer.of(event.getPlayer()),
                         null
-                        //TODO: Sponge returns a Collection<ItemStack> but Bukkit accepts an Item entity O.o
+                        //TODO: Sponge returns a Collection<ItemStack> but Bukkit accepts an Item entity O_o
                 ) {
                     @Override
                     public void setCancelled(boolean cancelled) {
@@ -121,22 +122,38 @@ public class PlayerEventRelay {
     }
 
     @Subscribe
-    public void onPlayerInteractBlock(final PlayerInteractBlockEvent event) {
-        Bukkit.getPluginManager().callEvent(
-                new org.bukkit.event.player.PlayerInteractEvent(
-                        PorePlayer.of(event.getPlayer()),
-                        ActionConverter.of(event.getInteractionType(), event.getBlock()),
-                        ItemStackConverter.of(event.getPlayer().getItemInHand().get()),
-                        PoreBlock.of(event.getBlock()),
-                        null //TODO: clicked face
-                ) {
-                    @Override
-                    public void setCancelled(boolean cancelled) {
-                        super.setCancelled(cancelled);
-                        event.setCancelled(cancelled);
+    public void onEntityInteractBlock(final EntityInteractBlockEvent event) {
+        if (event instanceof PlayerInteractBlockEvent) {
+            final PlayerInteractBlockEvent pEvent = (PlayerInteractBlockEvent)event;
+            Bukkit.getPluginManager().callEvent(
+                    new org.bukkit.event.player.PlayerInteractEvent(
+                            PorePlayer.of(pEvent.getPlayer()),
+                            ActionConverter.of(pEvent.getInteractionType(), event.getBlock()),
+                            ItemStackConverter.of(pEvent.getPlayer().getItemInHand().get()),
+                            PoreBlock.of(event.getBlock()),
+                            null //TODO: clicked face
+                    ) {
+                        @Override
+                        public void setCancelled(boolean cancelled) {
+                            super.setCancelled(cancelled);
+                            pEvent.setCancelled(cancelled);
+                        }
                     }
-                }
-        );
+            );
+        } else {
+            Bukkit.getPluginManager().callEvent(
+                    new org.bukkit.event.entity.EntityInteractEvent(
+                            PoreEntity.of(event.getEntity()),
+                            PoreBlock.of(event.getBlock())
+                    ) {
+                        @Override
+                        public void setCancelled(boolean cancelled) {
+                            super.setCancelled(cancelled);
+                            //TODO: find a way to cancel event in Sponge
+                        }
+                    }
+            );
+        }
     }
 
     @Subscribe

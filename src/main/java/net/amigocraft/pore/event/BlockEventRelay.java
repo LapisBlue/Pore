@@ -25,22 +25,59 @@ package net.amigocraft.pore.event;
 import net.amigocraft.pore.impl.block.PoreBlock;
 import net.amigocraft.pore.impl.block.PoreBlockState;
 import net.amigocraft.pore.impl.entity.PoreEntity;
+import net.amigocraft.pore.impl.entity.PorePlayer;
 import net.amigocraft.pore.util.converter.ItemStackConverter;
 import net.amigocraft.pore.util.converter.vector.VectorConverter;
 import org.bukkit.Bukkit;
-import org.bukkit.event.block.BlockFadeEvent;
-import org.bukkit.event.block.BlockGrowEvent;
+import org.bukkit.event.block.*;
 import org.spongepowered.api.entity.Entity;
+import org.spongepowered.api.event.block.*;
 import org.spongepowered.api.event.block.BlockBurnEvent;
-import org.spongepowered.api.event.block.BlockChangeEvent;
 import org.spongepowered.api.event.block.BlockDispenseEvent;
 import org.spongepowered.api.event.block.BlockIgniteEvent;
-import org.spongepowered.api.event.block.BlockMoveEvent;
-import org.spongepowered.api.event.block.FloraGrowEvent;
-import org.spongepowered.api.event.block.LeafDecayEvent;
+import org.spongepowered.api.event.player.PlayerBreakBlockEvent;
+import org.spongepowered.api.event.player.PlayerPlaceBlockEvent;
 import org.spongepowered.api.util.event.Subscribe;
 
 public class BlockEventRelay {
+
+    @Subscribe
+    public void onPlayerPlaceBlock(final PlayerPlaceBlockEvent event) {
+        Bukkit.getPluginManager().callEvent(
+                new org.bukkit.event.block.BlockPlaceEvent(
+                        PoreBlock.of(event.getBlock()),
+                        null, //TODO: find way to convert osa.BlockSnapshot to obc.BlockState
+                        null, //TODO: face block was placed against
+                        ItemStackConverter.of(event.getPlayer().getItemInHand().get()),
+                        PorePlayer.of(event.getPlayer()),
+                        true // TODO: canBuild
+                ) {
+                    @Override
+                    public void setCancelled(boolean cancelled) {
+                        super.setCancelled(cancelled);
+                        event.setCancelled(cancelled);
+                    }
+                }
+        );
+    }
+
+    //TODO: does CraftBukkit call an event when an entity such as an enderman breaks or places a block?
+
+    @Subscribe
+    public void onPlayerBreakBlock(final PlayerBreakBlockEvent event) {
+        Bukkit.getPluginManager().callEvent(
+                new org.bukkit.event.block.BlockBreakEvent(
+                        PoreBlock.of(event.getBlock()),
+                        PorePlayer.of(event.getPlayer())
+                ) {
+                    @Override
+                    public void setCancelled(boolean cancelled) {
+                        super.setCancelled(cancelled);
+                        event.setCancelled(cancelled);
+                    }
+                }
+        );
+    }
 
     @Subscribe
     public void onBlockBurn(final BlockBurnEvent event) {
