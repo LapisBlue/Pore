@@ -24,6 +24,7 @@ package net.amigocraft.pore.event;
 
 import net.amigocraft.pore.impl.PoreWorld;
 import net.amigocraft.pore.impl.block.PoreBlock;
+import net.amigocraft.pore.impl.entity.PoreEntity;
 import net.amigocraft.pore.impl.entity.PoreItem;
 import net.amigocraft.pore.impl.entity.PorePlayer;
 import net.amigocraft.pore.util.converter.ActionConverter;
@@ -37,16 +38,7 @@ import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.api.entity.Entity;
-import org.spongepowered.api.event.player.PlayerChangeGameModeEvent;
-import org.spongepowered.api.event.player.PlayerChangeWorldEvent;
-import org.spongepowered.api.event.player.PlayerChatEvent;
-import org.spongepowered.api.event.player.PlayerDeathEvent;
-import org.spongepowered.api.event.player.PlayerDropItemEvent;
-import org.spongepowered.api.event.player.PlayerInteractEvent;
-import org.spongepowered.api.event.player.PlayerJoinEvent;
-import org.spongepowered.api.event.player.PlayerMoveEvent;
-import org.spongepowered.api.event.player.PlayerPickUpItemEvent;
-import org.spongepowered.api.event.player.PlayerQuitEvent;
+import org.spongepowered.api.event.player.*;
 import org.spongepowered.api.text.message.Message;
 import org.spongepowered.api.util.event.Subscribe;
 
@@ -129,7 +121,7 @@ public class PlayerEventRelay {
     }
 
     @Subscribe
-    public void onPlayerInteractEvent(final PlayerInteractEvent event) {
+    public void onPlayerInteractBlock(final PlayerInteractBlockEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.player.PlayerInteractEvent(
                         PorePlayer.of(event.getPlayer()),
@@ -137,6 +129,22 @@ public class PlayerEventRelay {
                         ItemStackConverter.of(event.getPlayer().getItemInHand().get()),
                         PoreBlock.of(event.getBlock()),
                         null //TODO: clicked face
+                ) {
+                    @Override
+                    public void setCancelled(boolean cancelled) {
+                        super.setCancelled(cancelled);
+                        event.setCancelled(cancelled);
+                    }
+                }
+        );
+    }
+
+    @Subscribe
+    public void onPlayerInteractEntity(final PlayerInteractEntityEvent event) {
+        Bukkit.getPluginManager().callEvent(
+                new org.bukkit.event.player.PlayerInteractEntityEvent(
+                        PorePlayer.of(event.getPlayer()),
+                        PoreEntity.of(event.getTargetEntity())
                 ) {
                     @Override
                     public void setCancelled(boolean cancelled) {
