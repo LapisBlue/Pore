@@ -259,11 +259,7 @@ public class PoreBlock extends PoreWrapper<BlockLoc> implements Block {
 
     @Override
     public boolean isLiquid() {
-        return
-                getHandle().getType() == BlockTypes.FLOWING_WATER ||
-                        getHandle().getType() == BlockTypes.WATER ||
-                        getHandle().getType() == BlockTypes.FLOWING_LAVA ||
-                        getHandle().getType() == BlockTypes.LAVA;
+        return getHandle().getType().isLiquid();
     }
 
     @Override

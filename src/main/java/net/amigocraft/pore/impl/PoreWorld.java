@@ -36,6 +36,7 @@ import net.amigocraft.pore.impl.entity.PorePlayer;
 import net.amigocraft.pore.util.PoreCollections;
 import net.amigocraft.pore.util.PoreWrapper;
 import net.amigocraft.pore.util.converter.EffectConverter;
+import net.amigocraft.pore.util.converter.EnvironmentConverter;
 import net.amigocraft.pore.util.converter.SoundConverter;
 import net.amigocraft.pore.util.converter.TypeConverter;
 import net.amigocraft.pore.util.converter.vector.VectorConverter;
@@ -483,7 +484,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
     @Override
     public Environment getEnvironment() {
-        throw new NotImplementedException();
+        return EnvironmentConverter.of(getHandle().getEnvironment());
     }
 
     @Override
