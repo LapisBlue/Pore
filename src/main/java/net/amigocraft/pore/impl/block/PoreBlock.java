@@ -117,6 +117,12 @@ public class PoreBlock extends PoreWrapper<BlockLoc> implements Block {
     }
 
     @Override
+    public void setType(Material type, boolean applyPhysics) {
+        // TODO: applyPhysics
+        this.setType(type);
+    }
+
+    @Override
     public int getTypeId() {
         return MaterialConverter.toBukkitMaterial(getHandle().getState().getType()).getId();
     }
