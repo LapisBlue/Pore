@@ -28,6 +28,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import net.amigocraft.pore.impl.block.PoreBlock;
 import net.amigocraft.pore.impl.entity.PoreEntity;
@@ -77,6 +78,7 @@ import org.spongepowered.api.world.weather.Weathers;
 
 import javax.annotation.Nullable;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -190,7 +192,12 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
     @Override
     public Chunk[] getLoadedChunks() {
-        throw new NotImplementedException();
+        List<Chunk> chunks = new ArrayList<Chunk>();
+        for (org.spongepowered.api.world.Chunk chunk : getHandle().getLoadedChunks()) {
+            chunks.add(PoreChunk.of(chunk));
+        }
+
+        return chunks.toArray(new Chunk[chunks.size()]);
     }
 
     @Override
@@ -215,8 +222,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
     @Override
     public boolean loadChunk(int x, int z, boolean generate) {
-        getHandle().loadChunk(new Vector3i(x, 0, z), generate);
-        return true; //TODO
+        return getHandle().loadChunk(new Vector3i(x, 0, z), generate).isPresent();
     }
 
     @Override
@@ -248,6 +254,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
     public boolean unloadChunkRequest(int x, int z, boolean safe) {
         throw new NotImplementedException();
     }
+
 
     @Override
     public boolean regenerateChunk(int x, int z) {
@@ -489,7 +496,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
     @Override
     public long getSeed() {
-        throw new NotImplementedException();
+        return getHandle().getWorldSeed();
     }
 
     @Override

@@ -386,12 +386,13 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public boolean unloadWorld(String name, boolean save) {
-        throw new NotImplementedException();
+        Optional<org.spongepowered.api.world.World> world = getHandle().getWorld(name);
+        return world.isPresent() && getHandle().unloadWorld(world.get());
     }
 
     @Override
     public boolean unloadWorld(World world, boolean save) {
-        throw new NotImplementedException();
+        return getHandle().unloadWorld(((PoreWorld) world).getHandle());
     }
 
     @Override
