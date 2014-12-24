@@ -25,24 +25,22 @@ package net.amigocraft.pore.impl.entity;
 import com.google.common.collect.ImmutableMap;
 import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.Flying;
-import org.spongepowered.api.entity.living.Living;
+import org.spongepowered.api.entity.living.Aerial;
 import org.spongepowered.api.entity.living.monster.Ghast;
 
 public class PoreFlying extends PoreLivingEntity implements Flying {
 
-    // Flying has no corresponding interface in SpongeAPI, defines no methods, and is implemented only by Ghast
-
-    private static TypeConverter<Living, PoreFlying> converter;
+    private static TypeConverter<Aerial, PoreFlying> converter;
 
     @SuppressWarnings("unchecked")
-    static TypeConverter<Living, PoreFlying> getFlyingConverter() {
+    static TypeConverter<Aerial, PoreFlying> getFlyingConverter() {
         if (converter == null) {
-            converter = new TypeConverter<Living, PoreFlying>(
+            converter = new TypeConverter<Aerial, PoreFlying>(
                     (ImmutableMap) ImmutableMap.builder()
                             .put(Ghast.class, PoreGhast.getGhastConverter())
                             .build()) {
                 @Override
-                protected PoreFlying convert(Living handle) {
+                protected PoreFlying convert(Aerial handle) {
                     return new PoreFlying(handle);
                 }
             };
@@ -50,13 +48,13 @@ public class PoreFlying extends PoreLivingEntity implements Flying {
         return converter;
     }
 
-    protected PoreFlying(Living handle) {
+    protected PoreFlying(Aerial handle) {
         super(handle);
     }
 
     @Override
-    public Living getHandle() {
-        return (Living) super.getHandle();
+    public Aerial getHandle() {
+        return (Aerial)super.getHandle();
     }
 
     /**
@@ -66,7 +64,7 @@ public class PoreFlying extends PoreLivingEntity implements Flying {
      * @param handle The Sponge object to wrap.
      * @return A Pore wrapper for the given Sponge object.
      */
-    public static PoreFlying of(Living handle) {
+    public static PoreFlying of(Aerial handle) {
         return converter.apply(handle);
     }
 

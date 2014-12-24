@@ -23,22 +23,22 @@
 package net.amigocraft.pore.impl.entity;
 
 import net.amigocraft.pore.util.converter.TypeConverter;
-import org.bukkit.entity.Ambient;
+import org.spongepowered.api.entity.living.Ambient;
 import org.spongepowered.api.entity.living.Bat;
 import org.spongepowered.api.entity.living.Living;
 
-public class PoreAmbient extends PoreLivingEntity implements Ambient {
+public class PoreAmbient extends PoreLivingEntity implements org.bukkit.entity.Ambient {
 
-    private static TypeConverter<Living, PoreAmbient> converter;
+    private static TypeConverter<Ambient, PoreAmbient> converter;
 
     @SuppressWarnings("unchecked")
-    static TypeConverter<Living, PoreAmbient> getAmbientConverter() {
+    static TypeConverter<Ambient, PoreAmbient> getAmbientConverter() {
         if (converter == null) {
-            converter = new TypeConverter<Living, PoreAmbient>(
+            converter = new TypeConverter<Ambient, PoreAmbient>(
                     Bat.class, PoreBat.getBatConverter()
             ) {
                 @Override
-                protected PoreAmbient convert(Living handle) {
+                protected PoreAmbient convert(Ambient handle) {
                     return new PoreAmbient(handle);
                 }
             };
@@ -46,15 +46,13 @@ public class PoreAmbient extends PoreLivingEntity implements Ambient {
         return converter;
     }
 
-    //TODO: bridge
-
     protected PoreAmbient(Living handle) {
         super(handle);
     }
 
     @Override
-    public Living getHandle() {
-        return (Living) super.getHandle();
+    public Ambient getHandle() {
+        return (Ambient) super.getHandle();
     }
 
     /**
@@ -64,7 +62,7 @@ public class PoreAmbient extends PoreLivingEntity implements Ambient {
      * @param handle The Sponge object to wrap.
      * @return A Pore wrapper for the given Sponge object.
      */
-    public static PoreAmbient of(org.spongepowered.api.entity.living.Ageable handle) {
+    public static PoreAmbient of(Ambient handle) {
         return converter.apply(handle);
     }
 

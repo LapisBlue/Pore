@@ -25,22 +25,21 @@ package net.amigocraft.pore.impl.entity;
 import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.WaterMob;
 import org.spongepowered.api.entity.living.Agent;
+import org.spongepowered.api.entity.living.Aquatic;
 import org.spongepowered.api.entity.living.animal.Squid;
 
 public class PoreWaterMob extends PoreCreature implements WaterMob {
 
-    // no corresponding Sponge interface
-
-    private static TypeConverter<Agent, PoreWaterMob> converter;
+    private static TypeConverter<Aquatic, PoreWaterMob> converter;
 
     @SuppressWarnings("unchecked")
-    static TypeConverter<Agent, PoreWaterMob> getWaterMobConverter() {
+    static TypeConverter<Aquatic, PoreWaterMob> getWaterMobConverter() {
         if (converter == null) {
-            converter = new TypeConverter<Agent, PoreWaterMob>(
+            converter = new TypeConverter<Aquatic, PoreWaterMob>(
                     Squid.class, PoreSquid.getSquidConverter()
             ) {
                 @Override
-                protected PoreWaterMob convert(Agent handle) {
+                protected PoreWaterMob convert(Aquatic handle) {
                     return new PoreWaterMob(handle);
                 }
             };
@@ -53,8 +52,8 @@ public class PoreWaterMob extends PoreCreature implements WaterMob {
     }
 
     @Override
-    public Agent getHandle() {
-        return (Agent) super.getHandle();
+    public Aquatic getHandle() {
+        return (Aquatic) super.getHandle();
     }
 
     /**
@@ -64,7 +63,7 @@ public class PoreWaterMob extends PoreCreature implements WaterMob {
      * @param handle The Sponge object to wrap.
      * @return A Pore wrapper for the given Sponge object.
      */
-    public static PoreWaterMob of(Agent handle) {
+    public static PoreWaterMob of(Aquatic handle) {
         return converter.apply(handle);
     }
 
