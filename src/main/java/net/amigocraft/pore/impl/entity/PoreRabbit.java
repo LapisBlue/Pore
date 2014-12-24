@@ -23,6 +23,7 @@
 package net.amigocraft.pore.impl.entity;
 
 import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.entity.RabbitConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.animal.Rabbit;
 
@@ -59,5 +60,15 @@ public class PoreRabbit extends PoreAnimals implements org.bukkit.entity.Rabbit 
     @Override
     public EntityType getType() {
         return EntityType.RABBIT;
+    }
+
+    @Override
+    public Type getRabbitType() {
+        return RabbitConverter.of(getHandle().getRabbitType());
+    }
+
+    @Override
+    public void setRabbitType(Type type) {
+        getHandle().setRabbitType(RabbitConverter.of(type));
     }
 }
