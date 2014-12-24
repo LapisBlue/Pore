@@ -22,8 +22,8 @@
  */
 package net.amigocraft.pore.impl;
 
-import com.flowpowered.math.vector.Vector2i;
 import com.flowpowered.math.vector.Vector3d;
+import com.flowpowered.math.vector.Vector3i;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -169,7 +169,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
     @Override
     public Chunk getChunkAt(int x, int z) {
-        Optional<org.spongepowered.api.world.Chunk> chunk = getHandle().getChunk(new Vector2i(x, z));
+        Optional<org.spongepowered.api.world.Chunk> chunk = getHandle().getChunk(new Vector3i(x, 0, z));
         return chunk.isPresent() ? PoreChunk.of(chunk.get()) : null;
     }
 
@@ -200,7 +200,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
     @Override
     public boolean isChunkLoaded(int x, int z) {
-        return getHandle().getChunk(new Vector2i(x, z)).isPresent();
+        return getHandle().getChunk(new Vector3i(x, 0, z)).isPresent();
     }
 
     @Override
@@ -215,7 +215,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
     @Override
     public boolean loadChunk(int x, int z, boolean generate) {
-        getHandle().loadChunk(new Vector2i(x, z), generate);
+        getHandle().loadChunk(new Vector3i(x, 0, z), generate);
         return true; //TODO
     }
 
