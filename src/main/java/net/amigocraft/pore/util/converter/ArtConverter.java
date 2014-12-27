@@ -32,7 +32,7 @@ public class ArtConverter {
             ImmutableBiMap.<org.bukkit.Art, org.spongepowered.api.entity.hanging.art.Art>builder()
                     .put(Art.ALBAN, Arts.ALBAN)
                     .put(Art.AZTEC, Arts.AZTEC)
-                    .put(Art.AZTEC2, Arts.AZTEC2)
+                    .put(Art.AZTEC2, Arts.AZTEC_2)
                     .put(Art.BOMB, Arts.BOMB)
                     .put(Art.BURNINGSKULL, Arts.BURNING_SKULL)
                     .put(Art.COURBET, Arts.COURBET)

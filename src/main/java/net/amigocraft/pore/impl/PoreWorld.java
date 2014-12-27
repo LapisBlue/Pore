@@ -28,7 +28,6 @@ import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import net.amigocraft.pore.impl.block.PoreBlock;
 import net.amigocraft.pore.impl.entity.PoreEntity;

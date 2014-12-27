@@ -25,8 +25,6 @@ package net.amigocraft.pore.util.converter;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import org.bukkit.World;
-import org.bukkit.block.BlockFace;
-import org.spongepowered.api.util.Direction;
 import org.spongepowered.api.world.Environment;
 import org.spongepowered.api.world.Environments;
 
