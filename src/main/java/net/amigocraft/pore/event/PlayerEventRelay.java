@@ -99,7 +99,7 @@ public class PlayerEventRelay {
                         0, //TODO: new player xp
                         0, //TODO: new total player xp
                         0, //TODO: new player level
-                        ((Message.Text)event.getDeathMessage()).getContent() //TODO: verify this cast is safe
+                        event.getDeathMessage().toLegacy()
                 )
         );
     }
@@ -177,7 +177,7 @@ public class PlayerEventRelay {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.player.PlayerJoinEvent(
                         PorePlayer.of(event.getPlayer()),
-                        ((Message.Text)event.getJoinMessage()).getContent() //TODO: verify this cast is safe
+                        event.getJoinMessage().toLegacy()
                 )
         );
     }
@@ -228,7 +228,7 @@ public class PlayerEventRelay {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.player.PlayerQuitEvent(
                         PorePlayer.of(event.getPlayer()),
-                        ((Message.Text)event.getQuitMessage()).getContent() //TODO: verify this cast is safe
+                        event.getQuitMessage().toLegacy()
                 )
         );
     }
