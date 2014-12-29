@@ -29,6 +29,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
+import net.amigocraft.pore.Pore;
 import net.amigocraft.pore.impl.block.PoreBlock;
 import net.amigocraft.pore.impl.entity.PoreEntity;
 import net.amigocraft.pore.impl.entity.PoreLivingEntity;
@@ -551,13 +552,9 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
             getHandle().playSound(EffectConverter.toSound(effect, data), VectorConverter.create3d(location), radius);
         } else {
             getHandle().spawnParticles(
-                    EffectConverter.toParticle(effect),
-                    16, //TODO: determine default count
+                    Pore.getGame().getRegistry().getParticleEffectBuilder(EffectConverter.toParticle(effect)).build(),
                     VectorConverter.create3d(location),
-                    new Vector3d(0, 0, 0), //TODO: determine default offset
-                    1, //TODO: determine default speed
-                    radius
-            );
+                    radius);
         }
     }
 

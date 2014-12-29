@@ -27,10 +27,10 @@ import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.potion.Potion;
-import org.spongepowered.api.effect.Particle;
-import org.spongepowered.api.effect.Particles;
 import org.spongepowered.api.effect.Sound;
 import org.spongepowered.api.effect.Sounds;
+import org.spongepowered.api.effect.particle.ParticleType;
+import org.spongepowered.api.effect.particle.ParticleTypes;
 
 public class EffectConverter {
 
@@ -70,11 +70,11 @@ public class EffectConverter {
         return null;
     }
 
-    public static Particle toParticle(Effect effect) {
+    public static ParticleType toParticle(Effect effect) {
         if (effect.getType() == Effect.Type.VISUAL) {
             switch (effect) {
                 case SMOKE:
-                    return Particles.SMOKE_NORMAL;
+                    return ParticleTypes.SMOKE_NORMAL;
                 default:
                     return null;
             }
