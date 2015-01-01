@@ -100,7 +100,7 @@ checkstyle {
     configFile = file("checkstyle.xml")
 }
 
-// Disable tests for SpongeAPI
+// Disable tests and checkstyle for SpongeAPI
 project('SpongeAPI') {
     afterEvaluate { project ->
         javadoc.enabled = false
@@ -108,6 +108,9 @@ project('SpongeAPI') {
         sourceJar.enabled = false
         licenseFormat.enabled = false
         tasks.withType(VerificationTask) {
+            enabled = false
+        }
+        tasks.withType(Checkstyle) {
             enabled = false
         }
     }

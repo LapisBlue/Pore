@@ -24,7 +24,6 @@
  */
 package net.amigocraft.pore.impl;
 
-import com.flowpowered.math.vector.Vector3d;
 import com.flowpowered.math.vector.Vector3i;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;

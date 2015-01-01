@@ -42,7 +42,6 @@ import org.bukkit.inventory.ItemStack;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.event.entity.EntityInteractBlockEvent;
 import org.spongepowered.api.event.player.*;
-import org.spongepowered.api.text.message.Message;
 import org.spongepowered.api.util.event.Subscribe;
 
 import java.util.ArrayList;
