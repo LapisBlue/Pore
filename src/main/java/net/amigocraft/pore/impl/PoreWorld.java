@@ -492,7 +492,7 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
 
     @Override
     public Environment getEnvironment() {
-        return EnvironmentConverter.of(getHandle().getEnvironment());
+        return EnvironmentConverter.of(getHandle().getDimension().getType());
     }
 
     @Override

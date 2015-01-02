@@ -26,25 +26,26 @@ package net.amigocraft.pore.util.converter;
 
 import com.google.common.collect.ImmutableBiMap;
 import org.bukkit.Sound;
-import org.spongepowered.api.effect.Sounds;
+import org.spongepowered.api.effect.sound.SoundType;
+import org.spongepowered.api.effect.sound.SoundTypes;
 
 public class SoundConverter {
 
-    private static final ImmutableBiMap<Sound, org.spongepowered.api.effect.Sound> map;
+    private static final ImmutableBiMap<Sound, SoundType> map;
 
     static {
-        ImmutableBiMap.Builder<org.bukkit.Sound, org.spongepowered.api.effect.Sound> builder = ImmutableBiMap.builder();
+        ImmutableBiMap.Builder<Sound, SoundType> builder = ImmutableBiMap.builder();
         for (Sound sound : Sound.values()) {
-            builder.put(sound, Sounds.getByName(sound.name()).get());
+            builder.put(sound, SoundTypes.getByName(sound.name()).get());
         }
         map = builder.build();
     }
 
-    public static org.spongepowered.api.effect.Sound of(org.bukkit.Sound sound) {
+    public static SoundType of(org.bukkit.Sound sound) {
         return map.get(sound);
     }
 
-    public static org.bukkit.Sound of(org.spongepowered.api.effect.Sound sound) {
+    public static org.bukkit.Sound of(SoundType sound) {
         return map.inverse().get(sound);
     }
 }

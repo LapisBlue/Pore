@@ -27,22 +27,22 @@ package net.amigocraft.pore.util.converter;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import org.bukkit.World;
-import org.spongepowered.api.world.Environment;
-import org.spongepowered.api.world.Environments;
+import org.spongepowered.api.world.DimensionType;
+import org.spongepowered.api.world.DimensionTypes;
 
 public final class EnvironmentConverter {
 
-    private static final BiMap<World.Environment, Environment> LOOKUP = ImmutableBiMap.of(
-            World.Environment.NORMAL, Environments.OVERWORLD,
-            World.Environment.NETHER, Environments.NETHER,
-            World.Environment.THE_END, Environments.END
+    private static final BiMap<World.Environment, DimensionType> LOOKUP = ImmutableBiMap.of(
+            World.Environment.NORMAL, DimensionTypes.OVERWORLD,
+            World.Environment.NETHER, DimensionTypes.NETHER,
+            World.Environment.THE_END, DimensionTypes.END
     );
 
-    public static World.Environment of(Environment dir) {
+    public static World.Environment of(DimensionType dir) {
         return LOOKUP.inverse().get(dir);
     }
 
-    public static Environment of(World.Environment environment) {
+    public static DimensionType of(World.Environment environment) {
         return LOOKUP.get(environment);
     }
 

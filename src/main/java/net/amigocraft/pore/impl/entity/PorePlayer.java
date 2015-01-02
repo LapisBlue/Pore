@@ -43,7 +43,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
-import org.spongepowered.api.effect.Sounds;
+import org.spongepowered.api.effect.sound.SoundTypes;
 import org.spongepowered.api.entity.player.Player;
 
 import java.net.InetSocketAddress;
@@ -228,7 +228,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     public void playSound(Location location, String sound, float volume, float pitch) {
         // TODO: Isn't the String sound the ID and not the name?
-        getHandle().playSound(Sounds.getByName(sound).get(), VectorConverter.create3d(location),
+        getHandle().playSound(SoundTypes.getByName(sound).get(), VectorConverter.create3d(location),
                 (double) volume, (double) pitch);
     }
 

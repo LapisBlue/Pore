@@ -29,40 +29,40 @@ import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.potion.Potion;
-import org.spongepowered.api.effect.Sound;
-import org.spongepowered.api.effect.Sounds;
 import org.spongepowered.api.effect.particle.ParticleType;
 import org.spongepowered.api.effect.particle.ParticleTypes;
+import org.spongepowered.api.effect.sound.SoundType;
+import org.spongepowered.api.effect.sound.SoundTypes;
 
 public class EffectConverter {
 
-    public static Sound toSound(Effect effect, int data) {
+    public static SoundType toSound(Effect effect, int data) {
         if (effect.getType() == Effect.Type.SOUND) {
             switch (effect) {
                 case CLICK2:
-                    return Sounds.WOOD_CLICK;
+                    return SoundTypes.WOOD_CLICK;
                 case CLICK1:
-                    return Sounds.CLICK;
+                    return SoundTypes.CLICK;
                 case BOW_FIRE:
-                    return Sounds.SHOOT_ARROW;
+                    return SoundTypes.SHOOT_ARROW;
                 case DOOR_TOGGLE:
-                    return Math.random() >= 0.5 ? Sounds.DOOR_OPEN : Sounds.DOOR_CLOSE;
+                    return Math.random() >= 0.5 ? SoundTypes.DOOR_OPEN : SoundTypes.DOOR_CLOSE;
                 case EXTINGUISH:
-                    return Sounds.FIZZ; //TODO: verify this is the correct sound
+                    return SoundTypes.FIZZ; //TODO: verify this is the correct sound
                 case RECORD_PLAY:
                     throw new NotImplementedException();
                 case GHAST_SHRIEK:
-                    return Sounds.GHAST_SCREAM;
+                    return SoundTypes.GHAST_SCREAM;
                 case GHAST_SHOOT:
-                    return Sounds.GHAST_FIREBALL;
+                    return SoundTypes.GHAST_FIREBALL;
                 case BLAZE_SHOOT:
-                    return Sounds.BLAZE_BREATH;
+                    return SoundTypes.BLAZE_BREATH;
                 case ZOMBIE_CHEW_WOODEN_DOOR:
-                    return Sounds.ZOMBIE_WOOD;
+                    return SoundTypes.ZOMBIE_WOOD;
                 case ZOMBIE_CHEW_IRON_DOOR:
-                    return Sounds.ZOMBIE_METAL;
+                    return SoundTypes.ZOMBIE_METAL;
                 case ZOMBIE_DESTROY_DOOR:
-                    return Sounds.ZOMBIE_WOODBREAK;
+                    return SoundTypes.ZOMBIE_WOODBREAK;
                 case STEP_SOUND:
                     throw new NotImplementedException(); //TODO: determine generic type of block
                 default:
