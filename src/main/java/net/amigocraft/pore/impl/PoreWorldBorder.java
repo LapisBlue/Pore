@@ -46,17 +46,17 @@ public class PoreWorldBorder extends PoreWrapper<org.spongepowered.api.world.Wor
 
     @Override
     public double getSize() {
-        return getHandle().getRadius();
+        return getHandle().getDiameter();
     }
 
     @Override
     public void setSize(double newSize) {
-        getHandle().setRadius(newSize);
+        getHandle().setDiameter(newSize);
     }
 
     @Override
     public void setSize(double newSize, long seconds) {
-        getHandle().setRadius(newSize, seconds);
+        getHandle().setDiameter(newSize, seconds);
     }
 
     @Override
@@ -77,12 +77,12 @@ public class PoreWorldBorder extends PoreWrapper<org.spongepowered.api.world.Wor
 
     @Override
     public double getDamageBuffer() {
-        return getHandle().getBlockBuffer();
+        return getHandle().getDamageThreshold();
     }
 
     @Override
     public void setDamageBuffer(double blocks) {
-        getHandle().setBlockBuffer((int) blocks);
+        getHandle().setDamageThreshold(blocks);
     }
 
     @Override
