@@ -1,3 +1,6 @@
 rootProject.name = 'Pore'
+
 include 'SpongeAPI'
 project(':SpongeAPI').projectDir = file('lib/SpongeAPI')
+include 'Bukkit'
+project(':Bukkit').projectDir = file('lib/Bukkit')
