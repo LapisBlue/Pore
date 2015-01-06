@@ -41,10 +41,17 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    bukkit
+    compile {
+        extendsFrom bukkit
+    }
+}
+
 // Project dependencies
 dependencies {
     compile project('SpongeAPI') // TODO: Change to Sponge's Maven repo in the future
-    compile project('Bukkit')
+    bukkit project('Bukkit')
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
@@ -68,8 +75,9 @@ jar { // The Pore classes will be created in Pore-VERSION-base.jar first
 }
 
 shadowJar {
+    configurations = [project.configurations.bukkit]
     dependencies {
-        include project('Bukkit')
+        exclude dependency('com.google.guava:guava')
     }
 }
 
