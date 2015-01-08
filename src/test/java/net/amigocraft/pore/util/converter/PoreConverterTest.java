@@ -29,7 +29,6 @@ import net.amigocraft.pore.impl.entity.PoreEntity;
 import net.amigocraft.pore.impl.entity.PoreLivingEntity;
 import net.amigocraft.pore.impl.entity.PorePlayer;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.living.Living;
@@ -48,30 +47,18 @@ public class PoreConverterTest {
     @Test
     public void resolveEntity() {
         Entity generic = mock(Entity.class);
-        assertEquals(PoreEntity.class, PoreConverter.of(generic, PoreEntity.class).getClass());
+        assertEquals(PoreEntity.class, PoreConverter.of(generic).getClass());
     }
 
     @Test
     public void resolveLivingEntity() {
         Entity living = mock(Living.class);
-        assertEquals(PoreLivingEntity.class, PoreConverter.of(living, PoreEntity.class).getClass());
+        assertEquals(PoreLivingEntity.class, PoreConverter.of(living).getClass());
     }
 
-    @Test @Ignore("TODO: Fix converter to make this test working")
+    @Test
     public void resolvePlayer() {
         Entity player = mock(Player.class);
-        assertEquals(PorePlayer.class, PoreConverter.of(player, PoreEntity.class).getClass());
-    }
-
-    @Test
-    public void resolveLivingEntityDirectly() {
-        Living living = mock(Living.class);
-        assertEquals(PoreLivingEntity.class, PoreConverter.of(living, PoreLivingEntity.class).getClass());
-    }
-
-    @Test
-    public void resolvePlayerDirectly() {
-        Player player = mock(Player.class);
-        assertEquals(PorePlayer.class, PoreConverter.of(player, PorePlayer.class).getClass());
+        assertEquals(PorePlayer.class, PoreConverter.of(player).getClass());
     }
 }

@@ -28,6 +28,7 @@ import net.amigocraft.pore.impl.PoreChunk;
 import net.amigocraft.pore.impl.PoreOfflinePlayer;
 import net.amigocraft.pore.impl.PoreWorld;
 import net.amigocraft.pore.impl.entity.PoreAgeable;
+import net.amigocraft.pore.impl.entity.PoreAmbient;
 import net.amigocraft.pore.impl.entity.PoreAnimalTamer;
 import net.amigocraft.pore.impl.entity.PoreAnimals;
 import net.amigocraft.pore.impl.entity.PoreArmorStand;
@@ -56,6 +57,7 @@ import net.amigocraft.pore.impl.entity.PoreFallingSand;
 import net.amigocraft.pore.impl.entity.PoreFireball;
 import net.amigocraft.pore.impl.entity.PoreFirework;
 import net.amigocraft.pore.impl.entity.PoreFish;
+import net.amigocraft.pore.impl.entity.PoreFlying;
 import net.amigocraft.pore.impl.entity.PoreGhast;
 import net.amigocraft.pore.impl.entity.PoreGiant;
 import net.amigocraft.pore.impl.entity.PoreGolem;
@@ -94,6 +96,7 @@ import net.amigocraft.pore.impl.entity.PoreTameable;
 import net.amigocraft.pore.impl.entity.PoreThrownExpBottle;
 import net.amigocraft.pore.impl.entity.PoreThrownPotion;
 import net.amigocraft.pore.impl.entity.PoreVillager;
+import net.amigocraft.pore.impl.entity.PoreWaterMob;
 import net.amigocraft.pore.impl.entity.PoreWeather;
 import net.amigocraft.pore.impl.entity.PoreWitch;
 import net.amigocraft.pore.impl.entity.PoreWither;
@@ -120,8 +123,11 @@ import org.spongepowered.api.entity.hanging.Hanging;
 import org.spongepowered.api.entity.hanging.ItemFrame;
 import org.spongepowered.api.entity.hanging.LeashHitch;
 import org.spongepowered.api.entity.hanging.Painting;
+import org.spongepowered.api.entity.living.Aerial;
 import org.spongepowered.api.entity.living.Ageable;
 import org.spongepowered.api.entity.living.Agent;
+import org.spongepowered.api.entity.living.Ambient;
+import org.spongepowered.api.entity.living.Aquatic;
 import org.spongepowered.api.entity.living.ArmorStand;
 import org.spongepowered.api.entity.living.Bat;
 import org.spongepowered.api.entity.living.Human;
@@ -198,99 +204,100 @@ public class PoreConverter {
 
     private static final CachedConverter<PoreWrapper> CONVERTER = CachedConverter.builder(PoreWrapper.class)
 
+            // Entities
+            .register(Entity.class, PoreEntity.class)
+                .register(Living.class, PoreLivingEntity.class)
+                    .register(Human.class, PoreHumanEntity.class)
+                        .register(Player.class, PorePlayer.class)
+                    .register(Agent.class, PoreCreature.class)
+                        .register(Ageable.class, PoreAgeable.class)
+                            .register(Animal.class, PoreAnimals.class)
+                                .register(Chicken.class, PoreChicken.class)
+                                .register(Cow.class, PoreCow.class)
+                                    .register(Mooshroom.class, PoreMushroomCow.class)
+                                .register(Pig.class, PorePig.class)
+                                .register(Rabbit.class, PoreRabbit.class)
+                                .register(Sheep.class, PoreSheep.class)
+                                .register(Tameable.class, PoreTameable.class)
+                                    .register(Horse.class, PoreHorse.class)
+                                    .register(Ocelot.class, PoreOcelot.class)
+                                    .register(Wolf.class, PoreWolf.class)
+                            .register(Villager.class, PoreVillager.class)
+                        .register(Monster.class, PoreMonster.class)
+                            .register(Blaze.class, PoreBlaze.class)
+                            .register(Creeper.class, PoreCreeper.class)
+                            .register(Enderman.class, PoreEnderman.class)
+                            .register(Endermite.class, PoreEndermite.class)
+                            .register(Giant.class, PoreGiant.class)
+                            .register(Guardian.class, PoreGuardian.class)
+                            .register(Silverfish.class, PoreSilverfish.class)
+                            .register(Skeleton.class, PoreSkeleton.class)
+                            .register(Spider.class, PoreSpider.class)
+                                .register(CaveSpider.class, PoreCaveSpider.class)
+                            .register(Witch.class, PoreWitch.class)
+                            .register(Wither.class, PoreWither.class)
+                            .register(Zombie.class, PoreZombie.class)
+                                .register(ZombiePigman.class, PorePigZombie.class)
+                        .register(Golem.class, PoreGolem.class)
+                            .register(IronGolem.class, PoreIronGolem.class)
+                            .register(SnowGolem.class, PoreSnowman.class)
+                        .register(Aquatic.class, PoreWaterMob.class)
+                            .register(Squid.class, PoreSquid.class)
+                    .register(Ambient.class, PoreAmbient.class)
+                        .register(Bat.class, PoreBat.class)
+                    .register(ArmorStand.class, PoreArmorStand.class)
+                    .register(ComplexLiving.class, PoreComplexLivingEntity.class)
+                        .register(EnderDragon.class, PoreEnderDragon.class)
+                    .register(Aerial.class, PoreFlying.class)
+                        .register(Ghast.class, PoreGhast.class)
+                    .register(Slime.class, PoreSlime.class)
+                        .register(MagmaCube.class, PoreMagmaCube.class)
+                .register(ComplexLivingPart.class, PoreComplexEntityPart.class)
+                    .register(EnderDragonPart.class, PoreEnderDragonPart.class)
+                .register(EnderCrystal.class, PoreEnderCrystal.class)
+                .register(EyeOfEnder.class, PoreEnderSignal.class)
+                .register(ExperienceOrb.class, PoreExperienceOrb.class)
+                .register(FallingBlock.class, PoreFallingSand.class)
+                .register(Firework.class, PoreFirework.class)
+                .register(Hanging.class, PoreHanging.class)
+                    .register(ItemFrame.class, PoreItemFrame.class)
+                    .register(LeashHitch.class, PoreLeashHitch.class)
+                    .register(Painting.class, PorePainting.class)
+                .register(Item.class, PoreItem.class)
+                .register(Lightning.class, PoreLightningStrike.class)
+                .register(Projectile.class, PoreProjectile.class)
+                    .register(Arrow.class, PoreArrow.class)
+                    .register(Egg.class, PoreEgg.class)
+                    .register(EnderPearl.class, PoreEnderPearl.class)
+                    .register(Fireball.class, PoreFireball.class)
+                        .register(LargeFireball.class, PoreLargeFireball.class)
+                        .register(SmallFireball.class, PoreSmallFireball.class)
+                        .register(WitherSkull.class, PoreWitherSkull.class)
+                    .register(FishHook.class, PoreFish.class)
+                    .register(Snowball.class, PoreSnowball.class)
+                    .register(ThrownExpBottle.class, PoreThrownExpBottle.class)
+                    .register(ThrownPotion.class, PoreThrownPotion.class)
+                .register(PrimedTNT.class, PoreTNTPrimed.class)
+                .register(WeatherEffect.class, PoreWeather.class)
+                .register(Minecart.class, PoreMinecart.class)
+                    .register(MinecartChest.class, PoreStorageMinecart.class)
+                    .register(MinecartCommandBlock.class, PoreCommandMinecart.class)
+                    .register(MinecartFurnace.class, PorePoweredMinecart.class)
+                    .register(MinecartHopper.class, PoreHopperMinecart.class)
+                    .register(MinecartMobSpawner.class, PoreSpawnerMinecart.class)
+                    .register(MinecartRideable.class, PoreRideableMinecart.class)
+                    .register(MinecartTNT.class, PoreExplosiveMinecart.class)
+                .register(Boat.class, PoreBoat.class)
+
+            .register(Tamer.class, PoreAnimalTamer.class)
+
             .register(Chunk.class, PoreChunk.class)
             .register(User.class, PoreOfflinePlayer.class)
             .register(World.class, PoreWorld.class)
 
-                    // Entities
-            .register(Ageable.class, PoreAgeable.class)
-            .register(Agent.class, PoreCreature.class)
-            .register(Animal.class, PoreAnimals.class)
-            .register(ArmorStand.class, PoreArmorStand.class)
-            .register(Arrow.class, PoreArrow.class)
-            .register(Bat.class, PoreBat.class)
-            .register(Blaze.class, PoreBlaze.class)
-            .register(Boat.class, PoreBoat.class)
-            .register(CaveSpider.class, PoreCaveSpider.class)
-            .register(Chicken.class, PoreChicken.class)
-            .register(ComplexLiving.class, PoreComplexLivingEntity.class)
-            .register(ComplexLivingPart.class, PoreComplexEntityPart.class)
-            .register(Cow.class, PoreCow.class)
-            .register(Creeper.class, PoreCreeper.class)
-            .register(Egg.class, PoreEgg.class)
-            .register(EnderCrystal.class, PoreEnderCrystal.class)
-            .register(EnderDragon.class, PoreEnderDragon.class)
-            .register(EnderDragonPart.class, PoreEnderDragonPart.class)
-            .register(EnderPearl.class, PoreEnderPearl.class)
-            .register(Enderman.class, PoreEnderman.class)
-            .register(Endermite.class, PoreEndermite.class)
-            .register(Entity.class, PoreEntity.class)
-            .register(ExperienceOrb.class, PoreExperienceOrb.class)
-            .register(EyeOfEnder.class, PoreEnderSignal.class)
-            .register(FallingBlock.class, PoreFallingSand.class)
-            .register(Fireball.class, PoreFireball.class)
-            .register(Firework.class, PoreFirework.class)
-            .register(FishHook.class, PoreFish.class)
-            .register(Ghast.class, PoreGhast.class)
-            .register(Giant.class, PoreGiant.class)
-            .register(Golem.class, PoreGolem.class)
-            .register(Guardian.class, PoreGuardian.class)
-            .register(Hanging.class, PoreHanging.class)
-            .register(Horse.class, PoreHorse.class)
-            .register(Human.class, PoreHumanEntity.class)
-            .register(IronGolem.class, PoreIronGolem.class)
-            .register(Item.class, PoreItem.class)
-            .register(ItemFrame.class, PoreItemFrame.class)
-            .register(LargeFireball.class, PoreLargeFireball.class)
-            .register(LeashHitch.class, PoreLeashHitch.class)
-            .register(Lightning.class, PoreLightningStrike.class)
-            .register(Living.class, PoreLivingEntity.class)
-            .register(MagmaCube.class, PoreMagmaCube.class)
-            .register(Monster.class, PoreMonster.class)
-            .register(Mooshroom.class, PoreMushroomCow.class)
-            .register(Ocelot.class, PoreOcelot.class)
-            .register(Painting.class, PorePainting.class)
-            .register(Pig.class, PorePig.class)
-            .register(Player.class, PorePlayer.class)
-            .register(PrimedTNT.class, PoreTNTPrimed.class)
-            .register(Projectile.class, PoreProjectile.class)
-            .register(Rabbit.class, PoreRabbit.class)
-            .register(Sheep.class, PoreSheep.class)
-            .register(Silverfish.class, PoreSilverfish.class)
-            .register(Skeleton.class, PoreSkeleton.class)
-            .register(Slime.class, PoreSlime.class)
-            .register(SmallFireball.class, PoreSmallFireball.class)
-            .register(SnowGolem.class, PoreSnowman.class)
-            .register(Snowball.class, PoreSnowball.class)
-            .register(Spider.class, PoreSpider.class)
-            .register(Squid.class, PoreSquid.class)
-            .register(Tameable.class, PoreTameable.class)
-            .register(Tamer.class, PoreAnimalTamer.class)
-            .register(ThrownExpBottle.class, PoreThrownExpBottle.class)
-            .register(ThrownPotion.class, PoreThrownPotion.class)
-            .register(Villager.class, PoreVillager.class)
-            .register(WeatherEffect.class, PoreWeather.class)
-            .register(Witch.class, PoreWitch.class)
-            .register(Wither.class, PoreWither.class)
-            .register(WitherSkull.class, PoreWitherSkull.class)
-            .register(Wolf.class, PoreWolf.class)
-            .register(Zombie.class, PoreZombie.class)
-            .register(ZombiePigman.class, PorePigZombie.class)
-
-                    // Minecarts
-            .register(Minecart.class, PoreMinecart.class)
-            .register(MinecartChest.class, PoreStorageMinecart.class)
-            .register(MinecartCommandBlock.class, PoreCommandMinecart.class)
-            .register(MinecartFurnace.class, PorePoweredMinecart.class)
-            .register(MinecartHopper.class, PoreHopperMinecart.class)
-            .register(MinecartMobSpawner.class, PoreSpawnerMinecart.class)
-            .register(MinecartRideable.class, PoreRideableMinecart.class)
-            .register(MinecartTNT.class, PoreExplosiveMinecart.class)
-
-                    // Build the converter
             .build();
 
-    public static <P extends PoreWrapper<?>> P of(Object handle, Class<P> pore) {
-        return CONVERTER.get(handle, pore);
+    public static <P extends PoreWrapper<?>> P of(Object handle) {
+        return CONVERTER.get(handle);
     }
 }

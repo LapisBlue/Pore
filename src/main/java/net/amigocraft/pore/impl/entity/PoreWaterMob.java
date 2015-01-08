@@ -26,7 +26,6 @@ package net.amigocraft.pore.impl.entity;
 
 import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.entity.WaterMob;
-import org.spongepowered.api.entity.living.Agent;
 import org.spongepowered.api.entity.living.Aquatic;
 import org.spongepowered.api.entity.living.animal.Squid;
 
@@ -49,7 +48,7 @@ public class PoreWaterMob extends PoreCreature implements WaterMob {
         return converter;
     }
 
-    protected PoreWaterMob(Agent handle) {
+    protected PoreWaterMob(Aquatic handle) {
         super(handle);
     }
 

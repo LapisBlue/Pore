@@ -27,7 +27,6 @@ package net.amigocraft.pore.impl.entity;
 import net.amigocraft.pore.util.converter.TypeConverter;
 import org.spongepowered.api.entity.living.Ambient;
 import org.spongepowered.api.entity.living.Bat;
-import org.spongepowered.api.entity.living.Living;
 
 public class PoreAmbient extends PoreLivingEntity implements org.bukkit.entity.Ambient {
 
@@ -48,7 +47,7 @@ public class PoreAmbient extends PoreLivingEntity implements org.bukkit.entity.A
         return converter;
     }
 
-    protected PoreAmbient(Living handle) {
+    protected PoreAmbient(Ambient handle) {
         super(handle);
     }
 

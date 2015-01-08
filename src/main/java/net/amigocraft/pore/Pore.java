@@ -25,42 +25,37 @@
 package net.amigocraft.pore;
 
 import com.google.common.base.Preconditions;
-import com.google.inject.Inject;
 import net.amigocraft.pore.event.BlockEventRelay;
 import net.amigocraft.pore.event.EntityEventRelay;
 import net.amigocraft.pore.event.PlayerEventRelay;
 import net.amigocraft.pore.event.WorldEventRelay;
 import net.amigocraft.pore.impl.PoreServer;
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.plugin.PluginLoadOrder;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.event.state.PreInitializationEvent;
+import org.spongepowered.api.event.state.ServerStartingEvent;
 import org.spongepowered.api.event.state.ServerStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.util.event.Subscribe;
 
+import javax.inject.Inject;
+
 /**
  * @author Maxim Roncacé, Lapis Blue
  */
 @Plugin(id = "pore", name = "Pore")
-public class Pore {
-    private static Pore instance;
+public final class Pore {
+    protected static Pore instance;
 
-    private final Game game;
-    private final PluginContainer container;
+    @Inject
+    protected Game game;
 
     @Inject
     protected Logger logger;
     private PoreServer server;
-
-    @Inject
-    public Pore(Game game, PluginContainer container) {
-        instance = this;
-
-        this.game = game;
-        this.container = container;
-    }
 
     public static Pore getInstance() {
         return Preconditions.checkNotNull(instance);
@@ -91,8 +86,13 @@ public class Pore {
 
         initializeEventHandlers();
 
-        server = new PoreServer(event.getGame(), logger);
+        server = new PoreServer(game, logger);
         //TODO: initialize plugins with proper load order
+    }
+
+    @Subscribe
+    public void onStarting(ServerStartingEvent event) {
+        server.enablePlugins(PluginLoadOrder.POSTWORLD);
     }
 
     @Subscribe
@@ -107,8 +107,6 @@ public class Pore {
     }
 
     private static void initializeEventHandlers() {
-        // main class
-        getGame().getEventManager().register(getInstance(), getInstance());
         // block events
         getGame().getEventManager().register(getInstance(), new BlockEventRelay());
         // entity events

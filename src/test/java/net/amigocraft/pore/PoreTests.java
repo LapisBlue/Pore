@@ -26,16 +26,15 @@ package net.amigocraft.pore;
 
 import org.slf4j.LoggerFactory;
 import org.spongepowered.api.Game;
-import org.spongepowered.api.plugin.PluginContainer;
 
 import static org.mockito.Mockito.mock;
 
 public final class PoreTests {
 
     public static void mockPlugin() {
-        Game gameProxy = mock(Game.class);
-        PluginContainer container = mock(PluginContainer.class);
-        Pore pore = new Pore(gameProxy, container);
+        Pore pore = new Pore();
+        Pore.instance = pore;
+        pore.game = mock(Game.class);
         pore.logger = LoggerFactory.getLogger("Pore");
     }
 }

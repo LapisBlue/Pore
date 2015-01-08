@@ -24,6 +24,7 @@
  */
 package net.amigocraft.pore.logging;
 
+import java.util.logging.Formatter;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
@@ -43,6 +44,9 @@ public class PoreLogger extends Logger {
     }
 
     private class ForwardHandler extends Handler {
+        private ForwardHandler() {
+            setFormatter(new DummyFormatter());
+        }
 
         @Override
         public void publish(LogRecord record) {
@@ -69,6 +73,14 @@ public class PoreLogger extends Logger {
 
         @Override
         public void close() throws SecurityException {
+        }
+    }
+
+    private static final class DummyFormatter extends Formatter {
+
+        @Override
+        public String format(LogRecord record) {
+            throw new UnsupportedOperationException();
         }
     }
 }
