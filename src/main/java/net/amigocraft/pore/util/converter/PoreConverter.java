@@ -202,7 +202,7 @@ import org.spongepowered.api.world.World;
 
 public class PoreConverter {
 
-    private static final CachedConverter<PoreWrapper> CONVERTER = CachedConverter.builder(PoreWrapper.class)
+    private static final CachedConverter<PoreWrapper> converter = CachedConverter.builder(PoreWrapper.class)
 
             // Entities
             .register(Entity.class, PoreEntity.class)
@@ -298,6 +298,6 @@ public class PoreConverter {
             .build();
 
     public static <P extends PoreWrapper<?>> P of(Object handle) {
-        return CONVERTER.get(handle);
+        return converter.get(handle);
     }
 }
