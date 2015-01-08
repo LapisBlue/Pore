@@ -55,7 +55,6 @@ public final class CachedConverter<B> {
             });
 
     private final LoadingCache<Class<?>, Converter<?, ? extends B>> classCache = CacheBuilder.newBuilder()
-            .concurrencyLevel(1)
             .weakKeys()
             .build(new CacheLoader<Class<?>, Converter<?, ? extends B>>() {
                 @Override
