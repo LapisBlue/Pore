@@ -25,18 +25,20 @@
 package net.amigocraft.pore.impl;
 
 import net.amigocraft.pore.util.PoreWrapper;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import net.amigocraft.pore.util.converter.vector.LocationConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
-import org.bukkit.WorldBorder;
+import org.spongepowered.api.world.WorldBorder;
 
-public class PoreWorldBorder extends PoreWrapper<org.spongepowered.api.world.WorldBorder> implements WorldBorder {
-    protected PoreWorldBorder(org.spongepowered.api.world.WorldBorder handle) {
-        super(handle);
+public class PoreWorldBorder extends PoreWrapper<WorldBorder> implements org.bukkit.WorldBorder {
+
+    public static PoreWorldBorder of(WorldBorder handle) {
+        return PoreConverter.of(PoreWorldBorder.class, handle);
     }
 
-    public static PoreWorldBorder of(org.spongepowered.api.world.WorldBorder border) {
-        return new PoreWorldBorder(border); // TODO
+    protected PoreWorldBorder(WorldBorder handle) {
+        super(handle);
     }
 
     @Override

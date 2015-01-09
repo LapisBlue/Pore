@@ -24,46 +24,23 @@
  */
 package net.amigocraft.pore.impl.block;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
+import org.spongepowered.api.block.BlockState;
 
 import java.util.List;
 
 public class PoreBanner extends PoreBlockState implements org.bukkit.block.Banner {
 
-    private static TypeConverter<org.spongepowered.api.block.BlockState, PoreBanner> converter;
-
-    static TypeConverter<org.spongepowered.api.block.BlockState, PoreBanner> getBeaconConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<org.spongepowered.api.block.BlockState, PoreBanner>() {
-                @Override
-                protected PoreBanner convert(org.spongepowered.api.block.BlockState handle) {
-                    return new PoreBanner(handle);
-                }
-            };
-        }
-
-        return converter;
+    public static PoreBanner of(BlockState handle) {
+        return PoreConverter.of(PoreBanner.class, handle);
     }
 
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreBanner of(org.spongepowered.api.block.BlockState handle) {
-        return converter.apply(handle);
-    }
-
-    protected PoreBanner(org.spongepowered.api.block.BlockState handle) {
+    protected PoreBanner(BlockState handle) {
         super(handle);
     }
-
-    //TODO: bridge
 
     @Override
     public DyeColor getBaseColor() {

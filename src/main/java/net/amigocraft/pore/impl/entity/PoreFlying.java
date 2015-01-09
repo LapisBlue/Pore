@@ -24,30 +24,14 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import com.google.common.collect.ImmutableMap;
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.Flying;
 import org.spongepowered.api.entity.living.Aerial;
-import org.spongepowered.api.entity.living.monster.Ghast;
 
 public class PoreFlying extends PoreLivingEntity implements Flying {
 
-    private static TypeConverter<Aerial, PoreFlying> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<Aerial, PoreFlying> getFlyingConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Aerial, PoreFlying>(
-                    (ImmutableMap) ImmutableMap.builder()
-                            .put(Ghast.class, PoreGhast.getGhastConverter())
-                            .build()) {
-                @Override
-                protected PoreFlying convert(Aerial handle) {
-                    return new PoreFlying(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreFlying of(Aerial handle) {
+        return PoreConverter.of(PoreFlying.class, handle);
     }
 
     protected PoreFlying(Aerial handle) {
@@ -57,17 +41,6 @@ public class PoreFlying extends PoreLivingEntity implements Flying {
     @Override
     public Aerial getHandle() {
         return (Aerial)super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreFlying of(Aerial handle) {
-        return converter.apply(handle);
     }
 
 }

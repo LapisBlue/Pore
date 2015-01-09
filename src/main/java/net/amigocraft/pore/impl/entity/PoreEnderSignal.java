@@ -24,26 +24,15 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.EnderSignal;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.projectile.EyeOfEnder;
 
 public class PoreEnderSignal extends PoreEntity implements EnderSignal {
 
-    private static TypeConverter<EyeOfEnder, PoreEnderSignal> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<EyeOfEnder, PoreEnderSignal> getEnderSignalConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<EyeOfEnder, PoreEnderSignal>() {
-                @Override
-                protected PoreEnderSignal convert(EyeOfEnder handle) {
-                    return new PoreEnderSignal(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreEnderSignal of(EyeOfEnder handle) {
+        return PoreConverter.of(PoreEnderSignal.class, handle);
     }
 
     protected PoreEnderSignal(EyeOfEnder handle) {
@@ -53,17 +42,6 @@ public class PoreEnderSignal extends PoreEntity implements EnderSignal {
     @Override
     public EyeOfEnder getHandle() {
         return (EyeOfEnder) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreEnderSignal of(EyeOfEnder handle) {
-        return converter.apply(handle);
     }
 
     @Override

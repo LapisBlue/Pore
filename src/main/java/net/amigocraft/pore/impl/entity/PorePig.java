@@ -24,28 +24,14 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.animal.Pig;
 
 public class PorePig extends PoreAnimals implements org.bukkit.entity.Pig {
 
-    private static TypeConverter<Pig, PorePig> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<Pig, PorePig> getPigConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Pig, PorePig>() {
-                @Override
-                protected PorePig convert(Pig handle) {
-                    return new PorePig(handle);
-                }
-            };
-        }
-        return converter;
-
-
-
+    public static PorePig of(Pig handle) {
+        return PoreConverter.of(PorePig.class, handle);
     }
 
     protected PorePig(Pig handle) {
@@ -55,17 +41,6 @@ public class PorePig extends PoreAnimals implements org.bukkit.entity.Pig {
     @Override
     public Pig getHandle() {
         return (Pig) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PorePig of(Pig handle) {
-        return converter.apply(handle);
     }
 
     @Override

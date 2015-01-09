@@ -24,7 +24,7 @@
  */
 package net.amigocraft.pore.impl.entity.minecart;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.CommandMinecart;
@@ -38,19 +38,8 @@ import java.util.Set;
 
 public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart {
 
-    private static TypeConverter<MinecartCommandBlock, PoreCommandMinecart> converter;
-
-    @SuppressWarnings("unchecked")
-    public static TypeConverter<MinecartCommandBlock, PoreCommandMinecart> getCommandMinecartConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<MinecartCommandBlock, PoreCommandMinecart>() {
-                @Override
-                protected PoreCommandMinecart convert(MinecartCommandBlock handle) {
-                    return new PoreCommandMinecart(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreCommandMinecart of(MinecartCommandBlock handle) {
+        return PoreConverter.of(PoreCommandMinecart.class, handle);
     }
 
     protected PoreCommandMinecart(MinecartCommandBlock handle) {
@@ -61,19 +50,6 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
     public MinecartCommandBlock getHandle() {
         return (MinecartCommandBlock) super.getHandle();
     }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreCommandMinecart of(MinecartCommandBlock handle) {
-        return converter.apply(handle);
-    }
-
-    //TODO: bridge
 
     @Override
     public EntityType getType() {

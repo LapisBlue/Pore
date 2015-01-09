@@ -24,8 +24,8 @@
  */
 package net.amigocraft.pore.impl.entity;
 
+import net.amigocraft.pore.util.converter.PoreConverter;
 import net.amigocraft.pore.util.converter.SoundConverter;
-import net.amigocraft.pore.util.converter.TypeConverter;
 import net.amigocraft.pore.util.converter.vector.VectorConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Achievement;
@@ -52,23 +52,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-//TODO: still a ton of work to be done here
-
 public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Player {
 
-    private static TypeConverter<Player, PorePlayer> converter;
-
-    public static TypeConverter<Player, PorePlayer> getPlayerConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Player, PorePlayer>() {
-                @Override
-                protected PorePlayer convert(Player handle) {
-                    return new PorePlayer(handle);
-                }
-            };
-        }
-
-        return converter;
+    public static PorePlayer of(Player handle) {
+        return PoreConverter.of(PorePlayer.class, handle);
     }
 
     protected PorePlayer(Player handle) {
@@ -80,10 +67,6 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
         return (Player) super.getHandle();
     }
 
-    public static PorePlayer of(Player handle) {
-        return converter.apply(handle);
-    }
-
     @Override
     public EntityType getType() {
         return EntityType.PLAYER;
@@ -91,7 +74,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public String getDisplayName() {
-        return getHandle().getDisplayName().toString(); // TODO: Change to legacy format
+        return getHandle().getDisplayName().toLegacy();
     }
 
     @Override

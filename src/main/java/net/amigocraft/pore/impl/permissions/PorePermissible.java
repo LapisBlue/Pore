@@ -25,7 +25,6 @@
 package net.amigocraft.pore.impl.permissions;
 
 import net.amigocraft.pore.util.PoreWrapper;
-import net.amigocraft.pore.util.converter.TypeConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
@@ -36,37 +35,7 @@ import org.spongepowered.api.service.permission.Subject;
 
 import java.util.Set;
 
-//TODO: Bridge
-
-//TODO: Bridge
-
 public class PorePermissible extends PoreWrapper<Subject> implements Permissible {
-
-    private static TypeConverter<Subject, PorePermissible> converter;
-
-    static TypeConverter<Subject, PorePermissible> getConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Subject, PorePermissible>() {
-                @Override
-                protected PorePermissible convert(Subject handle) {
-                    return new PorePermissible(handle);
-                }
-            };
-        }
-
-        return converter;
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PorePermissible of(Subject handle) {
-        return getConverter().apply(handle);
-    }
 
     protected PorePermissible(Subject handle) {
         super(handle);

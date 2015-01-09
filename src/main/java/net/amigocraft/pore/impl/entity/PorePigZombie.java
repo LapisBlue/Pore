@@ -24,26 +24,15 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.PigZombie;
 import org.spongepowered.api.entity.living.monster.ZombiePigman;
 
 public class PorePigZombie extends PoreZombie implements PigZombie {
 
-    private static TypeConverter<ZombiePigman, PorePigZombie> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<ZombiePigman, PorePigZombie> getPigZombieConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<ZombiePigman, PorePigZombie>() {
-                @Override
-                protected PorePigZombie convert(ZombiePigman handle) {
-                    return new PorePigZombie(handle);
-                }
-            };
-        }
-        return converter;
+    public static PorePigZombie of(ZombiePigman handle) {
+        return PoreConverter.of(PorePigZombie.class, handle);
     }
 
     protected PorePigZombie(ZombiePigman handle) {
@@ -53,17 +42,6 @@ public class PorePigZombie extends PoreZombie implements PigZombie {
     @Override
     public ZombiePigman getHandle() {
         return (ZombiePigman) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PorePigZombie of(ZombiePigman handle) {
-        return converter.apply(handle);
     }
 
     @Override

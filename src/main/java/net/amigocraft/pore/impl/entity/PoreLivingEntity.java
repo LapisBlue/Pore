@@ -24,11 +24,10 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import com.google.common.collect.ImmutableMap;
 import net.amigocraft.pore.util.ProjectileUtil;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import net.amigocraft.pore.util.converter.PotionEffectConverter;
 import net.amigocraft.pore.util.converter.PotionEffectTypeConverter;
-import net.amigocraft.pore.util.converter.TypeConverter;
 import net.amigocraft.pore.util.converter.vector.LocationConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
@@ -41,7 +40,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Slime;
 import org.bukkit.entity.Snowball;
 import org.bukkit.entity.Witch;
 import org.bukkit.entity.Wither;
@@ -49,10 +47,7 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.entity.living.Agent;
-import org.spongepowered.api.entity.living.Human;
 import org.spongepowered.api.entity.living.Living;
-import org.spongepowered.api.entity.living.complex.ComplexLiving;
 import org.spongepowered.api.entity.projectile.source.ProjectileSource;
 
 import java.util.ArrayList;
@@ -61,42 +56,18 @@ import java.util.HashSet;
 import java.util.List;
 
 public class PoreLivingEntity extends PoreEntity implements LivingEntity {
-    private static TypeConverter<Living, PoreLivingEntity> converter;
 
-    @SuppressWarnings("unchecked")
-    public static TypeConverter<Living, PoreLivingEntity> getLivingEntityConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Living, PoreLivingEntity>(
-                    (ImmutableMap) ImmutableMap.builder()
-                            //.put(Living.class, PoreAmbient.getAmbientConverter())
-                            .put(ComplexLiving.class, PoreComplexLivingEntity.getComplexLivingEntityConverter())
-                                    //.put(Living.class, PoreFlying.getFlyingConverter())
-                            .put(Human.class, PoreHumanEntity.getHumanEntityConverter())
-                            .put(Slime.class, PoreSlime.getSlimeConverter())
-                            .put(Agent.class, PoreCreature.getCreatureConverter())
-                            .build()
-            ) {
-                @Override
-                protected PoreLivingEntity convert(Living handle) {
-                    return new PoreLivingEntity(handle);
-                }
-            };
-        }
-
-        return converter;
+    public static PoreLivingEntity of(Living handle) {
+        return PoreConverter.of(PoreLivingEntity.class, handle);
     }
 
-    protected PoreLivingEntity(org.spongepowered.api.entity.living.Living handle) {
+    protected PoreLivingEntity(Living handle) {
         super(handle);
     }
 
     @Override
     public Living getHandle() {
         return (Living) super.getHandle();
-    }
-
-    public static PoreLivingEntity of(Living handle) {
-        return getLivingEntityConverter().apply(handle);
     }
 
     @Override
@@ -106,7 +77,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public double getEyeHeight(boolean ignoreSneaking) {
-        return getEyeHeight(); // oddly enough, Craftbukkit does the exact same thing
+        return getEyeHeight(); // oddly enough, CraftBukkit does the exact same thing
     }
 
     @Override

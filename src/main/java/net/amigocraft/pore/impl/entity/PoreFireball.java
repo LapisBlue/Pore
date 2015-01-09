@@ -24,64 +24,26 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import com.google.common.collect.ImmutableMap;
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Fireball;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.entity.projectile.fireball.LargeFireball;
-import org.spongepowered.api.entity.projectile.fireball.SmallFireball;
-import org.spongepowered.api.entity.projectile.fireball.WitherSkull;
+import org.spongepowered.api.entity.projectile.fireball.Fireball;
 
-public class PoreFireball extends PoreProjectile implements Fireball {
+public class PoreFireball extends PoreProjectile implements org.bukkit.entity.Fireball {
 
-    private static TypeConverter<org.spongepowered.api.entity.projectile.fireball.Fireball, PoreFireball>
-            converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<org.spongepowered.api.entity.projectile.fireball.Fireball, PoreFireball>
-    getFireballConverter() {
-        if (converter == null) {
-            converter =
-                    new TypeConverter<org.spongepowered.api.entity.projectile.fireball.Fireball, PoreFireball>(
-                            (ImmutableMap) ImmutableMap.builder()
-                                    .put(LargeFireball.class, PoreLargeFireball.getLargeFireballConverter())
-                                    .put(SmallFireball.class, PoreSmallFireball.getSmallFireballConverter())
-                                    .put(WitherSkull.class, PoreWitherSkull.getWitherSkullConverter())
-                                    .build()
-                    ) {
-                        @Override
-                        protected PoreFireball convert(
-                                org.spongepowered.api.entity.projectile.fireball.Fireball handle) {
-                            return new PoreFireball(handle);
-                        }
-                    };
-        }
-        return converter;
+    public static PoreFireball of(Fireball handle) {
+        return PoreConverter.of(PoreFireball.class, handle);
     }
 
-    protected PoreFireball(org.spongepowered.api.entity.projectile.fireball.Fireball handle) {
+    protected PoreFireball(Fireball handle) {
         super(handle);
     }
 
     @Override
-    public org.spongepowered.api.entity.projectile.fireball.Fireball getHandle() {
-        return (org.spongepowered.api.entity.projectile.fireball.Fireball) super.getHandle();
+    public Fireball getHandle() {
+        return (Fireball) super.getHandle();
     }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreFireball of(org.spongepowered.api.entity.projectile.fireball.Fireball handle) {
-        return converter.apply(handle);
-    }
-
-    //TODO: bridge
 
     @Override
     public EntityType getType() {

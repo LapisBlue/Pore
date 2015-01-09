@@ -24,29 +24,14 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import com.google.common.collect.ImmutableMap;
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.golem.IronGolem;
 
 public class PoreIronGolem extends PoreGolem implements org.bukkit.entity.IronGolem {
 
-    private static TypeConverter<IronGolem, PoreIronGolem> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<IronGolem, PoreIronGolem> getIronGolemConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<IronGolem, PoreIronGolem>(
-                    (ImmutableMap) ImmutableMap.builder() // generified for simplicity and readability
-                            .build()
-            ) {
-                @Override
-                protected PoreIronGolem convert(IronGolem handle) {
-                    return new PoreIronGolem(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreIronGolem of(IronGolem handle) {
+        return PoreConverter.of(PoreIronGolem.class, handle);
     }
 
     protected PoreIronGolem(IronGolem handle) {
@@ -56,17 +41,6 @@ public class PoreIronGolem extends PoreGolem implements org.bukkit.entity.IronGo
     @Override
     public IronGolem getHandle() {
         return (IronGolem) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreIronGolem of(IronGolem handle) {
-        return converter.apply(handle);
     }
 
     @Override

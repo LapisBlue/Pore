@@ -24,45 +24,23 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
-import org.bukkit.entity.Bat;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.EntityType;
+import org.spongepowered.api.entity.living.Bat;
 
-public class PoreBat extends PoreAmbient implements Bat {
+public class PoreBat extends PoreAmbient implements org.bukkit.entity.Bat {
 
-    private static TypeConverter<org.spongepowered.api.entity.living.Bat, PoreBat> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<org.spongepowered.api.entity.living.Bat, PoreBat> getBatConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<org.spongepowered.api.entity.living.Bat, PoreBat>() {
-                @Override
-                protected PoreBat convert(org.spongepowered.api.entity.living.Bat handle) {
-                    return new PoreBat(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreBat of(Bat handle) {
+        return PoreConverter.of(PoreBat.class, handle);
     }
 
-    protected PoreBat(org.spongepowered.api.entity.living.Bat handle) {
+    protected PoreBat(Bat handle) {
         super(handle);
     }
 
     @Override
-    public org.spongepowered.api.entity.living.Bat getHandle() {
-        return (org.spongepowered.api.entity.living.Bat) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreBat of(org.spongepowered.api.entity.living.Bat handle) {
-        return converter.apply(handle);
+    public Bat getHandle() {
+        return (Bat) super.getHandle();
     }
 
     @Override

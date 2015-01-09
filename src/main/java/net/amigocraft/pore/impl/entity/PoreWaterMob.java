@@ -24,28 +24,14 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.WaterMob;
 import org.spongepowered.api.entity.living.Aquatic;
-import org.spongepowered.api.entity.living.animal.Squid;
 
 public class PoreWaterMob extends PoreCreature implements WaterMob {
 
-    private static TypeConverter<Aquatic, PoreWaterMob> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<Aquatic, PoreWaterMob> getWaterMobConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Aquatic, PoreWaterMob>(
-                    Squid.class, PoreSquid.getSquidConverter()
-            ) {
-                @Override
-                protected PoreWaterMob convert(Aquatic handle) {
-                    return new PoreWaterMob(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreWaterMob of(Aquatic handle) {
+        return PoreConverter.of(PoreWaterMob.class, handle);
     }
 
     protected PoreWaterMob(Aquatic handle) {
@@ -55,17 +41,6 @@ public class PoreWaterMob extends PoreCreature implements WaterMob {
     @Override
     public Aquatic getHandle() {
         return (Aquatic) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreWaterMob of(Aquatic handle) {
-        return converter.apply(handle);
     }
 
 }

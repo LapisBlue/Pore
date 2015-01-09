@@ -24,25 +24,14 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.projectile.fireball.SmallFireball;
 
 public class PoreSmallFireball extends PoreFireball implements org.bukkit.entity.SmallFireball {
 
-    private static TypeConverter<SmallFireball, PoreSmallFireball> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<SmallFireball, PoreSmallFireball> getSmallFireballConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<SmallFireball, PoreSmallFireball>() {
-                @Override
-                protected PoreSmallFireball convert(SmallFireball handle) {
-                    return new PoreSmallFireball(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreSmallFireball of(SmallFireball handle) {
+        return PoreConverter.of(PoreSmallFireball.class, handle);
     }
 
     protected PoreSmallFireball(SmallFireball handle) {
@@ -52,17 +41,6 @@ public class PoreSmallFireball extends PoreFireball implements org.bukkit.entity
     @Override
     public SmallFireball getHandle() {
         return (SmallFireball) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreSmallFireball of(SmallFireball handle) {
-        return converter.apply(handle);
     }
 
     @Override

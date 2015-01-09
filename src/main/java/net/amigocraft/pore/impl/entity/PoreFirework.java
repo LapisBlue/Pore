@@ -24,47 +24,25 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
+import org.spongepowered.api.entity.projectile.Firework;
 
-public class PoreFirework extends PoreEntity implements Firework {
+public class PoreFirework extends PoreEntity implements org.bukkit.entity.Firework {
 
-    private static TypeConverter<org.spongepowered.api.entity.projectile.Firework, PoreFirework> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<org.spongepowered.api.entity.projectile.Firework, PoreFirework> getFireworkConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<org.spongepowered.api.entity.projectile.Firework, PoreFirework>() {
-                @Override
-                protected PoreFirework convert(org.spongepowered.api.entity.projectile.Firework handle) {
-                    return new PoreFirework(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreFirework of(Firework handle) {
+        return PoreConverter.of(PoreFirework.class, handle);
     }
 
-    protected PoreFirework(org.spongepowered.api.entity.projectile.Firework handle) {
+    protected PoreFirework(Firework handle) {
         super(handle);
     }
 
     @Override
-    public org.spongepowered.api.entity.projectile.Firework getHandle() {
-        return (org.spongepowered.api.entity.projectile.Firework) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreFirework of(org.spongepowered.api.entity.projectile.Firework handle) {
-        return converter.apply(handle);
+    public Firework getHandle() {
+        return (Firework) super.getHandle();
     }
 
     @Override

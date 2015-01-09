@@ -24,25 +24,14 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.Witch;
 
 public class PoreWitch extends PoreMonster implements org.bukkit.entity.Witch {
 
-    private static TypeConverter<Witch, PoreWitch> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<Witch, PoreWitch> getWitchConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Witch, PoreWitch>() {
-                @Override
-                protected PoreWitch convert(Witch handle) {
-                    return new PoreWitch(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreWitch of(Witch handle) {
+        return PoreConverter.of(PoreWitch.class, handle);
     }
 
     protected PoreWitch(Witch handle) {
@@ -52,17 +41,6 @@ public class PoreWitch extends PoreMonster implements org.bukkit.entity.Witch {
     @Override
     public Witch getHandle() {
         return (Witch) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreWitch of(Witch handle) {
-        return converter.apply(handle);
     }
 
     @Override

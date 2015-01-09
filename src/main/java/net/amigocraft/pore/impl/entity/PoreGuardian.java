@@ -24,33 +24,18 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.Guardian;
 
 public class PoreGuardian extends PoreMonster implements org.bukkit.entity.Guardian {
 
-    private static TypeConverter<Guardian, PoreGuardian> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<Guardian, PoreGuardian> getGuardianConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Guardian, PoreGuardian>() {
-                @Override
-                protected PoreGuardian convert(Guardian handle) {
-                    return new PoreGuardian(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreGuardian of(Guardian handle) {
+        return PoreConverter.of(PoreGuardian.class, handle);
     }
 
     protected PoreGuardian(Guardian handle) {
         super(handle);
-    }
-
-    public static PoreGuardian of(Guardian rabbit) {
-        return getGuardianConverter().apply(rabbit);
     }
 
     @Override
@@ -62,7 +47,6 @@ public class PoreGuardian extends PoreMonster implements org.bukkit.entity.Guard
     public EntityType getType() {
         return EntityType.GUARDIAN;
     }
-
 
     @Override
     public boolean isElder() {

@@ -24,46 +24,23 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Snowball;
+import org.spongepowered.api.entity.projectile.Snowball;
 
-public class PoreSnowball extends PoreProjectile implements Snowball {
+public class PoreSnowball extends PoreProjectile implements org.bukkit.entity.Snowball {
 
-    private static TypeConverter<org.spongepowered.api.entity.projectile.Snowball, PoreSnowball> converter;
-
-    static TypeConverter<org.spongepowered.api.entity.projectile.Snowball, PoreSnowball> getSnowballConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<org.spongepowered.api.entity.projectile.Snowball, PoreSnowball>(
-                    //TODO: children converters
-            ) {
-                @Override
-                protected PoreSnowball convert(org.spongepowered.api.entity.projectile.Snowball handle) {
-                    return new PoreSnowball(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreSnowball of(Snowball handle) {
+        return PoreConverter.of(PoreSnowball.class, handle);
     }
 
-    protected PoreSnowball(org.spongepowered.api.entity.projectile.Snowball handle) {
+    protected PoreSnowball(Snowball handle) {
         super(handle);
     }
 
     @Override
-    public org.spongepowered.api.entity.projectile.Snowball getHandle() {
-        return (org.spongepowered.api.entity.projectile.Snowball) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreSnowball of(org.spongepowered.api.entity.projectile.Snowball handle) {
-        return converter.apply(handle);
+    public Snowball getHandle() {
+        return (Snowball) super.getHandle();
     }
 
     @Override

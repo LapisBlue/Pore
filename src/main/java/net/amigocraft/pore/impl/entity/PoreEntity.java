@@ -24,11 +24,11 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import net.amigocraft.pore.Pore;
 import net.amigocraft.pore.impl.PoreWorld;
 import net.amigocraft.pore.util.PoreWrapper;
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import net.amigocraft.pore.util.converter.vector.LocationConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Bukkit;
@@ -36,7 +36,6 @@ import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.World;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -44,81 +43,23 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.Game;
-import org.spongepowered.api.entity.EnderCrystal;
-import org.spongepowered.api.entity.ExperienceOrb;
-import org.spongepowered.api.entity.FallingBlock;
-import org.spongepowered.api.entity.Item;
-import org.spongepowered.api.entity.explosive.PrimedTNT;
-import org.spongepowered.api.entity.hanging.Hanging;
-import org.spongepowered.api.entity.living.Living;
-import org.spongepowered.api.entity.living.complex.ComplexLivingPart;
-import org.spongepowered.api.entity.projectile.EyeOfEnder;
-import org.spongepowered.api.entity.projectile.Firework;
-import org.spongepowered.api.entity.projectile.Projectile;
-import org.spongepowered.api.entity.weather.Lightning;
-import org.spongepowered.api.entity.weather.WeatherEffect;
+import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.event.entity.EntityDismountEvent;
 import org.spongepowered.api.event.entity.EntityMountEvent;
 import org.spongepowered.api.util.event.callback.CallbackList;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-//TODO: determine if metadata methods should be implemented manually
-public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity> implements Entity {
+//TODO: Determine if metadata methods should be implemented manually
+public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity.Entity {
 
-    private static TypeConverter<org.spongepowered.api.entity.Entity, PoreEntity> converter;
-
-    @SuppressWarnings("unchecked")
-    public static TypeConverter<org.spongepowered.api.entity.Entity, PoreEntity> getConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<org.spongepowered.api.entity.Entity, PoreEntity>(
-                    (ImmutableMap) ImmutableMap.builder()
-                            .put(ComplexLivingPart.class, PoreComplexEntityPart.getComplexEntityPartConverter())
-                            .put(EnderCrystal.class, PoreEnderCrystal.getEnderCrystalConverter())
-                            .put(EyeOfEnder.class, PoreEnderSignal.getEnderSignalConverter())
-                            .put(ExperienceOrb.class, PoreExperienceOrb.getExperienceOrbConverter())
-                            .put(FallingBlock.class, PoreFallingSand.getFallingSandConverter())
-                            .put(Firework.class, PoreFirework.getFireworkConverter())
-                            .put(Hanging.class, PoreHanging.getHangingConverter())
-                            .put(Item.class, PoreItem.getItemConverter())
-                            .put(Lightning.class, PoreLightningStrike.getLightningStrikeConverter())
-                            .put(Projectile.class, PoreProjectile.getProjectileConverter())
-                            .put(PrimedTNT.class, PoreTNTPrimed.getTNTPrimedConverter())
-                                    //.put(Entity.class, PoreVehicle.getVehicleConverter())
-                            .put(WeatherEffect.class, PoreWeather.getWeatherConverter())
-                            .put(Living.class, PoreLivingEntity.getLivingEntityConverter())
-                            .build()
-            ) {
-                @Override
-                protected PoreEntity convert(org.spongepowered.api.entity.Entity handle) {
-                    return new PoreEntity(handle);
-                }
-            };
-        }
-
-        return converter;
+    public static PoreEntity of(Entity handle) {
+        return PoreConverter.of(PoreEntity.class, handle);
     }
 
-    protected PoreEntity(org.spongepowered.api.entity.Entity handle) {
+    protected PoreEntity(Entity handle) {
         super(handle);
-    }
-
-    @Override
-    public org.spongepowered.api.entity.Entity getHandle() {
-        return super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreEntity of(org.spongepowered.api.entity.Entity handle) {
-        return getConverter().apply(handle);
     }
 
     @Override
@@ -179,20 +120,20 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
     }
 
     @Override
-    public boolean teleport(Entity destination) {
+    public boolean teleport(org.bukkit.entity.Entity destination) {
         return this.teleport(destination.getLocation());
     }
 
     @Override
-    public boolean teleport(Entity destination, PlayerTeleportEvent.TeleportCause cause) {
+    public boolean teleport(org.bukkit.entity.Entity destination, PlayerTeleportEvent.TeleportCause cause) {
         return this.teleport(destination.getLocation(), cause);
     }
 
     @Override
-    public List<Entity> getNearbyEntities(double x, double y, double z) {
-        List<Entity> worldEntities = getWorld().getEntities();
-        List<Entity> nearby = new ArrayList<Entity>();
-        for (Entity e : worldEntities) {
+    public List<org.bukkit.entity.Entity> getNearbyEntities(double x, double y, double z) {
+        List<org.bukkit.entity.Entity> worldEntities = getWorld().getEntities();
+        List<org.bukkit.entity.Entity> nearby = Lists.newArrayList();
+        for (org.bukkit.entity.Entity e : worldEntities) {
             Location loc1 = e.getLocation();
             Location loc2 = this.getLocation();
             if (Math.abs(loc1.getX() - loc2.getX()) <= x &&
@@ -246,12 +187,12 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
     }
 
     @Override
-    public Entity getPassenger() {
+    public org.bukkit.entity.Entity getPassenger() {
         return getHandle().getPassenger().isPresent() ? PoreEntity.of(getHandle().getPassenger().get()) : null;
     }
 
     @Override
-    public boolean setPassenger(final Entity passenger) {
+    public boolean setPassenger(final org.bukkit.entity.Entity passenger) {
         if (!getHandle().getPassenger().isPresent()) {
             getHandle().setPassenger(((PoreEntity) passenger).getHandle());
             final PoreEntity mounted = this;
@@ -411,7 +352,7 @@ public class PoreEntity extends PoreWrapper<org.spongepowered.api.entity.Entity>
     }
 
     @Override
-    public Entity getVehicle() {
+    public org.bukkit.entity.Entity getVehicle() {
         return getHandle().getVehicle().isPresent() ? PoreEntity.of(getHandle().getVehicle().get()) : null;
     }
 

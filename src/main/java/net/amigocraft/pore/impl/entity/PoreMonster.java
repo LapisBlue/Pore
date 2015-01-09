@@ -24,48 +24,13 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import com.google.common.collect.ImmutableMap;
-import net.amigocraft.pore.util.converter.TypeConverter;
-import org.spongepowered.api.entity.living.monster.Blaze;
-import org.spongepowered.api.entity.living.monster.Creeper;
-import org.spongepowered.api.entity.living.monster.Enderman;
-import org.spongepowered.api.entity.living.monster.Giant;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.spongepowered.api.entity.living.monster.Monster;
-import org.spongepowered.api.entity.living.monster.Silverfish;
-import org.spongepowered.api.entity.living.monster.Skeleton;
-import org.spongepowered.api.entity.living.monster.Spider;
-import org.spongepowered.api.entity.living.monster.Witch;
-import org.spongepowered.api.entity.living.monster.Wither;
-import org.spongepowered.api.entity.living.monster.Zombie;
 
 public class PoreMonster extends PoreCreature implements org.bukkit.entity.Monster {
 
-    private static TypeConverter<Monster, PoreMonster> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<Monster, PoreMonster> getMonsterConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Monster, PoreMonster>(
-                    (ImmutableMap) ImmutableMap.builder()
-                            .put(Blaze.class, PoreBlaze.getBlazeConverter())
-                            .put(Creeper.class, PoreCreeper.getCreeperConverter())
-                            .put(Enderman.class, PoreEnderman.getEndermanConverter())
-                            .put(Giant.class, PoreGiant.getGiantConverter())
-                            .put(Silverfish.class, PoreSilverfish.getSilverfishConverter())
-                            .put(Skeleton.class, PoreSkeleton.getSkeletonConverter())
-                            .put(Spider.class, PoreSpider.getSpiderConverter())
-                            .put(Witch.class, PoreWitch.getWitchConverter())
-                            .put(Wither.class, PoreWither.getWitherConverter())
-                            .put(Zombie.class, PoreZombie.getZombieConverter())
-                            .build()
-            ) {
-                @Override
-                protected PoreMonster convert(Monster handle) {
-                    return new PoreMonster(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreMonster of(Monster handle) {
+        return PoreConverter.of(PoreMonster.class, handle);
     }
 
     protected PoreMonster(Monster handle) {
@@ -75,17 +40,6 @@ public class PoreMonster extends PoreCreature implements org.bukkit.entity.Monst
     @Override
     public Monster getHandle() {
         return (Monster) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreMonster of(Monster handle) {
-        return converter.apply(handle);
     }
 
 }

@@ -24,49 +24,23 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
-import org.bukkit.entity.CaveSpider;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.EntityType;
+import org.spongepowered.api.entity.living.monster.CaveSpider;
 
-public class PoreCaveSpider extends PoreSpider implements CaveSpider {
+public class PoreCaveSpider extends PoreSpider implements org.bukkit.entity.CaveSpider {
 
-    private static TypeConverter<org.spongepowered.api.entity.living.monster.CaveSpider, PoreCaveSpider>
-            converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<org.spongepowered.api.entity.living.monster.CaveSpider, PoreCaveSpider>
-    getCaveSpiderConverter() {
-        if (converter == null) {
-            converter =
-                    new TypeConverter<org.spongepowered.api.entity.living.monster.CaveSpider, PoreCaveSpider>() {
-                        @Override
-                        protected PoreCaveSpider convert(
-                                org.spongepowered.api.entity.living.monster.CaveSpider handle) {
-                            return new PoreCaveSpider(handle);
-                        }
-                    };
-        }
-        return converter;
+    public static PoreCaveSpider of(CaveSpider handle) {
+        return PoreConverter.of(PoreCaveSpider.class, handle);
     }
 
-    protected PoreCaveSpider(org.spongepowered.api.entity.living.monster.CaveSpider handle) {
+    protected PoreCaveSpider(CaveSpider handle) {
         super(handle);
     }
 
     @Override
-    public org.spongepowered.api.entity.living.monster.CaveSpider getHandle() {
-        return (org.spongepowered.api.entity.living.monster.CaveSpider) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreCaveSpider of(org.spongepowered.api.entity.living.monster.CaveSpider handle) {
-        return converter.apply(handle);
+    public CaveSpider getHandle() {
+        return (CaveSpider) super.getHandle();
     }
 
     @Override

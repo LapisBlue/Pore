@@ -25,7 +25,7 @@
 package net.amigocraft.pore.impl.entity;
 
 import net.amigocraft.pore.util.converter.DyeColorConverter;
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
@@ -33,19 +33,8 @@ import org.spongepowered.api.entity.living.animal.Wolf;
 
 public class PoreWolf extends PoreTameable implements org.bukkit.entity.Wolf {
 
-    private static TypeConverter<Wolf, PoreWolf> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<Wolf, PoreWolf> getWolfConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Wolf, PoreWolf>() {
-                @Override
-                protected PoreWolf convert(Wolf handle) {
-                    return new PoreWolf(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreWolf of(Wolf handle) {
+        return PoreConverter.of(PoreWolf.class, handle);
     }
 
     protected PoreWolf(Wolf handle) {
@@ -55,17 +44,6 @@ public class PoreWolf extends PoreTameable implements org.bukkit.entity.Wolf {
     @Override
     public Wolf getHandle() {
         return (Wolf) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreWolf of(Wolf handle) {
-        return converter.apply(handle);
     }
 
     @Override

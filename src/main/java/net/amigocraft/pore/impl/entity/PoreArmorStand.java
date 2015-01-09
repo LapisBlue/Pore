@@ -25,7 +25,7 @@
 package net.amigocraft.pore.impl.entity;
 
 import net.amigocraft.pore.util.converter.ItemStackConverter;
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import net.amigocraft.pore.util.converter.vector.EulerAngleConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
@@ -35,19 +35,8 @@ import org.spongepowered.api.entity.living.ArmorStand;
 
 public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entity.ArmorStand {
 
-    private static TypeConverter<ArmorStand, PoreArmorStand> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<ArmorStand, PoreArmorStand> getArmorStandConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<ArmorStand, PoreArmorStand>() {
-                @Override
-                protected PoreArmorStand convert(ArmorStand handle) {
-                    return new PoreArmorStand(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreArmorStand of(ArmorStand handle) {
+        return PoreConverter.of(PoreArmorStand.class, handle);
     }
 
     protected PoreArmorStand(ArmorStand handle) {
@@ -57,10 +46,6 @@ public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entit
     @Override
     public ArmorStand getHandle() {
         return (ArmorStand) super.getHandle();
-    }
-
-    public static PoreArmorStand of(ArmorStand handle) {
-        return getArmorStandConverter().apply(handle);
     }
 
     @Override

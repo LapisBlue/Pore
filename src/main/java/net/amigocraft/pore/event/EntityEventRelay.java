@@ -26,10 +26,12 @@ package net.amigocraft.pore.event;
 
 import net.amigocraft.pore.impl.block.PoreBlock;
 import net.amigocraft.pore.impl.entity.PoreAnimalTamer;
+import net.amigocraft.pore.impl.entity.PoreBoat;
 import net.amigocraft.pore.impl.entity.PoreCreature;
 import net.amigocraft.pore.impl.entity.PoreEntity;
 import net.amigocraft.pore.impl.entity.PoreLivingEntity;
 import net.amigocraft.pore.impl.entity.PoreVehicle;
+import net.amigocraft.pore.impl.entity.minecart.PoreMinecart;
 import net.amigocraft.pore.util.converter.MaterialConverter;
 import net.amigocraft.pore.util.converter.vector.LocationConverter;
 import org.bukkit.Bukkit;
@@ -113,10 +115,17 @@ public class EntityEventRelay {
     @Subscribe
     public void onEntityCollisionWithEntity(final EntityCollisionWithEntityEvent event) {
         // Bukkit only has an event for vehicle collisions against other entities
-        if (event.getEntity() instanceof Minecart || event.getEntity() instanceof Boat) {
+        PoreVehicle vehicle = null;
+        if (event.getEntity() instanceof Minecart) {
+            vehicle = PoreMinecart.of((Minecart) event.getEntity());
+        } else if (event.getEntity() instanceof Boat) {
+            vehicle = PoreBoat.of((Boat) event.getEntity());
+        }
+
+        if (vehicle != null) {
             Bukkit.getPluginManager().callEvent(
                     new VehicleEntityCollisionEvent(
-                            PoreVehicle.of(event.getEntity()),
+                            vehicle,
                             PoreEntity.of(event.getCollided())
                     ) {
                         @Override

@@ -32,15 +32,13 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import net.amigocraft.pore.Pore;
 import net.amigocraft.pore.impl.block.PoreBlock;
-import net.amigocraft.pore.impl.entity.PoreEntity;
 import net.amigocraft.pore.impl.entity.PoreLivingEntity;
 import net.amigocraft.pore.impl.entity.PorePlayer;
-import net.amigocraft.pore.util.PoreCollections;
 import net.amigocraft.pore.util.PoreWrapper;
 import net.amigocraft.pore.util.converter.EffectConverter;
 import net.amigocraft.pore.util.converter.EnvironmentConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import net.amigocraft.pore.util.converter.SoundConverter;
-import net.amigocraft.pore.util.converter.TypeConverter;
 import net.amigocraft.pore.util.converter.vector.VectorConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.BlockChangeDelegate;
@@ -53,7 +51,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.TreeType;
-import org.bukkit.World;
 import org.bukkit.WorldBorder;
 import org.bukkit.WorldType;
 import org.bukkit.block.Biome;
@@ -74,6 +71,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.block.BlockTypes;
+import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.extent.Extent;
 import org.spongepowered.api.world.weather.Weathers;
 
@@ -85,42 +83,21 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> implements World {
-    private static TypeConverter<org.spongepowered.api.world.World, PoreWorld> converter;
+public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
-    static TypeConverter<org.spongepowered.api.world.World, PoreWorld> getConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<org.spongepowered.api.world.World, PoreWorld>() {
-                @Override
-                protected PoreWorld convert(org.spongepowered.api.world.World handle) {
-                    return new PoreWorld(handle);
-                }
-            };
-        }
-
-        return converter;
-    }
-
-    protected PoreWorld(org.spongepowered.api.world.World handle) {
-        super(handle);
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreWorld of(org.spongepowered.api.world.World handle) {
-        return getConverter().apply(handle);
+    public static PoreWorld of(World handle) {
+        return PoreConverter.of(PoreWorld.class, handle);
     }
 
     public static PoreWorld of(Extent handle) {
-        if (handle instanceof org.spongepowered.api.world.World) {
-            return of((org.spongepowered.api.world.World) handle);
+        if (handle instanceof World) {
+            return of((World) handle);
         }
         throw new UnsupportedOperationException(); // TODO
+    }
+
+    protected PoreWorld(World handle) {
+        super(handle);
     }
 
     @Override
@@ -320,9 +297,10 @@ public class PoreWorld extends PoreWrapper<org.spongepowered.api.world.World> im
     @Override
     public List<Entity> getEntities() {
         // TODO: Should this be unmodifiable?
-        return PoreCollections.<org.spongepowered.api.entity.Entity, Entity>transformToList(
+        /*return PoreCollections.<org.spongepowered.api.entity.Entity, Entity>transformToList(
                 getHandle().getEntities(), PoreEntity.getConverter()
-        );
+        ); TODO*/
+        throw new NotImplementedException();
     }
 
     @Override

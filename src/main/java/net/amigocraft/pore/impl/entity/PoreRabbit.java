@@ -24,34 +24,19 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import net.amigocraft.pore.util.converter.entity.RabbitConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.animal.Rabbit;
 
 public class PoreRabbit extends PoreAnimals implements org.bukkit.entity.Rabbit {
 
-    private static TypeConverter<Rabbit, PoreRabbit> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<Rabbit, PoreRabbit> getRabbitConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Rabbit, PoreRabbit>() {
-                @Override
-                protected PoreRabbit convert(Rabbit handle) {
-                    return new PoreRabbit(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreRabbit of(Rabbit handle) {
+        return PoreConverter.of(PoreRabbit.class, handle);
     }
 
     protected PoreRabbit(Rabbit handle) {
         super(handle);
-    }
-
-    public static PoreRabbit of(Rabbit rabbit) {
-        return getRabbitConverter().apply(rabbit);
     }
 
     @Override

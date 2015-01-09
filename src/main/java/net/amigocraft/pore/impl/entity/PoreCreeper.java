@@ -24,46 +24,23 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
-import org.bukkit.entity.Creeper;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.EntityType;
+import org.spongepowered.api.entity.living.monster.Creeper;
 
-public class PoreCreeper extends PoreMonster implements Creeper {
+public class PoreCreeper extends PoreMonster implements org.bukkit.entity.Creeper {
 
-    private static TypeConverter<org.spongepowered.api.entity.living.monster.Creeper, PoreCreeper> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<org.spongepowered.api.entity.living.monster.Creeper, PoreCreeper>
-    getCreeperConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<org.spongepowered.api.entity.living.monster.Creeper, PoreCreeper>() {
-                @Override
-                protected PoreCreeper convert(org.spongepowered.api.entity.living.monster.Creeper handle) {
-                    return new PoreCreeper(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreCreeper of(Creeper handle) {
+        return PoreConverter.of(PoreCreeper.class, handle);
     }
 
-    protected PoreCreeper(org.spongepowered.api.entity.living.monster.Creeper handle) {
+    protected PoreCreeper(Creeper handle) {
         super(handle);
     }
 
     @Override
-    public org.spongepowered.api.entity.living.monster.Creeper getHandle() {
-        return (org.spongepowered.api.entity.living.monster.Creeper) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreCreeper of(org.spongepowered.api.entity.living.monster.Creeper handle) {
-        return converter.apply(handle);
+    public Creeper getHandle() {
+        return (Creeper) super.getHandle();
     }
 
     @Override

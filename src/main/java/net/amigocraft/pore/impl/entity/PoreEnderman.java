@@ -26,54 +26,27 @@ package net.amigocraft.pore.impl.entity;
 
 import net.amigocraft.pore.impl.block.PoreBlockState;
 import net.amigocraft.pore.util.converter.MaterialConverter;
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.entity.Enderman;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
+import org.spongepowered.api.entity.living.monster.Enderman;
 import org.spongepowered.api.item.ItemBlock;
 
-public class PoreEnderman extends PoreMonster implements Enderman {
+public class PoreEnderman extends PoreMonster implements org.bukkit.entity.Enderman {
 
-    private static TypeConverter<org.spongepowered.api.entity.living.monster.Enderman, PoreEnderman> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<org.spongepowered.api.entity.living.monster.Enderman, PoreEnderman>
-    getEndermanConverter() {
-        if (converter == null) {
-            converter =
-                    new TypeConverter<org.spongepowered.api.entity.living.monster.Enderman, PoreEnderman>() {
-                        @Override
-                        protected PoreEnderman convert(
-                                org.spongepowered.api.entity.living.monster.Enderman handle) {
-                            return new PoreEnderman(handle);
-                        }
-                    };
-        }
-        return converter;
+    public static PoreEnderman of(Enderman handle) {
+        return PoreConverter.of(PoreEnderman.class, handle);
     }
 
-    protected PoreEnderman(org.spongepowered.api.entity.living.monster.Enderman handle) {
+    protected PoreEnderman(Enderman handle) {
         super(handle);
     }
 
     @Override
-    public org.spongepowered.api.entity.living.monster.Enderman getHandle() {
-        return (org.spongepowered.api.entity.living.monster.Enderman) super.getHandle();
+    public Enderman getHandle() {
+        return (Enderman) super.getHandle();
     }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreEnderman of(org.spongepowered.api.entity.living.monster.Enderman handle) {
-        return converter.apply(handle);
-    }
-
-    //TODO: bridge
 
     @Override
     public EntityType getType() {

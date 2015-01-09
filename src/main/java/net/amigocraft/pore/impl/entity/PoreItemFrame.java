@@ -25,8 +25,8 @@
 package net.amigocraft.pore.impl.entity;
 
 import net.amigocraft.pore.util.converter.ItemStackConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import net.amigocraft.pore.util.converter.RotationConverter;
-import net.amigocraft.pore.util.converter.TypeConverter;
 import org.bukkit.Rotation;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -34,19 +34,8 @@ import org.spongepowered.api.entity.hanging.ItemFrame;
 
 public class PoreItemFrame extends PoreHanging implements org.bukkit.entity.ItemFrame {
 
-    private static TypeConverter<ItemFrame, PoreItemFrame> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<ItemFrame, PoreItemFrame> getItemFrameConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<ItemFrame, PoreItemFrame>() {
-                @Override
-                protected PoreItemFrame convert(ItemFrame handle) {
-                    return new PoreItemFrame(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreItemFrame of(ItemFrame handle) {
+        return PoreConverter.of(PoreItemFrame.class, handle);
     }
 
     protected PoreItemFrame(ItemFrame handle) {
@@ -56,17 +45,6 @@ public class PoreItemFrame extends PoreHanging implements org.bukkit.entity.Item
     @Override
     public ItemFrame getHandle() {
         return (ItemFrame) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreItemFrame of(ItemFrame handle) {
-        return converter.apply(handle);
     }
 
     @Override

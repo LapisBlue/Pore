@@ -25,7 +25,7 @@
 package net.amigocraft.pore.impl.entity;
 
 import net.amigocraft.pore.util.converter.ItemStackConverter;
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -33,19 +33,8 @@ import org.spongepowered.api.entity.Item;
 
 public class PoreItem extends PoreEntity implements org.bukkit.entity.Item {
 
-    private static TypeConverter<Item, PoreItem> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<Item, PoreItem> getItemConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Item, PoreItem>() {
-                @Override
-                protected PoreItem convert(Item handle) {
-                    return new PoreItem(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreItem of(Item handle) {
+        return PoreConverter.of(PoreItem.class, handle);
     }
 
     protected PoreItem(Item handle) {
@@ -55,17 +44,6 @@ public class PoreItem extends PoreEntity implements org.bukkit.entity.Item {
     @Override
     public Item getHandle() {
         return (Item) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreItem of(Item handle) {
-        return converter.apply(handle);
     }
 
     @Override

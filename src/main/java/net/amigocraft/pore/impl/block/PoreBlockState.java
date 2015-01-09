@@ -26,49 +26,28 @@ package net.amigocraft.pore.impl.block;
 
 import net.amigocraft.pore.util.PoreWrapper;
 import net.amigocraft.pore.util.converter.MaterialConverter;
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.spongepowered.api.block.BlockState;
 
 import java.util.List;
 
-public class PoreBlockState extends PoreWrapper<org.spongepowered.api.block.BlockState> implements BlockState {
+public class PoreBlockState extends PoreWrapper<org.spongepowered.api.block.BlockState> implements
+        org.bukkit.block.BlockState {
 
-    //TODO: possibly store the parent BlockLoc in the wrapper object
-
-    private static TypeConverter<org.spongepowered.api.block.BlockState, PoreBlockState> converter;
-
-    static TypeConverter<org.spongepowered.api.block.BlockState, PoreBlockState> getBlockStateConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<org.spongepowered.api.block.BlockState, PoreBlockState>() {
-                @Override
-                protected PoreBlockState convert(org.spongepowered.api.block.BlockState handle) {
-                    return new PoreBlockState(handle);
-                }
-            };
-        }
-
-        return converter;
+    public static PoreBlockState of(BlockState handle) {
+        return PoreConverter.of(PoreBlockState.class, handle);
     }
 
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreBlockState of(org.spongepowered.api.block.BlockState handle) {
-        return converter.apply(handle);
-    }
+    // TODO: Possibly store the parent BlockLoc in the wrapper object
 
     protected PoreBlockState(org.spongepowered.api.block.BlockState handle) {
         super(handle);

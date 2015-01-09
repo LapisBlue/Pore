@@ -29,7 +29,7 @@ import net.amigocraft.pore.util.PoreWrapper;
 import net.amigocraft.pore.util.converter.DirectionConverter;
 import net.amigocraft.pore.util.converter.ItemStackConverter;
 import net.amigocraft.pore.util.converter.MaterialConverter;
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import net.amigocraft.pore.util.converter.vector.LocationConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
@@ -53,30 +53,8 @@ import java.util.List;
 
 public class PoreBlock extends PoreWrapper<BlockLoc> implements Block {
 
-    private static TypeConverter<BlockLoc, PoreBlock> converter;
-
-    static TypeConverter<BlockLoc, PoreBlock> getConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<BlockLoc, PoreBlock>() {
-                @Override
-                protected PoreBlock convert(BlockLoc handle) {
-                    return new PoreBlock(handle);
-                }
-            };
-        }
-
-        return converter;
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
     public static PoreBlock of(BlockLoc handle) {
-        return converter.apply(handle);
+        return PoreConverter.of(PoreBlock.class, handle);
     }
 
     private PoreBlock(BlockLoc handle) {

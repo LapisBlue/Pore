@@ -24,50 +24,28 @@
  */
 package net.amigocraft.pore.impl;
 
-import com.google.common.collect.Collections2;
 import net.amigocraft.pore.impl.block.PoreBlock;
 import net.amigocraft.pore.impl.entity.PoreEntity;
 import net.amigocraft.pore.util.PoreWrapper;
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
+import org.spongepowered.api.world.Chunk;
 
 import java.util.Collection;
 
-public class PoreChunk extends PoreWrapper<org.spongepowered.api.world.Chunk> implements Chunk {
-    private static TypeConverter<org.spongepowered.api.world.Chunk, PoreChunk> converter;
+public class PoreChunk extends PoreWrapper<Chunk> implements org.bukkit.Chunk {
 
-    static TypeConverter<org.spongepowered.api.world.Chunk, PoreChunk> getConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<org.spongepowered.api.world.Chunk, PoreChunk>() {
-                @Override
-                protected PoreChunk convert(org.spongepowered.api.world.Chunk handle) {
-                    return new PoreChunk(handle);
-                }
-            };
-        }
-
-        return converter;
+    public static PoreChunk of(Chunk handle) {
+        return PoreConverter.of(PoreChunk.class, handle);
     }
 
-    protected PoreChunk(org.spongepowered.api.world.Chunk handle) {
+    protected PoreChunk(Chunk handle) {
         super(handle);
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreChunk of(org.spongepowered.api.world.Chunk handle) {
-        return getConverter().apply(handle);
     }
 
     @Override
@@ -104,7 +82,14 @@ public class PoreChunk extends PoreWrapper<org.spongepowered.api.world.Chunk> im
     @Override
     public Entity[] getEntities() {
         Collection<org.spongepowered.api.entity.Entity> entities = getHandle().getEntities();
-        return Collections2.transform(entities, PoreEntity.getConverter()).toArray(new Entity[entities.size()]);
+
+        Entity[] result = new Entity[entities.size()];
+        int i = 0;
+        for (org.spongepowered.api.entity.Entity entity : entities) {
+            result[i++] = PoreEntity.of(entity);
+        }
+
+        return result;
     }
 
     @Override

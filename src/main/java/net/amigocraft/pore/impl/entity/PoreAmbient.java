@@ -24,27 +24,13 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.spongepowered.api.entity.living.Ambient;
-import org.spongepowered.api.entity.living.Bat;
 
 public class PoreAmbient extends PoreLivingEntity implements org.bukkit.entity.Ambient {
 
-    private static TypeConverter<Ambient, PoreAmbient> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<Ambient, PoreAmbient> getAmbientConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Ambient, PoreAmbient>(
-                    Bat.class, PoreBat.getBatConverter()
-            ) {
-                @Override
-                protected PoreAmbient convert(Ambient handle) {
-                    return new PoreAmbient(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreAmbient of(Ambient handle) {
+        return PoreConverter.of(PoreAmbient.class, handle);
     }
 
     protected PoreAmbient(Ambient handle) {
@@ -54,17 +40,6 @@ public class PoreAmbient extends PoreLivingEntity implements org.bukkit.entity.A
     @Override
     public Ambient getHandle() {
         return (Ambient) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreAmbient of(Ambient handle) {
-        return converter.apply(handle);
     }
 
 }

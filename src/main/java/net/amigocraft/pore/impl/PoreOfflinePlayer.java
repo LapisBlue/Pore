@@ -27,7 +27,7 @@ package net.amigocraft.pore.impl;
 import com.google.common.base.Optional;
 import net.amigocraft.pore.impl.entity.PorePlayer;
 import net.amigocraft.pore.util.PoreWrapper;
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -37,27 +37,13 @@ import java.util.Map;
 import java.util.UUID;
 
 public class PoreOfflinePlayer extends PoreWrapper<User> implements org.bukkit.OfflinePlayer {
-    private static TypeConverter<User, PoreOfflinePlayer> converter;
 
-    static TypeConverter<User, PoreOfflinePlayer> getConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<User, PoreOfflinePlayer>() {
-                @Override
-                protected PoreOfflinePlayer convert(User handle) {
-                    return new PoreOfflinePlayer(handle);
-                }
-            };
-        }
-
-        return converter;
+    public static PoreOfflinePlayer of(User handle) {
+        return PoreConverter.of(PoreOfflinePlayer.class, handle);
     }
 
     protected PoreOfflinePlayer(User handle) {
         super(handle);
-    }
-
-    public static PoreOfflinePlayer of(User user) {
-        return converter.apply(user);
     }
 
     @Override

@@ -24,25 +24,14 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.ExperienceOrb;
 
 public class PoreExperienceOrb extends PoreEntity implements org.bukkit.entity.ExperienceOrb {
 
-    private static TypeConverter<ExperienceOrb, PoreExperienceOrb> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<ExperienceOrb, PoreExperienceOrb> getExperienceOrbConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<ExperienceOrb, PoreExperienceOrb>() {
-                @Override
-                protected PoreExperienceOrb convert(ExperienceOrb handle) {
-                    return new PoreExperienceOrb(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreExperienceOrb of(ExperienceOrb handle) {
+        return PoreConverter.of(PoreExperienceOrb.class, handle);
     }
 
     protected PoreExperienceOrb(ExperienceOrb handle) {
@@ -52,17 +41,6 @@ public class PoreExperienceOrb extends PoreEntity implements org.bukkit.entity.E
     @Override
     public ExperienceOrb getHandle() {
         return (ExperienceOrb) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreExperienceOrb of(ExperienceOrb handle) {
-        return converter.apply(handle);
     }
 
     @Override

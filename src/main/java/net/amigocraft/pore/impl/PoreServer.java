@@ -32,7 +32,6 @@ import com.google.common.collect.Lists;
 import net.amigocraft.pore.impl.entity.PorePlayer;
 import net.amigocraft.pore.impl.scheduler.PoreBukkitScheduler;
 import net.amigocraft.pore.logging.PoreLogger;
-import net.amigocraft.pore.util.PoreCollections;
 import net.amigocraft.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.BanList;
@@ -189,7 +188,8 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public Collection<? extends Player> getOnlinePlayers() {
-        return PoreCollections.transform(getHandle().getOnlinePlayers(), PorePlayer.getPlayerConverter());
+        //return PoreCollections.transform(getHandle().getOnlinePlayers(), PorePlayer.getPlayerConverter());
+        throw new NotImplementedException(); // TODO
     }
 
     @Override
@@ -376,9 +376,10 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     @Override
     public List<World> getWorlds() {
         // TODO: Should this be unmodifiable?
-        return PoreCollections
+        /*return PoreCollections
                 .<org.spongepowered.api.world.World, World>transformToList(getHandle().getWorlds(),
-                        PoreWorld.getConverter());
+                        PoreWorld.getConverter()); TODO*/
+        throw new NotImplementedException();
     }
 
     @Override

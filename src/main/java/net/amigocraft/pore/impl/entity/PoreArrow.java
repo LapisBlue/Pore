@@ -24,47 +24,24 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
+import org.spongepowered.api.entity.projectile.Arrow;
 
-public class PoreArrow extends PoreProjectile implements Arrow {
+public class PoreArrow extends PoreProjectile implements org.bukkit.entity.Arrow {
 
-    private static TypeConverter<org.spongepowered.api.entity.projectile.Arrow, PoreArrow> converter;
-
-    static TypeConverter<org.spongepowered.api.entity.projectile.Arrow, PoreArrow> getArrowConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<org.spongepowered.api.entity.projectile.Arrow, PoreArrow>() {
-                @Override
-                protected PoreArrow convert(org.spongepowered.api.entity.projectile.Arrow handle) {
-                    return new PoreArrow(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreArrow of(Arrow handle) {
+        return PoreConverter.of(PoreArrow.class, handle);
     }
 
-    //TODO: bridge
-
-    protected PoreArrow(org.spongepowered.api.entity.projectile.Arrow handle) {
+    protected PoreArrow(Arrow handle) {
         super(handle);
     }
 
     @Override
-    public org.spongepowered.api.entity.projectile.Arrow getHandle() {
-        return (org.spongepowered.api.entity.projectile.Arrow) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreArrow of(org.spongepowered.api.entity.projectile.Arrow handle) {
-        return converter.apply(handle);
+    public Arrow getHandle() {
+        return (Arrow) super.getHandle();
     }
 
     @Override

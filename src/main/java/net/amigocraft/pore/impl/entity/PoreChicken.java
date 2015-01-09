@@ -24,45 +24,23 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
-import org.bukkit.entity.Chicken;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.EntityType;
+import org.spongepowered.api.entity.living.animal.Chicken;
 
-public class PoreChicken extends PoreAnimals implements Chicken {
+public class PoreChicken extends PoreAnimals implements org.bukkit.entity.Chicken {
 
-    private static TypeConverter<org.spongepowered.api.entity.living.animal.Chicken, PoreChicken> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<org.spongepowered.api.entity.living.animal.Chicken, PoreChicken> getChickenConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<org.spongepowered.api.entity.living.animal.Chicken, PoreChicken>() {
-                @Override
-                protected PoreChicken convert(org.spongepowered.api.entity.living.animal.Chicken handle) {
-                    return new PoreChicken(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreChicken of(Chicken handle) {
+        return PoreConverter.of(PoreChicken.class, handle);
     }
 
-    protected PoreChicken(org.spongepowered.api.entity.living.animal.Chicken handle) {
+    protected PoreChicken(Chicken handle) {
         super(handle);
     }
 
     @Override
-    public org.spongepowered.api.entity.living.animal.Chicken getHandle() {
-        return (org.spongepowered.api.entity.living.animal.Chicken) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreChicken of(org.spongepowered.api.entity.living.animal.Chicken handle) {
-        return converter.apply(handle);
+    public Chicken getHandle() {
+        return (Chicken) super.getHandle();
     }
 
     @Override

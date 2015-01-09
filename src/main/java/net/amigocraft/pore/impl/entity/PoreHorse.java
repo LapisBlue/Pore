@@ -24,7 +24,7 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import net.amigocraft.pore.util.converter.entity.HorseConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
@@ -33,19 +33,8 @@ import org.spongepowered.api.entity.living.animal.Horse;
 
 public class PoreHorse extends PoreTameable implements org.bukkit.entity.Horse {
 
-    private static TypeConverter<Horse, PoreHorse> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<Horse, PoreHorse> getHorseConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Horse, PoreHorse>() {
-                @Override
-                protected PoreHorse convert(Horse handle) {
-                    return new PoreHorse(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreHorse of(Horse handle) {
+        return PoreConverter.of(PoreHorse.class, handle);
     }
 
     protected PoreHorse(Horse handle) {
@@ -56,19 +45,6 @@ public class PoreHorse extends PoreTameable implements org.bukkit.entity.Horse {
     public Horse getHandle() {
         return (Horse) super.getHandle();
     }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreHorse of(Horse handle) {
-        return converter.apply(handle);
-    }
-
-    //TODO: bridge
 
     @Override
     public EntityType getType() {

@@ -24,49 +24,23 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
-import org.bukkit.entity.EnderPearl;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.EntityType;
+import org.spongepowered.api.entity.projectile.EnderPearl;
 
-public class PoreEnderPearl extends PoreProjectile implements EnderPearl {
+public class PoreEnderPearl extends PoreProjectile implements org.bukkit.entity.EnderPearl {
 
-    private static TypeConverter<org.spongepowered.api.entity.projectile.EnderPearl, PoreEnderPearl> converter;
-
-    static TypeConverter<org.spongepowered.api.entity.projectile.EnderPearl, PoreEnderPearl>
-    getEnderPearlConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<org.spongepowered.api.entity.projectile.EnderPearl, PoreEnderPearl>(
-                    //TODO: children converters
-            ) {
-                @Override
-                protected PoreEnderPearl convert(org.spongepowered.api.entity.projectile.EnderPearl handle) {
-                    return new PoreEnderPearl(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreEnderPearl of(EnderPearl handle) {
+        return PoreConverter.of(PoreEnderPearl.class, handle);
     }
 
-    //TODO: bridge
-
-    protected PoreEnderPearl(org.spongepowered.api.entity.projectile.EnderPearl handle) {
+    protected PoreEnderPearl(EnderPearl handle) {
         super(handle);
     }
 
     @Override
-    public org.spongepowered.api.entity.projectile.Egg getHandle() {
-        return (org.spongepowered.api.entity.projectile.Egg) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreEnderPearl of(org.spongepowered.api.entity.projectile.EnderPearl handle) {
-        return converter.apply(handle);
+    public EnderPearl getHandle() {
+        return (EnderPearl) super.getHandle();
     }
 
     @Override

@@ -24,37 +24,16 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import com.google.common.collect.ImmutableMap;
 import net.amigocraft.pore.util.converter.DirectionConverter;
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.BlockFace;
 import org.spongepowered.api.entity.hanging.Hanging;
-import org.spongepowered.api.entity.hanging.ItemFrame;
-import org.spongepowered.api.entity.hanging.LeashHitch;
-import org.spongepowered.api.entity.hanging.Painting;
 
 public class PoreHanging extends PoreEntity implements org.bukkit.entity.Hanging {
 
-    private static TypeConverter<Hanging, PoreHanging> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<Hanging, PoreHanging> getHangingConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Hanging, PoreHanging>(
-                    (ImmutableMap) ImmutableMap.builder()
-                            .put(ItemFrame.class, PoreItemFrame.getItemFrameConverter())
-                            .put(LeashHitch.class, PoreLeashHitch.getLeashHitchConverter())
-                            .put(Painting.class, PorePainting.getPaintingConverter())
-                            .build()
-            ) {
-                @Override
-                protected PoreHanging convert(Hanging handle) {
-                    return new PoreHanging(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreHanging of(Hanging handle) {
+        return PoreConverter.of(PoreHanging.class, handle);
     }
 
     protected PoreHanging(Hanging handle) {
@@ -64,17 +43,6 @@ public class PoreHanging extends PoreEntity implements org.bukkit.entity.Hanging
     @Override
     public Hanging getHandle() {
         return (Hanging) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreHanging of(Hanging handle) {
-        return converter.apply(handle);
     }
 
     @Override

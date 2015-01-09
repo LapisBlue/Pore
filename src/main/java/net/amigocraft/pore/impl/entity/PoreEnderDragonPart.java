@@ -24,53 +24,25 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EnderDragon;
-import org.bukkit.entity.EnderDragonPart;
 import org.bukkit.entity.Entity;
+import org.spongepowered.api.entity.living.complex.EnderDragonPart;
 
-public class PoreEnderDragonPart extends PoreComplexEntityPart implements EnderDragonPart {
+public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bukkit.entity.EnderDragonPart {
 
-    private static TypeConverter<org.spongepowered.api.entity.living.complex.EnderDragonPart,
-            PoreEnderDragonPart>
-            converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<org.spongepowered.api.entity.living.complex.EnderDragonPart, PoreEnderDragonPart>
-    getEnderDragonPartConverter() {
-        if (converter == null) {
-            converter =
-                    new TypeConverter<org.spongepowered.api.entity.living.complex.EnderDragonPart,
-                            PoreEnderDragonPart>() {
-                        @Override
-                        protected PoreEnderDragonPart convert(
-                                org.spongepowered.api.entity.living.complex.EnderDragonPart handle) {
-                            return new PoreEnderDragonPart(handle);
-                        }
-                    };
-        }
-        return converter;
+    public static PoreEnderDragonPart of(EnderDragonPart handle) {
+        return PoreConverter.of(PoreEnderDragonPart.class, handle);
     }
 
-    protected PoreEnderDragonPart(org.spongepowered.api.entity.living.complex.EnderDragonPart handle) {
+    protected PoreEnderDragonPart(EnderDragonPart handle) {
         super(handle);
     }
 
     @Override
-    public org.spongepowered.api.entity.living.complex.EnderDragonPart getHandle() {
-        return (org.spongepowered.api.entity.living.complex.EnderDragonPart) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreEnderDragonPart of(org.spongepowered.api.entity.living.complex.EnderDragonPart handle) {
-        return converter.apply(handle);
+    public EnderDragonPart getHandle() {
+        return (EnderDragonPart) super.getHandle();
     }
 
     public EnderDragon getParent() {

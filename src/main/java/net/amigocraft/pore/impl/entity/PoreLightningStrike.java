@@ -24,26 +24,15 @@
  */
 package net.amigocraft.pore.impl.entity;
 
-import net.amigocraft.pore.util.converter.TypeConverter;
+import net.amigocraft.pore.util.converter.PoreConverter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LightningStrike;
 import org.spongepowered.api.entity.weather.Lightning;
 
 public class PoreLightningStrike extends PoreEntity implements LightningStrike {
 
-    private static TypeConverter<Lightning, PoreLightningStrike> converter;
-
-    @SuppressWarnings("unchecked")
-    static TypeConverter<Lightning, PoreLightningStrike> getLightningStrikeConverter() {
-        if (converter == null) {
-            converter = new TypeConverter<Lightning, PoreLightningStrike>() {
-                @Override
-                protected PoreLightningStrike convert(Lightning handle) {
-                    return new PoreLightningStrike(handle);
-                }
-            };
-        }
-        return converter;
+    public static PoreLightningStrike of(Lightning handle) {
+        return PoreConverter.of(PoreLightningStrike.class, handle);
     }
 
     protected PoreLightningStrike(Lightning handle) {
@@ -53,17 +42,6 @@ public class PoreLightningStrike extends PoreEntity implements LightningStrike {
     @Override
     public Lightning getHandle() {
         return (Lightning) super.getHandle();
-    }
-
-    /**
-     * Returns a Pore wrapper for the given handle.
-     * If one exists, it will be retrieved; otherwise, a new wrapper instance will be created.
-     *
-     * @param handle The Sponge object to wrap.
-     * @return A Pore wrapper for the given Sponge object.
-     */
-    public static PoreLightningStrike of(Lightning handle) {
-        return converter.apply(handle);
     }
 
     @Override
