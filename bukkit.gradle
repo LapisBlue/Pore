@@ -4,7 +4,7 @@ apply plugin: 'idea'
 
 defaultTasks 'clean', 'build'
 
-group = 'blue.lapis.pore'
+group = 'net.amigocraft.pore'
 version = '1.8-SNAPSHOT' // TODO: Keep up to date
 
 sourceCompatibility = 1.6
@@ -19,7 +19,7 @@ repositories {
 dependencies {
     // TODO: Keep up to date
     compile 'commons-lang:commons-lang:2.6'
-    // Note sure why this is including junit as dependency
+    // Not sure why this is including junit as dependency
     compile('com.googlecode.json-simple:json-simple:1.1.1') {
         exclude module: 'junit'
     }
@@ -34,4 +34,10 @@ dependencies {
 // Read source files using UTF-8
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+afterEvaluate { project ->
+    tasks.withType(VerificationTask) {
+        enabled = false
+    }
 }
