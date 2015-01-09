@@ -117,6 +117,11 @@ public final class CachedConverter<B> {
         return (P) cache.getUnchecked(handle);
     }
 
+    @Nullable
+    public <P extends B> P get(Class<P> type, Object handle) {
+        return get(handle); // TODO: Optimize first access with type class as entry point
+    }
+
     protected Object create(Object handle) {
         Converter<?, ? extends B> converter = classCache.getUnchecked(handle.getClass());
         return converter.applyUnchecked(handle);
@@ -134,13 +139,12 @@ public final class CachedConverter<B> {
     }
 
     private static final class Converter<S, P> implements Function<S, P> {
-        private final Class<S> sponge;
         private final Constructor<P> constructor;
         private final ImmutableMap<Class<? extends S>, Converter<? extends S, ? extends P>> registry;
 
         private Converter(Class<S> sponge, Class<P> pore,
                           ImmutableMap<Class<? extends S>, Converter<? extends S, ? extends P>> registry) {
-            this.sponge = checkNotNull(sponge, "sponge");
+            checkNotNull(sponge, "sponge");
             checkNotNull(pore, "pore");
             this.registry = checkNotNull(registry, "registry");
 
@@ -174,7 +178,7 @@ public final class CachedConverter<B> {
             try { // Create the pore wrapper
                 return constructor.newInstance(input);
             } catch (Exception e) {
-                throw new RuntimeException("Failed to create Pore wrapper for " + sponge, e);
+                throw new RuntimeException("Failed to create Pore wrapper for " + input.getClass(), e);
             }
         }
 

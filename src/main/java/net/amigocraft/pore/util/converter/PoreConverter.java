@@ -300,4 +300,8 @@ public class PoreConverter {
     public static <P extends PoreWrapper<?>> P of(Object handle) {
         return converter.get(handle);
     }
+
+    public static <P extends PoreWrapper<?>> P of(Class<P> type, Object handle) {
+        return converter.get(type, handle);
+    }
 }
