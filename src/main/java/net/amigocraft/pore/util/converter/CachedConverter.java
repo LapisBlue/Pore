@@ -195,7 +195,7 @@ public final class CachedConverter<B> {
     public static class Builder<B> {
         private final Class<B> base;
         private final Set<Class<?>> registered = Sets.newHashSet();
-        private final Map<Class<? extends B>, Class<?>> registry = Maps.newLinkedHashMap();
+        final Map<Class<? extends B>, Class<?>> registry = Maps.newLinkedHashMap();
 
         private Builder(Class<B> base) {
             this.base = checkNotNull(base, "base");
