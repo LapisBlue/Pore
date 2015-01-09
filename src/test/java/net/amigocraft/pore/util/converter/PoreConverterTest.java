@@ -25,15 +25,16 @@
 package net.amigocraft.pore.util.converter;
 
 import net.amigocraft.pore.PoreTests;
-import net.amigocraft.pore.util.PoreWrapper;
+import net.amigocraft.pore.impl.entity.PoreEntity;
+import net.amigocraft.pore.impl.entity.PoreLivingEntity;
+import net.amigocraft.pore.impl.entity.PorePlayer;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-
-import java.util.Map;
+import org.spongepowered.api.entity.Entity;
+import org.spongepowered.api.entity.living.Living;
+import org.spongepowered.api.entity.player.Player;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 
 public class PoreConverterTest {
@@ -44,24 +45,20 @@ public class PoreConverterTest {
     }
 
     @Test
-    public void resolveNull() {
-        assertNull(PoreConverter.of(null));
-        assertNull(PoreConverter.of(null, null));
+    public void resolveEntity() {
+        Entity generic = mock(Entity.class);
+        assertEquals(PoreEntity.class, PoreConverter.of(generic).getClass());
     }
 
     @Test
-    public void resolve() {
-        for (Map.Entry<Class<? extends PoreWrapper>, Class<?>> entry : PoreConverter.builder().registry.entrySet()) {
-            Object handle = mock(entry.getValue());
-            assertEquals(entry.getKey(), PoreConverter.of(handle).getClass());
-        }
+    public void resolveLivingEntity() {
+        Entity living = mock(Living.class);
+        assertEquals(PoreLivingEntity.class, PoreConverter.of(living).getClass());
     }
 
     @Test
-    public void resolveDirectly() {
-        for (Map.Entry<Class<? extends PoreWrapper>, Class<?>> entry : PoreConverter.builder().registry.entrySet()) {
-            Object handle = mock(entry.getValue());
-            assertEquals(entry.getKey(), PoreConverter.of(entry.getKey(), handle).getClass());
-        }
+    public void resolvePlayer() {
+        Entity player = mock(Player.class);
+        assertEquals(PorePlayer.class, PoreConverter.of(player).getClass());
     }
 }

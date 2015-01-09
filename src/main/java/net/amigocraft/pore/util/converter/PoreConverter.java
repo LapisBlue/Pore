@@ -200,12 +200,9 @@ import org.spongepowered.api.entity.weather.WeatherEffect;
 import org.spongepowered.api.world.Chunk;
 import org.spongepowered.api.world.World;
 
-public final class PoreConverter {
-    private PoreConverter() {
-    }
+public class PoreConverter {
 
-    static CachedConverter.Builder<PoreWrapper> builder() {
-        return CachedConverter.builder(PoreWrapper.class)
+    private static final CachedConverter<PoreWrapper> converter = CachedConverter.builder(PoreWrapper.class)
 
             // Entities
             .register(Entity.class, PoreEntity.class)
@@ -296,10 +293,9 @@ public final class PoreConverter {
 
             .register(Chunk.class, PoreChunk.class)
             .register(User.class, PoreOfflinePlayer.class)
-            .register(World.class, PoreWorld.class);
-    }
+            .register(World.class, PoreWorld.class)
 
-    private static final CachedConverter<PoreWrapper> converter = builder().build();
+            .build();
 
     public static <P extends PoreWrapper<?>> P of(Object handle) {
         return converter.get(handle);
