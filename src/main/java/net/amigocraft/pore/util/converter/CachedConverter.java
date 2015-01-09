@@ -63,15 +63,22 @@ public final class CachedConverter<B> {
                 }
             });
 
-    private final ImmutableMap<Class<?>, Converter<?, ? extends B>> registry;
+    final ImmutableMap<Class<?>, Converter<?, ? extends B>> registry;
 
     @SuppressWarnings("unchecked")
     protected CachedConverter(Class<B> base, Map<Class<? extends B>, Class<?>> registrations) {
+        Set<Class<? extends B>> registered = Sets.newHashSet();
         Set<Map.Entry<Class<? extends B>, Class<?>>> parents = Sets.newLinkedHashSet();
         Multimap<Class<? extends B>, Map.Entry<Class<? extends B>, Class<?>>> children = LinkedHashMultimap.create();
 
         for (Map.Entry<Class<? extends B>, Class<?>> entry : registrations.entrySet()) {
             Class<?> parent = entry.getKey().getSuperclass();
+            while (parent != base && !registered.contains(parent)) {
+                parent = parent.getSuperclass();
+            }
+
+            registered.add(entry.getKey());
+
             if (parent == base) {
                 parents.add(entry);
             } else {
@@ -138,9 +145,9 @@ public final class CachedConverter<B> {
         throw new UnsupportedOperationException(sponge.toString());
     }
 
-    private static final class Converter<S, P> implements Function<S, P> {
-        private final Constructor<P> constructor;
-        private final ImmutableMap<Class<? extends S>, Converter<? extends S, ? extends P>> registry;
+    static final class Converter<S, P> implements Function<S, P> {
+        final Constructor<P> constructor;
+        final ImmutableMap<Class<? extends S>, Converter<? extends S, ? extends P>> registry;
 
         private Converter(Class<S> sponge, Class<P> pore,
                           ImmutableMap<Class<? extends S>, Converter<? extends S, ? extends P>> registry) {

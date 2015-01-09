@@ -24,41 +24,81 @@
  */
 package net.amigocraft.pore.util.converter;
 
+import com.google.common.collect.ImmutableListMultimap;
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ListMultimap;
 import net.amigocraft.pore.PoreTests;
-import net.amigocraft.pore.impl.entity.PoreEntity;
-import net.amigocraft.pore.impl.entity.PoreLivingEntity;
-import net.amigocraft.pore.impl.entity.PorePlayer;
+import net.amigocraft.pore.util.PoreWrapper;
 import org.junit.Before;
 import org.junit.Test;
-import org.spongepowered.api.entity.Entity;
-import org.spongepowered.api.entity.living.Living;
-import org.spongepowered.api.entity.player.Player;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.withSettings;
 
 public class PoreConverterTest {
+
+    private ListMultimap<Class<?>, Class<?>> testRegistry;
 
     @Before
     public void initConverters() {
         PoreTests.mockPlugin();
+        this.testRegistry = createRegistry();
+    }
+
+    private static ListMultimap<Class<?>, Class<?>> createRegistry() {
+        ImmutableListMultimap.Builder<Class<?>, Class<?>> builder = ImmutableListMultimap.builder();
+
+        for (Map.Entry<Class<?>, CachedConverter.Converter<?, ? extends PoreWrapper>> entry :
+                PoreConverter.converter.registry.entrySet()) {
+
+            scan(builder, entry.getKey(), null, entry.getValue());
+        }
+
+        return builder.build();
+    }
+
+    private static void scan(ImmutableMultimap.Builder<Class<?>, Class<?>> builder, Class<?> sponge,
+                             Set<Class<?>> parents, CachedConverter.Converter<?, ?> converter) {
+        Class<?> pore = converter.constructor.getDeclaringClass();
+        builder.put(pore, sponge);
+
+        ImmutableSet.Builder<Class<?>> parentsBuilder = ImmutableSet.<Class<?>>builder().add(sponge);
+
+        if (parents != null) {
+            builder.putAll(pore, parents);
+            parentsBuilder.addAll(parents);
+        }
+
+        parents = parentsBuilder.build();
+
+         for (Map.Entry<? extends Class<?>, ? extends CachedConverter.Converter<?, ?>> entry :
+                 converter.registry.entrySet()) {
+
+             scan(builder, entry.getKey(), parents, entry.getValue());
+        }
+    }
+
+    private Object create(Class<?> pore) {
+        List<Class<?>> interfaces = testRegistry.get(pore);
+        Class<?> base = interfaces.get(0);
+        if (interfaces.size() == 1) {
+            return mock(base);
+        } else {
+            return mock(base, withSettings().extraInterfaces(
+                    interfaces.subList(1, interfaces.size()).toArray(new Class<?>[interfaces.size() - 1])));
+        }
     }
 
     @Test
-    public void resolveEntity() {
-        Entity generic = mock(Entity.class);
-        assertEquals(PoreEntity.class, PoreConverter.of(generic).getClass());
-    }
-
-    @Test
-    public void resolveLivingEntity() {
-        Entity living = mock(Living.class);
-        assertEquals(PoreLivingEntity.class, PoreConverter.of(living).getClass());
-    }
-
-    @Test
-    public void resolvePlayer() {
-        Entity player = mock(Player.class);
-        assertEquals(PorePlayer.class, PoreConverter.of(player).getClass());
+    public void resolve() {
+        for (Class<?> pore : testRegistry.keySet()) {
+            assertEquals(pore, PoreConverter.of(create(pore)).getClass());
+        }
     }
 }
