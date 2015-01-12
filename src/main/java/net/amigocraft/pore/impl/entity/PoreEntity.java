@@ -40,6 +40,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.metadata.MetadataValue;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionAttachment;
+import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.Game;
@@ -49,6 +52,7 @@ import org.spongepowered.api.event.entity.EntityMountEvent;
 import org.spongepowered.api.util.event.callback.CallbackList;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 //TODO: Determine if metadata methods should be implemented manually
@@ -182,8 +186,23 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
     }
 
     @Override
+    public void sendMessage(String message) {
+
+    }
+
+    @Override
+    public void sendMessage(String[] messages) {
+
+    }
+
+    @Override
     public Server getServer() {
         return Bukkit.getServer();
+    }
+
+    @Override
+    public String getName() {
+        throw new NotImplementedException();
     }
 
     @Override
@@ -394,5 +413,70 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
     @Override
     public void removeMetadata(String s, Plugin plugin) {
         throw new NotImplementedException(); //TODO
+    }
+
+    @Override
+    public boolean isPermissionSet(String name) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean isPermissionSet(Permission perm) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean hasPermission(String name) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean hasPermission(Permission perm) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public PermissionAttachment addAttachment(Plugin plugin) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void removeAttachment(PermissionAttachment attachment) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void recalculatePermissions() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Set<PermissionAttachmentInfo> getEffectivePermissions() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean isOp() {
+        return false;
+    }
+
+    @Override
+    public void setOp(boolean value) {
+
     }
 }
