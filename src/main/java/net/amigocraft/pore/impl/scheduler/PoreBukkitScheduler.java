@@ -34,7 +34,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
-import org.spongepowered.api.service.scheduler.RepeatingTask;
 import org.spongepowered.api.service.scheduler.Scheduler;
 import org.spongepowered.api.service.scheduler.Task;
 
@@ -143,8 +142,7 @@ public class PoreBukkitScheduler implements BukkitScheduler {
     public BukkitTask runTaskTimer(Plugin plugin, Runnable task, long delay, long period)
             throws IllegalArgumentException {
         validate(plugin, task);
-        Optional<RepeatingTask> spongeTask =
-                getHandle().runRepeatingTaskAfter(Pore.getPlugin(plugin), task, delay, period);
+        Optional<Task> spongeTask = getHandle().runRepeatingTaskAfter(Pore.getPlugin(plugin), task, delay, period);
         return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get(), id.incrementAndGet()) : null;
     }
 
