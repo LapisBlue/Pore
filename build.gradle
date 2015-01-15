@@ -24,7 +24,7 @@ apply plugin: 'checkstyle'
 defaultTasks 'clean', 'licenseFormat', 'build', 'remap'
 
 // Project information
-group = 'net.amigocraft.pore'
+group = 'blue.lapis.pore'
 version = '1.0.0-SNAPSHOT'
 
 // Extended project information

@@ -4,7 +4,7 @@ apply plugin: 'idea'
 
 defaultTasks 'clean', 'build'
 
-group = 'net.amigocraft.pore'
+group = 'blue.lapis.pore'
 version = '1.8-SNAPSHOT' // TODO: Keep up to date
 
 sourceCompatibility = 1.6
