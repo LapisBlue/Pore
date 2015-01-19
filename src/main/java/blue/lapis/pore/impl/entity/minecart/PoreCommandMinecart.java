@@ -58,32 +58,32 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
 
     @Override
     public String getCommand() {
-        throw new NotImplementedException();
+        return getHandle().getCommand();
     }
 
     @Override
     public void setCommand(String command) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setName(String name) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void sendMessage(String message) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void sendMessage(String[] messages) {
-        throw new NotImplementedException();
+        getHandle().setCommand(command);
     }
 
     @Override
     public String getName() {
-        throw new NotImplementedException();
+        return getHandle().getCommandName();
+    }
+
+    @Override
+    public void setName(String name) {
+        getHandle().setCommandName(name);
+    }
+
+    @Override
+    public void sendMessage(String message) {
+        getHandle().sendMessage(message);
+    }
+
+    @Override
+    public void sendMessage(String[] messages) {
+        getHandle().sendMessage(messages);
     }
 
     @Override

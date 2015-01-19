@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.entity.minecart;
 
 import blue.lapis.pore.impl.entity.PoreVehicle;
 import blue.lapis.pore.util.converter.PoreConverter;
+import blue.lapis.pore.util.converter.vector.VectorConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
@@ -54,7 +55,7 @@ public class PoreMinecart extends PoreVehicle implements org.bukkit.entity.Minec
 
     @Override
     public void _INVALID_setDamage(int damage) {
-        throw new NotImplementedException();
+        this.setDamage((double)damage);
     }
 
     @Override
@@ -64,7 +65,7 @@ public class PoreMinecart extends PoreVehicle implements org.bukkit.entity.Minec
 
     @Override
     public int _INVALID_getDamage() {
-        throw new NotImplementedException();
+        return (int)this.getDamage();
     }
 
     @Override
@@ -74,42 +75,42 @@ public class PoreMinecart extends PoreVehicle implements org.bukkit.entity.Minec
 
     @Override
     public double getMaxSpeed() {
-        throw new NotImplementedException();
+        return getHandle().getSwiftness();
     }
 
     @Override
     public void setMaxSpeed(double speed) {
-        throw new NotImplementedException();
+        getHandle().setSwiftness(speed);
     }
 
     @Override
     public boolean isSlowWhenEmpty() {
-        throw new NotImplementedException();
+        return getHandle().doesSlowWhenEmpty();
     }
 
     @Override
     public void setSlowWhenEmpty(boolean slow) {
-        throw new NotImplementedException();
+        getHandle().setSlowWhenEmpty(slow);
     }
 
     @Override
     public Vector getFlyingVelocityMod() {
-        throw new NotImplementedException();
+        return VectorConverter.createBukkitVector(getHandle().getAirborneVelocityMod());
     }
 
     @Override
     public void setFlyingVelocityMod(Vector flying) {
-        throw new NotImplementedException();
+        getHandle().setAirborneVelocityMod(VectorConverter.create3d(flying));
     }
 
     @Override
     public Vector getDerailedVelocityMod() {
-        throw new NotImplementedException();
+        return VectorConverter.createBukkitVector(getHandle().getDerailedVelocityMod());
     }
 
     @Override
     public void setDerailedVelocityMod(Vector derailed) {
-        throw new NotImplementedException();
+        getHandle().setDerailedVelocityMod(VectorConverter.create3d(derailed));
     }
 
     @Override

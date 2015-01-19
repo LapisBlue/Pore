@@ -40,6 +40,10 @@ public class VectorConverter {
         return new Vector3d(location.getX(), location.getY(), location.getZ());
     }
 
+    public static Vector3d create3d(Vector vector) {
+        return new Vector3d(vector.getX(), vector.getY(), vector.getZ());
+    }
+
     public static Vector3f create3f(Vector vector) {
         return new Vector3f(vector.getX(), vector.getY(), vector.getZ());
     }
