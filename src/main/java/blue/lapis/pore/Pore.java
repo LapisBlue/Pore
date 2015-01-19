@@ -44,7 +44,7 @@ import org.spongepowered.api.util.event.Subscribe;
 import javax.inject.Inject;
 
 /**
- * @author Maxim Roncacé, Lapis Blue
+ * @author Lapis Blue
  */
 @Plugin(id = "pore", name = "Pore")
 public final class Pore {

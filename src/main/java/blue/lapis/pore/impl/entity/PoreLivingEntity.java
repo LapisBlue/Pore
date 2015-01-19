@@ -47,6 +47,7 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
+import org.spongepowered.api.entity.living.Agent;
 import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.entity.projectile.source.ProjectileSource;
 
@@ -265,12 +266,14 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void setCanPickupItems(boolean pickup) {
-        getHandle().setCanPickupItems(pickup);
+        if (getHandle() instanceof Agent) {
+            ((Agent)getHandle()).setCanPickupItems(pickup);
+        }
     }
 
     @Override
     public boolean getCanPickupItems() {
-        return getHandle().getCanPickupItems();
+        return getHandle() instanceof Agent && ((Agent)getHandle()).getCanPickupItems();
     }
 
     @Override
@@ -295,23 +298,29 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public boolean isLeashed() {
-        return getHandle().isLeashed();
+        return getHandle() instanceof Agent && ((Agent) getHandle()).isLeashed();
     }
 
     @Override
     public Entity getLeashHolder() throws IllegalStateException {
-        return getHandle().getLeashHolder().isPresent() ? PoreEntity.of(getHandle().getLeashHolder().get()) :
-                null;
+        if (getHandle() instanceof Agent) {
+            return ((Agent)getHandle()).getLeashHolder().isPresent() ? PoreEntity.of(((Agent)getHandle()).getLeashHolder().get()) :
+                    null;
+        }
+        return null;
     }
 
     @Override
     public boolean setLeashHolder(Entity holder) {
-        if (!(this instanceof Bat) && !(this instanceof EnderDragon) &&
-                !(this instanceof Witch) && !(this instanceof Wither)) {
-            getHandle().setLeashHolder(((PoreEntity) holder).getHandle());
-            return true;
+        if (getHandle() instanceof Agent) {
+            if (!(this instanceof Bat) && !(this instanceof EnderDragon) &&
+                    !(this instanceof Witch) && !(this instanceof Wither)) {
+
+                ((Agent)getHandle()).setLeashHolder(((PoreEntity) holder).getHandle());
+                return true;
+            }
         }
-        return false;
+            return false;
     }
 
     @Override

@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.util.converter;
 
+import blue.lapis.pore.Pore;
 import com.google.common.collect.ImmutableBiMap;
 import org.bukkit.Sound;
 import org.spongepowered.api.effect.sound.SoundType;
@@ -36,7 +37,7 @@ public class SoundConverter {
     static {
         ImmutableBiMap.Builder<Sound, SoundType> builder = ImmutableBiMap.builder();
         for (Sound sound : Sound.values()) {
-            builder.put(sound, SoundTypes.getByName(sound.name()).get());
+            builder.put(sound, Pore.getGame().getRegistry().getSound(sound.name()).get());
         }
         map = builder.build();
     }
