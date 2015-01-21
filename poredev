@@ -1,0 +1,107 @@
+#!/bin/bash
+basedir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+pore_help() {
+    echo "Usage: $0 <command>"
+    echo "Available commands:"
+    command -v column >/dev/null 2>&1 && cmd="column -t -s -" || cmd=cat
+    $cmd <<<'
+  help - Show this help page.
+  update - Update the submodules and apply the Porekit patches.
+  patches - Rebuild the Porekit patches.'
+}
+
+apply_patches() {
+    # Based on https://hub.spigotmc.org/stash/projects/SPIGOT/repos/spigot/browse/applyPatches.sh#7
+    source=$1
+    repo=$(basename $1)
+    target=$2
+    patchdir=$3
+    branch=${4:-origin/master}
+
+    cd "$basedir/$source"
+    git reset --hard "$branch" >/dev/null
+    git branch -f upstream >/dev/null
+
+    cd "$basedir"
+    [ -d "$basedir/$target" ] || git clone "$source" "$target" -b upstream
+
+    cd "$basedir/$target"
+
+    echo ">> Resetting $target to $repo..."
+    git remote rm upstream >/dev/null 2>&1
+    git remote add upstream "../$source" >/dev/null 2>&1
+    git checkout master >/dev/null 2>&1
+    git fetch upstream >/dev/null 2>&1
+    git reset --hard upstream/upstream
+
+    echo ">> Applying patches to $target..."
+    git am --abort >/dev/null 2>&1
+    git am --3way "$basedir/$patchdir/"*.patch || {
+        >&2 echo ">> Failed to apply patches to $target (from $source)."
+        exit 1
+    }
+
+    echo ">> Successfully applied patches to $repo"
+}
+
+pore_update() {
+    echo "> Updating submodules..."
+    git submodule update --init
+    echo "> Updating Porekit..."
+    apply_patches lib/Bukkit Porekit patches
+}
+
+
+clean_patches() {
+    # Based on https://hub.spigotmc.org/stash/projects/SPIGOT/repos/spigot/browse/rebuildPatches.sh#7
+    cd "$1"
+    for patch in *.patch; do
+        gitver=$(tail -n 2 $patch | grep -ve "^$" | tail -n 1)
+        diffs=$(git diff --staged $patch | grep -E "^(\+|\-)" | grep -Ev "(From [a-z0-9]{32,}|\-\-\- a|\+\+\+ b|.index)")
+
+        testver=$(echo "$diffs" | tail -n 2 | grep -ve "^$" | tail -n 1 | grep "$gitver")
+        if [ "x$testver" != "x" ]; then
+            diffs=$(echo "$diffs" | head -n -2)
+        fi
+
+        if [ "x$diffs" == "x" ] ; then
+            git reset HEAD $patch >/dev/null
+            git checkout -- $patch >/dev/null
+        fi
+    done
+}
+
+make_patches() {
+    # Based on https://hub.spigotmc.org/stash/projects/SPIGOT/repos/spigot/browse/rebuildPatches.sh#26
+    source=$1
+    repo=$(basename $1)
+    target=$2
+    patchdir=$3
+
+    echo ">> Creating patches from $repo to $target..."
+    cd "$basedir/$target"
+    git format-patch --no-stat -N -o "$basedir/$patchdir" upstream/upstream
+    cd "$basedir"
+    git add -A "$basedir/$patchdir"
+    clean_patches "$basedir/$patchdir"
+    echo ">> Successfully saved patches for $repo!"
+}
+
+pore_patches() {
+    echo "> Recreating patches for Porekit..."
+    make_patches lib/Bukkit Porekit patches
+}
+
+if [ -z $1 ]; then
+    pore_help
+    exit
+fi
+
+# TODO: Improve this, just a little bit lazy right now
+if [ "$(type -t "pore_$1")" = "function" ]; then
+    "pore_$@"
+else
+    >&2 echo "Unknown command: '$@'. Type '$0 help' for more information."
+    exit 1
+fi

@@ -35,9 +35,3 @@ dependencies {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
-
-afterEvaluate { project ->
-    tasks.withType(VerificationTask) {
-        enabled = false
-    }
-}

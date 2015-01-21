@@ -41,8 +41,8 @@ import org.spongepowered.api.event.block.BlockIgniteEvent;
 import org.spongepowered.api.event.block.BlockMoveEvent;
 import org.spongepowered.api.event.block.FloraGrowEvent;
 import org.spongepowered.api.event.block.LeafDecayEvent;
-import org.spongepowered.api.event.player.PlayerBreakBlockEvent;
-import org.spongepowered.api.event.player.PlayerPlaceBlockEvent;
+import org.spongepowered.api.event.entity.living.player.PlayerBreakBlockEvent;
+import org.spongepowered.api.event.entity.living.player.PlayerPlaceBlockEvent;
 import org.spongepowered.api.util.event.Subscribe;
 
 public class BlockEventRelay {

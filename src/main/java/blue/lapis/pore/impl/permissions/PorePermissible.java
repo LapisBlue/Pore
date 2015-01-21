@@ -63,7 +63,7 @@ public class PorePermissible extends PoreWrapper<Subject> implements Permissible
 
     @Override
     public boolean hasPermission(String name) {
-        return getHandle().isPermitted(name);
+        return getHandle().hasPermission(name);
     }
 
     @Override

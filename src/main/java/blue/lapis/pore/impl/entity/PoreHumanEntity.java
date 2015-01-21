@@ -173,7 +173,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     @Override
     public boolean hasPermission(String name) {
         if (this instanceof Subject) {
-            return ((Subject) this).isPermitted(name);
+            return ((Subject) this).hasPermission(name);
         }
         throw new NotImplementedException();
     }

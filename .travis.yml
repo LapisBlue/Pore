@@ -1,5 +1,11 @@
 language: java
 sudo: false
+before_install:
+  - git config --global user.name "Lapislazuli"
+  - git config --global user.email "lapislazuli@lapis.blue"
+install:
+  - ./poredev update
+  - ./gradlew assemble
 jdk:
   - openjdk6
   - openjdk7

@@ -132,6 +132,7 @@ import org.spongepowered.api.entity.living.ArmorStand;
 import org.spongepowered.api.entity.living.Bat;
 import org.spongepowered.api.entity.living.Human;
 import org.spongepowered.api.entity.living.Living;
+import org.spongepowered.api.entity.living.Squid;
 import org.spongepowered.api.entity.living.Tameable;
 import org.spongepowered.api.entity.living.animal.Animal;
 import org.spongepowered.api.entity.living.animal.Chicken;
@@ -142,7 +143,6 @@ import org.spongepowered.api.entity.living.animal.Ocelot;
 import org.spongepowered.api.entity.living.animal.Pig;
 import org.spongepowered.api.entity.living.animal.Rabbit;
 import org.spongepowered.api.entity.living.animal.Sheep;
-import org.spongepowered.api.entity.living.animal.Squid;
 import org.spongepowered.api.entity.living.animal.Wolf;
 import org.spongepowered.api.entity.living.complex.ComplexLiving;
 import org.spongepowered.api.entity.living.complex.ComplexLivingPart;
@@ -294,11 +294,12 @@ public class PoreConverter {
                     .register(MinecartTNT.class, PoreExplosiveMinecart.class)
                 .register(Boat.class, PoreBoat.class)
 
-            .register(Tamer.class, PoreAnimalTamer.class)
 
             .register(Chunk.class, PoreChunk.class)
             .register(User.class, PoreOfflinePlayer.class)
             .register(World.class, PoreWorld.class)
+
+            .register(Tamer.class, PoreAnimalTamer.class)
 
             .build();
 

@@ -1,0 +1,38 @@
+From 4feb3b3cc66c1333ed1440ec5d46eea3115b5c56 Mon Sep 17 00:00:00 2001
+From: Minecrell <dev@minecrell.net>
+Date: Thu, 22 Jan 2015 18:20:44 +0100
+Subject: [PATCH] Disable Spigot version check
+
+
+diff --git a/src/main/java/org/bukkit/command/defaults/VersionCommand.java b/src/main/java/org/bukkit/command/defaults/VersionCommand.java
+index b55abdb..87f54ee 100644
+--- a/src/main/java/org/bukkit/command/defaults/VersionCommand.java
++++ b/src/main/java/org/bukkit/command/defaults/VersionCommand.java
+@@ -44,7 +44,7 @@ public class VersionCommand extends BukkitCommand {
+ 
+         if (args.length == 0) {
+             sender.sendMessage("This server is running " + Bukkit.getName() + " version " + Bukkit.getVersion() + " (Implementing API version " + Bukkit.getBukkitVersion() + ")");
+-            sendVersion(sender);
++            //sendVersion(sender);
+         } else {
+             StringBuilder name = new StringBuilder();
+ 
+@@ -142,7 +142,7 @@ public class VersionCommand extends BukkitCommand {
+         return ImmutableList.of();
+     }
+ 
+-    private final ReentrantLock versionLock = new ReentrantLock();
++    /*private final ReentrantLock versionLock = new ReentrantLock();
+     private boolean hasVersion = false;
+     private String versionMessage = null;
+     private final Set<CommandSender> versionWaiters = new HashSet<CommandSender>();
+@@ -251,5 +251,5 @@ public class VersionCommand extends BukkitCommand {
+             e.printStackTrace();
+             return -1;
+         }
+-    }
++    }*/
+ }
+-- 
+2.2.2
+

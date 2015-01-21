@@ -41,17 +41,17 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.event.entity.EntityInteractBlockEvent;
-import org.spongepowered.api.event.player.PlayerChangeGameModeEvent;
-import org.spongepowered.api.event.player.PlayerChangeWorldEvent;
-import org.spongepowered.api.event.player.PlayerChatEvent;
-import org.spongepowered.api.event.player.PlayerDeathEvent;
-import org.spongepowered.api.event.player.PlayerDropItemEvent;
-import org.spongepowered.api.event.player.PlayerInteractBlockEvent;
-import org.spongepowered.api.event.player.PlayerInteractEntityEvent;
-import org.spongepowered.api.event.player.PlayerJoinEvent;
-import org.spongepowered.api.event.player.PlayerMoveEvent;
-import org.spongepowered.api.event.player.PlayerPickUpItemEvent;
-import org.spongepowered.api.event.player.PlayerQuitEvent;
+import org.spongepowered.api.event.entity.living.player.PlayerChangeGameModeEvent;
+import org.spongepowered.api.event.entity.living.player.PlayerChangeWorldEvent;
+import org.spongepowered.api.event.entity.living.player.PlayerChatEvent;
+import org.spongepowered.api.event.entity.living.player.PlayerDeathEvent;
+import org.spongepowered.api.event.entity.living.player.PlayerDropItemEvent;
+import org.spongepowered.api.event.entity.living.player.PlayerInteractBlockEvent;
+import org.spongepowered.api.event.entity.living.player.PlayerInteractEntityEvent;
+import org.spongepowered.api.event.entity.living.player.PlayerJoinEvent;
+import org.spongepowered.api.event.entity.living.player.PlayerMoveEvent;
+import org.spongepowered.api.event.entity.living.player.PlayerPickUpItemEvent;
+import org.spongepowered.api.event.entity.living.player.PlayerQuitEvent;
 import org.spongepowered.api.util.event.Subscribe;
 
 import java.util.ArrayList;
@@ -147,7 +147,7 @@ public class PlayerEventRelay {
                         @Override
                         public void setCancelled(boolean cancelled) {
                             super.setCancelled(cancelled);
-                            pEvent.setCancelled(cancelled);
+                            //TODO: find a way to cancel event in Sponge
                         }
                     }
             );
@@ -177,7 +177,7 @@ public class PlayerEventRelay {
                     @Override
                     public void setCancelled(boolean cancelled) {
                         super.setCancelled(cancelled);
-                        event.setCancelled(cancelled);
+                        //TODO: find a way to cancel event in Sponge
                     }
                 }
         );

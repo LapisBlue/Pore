@@ -117,6 +117,16 @@ public class ProjectileUtil {
         final T finalEntity = entity;
         Pore.getGame().getEventManager().post(new ProjectileLaunchEvent() {
             @Override
+            public org.spongepowered.api.entity.projectile.Projectile getLaunchedProjectile() {
+                throw new UnsupportedOperationException(); // TODO
+            }
+
+            @Override
+            public Optional<ProjectileSource> getSource() {
+                throw new UnsupportedOperationException(); // TODO
+            }
+
+            @Override
             public Optional<Cause> getCause() {
                 return Optional.of(null); //TODO: cause
             }
