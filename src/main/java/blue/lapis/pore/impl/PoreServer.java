@@ -24,15 +24,15 @@
  */
 package blue.lapis.pore.impl;
 
+import blue.lapis.pore.impl.entity.PorePlayer;
+import blue.lapis.pore.impl.scheduler.PoreBukkitScheduler;
+import blue.lapis.pore.logging.PoreLogger;
+import blue.lapis.pore.util.PoreWrapper;
 import com.avaje.ebean.config.ServerConfig;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import blue.lapis.pore.impl.entity.PorePlayer;
-import blue.lapis.pore.impl.scheduler.PoreBukkitScheduler;
-import blue.lapis.pore.logging.PoreLogger;
-import blue.lapis.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
@@ -43,6 +43,7 @@ import org.bukkit.UnsafeValues;
 import org.bukkit.Warning;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -59,7 +60,12 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.map.MapView;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
-import org.bukkit.plugin.*;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginLoadOrder;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.ServicesManager;
+import org.bukkit.plugin.SimplePluginManager;
+import org.bukkit.plugin.SimpleServicesManager;
 import org.bukkit.plugin.java.JavaPluginLoader;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.StandardMessenger;
@@ -67,6 +73,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.util.CachedServerIcon;
 import org.bukkit.util.StringUtil;
+import org.bukkit.util.permissions.DefaultPermissions;
 import org.spongepowered.api.Game;
 
 import java.awt.image.BufferedImage;
@@ -87,8 +94,10 @@ import java.util.logging.Logger;
 public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implements Server {
     private final Game game;
     private final Logger logger;
+    private final SimpleCommandMap commandMap;
     private final PluginManager pluginManager;
     private final ServicesManager servicesManager;
+    private final Warning.WarningState warnState = Warning.WarningState.DEFAULT;
     private final File pluginsDir = new File(".", "bukkit-plugins");
     //TODO: use actual server directory, currently set to working directory
 
@@ -98,12 +107,10 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
         super(handle.getServer().get());
         this.game = handle;
         this.logger = new PoreLogger(logger);
-        this.pluginManager = new SimplePluginManager(this, new SimpleCommandMap(this));
+        this.commandMap = new SimpleCommandMap(this);
+        this.pluginManager = new SimplePluginManager(this, commandMap);
         this.servicesManager = new SimpleServicesManager();
         Bukkit.setServer(this);
-
-        getLogger().info("Loading plugins");
-        loadPlugins();
     }
 
     public Game getGame() {
@@ -111,51 +118,71 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     }
 
     public void loadPlugins() {
-        pluginManager.registerInterface(JavaPluginLoader.class);
+        // Clear the command map
+        commandMap.clearCommands();
 
-        if (pluginsDir.exists()) {
-            Plugin[] plugins = pluginManager.loadPlugins(pluginsDir);
-            for (Plugin plugin : plugins) {
+        if (pluginsDir.isDirectory()) {
+            // Clear plugins and prepare to load
+            pluginManager.clearPlugins();
+            pluginManager.registerInterface(JavaPluginLoader.class);
+
+            // Call onLoad methods
+            for (Plugin plugin : pluginManager.loadPlugins(pluginsDir)) {
                 try {
                     getLogger().info(String.format("Loading %s", plugin.getDescription().getFullName()));
                     plugin.onLoad();
-                } catch (Throwable ex) {
+                } catch (Exception ex) {
                     getLogger().log(Level.SEVERE,
                             ex.getMessage() + " initializing " + plugin.getDescription().getFullName() +
                                     " (Is it up to date?)", ex);
                 }
             }
         } else {
-            pluginsDir.mkdir();
+            if (!pluginsDir.mkdir()) {
+                logger.log(Level.SEVERE, "Could not create plugins directory: " + pluginsDir);
+            }
         }
     }
 
     private void loadPlugin(Plugin plugin) {
+        for (Permission perm : plugin.getDescription().getPermissions()) {
+            try {
+                pluginManager.addPermission(perm);
+            } catch (IllegalArgumentException ex) {
+                getLogger().log(Level.WARNING,
+                        "Plugin " + plugin.getDescription().getFullName()
+                                + " tried to register permission '" + perm.getName()
+                                + "' but it's already registered", ex);
+            }
+        }
+
         try {
             pluginManager.enablePlugin(plugin);
-
-            List<Permission> perms = plugin.getDescription().getPermissions();
-            for (Permission perm : perms) {
-                try {
-                    pluginManager.addPermission(perm);
-                } catch (IllegalArgumentException ex) {
-                    System.out.println("Plugin " + plugin.getDescription().getFullName() +
-                            " tried to register permission '" + perm.getName() +
-                            "' but it's already registered");
-                }
-            }
         } catch (Throwable ex) {
-            System.out.println(ex.getMessage() + " loading " + plugin.getDescription().getFullName() +
-                    " (Is it up to date?)");
+            getLogger().log(Level.SEVERE,
+                    ex.getMessage() + " loading " + plugin.getDescription().getFullName() +
+                            " (Is it up to date?)");
         }
     }
 
-    public void enablePlugins(PluginLoadOrder type) { // TODO: Load plugins before or after world loading
-        Plugin[] plugins = pluginManager.getPlugins();
-        for (Plugin plugin : plugins) {
-            if ((!plugin.isEnabled())) {
+    public void enablePlugins(PluginLoadOrder type) {
+        if (type == PluginLoadOrder.STARTUP) {
+            // TODO
+            //helpMap.clear();
+        }
+
+        // Load all the plugins
+        for (Plugin plugin : pluginManager.getPlugins()) {
+            if (!plugin.isEnabled() && plugin.getDescription().getLoad() == type) {
                 loadPlugin(plugin);
             }
+        }
+
+        if (type == PluginLoadOrder.POSTWORLD) {
+            commandMap.setFallbackCommands();
+            //commandMap.registerServerAliases();
+            DefaultPermissions.registerCorePermissions();
+            //helpMap.initializeCommands();
         }
     }
 
@@ -430,7 +457,13 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public PluginCommand getPluginCommand(String name) {
-        throw new NotImplementedException();
+        Command command = commandMap.getCommand(name);
+
+        if (command instanceof PluginCommand) {
+            return (PluginCommand) command;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -440,7 +473,10 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public boolean dispatchCommand(CommandSender sender, String commandLine) throws CommandException {
-        throw new NotImplementedException();
+        Preconditions.checkNotNull(sender, "sender");
+        Preconditions.checkNotNull(commandLine, "commandLine");
+
+        return commandMap.dispatch(sender, commandLine);
     }
 
     @Override
@@ -662,7 +698,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public Warning.WarningState getWarningState() {
-        throw new NotImplementedException();
+        return warnState;
     }
 
     @Override

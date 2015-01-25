@@ -32,6 +32,7 @@ import org.bukkit.plugin.PluginLoadOrder;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.event.state.PreInitializationEvent;
+import org.spongepowered.api.event.state.ServerAboutToStartEvent;
 import org.spongepowered.api.event.state.ServerStartingEvent;
 import org.spongepowered.api.event.state.ServerStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
@@ -74,7 +75,6 @@ public final class Pore {
         throw new NotImplementedException();
     }
 
-    //TODO: possibly move state event handlers to their own class
     @Subscribe
     public void onInitialization(PreInitializationEvent event) {
         instance = this;
@@ -83,7 +83,14 @@ public final class Pore {
 
         server = new PoreServer(game, logger);
         PoreEventWrapper.register();
-        //TODO: initialize plugins with proper load order
+
+        server.getLogger().info("Loading plugins");
+        server.loadPlugins();
+    }
+
+    @Subscribe
+    public void onAboutToStart(ServerAboutToStartEvent event) {
+        server.enablePlugins(PluginLoadOrder.STARTUP);
     }
 
     @Subscribe
