@@ -88,6 +88,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     private final Game game;
     private final Logger logger;
     private final PluginManager pluginManager;
+    private final ServicesManager servicesManager;
     private final File pluginsDir = new File(".", "bukkit-plugins");
     //TODO: use actual server directory, currently set to working directory
 
@@ -98,6 +99,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
         this.game = handle;
         this.logger = new PoreLogger(logger);
         this.pluginManager = new SimplePluginManager(this, new SimpleCommandMap(this));
+        this.servicesManager = new SimpleServicesManager();
         Bukkit.setServer(this);
 
         getLogger().info("Loading plugins");
@@ -366,7 +368,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public ServicesManager getServicesManager() {
-        throw new NotImplementedException();
+        return servicesManager;
     }
 
     @Override
