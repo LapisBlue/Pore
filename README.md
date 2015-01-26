@@ -10,7 +10,8 @@ Compilation
 
 Gradle is used to handle dependencies.
 
-- Clone the repo and initialize the [SpongeAPI](https://github.com/SpongePowered/SpongeAPI) dependency: `git clone --recursive https://github.com/LapisBlue/Pore.git`
+- Clone the repo: `git clone https://github.com/LapisBlue/Pore.git`
+- Initialize the project: `./poredev update` (TODO: Windows)
 - Compile the project using the Gradle wrapper: `./gradlew` (`gradlew` on Windows)
 
 Licensing
