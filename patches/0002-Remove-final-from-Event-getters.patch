@@ -1,0 +1,87 @@
+From 2bcff1506b29ec8f78fddef4a8fe4b23c0afa9e3 Mon Sep 17 00:00:00 2001
+From: Minecrell <dev@minecrell.net>
+Date: Mon, 26 Jan 2015 22:51:58 +0100
+Subject: [PATCH] Remove final from Event getters
+
+
+diff --git a/src/main/java/org/bukkit/event/block/BlockEvent.java b/src/main/java/org/bukkit/event/block/BlockEvent.java
+index 2405205..c0c9b6c 100644
+--- a/src/main/java/org/bukkit/event/block/BlockEvent.java
++++ b/src/main/java/org/bukkit/event/block/BlockEvent.java
+@@ -18,7 +18,7 @@ public abstract class BlockEvent extends Event {
+      *
+      * @return The Block which block is involved in this event
+      */
+-    public final Block getBlock() {
++    public Block getBlock() {
+         return block;
+     }
+ }
+diff --git a/src/main/java/org/bukkit/event/entity/PlayerLeashEntityEvent.java b/src/main/java/org/bukkit/event/entity/PlayerLeashEntityEvent.java
+index 74d458a..07f978a 100644
+--- a/src/main/java/org/bukkit/event/entity/PlayerLeashEntityEvent.java
++++ b/src/main/java/org/bukkit/event/entity/PlayerLeashEntityEvent.java
+@@ -45,7 +45,7 @@ public class PlayerLeashEntityEvent extends Event implements Cancellable {
+      *
+      * @return Player who is involved in this event
+      */
+-    public final Player getPlayer() {
++    public Player getPlayer() {
+         return player;
+     }
+ 
+diff --git a/src/main/java/org/bukkit/event/player/PlayerChannelEvent.java b/src/main/java/org/bukkit/event/player/PlayerChannelEvent.java
+index 054efbc..c44bbf8 100644
+--- a/src/main/java/org/bukkit/event/player/PlayerChannelEvent.java
++++ b/src/main/java/org/bukkit/event/player/PlayerChannelEvent.java
+@@ -16,7 +16,7 @@ public abstract class PlayerChannelEvent extends PlayerEvent {
+         this.channel = channel;
+     }
+ 
+-    public final String getChannel() {
++    public String getChannel() {
+         return channel;
+     }
+ 
+diff --git a/src/main/java/org/bukkit/event/player/PlayerEvent.java b/src/main/java/org/bukkit/event/player/PlayerEvent.java
+index 0d4833f..20106ce 100644
+--- a/src/main/java/org/bukkit/event/player/PlayerEvent.java
++++ b/src/main/java/org/bukkit/event/player/PlayerEvent.java
+@@ -24,7 +24,7 @@ public abstract class PlayerEvent extends Event {
+      *
+      * @return Player who is involved in this event
+      */
+-    public final Player getPlayer() {
++    public Player getPlayer() {
+         return player;
+     }
+ }
+diff --git a/src/main/java/org/bukkit/event/vehicle/VehicleEvent.java b/src/main/java/org/bukkit/event/vehicle/VehicleEvent.java
+index b8255c0..b09ef86 100644
+--- a/src/main/java/org/bukkit/event/vehicle/VehicleEvent.java
++++ b/src/main/java/org/bukkit/event/vehicle/VehicleEvent.java
+@@ -18,7 +18,7 @@ public abstract class VehicleEvent extends Event {
+      *
+      * @return the vehicle
+      */
+-    public final Vehicle getVehicle() {
++    public Vehicle getVehicle() {
+         return vehicle;
+     }
+ }
+diff --git a/src/main/java/org/bukkit/event/weather/WeatherEvent.java b/src/main/java/org/bukkit/event/weather/WeatherEvent.java
+index 0cae9bc..5d88767 100644
+--- a/src/main/java/org/bukkit/event/weather/WeatherEvent.java
++++ b/src/main/java/org/bukkit/event/weather/WeatherEvent.java
+@@ -18,7 +18,7 @@ public abstract class WeatherEvent extends Event {
+      *
+      * @return World this event is occurring in
+      */
+-    public final World getWorld() {
++    public World getWorld() {
+         return world;
+     }
+ }
+-- 
+2.2.2
+
