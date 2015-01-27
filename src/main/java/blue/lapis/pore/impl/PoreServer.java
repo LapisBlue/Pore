@@ -165,7 +165,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public String getName() {
-        return "Sponge";
+        return "Pore";
     }
 
     @Override
