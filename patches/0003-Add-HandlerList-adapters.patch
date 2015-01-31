@@ -1,0 +1,137 @@
+From a8b665c87d3770fb00bfed4ef61898ef9b49b499 Mon Sep 17 00:00:00 2001
+From: Minecrell <dev@minecrell.net>
+Date: Sat, 31 Jan 2015 19:28:20 +0100
+Subject: [PATCH] Add HandlerList adapters
+
+
+diff --git a/src/main/java/org/bukkit/event/HandlerList.java b/src/main/java/org/bukkit/event/HandlerList.java
+index 7d5efff..3aca736 100644
+--- a/src/main/java/org/bukkit/event/HandlerList.java
++++ b/src/main/java/org/bukkit/event/HandlerList.java
+@@ -53,6 +53,7 @@ public class HandlerList {
+                         list.clear();
+                     }
+                     h.handlers = null;
++                    h.removeAll();
+                 }
+             }
+         }
+@@ -108,6 +109,7 @@ public class HandlerList {
+         if (handlerslots.get(listener.getPriority()).contains(listener))
+             throw new IllegalStateException("This listener is already registered to priority " + listener.getPriority().toString());
+         handlers = null;
++        add(listener);
+         handlerslots.get(listener.getPriority()).add(listener);
+     }
+ 
+@@ -130,6 +132,7 @@ public class HandlerList {
+     public synchronized void unregister(RegisteredListener listener) {
+         if (handlerslots.get(listener.getPriority()).remove(listener)) {
+             handlers = null;
++            remove(listener);
+         }
+     }
+ 
+@@ -142,8 +145,10 @@ public class HandlerList {
+         boolean changed = false;
+         for (List<RegisteredListener> list : handlerslots.values()) {
+             for (ListIterator<RegisteredListener> i = list.listIterator(); i.hasNext();) {
+-                if (i.next().getPlugin().equals(plugin)) {
++                RegisteredListener handler = i.next();
++                if (handler.getPlugin().equals(plugin)) {
+                     i.remove();
++                    remove(handler);
+                     changed = true;
+                 }
+             }
+@@ -160,8 +165,10 @@ public class HandlerList {
+         boolean changed = false;
+         for (List<RegisteredListener> list : handlerslots.values()) {
+             for (ListIterator<RegisteredListener> i = list.listIterator(); i.hasNext();) {
+-                if (i.next().getListener().equals(listener)) {
++                RegisteredListener handler = i.next();
++                if (handler.getListener().equals(listener)) {
+                     i.remove();
++                    remove(handler);
+                     changed = true;
+                 }
+             }
+@@ -228,4 +235,53 @@ public class HandlerList {
+             return (ArrayList<HandlerList>) allLists.clone();
+         }
+     }
++
++    public Iterable<RegisteredListener> getRegisteredListeners(EventPriority priority) {
++        ArrayList<RegisteredListener> listeners = handlerslots.get(priority);
++        return listeners != null ? listeners : Collections.<RegisteredListener>emptyList();
++    }
++
++    private List<Adapter> adapter = new ArrayList<Adapter>();
++
++    public void addAdapter(Adapter adapter) {
++        this.adapter.add(adapter);
++    }
++
++    private boolean hasRegistrations(EventPriority priority) {
++        ArrayList<RegisteredListener> registered = handlerslots.get(priority);
++        return registered != null && registered.size() > 0;
++    }
++
++    private void add(RegisteredListener listener) {
++        if (!adapter.isEmpty()) {
++            EventPriority priority = listener.getPriority();
++            if (!hasRegistrations(priority)) {
++                for (Adapter adapter : this.adapter)
++                    adapter.register(priority);
++            }
++        }
++    }
++
++    private void remove(RegisteredListener listener) {
++        if (!adapter.isEmpty()) {
++            EventPriority priority = listener.getPriority();
++            if (!hasRegistrations(priority)) {
++                for (Adapter adapter : this.adapter)
++                    adapter.unregister(priority);
++            }
++        }
++    }
++
++    private void removeAll() {
++        if (!adapter.isEmpty()) {
++            for (Adapter adapter : this.adapter)
++                adapter.unregister();
++        }
++    }
++
++    public interface Adapter {
++        void register(EventPriority priority);
++        void unregister();
++        void unregister(EventPriority priority);
++    }
+ }
+diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
+index d2fe422..ce40bf3 100644
+--- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
++++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
+@@ -562,7 +562,7 @@ public final class SimplePluginManager implements PluginManager {
+         }
+     }
+ 
+-    private HandlerList getEventListeners(Class<? extends Event> type) {
++    public static HandlerList getEventListeners(Class<? extends Event> type) {
+         try {
+             Method method = getRegistrationClass(type).getDeclaredMethod("getHandlerList");
+             method.setAccessible(true);
+@@ -572,7 +572,7 @@ public final class SimplePluginManager implements PluginManager {
+         }
+     }
+ 
+-    private Class<? extends Event> getRegistrationClass(Class<? extends Event> clazz) {
++    private static Class<? extends Event> getRegistrationClass(Class<? extends Event> clazz) {
+         try {
+             clazz.getDeclaredMethod("getHandlerList");
+             return clazz;
+-- 
+2.2.2
+

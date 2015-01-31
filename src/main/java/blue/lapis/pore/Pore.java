@@ -24,10 +24,7 @@
  */
 package blue.lapis.pore;
 
-import blue.lapis.pore.event.BlockEventRelay;
-import blue.lapis.pore.event.EntityEventRelay;
-import blue.lapis.pore.event.PlayerEventRelay;
-import blue.lapis.pore.event.WorldEventRelay;
+import blue.lapis.pore.event.PoreEventWrapper;
 import blue.lapis.pore.impl.PoreServer;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang.NotImplementedException;
@@ -84,9 +81,8 @@ public final class Pore {
 
         logger.info("Loading Pore server, please wait...");
 
-        initializeEventHandlers();
-
         server = new PoreServer(game, logger);
+        PoreEventWrapper.register();
         //TODO: initialize plugins with proper load order
     }
 
@@ -104,17 +100,6 @@ public final class Pore {
         instance = null;
         server = null;
         logger = null;
-    }
-
-    private static void initializeEventHandlers() {
-        // block events
-        getGame().getEventManager().register(getInstance(), new BlockEventRelay());
-        // entity events
-        getGame().getEventManager().register(getInstance(), new EntityEventRelay());
-        // player events
-        getGame().getEventManager().register(getInstance(), new PlayerEventRelay());
-        // world events
-        getGame().getEventManager().register(getInstance(), new WorldEventRelay());
     }
 
 }
