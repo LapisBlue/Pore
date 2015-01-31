@@ -100,10 +100,9 @@ project('Porekit') {
 // Disable tests and checkstyle for SpongeAPI
 project('SpongeAPI') {
     afterEvaluate { project ->
-        javadoc.enabled = false
-        javadocJar.enabled = false
-        sourceJar.enabled = false
-        licenseFormat.enabled = false
+        configure([assemble, build, compileTestJava, javadoc, javadocJar, sourceJar, licenseFormat]) {
+            enabled = false
+        }
         tasks.withType(VerificationTask) {
             enabled = false
         }
