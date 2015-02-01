@@ -65,7 +65,7 @@ public class EntityEventRelay {
                 new org.bukkit.event.entity.EntityChangeBlockEvent(
                         PoreEntity.of(event.getEntity()),
                         PoreBlock.of(event.getBlock()),
-                        MaterialConverter.toBukkitMaterial(event.getReplacementBlock().getState().getType()),
+                        MaterialConverter.of(event.getReplacementBlock().getState().getType()),
                         event.getReplacementBlock().getState().getDataValue()
                 ) {
                     @Override

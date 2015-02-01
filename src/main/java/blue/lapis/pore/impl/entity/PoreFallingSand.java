@@ -53,12 +53,12 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
 
     @Override
     public Material getMaterial() {
-        return MaterialConverter.toBukkitMaterial(getHandle().getBlockState().getType());
+        return MaterialConverter.of(getHandle().getBlockState().getType());
     }
 
     @Override
     public int getBlockId() {
-        return MaterialConverter.toBukkitMaterial(getHandle().getBlockState().getType()).getId();
+        return getMaterial().getId();
     }
 
     @Override

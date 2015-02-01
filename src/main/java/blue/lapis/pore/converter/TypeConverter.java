@@ -30,6 +30,9 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
 public final class TypeConverter<B, S> extends Converter<B, S> {
 
     private final ImmutableMap<B, S> bukkitToSponge;
@@ -71,7 +74,8 @@ public final class TypeConverter<B, S> extends Converter<B, S> {
         protected final BiMap<B, S> registry = HashBiMap.create();
 
         public Builder<B, S> add(B bukkit, S sponge) {
-            registry.put(bukkit, sponge);
+            checkState(registry.put(checkNotNull(bukkit, "bukkit"), checkNotNull(sponge, "sponge")) == null,
+                    "Key %s is already present", bukkit);
             return this;
         }
 

@@ -1,7 +1,0 @@
-# This file is a part of Pore, licensed under the MIT License
-valid,this line is valid
- spaceTest , this line is trimmed 
-	tabTest	,	this line is trimmed	
-tooMany,this line is invalid,it has too many parameters
-tooFew
-#comment,this line is a comment

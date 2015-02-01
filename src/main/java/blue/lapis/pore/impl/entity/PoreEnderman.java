@@ -30,6 +30,7 @@ import blue.lapis.pore.impl.block.PoreBlockState;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
+import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.entity.living.monster.Enderman;
 import org.spongepowered.api.item.ItemBlock;
 
@@ -62,7 +63,7 @@ public class PoreEnderman extends PoreMonster implements org.bukkit.entity.Ender
 
     @Override
     public void setCarriedMaterial(MaterialData material) {
-        ItemBlock type = (ItemBlock) MaterialConverter.toItemType(material.getItemType());
+        BlockType type = MaterialConverter.asBlock(material.getItemType());
         if (type != null) {
             //getHandle().setCarriedBlock(type); //TODO: not sure of how to create the block state
             throw new NotImplementedException();

@@ -88,12 +88,12 @@ public class PoreBlock extends PoreWrapper<BlockLoc> implements Block {
 
     @Override
     public Material getType() {
-        return MaterialConverter.toBukkitMaterial(getHandle().getState().getType());
+        return MaterialConverter.of(getHandle().getType());
     }
 
     @Override
     public void setType(Material type) {
-        getHandle().replaceWith(MaterialConverter.toBlockType(type));
+        getHandle().replaceWith(MaterialConverter.asBlock(type));
     }
 
     @Override
@@ -104,7 +104,7 @@ public class PoreBlock extends PoreWrapper<BlockLoc> implements Block {
 
     @Override
     public int getTypeId() {
-        return MaterialConverter.toBukkitMaterial(getHandle().getState().getType()).getId();
+        return getType().getId();
     }
 
     @Override
@@ -171,7 +171,7 @@ public class PoreBlock extends PoreWrapper<BlockLoc> implements Block {
     @Override
     public boolean setTypeId(int type, boolean applyPhysics) {
         //TODO: applyPhysics
-        BlockType blockType = MaterialConverter.toBlockType(Material.getMaterial(type));
+        BlockType blockType = MaterialConverter.asBlock(Material.getMaterial(type));
         getHandle().replaceWith(blockType);
         return getHandle().getType().equals(blockType);
     }

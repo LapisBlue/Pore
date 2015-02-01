@@ -27,6 +27,9 @@ package blue.lapis.pore;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.api.Game;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+
 import static org.mockito.Mockito.mock;
 
 public final class PoreTests {
@@ -37,6 +40,26 @@ public final class PoreTests {
             Pore.instance = pore;
             pore.game = mock(Game.class);
             pore.logger = LoggerFactory.getLogger("Pore");
+        }
+    }
+
+    private static Field modifiers;
+
+    public static void setConstants(Class<?> type) throws Exception {
+        if (modifiers == null) {
+            Field modifiers = Field.class.getDeclaredField("modifiers");
+            modifiers.setAccessible(true);
+            PoreTests.modifiers = modifiers;
+        }
+
+        for (Field field : type.getFields()) {
+            if (Modifier.isStatic(field.getModifiers())) {
+                if (Modifier.isFinal(field.getModifiers())) {
+                    modifiers.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+                }
+
+                field.set(null, mock(field.getType()));
+            }
         }
     }
 }

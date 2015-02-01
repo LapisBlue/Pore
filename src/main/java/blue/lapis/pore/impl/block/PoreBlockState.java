@@ -65,12 +65,12 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements
 
     @Override
     public Material getType() {
-        return MaterialConverter.toBukkitMaterial(getHandle().getType());
+        return MaterialConverter.of(getHandle().getType());
     }
 
     @Override
     public int getTypeId() {
-        return MaterialConverter.toBukkitMaterial(getHandle().getType()).getId();
+        return getType().getId();
     }
 
     @Override

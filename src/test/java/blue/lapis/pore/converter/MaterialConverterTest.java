@@ -24,31 +24,23 @@
  */
 package blue.lapis.pore.converter;
 
-import blue.lapis.pore.Pore;
-import org.spongepowered.api.item.ItemType;
+import blue.lapis.pore.PoreTests;
+import org.junit.Before;
+import org.junit.Test;
+import org.spongepowered.api.block.BlockTypes;
+import org.spongepowered.api.item.ItemTypes;
 
-public class ItemStackConverter {
+public class MaterialConverterTest {
 
-    public static org.bukkit.inventory.ItemStack of(org.spongepowered.api.item.inventory.ItemStack stack) {
-        return new org.bukkit.inventory.ItemStack(
-                MaterialConverter.of(stack.getItem()),
-                stack.getQuantity(),
-                stack.getDamage()
-        );
+    @Before
+    public void setupConstants() throws Exception {
+        PoreTests.setConstants(BlockTypes.class);
+        PoreTests.setConstants(ItemTypes.class);
     }
 
-    public static org.spongepowered.api.item.inventory.ItemStack of(org.bukkit.inventory.ItemStack stack) {
-        ItemType type = MaterialConverter.asItem(stack.getType());
-        if (type == null)
-            throw new UnsupportedOperationException();
-        // IntelliJ doesn't recognize the above check and thinks withItemType() may throw an NPE
-        //noinspection ConstantConditions
-        return Pore.getGame().getRegistry().getItemBuilder() // Eh, this shouldn't be in the registry
-                .itemType(type)
-                .quantity(stack.getAmount())
-                .damage(stack.getDurability())
-                .maxQuantity(stack.getType().getMaxStackSize())
-                .build();
+    @Test
+    public void test() {
+        // Try to load the converter
+        new MaterialConverter();
     }
-
 }
