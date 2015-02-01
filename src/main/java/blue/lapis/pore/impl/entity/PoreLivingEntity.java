@@ -25,10 +25,10 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.util.ProjectileUtil;
-import blue.lapis.pore.util.converter.PoreConverter;
-import blue.lapis.pore.util.converter.PotionEffectConverter;
-import blue.lapis.pore.util.converter.PotionEffectTypeConverter;
-import blue.lapis.pore.util.converter.vector.LocationConverter;
+import blue.lapis.pore.converter.PoreConverter;
+import blue.lapis.pore.converter.PotionEffectConverter;
+import blue.lapis.pore.converter.PotionEffectTypeConverter;
+import blue.lapis.pore.converter.vector.LocationConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.block.Block;

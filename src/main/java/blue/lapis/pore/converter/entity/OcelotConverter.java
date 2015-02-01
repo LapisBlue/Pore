@@ -22,33 +22,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.util.converter;
+package blue.lapis.pore.converter.entity;
 
-import blue.lapis.pore.Pore;
-import org.spongepowered.api.item.ItemType;
+import blue.lapis.pore.converter.TypeConverter;
+import com.google.common.base.Converter;
+import org.bukkit.entity.Ocelot;
+import org.spongepowered.api.entity.living.meta.OcelotType;
+import org.spongepowered.api.entity.living.meta.OcelotTypes;
 
-public class ItemStackConverter {
+public final class OcelotConverter {
 
-    public static org.bukkit.inventory.ItemStack of(org.spongepowered.api.item.inventory.ItemStack stack) {
-        return new org.bukkit.inventory.ItemStack(
-                MaterialConverter.toBukkitMaterial(stack.getItem()),
-                stack.getQuantity(),
-                stack.getDamage()
-        );
+    public static final Converter<Ocelot.Type, OcelotType> CONVERTER =
+            TypeConverter.<Ocelot.Type, OcelotType>builder()
+                    .add(Ocelot.Type.BLACK_CAT, OcelotTypes.BLACK_CAT)
+                    .add(Ocelot.Type.RED_CAT, OcelotTypes.RED_CAT)
+                    .add(Ocelot.Type.SIAMESE_CAT, OcelotTypes.SIAMESE_CAT)
+                    .add(Ocelot.Type.WILD_OCELOT, OcelotTypes.WILD_OCELOT)
+                    .build();
+
+    public static OcelotType of(Ocelot.Type type) {
+        return CONVERTER.convert(type);
     }
 
-    public static org.spongepowered.api.item.inventory.ItemStack of(org.bukkit.inventory.ItemStack stack) {
-        ItemType type = MaterialConverter.toItemType(stack.getType());
-        if (type == null)
-            throw new UnsupportedOperationException();
-        // IntelliJ doesn't recognize the above check and thinks withItemType() may throw an NPE
-        //noinspection ConstantConditions
-        return Pore.getGame().getRegistry().getItemBuilder() // Eh, this shouldn't be in the registry
-                .itemType(type)
-                .quantity(stack.getAmount())
-                .damage(stack.getDurability())
-                .maxQuantity(stack.getType().getMaxStackSize())
-                .build();
+    public static Ocelot.Type of(OcelotType type) {
+        return CONVERTER.reverse().convert(type);
     }
 
 }

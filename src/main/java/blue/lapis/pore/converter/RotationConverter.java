@@ -22,28 +22,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.util.converter.entity;
+package blue.lapis.pore.converter;
 
-import blue.lapis.pore.util.converter.TypeConverter;
 import com.google.common.base.Converter;
-import org.bukkit.entity.Skeleton;
-import org.spongepowered.api.entity.living.meta.SkeletonType;
-import org.spongepowered.api.entity.living.meta.SkeletonTypes;
+import org.bukkit.Rotation;
+import org.spongepowered.api.util.rotation.Rotations;
 
-public final class SkeletonConverter {
+public final class RotationConverter {
 
-    public static final Converter<Skeleton.SkeletonType, SkeletonType> CONVERTER =
-            TypeConverter.<Skeleton.SkeletonType, SkeletonType>builder()
-                    .add(Skeleton.SkeletonType.NORMAL, SkeletonTypes.NORMAL)
-                    .add(Skeleton.SkeletonType.WITHER, SkeletonTypes.WITHER)
+    public static final Converter<Rotation, org.spongepowered.api.util.rotation.Rotation> CONVERTER =
+            TypeConverter.<Rotation, org.spongepowered.api.util.rotation.Rotation>builder()
+                    .add(Rotation.NONE, Rotations.TOP)
+                    .add(Rotation.CLOCKWISE_45, Rotations.TOP_RIGHT)
+                    .add(Rotation.CLOCKWISE, Rotations.RIGHT)
+                    .add(Rotation.CLOCKWISE_135, Rotations.BOTTOM_RIGHT)
+                    .add(Rotation.FLIPPED, Rotations.BOTTOM)
+                    .add(Rotation.FLIPPED_45, Rotations.BOTTOM_LEFT)
+                    .add(Rotation.COUNTER_CLOCKWISE, Rotations.LEFT)
+                    .add(Rotation.COUNTER_CLOCKWISE_45, Rotations.TOP_LEFT)
                     .build();
 
-    public static SkeletonType of(Skeleton.SkeletonType type) {
-        return CONVERTER.convert(type);
+    public static org.spongepowered.api.util.rotation.Rotation of(Rotation rotation) {
+        return CONVERTER.convert(rotation);
     }
 
-    public static Skeleton.SkeletonType of(SkeletonType type) {
-        return CONVERTER.reverse().convert(type);
+    public static Rotation of(org.spongepowered.api.util.rotation.Rotation rotation) {
+        return CONVERTER.reverse().convert(rotation);
     }
-
 }

@@ -22,33 +22,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.util.converter;
+package blue.lapis.pore.converter;
 
-import blue.lapis.pore.Pore;
-import org.spongepowered.api.potion.PotionEffectBuilder;
+import com.google.common.base.Converter;
+import org.bukkit.event.EventPriority;
+import org.spongepowered.api.util.event.Order;
 
-public class PotionEffectConverter {
+public final class EventPriorityConverter {
 
-    private static PotionEffectBuilder effectBuilder = Pore.getGame().getRegistry().getPotionEffectBuilder();
+    // TODO: Verify this
+    public static final Converter<EventPriority, Order> CONVERTER = TypeConverter.<EventPriority, Order>builder()
+            .add(EventPriority.LOWEST, Order.PRE)
+            .add(EventPriority.LOW, Order.EARLY)
+            .add(EventPriority.NORMAL, Order.DEFAULT)
+            .add(EventPriority.HIGH, Order.LATE)
+            .add(EventPriority.HIGHEST, Order.LAST)
+            .add(EventPriority.MONITOR, Order.POST)
+            .build();
 
-    public static org.spongepowered.api.potion.PotionEffect of(org.bukkit.potion.PotionEffect effect) {
-        return effectBuilder
-                .potionType(PotionEffectTypeConverter.of(effect.getType()))
-                .ambience(effect.isAmbient())
-                .amplifier(effect.getAmplifier())
-                .duration(effect.getDuration())
-                .particles(effect.hasParticles())
-                .build();
+    public static Order of(EventPriority eventPriority) {
+        return CONVERTER.convert(eventPriority);
     }
 
-    public static org.bukkit.potion.PotionEffect of(org.spongepowered.api.potion.PotionEffect effect) {
-        return new org.bukkit.potion.PotionEffect(
-                PotionEffectTypeConverter.of(effect.getType()),
-                effect.getDuration(),
-                effect.getAmplifier(),
-                effect.isAmbient(),
-                effect.getShowParticles()
-        );
+    public static EventPriority of(Order order) {
+        return CONVERTER.reverse().convert(order);
     }
 
 }

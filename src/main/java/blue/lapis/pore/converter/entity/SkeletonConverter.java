@@ -22,18 +22,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.util.converter.vector;
+package blue.lapis.pore.converter.entity;
 
-import com.flowpowered.math.vector.Vector3f;
-import org.bukkit.util.EulerAngle;
+import blue.lapis.pore.converter.TypeConverter;
+import com.google.common.base.Converter;
+import org.bukkit.entity.Skeleton;
+import org.spongepowered.api.entity.living.meta.SkeletonType;
+import org.spongepowered.api.entity.living.meta.SkeletonTypes;
 
-public class EulerAngleConverter {
+public final class SkeletonConverter {
 
-    public static EulerAngle of(Vector3f dir) {
-        return new EulerAngle(dir.getX(), dir.getY(), dir.getZ());
+    public static final Converter<Skeleton.SkeletonType, SkeletonType> CONVERTER =
+            TypeConverter.<Skeleton.SkeletonType, SkeletonType>builder()
+                    .add(Skeleton.SkeletonType.NORMAL, SkeletonTypes.NORMAL)
+                    .add(Skeleton.SkeletonType.WITHER, SkeletonTypes.WITHER)
+                    .build();
+
+    public static SkeletonType of(Skeleton.SkeletonType type) {
+        return CONVERTER.convert(type);
     }
 
-    public static Vector3f of(EulerAngle angle) {
-        return new Vector3f(angle.getX(), angle.getY(), angle.getZ());
+    public static Skeleton.SkeletonType of(SkeletonType type) {
+        return CONVERTER.reverse().convert(type);
     }
+
 }

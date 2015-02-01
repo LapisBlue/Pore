@@ -22,28 +22,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.util.converter;
+package blue.lapis.pore.converter;
 
-import com.google.common.base.Converter;
-import org.bukkit.GameMode;
-import org.spongepowered.api.entity.player.gamemode.GameModes;
+import blue.lapis.pore.Pore;
+import org.spongepowered.api.potion.PotionEffectBuilder;
 
-public final class GameModeConverter {
-    
-    public static final Converter<GameMode, org.spongepowered.api.entity.player.gamemode.GameMode> CONVERTER =
-            TypeConverter.<GameMode, org.spongepowered.api.entity.player.gamemode.GameMode>builder()
-                    .add(GameMode.SURVIVAL, GameModes.SURVIVAL)
-                    .add(GameMode.CREATIVE, GameModes.CREATIVE)
-                    .add(GameMode.ADVENTURE, GameModes.ADVENTURE)
-                    .add(GameMode.SPECTATOR, GameModes.SPECTATOR)
-                    .build();
+public class PotionEffectConverter {
 
-    public static org.spongepowered.api.entity.player.gamemode.GameMode of(GameMode gameMode) {
-        return CONVERTER.convert(gameMode);
+    private static PotionEffectBuilder effectBuilder = Pore.getGame().getRegistry().getPotionEffectBuilder();
+
+    public static org.spongepowered.api.potion.PotionEffect of(org.bukkit.potion.PotionEffect effect) {
+        return effectBuilder
+                .potionType(PotionEffectTypeConverter.of(effect.getType()))
+                .ambience(effect.isAmbient())
+                .amplifier(effect.getAmplifier())
+                .duration(effect.getDuration())
+                .particles(effect.hasParticles())
+                .build();
     }
 
-    public static GameMode of(org.spongepowered.api.entity.player.gamemode.GameMode gameMode) {
-        return CONVERTER.reverse().convert(gameMode);
+    public static org.bukkit.potion.PotionEffect of(org.spongepowered.api.potion.PotionEffect effect) {
+        return new org.bukkit.potion.PotionEffect(
+                PotionEffectTypeConverter.of(effect.getType()),
+                effect.getDuration(),
+                effect.getAmplifier(),
+                effect.isAmbient(),
+                effect.getShowParticles()
+        );
     }
 
 }

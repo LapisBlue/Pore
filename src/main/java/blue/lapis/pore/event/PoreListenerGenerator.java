@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.event;
 
-import blue.lapis.pore.util.converter.EventPriorityConverter;
+import blue.lapis.pore.converter.EventPriorityConverter;
 import com.google.common.base.Throwables;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;

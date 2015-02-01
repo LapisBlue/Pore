@@ -24,8 +24,8 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.util.converter.PoreConverter;
-import blue.lapis.pore.util.converter.entity.HorseConverter;
+import blue.lapis.pore.converter.PoreConverter;
+import blue.lapis.pore.converter.entity.HorseConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.HorseInventory;

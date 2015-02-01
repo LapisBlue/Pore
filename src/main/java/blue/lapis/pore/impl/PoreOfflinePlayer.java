@@ -25,7 +25,7 @@
 package blue.lapis.pore.impl;
 
 import blue.lapis.pore.impl.entity.PorePlayer;
-import blue.lapis.pore.util.converter.PoreConverter;
+import blue.lapis.pore.converter.PoreConverter;
 import com.google.common.base.Optional;
 import blue.lapis.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;

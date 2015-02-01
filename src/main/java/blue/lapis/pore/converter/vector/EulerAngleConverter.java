@@ -22,31 +22,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.util.converter.entity;
+package blue.lapis.pore.converter.vector;
 
-import blue.lapis.pore.util.converter.TypeConverter;
-import com.google.common.base.Converter;
-import org.bukkit.entity.Villager;
-import org.spongepowered.api.entity.living.villager.Profession;
-import org.spongepowered.api.entity.living.villager.Professions;
+import com.flowpowered.math.vector.Vector3f;
+import org.bukkit.util.EulerAngle;
 
-public final class ProfessionConverter {
+public class EulerAngleConverter {
 
-    public static final Converter<Villager.Profession, Profession> CONVERTER =
-            TypeConverter.<Villager.Profession, Profession>builder()
-                    .add(Villager.Profession.BLACKSMITH, Professions.BLACKSMITH)
-                    .add(Villager.Profession.BUTCHER, Professions.BUTCHER)
-                    .add(Villager.Profession.FARMER, Professions.FARMER)
-                    .add(Villager.Profession.LIBRARIAN, Professions.LIBRARIAN)
-                    .add(Villager.Profession.PRIEST, Professions.PRIEST)
-                    .build();
-
-    public static Profession of(Villager.Profession profession) {
-        return CONVERTER.convert(profession);
+    public static EulerAngle of(Vector3f dir) {
+        return new EulerAngle(dir.getX(), dir.getY(), dir.getZ());
     }
 
-    public static Villager.Profession of(Profession profession) {
-        return CONVERTER.reverse().convert(profession);
+    public static Vector3f of(EulerAngle angle) {
+        return new Vector3f(angle.getX(), angle.getY(), angle.getZ());
     }
-
 }

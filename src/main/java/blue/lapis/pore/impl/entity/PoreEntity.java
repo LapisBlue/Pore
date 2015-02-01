@@ -25,11 +25,11 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.impl.PoreWorld;
-import blue.lapis.pore.util.converter.PoreConverter;
+import blue.lapis.pore.converter.PoreConverter;
 import com.google.common.collect.Lists;
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.util.PoreWrapper;
-import blue.lapis.pore.util.converter.vector.LocationConverter;
+import blue.lapis.pore.converter.vector.LocationConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;

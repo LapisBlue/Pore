@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.util.converter.vector;
+package blue.lapis.pore.converter.vector;
 
 import blue.lapis.pore.impl.PoreWorld;
 import com.flowpowered.math.vector.Vector3d;

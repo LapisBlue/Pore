@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.util.converter.PoreConverter;
+import blue.lapis.pore.converter.PoreConverter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LightningStrike;
 import org.spongepowered.api.entity.weather.Lightning;

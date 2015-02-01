@@ -22,30 +22,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.util.converter;
+package blue.lapis.pore.converter.entity;
 
+import blue.lapis.pore.converter.TypeConverter;
 import com.google.common.base.Converter;
-import org.bukkit.event.EventPriority;
-import org.spongepowered.api.util.event.Order;
+import org.bukkit.entity.Villager;
+import org.spongepowered.api.entity.living.villager.Profession;
+import org.spongepowered.api.entity.living.villager.Professions;
 
-public final class EventPriorityConverter {
+public final class ProfessionConverter {
 
-    // TODO: Verify this
-    public static final Converter<EventPriority, Order> CONVERTER = TypeConverter.<EventPriority, Order>builder()
-            .add(EventPriority.LOWEST, Order.PRE)
-            .add(EventPriority.LOW, Order.EARLY)
-            .add(EventPriority.NORMAL, Order.DEFAULT)
-            .add(EventPriority.HIGH, Order.LATE)
-            .add(EventPriority.HIGHEST, Order.LAST)
-            .add(EventPriority.MONITOR, Order.POST)
-            .build();
+    public static final Converter<Villager.Profession, Profession> CONVERTER =
+            TypeConverter.<Villager.Profession, Profession>builder()
+                    .add(Villager.Profession.BLACKSMITH, Professions.BLACKSMITH)
+                    .add(Villager.Profession.BUTCHER, Professions.BUTCHER)
+                    .add(Villager.Profession.FARMER, Professions.FARMER)
+                    .add(Villager.Profession.LIBRARIAN, Professions.LIBRARIAN)
+                    .add(Villager.Profession.PRIEST, Professions.PRIEST)
+                    .build();
 
-    public static Order of(EventPriority eventPriority) {
-        return CONVERTER.convert(eventPriority);
+    public static Profession of(Villager.Profession profession) {
+        return CONVERTER.convert(profession);
     }
 
-    public static EventPriority of(Order order) {
-        return CONVERTER.reverse().convert(order);
+    public static Villager.Profession of(Profession profession) {
+        return CONVERTER.reverse().convert(profession);
     }
 
 }

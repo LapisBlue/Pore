@@ -24,9 +24,9 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.util.converter.PoreConverter;
+import blue.lapis.pore.converter.PoreConverter;
 import blue.lapis.pore.Pore;
-import blue.lapis.pore.util.converter.entity.ProfessionConverter;
+import blue.lapis.pore.converter.entity.ProfessionConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.villager.Villager;
 

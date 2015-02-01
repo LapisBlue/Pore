@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.util.converter.PoreConverter;
+import blue.lapis.pore.converter.PoreConverter;
 import org.bukkit.entity.ComplexEntityPart;
 import org.bukkit.entity.ComplexLivingEntity;
 import org.bukkit.entity.EntityType;

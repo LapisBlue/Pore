@@ -22,31 +22,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.util.converter;
+package blue.lapis.pore.converter.entity;
 
+import blue.lapis.pore.converter.TypeConverter;
 import com.google.common.base.Converter;
-import org.bukkit.Rotation;
-import org.spongepowered.api.util.rotation.Rotations;
+import org.bukkit.entity.Rabbit;
+import org.spongepowered.api.entity.living.meta.RabbitType;
+import org.spongepowered.api.entity.living.meta.RabbitTypes;
 
-public final class RotationConverter {
+public final class RabbitConverter {
 
-    public static final Converter<Rotation, org.spongepowered.api.util.rotation.Rotation> CONVERTER =
-            TypeConverter.<Rotation, org.spongepowered.api.util.rotation.Rotation>builder()
-                    .add(Rotation.NONE, Rotations.TOP)
-                    .add(Rotation.CLOCKWISE_45, Rotations.TOP_RIGHT)
-                    .add(Rotation.CLOCKWISE, Rotations.RIGHT)
-                    .add(Rotation.CLOCKWISE_135, Rotations.BOTTOM_RIGHT)
-                    .add(Rotation.FLIPPED, Rotations.BOTTOM)
-                    .add(Rotation.FLIPPED_45, Rotations.BOTTOM_LEFT)
-                    .add(Rotation.COUNTER_CLOCKWISE, Rotations.LEFT)
-                    .add(Rotation.COUNTER_CLOCKWISE_45, Rotations.TOP_LEFT)
-                    .build();
+    public static final Converter<Rabbit.Type, RabbitType> CONVERTER = TypeConverter.<Rabbit.Type, RabbitType>builder()
+            .add(Rabbit.Type.BROWN, RabbitTypes.BROWN)
+            .add(Rabbit.Type.WHITE, RabbitTypes.WHITE)
+            .add(Rabbit.Type.BLACK, RabbitTypes.BLACK)
+            .add(Rabbit.Type.BLACK_AND_WHITE, RabbitTypes.BLACK_AND_WHITE)
+            .add(Rabbit.Type.GOLD, RabbitTypes.GOLD)
+            .add(Rabbit.Type.SALT_AND_PEPPER, RabbitTypes.SALT_AND_PEPPER)
+            .add(Rabbit.Type.THE_KILLER_BUNNY, RabbitTypes.KILLER)
+            .build();
 
-    public static org.spongepowered.api.util.rotation.Rotation of(Rotation rotation) {
-        return CONVERTER.convert(rotation);
+    public static RabbitType of(Rabbit.Type type) {
+        return CONVERTER.convert(type);
     }
 
-    public static Rotation of(org.spongepowered.api.util.rotation.Rotation rotation) {
-        return CONVERTER.reverse().convert(rotation);
+    public static Rabbit.Type of(RabbitType type) {
+        return CONVERTER.reverse().convert(type);
     }
+
 }

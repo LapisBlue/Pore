@@ -25,13 +25,10 @@
 package blue.lapis.pore.impl.command;
 
 import blue.lapis.pore.Pore;
-import blue.lapis.pore.impl.PoreServer;
 import blue.lapis.pore.impl.permissions.PorePermissible;
-import blue.lapis.pore.util.converter.PoreConverter;
-import org.apache.commons.lang.NotImplementedException;
+import blue.lapis.pore.converter.PoreConverter;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
-import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.api.util.command.CommandSource;
 
 public class PoreCommandSender extends PorePermissible implements CommandSender {

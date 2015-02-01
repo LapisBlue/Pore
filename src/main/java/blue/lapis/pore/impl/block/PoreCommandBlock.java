@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.block;
 
-import blue.lapis.pore.util.converter.PoreConverter;
+import blue.lapis.pore.converter.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.CommandBlock;
 import org.spongepowered.api.block.BlockState;

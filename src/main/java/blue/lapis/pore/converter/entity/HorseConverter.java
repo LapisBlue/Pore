@@ -22,9 +22,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.util.converter.entity;
+package blue.lapis.pore.converter.entity;
 
-import blue.lapis.pore.util.converter.TypeConverter;
+import blue.lapis.pore.converter.TypeConverter;
 import com.google.common.base.Converter;
 import org.bukkit.entity.Horse;
 import org.spongepowered.api.entity.living.meta.HorseColor;

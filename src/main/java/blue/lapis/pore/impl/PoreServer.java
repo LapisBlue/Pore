@@ -29,7 +29,7 @@ import blue.lapis.pore.impl.scheduler.PoreBukkitScheduler;
 import blue.lapis.pore.logging.PoreLogger;
 import blue.lapis.pore.util.PoreCollections;
 import blue.lapis.pore.util.PoreWrapper;
-import blue.lapis.pore.util.converter.PoreConverter;
+import blue.lapis.pore.converter.PoreConverter;
 import com.avaje.ebean.config.ServerConfig;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;

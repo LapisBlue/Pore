@@ -25,9 +25,9 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.Pore;
-import blue.lapis.pore.util.converter.PoreConverter;
-import blue.lapis.pore.util.converter.SoundConverter;
-import blue.lapis.pore.util.converter.vector.VectorConverter;
+import blue.lapis.pore.converter.PoreConverter;
+import blue.lapis.pore.converter.SoundConverter;
+import blue.lapis.pore.converter.vector.VectorConverter;
 import com.google.common.base.Optional;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Achievement;
@@ -46,7 +46,6 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
 import org.spongepowered.api.effect.sound.SoundType;
-import org.spongepowered.api.effect.sound.SoundTypes;
 import org.spongepowered.api.entity.player.Player;
 
 import java.net.InetSocketAddress;

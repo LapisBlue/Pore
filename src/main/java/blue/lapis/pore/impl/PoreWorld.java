@@ -24,9 +24,9 @@
  */
 package blue.lapis.pore.impl;
 
-import blue.lapis.pore.util.converter.EnvironmentConverter;
-import blue.lapis.pore.util.converter.PoreConverter;
-import blue.lapis.pore.util.converter.SoundConverter;
+import blue.lapis.pore.converter.EnvironmentConverter;
+import blue.lapis.pore.converter.PoreConverter;
+import blue.lapis.pore.converter.SoundConverter;
 import com.flowpowered.math.vector.Vector3i;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
@@ -38,8 +38,8 @@ import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreWrapper;
-import blue.lapis.pore.util.converter.EffectConverter;
-import blue.lapis.pore.util.converter.vector.VectorConverter;
+import blue.lapis.pore.converter.EffectConverter;
+import blue.lapis.pore.converter.vector.VectorConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;

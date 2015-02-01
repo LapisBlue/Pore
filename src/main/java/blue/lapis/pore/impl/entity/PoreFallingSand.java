@@ -24,8 +24,8 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.util.converter.MaterialConverter;
-import blue.lapis.pore.util.converter.PoreConverter;
+import blue.lapis.pore.converter.MaterialConverter;
+import blue.lapis.pore.converter.PoreConverter;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingSand;
