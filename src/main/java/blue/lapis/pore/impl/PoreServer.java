@@ -24,12 +24,12 @@
  */
 package blue.lapis.pore.impl;
 
+import blue.lapis.pore.converter.PoreConverter;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.impl.scheduler.PoreBukkitScheduler;
 import blue.lapis.pore.logging.PoreLogger;
 import blue.lapis.pore.util.PoreCollections;
 import blue.lapis.pore.util.PoreWrapper;
-import blue.lapis.pore.converter.PoreConverter;
 import com.avaje.ebean.config.ServerConfig;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
@@ -403,11 +403,8 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public List<World> getWorlds() {
-        // TODO: Should this be unmodifiable?
-        /*return PoreCollections
-                .<org.spongepowered.api.world.World, World>transformToList(getHandle().getWorlds(),
-                        PoreWorld.getConverter()); TODO*/
-        throw new NotImplementedException();
+        return PoreCollections.<org.spongepowered.api.world.World, World>transformToList(getHandle().getWorlds(),
+                PoreConverter.<org.spongepowered.api.world.World, PoreWorld>getConverter());
     }
 
     @Override

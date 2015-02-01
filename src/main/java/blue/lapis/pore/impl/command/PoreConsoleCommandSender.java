@@ -28,7 +28,6 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
-import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.api.util.command.CommandSource;
 
 // TODO: Bridge

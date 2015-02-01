@@ -24,22 +24,24 @@
  */
 package blue.lapis.pore.impl;
 
+import blue.lapis.pore.Pore;
+import blue.lapis.pore.converter.EffectConverter;
 import blue.lapis.pore.converter.EnvironmentConverter;
 import blue.lapis.pore.converter.PoreConverter;
 import blue.lapis.pore.converter.SoundConverter;
+import blue.lapis.pore.converter.vector.VectorConverter;
+import blue.lapis.pore.impl.block.PoreBlock;
+import blue.lapis.pore.impl.entity.PoreEntity;
+import blue.lapis.pore.impl.entity.PoreLivingEntity;
+import blue.lapis.pore.impl.entity.PorePlayer;
+import blue.lapis.pore.util.PoreCollections;
+import blue.lapis.pore.util.PoreWrapper;
 import com.flowpowered.math.vector.Vector3i;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
-import blue.lapis.pore.Pore;
-import blue.lapis.pore.impl.block.PoreBlock;
-import blue.lapis.pore.impl.entity.PoreLivingEntity;
-import blue.lapis.pore.impl.entity.PorePlayer;
-import blue.lapis.pore.util.PoreWrapper;
-import blue.lapis.pore.converter.EffectConverter;
-import blue.lapis.pore.converter.vector.VectorConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
@@ -297,10 +299,9 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     @Override
     public List<Entity> getEntities() {
         // TODO: Should this be unmodifiable?
-        /*return PoreCollections.<org.spongepowered.api.entity.Entity, Entity>transformToList(
-                getHandle().getEntities(), PoreEntity.getConverter()
-        ); TODO*/
-        throw new NotImplementedException();
+        return PoreCollections.<org.spongepowered.api.entity.Entity, Entity>transformToList(
+                getHandle().getEntities(), PoreConverter.<org.spongepowered.api.entity.Entity, PoreEntity>getConverter()
+        );
     }
 
     @Override

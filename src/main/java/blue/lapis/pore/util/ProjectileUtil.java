@@ -24,11 +24,11 @@
  */
 package blue.lapis.pore.util;
 
-import com.google.common.base.Optional;
 import blue.lapis.pore.Pore;
+import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.impl.entity.PoreFireball;
 import blue.lapis.pore.impl.entity.PoreProjectile;
-import blue.lapis.pore.converter.vector.VectorConverter;
+import com.google.common.base.Optional;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Egg;
 import org.bukkit.entity.EnderPearl;

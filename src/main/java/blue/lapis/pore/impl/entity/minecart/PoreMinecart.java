@@ -24,9 +24,9 @@
  */
 package blue.lapis.pore.impl.entity.minecart;
 
-import blue.lapis.pore.impl.entity.PoreVehicle;
 import blue.lapis.pore.converter.PoreConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
+import blue.lapis.pore.impl.entity.PoreVehicle;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;

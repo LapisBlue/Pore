@@ -32,9 +32,11 @@ import static org.mockito.Mockito.mock;
 public final class PoreTests {
 
     public static void mockPlugin() {
-        Pore pore = new Pore();
-        Pore.instance = pore;
-        pore.game = mock(Game.class);
-        pore.logger = LoggerFactory.getLogger("Pore");
+        if (Pore.instance == null) {
+            Pore pore = new Pore();
+            Pore.instance = pore;
+            pore.game = mock(Game.class);
+            pore.logger = LoggerFactory.getLogger("Pore");
+        }
     }
 }

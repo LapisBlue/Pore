@@ -24,9 +24,9 @@
  */
 package blue.lapis.pore.impl;
 
-import blue.lapis.pore.util.PoreWrapper;
 import blue.lapis.pore.converter.PoreConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
+import blue.lapis.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.spongepowered.api.world.WorldBorder;

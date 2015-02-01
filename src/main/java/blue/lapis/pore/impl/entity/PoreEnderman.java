@@ -24,9 +24,9 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.impl.block.PoreBlockState;
 import blue.lapis.pore.converter.MaterialConverter;
 import blue.lapis.pore.converter.PoreConverter;
+import blue.lapis.pore.impl.block.PoreBlockState;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;

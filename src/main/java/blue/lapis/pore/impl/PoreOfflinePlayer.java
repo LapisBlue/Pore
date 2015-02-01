@@ -24,10 +24,10 @@
  */
 package blue.lapis.pore.impl;
 
-import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.converter.PoreConverter;
-import com.google.common.base.Optional;
+import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreWrapper;
+import com.google.common.base.Optional;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

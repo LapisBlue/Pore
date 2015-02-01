@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.event;
 
+import blue.lapis.pore.converter.MaterialConverter;
+import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreAnimalTamer;
 import blue.lapis.pore.impl.entity.PoreBoat;
@@ -32,8 +34,6 @@ import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 import blue.lapis.pore.impl.entity.PoreVehicle;
 import blue.lapis.pore.impl.entity.minecart.PoreMinecart;
-import blue.lapis.pore.converter.MaterialConverter;
-import blue.lapis.pore.converter.vector.LocationConverter;
 import org.bukkit.Bukkit;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageEvent;

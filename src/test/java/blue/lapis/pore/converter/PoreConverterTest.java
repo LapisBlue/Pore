@@ -30,7 +30,6 @@ import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ListMultimap;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -99,7 +98,7 @@ public class PoreConverterTest {
     @Test
     public void resolve() {
         for (Class<?> pore : testRegistry.keySet()) {
-            Assert.assertEquals(pore, PoreConverter.of(create(pore)).getClass());
+            assertEquals(pore, PoreConverter.of(create(pore)).getClass());
         }
     }
 }

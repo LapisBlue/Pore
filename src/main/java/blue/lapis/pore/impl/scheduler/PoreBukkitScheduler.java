@@ -24,9 +24,9 @@
  */
 package blue.lapis.pore.impl.scheduler;
 
+import blue.lapis.pore.Pore;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
-import blue.lapis.pore.Pore;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.Plugin;

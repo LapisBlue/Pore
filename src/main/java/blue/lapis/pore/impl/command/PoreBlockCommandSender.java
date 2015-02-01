@@ -27,7 +27,6 @@ package blue.lapis.pore.impl.command;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.command.BlockCommandSender;
-import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.api.util.command.CommandSource;
 
 public class PoreBlockCommandSender extends PoreCommandSender implements BlockCommandSender {

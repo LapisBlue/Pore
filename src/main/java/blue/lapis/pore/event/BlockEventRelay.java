@@ -24,12 +24,12 @@
  */
 package blue.lapis.pore.event;
 
+import blue.lapis.pore.converter.ItemStackConverter;
+import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.block.PoreBlockState;
 import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.impl.entity.PorePlayer;
-import blue.lapis.pore.converter.ItemStackConverter;
-import blue.lapis.pore.converter.vector.VectorConverter;
 import org.bukkit.Bukkit;
 import org.bukkit.event.block.BlockFadeEvent;
 import org.bukkit.event.block.BlockGrowEvent;
