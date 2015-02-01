@@ -1,38 +1,44 @@
-From a8b665c87d3770fb00bfed4ef61898ef9b49b499 Mon Sep 17 00:00:00 2001
+From eed60834841859777a95ef7053c395756c242015 Mon Sep 17 00:00:00 2001
 From: Minecrell <dev@minecrell.net>
 Date: Sat, 31 Jan 2015 19:28:20 +0100
 Subject: [PATCH] Add HandlerList adapters
 
 
 diff --git a/src/main/java/org/bukkit/event/HandlerList.java b/src/main/java/org/bukkit/event/HandlerList.java
-index 7d5efff..3aca736 100644
+index 7d5efff..b5d78df 100644
 --- a/src/main/java/org/bukkit/event/HandlerList.java
 +++ b/src/main/java/org/bukkit/event/HandlerList.java
-@@ -53,6 +53,7 @@ public class HandlerList {
+@@ -52,7 +52,8 @@ public class HandlerList {
+                     for (List<RegisteredListener> list : h.handlerslots.values()) {
                          list.clear();
                      }
-                     h.handlers = null;
+-                    h.handlers = null;
++                    h.reset();
 +                    h.removeAll();
                  }
              }
          }
-@@ -108,6 +109,7 @@ public class HandlerList {
+@@ -107,7 +108,8 @@ public class HandlerList {
+     public synchronized void register(RegisteredListener listener) {
          if (handlerslots.get(listener.getPriority()).contains(listener))
              throw new IllegalStateException("This listener is already registered to priority " + listener.getPriority().toString());
-         handlers = null;
+-        handlers = null;
++        reset();
 +        add(listener);
          handlerslots.get(listener.getPriority()).add(listener);
      }
  
-@@ -130,6 +132,7 @@ public class HandlerList {
+@@ -129,7 +131,8 @@ public class HandlerList {
+      */
      public synchronized void unregister(RegisteredListener listener) {
          if (handlerslots.get(listener.getPriority()).remove(listener)) {
-             handlers = null;
+-            handlers = null;
++            reset();
 +            remove(listener);
          }
      }
  
-@@ -142,8 +145,10 @@ public class HandlerList {
+@@ -142,13 +145,15 @@ public class HandlerList {
          boolean changed = false;
          for (List<RegisteredListener> list : handlerslots.values()) {
              for (ListIterator<RegisteredListener> i = list.listIterator(); i.hasNext();) {
@@ -44,7 +50,13 @@ index 7d5efff..3aca736 100644
                      changed = true;
                  }
              }
-@@ -160,8 +165,10 @@ public class HandlerList {
+         }
+-        if (changed) handlers = null;
++        if (changed) reset();
+     }
+ 
+     /**
+@@ -160,13 +165,15 @@ public class HandlerList {
          boolean changed = false;
          for (List<RegisteredListener> list : handlerslots.values()) {
              for (ListIterator<RegisteredListener> i = list.listIterator(); i.hasNext();) {
@@ -56,14 +68,39 @@ index 7d5efff..3aca736 100644
                      changed = true;
                  }
              }
-@@ -228,4 +235,53 @@ public class HandlerList {
+         }
+-        if (changed) handlers = null;
++        if (changed) reset();
+     }
+ 
+     /**
+@@ -175,8 +182,10 @@ public class HandlerList {
+     public synchronized void bake() {
+         if (handlers != null) return; // don't re-bake when still valid
+         List<RegisteredListener> entries = new ArrayList<RegisteredListener>();
++        handlersByPriority = new EnumMap<EventPriority, RegisteredListener[]>(EventPriority.class);
+         for (Entry<EventPriority, ArrayList<RegisteredListener>> entry : handlerslots.entrySet()) {
+             entries.addAll(entry.getValue());
++            handlersByPriority.put(entry.getKey(), entry.getValue().toArray(new RegisteredListener[entry.getValue().size()]));
+         }
+         handlers = entries.toArray(new RegisteredListener[entries.size()]);
+     }
+@@ -228,4 +237,61 @@ public class HandlerList {
              return (ArrayList<HandlerList>) allLists.clone();
          }
      }
 +
-+    public Iterable<RegisteredListener> getRegisteredListeners(EventPriority priority) {
-+        ArrayList<RegisteredListener> listeners = handlerslots.get(priority);
-+        return listeners != null ? listeners : Collections.<RegisteredListener>emptyList();
++
++    private EnumMap<EventPriority, RegisteredListener[]> handlersByPriority;
++
++    public RegisteredListener[] getRegisteredListeners(EventPriority priority) {
++        while (handlers == null) bake(); // This prevents fringe cases of returning null
++        return handlersByPriority.get(priority);
++    }
++
++    private void reset() {
++        handlers = null;
++        handlersByPriority = null;
 +    }
 +
 +    private List<Adapter> adapter = new ArrayList<Adapter>();
@@ -74,7 +111,7 @@ index 7d5efff..3aca736 100644
 +
 +    private boolean hasRegistrations(EventPriority priority) {
 +        ArrayList<RegisteredListener> registered = handlerslots.get(priority);
-+        return registered != null && registered.size() > 0;
++        return registered.size() > 0;
 +    }
 +
 +    private void add(RegisteredListener listener) {
