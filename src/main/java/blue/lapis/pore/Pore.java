@@ -26,11 +26,14 @@ package blue.lapis.pore;
 
 import blue.lapis.pore.event.PoreEventWrapper;
 import blue.lapis.pore.impl.PoreServer;
+import blue.lapis.pore.impl.command.PoreCommandSender;
+import blue.lapis.pore.plugin.PorePluginContainer;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.plugin.PluginLoadOrder;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
+import org.spongepowered.api.event.message.CommandEvent;
 import org.spongepowered.api.event.state.PreInitializationEvent;
 import org.spongepowered.api.event.state.ServerAboutToStartEvent;
 import org.spongepowered.api.event.state.ServerStartingEvent;
@@ -72,7 +75,7 @@ public final class Pore {
     }
 
     public static PluginContainer getPlugin(org.bukkit.plugin.Plugin plugin) {
-        throw new NotImplementedException();
+        return new PorePluginContainer(plugin);
     }
 
     @Subscribe
@@ -107,6 +110,14 @@ public final class Pore {
         instance = null;
         server = null;
         logger = null;
+    }
+
+    @Subscribe
+    public void onCommand(CommandEvent event) {
+        if (Pore.getServer().dispatchCommand(PoreCommandSender.of(event.getSource()), event.getCommand() + ' ' +
+                event.getArguments())) {
+            event.setCancelled(true);
+        }
     }
 
 }

@@ -27,7 +27,9 @@ package blue.lapis.pore.impl;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.impl.scheduler.PoreBukkitScheduler;
 import blue.lapis.pore.logging.PoreLogger;
+import blue.lapis.pore.util.PoreCollections;
 import blue.lapis.pore.util.PoreWrapper;
+import blue.lapis.pore.util.converter.PoreConverter;
 import com.avaje.ebean.config.ServerConfig;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
@@ -97,6 +99,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     private final SimpleCommandMap commandMap;
     private final PluginManager pluginManager;
     private final ServicesManager servicesManager;
+    private final Messenger messenger = new StandardMessenger();
     private final Warning.WarningState warnState = Warning.WarningState.DEFAULT;
     private final File pluginsDir = new File(".", "bukkit-plugins");
     //TODO: use actual server directory, currently set to working directory
@@ -213,8 +216,8 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public Collection<? extends Player> getOnlinePlayers() {
-        //return PoreCollections.transform(getHandle().getOnlinePlayers(), PorePlayer.getPlayerConverter());
-        throw new NotImplementedException(); // TODO
+        return PoreCollections.transform(getHandle().getOnlinePlayers(),
+                PoreConverter.<org.spongepowered.api.entity.player.Player, PorePlayer>getConverter());
     }
 
     @Override
@@ -447,7 +450,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public void reload() {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -632,7 +635,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public Messenger getMessenger() {
-        throw new NotImplementedException();
+        return messenger;
     }
 
     @Override

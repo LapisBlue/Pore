@@ -44,7 +44,7 @@ import java.util.Set;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
-public final class CachedConverter<B> {
+public final class CachedConverter<B> implements Function<Object, B> {
     private final LoadingCache<Object, Object> cache = CacheBuilder.newBuilder()
             .weakKeys()
             .build(new CacheLoader<Object, Object>() {
@@ -127,6 +127,12 @@ public final class CachedConverter<B> {
     @Nullable
     public <P extends B> P get(Class<P> type, Object handle) {
         return get(handle); // TODO: Optimize first access with type class as entry point
+    }
+
+    @Nullable
+    @Override
+    public B apply(@Nullable Object input) {
+        return get(input);
     }
 
     protected Object create(Object handle) {

@@ -24,37 +24,50 @@
  */
 package blue.lapis.pore.impl.command;
 
+import blue.lapis.pore.Pore;
+import blue.lapis.pore.impl.PoreServer;
 import blue.lapis.pore.impl.permissions.PorePermissible;
+import blue.lapis.pore.util.converter.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.spongepowered.api.service.permission.Subject;
+import org.spongepowered.api.util.command.CommandSource;
 
 public class PoreCommandSender extends PorePermissible implements CommandSender {
 
+    public static CommandSender of(CommandSource source) {
+        return PoreConverter.of(PoreCommandSender.class, source);
+    }
+
     // TODO
-    protected PoreCommandSender(Subject handle) {
+    protected PoreCommandSender(CommandSource handle) {
         super(handle);
     }
 
     @Override
+    public CommandSource getHandle() {
+        return (CommandSource) super.getHandle();
+    }
+
+    @Override
     public void sendMessage(String message) {
-        // TODO: Bridge
+        getHandle().sendMessage(message);
     }
 
     @Override
     public void sendMessage(String[] messages) {
-        // TODO: Bridge
+        getHandle().sendMessage(messages);
     }
 
     @Override
     public Server getServer() {
-        throw new NotImplementedException(); // TODO: Bridge
+        return Pore.getServer();
     }
 
     @Override
     public String getName() {
-        throw new NotImplementedException(); // TODO: Bridge
+        return "FAIL";
     }
 
 }

@@ -26,13 +26,14 @@ package blue.lapis.pore.impl.command;
 
 import org.bukkit.command.RemoteConsoleCommandSender;
 import org.spongepowered.api.service.permission.Subject;
+import org.spongepowered.api.util.command.CommandSource;
 
 //TODO: Bridge
 
 public class PoreRemoteConsoleCommandSender extends PoreCommandSender implements RemoteConsoleCommandSender {
 
     // TODO
-    protected PoreRemoteConsoleCommandSender(Subject handle) {
+    protected PoreRemoteConsoleCommandSender(CommandSource handle) {
         super(handle);
     }
 }

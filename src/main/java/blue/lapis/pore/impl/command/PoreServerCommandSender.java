@@ -33,6 +33,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.service.permission.Subject;
+import org.spongepowered.api.util.command.CommandSource;
 
 import java.util.Set;
 
@@ -44,7 +45,7 @@ public class PoreServerCommandSender extends PoreCommandSender implements Comman
 
     private PorePermissibleBase perm = new PorePermissibleBase(this);
 
-    protected PoreServerCommandSender(Subject handle) {
+    protected PoreServerCommandSender(CommandSource handle) {
         super(handle);
     }
 

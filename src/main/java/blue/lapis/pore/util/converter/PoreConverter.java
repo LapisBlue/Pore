@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.util.converter;
 
+import blue.lapis.pore.impl.command.PoreCommandSender;
 import blue.lapis.pore.impl.entity.minecart.PoreExplosiveMinecart;
 import blue.lapis.pore.impl.PoreChunk;
 import blue.lapis.pore.impl.PoreOfflinePlayer;
@@ -112,6 +113,7 @@ import blue.lapis.pore.impl.entity.minecart.PoreRideableMinecart;
 import blue.lapis.pore.impl.entity.minecart.PoreSpawnerMinecart;
 import blue.lapis.pore.impl.entity.minecart.PoreStorageMinecart;
 import blue.lapis.pore.util.PoreWrapper;
+import com.google.common.base.Function;
 import org.spongepowered.api.entity.EnderCrystal;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.ExperienceOrb;
@@ -197,6 +199,7 @@ import org.spongepowered.api.entity.vehicle.minecart.MinecartRideable;
 import org.spongepowered.api.entity.vehicle.minecart.MinecartTNT;
 import org.spongepowered.api.entity.weather.Lightning;
 import org.spongepowered.api.entity.weather.WeatherEffect;
+import org.spongepowered.api.util.command.CommandSource;
 import org.spongepowered.api.world.Chunk;
 import org.spongepowered.api.world.World;
 
@@ -300,6 +303,7 @@ public class PoreConverter {
             .register(World.class, PoreWorld.class)
 
             .register(Tamer.class, PoreAnimalTamer.class)
+            .register(CommandSource.class, PoreCommandSender.class)
 
             .build();
 
@@ -309,5 +313,10 @@ public class PoreConverter {
 
     public static <P extends PoreWrapper<?>> P of(Class<P> type, Object handle) {
         return converter.get(type, handle);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <S, P extends PoreWrapper<?>> Function<S, P> getConverter() {
+        return (Function) converter;
     }
 }
