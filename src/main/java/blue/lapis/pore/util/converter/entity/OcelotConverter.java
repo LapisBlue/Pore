@@ -24,27 +24,28 @@
  */
 package blue.lapis.pore.util.converter.entity;
 
-import com.google.common.collect.ImmutableBiMap;
+import blue.lapis.pore.util.converter.TypeConverter;
+import com.google.common.base.Converter;
 import org.bukkit.entity.Ocelot;
 import org.spongepowered.api.entity.living.meta.OcelotType;
 import org.spongepowered.api.entity.living.meta.OcelotTypes;
 
-public class OcelotConverter {
+public final class OcelotConverter {
 
-    private static ImmutableBiMap<Ocelot.Type, OcelotType> map =
-            ImmutableBiMap.<Ocelot.Type, OcelotType>builder()
-                    .put(Ocelot.Type.BLACK_CAT, OcelotTypes.BLACK_CAT)
-                    .put(Ocelot.Type.RED_CAT, OcelotTypes.RED_CAT)
-                    .put(Ocelot.Type.SIAMESE_CAT, OcelotTypes.SIAMESE_CAT)
-                    .put(Ocelot.Type.WILD_OCELOT, OcelotTypes.WILD_OCELOT)
+    public static final Converter<Ocelot.Type, OcelotType> CONVERTER =
+            TypeConverter.<Ocelot.Type, OcelotType>builder()
+                    .add(Ocelot.Type.BLACK_CAT, OcelotTypes.BLACK_CAT)
+                    .add(Ocelot.Type.RED_CAT, OcelotTypes.RED_CAT)
+                    .add(Ocelot.Type.SIAMESE_CAT, OcelotTypes.SIAMESE_CAT)
+                    .add(Ocelot.Type.WILD_OCELOT, OcelotTypes.WILD_OCELOT)
                     .build();
 
     public static OcelotType of(Ocelot.Type type) {
-        return map.get(type);
+        return CONVERTER.convert(type);
     }
 
     public static Ocelot.Type of(OcelotType type) {
-        return map.inverse().get(type);
+        return CONVERTER.reverse().convert(type);
     }
 
 }

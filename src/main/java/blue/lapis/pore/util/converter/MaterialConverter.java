@@ -24,8 +24,8 @@
  */
 package blue.lapis.pore.util.converter;
 
-import blue.lapis.pore.util.CsvMap;
 import blue.lapis.pore.Pore;
+import blue.lapis.pore.util.CsvMap;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.spongepowered.api.block.BlockType;

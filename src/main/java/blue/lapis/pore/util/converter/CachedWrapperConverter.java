@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.util.converter;
 
+import blue.lapis.pore.Pore;
 import com.google.common.base.Function;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -33,7 +34,6 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import blue.lapis.pore.Pore;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
@@ -44,7 +44,7 @@ import java.util.Set;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
-public final class CachedConverter<B> implements Function<Object, B> {
+final class CachedWrapperConverter<B> implements Function<Object, B> {
     private final LoadingCache<Object, Object> cache = CacheBuilder.newBuilder()
             .weakKeys()
             .build(new CacheLoader<Object, Object>() {
@@ -66,7 +66,7 @@ public final class CachedConverter<B> implements Function<Object, B> {
     final ImmutableMap<Class<?>, Converter<?, ? extends B>> registry;
 
     @SuppressWarnings("unchecked")
-    protected CachedConverter(Class<B> base, Map<Class<? extends B>, Class<?>> registrations) {
+    protected CachedWrapperConverter(Class<B> base, Map<Class<? extends B>, Class<?>> registrations) {
         Set<Class<? extends B>> registered = Sets.newHashSet();
         Set<Map.Entry<Class<? extends B>, Class<?>>> parents = Sets.newLinkedHashSet();
         Multimap<Class<? extends B>, Map.Entry<Class<? extends B>, Class<?>>> children = LinkedHashMultimap.create();
@@ -205,7 +205,7 @@ public final class CachedConverter<B> implements Function<Object, B> {
         return new Builder<B>(base);
     }
 
-    public static class Builder<B> {
+    public static final class Builder<B> {
         private final Class<B> base;
         private final Set<Class<?>> registered = Sets.newHashSet();
         private final Map<Class<? extends B>, Class<?>> registry = Maps.newLinkedHashMap();
@@ -235,8 +235,8 @@ public final class CachedConverter<B> implements Function<Object, B> {
             return this;
         }
 
-        public CachedConverter<B> build() {
-            return new CachedConverter<B>(base, registry);
+        public CachedWrapperConverter<B> build() {
+            return new CachedWrapperConverter<B>(base, registry);
         }
     }
 }

@@ -24,30 +24,30 @@
  */
 package blue.lapis.pore.util.converter.entity;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.ImmutableBiMap;
+import blue.lapis.pore.util.converter.TypeConverter;
+import com.google.common.base.Converter;
 import org.bukkit.entity.Rabbit;
 import org.spongepowered.api.entity.living.meta.RabbitType;
 import org.spongepowered.api.entity.living.meta.RabbitTypes;
 
-public class RabbitConverter {
+public final class RabbitConverter {
 
-    private static BiMap<RabbitType, Rabbit.Type> TYPES = ImmutableBiMap.<RabbitType, Rabbit.Type>builder()
-            .put(RabbitTypes.BROWN, Rabbit.Type.BROWN)
-            .put(RabbitTypes.WHITE, Rabbit.Type.WHITE)
-            .put(RabbitTypes.BLACK, Rabbit.Type.BLACK)
-            .put(RabbitTypes.BLACK_AND_WHITE, Rabbit.Type.BLACK_AND_WHITE)
-            .put(RabbitTypes.GOLD, Rabbit.Type.GOLD)
-            .put(RabbitTypes.SALT_AND_PEPPER, Rabbit.Type.SALT_AND_PEPPER)
-            .put(RabbitTypes.KILLER, Rabbit.Type.THE_KILLER_BUNNY)
+    public static final Converter<Rabbit.Type, RabbitType> CONVERTER = TypeConverter.<Rabbit.Type, RabbitType>builder()
+            .add(Rabbit.Type.BROWN, RabbitTypes.BROWN)
+            .add(Rabbit.Type.WHITE, RabbitTypes.WHITE)
+            .add(Rabbit.Type.BLACK, RabbitTypes.BLACK)
+            .add(Rabbit.Type.BLACK_AND_WHITE, RabbitTypes.BLACK_AND_WHITE)
+            .add(Rabbit.Type.GOLD, RabbitTypes.GOLD)
+            .add(Rabbit.Type.SALT_AND_PEPPER, RabbitTypes.SALT_AND_PEPPER)
+            .add(Rabbit.Type.THE_KILLER_BUNNY, RabbitTypes.KILLER)
             .build();
 
-    public static Rabbit.Type of(RabbitType type) {
-        return TYPES.get(type);
+    public static RabbitType of(Rabbit.Type type) {
+        return CONVERTER.convert(type);
     }
 
-    public static RabbitType of(Rabbit.Type type) {
-        return TYPES.inverse().get(type);
+    public static Rabbit.Type of(RabbitType type) {
+        return CONVERTER.reverse().convert(type);
     }
 
 }

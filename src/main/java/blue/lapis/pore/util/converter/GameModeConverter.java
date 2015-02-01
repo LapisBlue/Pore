@@ -24,27 +24,26 @@
  */
 package blue.lapis.pore.util.converter;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.ImmutableBiMap;
+import com.google.common.base.Converter;
 import org.bukkit.GameMode;
 import org.spongepowered.api.entity.player.gamemode.GameModes;
 
-public class GameModeConverter {
-
-    private static BiMap<org.bukkit.GameMode, org.spongepowered.api.entity.player.gamemode.GameMode> map =
-            ImmutableBiMap.<org.bukkit.GameMode, org.spongepowered.api.entity.player.gamemode.GameMode>builder()
-                    .put(GameMode.SURVIVAL, GameModes.SURVIVAL)
-                    .put(GameMode.CREATIVE, GameModes.CREATIVE)
-                    .put(GameMode.ADVENTURE, GameModes.ADVENTURE)
-                    .put(GameMode.SPECTATOR, GameModes.SPECTATOR)
+public final class GameModeConverter {
+    
+    public static final Converter<GameMode, org.spongepowered.api.entity.player.gamemode.GameMode> CONVERTER =
+            TypeConverter.<GameMode, org.spongepowered.api.entity.player.gamemode.GameMode>builder()
+                    .add(GameMode.SURVIVAL, GameModes.SURVIVAL)
+                    .add(GameMode.CREATIVE, GameModes.CREATIVE)
+                    .add(GameMode.ADVENTURE, GameModes.ADVENTURE)
+                    .add(GameMode.SPECTATOR, GameModes.SPECTATOR)
                     .build();
 
-    public static org.spongepowered.api.entity.player.gamemode.GameMode of(org.bukkit.GameMode gameMode) {
-        return map.get(gameMode);
+    public static org.spongepowered.api.entity.player.gamemode.GameMode of(GameMode gameMode) {
+        return CONVERTER.convert(gameMode);
     }
 
-    public static org.bukkit.GameMode of(org.spongepowered.api.entity.player.gamemode.GameMode gameMode) {
-        return map.inverse().get(gameMode);
+    public static GameMode of(org.spongepowered.api.entity.player.gamemode.GameMode gameMode) {
+        return CONVERTER.reverse().convert(gameMode);
     }
 
 }

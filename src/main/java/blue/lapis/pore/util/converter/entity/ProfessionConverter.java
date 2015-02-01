@@ -22,30 +22,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.util.converter;
+package blue.lapis.pore.util.converter.entity;
 
-import com.google.common.collect.ImmutableBiMap;
+import blue.lapis.pore.util.converter.TypeConverter;
+import com.google.common.base.Converter;
 import org.bukkit.entity.Villager;
 import org.spongepowered.api.entity.living.villager.Profession;
 import org.spongepowered.api.entity.living.villager.Professions;
 
-public class ProfessionConverter {
+public final class ProfessionConverter {
 
-    private static ImmutableBiMap<Villager.Profession, Profession> map =
-            ImmutableBiMap.<Villager.Profession, Profession>builder()
-                    .put(Villager.Profession.BLACKSMITH, Professions.BLACKSMITH)
-                    .put(Villager.Profession.BUTCHER, Professions.BUTCHER)
-                    .put(Villager.Profession.FARMER, Professions.FARMER)
-                    .put(Villager.Profession.LIBRARIAN, Professions.LIBRARIAN)
-                    .put(Villager.Profession.PRIEST, Professions.PRIEST)
+    public static final Converter<Villager.Profession, Profession> CONVERTER =
+            TypeConverter.<Villager.Profession, Profession>builder()
+                    .add(Villager.Profession.BLACKSMITH, Professions.BLACKSMITH)
+                    .add(Villager.Profession.BUTCHER, Professions.BUTCHER)
+                    .add(Villager.Profession.FARMER, Professions.FARMER)
+                    .add(Villager.Profession.LIBRARIAN, Professions.LIBRARIAN)
+                    .add(Villager.Profession.PRIEST, Professions.PRIEST)
                     .build();
 
     public static Profession of(Villager.Profession profession) {
-        return map.get(profession);
+        return CONVERTER.convert(profession);
     }
 
     public static Villager.Profession of(Profession profession) {
-        return map.inverse().get(profession);
+        return CONVERTER.reverse().convert(profession);
     }
 
 }

@@ -24,11 +24,10 @@
  */
 package blue.lapis.pore.util.converter;
 
-import blue.lapis.pore.impl.command.PoreCommandSender;
-import blue.lapis.pore.impl.entity.minecart.PoreExplosiveMinecart;
 import blue.lapis.pore.impl.PoreChunk;
 import blue.lapis.pore.impl.PoreOfflinePlayer;
 import blue.lapis.pore.impl.PoreWorld;
+import blue.lapis.pore.impl.command.PoreCommandSender;
 import blue.lapis.pore.impl.entity.PoreAgeable;
 import blue.lapis.pore.impl.entity.PoreAmbient;
 import blue.lapis.pore.impl.entity.PoreAnimalTamer;
@@ -106,6 +105,7 @@ import blue.lapis.pore.impl.entity.PoreWitherSkull;
 import blue.lapis.pore.impl.entity.PoreWolf;
 import blue.lapis.pore.impl.entity.PoreZombie;
 import blue.lapis.pore.impl.entity.minecart.PoreCommandMinecart;
+import blue.lapis.pore.impl.entity.minecart.PoreExplosiveMinecart;
 import blue.lapis.pore.impl.entity.minecart.PoreHopperMinecart;
 import blue.lapis.pore.impl.entity.minecart.PoreMinecart;
 import blue.lapis.pore.impl.entity.minecart.PorePoweredMinecart;
@@ -205,7 +205,7 @@ import org.spongepowered.api.world.World;
 
 public class PoreConverter {
 
-    static final CachedConverter<PoreWrapper> converter = CachedConverter.builder(PoreWrapper.class)
+    static final CachedWrapperConverter<PoreWrapper> converter = CachedWrapperConverter.builder(PoreWrapper.class)
 
             // Entities
             .register(Entity.class, PoreEntity.class)

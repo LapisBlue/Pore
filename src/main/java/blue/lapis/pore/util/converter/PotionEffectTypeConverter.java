@@ -24,45 +24,45 @@
  */
 package blue.lapis.pore.util.converter;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.ImmutableBiMap;
+import com.google.common.base.Converter;
 import org.bukkit.potion.PotionEffectType;
 import org.spongepowered.api.potion.PotionEffectTypes;
 
-public class PotionEffectTypeConverter {
+public final class PotionEffectTypeConverter {
 
-    private static BiMap<PotionEffectType, org.spongepowered.api.potion.PotionEffectType> TYPES =
-            ImmutableBiMap.<PotionEffectType, org.spongepowered.api.potion.PotionEffectType>builder()
-                    .put(PotionEffectType.SPEED, PotionEffectTypes.SPEED)
-                    .put(PotionEffectType.SLOW, PotionEffectTypes.SLOWNESS)
-                    .put(PotionEffectType.FAST_DIGGING, PotionEffectTypes.HASTE)
-                    .put(PotionEffectType.SLOW_DIGGING, PotionEffectTypes.MINING_FATIGUE)
-                    .put(PotionEffectType.INCREASE_DAMAGE, PotionEffectTypes.STRENGTH)
-                    .put(PotionEffectType.HEAL, PotionEffectTypes.INSTANT_HEALTH)
-                    .put(PotionEffectType.HARM, PotionEffectTypes.INSTANT_DAMAGE)
-                    .put(PotionEffectType.JUMP, PotionEffectTypes.JUMP_BOOST)
-                    .put(PotionEffectType.CONFUSION, PotionEffectTypes.NAUSEA)
-                    .put(PotionEffectType.REGENERATION, PotionEffectTypes.REGENERATION)
-                    .put(PotionEffectType.DAMAGE_RESISTANCE, PotionEffectTypes.RESISTANCE)
-                    .put(PotionEffectType.FIRE_RESISTANCE, PotionEffectTypes.FIRE_RESISTANCE)
-                    .put(PotionEffectType.WATER_BREATHING, PotionEffectTypes.WATER_BREATHING)
-                    .put(PotionEffectType.INVISIBILITY, PotionEffectTypes.INVISIBILITY)
-                    .put(PotionEffectType.BLINDNESS, PotionEffectTypes.BLINDNESS)
-                    .put(PotionEffectType.NIGHT_VISION, PotionEffectTypes.NIGHT_VISION)
-                    .put(PotionEffectType.HUNGER, PotionEffectTypes.HUNGER)
-                    .put(PotionEffectType.WEAKNESS, PotionEffectTypes.WEAKNESS)
-                    .put(PotionEffectType.POISON, PotionEffectTypes.POISON)
-                    .put(PotionEffectType.WITHER, PotionEffectTypes.WITHER)
-                    .put(PotionEffectType.HEALTH_BOOST, PotionEffectTypes.HEALTH_BOOST)
-                    .put(PotionEffectType.ABSORPTION, PotionEffectTypes.ABSORPTION)
-                    .put(PotionEffectType.SATURATION, PotionEffectTypes.SATURATION)
+    public static final Converter<PotionEffectType, org.spongepowered.api.potion.PotionEffectType> CONVERTER =
+            TypeConverter.<PotionEffectType, org.spongepowered.api.potion.PotionEffectType>mapBuilder()
+                    .add(PotionEffectType.SPEED, PotionEffectTypes.SPEED)
+                    .add(PotionEffectType.SLOW, PotionEffectTypes.SLOWNESS)
+                    .add(PotionEffectType.FAST_DIGGING, PotionEffectTypes.HASTE)
+                    .add(PotionEffectType.SLOW_DIGGING, PotionEffectTypes.MINING_FATIGUE)
+                    .add(PotionEffectType.INCREASE_DAMAGE, PotionEffectTypes.STRENGTH)
+                    .add(PotionEffectType.HEAL, PotionEffectTypes.INSTANT_HEALTH)
+                    .add(PotionEffectType.HARM, PotionEffectTypes.INSTANT_DAMAGE)
+                    .add(PotionEffectType.JUMP, PotionEffectTypes.JUMP_BOOST)
+                    .add(PotionEffectType.CONFUSION, PotionEffectTypes.NAUSEA)
+                    .add(PotionEffectType.REGENERATION, PotionEffectTypes.REGENERATION)
+                    .add(PotionEffectType.DAMAGE_RESISTANCE, PotionEffectTypes.RESISTANCE)
+                    .add(PotionEffectType.FIRE_RESISTANCE, PotionEffectTypes.FIRE_RESISTANCE)
+                    .add(PotionEffectType.WATER_BREATHING, PotionEffectTypes.WATER_BREATHING)
+                    .add(PotionEffectType.INVISIBILITY, PotionEffectTypes.INVISIBILITY)
+                    .add(PotionEffectType.BLINDNESS, PotionEffectTypes.BLINDNESS)
+                    .add(PotionEffectType.NIGHT_VISION, PotionEffectTypes.NIGHT_VISION)
+                    .add(PotionEffectType.HUNGER, PotionEffectTypes.HUNGER)
+                    .add(PotionEffectType.WEAKNESS, PotionEffectTypes.WEAKNESS)
+                    .add(PotionEffectType.POISON, PotionEffectTypes.POISON)
+                    .add(PotionEffectType.WITHER, PotionEffectTypes.WITHER)
+                    .add(PotionEffectType.HEALTH_BOOST, PotionEffectTypes.HEALTH_BOOST)
+                    .add(PotionEffectType.ABSORPTION, PotionEffectTypes.ABSORPTION)
+                    .add(PotionEffectType.SATURATION, PotionEffectTypes.SATURATION)
                     .build();
 
-    public static org.spongepowered.api.potion.PotionEffectType of(PotionEffectType type) {
-        return TYPES.get(type);
+    public static org.spongepowered.api.potion.PotionEffectType of(PotionEffectType potionEffectType) {
+        return CONVERTER.convert(potionEffectType);
     }
 
-    public static PotionEffectType of(org.spongepowered.api.potion.PotionEffectType type) {
-        return TYPES.inverse().get(type);
+    public static PotionEffectType of(org.spongepowered.api.potion.PotionEffectType potionEffectType) {
+        return CONVERTER.reverse().convert(potionEffectType);
     }
+
 }

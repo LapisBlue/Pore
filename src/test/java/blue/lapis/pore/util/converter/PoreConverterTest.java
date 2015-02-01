@@ -55,7 +55,7 @@ public class PoreConverterTest {
     private static ListMultimap<Class<?>, Class<?>> createRegistry() {
         ImmutableListMultimap.Builder<Class<?>, Class<?>> builder = ImmutableListMultimap.builder();
 
-        for (Map.Entry<Class<?>, CachedConverter.Converter<?, ? extends PoreWrapper>> entry :
+        for (Map.Entry<Class<?>, CachedWrapperConverter.Converter<?, ? extends PoreWrapper>> entry :
                 PoreConverter.converter.registry.entrySet()) {
 
             scan(builder, entry.getKey(), null, entry.getValue());
@@ -65,7 +65,7 @@ public class PoreConverterTest {
     }
 
     private static void scan(ImmutableMultimap.Builder<Class<?>, Class<?>> builder, Class<?> sponge,
-                             Set<Class<?>> parents, CachedConverter.Converter<?, ?> converter) {
+                             Set<Class<?>> parents, CachedWrapperConverter.Converter<?, ?> converter) {
         Class<?> pore = converter.constructor.getDeclaringClass();
         builder.put(pore, sponge);
 
@@ -78,7 +78,7 @@ public class PoreConverterTest {
 
         parents = parentsBuilder.build();
 
-         for (Map.Entry<? extends Class<?>, ? extends CachedConverter.Converter<?, ?>> entry :
+         for (Map.Entry<? extends Class<?>, ? extends CachedWrapperConverter.Converter<?, ?>> entry :
                  converter.registry.entrySet()) {
 
              scan(builder, entry.getKey(), parents, entry.getValue());

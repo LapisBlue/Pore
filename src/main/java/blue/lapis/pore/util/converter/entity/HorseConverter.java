@@ -24,8 +24,8 @@
  */
 package blue.lapis.pore.util.converter.entity;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.ImmutableBiMap;
+import blue.lapis.pore.util.converter.TypeConverter;
+import com.google.common.base.Converter;
 import org.bukkit.entity.Horse;
 import org.spongepowered.api.entity.living.meta.HorseColor;
 import org.spongepowered.api.entity.living.meta.HorseColors;
@@ -34,58 +34,59 @@ import org.spongepowered.api.entity.living.meta.HorseStyles;
 import org.spongepowered.api.entity.living.meta.HorseVariant;
 import org.spongepowered.api.entity.living.meta.HorseVariants;
 
-public class HorseConverter {
+public final class HorseConverter {
 
-    private static final BiMap<Horse.Variant, HorseVariant> VARIANTS =
-            ImmutableBiMap.<Horse.Variant, HorseVariant>builder()
-                    .put(Horse.Variant.HORSE, HorseVariants.HORSE)
-                    .put(Horse.Variant.DONKEY, HorseVariants.DONKEY)
-                    .put(Horse.Variant.MULE, HorseVariants.MULE)
-                    .put(Horse.Variant.UNDEAD_HORSE, HorseVariants.UNDEAD_HORSE)
-                    .put(Horse.Variant.SKELETON_HORSE, HorseVariants.SKELETON_HORSE)
+    public static final Converter<Horse.Variant, HorseVariant> VARIANT_CONVERTER =
+            TypeConverter.<Horse.Variant, HorseVariant>builder()
+                    .add(Horse.Variant.HORSE, HorseVariants.HORSE)
+                    .add(Horse.Variant.DONKEY, HorseVariants.DONKEY)
+                    .add(Horse.Variant.MULE, HorseVariants.MULE)
+                    .add(Horse.Variant.UNDEAD_HORSE, HorseVariants.UNDEAD_HORSE)
+                    .add(Horse.Variant.SKELETON_HORSE, HorseVariants.SKELETON_HORSE)
                     .build();
 
     public static HorseVariant of(Horse.Variant variant) {
-        return VARIANTS.get(variant);
+        return VARIANT_CONVERTER.convert(variant);
     }
 
     public static Horse.Variant of(HorseVariant variant) {
-        return VARIANTS.inverse().get(variant);
+        return VARIANT_CONVERTER.reverse().convert(variant);
     }
 
-    private static final BiMap<Horse.Color, HorseColor> COLORS =
-            ImmutableBiMap.<Horse.Color, HorseColor>builder()
-                    .put(Horse.Color.WHITE, HorseColors.WHITE)
-                    .put(Horse.Color.CREAMY, HorseColors.CREAMY)
-                    .put(Horse.Color.CHESTNUT, HorseColors.CHESTNUT)
-                    .put(Horse.Color.BROWN, HorseColors.BROWN)
-                    .put(Horse.Color.BLACK, HorseColors.BLACK)
-                    .put(Horse.Color.GRAY, HorseColors.GRAY)
-                    .put(Horse.Color.DARK_BROWN, HorseColors.DARK_BROWN)
+    public static final Converter<Horse.Color, HorseColor> COLOR_CONVERTER =
+            TypeConverter.<Horse.Color, HorseColor>builder()
+                    .add(Horse.Color.WHITE, HorseColors.WHITE)
+                    .add(Horse.Color.CREAMY, HorseColors.CREAMY)
+                    .add(Horse.Color.CHESTNUT, HorseColors.CHESTNUT)
+                    .add(Horse.Color.BROWN, HorseColors.BROWN)
+                    .add(Horse.Color.BLACK, HorseColors.BLACK)
+                    .add(Horse.Color.GRAY, HorseColors.GRAY)
+                    .add(Horse.Color.DARK_BROWN, HorseColors.DARK_BROWN)
                     .build();
 
     public static HorseColor of(Horse.Color color) {
-        return COLORS.get(color);
+        return COLOR_CONVERTER.convert(color);
     }
 
     public static Horse.Color of(HorseColor color) {
-        return COLORS.inverse().get(color);
+        return COLOR_CONVERTER.reverse().convert(color);
     }
 
-    private static final BiMap<Horse.Style, HorseStyle> STYLES =
-            ImmutableBiMap.<Horse.Style, HorseStyle>builder()
-                    .put(Horse.Style.NONE, HorseStyles.NONE)
-                    .put(Horse.Style.WHITE, HorseStyles.WHITE)
-                    .put(Horse.Style.WHITEFIELD, HorseStyles.WHITEFIELD)
-                    .put(Horse.Style.WHITE_DOTS, HorseStyles.WHITE_DOTS)
-                    .put(Horse.Style.BLACK_DOTS, HorseStyles.BLACK_DOTS)
+    public static final Converter<Horse.Style, HorseStyle> STYLE_CONVERTER =
+            TypeConverter.<Horse.Style, HorseStyle>builder()
+                    .add(Horse.Style.NONE, HorseStyles.NONE)
+                    .add(Horse.Style.WHITE, HorseStyles.WHITE)
+                    .add(Horse.Style.WHITEFIELD, HorseStyles.WHITEFIELD)
+                    .add(Horse.Style.WHITE_DOTS, HorseStyles.WHITE_DOTS)
+                    .add(Horse.Style.BLACK_DOTS, HorseStyles.BLACK_DOTS)
                     .build();
 
-    public static HorseStyle of(Horse.Style Style) {
-        return STYLES.get(Style);
+    public static HorseStyle of(Horse.Style style) {
+        return STYLE_CONVERTER.convert(style);
     }
 
-    public static Horse.Style of(HorseStyle Style) {
-        return STYLES.inverse().get(Style);
+    public static Horse.Style of(HorseStyle style) {
+        return STYLE_CONVERTER.reverse().convert(style);
     }
+
 }

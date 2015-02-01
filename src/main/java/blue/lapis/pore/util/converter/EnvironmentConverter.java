@@ -24,26 +24,26 @@
  */
 package blue.lapis.pore.util.converter;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.ImmutableBiMap;
+import com.google.common.base.Converter;
 import org.bukkit.World;
 import org.spongepowered.api.world.DimensionType;
 import org.spongepowered.api.world.DimensionTypes;
 
 public final class EnvironmentConverter {
 
-    private static final BiMap<World.Environment, DimensionType> LOOKUP = ImmutableBiMap.of(
-            World.Environment.NORMAL, DimensionTypes.OVERWORLD,
-            World.Environment.NETHER, DimensionTypes.NETHER,
-            World.Environment.THE_END, DimensionTypes.END
-    );
-
-    public static World.Environment of(DimensionType dir) {
-        return LOOKUP.inverse().get(dir);
-    }
+    public static final Converter<World.Environment, DimensionType> CONVERTER =
+            TypeConverter.<World.Environment, DimensionType>builder()
+                    .add(World.Environment.NORMAL, DimensionTypes.OVERWORLD)
+                    .add(World.Environment.NETHER, DimensionTypes.NETHER)
+                    .add(World.Environment.THE_END, DimensionTypes.END)
+                    .build();
 
     public static DimensionType of(World.Environment environment) {
-        return LOOKUP.get(environment);
+        return CONVERTER.convert(environment);
+    }
+
+    public static World.Environment of(DimensionType dimensionType) {
+        return CONVERTER.reverse().convert(dimensionType);
     }
 
 }

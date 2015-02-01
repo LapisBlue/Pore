@@ -24,29 +24,28 @@
  */
 package blue.lapis.pore.util.converter;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.ImmutableBiMap;
+import com.google.common.base.Converter;
 import org.bukkit.event.EventPriority;
 import org.spongepowered.api.util.event.Order;
 
-public class EventPriorityConverter {
+public final class EventPriorityConverter {
 
     // TODO: Verify this
-    private static final BiMap<EventPriority, Order> LOOKUP = ImmutableBiMap.<EventPriority, Order>builder()
-            .put(EventPriority.LOWEST, Order.PRE)
-            .put(EventPriority.LOW, Order.EARLY)
-            .put(EventPriority.NORMAL, Order.DEFAULT)
-            .put(EventPriority.HIGH, Order.LATE)
-            .put(EventPriority.HIGHEST, Order.LAST)
-            .put(EventPriority.MONITOR, Order.POST)
+    public static final Converter<EventPriority, Order> CONVERTER = TypeConverter.<EventPriority, Order>builder()
+            .add(EventPriority.LOWEST, Order.PRE)
+            .add(EventPriority.LOW, Order.EARLY)
+            .add(EventPriority.NORMAL, Order.DEFAULT)
+            .add(EventPriority.HIGH, Order.LATE)
+            .add(EventPriority.HIGHEST, Order.LAST)
+            .add(EventPriority.MONITOR, Order.POST)
             .build();
 
-    public static Order of(EventPriority priority) {
-        return LOOKUP.get(priority);
+    public static Order of(EventPriority eventPriority) {
+        return CONVERTER.convert(eventPriority);
     }
 
     public static EventPriority of(Order order) {
-        return LOOKUP.inverse().get(order);
+        return CONVERTER.reverse().convert(order);
     }
 
 }

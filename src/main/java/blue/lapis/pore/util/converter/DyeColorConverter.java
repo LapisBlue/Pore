@@ -24,38 +24,38 @@
  */
 package blue.lapis.pore.util.converter;
 
-import com.google.common.collect.ImmutableBiMap;
+import com.google.common.base.Converter;
 import org.bukkit.DyeColor;
 import org.spongepowered.api.entity.living.meta.DyeColors;
 
-public class DyeColorConverter {
+public final class DyeColorConverter {
 
-    private static ImmutableBiMap<org.bukkit.DyeColor, org.spongepowered.api.entity.living.meta.DyeColor> map =
-            ImmutableBiMap.<org.bukkit.DyeColor, org.spongepowered.api.entity.living.meta.DyeColor>builder()
-                    .put(DyeColor.BLACK, DyeColors.BLACK)
-                    .put(DyeColor.BLUE, DyeColors.BLUE)
-                    .put(DyeColor.BROWN, DyeColors.BROWN)
-                    .put(DyeColor.CYAN, DyeColors.CYAN)
-                    .put(DyeColor.GRAY, DyeColors.GRAY)
-                    .put(DyeColor.GREEN, DyeColors.GREEN)
-                    .put(DyeColor.LIGHT_BLUE, DyeColors.LIGHT_BLUE)
-                    .put(DyeColor.LIME, DyeColors.LIME)
-                    .put(DyeColor.MAGENTA, DyeColors.MAGENTA)
-                    .put(DyeColor.ORANGE, DyeColors.ORANGE)
-                    .put(DyeColor.PINK, DyeColors.PINK)
-                    .put(DyeColor.PURPLE, DyeColors.PURPLE)
-                    .put(DyeColor.RED, DyeColors.RED)
-                    .put(DyeColor.SILVER, DyeColors.SILVER)
-                    .put(DyeColor.WHITE, DyeColors.WHITE)
-                    .put(DyeColor.YELLOW, DyeColors.YELLOW)
+    public static Converter<DyeColor, org.spongepowered.api.entity.living.meta.DyeColor> CONVERTER =
+            TypeConverter.<DyeColor, org.spongepowered.api.entity.living.meta.DyeColor>builder()
+                    .add(DyeColor.BLACK, DyeColors.BLACK)
+                    .add(DyeColor.BLUE, DyeColors.BLUE)
+                    .add(DyeColor.BROWN, DyeColors.BROWN)
+                    .add(DyeColor.CYAN, DyeColors.CYAN)
+                    .add(DyeColor.GRAY, DyeColors.GRAY)
+                    .add(DyeColor.GREEN, DyeColors.GREEN)
+                    .add(DyeColor.LIGHT_BLUE, DyeColors.LIGHT_BLUE)
+                    .add(DyeColor.LIME, DyeColors.LIME)
+                    .add(DyeColor.MAGENTA, DyeColors.MAGENTA)
+                    .add(DyeColor.ORANGE, DyeColors.ORANGE)
+                    .add(DyeColor.PINK, DyeColors.PINK)
+                    .add(DyeColor.PURPLE, DyeColors.PURPLE)
+                    .add(DyeColor.RED, DyeColors.RED)
+                    .add(DyeColor.SILVER, DyeColors.SILVER)
+                    .add(DyeColor.WHITE, DyeColors.WHITE)
+                    .add(DyeColor.YELLOW, DyeColors.YELLOW)
                     .build();
 
     public static org.spongepowered.api.entity.living.meta.DyeColor of(org.bukkit.DyeColor color) {
-        return map.get(color);
+        return CONVERTER.convert(color);
     }
 
-    public static org.bukkit.DyeColor of(org.spongepowered.api.entity.living.meta.DyeColor color) {
-        return map.inverse().get(color);
+    public static DyeColor of(org.spongepowered.api.entity.living.meta.DyeColor color) {
+        return CONVERTER.reverse().convert(color);
     }
 
 }
