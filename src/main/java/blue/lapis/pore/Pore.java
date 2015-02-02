@@ -114,8 +114,11 @@ public final class Pore {
 
     @Subscribe
     public void onCommand(CommandEvent event) {
-        if (Pore.getServer().dispatchCommand(PoreCommandSender.of(event.getSource()), event.getCommand() + ' ' +
-                event.getArguments())) {
+        String command = event.getCommand();
+        String args = event.getArguments();
+        if (!args.isEmpty()) command = command + ' ' + args;
+
+        if (Pore.getServer().dispatchCommand(PoreCommandSender.of(event.getSource()), command)) {
             event.setCancelled(true);
         }
     }

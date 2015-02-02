@@ -40,6 +40,7 @@ import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.entity.living.Human;
 import org.spongepowered.api.entity.player.Player;
 import org.spongepowered.api.service.permission.Subject;
+import org.spongepowered.api.util.Tristate;
 
 import java.util.Set;
 
@@ -162,25 +163,27 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public boolean isPermissionSet(String name) {
-        throw new NotImplementedException(); //TODO
+        if (getHandle() instanceof Subject) {
+            Subject subject = (Subject) getHandle();
+            return subject.getPermissionValue(subject.getActiveContexts(), name) != Tristate.UNDEFINED;
+        }
+
+        return false;
     }
 
     @Override
     public boolean isPermissionSet(Permission perm) {
-        throw new NotImplementedException(); //TODO
+        return isPermissionSet(perm.getName());
     }
 
     @Override
     public boolean hasPermission(String name) {
-        if (this instanceof Subject) {
-            return ((Subject) this).hasPermission(name);
-        }
-        throw new NotImplementedException();
+        return getHandle() instanceof Subject && ((Subject) getHandle()).hasPermission(name);
     }
 
     @Override
     public boolean hasPermission(Permission perm) {
-        throw new NotImplementedException(); //TODO
+        return hasPermission(perm.getName());
     }
 
     @Override
