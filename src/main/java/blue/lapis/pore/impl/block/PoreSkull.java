@@ -28,17 +28,21 @@ import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.SkullType;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.Skull;
-import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.data.Skull;
 
-public class PoreSkull extends PoreBlockState implements Skull {
+public class PoreSkull extends PoreBlockState implements org.bukkit.block.Skull {
 
-    public static PoreSkull of(BlockState handle) {
+    public static PoreSkull of(Skull handle) {
         return PoreConverter.of(PoreSkull.class, handle);
     }
 
-    protected PoreSkull(BlockState handle) {
+    protected PoreSkull(Skull handle) {
         super(handle);
+    }
+
+    @Override
+    public Skull getHandle() {
+        return (Skull) super.getHandle();
     }
 
     @Override

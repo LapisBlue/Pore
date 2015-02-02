@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.event.server;
 
-import org.apache.commons.lang.NotImplementedException;
+import blue.lapis.pore.impl.util.PoreCachedServerIcon;
 import org.bukkit.entity.Player;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.util.CachedServerIcon;
@@ -77,12 +77,12 @@ public class PoreServerListPingEvent extends ServerListPingEvent {
 
     @Override
     public void setServerIcon(CachedServerIcon icon) throws IllegalArgumentException, UnsupportedOperationException {
-        throw new NotImplementedException(); // TODO
+        handle.getResponse().setFavicon(((PoreCachedServerIcon) icon).getHandle());
     }
 
     @Override
     public Iterator<Player> iterator() throws UnsupportedOperationException {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException(); // Unsupported for now
     }
 
 }

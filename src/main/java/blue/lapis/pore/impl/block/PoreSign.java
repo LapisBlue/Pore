@@ -26,17 +26,21 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.block.Sign;
-import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.data.Sign;
 
-public class PoreSign extends PoreBlockState implements Sign {
+public class PoreSign extends PoreBlockState implements org.bukkit.block.Sign {
 
-    public static PoreSign of(BlockState handle) {
+    public static PoreSign of(Sign handle) {
         return PoreConverter.of(PoreSign.class, handle);
     }
 
-    protected PoreSign(BlockState handle) {
+    protected PoreSign(Sign handle) {
         super(handle);
+    }
+
+    @Override
+    public Sign getHandle() {
+        return (Sign) super.getHandle();
     }
 
     @Override

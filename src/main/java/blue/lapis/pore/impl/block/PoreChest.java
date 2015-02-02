@@ -26,18 +26,22 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.block.Chest;
 import org.bukkit.inventory.Inventory;
-import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.data.Chest;
 
-public class PoreChest extends PoreBlockState implements Chest {
+public class PoreChest extends PoreBlockState implements org.bukkit.block.Chest {
 
-    public static PoreChest of(BlockState handle) {
+    public static PoreChest of(Chest handle) {
         return PoreConverter.of(PoreChest.class, handle);
     }
 
-    protected PoreChest(BlockState handle) {
+    protected PoreChest(Chest handle) {
         super(handle);
+    }
+
+    @Override
+    public Chest getHandle() {
+        return (Chest) super.getHandle();
     }
 
     @Override

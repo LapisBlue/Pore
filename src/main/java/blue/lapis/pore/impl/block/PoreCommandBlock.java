@@ -26,36 +26,128 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.block.CommandBlock;
-import org.spongepowered.api.block.BlockState;
+import org.bukkit.Server;
+import org.bukkit.command.BlockCommandSender;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionAttachment;
+import org.bukkit.permissions.PermissionAttachmentInfo;
+import org.bukkit.plugin.Plugin;
+import org.spongepowered.api.block.data.CommandBlock;
 
-public class PoreCommandBlock extends PoreBlockState implements CommandBlock {
+import java.util.Set;
 
-    public static PoreCommandBlock of(BlockState handle) {
+public class PoreCommandBlock extends PoreBlockState implements org.bukkit.block.CommandBlock, BlockCommandSender {
+
+    public static PoreCommandBlock of(CommandBlock handle) {
         return PoreConverter.of(PoreCommandBlock.class, handle);
     }
 
-    protected PoreCommandBlock(BlockState handle) {
+    protected PoreCommandBlock(CommandBlock handle) {
         super(handle);
     }
 
     @Override
+    public CommandBlock getHandle() {
+        return (CommandBlock) super.getHandle();
+    }
+
+    @Override
     public String getCommand() {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); // TODO
     }
 
     @Override
     public void setCommand(String command) {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public void sendMessage(String message) {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public void sendMessage(String[] messages) {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public Server getServer() {
+        throw new NotImplementedException(); // TODO
     }
 
     @Override
     public String getName() {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); // TODO
     }
 
     @Override
     public void setName(String name) {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public boolean isPermissionSet(String name) {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public boolean isPermissionSet(Permission perm) {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public boolean hasPermission(String name) {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public boolean hasPermission(Permission perm) {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public PermissionAttachment addAttachment(Plugin plugin) {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public void removeAttachment(PermissionAttachment attachment) {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public void recalculatePermissions() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public Set<PermissionAttachmentInfo> getEffectivePermissions() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public boolean isOp() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public void setOp(boolean value) {
+        throw new NotImplementedException(); // TODO
     }
 }

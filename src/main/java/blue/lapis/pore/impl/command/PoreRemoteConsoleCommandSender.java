@@ -24,15 +24,23 @@
  */
 package blue.lapis.pore.impl.command;
 
+import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.bukkit.command.RemoteConsoleCommandSender;
-import org.spongepowered.api.util.command.CommandSource;
-
-//TODO: Bridge
+import org.spongepowered.api.util.command.source.RemoteSource;
 
 public class PoreRemoteConsoleCommandSender extends PoreCommandSender implements RemoteConsoleCommandSender {
 
-    // TODO
-    protected PoreRemoteConsoleCommandSender(CommandSource handle) {
+    public static PoreRemoteConsoleCommandSender of(RemoteSource handle) {
+        return PoreConverter.of(PoreRemoteConsoleCommandSender.class, handle);
+    }
+
+    protected PoreRemoteConsoleCommandSender(RemoteSource handle) {
         super(handle);
     }
+
+    @Override
+    public RemoteSource getHandle() {
+        return (RemoteSource) super.getHandle();
+    }
+
 }

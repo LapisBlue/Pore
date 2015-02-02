@@ -32,6 +32,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.service.permission.Subject;
+import org.spongepowered.api.util.Tristate;
 
 import java.util.Set;
 
@@ -53,12 +54,12 @@ public class PorePermissible extends PoreWrapper<Subject> implements Permissible
 
     @Override
     public boolean isPermissionSet(String name) {
-        throw new NotImplementedException();
+        return getHandle().getPermissionValue(getHandle().getActiveContexts(), name) != Tristate.UNDEFINED;
     }
 
     @Override
     public boolean isPermissionSet(Permission perm) {
-        throw new NotImplementedException();
+        return isPermissionSet(perm.getName());
     }
 
     @Override
@@ -68,7 +69,7 @@ public class PorePermissible extends PoreWrapper<Subject> implements Permissible
 
     @Override
     public boolean hasPermission(Permission perm) {
-        throw new NotImplementedException();
+        return hasPermission(perm.getName());
     }
 
     @Override

@@ -29,16 +29,21 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.data.MobSpawner;
 
 public class PoreCreatureSpawner extends PoreBlockState implements CreatureSpawner {
 
-    public static PoreCreatureSpawner of(BlockState handle) {
+    public static PoreCreatureSpawner of(MobSpawner handle) {
         return PoreConverter.of(PoreCreatureSpawner.class, handle);
     }
 
-    protected PoreCreatureSpawner(BlockState handle) {
+    protected PoreCreatureSpawner(MobSpawner handle) {
         super(handle);
+    }
+
+    @Override
+    public MobSpawner getHandle() {
+        return (MobSpawner) super.getHandle();
     }
 
     @Override

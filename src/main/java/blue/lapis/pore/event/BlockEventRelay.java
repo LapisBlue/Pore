@@ -27,12 +27,9 @@ package blue.lapis.pore.event;
 import blue.lapis.pore.converter.ItemStackConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
-import blue.lapis.pore.impl.block.PoreBlockState;
 import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import org.bukkit.Bukkit;
-import org.bukkit.event.block.BlockFadeEvent;
-import org.bukkit.event.block.BlockGrowEvent;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.event.block.BlockBurnEvent;
 import org.spongepowered.api.event.block.BlockChangeEvent;
@@ -152,7 +149,7 @@ public class BlockEventRelay {
 
     @Subscribe
     public void onFloraGrow(final FloraGrowEvent event) {
-        Bukkit.getPluginManager().callEvent(
+        /*Bukkit.getPluginManager().callEvent(
                 new BlockGrowEvent(
                         PoreBlock.of(event.getBlock()),
                         PoreBlockState.of(event.getReplacementBlock().getState())
@@ -163,12 +160,12 @@ public class BlockEventRelay {
                         //TODO: find a way to cancel the event in Sponge
                     }
                 }
-        );
+        );*/
     }
 
     @Subscribe
     public void onLeafDecay(final LeafDecayEvent event) {
-        Bukkit.getPluginManager().callEvent(
+        /*Bukkit.getPluginManager().callEvent(
                 new BlockFadeEvent(
                         PoreBlock.of(event.getBlock()),
                         PoreBlockState.of(event.getReplacementBlock().getState())
@@ -179,7 +176,7 @@ public class BlockEventRelay {
                         //TODO: find a way to cancel the event in Sponge
                     }
                 }
-        );
+        );*/
     }
 
 }

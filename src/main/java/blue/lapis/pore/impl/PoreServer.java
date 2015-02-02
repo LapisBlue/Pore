@@ -27,6 +27,7 @@ package blue.lapis.pore.impl;
 import blue.lapis.pore.converter.wrapper.PoreConverter;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.impl.scheduler.PoreBukkitScheduler;
+import blue.lapis.pore.impl.util.PoreCachedServerIcon;
 import blue.lapis.pore.logging.PoreLogger;
 import blue.lapis.pore.util.PoreCollections;
 import blue.lapis.pore.util.PoreWrapper;
@@ -717,13 +718,13 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     }
 
     @Override
-    public CachedServerIcon loadServerIcon(File file) throws IllegalArgumentException, Exception {
-        throw new NotImplementedException();
+    public CachedServerIcon loadServerIcon(File file) throws Exception {
+        return PoreCachedServerIcon.of(game.getRegistry().loadFavicon(file));
     }
 
     @Override
-    public CachedServerIcon loadServerIcon(BufferedImage image) throws IllegalArgumentException, Exception {
-        throw new NotImplementedException();
+    public CachedServerIcon loadServerIcon(BufferedImage image) throws Exception {
+        return PoreCachedServerIcon.of(game.getRegistry().loadFavicon(image));
     }
 
     @Override

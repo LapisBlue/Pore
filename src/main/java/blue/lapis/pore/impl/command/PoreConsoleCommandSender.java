@@ -24,51 +24,54 @@
  */
 package blue.lapis.pore.impl.command;
 
-import org.apache.commons.lang.NotImplementedException;
+import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
-import org.spongepowered.api.util.command.CommandSource;
+import org.spongepowered.api.util.command.source.ConsoleSource;
 
-// TODO: Bridge
+public class PoreConsoleCommandSender extends PoreCommandSender implements ConsoleCommandSender {
 
-// TODO: Bridge
+    public static PoreConsoleCommandSender of(ConsoleSource handle) {
+        return PoreConverter.of(PoreConsoleCommandSender.class, handle);
+    }
 
-public class PoreConsoleCommandSender extends PoreServerCommandSender implements ConsoleCommandSender {
-
-    // TODO
-    protected PoreConsoleCommandSender(CommandSource handle) {
+    protected PoreConsoleCommandSender(ConsoleSource handle) {
         super(handle);
     }
 
     @Override
+    public ConsoleSource getHandle() {
+        return (ConsoleSource) super.getHandle();
+    }
+
+    @Override
     public boolean isConversing() {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException(); // TODO
     }
 
     @Override
     public void acceptConversationInput(String input) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException(); // TODO
     }
 
     @Override
     public boolean beginConversation(Conversation conversation) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException(); // TODO
     }
 
     @Override
     public void abandonConversation(Conversation conversation) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException(); // TODO
     }
 
     @Override
     public void abandonConversation(Conversation conversation, ConversationAbandonedEvent details) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException(); // TODO
     }
 
     @Override
     public void sendRawMessage(String message) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException(); // TODO
     }
-
 }

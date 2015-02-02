@@ -26,18 +26,23 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.block.Beacon;
 import org.bukkit.inventory.Inventory;
 import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.data.Beacon;
 
-public class PoreBeacon extends PoreBlockState implements Beacon {
+public class PoreBeacon extends PoreBlockState implements org.bukkit.block.Beacon {
 
     public static PoreBeacon of(BlockState handle) {
         return PoreConverter.of(PoreBeacon.class, handle);
     }
 
-    protected PoreBeacon(BlockState handle) {
+    protected PoreBeacon(Beacon handle) {
         super(handle);
+    }
+
+    @Override
+    public Beacon getHandle() {
+        return (Beacon) super.getHandle();
     }
 
     @Override

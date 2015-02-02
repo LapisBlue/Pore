@@ -26,7 +26,6 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.type.MaterialConverter;
 import blue.lapis.pore.converter.wrapper.PoreConverter;
-import blue.lapis.pore.impl.block.PoreBlockState;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
@@ -55,9 +54,10 @@ public class PoreEnderman extends PoreMonster implements org.bukkit.entity.Ender
 
     @Override
     public MaterialData getCarriedMaterial() {
-        return getHandle().getCarriedBlock().isPresent() ?
+        throw new NotImplementedException();
+        /*return getHandle().getCarriedBlock().isPresent() ?
                 PoreBlockState.of(getHandle().getCarriedBlock().get()).getData() :
-                null;
+                null;*/
     }
 
     @Override

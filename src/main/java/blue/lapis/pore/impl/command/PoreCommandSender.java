@@ -37,7 +37,6 @@ public class PoreCommandSender extends PorePermissible implements CommandSender 
         return PoreConverter.of(PoreCommandSender.class, source);
     }
 
-    // TODO
     protected PoreCommandSender(CommandSource handle) {
         super(handle);
     }
@@ -48,13 +47,8 @@ public class PoreCommandSender extends PorePermissible implements CommandSender 
     }
 
     @Override
-    public void sendMessage(String message) {
-        getHandle().sendMessage(message);
-    }
-
-    @Override
-    public void sendMessage(String[] messages) {
-        getHandle().sendMessage(messages);
+    public String getName() {
+        return "FAIL";
     }
 
     @Override
@@ -63,8 +57,13 @@ public class PoreCommandSender extends PorePermissible implements CommandSender 
     }
 
     @Override
-    public String getName() {
-        return "FAIL";
+    public void sendMessage(String message) {
+        getHandle().sendMessage(message);
+    }
+
+    @Override
+    public void sendMessage(String[] messages) {
+        getHandle().sendMessage(messages);
     }
 
 }

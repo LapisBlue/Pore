@@ -189,7 +189,7 @@ public class PoreBlock extends PoreWrapper<BlockLoc> implements Block {
 
     @Override
     public BlockState getState() {
-        return PoreBlockState.of(getHandle().getState());
+        throw new NotImplementedException();
     }
 
     @Override

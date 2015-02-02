@@ -44,14 +44,12 @@ public class PoreLogger extends Logger {
     }
 
     private class ForwardHandler extends Handler {
-        private ForwardHandler() {
-            setFormatter(new DummyFormatter());
-        }
+        private final Formatter formatter = new DummyFormatter();
 
         @Override
         public void publish(LogRecord record) {
             Level level = record.getLevel();
-            String message = getFormatter().formatMessage(record);
+            String message = formatter.formatMessage(record);
             Throwable thrown = record.getThrown();
 
             if (level == Level.SEVERE) {

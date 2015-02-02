@@ -27,6 +27,19 @@ package blue.lapis.pore.converter.wrapper;
 import blue.lapis.pore.impl.PoreChunk;
 import blue.lapis.pore.impl.PoreOfflinePlayer;
 import blue.lapis.pore.impl.PoreWorld;
+import blue.lapis.pore.impl.block.PoreBanner;
+import blue.lapis.pore.impl.block.PoreBeacon;
+import blue.lapis.pore.impl.block.PoreBrewingStand;
+import blue.lapis.pore.impl.block.PoreChest;
+import blue.lapis.pore.impl.block.PoreCommandBlock;
+import blue.lapis.pore.impl.block.PoreCreatureSpawner;
+import blue.lapis.pore.impl.block.PoreDispenser;
+import blue.lapis.pore.impl.block.PoreDropper;
+import blue.lapis.pore.impl.block.PoreFurnace;
+import blue.lapis.pore.impl.block.PoreHopper;
+import blue.lapis.pore.impl.block.PoreNoteBlock;
+import blue.lapis.pore.impl.block.PoreSign;
+import blue.lapis.pore.impl.block.PoreSkull;
 import blue.lapis.pore.impl.command.PoreCommandSender;
 import blue.lapis.pore.impl.entity.PoreAgeable;
 import blue.lapis.pore.impl.entity.PoreAmbient;
@@ -112,8 +125,22 @@ import blue.lapis.pore.impl.entity.minecart.PorePoweredMinecart;
 import blue.lapis.pore.impl.entity.minecart.PoreRideableMinecart;
 import blue.lapis.pore.impl.entity.minecart.PoreSpawnerMinecart;
 import blue.lapis.pore.impl.entity.minecart.PoreStorageMinecart;
+import blue.lapis.pore.impl.util.PoreCachedServerIcon;
 import blue.lapis.pore.util.PoreWrapper;
 import com.google.common.base.Function;
+import org.spongepowered.api.block.data.Banner;
+import org.spongepowered.api.block.data.Beacon;
+import org.spongepowered.api.block.data.BrewingStand;
+import org.spongepowered.api.block.data.Chest;
+import org.spongepowered.api.block.data.CommandBlock;
+import org.spongepowered.api.block.data.Dispenser;
+import org.spongepowered.api.block.data.Dropper;
+import org.spongepowered.api.block.data.Furnace;
+import org.spongepowered.api.block.data.Hopper;
+import org.spongepowered.api.block.data.MobSpawner;
+import org.spongepowered.api.block.data.Note;
+import org.spongepowered.api.block.data.Sign;
+import org.spongepowered.api.block.data.Skull;
 import org.spongepowered.api.entity.EnderCrystal;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.ExperienceOrb;
@@ -199,6 +226,7 @@ import org.spongepowered.api.entity.vehicle.minecart.MinecartRideable;
 import org.spongepowered.api.entity.vehicle.minecart.MinecartTNT;
 import org.spongepowered.api.entity.weather.Lightning;
 import org.spongepowered.api.entity.weather.WeatherEffect;
+import org.spongepowered.api.status.Favicon;
 import org.spongepowered.api.util.command.CommandSource;
 import org.spongepowered.api.world.Chunk;
 import org.spongepowered.api.world.World;
@@ -206,6 +234,7 @@ import org.spongepowered.api.world.World;
 public class PoreConverter {
 
     static final CachedWrapperConverter<PoreWrapper> converter = CachedWrapperConverter.builder(PoreWrapper.class)
+            .register(Favicon.class, PoreCachedServerIcon.class)
 
             // Entities
             .register(Entity.class, PoreEntity.class)
@@ -296,6 +325,22 @@ public class PoreConverter {
                     .register(MinecartRideable.class, PoreRideableMinecart.class)
                     .register(MinecartTNT.class, PoreExplosiveMinecart.class)
                 .register(Boat.class, PoreBoat.class)
+
+            //.register(TileEntity.class, PoreTileEntity.class)
+                .register(Banner.class, PoreBanner.class)
+                .register(Beacon.class, PoreBeacon.class)
+                .register(BrewingStand.class, PoreBrewingStand.class)
+                .register(Chest.class, PoreChest.class)
+                .register(CommandBlock.class, PoreCommandBlock.class)
+                .register(MobSpawner.class, PoreCreatureSpawner.class)
+                .register(Dispenser.class, PoreDispenser.class)
+                .register(Dropper.class, PoreDropper.class)
+                .register(Furnace.class, PoreFurnace.class)
+                .register(Hopper.class, PoreHopper.class)
+                //.register(Jukebox.clas, PoreJukebox.class)
+                .register(Note.class, PoreNoteBlock.class)
+                .register(Sign.class, PoreSign.class)
+                .register(Skull.class, PoreSkull.class)
 
 
             .register(Chunk.class, PoreChunk.class)

@@ -26,18 +26,22 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.block.Furnace;
 import org.bukkit.inventory.FurnaceInventory;
-import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.data.Furnace;
 
-public class PoreFurnace extends PoreBlockState implements Furnace {
+public class PoreFurnace extends PoreBlockState implements org.bukkit.block.Furnace {
 
-    public static PoreFurnace of(BlockState handle) {
+    public static PoreFurnace of(Furnace handle) {
         return PoreConverter.of(PoreFurnace.class, handle);
     }
 
-    protected PoreFurnace(BlockState handle) {
+    protected PoreFurnace(Furnace handle) {
         super(handle);
+    }
+
+    @Override
+    public Furnace getHandle() {
+        return (Furnace) super.getHandle();
     }
 
     @Override

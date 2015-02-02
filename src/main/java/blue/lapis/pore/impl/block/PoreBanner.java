@@ -28,18 +28,23 @@ import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
-import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.data.Banner;
 
 import java.util.List;
 
 public class PoreBanner extends PoreBlockState implements org.bukkit.block.Banner {
 
-    public static PoreBanner of(BlockState handle) {
+    public static PoreBanner of(Banner handle) {
         return PoreConverter.of(PoreBanner.class, handle);
     }
 
-    protected PoreBanner(BlockState handle) {
+    protected PoreBanner(Banner handle) {
         super(handle);
+    }
+
+    @Override
+    public Banner getHandle() {
+        return (Banner) super.getHandle();
     }
 
     @Override

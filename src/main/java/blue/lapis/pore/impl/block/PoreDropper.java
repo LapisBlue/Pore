@@ -26,18 +26,22 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.block.Dropper;
 import org.bukkit.inventory.Inventory;
-import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.data.Dropper;
 
-public class PoreDropper extends PoreBlockState implements Dropper {
+public class PoreDropper extends PoreBlockState implements org.bukkit.block.Dropper {
 
-    public static PoreDropper of(BlockState handle) {
+    public static PoreDropper of(Dropper handle) {
         return PoreConverter.of(PoreDropper.class, handle);
     }
 
-    protected PoreDropper(BlockState handle) {
+    protected PoreDropper(Dropper handle) {
         super(handle);
+    }
+
+    @Override
+    public Dropper getHandle() {
+        return (Dropper) super.getHandle();
     }
 
     @Override

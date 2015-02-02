@@ -27,22 +27,26 @@ package blue.lapis.pore.impl.block;
 import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Instrument;
-import org.bukkit.Note;
 import org.bukkit.block.NoteBlock;
-import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.data.Note;
 
 public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
 
-    public static PoreNoteBlock of(BlockState handle) {
+    public static PoreNoteBlock of(Note handle) {
         return PoreConverter.of(PoreNoteBlock.class, handle);
     }
 
-    protected PoreNoteBlock(BlockState handle) {
+    protected PoreNoteBlock(Note handle) {
         super(handle);
     }
 
     @Override
-    public Note getNote() {
+    public Note getHandle() {
+        return (Note) super.getHandle();
+    }
+
+    @Override
+    public org.bukkit.Note getNote() {
         throw new NotImplementedException();
     }
 
@@ -52,7 +56,7 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
     }
 
     @Override
-    public void setNote(Note note) {
+    public void setNote(org.bukkit.Note note) {
         throw new NotImplementedException();
     }
 
@@ -72,7 +76,7 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
     }
 
     @Override
-    public boolean play(Instrument instrument, Note note) {
+    public boolean play(Instrument instrument, org.bukkit.Note note) {
         throw new NotImplementedException();
     }
 }

@@ -24,8 +24,8 @@
  */
 package blue.lapis.pore.impl.block;
 
-import blue.lapis.pore.converter.type.MaterialConverter;
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
@@ -33,29 +33,28 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
-import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.data.TileEntity;
 
 import java.util.List;
 
-public class PoreBlockState extends PoreWrapper<BlockState> implements
-        org.bukkit.block.BlockState {
+public class PoreBlockState extends PoreWrapper<TileEntity> implements BlockState {
 
-    public static PoreBlockState of(BlockState handle) {
+    // TODO: Actually block states exist even without tile entities
+    public static PoreBlockState of(TileEntity handle) {
         return PoreConverter.of(PoreBlockState.class, handle);
     }
 
-    // TODO: Possibly store the parent BlockLoc in the wrapper object
-
-    protected PoreBlockState(org.spongepowered.api.block.BlockState handle) {
+    protected PoreBlockState(TileEntity handle) {
         super(handle);
     }
 
     @Override
     public Block getBlock() {
-        throw new NotImplementedException();
+        return PoreBlock.of(getHandle().getBlock());
     }
 
     @Override
@@ -65,52 +64,52 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements
 
     @Override
     public Material getType() {
-        return MaterialConverter.of(getHandle().getType());
+        return getBlock().getType();
     }
 
     @Override
     public int getTypeId() {
-        return getType().getId();
+        return getBlock().getTypeId();
     }
 
     @Override
     public byte getLightLevel() {
-        throw new NotImplementedException();
+        return getBlock().getLightLevel();
     }
 
     @Override
     public World getWorld() {
-        throw new NotImplementedException();
+        return PoreWorld.of(getHandle().getWorld());
     }
 
     @Override
     public int getX() {
-        throw new NotImplementedException();
+        return getBlock().getX();
     }
 
     @Override
     public int getY() {
-        throw new NotImplementedException();
+        return getBlock().getY();
     }
 
     @Override
     public int getZ() {
-        throw new NotImplementedException();
+        return getBlock().getZ();
     }
 
     @Override
     public Location getLocation() {
-        throw new NotImplementedException();
+        return getBlock().getLocation();
     }
 
     @Override
     public Location getLocation(Location loc) {
-        throw new NotImplementedException();
+        return getBlock().getLocation(loc);
     }
 
     @Override
     public Chunk getChunk() {
-        throw new NotImplementedException();
+        return getBlock().getChunk();
     }
 
     @Override
@@ -120,7 +119,7 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements
 
     @Override
     public void setType(Material type) {
-        throw new NotImplementedException();
+        getBlock().setType(type);
     }
 
     @Override
@@ -145,7 +144,7 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements
 
     @Override
     public byte getRawData() {
-        return getHandle().getDataValue();
+        return getBlock().getData();
     }
 
     @Override

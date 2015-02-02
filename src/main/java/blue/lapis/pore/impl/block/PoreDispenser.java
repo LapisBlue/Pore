@@ -26,19 +26,23 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.block.Dispenser;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.projectiles.BlockProjectileSource;
-import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.data.Dispenser;
 
-public class PoreDispenser extends PoreBlockState implements Dispenser {
+public class PoreDispenser extends PoreBlockState implements org.bukkit.block.Dispenser {
 
-    public static PoreDispenser of(BlockState handle) {
+    public static PoreDispenser of(Dispenser handle) {
         return PoreConverter.of(PoreDispenser.class, handle);
     }
 
-    protected PoreDispenser(BlockState handle) {
+    protected PoreDispenser(Dispenser handle) {
         super(handle);
+    }
+
+    @Override
+    public Dispenser getHandle() {
+        return (Dispenser) super.getHandle();
     }
 
     @Override
