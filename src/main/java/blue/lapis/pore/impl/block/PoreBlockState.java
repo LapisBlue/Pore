@@ -24,8 +24,8 @@
  */
 package blue.lapis.pore.impl.block;
 
-import blue.lapis.pore.converter.MaterialConverter;
-import blue.lapis.pore.converter.PoreConverter;
+import blue.lapis.pore.converter.type.MaterialConverter;
+import blue.lapis.pore.converter.wrapper.PoreConverter;
 import blue.lapis.pore.util.PoreWrapper;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;

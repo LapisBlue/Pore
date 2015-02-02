@@ -45,21 +45,24 @@ public final class PoreTests {
 
     private static Field modifiers;
 
-    public static void setConstants(Class<?> type) throws Exception {
+    public static void setConstants(Class<?>... classes) throws Exception {
         if (modifiers == null) {
             Field modifiers = Field.class.getDeclaredField("modifiers");
             modifiers.setAccessible(true);
             PoreTests.modifiers = modifiers;
         }
 
-        for (Field field : type.getFields()) {
-            if (Modifier.isStatic(field.getModifiers())) {
-                if (Modifier.isFinal(field.getModifiers())) {
-                    modifiers.setInt(field, field.getModifiers() & ~Modifier.FINAL);
-                }
+        for (Class<?> type : classes) {
+            for (Field field : type.getFields()) {
+                if (Modifier.isStatic(field.getModifiers())) {
+                    if (Modifier.isFinal(field.getModifiers())) {
+                        modifiers.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+                    }
 
-                field.set(null, mock(field.getType()));
+                    field.set(null, mock(field.getType()));
+                }
             }
         }
     }
+
 }

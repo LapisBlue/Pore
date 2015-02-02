@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl;
 
-import blue.lapis.pore.converter.PoreConverter;
+import blue.lapis.pore.converter.wrapper.PoreConverter;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreWrapper;
 import com.google.common.base.Optional;

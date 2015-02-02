@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter;
+package blue.lapis.pore.converter.wrapper;
 
 import blue.lapis.pore.PoreTests;
 import blue.lapis.pore.util.PoreWrapper;
@@ -41,7 +41,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.withSettings;
 
-public class PoreConverterTest {
+public class WrapperConverterTest {
 
     private ListMultimap<Class<?>, Class<?>> testRegistry;
 

@@ -22,30 +22,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter;
+package blue.lapis.pore.converter.type;
 
 import com.google.common.base.Converter;
-import org.bukkit.event.EventPriority;
-import org.spongepowered.api.util.event.Order;
+import org.bukkit.Rotation;
+import org.spongepowered.api.util.rotation.Rotations;
 
-public final class EventPriorityConverter {
+public final class RotationConverter {
 
-    // TODO: Verify this
-    public static final Converter<EventPriority, Order> CONVERTER = TypeConverter.<EventPriority, Order>builder()
-            .add(EventPriority.LOWEST, Order.PRE)
-            .add(EventPriority.LOW, Order.EARLY)
-            .add(EventPriority.NORMAL, Order.DEFAULT)
-            .add(EventPriority.HIGH, Order.LATE)
-            .add(EventPriority.HIGHEST, Order.LAST)
-            .add(EventPriority.MONITOR, Order.POST)
-            .build();
+    public static final Converter<Rotation, org.spongepowered.api.util.rotation.Rotation> CONVERTER =
+            TypeConverter.<Rotation, org.spongepowered.api.util.rotation.Rotation>builder()
+                    .add(Rotation.NONE, Rotations.TOP)
+                    .add(Rotation.CLOCKWISE_45, Rotations.TOP_RIGHT)
+                    .add(Rotation.CLOCKWISE, Rotations.RIGHT)
+                    .add(Rotation.CLOCKWISE_135, Rotations.BOTTOM_RIGHT)
+                    .add(Rotation.FLIPPED, Rotations.BOTTOM)
+                    .add(Rotation.FLIPPED_45, Rotations.BOTTOM_LEFT)
+                    .add(Rotation.COUNTER_CLOCKWISE, Rotations.LEFT)
+                    .add(Rotation.COUNTER_CLOCKWISE_45, Rotations.TOP_LEFT)
+                    .build();
 
-    public static Order of(EventPriority eventPriority) {
-        return CONVERTER.convert(eventPriority);
+    public static org.spongepowered.api.util.rotation.Rotation of(Rotation rotation) {
+        return CONVERTER.convert(rotation);
     }
 
-    public static EventPriority of(Order order) {
-        return CONVERTER.reverse().convert(order);
+    public static Rotation of(org.spongepowered.api.util.rotation.Rotation rotation) {
+        return CONVERTER.reverse().convert(rotation);
     }
-
 }

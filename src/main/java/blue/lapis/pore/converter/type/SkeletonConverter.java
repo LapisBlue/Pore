@@ -22,28 +22,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter;
+package blue.lapis.pore.converter.type;
 
 import com.google.common.base.Converter;
-import org.bukkit.World;
-import org.spongepowered.api.world.DimensionType;
-import org.spongepowered.api.world.DimensionTypes;
+import org.bukkit.entity.Skeleton;
+import org.spongepowered.api.entity.living.meta.SkeletonType;
+import org.spongepowered.api.entity.living.meta.SkeletonTypes;
 
-public final class EnvironmentConverter {
+public final class SkeletonConverter {
 
-    public static final Converter<World.Environment, DimensionType> CONVERTER =
-            TypeConverter.<World.Environment, DimensionType>builder()
-                    .add(World.Environment.NORMAL, DimensionTypes.OVERWORLD)
-                    .add(World.Environment.NETHER, DimensionTypes.NETHER)
-                    .add(World.Environment.THE_END, DimensionTypes.END)
+    public static final Converter<Skeleton.SkeletonType, SkeletonType> CONVERTER =
+            TypeConverter.<Skeleton.SkeletonType, SkeletonType>builder()
+                    .add(Skeleton.SkeletonType.NORMAL, SkeletonTypes.NORMAL)
+                    .add(Skeleton.SkeletonType.WITHER, SkeletonTypes.WITHER)
                     .build();
 
-    public static DimensionType of(World.Environment environment) {
-        return CONVERTER.convert(environment);
+    public static SkeletonType of(Skeleton.SkeletonType type) {
+        return CONVERTER.convert(type);
     }
 
-    public static World.Environment of(DimensionType dimensionType) {
-        return CONVERTER.reverse().convert(dimensionType);
+    public static Skeleton.SkeletonType of(SkeletonType type) {
+        return CONVERTER.reverse().convert(type);
     }
 
 }

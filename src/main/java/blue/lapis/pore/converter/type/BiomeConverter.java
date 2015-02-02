@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter;
+package blue.lapis.pore.converter.type;
 
 import com.google.common.base.Converter;
 import org.bukkit.block.Biome;

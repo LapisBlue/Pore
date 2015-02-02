@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.PoreConverter;
+import blue.lapis.pore.converter.wrapper.PoreConverter;
 import blue.lapis.pore.util.PoreWrapper;
 import org.bukkit.entity.AnimalTamer;
 import org.spongepowered.api.entity.Tamer;

@@ -22,32 +22,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.entity;
+package blue.lapis.pore.converter.type;
 
-import blue.lapis.pore.converter.TypeConverter;
 import com.google.common.base.Converter;
-import org.bukkit.entity.Rabbit;
-import org.spongepowered.api.entity.living.meta.RabbitType;
-import org.spongepowered.api.entity.living.meta.RabbitTypes;
+import org.bukkit.event.EventPriority;
+import org.spongepowered.api.util.event.Order;
 
-public final class RabbitConverter {
+public final class EventPriorityConverter {
 
-    public static final Converter<Rabbit.Type, RabbitType> CONVERTER = TypeConverter.<Rabbit.Type, RabbitType>builder()
-            .add(Rabbit.Type.BROWN, RabbitTypes.BROWN)
-            .add(Rabbit.Type.WHITE, RabbitTypes.WHITE)
-            .add(Rabbit.Type.BLACK, RabbitTypes.BLACK)
-            .add(Rabbit.Type.BLACK_AND_WHITE, RabbitTypes.BLACK_AND_WHITE)
-            .add(Rabbit.Type.GOLD, RabbitTypes.GOLD)
-            .add(Rabbit.Type.SALT_AND_PEPPER, RabbitTypes.SALT_AND_PEPPER)
-            .add(Rabbit.Type.THE_KILLER_BUNNY, RabbitTypes.KILLER)
+    // TODO: Verify this
+    public static final Converter<EventPriority, Order> CONVERTER = TypeConverter.<EventPriority, Order>builder()
+            .add(EventPriority.LOWEST, Order.PRE)
+            .add(EventPriority.LOW, Order.EARLY)
+            .add(EventPriority.NORMAL, Order.DEFAULT)
+            .add(EventPriority.HIGH, Order.LATE)
+            .add(EventPriority.HIGHEST, Order.LAST)
+            .add(EventPriority.MONITOR, Order.POST)
             .build();
 
-    public static RabbitType of(Rabbit.Type type) {
-        return CONVERTER.convert(type);
+    public static Order of(EventPriority eventPriority) {
+        return CONVERTER.convert(eventPriority);
     }
 
-    public static Rabbit.Type of(RabbitType type) {
-        return CONVERTER.reverse().convert(type);
+    public static EventPriority of(Order order) {
+        return CONVERTER.reverse().convert(order);
     }
 
 }

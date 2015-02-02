@@ -25,8 +25,8 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.Pore;
-import blue.lapis.pore.converter.PoreConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
+import blue.lapis.pore.converter.wrapper.PoreConverter;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreWrapper;
 import com.google.common.collect.Lists;

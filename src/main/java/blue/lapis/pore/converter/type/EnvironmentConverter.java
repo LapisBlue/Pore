@@ -22,25 +22,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter;
+package blue.lapis.pore.converter.type;
 
-import blue.lapis.pore.PoreTests;
-import org.junit.Before;
-import org.junit.Test;
-import org.spongepowered.api.block.BlockTypes;
-import org.spongepowered.api.item.ItemTypes;
+import com.google.common.base.Converter;
+import org.bukkit.World;
+import org.spongepowered.api.world.DimensionType;
+import org.spongepowered.api.world.DimensionTypes;
 
-public class MaterialConverterTest {
+public final class EnvironmentConverter {
 
-    @Before
-    public void setupConstants() throws Exception {
-        PoreTests.setConstants(BlockTypes.class);
-        PoreTests.setConstants(ItemTypes.class);
+    public static final Converter<World.Environment, DimensionType> CONVERTER =
+            TypeConverter.<World.Environment, DimensionType>builder()
+                    .add(World.Environment.NORMAL, DimensionTypes.OVERWORLD)
+                    .add(World.Environment.NETHER, DimensionTypes.NETHER)
+                    .add(World.Environment.THE_END, DimensionTypes.END)
+                    .build();
+
+    public static DimensionType of(World.Environment environment) {
+        return CONVERTER.convert(environment);
     }
 
-    @Test
-    public void test() {
-        // Try to load the converter
-        new MaterialConverter();
+    public static World.Environment of(DimensionType dimensionType) {
+        return CONVERTER.reverse().convert(dimensionType);
     }
+
 }

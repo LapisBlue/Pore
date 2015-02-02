@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.PoreConverter;
+import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.spongepowered.api.entity.projectile.fireball.LargeFireball;
 
 public class PoreLargeFireball extends PoreFireball implements org.bukkit.entity.LargeFireball {

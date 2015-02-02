@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.event;
 
-import blue.lapis.pore.converter.MaterialConverter;
+import blue.lapis.pore.converter.type.MaterialConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreAnimalTamer;

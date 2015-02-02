@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter;
+package blue.lapis.pore.converter.type;
 
 import com.google.common.base.Converter;
 import com.google.common.collect.BiMap;
@@ -33,7 +33,7 @@ import com.google.common.collect.Maps;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
-public final class TypeConverter<B, S> extends Converter<B, S> {
+final class TypeConverter<B, S> extends Converter<B, S> {
 
     private final ImmutableMap<B, S> bukkitToSponge;
     private final ImmutableMap<S, B> spongeToBukkit;
@@ -61,15 +61,15 @@ public final class TypeConverter<B, S> extends Converter<B, S> {
         return checkDefined(spongeToBukkit.get(sponge), sponge);
     }
 
-    public static <B extends Enum<B>, S> EnumBuilder<B, S> builder() {
+    static <B extends Enum<B>, S> EnumBuilder<B, S> builder() {
         return new EnumBuilder<B, S>();
     }
 
-    public static <B, S> MapBuilder<B, S> mapBuilder() {
+    static <B, S> MapBuilder<B, S> mapBuilder() {
         return new MapBuilder<B, S>();
     }
 
-    public static abstract class Builder<B, S> {
+    static abstract class Builder<B, S> {
 
         protected final BiMap<B, S> registry = HashBiMap.create();
 
@@ -82,7 +82,7 @@ public final class TypeConverter<B, S> extends Converter<B, S> {
         public abstract TypeConverter<B, S> build();
     }
 
-    public static final class MapBuilder<B, S> extends Builder<B, S> {
+    static final class MapBuilder<B, S> extends Builder<B, S> {
 
         @Override
         public TypeConverter<B, S> build() {
@@ -90,7 +90,7 @@ public final class TypeConverter<B, S> extends Converter<B, S> {
         }
     }
 
-    public static final class EnumBuilder<B extends Enum<B>, S> extends Builder<B, S> {
+    static final class EnumBuilder<B extends Enum<B>, S> extends Builder<B, S> {
 
         @Override
         public TypeConverter<B, S> build() {

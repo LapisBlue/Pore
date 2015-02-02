@@ -25,7 +25,7 @@
 package blue.lapis.pore.impl.command;
 
 import blue.lapis.pore.Pore;
-import blue.lapis.pore.converter.PoreConverter;
+import blue.lapis.pore.converter.wrapper.PoreConverter;
 import blue.lapis.pore.impl.permissions.PorePermissible;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;

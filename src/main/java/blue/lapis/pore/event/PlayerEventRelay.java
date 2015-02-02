@@ -25,8 +25,8 @@
 package blue.lapis.pore.event;
 
 import blue.lapis.pore.converter.ActionConverter;
-import blue.lapis.pore.converter.GameModeConverter;
 import blue.lapis.pore.converter.ItemStackConverter;
+import blue.lapis.pore.converter.type.GameModeConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.impl.block.PoreBlock;

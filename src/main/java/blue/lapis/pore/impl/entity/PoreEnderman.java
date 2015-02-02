@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.MaterialConverter;
-import blue.lapis.pore.converter.PoreConverter;
+import blue.lapis.pore.converter.type.MaterialConverter;
+import blue.lapis.pore.converter.wrapper.PoreConverter;
 import blue.lapis.pore.impl.block.PoreBlockState;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
 import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.entity.living.monster.Enderman;
-import org.spongepowered.api.item.ItemBlock;
 
 public class PoreEnderman extends PoreMonster implements org.bukkit.entity.Enderman {
 

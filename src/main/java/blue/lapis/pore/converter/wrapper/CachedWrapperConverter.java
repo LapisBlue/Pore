@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter;
+package blue.lapis.pore.converter.wrapper;
 
 import blue.lapis.pore.Pore;
 import com.google.common.base.Function;
@@ -201,11 +201,11 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
         }
     }
 
-    public static <B> Builder<B> builder(Class<B> base) {
+    static <B> Builder<B> builder(Class<B> base) {
         return new Builder<B>(base);
     }
 
-    public static final class Builder<B> {
+    static final class Builder<B> {
         private final Class<B> base;
         private final Set<Class<?>> registered = Sets.newHashSet();
         private final Map<Class<? extends B>, Class<?>> registry = Maps.newLinkedHashMap();

@@ -24,8 +24,8 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.DyeColorConverter;
-import blue.lapis.pore.converter.PoreConverter;
+import blue.lapis.pore.converter.type.DyeColorConverter;
+import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.animal.Sheep;

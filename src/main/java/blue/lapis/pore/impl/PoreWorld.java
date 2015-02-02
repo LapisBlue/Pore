@@ -26,10 +26,10 @@ package blue.lapis.pore.impl;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.EffectConverter;
-import blue.lapis.pore.converter.EnvironmentConverter;
-import blue.lapis.pore.converter.PoreConverter;
-import blue.lapis.pore.converter.SoundConverter;
+import blue.lapis.pore.converter.type.EnvironmentConverter;
+import blue.lapis.pore.converter.type.SoundConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
+import blue.lapis.pore.converter.wrapper.PoreConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;

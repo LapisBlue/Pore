@@ -22,28 +22,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.entity;
+package blue.lapis.pore.converter.type;
 
-import blue.lapis.pore.converter.TypeConverter;
 import com.google.common.base.Converter;
-import org.bukkit.entity.Skeleton;
-import org.spongepowered.api.entity.living.meta.SkeletonType;
-import org.spongepowered.api.entity.living.meta.SkeletonTypes;
+import org.bukkit.GameMode;
+import org.spongepowered.api.entity.player.gamemode.GameModes;
 
-public final class SkeletonConverter {
-
-    public static final Converter<Skeleton.SkeletonType, SkeletonType> CONVERTER =
-            TypeConverter.<Skeleton.SkeletonType, SkeletonType>builder()
-                    .add(Skeleton.SkeletonType.NORMAL, SkeletonTypes.NORMAL)
-                    .add(Skeleton.SkeletonType.WITHER, SkeletonTypes.WITHER)
+public final class GameModeConverter {
+    
+    public static final Converter<GameMode, org.spongepowered.api.entity.player.gamemode.GameMode> CONVERTER =
+            TypeConverter.<GameMode, org.spongepowered.api.entity.player.gamemode.GameMode>builder()
+                    .add(GameMode.SURVIVAL, GameModes.SURVIVAL)
+                    .add(GameMode.CREATIVE, GameModes.CREATIVE)
+                    .add(GameMode.ADVENTURE, GameModes.ADVENTURE)
+                    .add(GameMode.SPECTATOR, GameModes.SPECTATOR)
                     .build();
 
-    public static SkeletonType of(Skeleton.SkeletonType type) {
-        return CONVERTER.convert(type);
+    public static org.spongepowered.api.entity.player.gamemode.GameMode of(GameMode gameMode) {
+        return CONVERTER.convert(gameMode);
     }
 
-    public static Skeleton.SkeletonType of(SkeletonType type) {
-        return CONVERTER.reverse().convert(type);
+    public static GameMode of(org.spongepowered.api.entity.player.gamemode.GameMode gameMode) {
+        return CONVERTER.reverse().convert(gameMode);
     }
 
 }

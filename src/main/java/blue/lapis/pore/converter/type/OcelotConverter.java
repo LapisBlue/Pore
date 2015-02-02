@@ -22,31 +22,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter;
+package blue.lapis.pore.converter.type;
 
 import com.google.common.base.Converter;
-import org.bukkit.Rotation;
-import org.spongepowered.api.util.rotation.Rotations;
+import org.bukkit.entity.Ocelot;
+import org.spongepowered.api.entity.living.meta.OcelotType;
+import org.spongepowered.api.entity.living.meta.OcelotTypes;
 
-public final class RotationConverter {
+public final class OcelotConverter {
 
-    public static final Converter<Rotation, org.spongepowered.api.util.rotation.Rotation> CONVERTER =
-            TypeConverter.<Rotation, org.spongepowered.api.util.rotation.Rotation>builder()
-                    .add(Rotation.NONE, Rotations.TOP)
-                    .add(Rotation.CLOCKWISE_45, Rotations.TOP_RIGHT)
-                    .add(Rotation.CLOCKWISE, Rotations.RIGHT)
-                    .add(Rotation.CLOCKWISE_135, Rotations.BOTTOM_RIGHT)
-                    .add(Rotation.FLIPPED, Rotations.BOTTOM)
-                    .add(Rotation.FLIPPED_45, Rotations.BOTTOM_LEFT)
-                    .add(Rotation.COUNTER_CLOCKWISE, Rotations.LEFT)
-                    .add(Rotation.COUNTER_CLOCKWISE_45, Rotations.TOP_LEFT)
+    public static final Converter<Ocelot.Type, OcelotType> CONVERTER =
+            TypeConverter.<Ocelot.Type, OcelotType>builder()
+                    .add(Ocelot.Type.BLACK_CAT, OcelotTypes.BLACK_CAT)
+                    .add(Ocelot.Type.RED_CAT, OcelotTypes.RED_CAT)
+                    .add(Ocelot.Type.SIAMESE_CAT, OcelotTypes.SIAMESE_CAT)
+                    .add(Ocelot.Type.WILD_OCELOT, OcelotTypes.WILD_OCELOT)
                     .build();
 
-    public static org.spongepowered.api.util.rotation.Rotation of(Rotation rotation) {
-        return CONVERTER.convert(rotation);
+    public static OcelotType of(Ocelot.Type type) {
+        return CONVERTER.convert(type);
     }
 
-    public static Rotation of(org.spongepowered.api.util.rotation.Rotation rotation) {
-        return CONVERTER.reverse().convert(rotation);
+    public static Ocelot.Type of(OcelotType type) {
+        return CONVERTER.reverse().convert(type);
     }
+
 }

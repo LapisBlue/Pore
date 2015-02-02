@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.block;
 
-import blue.lapis.pore.converter.PoreConverter;
+import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Dispenser;
 import org.bukkit.inventory.Inventory;

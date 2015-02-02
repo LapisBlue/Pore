@@ -22,28 +22,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter;
+package blue.lapis.pore.converter.type;
 
 import com.google.common.base.Converter;
-import org.bukkit.GameMode;
-import org.spongepowered.api.entity.player.gamemode.GameModes;
+import org.bukkit.entity.Rabbit;
+import org.spongepowered.api.entity.living.meta.RabbitType;
+import org.spongepowered.api.entity.living.meta.RabbitTypes;
 
-public final class GameModeConverter {
-    
-    public static final Converter<GameMode, org.spongepowered.api.entity.player.gamemode.GameMode> CONVERTER =
-            TypeConverter.<GameMode, org.spongepowered.api.entity.player.gamemode.GameMode>builder()
-                    .add(GameMode.SURVIVAL, GameModes.SURVIVAL)
-                    .add(GameMode.CREATIVE, GameModes.CREATIVE)
-                    .add(GameMode.ADVENTURE, GameModes.ADVENTURE)
-                    .add(GameMode.SPECTATOR, GameModes.SPECTATOR)
-                    .build();
+public final class RabbitConverter {
 
-    public static org.spongepowered.api.entity.player.gamemode.GameMode of(GameMode gameMode) {
-        return CONVERTER.convert(gameMode);
+    public static final Converter<Rabbit.Type, RabbitType> CONVERTER = TypeConverter.<Rabbit.Type, RabbitType>builder()
+            .add(Rabbit.Type.BROWN, RabbitTypes.BROWN)
+            .add(Rabbit.Type.WHITE, RabbitTypes.WHITE)
+            .add(Rabbit.Type.BLACK, RabbitTypes.BLACK)
+            .add(Rabbit.Type.BLACK_AND_WHITE, RabbitTypes.BLACK_AND_WHITE)
+            .add(Rabbit.Type.GOLD, RabbitTypes.GOLD)
+            .add(Rabbit.Type.SALT_AND_PEPPER, RabbitTypes.SALT_AND_PEPPER)
+            .add(Rabbit.Type.THE_KILLER_BUNNY, RabbitTypes.KILLER)
+            .build();
+
+    public static RabbitType of(Rabbit.Type type) {
+        return CONVERTER.convert(type);
     }
 
-    public static GameMode of(org.spongepowered.api.entity.player.gamemode.GameMode gameMode) {
-        return CONVERTER.reverse().convert(gameMode);
+    public static Rabbit.Type of(RabbitType type) {
+        return CONVERTER.reverse().convert(type);
     }
 
 }
