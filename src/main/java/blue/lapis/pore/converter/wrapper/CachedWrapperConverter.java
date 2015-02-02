@@ -223,7 +223,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
                 if (parent == Object.class || parent == null)
                     throw new AssertionError(String.format("Pore %s does not extend the parent class %s", pore, base));
                 if (!registered.contains(parent))
-                    Pore.getLogger().warn("Parent class {} for {} ({}) is not registered", parent.getSimpleName(),
+                    Pore.getTestLogger().warn("Parent class {} for {} ({}) is not registered", parent.getSimpleName(),
                             pore.getSimpleName(), sponge.getSimpleName());
 
                 parent = parent.getSuperclass();

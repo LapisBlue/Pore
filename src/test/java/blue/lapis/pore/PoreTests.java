@@ -40,6 +40,7 @@ public final class PoreTests {
             Pore.instance = pore;
             pore.game = mock(Game.class);
             pore.logger = LoggerFactory.getLogger("Pore");
+            Pore.testLogger = pore.logger;
         }
     }
 

@@ -31,6 +31,7 @@ import blue.lapis.pore.plugin.PorePluginContainer;
 import com.google.common.base.Preconditions;
 import org.bukkit.plugin.PluginLoadOrder;
 import org.slf4j.Logger;
+import org.slf4j.helpers.NOPLogger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.event.message.CommandEvent;
 import org.spongepowered.api.event.state.PreInitializationEvent;
@@ -117,6 +118,12 @@ public final class Pore {
                 event.getArguments())) {
             event.setCancelled(true);
         }
+    }
+
+    static Logger testLogger = NOPLogger.NOP_LOGGER;
+
+    public static Logger getTestLogger() {
+        return testLogger;
     }
 
 }
