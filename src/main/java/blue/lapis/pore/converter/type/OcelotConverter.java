@@ -26,8 +26,8 @@ package blue.lapis.pore.converter.type;
 
 import com.google.common.base.Converter;
 import org.bukkit.entity.Ocelot;
-import org.spongepowered.api.entity.living.meta.OcelotType;
-import org.spongepowered.api.entity.living.meta.OcelotTypes;
+import org.spongepowered.api.entity.living.animal.OcelotType;
+import org.spongepowered.api.entity.living.animal.OcelotTypes;
 
 public final class OcelotConverter {
 

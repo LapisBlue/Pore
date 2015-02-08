@@ -26,12 +26,12 @@ package blue.lapis.pore.converter.type;
 
 import com.google.common.base.Converter;
 import org.bukkit.DyeColor;
-import org.spongepowered.api.entity.living.meta.DyeColors;
+import org.spongepowered.api.entity.living.animal.DyeColors;
 
 public final class DyeColorConverter {
 
-    public static Converter<DyeColor, org.spongepowered.api.entity.living.meta.DyeColor> CONVERTER =
-            TypeConverter.<DyeColor, org.spongepowered.api.entity.living.meta.DyeColor>builder()
+    public static Converter<DyeColor, org.spongepowered.api.entity.living.animal.DyeColor> CONVERTER =
+            TypeConverter.<DyeColor, org.spongepowered.api.entity.living.animal.DyeColor>builder()
                     .add(DyeColor.BLACK, DyeColors.BLACK)
                     .add(DyeColor.BLUE, DyeColors.BLUE)
                     .add(DyeColor.BROWN, DyeColors.BROWN)
@@ -50,11 +50,11 @@ public final class DyeColorConverter {
                     .add(DyeColor.YELLOW, DyeColors.YELLOW)
                     .build();
 
-    public static org.spongepowered.api.entity.living.meta.DyeColor of(org.bukkit.DyeColor color) {
+    public static org.spongepowered.api.entity.living.animal.DyeColor of(org.bukkit.DyeColor color) {
         return CONVERTER.convert(color);
     }
 
-    public static DyeColor of(org.spongepowered.api.entity.living.meta.DyeColor color) {
+    public static DyeColor of(org.spongepowered.api.entity.living.animal.DyeColor color) {
         return CONVERTER.reverse().convert(color);
     }
 
