@@ -24,57 +24,60 @@
  */
 package blue.lapis.pore.impl.event.block;
 
-import blue.lapis.pore.impl.block.PoreBlock;
-import blue.lapis.pore.impl.entity.PorePlayer;
+import com.google.common.base.Preconditions;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerBreakBlockEvent;
+import org.bukkit.event.block.BlockDamageEvent;
+import org.bukkit.event.block.BlockEvent;
+import org.bukkit.inventory.ItemStack;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+public class PoreBlockDamageEvent extends BlockDamageEvent {
 
-public class PoreBlockBreakEvent extends BlockBreakEvent {
+    private final BlockEvent handle;
 
-    private final PlayerBreakBlockEvent handle;
-
-    public PoreBlockBreakEvent(PlayerBreakBlockEvent handle) {
-        super(null, null);
-        this.handle = checkNotNull(handle, "handle");
+    public PoreBlockDamageEvent(BlockEvent handle) {
+        super(null, null, null, false);
+        this.handle = Preconditions.checkNotNull(handle, "handle");
     }
 
-    public PlayerBreakBlockEvent getHandle() {
+    public BlockEvent getHandle() {
         return handle;
     }
 
     @Override
-    public Player getPlayer() {
-        return PorePlayer.of(handle.getPlayer());
-    }
-
-    @Override
     public Block getBlock() {
-        return PoreBlock.of(handle.getBlock());
-    }
-
-    @Override
-    public int getExpToDrop() {
         throw new NotImplementedException(); // TODO
     }
 
     @Override
-    public void setExpToDrop(int exp) {
+    public Player getPlayer() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public ItemStack getItemInHand() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public boolean getInstaBreak() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public void setInstaBreak(boolean bool) {
         throw new NotImplementedException(); // TODO
     }
 
     @Override
     public boolean isCancelled() {
-        return handle.isCancelled();
+        throw new NotImplementedException(); // TODO
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        handle.setCancelled(cancel);
+        throw new NotImplementedException(); // TODO
     }
 
 }

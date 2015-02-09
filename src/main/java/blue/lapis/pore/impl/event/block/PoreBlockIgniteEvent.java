@@ -24,57 +24,60 @@
  */
 package blue.lapis.pore.impl.event.block;
 
-import blue.lapis.pore.impl.block.PoreBlock;
-import blue.lapis.pore.impl.entity.PorePlayer;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerBreakBlockEvent;
+import org.spongepowered.api.event.block.BlockIgniteEvent;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class PoreBlockBreakEvent extends BlockBreakEvent {
+public class PoreBlockIgniteEvent extends org.bukkit.event.block.BlockIgniteEvent {
 
-    private final PlayerBreakBlockEvent handle;
+    private final BlockIgniteEvent event;
 
-    public PoreBlockBreakEvent(PlayerBreakBlockEvent handle) {
-        super(null, null);
-        this.handle = checkNotNull(handle, "handle");
+    public PoreBlockIgniteEvent(BlockIgniteEvent event) {
+        super(null, null, null, null);
+        this.event = checkNotNull(event, "event");
     }
 
-    public PlayerBreakBlockEvent getHandle() {
-        return handle;
-    }
-
-    @Override
-    public Player getPlayer() {
-        return PorePlayer.of(handle.getPlayer());
+    public BlockIgniteEvent getEvent() {
+        return event;
     }
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(handle.getBlock());
-    }
-
-    @Override
-    public int getExpToDrop() {
         throw new NotImplementedException(); // TODO
     }
 
     @Override
-    public void setExpToDrop(int exp) {
+    public Player getPlayer() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public Entity getIgnitingEntity() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public Block getIgnitingBlock() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public IgniteCause getCause() {
         throw new NotImplementedException(); // TODO
     }
 
     @Override
     public boolean isCancelled() {
-        return handle.isCancelled();
+        throw new NotImplementedException(); // TODO
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        handle.setCancelled(cancel);
+        throw new NotImplementedException(); // TODO
     }
 
 }

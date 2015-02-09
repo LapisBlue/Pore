@@ -24,57 +24,38 @@
  */
 package blue.lapis.pore.impl.event.block;
 
-import blue.lapis.pore.impl.block.PoreBlock;
-import blue.lapis.pore.impl.entity.PorePlayer;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerBreakBlockEvent;
+import org.spongepowered.api.event.block.BlockBurnEvent;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class PoreBlockBreakEvent extends BlockBreakEvent {
+public class PoreBlockBurnEvent extends org.bukkit.event.block.BlockBurnEvent {
 
-    private final PlayerBreakBlockEvent handle;
+    private final BlockBurnEvent handle;
 
-    public PoreBlockBreakEvent(PlayerBreakBlockEvent handle) {
-        super(null, null);
+    public PoreBlockBurnEvent(BlockBurnEvent handle) {
+        super(null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public PlayerBreakBlockEvent getHandle() {
+    public BlockBurnEvent getHandle() {
         return handle;
     }
 
     @Override
-    public Player getPlayer() {
-        return PorePlayer.of(handle.getPlayer());
-    }
-
-    @Override
     public Block getBlock() {
-        return PoreBlock.of(handle.getBlock());
-    }
-
-    @Override
-    public int getExpToDrop() {
-        throw new NotImplementedException(); // TODO
-    }
-
-    @Override
-    public void setExpToDrop(int exp) {
         throw new NotImplementedException(); // TODO
     }
 
     @Override
     public boolean isCancelled() {
-        return handle.isCancelled();
+        throw new NotImplementedException(); // TODO
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        handle.setCancelled(cancel);
+        throw new NotImplementedException(); // TODO
     }
 
 }

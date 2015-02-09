@@ -24,57 +24,74 @@
  */
 package blue.lapis.pore.impl.event.block;
 
-import blue.lapis.pore.impl.block.PoreBlock;
-import blue.lapis.pore.impl.entity.PorePlayer;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerBreakBlockEvent;
+import org.bukkit.event.block.BlockEvent;
+import org.bukkit.event.block.BlockMultiPlaceEvent;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class PoreBlockBreakEvent extends BlockBreakEvent {
+public class PoreBlockMultiPlaceEvent extends BlockMultiPlaceEvent {
 
-    private final PlayerBreakBlockEvent handle;
+    private final BlockEvent handle;
 
-    public PoreBlockBreakEvent(PlayerBreakBlockEvent handle) {
-        super(null, null);
+    public PoreBlockMultiPlaceEvent(BlockEvent handle) {
+        super(null, null, null, null, false);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public PlayerBreakBlockEvent getHandle() {
+    public BlockEvent getHandle() {
         return handle;
     }
 
     @Override
-    public Player getPlayer() {
-        return PorePlayer.of(handle.getPlayer());
-    }
-
-    @Override
     public Block getBlock() {
-        return PoreBlock.of(handle.getBlock());
-    }
-
-    @Override
-    public int getExpToDrop() {
         throw new NotImplementedException(); // TODO
     }
 
     @Override
-    public void setExpToDrop(int exp) {
+    public Player getPlayer() {
         throw new NotImplementedException(); // TODO
     }
 
     @Override
-    public boolean isCancelled() {
-        return handle.isCancelled();
+    public Block getBlockPlaced() {
+        throw new NotImplementedException(); // TODO
     }
 
     @Override
-    public void setCancelled(boolean cancel) {
-        handle.setCancelled(cancel);
+    public BlockState getBlockReplacedState() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public Block getBlockAgainst() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public List<BlockState> getReplacedBlockStates() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public ItemStack getItemInHand() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public boolean canBuild() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public void setBuild(boolean canBuild) {
+        throw new NotImplementedException(); // TODO
     }
 
 }
