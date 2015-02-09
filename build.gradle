@@ -54,6 +54,7 @@ dependencies {
 
 // Read source files using UTF-8
 tasks.withType(JavaCompile) {
+    options.compilerArgs += ['-Xlint:all', '-Xlint:-deprecation']
     options.encoding = 'UTF-8'
 }
 
