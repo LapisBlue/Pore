@@ -26,6 +26,7 @@ package blue.lapis.pore.event;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.impl.event.block.PoreBlockBreakEvent;
+import blue.lapis.pore.impl.event.player.PoreAsyncPlayerChatEvent;
 import blue.lapis.pore.impl.event.player.PorePlayerJoinEvent;
 import blue.lapis.pore.impl.event.player.PorePlayerQuitEvent;
 import blue.lapis.pore.impl.event.server.PoreServerListPingEvent;
@@ -51,6 +52,7 @@ public final class PoreEventWrapper {
     public static void register() {
         register(PorePlayerJoinEvent.class);
         register(PorePlayerQuitEvent.class);
+        register(PoreAsyncPlayerChatEvent.class);
 
         register(PoreBlockBreakEvent.class);
 
