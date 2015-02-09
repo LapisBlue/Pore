@@ -106,7 +106,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public InetSocketAddress getAddress() {
-        throw new NotImplementedException();
+        return getHandle().getConnection().getAddress();
     }
 
     @Override
@@ -653,7 +653,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void sendPluginMessage(Plugin source, String channel, byte[] message) {
-        throw new NotImplementedException();
+        getHandle().getConnection().sendCustomPayload(source, channel, message);
     }
 
     @Override

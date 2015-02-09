@@ -60,7 +60,7 @@ public class PoreChunk extends PoreWrapper<Chunk> implements org.bukkit.Chunk {
 
     @Override
     public World getWorld() {
-        throw new NotImplementedException();
+        return PoreWorld.of(getHandle().getWorld());
     }
 
     @Override

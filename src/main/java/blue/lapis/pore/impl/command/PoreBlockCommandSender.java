@@ -22,53 +22,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.impl.block;
+package blue.lapis.pore.impl.command;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.Server;
+import org.bukkit.block.Block;
 import org.bukkit.command.BlockCommandSender;
-import org.bukkit.permissions.Permission;
-import org.bukkit.permissions.PermissionAttachment;
-import org.bukkit.permissions.PermissionAttachmentInfo;
-import org.bukkit.plugin.Plugin;
-import org.spongepowered.api.block.data.CommandBlock;
+import org.spongepowered.api.util.command.source.CommandBlockSource;
 
-import java.util.Set;
+public class PoreBlockCommandSender extends PoreCommandSender implements BlockCommandSender {
 
-public class PoreCommandBlock extends PoreBlockState implements org.bukkit.block.CommandBlock {
-
-    public static PoreCommandBlock of(CommandBlock handle) {
-        return PoreConverter.of(PoreCommandBlock.class, handle);
+    public static PoreBlockCommandSender of(CommandBlockSource handle) {
+        return PoreConverter.of(PoreBlockCommandSender.class, handle);
     }
 
-    protected PoreCommandBlock(CommandBlock handle) {
+    protected PoreBlockCommandSender(CommandBlockSource handle) {
         super(handle);
     }
 
     @Override
-    public CommandBlock getHandle() {
-        return (CommandBlock) super.getHandle();
+    public CommandBlockSource getHandle() {
+        return (CommandBlockSource) super.getHandle();
     }
 
     @Override
-    public String getCommand() {
-        throw new NotImplementedException(); // TODO
-    }
-
-    @Override
-    public void setCommand(String command) {
-        throw new NotImplementedException(); // TODO
-    }
-
-    @Override
-    public String getName() {
-        throw new NotImplementedException(); // TODO
-    }
-
-    @Override
-    public void setName(String name) {
-        throw new NotImplementedException(); // TODO
+    public Block getBlock() {
+        throw new NotImplementedException();
     }
 
 }

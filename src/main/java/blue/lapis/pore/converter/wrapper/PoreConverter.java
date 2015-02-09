@@ -40,6 +40,7 @@ import blue.lapis.pore.impl.block.PoreHopper;
 import blue.lapis.pore.impl.block.PoreNoteBlock;
 import blue.lapis.pore.impl.block.PoreSign;
 import blue.lapis.pore.impl.block.PoreSkull;
+import blue.lapis.pore.impl.command.PoreBlockCommandSender;
 import blue.lapis.pore.impl.command.PoreCommandSender;
 import blue.lapis.pore.impl.entity.PoreAgeable;
 import blue.lapis.pore.impl.entity.PoreAmbient;
@@ -228,6 +229,7 @@ import org.spongepowered.api.entity.weather.Lightning;
 import org.spongepowered.api.entity.weather.WeatherEffect;
 import org.spongepowered.api.status.Favicon;
 import org.spongepowered.api.util.command.CommandSource;
+import org.spongepowered.api.util.command.source.CommandBlockSource;
 import org.spongepowered.api.world.Chunk;
 import org.spongepowered.api.world.World;
 
@@ -349,6 +351,7 @@ public class PoreConverter {
 
             .register(Tamer.class, PoreAnimalTamer.class)
             .register(CommandSource.class, PoreCommandSender.class)
+                .register(CommandBlockSource.class, PoreBlockCommandSender.class)
 
             .build();
 
