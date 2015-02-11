@@ -43,6 +43,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.objectweb.asm.AnnotationVisitor;
 import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 import org.spongepowered.api.util.event.Order;
@@ -55,15 +56,21 @@ public final class PoreListenerGenerator {
 
     private static final String PACKAGE = PoreListenerGenerator.class.getPackage().getName() + '.';
 
-    private static final String ANNOTATION = Type.getDescriptor(Subscribe.class);
+    private static final String ANNOTATION_DESCRIPTOR = Type.getDescriptor(Subscribe.class);
 
     private static final String PRIORITY_CLASS = Type.getInternalName(EventPriority.class);
     private static final String PRIORITY_DESCRIPTOR = Type.getDescriptor(EventPriority.class);
     private static final String ORDER_DESCRIPTOR = Type.getDescriptor(Order.class);
 
     private static final String EVENT_WRAPPER_CLASS = Type.getInternalName(PoreEventWrapper.class);
-    private static final String CALL_EVENT =
-            "(L" + Type.getInternalName(Event.class) + ';' + PRIORITY_DESCRIPTOR + ")V";
+
+    private static final String EVENT_CLASS = Type.getInternalName(Event.class);
+    private static final String SPONGE_EVENT_CLASS = Type.getInternalName(org.spongepowered.api.util.event.Event.class);
+
+    private static final String GET_CACHE = "(L" + SPONGE_EVENT_CLASS + ";)L" + EVENT_CLASS + ';';
+    private static final String SET_CACHE = "(L" + SPONGE_EVENT_CLASS + ";L" + EVENT_CLASS + ";)V";
+
+    private static final String CALL_EVENT = "(L" + EVENT_CLASS + ';' + PRIORITY_DESCRIPTOR + ")V";
 
     private static byte[] generate(String name, Class<?> pore, Class<?> sponge, EventPriority priority, Order order) {
         name = name.replace('.', '/');
@@ -88,19 +95,33 @@ public final class PoreListenerGenerator {
         {
             mv = cw.visitMethod(ACC_PUBLIC, "on" + sponge.getSimpleName(), spongeSignature, null, null);
             {
-                av = mv.visitAnnotation(ANNOTATION, true);
+                av = mv.visitAnnotation(ANNOTATION_DESCRIPTOR, true);
                 av.visitEnum("order", ORDER_DESCRIPTOR, order.name());
                 av.visitEnd();
             }
             mv.visitCode();
+            mv.visitVarInsn(ALOAD, 1);
+            mv.visitMethodInsn(INVOKESTATIC, EVENT_WRAPPER_CLASS, "get", GET_CACHE, false);
+            mv.visitTypeInsn(CHECKCAST, poreName);
+            mv.visitVarInsn(ASTORE, 2);
+            mv.visitVarInsn(ALOAD, 2);
+            Label l0 = new Label();
+            mv.visitJumpInsn(IFNONNULL, l0);
+            mv.visitVarInsn(ALOAD, 1);
             mv.visitTypeInsn(NEW, poreName);
             mv.visitInsn(DUP);
             mv.visitVarInsn(ALOAD, 1);
             mv.visitMethodInsn(INVOKESPECIAL, poreName, "<init>", spongeSignature, false);
+            mv.visitInsn(DUP);
+            mv.visitVarInsn(ASTORE, 2);
+            mv.visitMethodInsn(INVOKESTATIC, EVENT_WRAPPER_CLASS, "set", SET_CACHE, false);
+            mv.visitLabel(l0);
+            mv.visitFrame(F_APPEND, 1, new Object[]{poreName}, 0, null);
+            mv.visitVarInsn(ALOAD, 2);
             mv.visitFieldInsn(GETSTATIC, PRIORITY_CLASS, priority.name(), PRIORITY_DESCRIPTOR);
             mv.visitMethodInsn(INVOKESTATIC, EVENT_WRAPPER_CLASS, "call", CALL_EVENT, false);
             mv.visitInsn(RETURN);
-            mv.visitMaxs(3, 2);
+            mv.visitMaxs(4, 3);
             mv.visitEnd();
         }
         cw.visitEnd();

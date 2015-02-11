@@ -35,6 +35,7 @@ import blue.lapis.pore.impl.event.player.PorePlayerJoinEvent;
 import blue.lapis.pore.impl.event.player.PorePlayerQuitEvent;
 import blue.lapis.pore.impl.event.server.PoreServerListPingEvent;
 
+import com.google.common.collect.MapMaker;
 import com.google.common.collect.Maps;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
@@ -48,6 +49,7 @@ import org.spongepowered.api.service.event.EventManager;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.util.EnumMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 public final class PoreEventWrapper {
@@ -153,6 +155,17 @@ public final class PoreEventWrapper {
                 Pore.getGame().getEventManager().unregister(listener);
             }
         }
+    }
+
+    private static final Map<org.spongepowered.api.util.event.Event, Event> cache = new MapMaker().weakKeys().makeMap();
+
+    @SuppressWarnings("unchecked")
+    public static <T extends Event> T get(org.spongepowered.api.util.event.Event handle) {
+        return handle != null ? (T) cache.get(handle) : null;
+    }
+
+    public static void set(org.spongepowered.api.util.event.Event handle, Event event) {
+        cache.put(handle, event);
     }
 
 }
