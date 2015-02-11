@@ -234,7 +234,7 @@ import org.spongepowered.api.util.command.source.CommandBlockSource;
 import org.spongepowered.api.world.Chunk;
 import org.spongepowered.api.world.World;
 
-public class PoreConverter {
+public class WrapperConverter {
 
     static final CachedWrapperConverter<PoreWrapper> converter = CachedWrapperConverter.builder(PoreWrapper.class)
             .register(Favicon.class, PoreCachedServerIcon.class)

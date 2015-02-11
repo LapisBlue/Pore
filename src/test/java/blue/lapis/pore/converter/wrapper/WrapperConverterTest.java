@@ -56,7 +56,7 @@ public class WrapperConverterTest {
         ImmutableListMultimap.Builder<Class<?>, Class<?>> builder = ImmutableListMultimap.builder();
 
         for (Map.Entry<Class<?>, CachedWrapperConverter.Converter<?, ? extends PoreWrapper>> entry :
-                PoreConverter.converter.registry.entrySet()) {
+                WrapperConverter.converter.registry.entrySet()) {
 
             scan(builder, entry.getKey(), null, entry.getValue());
         }
@@ -99,7 +99,7 @@ public class WrapperConverterTest {
     @Test
     public void resolve() {
         for (Class<?> pore : testRegistry.keySet()) {
-            assertEquals(pore, PoreConverter.of(create(pore)).getClass());
+            assertEquals(pore, WrapperConverter.of(create(pore)).getClass());
         }
     }
 }

@@ -27,8 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.SoundConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import com.google.common.base.Optional;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Achievement;
@@ -58,7 +57,7 @@ import java.util.UUID;
 public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Player {
 
     public static PorePlayer of(Player handle) {
-        return PoreConverter.of(PorePlayer.class, handle);
+        return WrapperConverter.of(PorePlayer.class, handle);
     }
 
     protected PorePlayer(Player handle) {
@@ -67,7 +66,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public Player getHandle() {
-        return (Player)super.getHandle();
+        return (Player) super.getHandle();
     }
 
     @Override
@@ -207,8 +206,8 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void playSound(Location location, Sound sound, float volume, float pitch) {
-        getHandle().playSound(SoundConverter.of(sound), VectorConverter.create3d(location), (double)volume,
-                (double)pitch);
+        getHandle().playSound(SoundConverter.of(sound), VectorConverter.create3d(location), (double) volume,
+                (double) pitch);
     }
 
     @Override
@@ -217,7 +216,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
         Optional<SoundType> spongeSound = Pore.getGame().getRegistry().getSound(sound);
         if (spongeSound.isPresent()) {
             getHandle().playSound(spongeSound.get(), VectorConverter.create3d(location),
-                    (double)volume, (double)pitch);
+                    (double) volume, (double) pitch);
         }
     }
 

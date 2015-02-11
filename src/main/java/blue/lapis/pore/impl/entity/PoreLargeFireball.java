@@ -24,14 +24,13 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.spongepowered.api.entity.projectile.fireball.LargeFireball;
 
 public class PoreLargeFireball extends PoreFireball implements org.bukkit.entity.LargeFireball {
 
     public static PoreLargeFireball of(LargeFireball handle) {
-        return PoreConverter.of(PoreLargeFireball.class, handle);
+        return WrapperConverter.of(PoreLargeFireball.class, handle);
     }
 
     protected PoreLargeFireball(LargeFireball handle) {
@@ -40,7 +39,7 @@ public class PoreLargeFireball extends PoreFireball implements org.bukkit.entity
 
     @Override
     public LargeFireball getHandle() {
-        return (LargeFireball)super.getHandle();
+        return (LargeFireball) super.getHandle();
     }
 
 }

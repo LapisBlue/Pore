@@ -25,8 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.type.ArtConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.Art;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.hanging.Painting;
@@ -34,7 +33,7 @@ import org.spongepowered.api.entity.hanging.Painting;
 public class PorePainting extends PoreHanging implements org.bukkit.entity.Painting {
 
     public static PorePainting of(Painting handle) {
-        return PoreConverter.of(PorePainting.class, handle);
+        return WrapperConverter.of(PorePainting.class, handle);
     }
 
     protected PorePainting(Painting handle) {
@@ -43,7 +42,7 @@ public class PorePainting extends PoreHanging implements org.bukkit.entity.Paint
 
     @Override
     public Painting getHandle() {
-        return (Painting)super.getHandle();
+        return (Painting) super.getHandle();
     }
 
     @Override

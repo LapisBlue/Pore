@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.block;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.inventory.Inventory;
 import org.spongepowered.api.block.data.Hopper;
@@ -33,7 +32,7 @@ import org.spongepowered.api.block.data.Hopper;
 public class PoreHopper extends PoreBlockState implements org.bukkit.block.Hopper {
 
     public static PoreHopper of(Hopper handle) {
-        return PoreConverter.of(PoreHopper.class, handle);
+        return WrapperConverter.of(PoreHopper.class, handle);
     }
 
     protected PoreHopper(Hopper handle) {
@@ -42,7 +41,7 @@ public class PoreHopper extends PoreBlockState implements org.bukkit.block.Hoppe
 
     @Override
     public Hopper getHandle() {
-        return (Hopper)super.getHandle();
+        return (Hopper) super.getHandle();
     }
 
     @Override

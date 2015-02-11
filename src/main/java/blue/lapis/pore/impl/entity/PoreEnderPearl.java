@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.projectile.EnderPearl;
 
 public class PoreEnderPearl extends PoreProjectile implements org.bukkit.entity.EnderPearl {
 
     public static PoreEnderPearl of(EnderPearl handle) {
-        return PoreConverter.of(PoreEnderPearl.class, handle);
+        return WrapperConverter.of(PoreEnderPearl.class, handle);
     }
 
     protected PoreEnderPearl(EnderPearl handle) {
@@ -41,7 +40,7 @@ public class PoreEnderPearl extends PoreProjectile implements org.bukkit.entity.
 
     @Override
     public EnderPearl getHandle() {
-        return (EnderPearl)super.getHandle();
+        return (EnderPearl) super.getHandle();
     }
 
     @Override

@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.Silverfish;
 
 public class PoreSilverfish extends PoreMonster implements org.bukkit.entity.Silverfish {
 
     public static PoreSilverfish of(Silverfish handle) {
-        return PoreConverter.of(PoreSilverfish.class, handle);
+        return WrapperConverter.of(PoreSilverfish.class, handle);
     }
 
     protected PoreSilverfish(Silverfish handle) {
@@ -41,7 +40,7 @@ public class PoreSilverfish extends PoreMonster implements org.bukkit.entity.Sil
 
     @Override
     public Silverfish getHandle() {
-        return (Silverfish)super.getHandle();
+        return (Silverfish) super.getHandle();
     }
 
     @Override

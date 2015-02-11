@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.command;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.command.BlockCommandSender;
@@ -34,7 +33,7 @@ import org.spongepowered.api.util.command.source.CommandBlockSource;
 public class PoreBlockCommandSender extends PoreCommandSender implements BlockCommandSender {
 
     public static PoreBlockCommandSender of(CommandBlockSource handle) {
-        return PoreConverter.of(PoreBlockCommandSender.class, handle);
+        return WrapperConverter.of(PoreBlockCommandSender.class, handle);
     }
 
     protected PoreBlockCommandSender(CommandBlockSource handle) {
@@ -43,7 +42,7 @@ public class PoreBlockCommandSender extends PoreCommandSender implements BlockCo
 
     @Override
     public CommandBlockSource getHandle() {
-        return (CommandBlockSource)super.getHandle();
+        return (CommandBlockSource) super.getHandle();
     }
 
     @Override

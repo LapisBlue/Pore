@@ -25,8 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.type.DirectionConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.BlockFace;
 import org.spongepowered.api.entity.hanging.Hanging;
@@ -34,7 +33,7 @@ import org.spongepowered.api.entity.hanging.Hanging;
 public class PoreHanging extends PoreEntity implements org.bukkit.entity.Hanging {
 
     public static PoreHanging of(Hanging handle) {
-        return PoreConverter.of(PoreHanging.class, handle);
+        return WrapperConverter.of(PoreHanging.class, handle);
     }
 
     protected PoreHanging(Hanging handle) {
@@ -43,7 +42,7 @@ public class PoreHanging extends PoreEntity implements org.bukkit.entity.Hanging
 
     @Override
     public Hanging getHandle() {
-        return (Hanging)super.getHandle();
+        return (Hanging) super.getHandle();
     }
 
     @Override

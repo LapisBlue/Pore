@@ -25,15 +25,14 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.type.OcelotConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.animal.Ocelot;
 
 public class PoreOcelot extends PoreTameable implements org.bukkit.entity.Ocelot {
 
     public static PoreOcelot of(Ocelot handle) {
-        return PoreConverter.of(PoreOcelot.class, handle);
+        return WrapperConverter.of(PoreOcelot.class, handle);
     }
 
     protected PoreOcelot(Ocelot handle) {
@@ -42,7 +41,7 @@ public class PoreOcelot extends PoreTameable implements org.bukkit.entity.Ocelot
 
     @Override
     public Ocelot getHandle() {
-        return (Ocelot)super.getHandle();
+        return (Ocelot) super.getHandle();
     }
 
     @Override

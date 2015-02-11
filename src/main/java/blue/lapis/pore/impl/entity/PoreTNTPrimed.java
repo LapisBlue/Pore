@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -35,7 +34,7 @@ import org.spongepowered.api.entity.explosive.PrimedTNT;
 public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
 
     public static PoreTNTPrimed of(PrimedTNT handle) {
-        return PoreConverter.of(PoreTNTPrimed.class, handle);
+        return WrapperConverter.of(PoreTNTPrimed.class, handle);
     }
 
     protected PoreTNTPrimed(PrimedTNT handle) {
@@ -44,7 +43,7 @@ public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
 
     @Override
     public PrimedTNT getHandle() {
-        return (PrimedTNT)super.getHandle();
+        return (PrimedTNT) super.getHandle();
     }
 
     @Override

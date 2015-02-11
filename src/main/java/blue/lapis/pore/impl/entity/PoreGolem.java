@@ -24,14 +24,13 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.spongepowered.api.entity.living.golem.Golem;
 
 public class PoreGolem extends PoreCreature implements org.bukkit.entity.Golem {
 
     public static PoreGolem of(Golem handle) {
-        return PoreConverter.of(PoreGolem.class, handle);
+        return WrapperConverter.of(PoreGolem.class, handle);
     }
 
     protected PoreGolem(Golem handle) {
@@ -40,7 +39,7 @@ public class PoreGolem extends PoreCreature implements org.bukkit.entity.Golem {
 
     @Override
     public Golem getHandle() {
-        return (Golem)super.getHandle();
+        return (Golem) super.getHandle();
     }
 
 }

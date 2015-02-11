@@ -25,15 +25,14 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.type.SkeletonConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.Skeleton;
 
 public class PoreSkeleton extends PoreMonster implements org.bukkit.entity.Skeleton {
 
     public static PoreSkeleton of(Skeleton handle) {
-        return PoreConverter.of(PoreSkeleton.class, handle);
+        return WrapperConverter.of(PoreSkeleton.class, handle);
     }
 
     protected PoreSkeleton(Skeleton handle) {
@@ -42,7 +41,7 @@ public class PoreSkeleton extends PoreMonster implements org.bukkit.entity.Skele
 
     @Override
     public Skeleton getHandle() {
-        return (Skeleton)super.getHandle();
+        return (Skeleton) super.getHandle();
     }
 
     @Override

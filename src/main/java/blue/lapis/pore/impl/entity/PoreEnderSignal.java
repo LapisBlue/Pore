@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EnderSignal;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.projectile.EyeOfEnder;
@@ -33,7 +32,7 @@ import org.spongepowered.api.entity.projectile.EyeOfEnder;
 public class PoreEnderSignal extends PoreEntity implements EnderSignal {
 
     public static PoreEnderSignal of(EyeOfEnder handle) {
-        return PoreConverter.of(PoreEnderSignal.class, handle);
+        return WrapperConverter.of(PoreEnderSignal.class, handle);
     }
 
     protected PoreEnderSignal(EyeOfEnder handle) {
@@ -42,7 +41,7 @@ public class PoreEnderSignal extends PoreEntity implements EnderSignal {
 
     @Override
     public EyeOfEnder getHandle() {
-        return (EyeOfEnder)super.getHandle();
+        return (EyeOfEnder) super.getHandle();
     }
 
     @Override

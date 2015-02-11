@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.command;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
@@ -34,7 +33,7 @@ import org.spongepowered.api.util.command.source.ConsoleSource;
 public class PoreConsoleCommandSender extends PoreCommandSender implements ConsoleCommandSender {
 
     public static PoreConsoleCommandSender of(ConsoleSource handle) {
-        return PoreConverter.of(PoreConsoleCommandSender.class, handle);
+        return WrapperConverter.of(PoreConsoleCommandSender.class, handle);
     }
 
     protected PoreConsoleCommandSender(ConsoleSource handle) {
@@ -43,7 +42,7 @@ public class PoreConsoleCommandSender extends PoreCommandSender implements Conso
 
     @Override
     public ConsoleSource getHandle() {
-        return (ConsoleSource)super.getHandle();
+        return (ConsoleSource) super.getHandle();
     }
 
     @Override

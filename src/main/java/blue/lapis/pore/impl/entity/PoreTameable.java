@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Creature;
 import org.spongepowered.api.entity.living.Tameable;
@@ -34,15 +33,15 @@ import org.spongepowered.api.entity.living.animal.Animal;
 public class PoreTameable extends PoreAnimals implements org.bukkit.entity.Tameable, Creature {
 
     public static PoreTameable of(Tameable handle) {
-        return PoreConverter.of(PoreTameable.class, handle);
+        return WrapperConverter.of(PoreTameable.class, handle);
     }
 
     protected PoreTameable(Tameable handle) {
-        super((Animal)handle);
+        super((Animal) handle);
     }
 
     private Tameable getTameable() {
-        return (Tameable)getHandle();
+        return (Tameable) getHandle();
     }
 
     @Override
@@ -62,6 +61,6 @@ public class PoreTameable extends PoreAnimals implements org.bukkit.entity.Tamea
 
     @Override
     public void setOwner(AnimalTamer tamer) {
-        getTameable().setOwner(((PoreAnimalTamer)tamer).getHandle());
+        getTameable().setOwner(((PoreAnimalTamer) tamer).getHandle());
     }
 }

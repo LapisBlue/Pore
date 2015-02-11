@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.util.PoreWrapper;
@@ -42,7 +42,7 @@ import java.util.Collection;
 public class PoreChunk extends PoreWrapper<Chunk> implements org.bukkit.Chunk {
 
     public static PoreChunk of(Chunk handle) {
-        return PoreConverter.of(PoreChunk.class, handle);
+        return WrapperConverter.of(PoreChunk.class, handle);
     }
 
     protected PoreChunk(Chunk handle) {

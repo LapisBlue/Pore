@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
@@ -34,7 +33,7 @@ import org.spongepowered.api.entity.living.Agent;
 public class PoreCreature extends PoreLivingEntity implements Creature {
 
     public static PoreCreature of(Agent handle) {
-        return PoreConverter.of(PoreCreature.class, handle);
+        return WrapperConverter.of(PoreCreature.class, handle);
     }
 
     protected PoreCreature(Agent handle) {
@@ -43,7 +42,7 @@ public class PoreCreature extends PoreLivingEntity implements Creature {
 
     @Override
     public Agent getHandle() {
-        return (Agent)super.getHandle();
+        return (Agent) super.getHandle();
     }
 
     @Override

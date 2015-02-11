@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fish;
@@ -34,7 +33,7 @@ import org.spongepowered.api.entity.projectile.FishHook;
 public class PoreFish extends PoreProjectile implements Fish {
 
     public static PoreFish of(FishHook handle) {
-        return PoreConverter.of(PoreFish.class, handle);
+        return WrapperConverter.of(PoreFish.class, handle);
     }
 
     protected PoreFish(FishHook handle) {
@@ -43,7 +42,7 @@ public class PoreFish extends PoreProjectile implements Fish {
 
     @Override
     public FishHook getHandle() {
-        return (FishHook)super.getHandle();
+        return (FishHook) super.getHandle();
     }
 
     @Override

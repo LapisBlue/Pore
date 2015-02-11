@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.hanging.LeashHitch;
 
 public class PoreLeashHitch extends PoreHanging implements org.bukkit.entity.LeashHitch {
 
     public static PoreLeashHitch of(LeashHitch handle) {
-        return PoreConverter.of(PoreLeashHitch.class, handle);
+        return WrapperConverter.of(PoreLeashHitch.class, handle);
     }
 
     protected PoreLeashHitch(LeashHitch handle) {
@@ -41,7 +40,7 @@ public class PoreLeashHitch extends PoreHanging implements org.bukkit.entity.Lea
 
     @Override
     public LeashHitch getHandle() {
-        return (LeashHitch)super.getHandle();
+        return (LeashHitch) super.getHandle();
     }
 
     @Override

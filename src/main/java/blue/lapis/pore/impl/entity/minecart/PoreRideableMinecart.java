@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.entity.minecart;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.RideableMinecart;
 import org.spongepowered.api.entity.vehicle.minecart.MinecartRideable;
@@ -33,7 +32,7 @@ import org.spongepowered.api.entity.vehicle.minecart.MinecartRideable;
 public class PoreRideableMinecart extends PoreMinecart implements RideableMinecart {
 
     public static PoreRideableMinecart of(MinecartRideable handle) {
-        return PoreConverter.of(PoreRideableMinecart.class, handle);
+        return WrapperConverter.of(PoreRideableMinecart.class, handle);
     }
 
     protected PoreRideableMinecart(MinecartRideable handle) {
@@ -42,7 +41,7 @@ public class PoreRideableMinecart extends PoreMinecart implements RideableMineca
 
     @Override
     public MinecartRideable getHandle() {
-        return (MinecartRideable)super.getHandle();
+        return (MinecartRideable) super.getHandle();
     }
 
     @Override

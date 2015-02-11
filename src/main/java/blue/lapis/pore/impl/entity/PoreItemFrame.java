@@ -26,8 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.ItemStackConverter;
 import blue.lapis.pore.converter.type.RotationConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.Rotation;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -36,7 +35,7 @@ import org.spongepowered.api.entity.hanging.ItemFrame;
 public class PoreItemFrame extends PoreHanging implements org.bukkit.entity.ItemFrame {
 
     public static PoreItemFrame of(ItemFrame handle) {
-        return PoreConverter.of(PoreItemFrame.class, handle);
+        return WrapperConverter.of(PoreItemFrame.class, handle);
     }
 
     protected PoreItemFrame(ItemFrame handle) {
@@ -45,7 +44,7 @@ public class PoreItemFrame extends PoreHanging implements org.bukkit.entity.Item
 
     @Override
     public ItemFrame getHandle() {
-        return (ItemFrame)super.getHandle();
+        return (ItemFrame) super.getHandle();
     }
 
     @Override

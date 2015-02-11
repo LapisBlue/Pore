@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.Squid;
 
 public class PoreSquid extends PoreWaterMob implements org.bukkit.entity.Squid {
 
     public static PoreSquid of(Squid handle) {
-        return PoreConverter.of(PoreSquid.class, handle);
+        return WrapperConverter.of(PoreSquid.class, handle);
     }
 
     protected PoreSquid(Squid handle) {
@@ -41,7 +40,7 @@ public class PoreSquid extends PoreWaterMob implements org.bukkit.entity.Squid {
 
     @Override
     public Squid getHandle() {
-        return (Squid)super.getHandle();
+        return (Squid) super.getHandle();
     }
 
     @Override

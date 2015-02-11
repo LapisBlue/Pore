@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
 import org.bukkit.entity.AnimalTamer;
@@ -35,7 +35,7 @@ import java.util.UUID;
 public class PoreAnimalTamer extends PoreWrapper<Tamer> implements AnimalTamer {
 
     public static PoreAnimalTamer of(Tamer handle) {
-        return PoreConverter.of(PoreAnimalTamer.class, handle);
+        return WrapperConverter.of(PoreAnimalTamer.class, handle);
     }
 
     protected PoreAnimalTamer(Tamer handle) {

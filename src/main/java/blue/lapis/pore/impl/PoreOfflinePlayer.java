@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreWrapper;
 
@@ -40,7 +40,7 @@ import java.util.UUID;
 public class PoreOfflinePlayer extends PoreWrapper<User> implements org.bukkit.OfflinePlayer {
 
     public static PoreOfflinePlayer of(User handle) {
-        return PoreConverter.of(PoreOfflinePlayer.class, handle);
+        return WrapperConverter.of(PoreOfflinePlayer.class, handle);
     }
 
     protected PoreOfflinePlayer(User handle) {

@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.Bat;
 
 public class PoreBat extends PoreAmbient implements org.bukkit.entity.Bat {
 
     public static PoreBat of(Bat handle) {
-        return PoreConverter.of(PoreBat.class, handle);
+        return WrapperConverter.of(PoreBat.class, handle);
     }
 
     protected PoreBat(Bat handle) {
@@ -41,7 +40,7 @@ public class PoreBat extends PoreAmbient implements org.bukkit.entity.Bat {
 
     @Override
     public Bat getHandle() {
-        return (Bat)super.getHandle();
+        return (Bat) super.getHandle();
     }
 
     @Override

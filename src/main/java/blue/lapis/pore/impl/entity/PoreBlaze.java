@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.Blaze;
 
 public class PoreBlaze extends PoreMonster implements org.bukkit.entity.Blaze {
 
     public static PoreBlaze of(Blaze handle) {
-        return PoreConverter.of(PoreBlaze.class, handle);
+        return WrapperConverter.of(PoreBlaze.class, handle);
     }
 
     protected PoreBlaze(Blaze handle) {
@@ -41,7 +40,7 @@ public class PoreBlaze extends PoreMonster implements org.bukkit.entity.Blaze {
 
     @Override
     public Blaze getHandle() {
-        return (Blaze)super.getHandle();
+        return (Blaze) super.getHandle();
     }
 
     @Override

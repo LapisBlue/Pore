@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.vehicle.Boat;
 
 public class PoreBoat extends PoreVehicle implements org.bukkit.entity.Boat {
 
     public static PoreBoat of(Boat handle) {
-        return PoreConverter.of(PoreBoat.class, handle);
+        return WrapperConverter.of(PoreBoat.class, handle);
     }
 
     protected PoreBoat(Boat handle) {
@@ -41,7 +40,7 @@ public class PoreBoat extends PoreVehicle implements org.bukkit.entity.Boat {
 
     @Override
     public Boat getHandle() {
-        return (Boat)super.getHandle();
+        return (Boat) super.getHandle();
     }
 
     @Override

@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.block;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.inventory.Inventory;
 import org.spongepowered.api.block.BlockState;
@@ -34,7 +33,7 @@ import org.spongepowered.api.block.data.Beacon;
 public class PoreBeacon extends PoreBlockState implements org.bukkit.block.Beacon {
 
     public static PoreBeacon of(BlockState handle) {
-        return PoreConverter.of(PoreBeacon.class, handle);
+        return WrapperConverter.of(PoreBeacon.class, handle);
     }
 
     protected PoreBeacon(Beacon handle) {
@@ -43,7 +42,7 @@ public class PoreBeacon extends PoreBlockState implements org.bukkit.block.Beaco
 
     @Override
     public Beacon getHandle() {
-        return (Beacon)super.getHandle();
+        return (Beacon) super.getHandle();
     }
 
     @Override

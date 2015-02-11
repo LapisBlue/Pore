@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.block;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Instrument;
 import org.bukkit.block.NoteBlock;
@@ -34,7 +33,7 @@ import org.spongepowered.api.block.data.Note;
 public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
 
     public static PoreNoteBlock of(Note handle) {
-        return PoreConverter.of(PoreNoteBlock.class, handle);
+        return WrapperConverter.of(PoreNoteBlock.class, handle);
     }
 
     protected PoreNoteBlock(Note handle) {
@@ -43,7 +42,7 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
 
     @Override
     public Note getHandle() {
-        return (Note)super.getHandle();
+        return (Note) super.getHandle();
     }
 
     @Override

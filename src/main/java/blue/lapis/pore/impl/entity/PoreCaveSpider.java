@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.CaveSpider;
 
 public class PoreCaveSpider extends PoreSpider implements org.bukkit.entity.CaveSpider {
 
     public static PoreCaveSpider of(CaveSpider handle) {
-        return PoreConverter.of(PoreCaveSpider.class, handle);
+        return WrapperConverter.of(PoreCaveSpider.class, handle);
     }
 
     protected PoreCaveSpider(CaveSpider handle) {
@@ -41,7 +40,7 @@ public class PoreCaveSpider extends PoreSpider implements org.bukkit.entity.Cave
 
     @Override
     public CaveSpider getHandle() {
-        return (CaveSpider)super.getHandle();
+        return (CaveSpider) super.getHandle();
     }
 
     @Override

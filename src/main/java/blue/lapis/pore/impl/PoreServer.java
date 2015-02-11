@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.impl.scheduler.PoreBukkitScheduler;
 import blue.lapis.pore.impl.util.PoreCachedServerIcon;
@@ -219,7 +219,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     @Override
     public Collection<? extends Player> getOnlinePlayers() {
         return PoreCollections.transform(getHandle().getOnlinePlayers(),
-                PoreConverter.<org.spongepowered.api.entity.player.Player, PorePlayer>getConverter());
+                WrapperConverter.<org.spongepowered.api.entity.player.Player, PorePlayer>getConverter());
     }
 
     @Override
@@ -406,7 +406,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     @Override
     public List<World> getWorlds() {
         return PoreCollections.<org.spongepowered.api.world.World, World>transformToList(getHandle().getWorlds(),
-                PoreConverter.<org.spongepowered.api.world.World, PoreWorld>getConverter());
+                WrapperConverter.<org.spongepowered.api.world.World, PoreWorld>getConverter());
     }
 
     @Override

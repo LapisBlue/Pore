@@ -25,7 +25,7 @@
 package blue.lapis.pore.impl.command;
 
 import blue.lapis.pore.Pore;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.permissions.PorePermissible;
 
 import org.bukkit.Server;
@@ -35,7 +35,7 @@ import org.spongepowered.api.util.command.CommandSource;
 public class PoreCommandSender extends PorePermissible implements CommandSender {
 
     public static CommandSender of(CommandSource source) {
-        return PoreConverter.of(PoreCommandSender.class, source);
+        return WrapperConverter.of(PoreCommandSender.class, source);
     }
 
     protected PoreCommandSender(CommandSource handle) {

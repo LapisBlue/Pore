@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.golem.SnowGolem;
 
 public class PoreSnowman extends PoreGolem implements org.bukkit.entity.Snowman {
 
     public static PoreSnowman of(SnowGolem handle) {
-        return PoreConverter.of(PoreSnowman.class, handle);
+        return WrapperConverter.of(PoreSnowman.class, handle);
     }
 
     protected PoreSnowman(SnowGolem handle) {
@@ -41,7 +40,7 @@ public class PoreSnowman extends PoreGolem implements org.bukkit.entity.Snowman 
 
     @Override
     public SnowGolem getHandle() {
-        return (SnowGolem)super.getHandle();
+        return (SnowGolem) super.getHandle();
     }
 
     @Override

@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.Flying;
 import org.spongepowered.api.entity.living.Aerial;
 
 public class PoreFlying extends PoreLivingEntity implements Flying {
 
     public static PoreFlying of(Aerial handle) {
-        return PoreConverter.of(PoreFlying.class, handle);
+        return WrapperConverter.of(PoreFlying.class, handle);
     }
 
     protected PoreFlying(Aerial handle) {

@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.projectile.Snowball;
 
 public class PoreSnowball extends PoreProjectile implements org.bukkit.entity.Snowball {
 
     public static PoreSnowball of(Snowball handle) {
-        return PoreConverter.of(PoreSnowball.class, handle);
+        return WrapperConverter.of(PoreSnowball.class, handle);
     }
 
     protected PoreSnowball(Snowball handle) {
@@ -41,7 +40,7 @@ public class PoreSnowball extends PoreProjectile implements org.bukkit.entity.Sn
 
     @Override
     public Snowball getHandle() {
-        return (Snowball)super.getHandle();
+        return (Snowball) super.getHandle();
     }
 
     @Override

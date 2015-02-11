@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.PotionEffectConverter;
 import blue.lapis.pore.converter.type.PotionEffectTypeConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.ProjectileUtil;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -60,7 +60,7 @@ import java.util.List;
 public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     public static PoreLivingEntity of(Living handle) {
-        return PoreConverter.of(PoreLivingEntity.class, handle);
+        return WrapperConverter.of(PoreLivingEntity.class, handle);
     }
 
     protected PoreLivingEntity(Living handle) {

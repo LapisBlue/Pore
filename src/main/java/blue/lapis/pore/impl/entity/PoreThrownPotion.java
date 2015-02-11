@@ -25,8 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.ItemStackConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -38,7 +37,7 @@ import java.util.Collection;
 public class PoreThrownPotion extends PoreProjectile implements org.bukkit.entity.ThrownPotion {
 
     public static PoreThrownPotion of(ThrownPotion handle) {
-        return PoreConverter.of(PoreThrownPotion.class, handle);
+        return WrapperConverter.of(PoreThrownPotion.class, handle);
     }
 
     protected PoreThrownPotion(ThrownPotion handle) {
@@ -47,7 +46,7 @@ public class PoreThrownPotion extends PoreProjectile implements org.bukkit.entit
 
     @Override
     public ThrownPotion getHandle() {
-        return (ThrownPotion)super.getHandle();
+        return (ThrownPotion) super.getHandle();
     }
 
     @Override

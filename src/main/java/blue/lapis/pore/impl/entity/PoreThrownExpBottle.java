@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.projectile.ThrownExpBottle;
 
 public class PoreThrownExpBottle extends PoreProjectile implements org.bukkit.entity.ThrownExpBottle {
 
     public static PoreThrownExpBottle of(ThrownExpBottle handle) {
-        return PoreConverter.of(PoreThrownExpBottle.class, handle);
+        return WrapperConverter.of(PoreThrownExpBottle.class, handle);
     }
 
     protected PoreThrownExpBottle(ThrownExpBottle handle) {
@@ -41,7 +40,7 @@ public class PoreThrownExpBottle extends PoreProjectile implements org.bukkit.en
 
     @Override
     public ThrownExpBottle getHandle() {
-        return (ThrownExpBottle)super.getHandle();
+        return (ThrownExpBottle) super.getHandle();
     }
 
     @Override

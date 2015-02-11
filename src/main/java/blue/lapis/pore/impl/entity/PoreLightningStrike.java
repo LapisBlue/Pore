@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LightningStrike;
 import org.spongepowered.api.entity.weather.Lightning;
@@ -33,7 +32,7 @@ import org.spongepowered.api.entity.weather.Lightning;
 public class PoreLightningStrike extends PoreEntity implements LightningStrike {
 
     public static PoreLightningStrike of(Lightning handle) {
-        return PoreConverter.of(PoreLightningStrike.class, handle);
+        return WrapperConverter.of(PoreLightningStrike.class, handle);
     }
 
     protected PoreLightningStrike(Lightning handle) {
@@ -42,7 +41,7 @@ public class PoreLightningStrike extends PoreEntity implements LightningStrike {
 
     @Override
     public Lightning getHandle() {
-        return (Lightning)super.getHandle();
+        return (Lightning) super.getHandle();
     }
 
     @Override

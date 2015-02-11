@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.MagmaCube;
 
 public class PoreMagmaCube extends PoreSlime implements org.bukkit.entity.MagmaCube {
 
     public static PoreMagmaCube of(MagmaCube handle) {
-        return PoreConverter.of(PoreMagmaCube.class, handle);
+        return WrapperConverter.of(PoreMagmaCube.class, handle);
     }
 
     protected PoreMagmaCube(MagmaCube handle) {
@@ -41,7 +40,7 @@ public class PoreMagmaCube extends PoreSlime implements org.bukkit.entity.MagmaC
 
     @Override
     public MagmaCube getHandle() {
-        return (MagmaCube)super.getHandle();
+        return (MagmaCube) super.getHandle();
     }
 
     @Override

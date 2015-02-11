@@ -25,8 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.ItemStackConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -35,7 +34,7 @@ import org.spongepowered.api.entity.Item;
 public class PoreItem extends PoreEntity implements org.bukkit.entity.Item {
 
     public static PoreItem of(Item handle) {
-        return PoreConverter.of(PoreItem.class, handle);
+        return WrapperConverter.of(PoreItem.class, handle);
     }
 
     protected PoreItem(Item handle) {
@@ -44,7 +43,7 @@ public class PoreItem extends PoreEntity implements org.bukkit.entity.Item {
 
     @Override
     public Item getHandle() {
-        return (Item)super.getHandle();
+        return (Item) super.getHandle();
     }
 
     @Override

@@ -44,7 +44,6 @@ public class PoreLogger extends Logger {
     }
 
     private class ForwardHandler extends Handler {
-        private final Formatter formatter = new DummyFormatter();
 
         @Override
         public void publish(LogRecord record) {
@@ -73,6 +72,8 @@ public class PoreLogger extends Logger {
         public void close() throws SecurityException {
         }
     }
+
+    private static final Formatter formatter = new DummyFormatter();
 
     private static final class DummyFormatter extends Formatter {
 

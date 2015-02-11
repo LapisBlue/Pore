@@ -26,8 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.ItemStackConverter;
 import blue.lapis.pore.converter.vector.EulerAngleConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -37,7 +36,7 @@ import org.spongepowered.api.entity.living.ArmorStand;
 public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entity.ArmorStand {
 
     public static PoreArmorStand of(ArmorStand handle) {
-        return PoreConverter.of(PoreArmorStand.class, handle);
+        return WrapperConverter.of(PoreArmorStand.class, handle);
     }
 
     protected PoreArmorStand(ArmorStand handle) {
@@ -46,7 +45,7 @@ public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entit
 
     @Override
     public ArmorStand getHandle() {
-        return (ArmorStand)super.getHandle();
+        return (ArmorStand) super.getHandle();
     }
 
     @Override

@@ -25,8 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.type.HorseConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.HorseInventory;
@@ -35,7 +34,7 @@ import org.spongepowered.api.entity.living.animal.Horse;
 public class PoreHorse extends PoreTameable implements org.bukkit.entity.Horse {
 
     public static PoreHorse of(Horse handle) {
-        return PoreConverter.of(PoreHorse.class, handle);
+        return WrapperConverter.of(PoreHorse.class, handle);
     }
 
     protected PoreHorse(Horse handle) {
@@ -44,7 +43,7 @@ public class PoreHorse extends PoreTameable implements org.bukkit.entity.Horse {
 
     @Override
     public Horse getHandle() {
-        return (Horse)super.getHandle();
+        return (Horse) super.getHandle();
     }
 
     @Override

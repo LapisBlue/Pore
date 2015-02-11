@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.Creeper;
 
 public class PoreCreeper extends PoreMonster implements org.bukkit.entity.Creeper {
 
     public static PoreCreeper of(Creeper handle) {
-        return PoreConverter.of(PoreCreeper.class, handle);
+        return WrapperConverter.of(PoreCreeper.class, handle);
     }
 
     protected PoreCreeper(Creeper handle) {
@@ -41,7 +40,7 @@ public class PoreCreeper extends PoreMonster implements org.bukkit.entity.Creepe
 
     @Override
     public Creeper getHandle() {
-        return (Creeper)super.getHandle();
+        return (Creeper) super.getHandle();
     }
 
     @Override

@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.block;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.SkullType;
 import org.bukkit.block.BlockFace;
@@ -34,7 +33,7 @@ import org.spongepowered.api.block.data.Skull;
 public class PoreSkull extends PoreBlockState implements org.bukkit.block.Skull {
 
     public static PoreSkull of(Skull handle) {
-        return PoreConverter.of(PoreSkull.class, handle);
+        return WrapperConverter.of(PoreSkull.class, handle);
     }
 
     protected PoreSkull(Skull handle) {
@@ -43,7 +42,7 @@ public class PoreSkull extends PoreBlockState implements org.bukkit.block.Skull 
 
     @Override
     public Skull getHandle() {
-        return (Skull)super.getHandle();
+        return (Skull) super.getHandle();
     }
 
     @Override

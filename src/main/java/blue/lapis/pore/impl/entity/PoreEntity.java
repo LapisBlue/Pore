@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.vector.LocationConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreWrapper;
 
@@ -60,7 +60,7 @@ import java.util.UUID;
 public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity.Entity {
 
     public static PoreEntity of(Entity handle) {
-        return PoreConverter.of(PoreEntity.class, handle);
+        return WrapperConverter.of(PoreEntity.class, handle);
     }
 
     protected PoreEntity(Entity handle) {

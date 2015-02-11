@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.projectiles.PoreBlockProjectileSource;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -37,7 +37,7 @@ import org.spongepowered.api.entity.projectile.source.BlockProjectileSource;
 public class PoreProjectile extends PoreEntity implements org.bukkit.entity.Projectile {
 
     public static PoreProjectile of(Projectile handle) {
-        return PoreConverter.of(PoreProjectile.class, handle);
+        return WrapperConverter.of(PoreProjectile.class, handle);
     }
 
     protected PoreProjectile(Projectile handle) {

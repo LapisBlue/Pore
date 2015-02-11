@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Entity;
@@ -34,7 +33,7 @@ import org.spongepowered.api.entity.living.complex.EnderDragonPart;
 public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bukkit.entity.EnderDragonPart {
 
     public static PoreEnderDragonPart of(EnderDragonPart handle) {
-        return PoreConverter.of(PoreEnderDragonPart.class, handle);
+        return WrapperConverter.of(PoreEnderDragonPart.class, handle);
     }
 
     protected PoreEnderDragonPart(EnderDragonPart handle) {
@@ -43,7 +42,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
 
     @Override
     public EnderDragonPart getHandle() {
-        return (EnderDragonPart)super.getHandle();
+        return (EnderDragonPart) super.getHandle();
     }
 
     public EnderDragon getParent() {
@@ -57,7 +56,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
 
     @Override
     public void _INVALID_damage(int amount) {
-        this.damage((double)amount);
+        this.damage((double) amount);
     }
 
     @Override
@@ -67,7 +66,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
 
     @Override
     public void _INVALID_damage(int amount, Entity source) {
-        this.damage((double)amount, source);
+        this.damage((double) amount, source);
     }
 
     @Override
@@ -77,7 +76,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
 
     @Override
     public int _INVALID_getHealth() {
-        return (int)getHealth();
+        return (int) getHealth();
     }
 
     @Override
@@ -87,7 +86,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
 
     @Override
     public void _INVALID_setHealth(int health) {
-        this.setHealth((double)health);
+        this.setHealth((double) health);
     }
 
     @Override
@@ -97,7 +96,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
 
     @Override
     public int _INVALID_getMaxHealth() {
-        return (int)this.getMaxHealth();
+        return (int) this.getMaxHealth();
     }
 
     @Override
@@ -107,7 +106,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
 
     @Override
     public void _INVALID_setMaxHealth(int health) {
-        this.setMaxHealth((double)health);
+        this.setMaxHealth((double) health);
     }
 
     @Override

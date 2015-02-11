@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.block;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
@@ -36,7 +35,7 @@ import java.util.List;
 public class PoreBanner extends PoreBlockState implements org.bukkit.block.Banner {
 
     public static PoreBanner of(Banner handle) {
-        return PoreConverter.of(PoreBanner.class, handle);
+        return WrapperConverter.of(PoreBanner.class, handle);
     }
 
     protected PoreBanner(Banner handle) {
@@ -45,7 +44,7 @@ public class PoreBanner extends PoreBlockState implements org.bukkit.block.Banne
 
     @Override
     public Banner getHandle() {
-        return (Banner)super.getHandle();
+        return (Banner) super.getHandle();
     }
 
     @Override

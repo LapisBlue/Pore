@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.block;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.inventory.Inventory;
 import org.spongepowered.api.block.data.Chest;
@@ -33,7 +32,7 @@ import org.spongepowered.api.block.data.Chest;
 public class PoreChest extends PoreBlockState implements org.bukkit.block.Chest {
 
     public static PoreChest of(Chest handle) {
-        return PoreConverter.of(PoreChest.class, handle);
+        return WrapperConverter.of(PoreChest.class, handle);
     }
 
     protected PoreChest(Chest handle) {
@@ -42,7 +41,7 @@ public class PoreChest extends PoreBlockState implements org.bukkit.block.Chest 
 
     @Override
     public Chest getHandle() {
-        return (Chest)super.getHandle();
+        return (Chest) super.getHandle();
     }
 
     @Override

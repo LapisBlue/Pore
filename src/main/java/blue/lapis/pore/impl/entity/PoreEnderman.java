@@ -25,8 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.type.MaterialConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
@@ -36,7 +35,7 @@ import org.spongepowered.api.entity.living.monster.Enderman;
 public class PoreEnderman extends PoreMonster implements org.bukkit.entity.Enderman {
 
     public static PoreEnderman of(Enderman handle) {
-        return PoreConverter.of(PoreEnderman.class, handle);
+        return WrapperConverter.of(PoreEnderman.class, handle);
     }
 
     protected PoreEnderman(Enderman handle) {
@@ -45,7 +44,7 @@ public class PoreEnderman extends PoreMonster implements org.bukkit.entity.Ender
 
     @Override
     public Enderman getHandle() {
-        return (Enderman)super.getHandle();
+        return (Enderman) super.getHandle();
     }
 
     @Override

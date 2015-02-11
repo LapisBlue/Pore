@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.Witch;
 
 public class PoreWitch extends PoreMonster implements org.bukkit.entity.Witch {
 
     public static PoreWitch of(Witch handle) {
-        return PoreConverter.of(PoreWitch.class, handle);
+        return WrapperConverter.of(PoreWitch.class, handle);
     }
 
     protected PoreWitch(Witch handle) {
@@ -41,7 +40,7 @@ public class PoreWitch extends PoreMonster implements org.bukkit.entity.Witch {
 
     @Override
     public Witch getHandle() {
-        return (Witch)super.getHandle();
+        return (Witch) super.getHandle();
     }
 
     @Override

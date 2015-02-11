@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.projectile.Egg;
 
 public class PoreEgg extends PoreProjectile implements org.bukkit.entity.Egg {
 
     public static PoreEgg of(Egg handle) {
-        return PoreConverter.of(PoreEgg.class, handle);
+        return WrapperConverter.of(PoreEgg.class, handle);
     }
 
     protected PoreEgg(Egg handle) {
@@ -41,7 +40,7 @@ public class PoreEgg extends PoreProjectile implements org.bukkit.entity.Egg {
 
     @Override
     public Egg getHandle() {
-        return (Egg)super.getHandle();
+        return (Egg) super.getHandle();
     }
 
     @Override

@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.ComplexEntityPart;
 import org.bukkit.entity.ComplexLivingEntity;
 import org.bukkit.entity.EntityType;
@@ -34,7 +33,7 @@ import org.spongepowered.api.entity.living.complex.ComplexLivingPart;
 public class PoreComplexEntityPart extends PoreEntity implements ComplexEntityPart {
 
     public static PoreComplexEntityPart of(ComplexLivingPart handle) {
-        return PoreConverter.of(PoreComplexEntityPart.class, handle);
+        return WrapperConverter.of(PoreComplexEntityPart.class, handle);
     }
 
     protected PoreComplexEntityPart(ComplexLivingPart handle) {
@@ -43,7 +42,7 @@ public class PoreComplexEntityPart extends PoreEntity implements ComplexEntityPa
 
     @Override
     public ComplexLivingPart getHandle() {
-        return (ComplexLivingPart)super.getHandle();
+        return (ComplexLivingPart) super.getHandle();
     }
 
     @Override

@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.MushroomCow;
 import org.spongepowered.api.entity.living.animal.Mooshroom;
@@ -33,7 +32,7 @@ import org.spongepowered.api.entity.living.animal.Mooshroom;
 public class PoreMushroomCow extends PoreCow implements MushroomCow {
 
     public static PoreMushroomCow of(Mooshroom handle) {
-        return PoreConverter.of(PoreMushroomCow.class, handle);
+        return WrapperConverter.of(PoreMushroomCow.class, handle);
     }
 
     protected PoreMushroomCow(Mooshroom handle) {
@@ -42,7 +41,7 @@ public class PoreMushroomCow extends PoreCow implements MushroomCow {
 
     @Override
     public Mooshroom getHandle() {
-        return (Mooshroom)super.getHandle();
+        return (Mooshroom) super.getHandle();
     }
 
     @Override

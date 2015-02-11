@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.projectiles;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -37,7 +37,7 @@ public class PoreBlockProjectileSource
         extends PoreWrapper<BlockProjectileSource> implements org.bukkit.projectiles.BlockProjectileSource {
 
     public static PoreBlockProjectileSource of(BlockProjectileSource handle) {
-        return PoreConverter.of(PoreBlockProjectileSource.class, handle);
+        return WrapperConverter.of(PoreBlockProjectileSource.class, handle);
     }
 
     protected PoreBlockProjectileSource(BlockProjectileSource handle) {

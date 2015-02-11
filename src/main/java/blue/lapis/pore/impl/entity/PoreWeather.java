@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Weather;
 import org.spongepowered.api.entity.weather.WeatherEffect;
@@ -33,7 +32,7 @@ import org.spongepowered.api.entity.weather.WeatherEffect;
 public class PoreWeather extends PoreEntity implements Weather {
 
     public static PoreWeather of(WeatherEffect handle) {
-        return PoreConverter.of(PoreWeather.class, handle);
+        return WrapperConverter.of(PoreWeather.class, handle);
     }
 
     protected PoreWeather(WeatherEffect handle) {
@@ -42,7 +41,7 @@ public class PoreWeather extends PoreEntity implements Weather {
 
     @Override
     public WeatherEffect getHandle() {
-        return (WeatherEffect)super.getHandle();
+        return (WeatherEffect) super.getHandle();
     }
 
     @Override

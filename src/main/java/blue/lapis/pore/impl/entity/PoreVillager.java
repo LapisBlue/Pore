@@ -26,15 +26,14 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.ProfessionConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.villager.Villager;
 
 public class PoreVillager extends PoreAgeable implements org.bukkit.entity.Villager {
 
     public static PoreVillager of(Villager handle) {
-        return PoreConverter.of(PoreVillager.class, handle);
+        return WrapperConverter.of(PoreVillager.class, handle);
     }
 
     protected PoreVillager(Villager handle) {
@@ -43,7 +42,7 @@ public class PoreVillager extends PoreAgeable implements org.bukkit.entity.Villa
 
     @Override
     public Villager getHandle() {
-        return (Villager)super.getHandle();
+        return (Villager) super.getHandle();
     }
 
     @Override

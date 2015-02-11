@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.golem.IronGolem;
 
 public class PoreIronGolem extends PoreGolem implements org.bukkit.entity.IronGolem {
 
     public static PoreIronGolem of(IronGolem handle) {
-        return PoreConverter.of(PoreIronGolem.class, handle);
+        return WrapperConverter.of(PoreIronGolem.class, handle);
     }
 
     protected PoreIronGolem(IronGolem handle) {
@@ -41,7 +40,7 @@ public class PoreIronGolem extends PoreGolem implements org.bukkit.entity.IronGo
 
     @Override
     public IronGolem getHandle() {
-        return (IronGolem)super.getHandle();
+        return (IronGolem) super.getHandle();
     }
 
     @Override

@@ -25,7 +25,7 @@
 package blue.lapis.pore.impl;
 
 import blue.lapis.pore.converter.vector.LocationConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -35,7 +35,7 @@ import org.spongepowered.api.world.WorldBorder;
 public class PoreWorldBorder extends PoreWrapper<WorldBorder> implements org.bukkit.WorldBorder {
 
     public static PoreWorldBorder of(WorldBorder handle) {
-        return PoreConverter.of(PoreWorldBorder.class, handle);
+        return WrapperConverter.of(PoreWorldBorder.class, handle);
     }
 
     protected PoreWorldBorder(WorldBorder handle) {

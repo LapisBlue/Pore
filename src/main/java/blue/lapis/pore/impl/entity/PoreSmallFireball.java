@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.projectile.fireball.SmallFireball;
 
 public class PoreSmallFireball extends PoreFireball implements org.bukkit.entity.SmallFireball {
 
     public static PoreSmallFireball of(SmallFireball handle) {
-        return PoreConverter.of(PoreSmallFireball.class, handle);
+        return WrapperConverter.of(PoreSmallFireball.class, handle);
     }
 
     protected PoreSmallFireball(SmallFireball handle) {
@@ -41,7 +40,7 @@ public class PoreSmallFireball extends PoreFireball implements org.bukkit.entity
 
     @Override
     public SmallFireball getHandle() {
-        return (SmallFireball)super.getHandle();
+        return (SmallFireball) super.getHandle();
     }
 
     @Override

@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.animal.Pig;
 
 public class PorePig extends PoreAnimals implements org.bukkit.entity.Pig {
 
     public static PorePig of(Pig handle) {
-        return PoreConverter.of(PorePig.class, handle);
+        return WrapperConverter.of(PorePig.class, handle);
     }
 
     protected PorePig(Pig handle) {
@@ -41,7 +40,7 @@ public class PorePig extends PoreAnimals implements org.bukkit.entity.Pig {
 
     @Override
     public Pig getHandle() {
-        return (Pig)super.getHandle();
+        return (Pig) super.getHandle();
     }
 
     @Override

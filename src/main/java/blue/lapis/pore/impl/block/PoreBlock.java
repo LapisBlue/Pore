@@ -28,7 +28,7 @@ import blue.lapis.pore.converter.ItemStackConverter;
 import blue.lapis.pore.converter.type.DirectionConverter;
 import blue.lapis.pore.converter.type.MaterialConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreWrapper;
 
@@ -55,7 +55,7 @@ import java.util.List;
 public class PoreBlock extends PoreWrapper<BlockLoc> implements Block {
 
     public static PoreBlock of(BlockLoc handle) {
-        return PoreConverter.of(PoreBlock.class, handle);
+        return WrapperConverter.of(PoreBlock.class, handle);
     }
 
     private PoreBlock(BlockLoc handle) {

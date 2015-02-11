@@ -24,8 +24,7 @@
  */
 package blue.lapis.pore.impl.block;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.CreatureType;
@@ -35,7 +34,7 @@ import org.spongepowered.api.block.data.MobSpawner;
 public class PoreCreatureSpawner extends PoreBlockState implements CreatureSpawner {
 
     public static PoreCreatureSpawner of(MobSpawner handle) {
-        return PoreConverter.of(PoreCreatureSpawner.class, handle);
+        return WrapperConverter.of(PoreCreatureSpawner.class, handle);
     }
 
     protected PoreCreatureSpawner(MobSpawner handle) {
@@ -44,7 +43,7 @@ public class PoreCreatureSpawner extends PoreBlockState implements CreatureSpawn
 
     @Override
     public MobSpawner getHandle() {
-        return (MobSpawner)super.getHandle();
+        return (MobSpawner) super.getHandle();
     }
 
     @Override

@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.Wither;
 
 public class PoreWither extends PoreMonster implements org.bukkit.entity.Wither {
 
     public static PoreWither of(Wither handle) {
-        return PoreConverter.of(PoreWither.class, handle);
+        return WrapperConverter.of(PoreWither.class, handle);
     }
 
     protected PoreWither(Wither handle) {
@@ -41,7 +40,7 @@ public class PoreWither extends PoreMonster implements org.bukkit.entity.Wither 
 
     @Override
     public Wither getHandle() {
-        return (Wither)super.getHandle();
+        return (Wither) super.getHandle();
     }
 
     @Override

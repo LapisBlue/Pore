@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.animal.Chicken;
 
 public class PoreChicken extends PoreAnimals implements org.bukkit.entity.Chicken {
 
     public static PoreChicken of(Chicken handle) {
-        return PoreConverter.of(PoreChicken.class, handle);
+        return WrapperConverter.of(PoreChicken.class, handle);
     }
 
     protected PoreChicken(Chicken handle) {
@@ -41,7 +40,7 @@ public class PoreChicken extends PoreAnimals implements org.bukkit.entity.Chicke
 
     @Override
     public Chicken getHandle() {
-        return (Chicken)super.getHandle();
+        return (Chicken) super.getHandle();
     }
 
     @Override

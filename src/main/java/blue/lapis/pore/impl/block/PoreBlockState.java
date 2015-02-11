@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.block;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreWrapper;
 
@@ -46,7 +46,7 @@ public class PoreBlockState extends PoreWrapper<TileEntity> implements BlockStat
 
     // TODO: Actually block states exist even without tile entities
     public static PoreBlockState of(TileEntity handle) {
-        return PoreConverter.of(PoreBlockState.class, handle);
+        return WrapperConverter.of(PoreBlockState.class, handle);
     }
 
     protected PoreBlockState(TileEntity handle) {

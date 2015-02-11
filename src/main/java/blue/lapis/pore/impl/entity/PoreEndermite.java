@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.Endermite;
 
 public class PoreEndermite extends PoreMonster implements org.bukkit.entity.Endermite {
 
     public static PoreEndermite of(Endermite handle) {
-        return PoreConverter.of(PoreEndermite.class, handle);
+        return WrapperConverter.of(PoreEndermite.class, handle);
     }
 
     protected PoreEndermite(Endermite handle) {
@@ -41,7 +40,7 @@ public class PoreEndermite extends PoreMonster implements org.bukkit.entity.Ende
 
     @Override
     public Endermite getHandle() {
-        return (Endermite)super.getHandle();
+        return (Endermite) super.getHandle();
     }
 
     @Override

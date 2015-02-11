@@ -25,8 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.type.DyeColorConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
@@ -35,7 +34,7 @@ import org.spongepowered.api.entity.living.animal.Wolf;
 public class PoreWolf extends PoreTameable implements org.bukkit.entity.Wolf {
 
     public static PoreWolf of(Wolf handle) {
-        return PoreConverter.of(PoreWolf.class, handle);
+        return WrapperConverter.of(PoreWolf.class, handle);
     }
 
     protected PoreWolf(Wolf handle) {
@@ -44,7 +43,7 @@ public class PoreWolf extends PoreTameable implements org.bukkit.entity.Wolf {
 
     @Override
     public Wolf getHandle() {
-        return (Wolf)super.getHandle();
+        return (Wolf) super.getHandle();
     }
 
     @Override

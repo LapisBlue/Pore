@@ -29,7 +29,7 @@ import blue.lapis.pore.converter.EffectConverter;
 import blue.lapis.pore.converter.type.EnvironmentConverter;
 import blue.lapis.pore.converter.type.SoundConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
-import blue.lapis.pore.converter.wrapper.PoreConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
@@ -90,7 +90,7 @@ import javax.annotation.Nullable;
 public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     public static PoreWorld of(World handle) {
-        return PoreConverter.of(PoreWorld.class, handle);
+        return WrapperConverter.of(PoreWorld.class, handle);
     }
 
     public static PoreWorld of(Extent handle) {
@@ -302,7 +302,8 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     public List<Entity> getEntities() {
         // TODO: Should this be unmodifiable?
         return PoreCollections.<org.spongepowered.api.entity.Entity, Entity>transformToList(
-                getHandle().getEntities(), PoreConverter.<org.spongepowered.api.entity.Entity, PoreEntity>getConverter()
+                getHandle().getEntities(), WrapperConverter
+                .<org.spongepowered.api.entity.Entity, PoreEntity>getConverter()
         );
     }
 

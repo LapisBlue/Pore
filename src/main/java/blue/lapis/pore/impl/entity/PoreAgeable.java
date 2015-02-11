@@ -24,15 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.PoreConverter;
-
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.spongepowered.api.entity.living.Ageable;
 
 public class PoreAgeable extends PoreCreature implements org.bukkit.entity.Ageable {
 
     public static PoreAgeable of(Ageable handle) {
-        return PoreConverter.of(PoreAgeable.class, handle);
+        return WrapperConverter.of(PoreAgeable.class, handle);
     }
 
     protected PoreAgeable(Ageable handle) {
@@ -41,7 +40,7 @@ public class PoreAgeable extends PoreCreature implements org.bukkit.entity.Ageab
 
     @Override
     public Ageable getHandle() {
-        return (Ageable)super.getHandle();
+        return (Ageable) super.getHandle();
     }
 
     @Override
