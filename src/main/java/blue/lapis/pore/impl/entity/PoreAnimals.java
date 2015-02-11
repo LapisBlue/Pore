@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.Animals;
 import org.spongepowered.api.entity.living.animal.Animal;
 
@@ -40,7 +41,7 @@ public class PoreAnimals extends PoreAgeable implements Animals {
 
     @Override
     public Animal getHandle() {
-        return (Animal) super.getHandle();
+        return (Animal)super.getHandle();
     }
 
 }

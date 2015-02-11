@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.spongepowered.api.block.data.Sign;
 
@@ -40,7 +41,7 @@ public class PoreSign extends PoreBlockState implements org.bukkit.block.Sign {
 
     @Override
     public Sign getHandle() {
-        return (Sign) super.getHandle();
+        return (Sign)super.getHandle();
     }
 
     @Override

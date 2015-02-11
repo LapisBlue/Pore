@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.golem.IronGolem;
 
@@ -40,7 +41,7 @@ public class PoreIronGolem extends PoreGolem implements org.bukkit.entity.IronGo
 
     @Override
     public IronGolem getHandle() {
-        return (IronGolem) super.getHandle();
+        return (IronGolem)super.getHandle();
     }
 
     @Override

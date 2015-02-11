@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.scheduler;
 
 import blue.lapis.pore.Pore;
+
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang.NotImplementedException;
@@ -170,37 +171,37 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 
     @Override
     public BukkitTask runTask(Plugin plugin, BukkitRunnable task) throws IllegalArgumentException {
-        return runTask(plugin, (Runnable) task);
+        return runTask(plugin, (Runnable)task);
     }
 
     @Override
     public BukkitTask runTaskAsynchronously(Plugin plugin, BukkitRunnable task)
             throws IllegalArgumentException {
-        return runTaskAsynchronously(plugin, (Runnable) task);
+        return runTaskAsynchronously(plugin, (Runnable)task);
     }
 
     @Override
     public BukkitTask runTaskLater(Plugin plugin, BukkitRunnable task, long delay)
             throws IllegalArgumentException {
-        return runTaskLater(plugin, (Runnable) task, delay);
+        return runTaskLater(plugin, (Runnable)task, delay);
     }
 
     @Override
     public BukkitTask runTaskLaterAsynchronously(Plugin plugin, BukkitRunnable task, long delay)
             throws IllegalArgumentException {
-        return runTaskLaterAsynchronously(plugin, (Runnable) task, delay);
+        return runTaskLaterAsynchronously(plugin, (Runnable)task, delay);
     }
 
     @Override
     public BukkitTask runTaskTimer(Plugin plugin, BukkitRunnable task, long delay, long period)
             throws IllegalArgumentException {
-        return runTaskTimer(plugin, (Runnable) task, delay, period);
+        return runTaskTimer(plugin, (Runnable)task, delay, period);
     }
 
     @Override
     public BukkitTask runTaskTimerAsynchronously(Plugin plugin, BukkitRunnable task, long delay, long period)
             throws IllegalArgumentException {
-        return runTaskTimerAsynchronously(plugin, (Runnable) task, delay, period);
+        return runTaskTimerAsynchronously(plugin, (Runnable)task, delay, period);
     }
 
     @Override

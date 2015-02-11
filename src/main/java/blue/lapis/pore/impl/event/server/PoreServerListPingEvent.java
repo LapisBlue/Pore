@@ -24,7 +24,10 @@
  */
 package blue.lapis.pore.impl.event.server;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import blue.lapis.pore.impl.util.PoreCachedServerIcon;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.util.CachedServerIcon;
@@ -33,8 +36,6 @@ import org.spongepowered.api.text.message.Messages;
 
 import java.net.InetAddress;
 import java.util.Iterator;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PoreServerListPingEvent extends ServerListPingEvent {
 
@@ -77,7 +78,7 @@ public class PoreServerListPingEvent extends ServerListPingEvent {
 
     @Override
     public void setServerIcon(CachedServerIcon icon) throws IllegalArgumentException, UnsupportedOperationException {
-        handle.getResponse().setFavicon(((PoreCachedServerIcon) icon).getHandle());
+        handle.getResponse().setFavicon(((PoreCachedServerIcon)icon).getHandle());
     }
 
     @Override

@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.Giant;
 
@@ -40,7 +41,7 @@ public class PoreGiant extends PoreMonster implements org.bukkit.entity.Giant {
 
     @Override
     public Giant getHandle() {
-        return (Giant) super.getHandle();
+        return (Giant)super.getHandle();
     }
 
     @Override

@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.PigZombie;
 import org.spongepowered.api.entity.living.monster.ZombiePigman;
@@ -41,7 +42,7 @@ public class PorePigZombie extends PoreZombie implements PigZombie {
 
     @Override
     public ZombiePigman getHandle() {
-        return (ZombiePigman) super.getHandle();
+        return (ZombiePigman)super.getHandle();
     }
 
     @Override

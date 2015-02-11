@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -43,7 +44,7 @@ public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
 
     @Override
     public PrimedTNT getHandle() {
-        return (PrimedTNT) super.getHandle();
+        return (PrimedTNT)super.getHandle();
     }
 
     @Override

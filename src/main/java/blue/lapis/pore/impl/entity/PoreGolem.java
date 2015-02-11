@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.spongepowered.api.entity.living.golem.Golem;
 
 public class PoreGolem extends PoreCreature implements org.bukkit.entity.Golem {
@@ -39,7 +40,7 @@ public class PoreGolem extends PoreCreature implements org.bukkit.entity.Golem {
 
     @Override
     public Golem getHandle() {
-        return (Golem) super.getHandle();
+        return (Golem)super.getHandle();
     }
 
 }

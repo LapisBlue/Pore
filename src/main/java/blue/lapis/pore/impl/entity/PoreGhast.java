@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.Ghast;
 
@@ -40,7 +41,7 @@ public class PoreGhast extends PoreFlying implements org.bukkit.entity.Ghast {
 
     @Override
     public Ghast getHandle() {
-        return (Ghast) super.getHandle();
+        return (Ghast)super.getHandle();
     }
 
     @Override

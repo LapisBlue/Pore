@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fish;
@@ -42,7 +43,7 @@ public class PoreFish extends PoreProjectile implements Fish {
 
     @Override
     public FishHook getHandle() {
-        return (FishHook) super.getHandle();
+        return (FishHook)super.getHandle();
     }
 
     @Override

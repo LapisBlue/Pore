@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.animal.Cow;
 
@@ -40,7 +41,7 @@ public class PoreCow extends PoreAnimals implements org.bukkit.entity.Cow {
 
     @Override
     public Cow getHandle() {
-        return (Cow) super.getHandle();
+        return (Cow)super.getHandle();
     }
 
     @Override

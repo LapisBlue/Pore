@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.impl.event.enchantment;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.HumanEntity;
@@ -35,8 +37,6 @@ import org.bukkit.inventory.ItemStack;
 import org.spongepowered.api.event.inventory.ItemEvent;
 
 import java.util.List;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PorePrepareItemEnchantEvent extends PrepareItemEnchantEvent {
 

@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.vehicle.Boat;
 
@@ -40,7 +41,7 @@ public class PoreBoat extends PoreVehicle implements org.bukkit.entity.Boat {
 
     @Override
     public Boat getHandle() {
-        return (Boat) super.getHandle();
+        return (Boat)super.getHandle();
     }
 
     @Override

@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.projectile.ThrownExpBottle;
 
@@ -40,7 +41,7 @@ public class PoreThrownExpBottle extends PoreProjectile implements org.bukkit.en
 
     @Override
     public ThrownExpBottle getHandle() {
-        return (ThrownExpBottle) super.getHandle();
+        return (ThrownExpBottle)super.getHandle();
     }
 
     @Override

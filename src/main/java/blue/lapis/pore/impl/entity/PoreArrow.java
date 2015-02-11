@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.projectile.Arrow;
@@ -41,7 +42,7 @@ public class PoreArrow extends PoreProjectile implements org.bukkit.entity.Arrow
 
     @Override
     public Arrow getHandle() {
-        return (Arrow) super.getHandle();
+        return (Arrow)super.getHandle();
     }
 
     @Override

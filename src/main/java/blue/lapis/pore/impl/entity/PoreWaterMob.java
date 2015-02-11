@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.WaterMob;
 import org.spongepowered.api.entity.living.Aquatic;
 
@@ -40,7 +41,7 @@ public class PoreWaterMob extends PoreCreature implements WaterMob {
 
     @Override
     public Aquatic getHandle() {
-        return (Aquatic) super.getHandle();
+        return (Aquatic)super.getHandle();
     }
 
 }

@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.Witch;
 
@@ -40,7 +41,7 @@ public class PoreWitch extends PoreMonster implements org.bukkit.entity.Witch {
 
     @Override
     public Witch getHandle() {
-        return (Witch) super.getHandle();
+        return (Witch)super.getHandle();
     }
 
     @Override

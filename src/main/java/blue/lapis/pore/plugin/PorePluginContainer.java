@@ -25,6 +25,7 @@
 package blue.lapis.pore.plugin;
 
 import blue.lapis.pore.util.PoreWrapper;
+
 import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
 

@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.projectile.fireball.SmallFireball;
 
@@ -40,7 +41,7 @@ public class PoreSmallFireball extends PoreFireball implements org.bukkit.entity
 
     @Override
     public SmallFireball getHandle() {
-        return (SmallFireball) super.getHandle();
+        return (SmallFireball)super.getHandle();
     }
 
     @Override

@@ -25,6 +25,7 @@
 package blue.lapis.pore.converter.vector;
 
 import blue.lapis.pore.impl.PoreWorld;
+
 import com.flowpowered.math.vector.Vector3d;
 import com.flowpowered.math.vector.Vector3f;
 import com.flowpowered.math.vector.Vector3i;
@@ -47,7 +48,7 @@ public class LocationConverter {
     }
 
     public static org.spongepowered.api.world.Location of(Location location) {
-        return new org.spongepowered.api.world.Location(((PoreWorld) location.getWorld()).getHandle(),
+        return new org.spongepowered.api.world.Location(((PoreWorld)location.getWorld()).getHandle(),
                 VectorConverter.create3d(location));
     }
 

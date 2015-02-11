@@ -27,6 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.ItemStackConverter;
 import blue.lapis.pore.converter.type.RotationConverter;
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.Rotation;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -44,7 +45,7 @@ public class PoreItemFrame extends PoreHanging implements org.bukkit.entity.Item
 
     @Override
     public ItemFrame getHandle() {
-        return (ItemFrame) super.getHandle();
+        return (ItemFrame)super.getHandle();
     }
 
     @Override

@@ -24,15 +24,16 @@
  */
 package blue.lapis.pore.impl.event.block;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PorePlayer;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.spongepowered.api.event.entity.living.player.PlayerBreakBlockEvent;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PoreBlockBreakEvent extends BlockBreakEvent {
 

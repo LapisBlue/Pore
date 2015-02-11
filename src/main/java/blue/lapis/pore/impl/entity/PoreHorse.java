@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.type.HorseConverter;
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.HorseInventory;
@@ -43,7 +44,7 @@ public class PoreHorse extends PoreTameable implements org.bukkit.entity.Horse {
 
     @Override
     public Horse getHandle() {
-        return (Horse) super.getHandle();
+        return (Horse)super.getHandle();
     }
 
     @Override

@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.EnderCrystal;
 
@@ -40,7 +41,7 @@ public class PoreEnderCrystal extends PoreEntity implements org.bukkit.entity.En
 
     @Override
     public EnderCrystal getHandle() {
-        return (EnderCrystal) super.getHandle();
+        return (EnderCrystal)super.getHandle();
     }
 
     @Override

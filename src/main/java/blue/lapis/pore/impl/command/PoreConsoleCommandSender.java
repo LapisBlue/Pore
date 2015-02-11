@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.command;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
@@ -42,7 +43,7 @@ public class PoreConsoleCommandSender extends PoreCommandSender implements Conso
 
     @Override
     public ConsoleSource getHandle() {
-        return (ConsoleSource) super.getHandle();
+        return (ConsoleSource)super.getHandle();
     }
 
     @Override

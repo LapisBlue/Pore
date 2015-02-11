@@ -24,7 +24,20 @@
  */
 package blue.lapis.pore.event;
 
+import static org.objectweb.asm.Opcodes.ACC_FINAL;
+import static org.objectweb.asm.Opcodes.ACC_PUBLIC;
+import static org.objectweb.asm.Opcodes.ACC_SUPER;
+import static org.objectweb.asm.Opcodes.ALOAD;
+import static org.objectweb.asm.Opcodes.DUP;
+import static org.objectweb.asm.Opcodes.GETSTATIC;
+import static org.objectweb.asm.Opcodes.INVOKESPECIAL;
+import static org.objectweb.asm.Opcodes.INVOKESTATIC;
+import static org.objectweb.asm.Opcodes.NEW;
+import static org.objectweb.asm.Opcodes.RETURN;
+import static org.objectweb.asm.Opcodes.V1_6;
+
 import blue.lapis.pore.converter.type.EventPriorityConverter;
+
 import com.google.common.base.Throwables;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
@@ -37,8 +50,6 @@ import org.spongepowered.api.util.event.Subscribe;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
-import static org.objectweb.asm.Opcodes.*;
 
 public final class PoreListenerGenerator {
 
@@ -100,7 +111,7 @@ public final class PoreListenerGenerator {
     private static Class<?> load(String name, Class<?> pore, Class<?> sponge, EventPriority priority, Order order) {
         byte[] bytes = generate(name, pore, sponge, priority, order);
         try {
-            return (Class<?>) defineClass.invoke(PoreListenerGenerator.class.getClassLoader(),
+            return (Class<?>)defineClass.invoke(PoreListenerGenerator.class.getClassLoader(),
                     name, bytes, 0, bytes.length);
         } catch (IllegalAccessException e) {
             throw Throwables.propagate(e);

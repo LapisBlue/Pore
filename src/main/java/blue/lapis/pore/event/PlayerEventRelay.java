@@ -33,6 +33,7 @@ import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.impl.entity.PoreItem;
 import blue.lapis.pore.impl.entity.PorePlayer;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
@@ -218,7 +219,7 @@ public class PlayerEventRelay {
                 Bukkit.getPluginManager().callEvent(
                         new PlayerPickupItemEvent(
                                 PorePlayer.of(event.getPlayer()),
-                                PoreItem.of((org.spongepowered.api.entity.Item) drop),
+                                PoreItem.of((org.spongepowered.api.entity.Item)drop),
                                 0 //TODO: remaining item count
                         ) {
                             @Override

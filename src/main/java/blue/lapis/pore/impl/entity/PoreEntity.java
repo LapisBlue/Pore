@@ -29,6 +29,7 @@ import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.PoreConverter;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreWrapper;
+
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Bukkit;
@@ -213,7 +214,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
     @Override
     public boolean setPassenger(final org.bukkit.entity.Entity passenger) {
         if (!getHandle().getPassenger().isPresent()) {
-            getHandle().setPassenger(((PoreEntity) passenger).getHandle());
+            getHandle().setPassenger(((PoreEntity)passenger).getHandle());
             final PoreEntity mounted = this;
             Pore.getGame().getEventManager().post(new EntityMountEvent() {
 
@@ -235,13 +236,13 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
                     if (cancel)
                         mounted.getHandle().setPassenger(null); //TODO: avoid triggering an event
                     else
-                        mounted.getHandle().setPassenger(((PoreEntity) passenger).getHandle());
-                        //TODO: avoid triggering event
+                        mounted.getHandle().setPassenger(((PoreEntity)passenger).getHandle());
+                    //TODO: avoid triggering event
                 }
 
                 @Override
                 public org.spongepowered.api.entity.Entity getEntity() {
-                    return ((PoreEntity) passenger).getHandle();
+                    return ((PoreEntity)passenger).getHandle();
                 }
 
                 @Override

@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -42,7 +43,7 @@ public class PoreFirework extends PoreEntity implements org.bukkit.entity.Firewo
 
     @Override
     public Firework getHandle() {
-        return (Firework) super.getHandle();
+        return (Firework)super.getHandle();
     }
 
     @Override

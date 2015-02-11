@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity.minecart;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.CommandMinecart;
@@ -48,7 +49,7 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
 
     @Override
     public MinecartCommandBlock getHandle() {
-        return (MinecartCommandBlock) super.getHandle();
+        return (MinecartCommandBlock)super.getHandle();
     }
 
     @Override

@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.command;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.command.RemoteConsoleCommandSender;
 import org.spongepowered.api.util.command.source.RemoteSource;
 
@@ -40,7 +41,7 @@ public class PoreRemoteConsoleCommandSender extends PoreCommandSender implements
 
     @Override
     public RemoteSource getHandle() {
-        return (RemoteSource) super.getHandle();
+        return (RemoteSource)super.getHandle();
     }
 
 }

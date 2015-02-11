@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity.minecart;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.ExplosiveMinecart;
 import org.spongepowered.api.entity.vehicle.minecart.MinecartTNT;
@@ -41,7 +42,7 @@ public class PoreExplosiveMinecart extends PoreMinecart implements ExplosiveMine
 
     @Override
     public MinecartTNT getHandle() {
-        return (MinecartTNT) super.getHandle();
+        return (MinecartTNT)super.getHandle();
     }
 
     @Override

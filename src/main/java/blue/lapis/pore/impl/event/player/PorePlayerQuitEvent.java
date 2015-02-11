@@ -24,12 +24,13 @@
  */
 package blue.lapis.pore.impl.event.player;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import blue.lapis.pore.impl.entity.PorePlayer;
+
 import org.bukkit.entity.Player;
 import org.spongepowered.api.event.entity.living.player.PlayerQuitEvent;
 import org.spongepowered.api.text.message.Messages;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PorePlayerQuitEvent extends org.bukkit.event.player.PlayerQuitEvent {
 

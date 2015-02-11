@@ -30,7 +30,7 @@ import org.bukkit.map.MapCursorCollection;
 import org.bukkit.map.MapFont;
 import org.bukkit.map.MapView;
 
-import java.awt.Image;
+import java.awt.*;
 
 public class PoreMapCanvas implements MapCanvas {
 

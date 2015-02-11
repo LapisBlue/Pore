@@ -85,7 +85,7 @@ public class EffectConverter {
     }
 
     public static <T> int getDataValue(Effect effect, T data) {
-        switch(effect) {
+        switch (effect) {
             case POTION_BREAK:
                 return ((Potion)data).toDamageValue() & 0x3F;
             case RECORD_PLAY:
@@ -135,7 +135,7 @@ public class EffectConverter {
                         return 8;
                     default:
                         throw new IllegalArgumentException("Invalid smoke direction!");
-            }
+                }
             default:
                 return 0;
         }

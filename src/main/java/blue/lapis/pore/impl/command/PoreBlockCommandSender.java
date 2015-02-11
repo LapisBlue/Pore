@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.command;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.command.BlockCommandSender;
@@ -42,7 +43,7 @@ public class PoreBlockCommandSender extends PoreCommandSender implements BlockCo
 
     @Override
     public CommandBlockSource getHandle() {
-        return (CommandBlockSource) super.getHandle();
+        return (CommandBlockSource)super.getHandle();
     }
 
     @Override

@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity.minecart;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.SpawnerMinecart;
 import org.spongepowered.api.entity.vehicle.minecart.MinecartMobSpawner;
@@ -41,7 +42,7 @@ public class PoreSpawnerMinecart extends PoreMinecart implements SpawnerMinecart
 
     @Override
     public MinecartMobSpawner getHandle() {
-        return (MinecartMobSpawner) super.getHandle();
+        return (MinecartMobSpawner)super.getHandle();
     }
 
     @Override

@@ -29,6 +29,7 @@ import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.impl.entity.PorePlayer;
+
 import org.bukkit.Bukkit;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.event.block.BlockBurnEvent;
@@ -128,7 +129,7 @@ public class BlockEventRelay {
                         null, //TODO: cause (reason); not sure if this can be implemented at the moment
                         event.getCause().isPresent() ? // check if there's a cause (presumably always true)
                                 event.getCause() instanceof Entity ? // check if the cause was an entity
-                                        PoreEntity.of((Entity) event.getCause().get())
+                                        PoreEntity.of((Entity)event.getCause().get())
                                         // get a wrapper for the entity
                                         : null // cause is not an entity
                                 : null // no cause (not sure if this is possible)

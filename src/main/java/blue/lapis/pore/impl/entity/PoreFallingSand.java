@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.type.MaterialConverter;
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingSand;
@@ -43,7 +44,7 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
 
     @Override
     public FallingBlock getHandle() {
-        return (FallingBlock) super.getHandle();
+        return (FallingBlock)super.getHandle();
     }
 
     @Override

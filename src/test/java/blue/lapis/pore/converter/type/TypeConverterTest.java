@@ -25,6 +25,7 @@
 package blue.lapis.pore.converter.type;
 
 import blue.lapis.pore.PoreTests;
+
 import org.junit.Test;
 import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.effect.sound.SoundTypes;

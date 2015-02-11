@@ -31,6 +31,7 @@ import blue.lapis.pore.impl.util.PoreCachedServerIcon;
 import blue.lapis.pore.logging.PoreLogger;
 import blue.lapis.pore.util.PoreCollections;
 import blue.lapis.pore.util.PoreWrapper;
+
 import com.avaje.ebean.config.ServerConfig;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
@@ -421,7 +422,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public boolean unloadWorld(World world, boolean save) {
-        return getHandle().unloadWorld(((PoreWorld) world).getHandle());
+        return getHandle().unloadWorld(((PoreWorld)world).getHandle());
     }
 
     @Override
@@ -461,7 +462,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
         Command command = commandMap.getCommand(name);
 
         if (command instanceof PluginCommand) {
-            return (PluginCommand) command;
+            return (PluginCommand)command;
         } else {
             return null;
         }
@@ -557,7 +558,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
         for (Permissible permissible : permissibles) {
             if (permissible instanceof CommandSender && permissible.hasPermission(permission)) {
-                CommandSender user = (CommandSender) permissible;
+                CommandSender user = (CommandSender)permissible;
                 user.sendMessage(message);
                 count++;
             }

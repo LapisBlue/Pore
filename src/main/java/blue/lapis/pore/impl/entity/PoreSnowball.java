@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.projectile.Snowball;
 
@@ -40,7 +41,7 @@ public class PoreSnowball extends PoreProjectile implements org.bukkit.entity.Sn
 
     @Override
     public Snowball getHandle() {
-        return (Snowball) super.getHandle();
+        return (Snowball)super.getHandle();
     }
 
     @Override

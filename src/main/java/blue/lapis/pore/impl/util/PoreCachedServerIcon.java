@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.util;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
 import blue.lapis.pore.util.PoreWrapper;
+
 import org.bukkit.util.CachedServerIcon;
 import org.spongepowered.api.status.Favicon;
 

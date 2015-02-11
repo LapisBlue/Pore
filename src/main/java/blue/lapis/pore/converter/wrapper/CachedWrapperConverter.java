@@ -24,7 +24,11 @@
  */
 package blue.lapis.pore.converter.wrapper;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
 import blue.lapis.pore.Pore;
+
 import com.google.common.base.Function;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -35,14 +39,12 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
-import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
+import javax.annotation.Nullable;
 
 final class CachedWrapperConverter<B> implements Function<Object, B> {
     private final LoadingCache<Object, Object> cache = CacheBuilder.newBuilder()
@@ -82,7 +84,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
             if (parent == base) {
                 parents.add(entry);
             } else {
-                children.put((Class<? extends B>) parent, entry);
+                children.put((Class<? extends B>)parent, entry);
             }
         }
 
@@ -107,9 +109,9 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
                 ImmutableMap.builder();
 
         for (Map.Entry<Class<? extends B>, Class<?>> child : children) {
-            Class<? extends S> childSponge = (Class<? extends S>) child.getValue();
+            Class<? extends S> childSponge = (Class<? extends S>)child.getValue();
             converterRegistry.put(childSponge,
-                    build(childrenRegistry, childSponge, (Class<? extends P>) child.getKey()));
+                    build(childrenRegistry, childSponge, (Class<? extends P>)child.getKey()));
         }
 
         return new Converter<S, P>(sponge, pore, converterRegistry.build());
@@ -121,7 +123,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
         if (handle == null)
             return null;
 
-        return (P) cache.getUnchecked(handle);
+        return (P)cache.getUnchecked(handle);
     }
 
     @Nullable
@@ -183,7 +185,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
 
         @SuppressWarnings("unchecked")
         public Converter<? extends S, ? extends P> findUnchecked(Class<?> sponge) {
-            return find((Class<? extends S>) sponge);
+            return find((Class<? extends S>)sponge);
         }
 
         @Override
@@ -197,7 +199,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
 
         @SuppressWarnings("unchecked")
         public P applyUnchecked(Object input) {
-            return apply((S) input);
+            return apply((S)input);
         }
     }
 

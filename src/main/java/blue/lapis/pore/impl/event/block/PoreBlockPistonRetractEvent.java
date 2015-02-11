@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.impl.event.block;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -32,8 +34,6 @@ import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.spongepowered.api.event.block.BlockEvent;
 
 import java.util.List;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PoreBlockPistonRetractEvent extends BlockPistonRetractEvent {
 

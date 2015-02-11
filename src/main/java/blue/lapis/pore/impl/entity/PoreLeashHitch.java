@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.hanging.LeashHitch;
 
@@ -40,7 +41,7 @@ public class PoreLeashHitch extends PoreHanging implements org.bukkit.entity.Lea
 
     @Override
     public LeashHitch getHandle() {
-        return (LeashHitch) super.getHandle();
+        return (LeashHitch)super.getHandle();
     }
 
     @Override

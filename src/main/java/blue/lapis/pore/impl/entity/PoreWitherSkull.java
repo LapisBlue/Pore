@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.projectile.fireball.WitherSkull;
@@ -41,7 +42,7 @@ public class PoreWitherSkull extends PoreFireball implements org.bukkit.entity.W
 
     @Override
     public WitherSkull getHandle() {
-        return (WitherSkull) super.getHandle();
+        return (WitherSkull)super.getHandle();
     }
 
     @Override

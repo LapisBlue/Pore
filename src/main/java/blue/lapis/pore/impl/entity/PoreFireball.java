@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
@@ -42,7 +43,7 @@ public class PoreFireball extends PoreProjectile implements org.bukkit.entity.Fi
 
     @Override
     public Fireball getHandle() {
-        return (Fireball) super.getHandle();
+        return (Fireball)super.getHandle();
     }
 
     @Override

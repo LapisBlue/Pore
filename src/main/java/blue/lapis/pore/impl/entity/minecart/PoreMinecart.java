@@ -27,6 +27,7 @@ package blue.lapis.pore.impl.entity.minecart;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.PoreConverter;
 import blue.lapis.pore.impl.entity.PoreVehicle;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
@@ -45,7 +46,7 @@ public class PoreMinecart extends PoreVehicle implements org.bukkit.entity.Minec
 
     @Override
     public Minecart getHandle() {
-        return (Minecart) super.getHandle();
+        return (Minecart)super.getHandle();
     }
 
     @Override

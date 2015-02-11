@@ -24,7 +24,15 @@
  */
 package blue.lapis.pore.impl;
 
+import static com.google.common.base.Predicates.instanceOf;
+import static com.google.common.collect.Collections2.filter;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import blue.lapis.pore.PoreTests;
+
 import com.google.common.collect.ImmutableList;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
@@ -37,13 +45,6 @@ import org.spongepowered.api.world.World;
 
 import java.util.Collection;
 import java.util.List;
-
-import static com.google.common.base.Predicates.instanceOf;
-import static com.google.common.collect.Collections2.filter;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class WorldEntitiesTest {
     private PoreWorld world;

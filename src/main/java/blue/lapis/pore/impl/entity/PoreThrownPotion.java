@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.ItemStackConverter;
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -46,7 +47,7 @@ public class PoreThrownPotion extends PoreProjectile implements org.bukkit.entit
 
     @Override
     public ThrownPotion getHandle() {
-        return (ThrownPotion) super.getHandle();
+        return (ThrownPotion)super.getHandle();
     }
 
     @Override

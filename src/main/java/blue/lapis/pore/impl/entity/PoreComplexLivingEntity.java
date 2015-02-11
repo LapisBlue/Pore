@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.ComplexEntityPart;
 import org.bukkit.entity.ComplexLivingEntity;
 import org.spongepowered.api.entity.living.complex.ComplexLiving;
@@ -45,7 +46,7 @@ public class PoreComplexLivingEntity extends PoreLivingEntity implements Complex
 
     @Override
     public ComplexLiving getHandle() {
-        return (ComplexLiving) super.getHandle();
+        return (ComplexLiving)super.getHandle();
     }
 
     @Override

@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.projectiles.BlockProjectileSource;
@@ -42,7 +43,7 @@ public class PoreDispenser extends PoreBlockState implements org.bukkit.block.Di
 
     @Override
     public Dispenser getHandle() {
-        return (Dispenser) super.getHandle();
+        return (Dispenser)super.getHandle();
     }
 
     @Override

@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.Spider;
 
@@ -40,7 +41,7 @@ public class PoreSpider extends PoreMonster implements org.bukkit.entity.Spider 
 
     @Override
     public Spider getHandle() {
-        return (Spider) super.getHandle();
+        return (Spider)super.getHandle();
     }
 
     @Override

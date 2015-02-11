@@ -36,6 +36,7 @@ import blue.lapis.pore.impl.entity.PoreLivingEntity;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreCollections;
 import blue.lapis.pore.util.PoreWrapper;
+
 import com.flowpowered.math.vector.Vector3i;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
@@ -77,13 +78,14 @@ import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.extent.Extent;
 import org.spongepowered.api.world.weather.Weathers;
 
-import javax.annotation.Nullable;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+
+import javax.annotation.Nullable;
 
 public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
@@ -93,7 +95,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     public static PoreWorld of(Extent handle) {
         if (handle instanceof World) {
-            return of((World) handle);
+            return of((World)handle);
         }
         throw new UnsupportedOperationException(); // TODO
     }
@@ -312,7 +314,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         List<LivingEntity> living = Lists.newArrayList();
         for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()) {
             if (e instanceof org.spongepowered.api.entity.living.Living) {
-                living.add(PoreLivingEntity.of((org.spongepowered.api.entity.living.Living) e));
+                living.add(PoreLivingEntity.of((org.spongepowered.api.entity.living.Living)e));
             }
         }
         return living;
@@ -321,14 +323,14 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     @Override
     @SuppressWarnings("unchecked")
     public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls) {
-        return (Collection<T>) Collections2.filter(getEntities(), Predicates.instanceOf(cls));
+        return (Collection<T>)Collections2.filter(getEntities(), Predicates.instanceOf(cls));
     }
 
     @Override
     @SuppressWarnings("unchecked")
     @Deprecated
     public <T extends Entity> Collection<T> getEntitiesByClass(final Class<T>... classes) {
-        return (Collection<T>) getEntitiesByClasses(classes);
+        return (Collection<T>)getEntitiesByClasses(classes);
     }
 
     @Override
@@ -355,7 +357,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         List<Player> players = Lists.newArrayList();
         for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()) {
             if (e instanceof org.spongepowered.api.entity.player.Player) {
-                players.add(PorePlayer.of((org.spongepowered.api.entity.player.Player) e));
+                players.add(PorePlayer.of((org.spongepowered.api.entity.player.Player)e));
             }
         }
         return players;
@@ -413,7 +415,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public int getWeatherDuration() {
-        return (int) getHandle().getRemainingDuration();
+        return (int)getHandle().getRemainingDuration();
     }
 
     @Override
@@ -435,7 +437,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public int getThunderDuration() {
-        return isThundering() ? (int) getHandle().getRemainingDuration() : 0;
+        return isThundering() ? (int)getHandle().getRemainingDuration() : 0;
     }
 
     @Override
@@ -712,8 +714,8 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public void playSound(Location location, Sound sound, float volume, float pitch) {
-        getHandle().playSound(SoundConverter.of(sound), VectorConverter.create3d(location), (double) volume,
-                (double) pitch);
+        getHandle().playSound(SoundConverter.of(sound), VectorConverter.create3d(location), (double)volume,
+                (double)pitch);
     }
 
     @Override

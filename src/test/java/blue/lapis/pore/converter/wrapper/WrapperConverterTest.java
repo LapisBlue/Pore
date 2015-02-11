@@ -24,8 +24,13 @@
  */
 package blue.lapis.pore.converter.wrapper;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.withSettings;
+
 import blue.lapis.pore.PoreTests;
 import blue.lapis.pore.util.PoreWrapper;
+
 import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
@@ -36,10 +41,6 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.withSettings;
 
 public class WrapperConverterTest {
 
@@ -77,10 +78,10 @@ public class WrapperConverterTest {
 
         parents = parentsBuilder.build();
 
-         for (Map.Entry<? extends Class<?>, ? extends CachedWrapperConverter.Converter<?, ?>> entry :
-                 converter.registry.entrySet()) {
+        for (Map.Entry<? extends Class<?>, ? extends CachedWrapperConverter.Converter<?, ?>> entry :
+                converter.registry.entrySet()) {
 
-             scan(builder, entry.getKey(), parents, entry.getValue());
+            scan(builder, entry.getKey(), parents, entry.getValue());
         }
     }
 

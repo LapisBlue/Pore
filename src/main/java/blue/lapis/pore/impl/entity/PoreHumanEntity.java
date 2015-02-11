@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -56,13 +57,13 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public Human getHandle() {
-        return (Human) super.getHandle();
+        return (Human)super.getHandle();
     }
 
     @Override
     public String getName() {
         if (getHandle() instanceof Player)
-            return ((Player) getHandle()).getName();
+            return ((Player)getHandle()).getName();
         throw new NotImplementedException();
     }
 
@@ -164,7 +165,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     @Override
     public boolean isPermissionSet(String name) {
         if (getHandle() instanceof Subject) {
-            Subject subject = (Subject) getHandle();
+            Subject subject = (Subject)getHandle();
             return subject.getPermissionValue(subject.getActiveContexts(), name) != Tristate.UNDEFINED;
         }
 
@@ -178,7 +179,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public boolean hasPermission(String name) {
-        return getHandle() instanceof Subject && ((Subject) getHandle()).hasPermission(name);
+        return getHandle() instanceof Subject && ((Subject)getHandle()).hasPermission(name);
     }
 
     @Override

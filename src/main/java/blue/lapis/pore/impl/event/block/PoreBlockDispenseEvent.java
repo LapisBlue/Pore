@@ -24,13 +24,13 @@
  */
 package blue.lapis.pore.impl.event.block;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.event.block.BlockDispenseEvent;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PoreBlockDispenseEvent extends org.bukkit.event.block.BlockDispenseEvent {
 

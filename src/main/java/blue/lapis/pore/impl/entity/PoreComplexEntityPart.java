@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.ComplexEntityPart;
 import org.bukkit.entity.ComplexLivingEntity;
 import org.bukkit.entity.EntityType;
@@ -42,7 +43,7 @@ public class PoreComplexEntityPart extends PoreEntity implements ComplexEntityPa
 
     @Override
     public ComplexLivingPart getHandle() {
-        return (ComplexLivingPart) super.getHandle();
+        return (ComplexLivingPart)super.getHandle();
     }
 
     @Override

@@ -27,6 +27,7 @@ package blue.lapis.pore.impl;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.PoreConverter;
 import blue.lapis.pore.util.PoreWrapper;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.spongepowered.api.world.WorldBorder;
@@ -94,7 +95,7 @@ public class PoreWorldBorder extends PoreWrapper<WorldBorder> implements org.buk
 
     @Override
     public void setDamageAmount(double damage) {
-        getHandle().setDamageAmount((int) damage);
+        getHandle().setDamageAmount((int)damage);
     }
 
     @Override

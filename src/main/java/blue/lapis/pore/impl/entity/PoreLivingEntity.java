@@ -29,6 +29,7 @@ import blue.lapis.pore.converter.type.PotionEffectTypeConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.PoreConverter;
 import blue.lapis.pore.util.ProjectileUtil;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -68,7 +69,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public Living getHandle() {
-        return (Living) super.getHandle();
+        return (Living)super.getHandle();
     }
 
     @Override
@@ -105,7 +106,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     public Egg throwEgg() {
         if (getHandle() instanceof ProjectileSource) {
             return PoreEgg.of(
-                    ((ProjectileSource) getHandle()).launchProjectile(
+                    ((ProjectileSource)getHandle()).launchProjectile(
                             org.spongepowered.api.entity.projectile.Egg.class
                     )
             );
@@ -117,7 +118,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     public Snowball throwSnowball() {
         if (getHandle() instanceof ProjectileSource) {
             return PoreSnowball.of(
-                    ((ProjectileSource) getHandle()).launchProjectile(
+                    ((ProjectileSource)getHandle()).launchProjectile(
                             org.spongepowered.api.entity.projectile.Snowball.class
                     )
             );
@@ -129,7 +130,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     public Arrow shootArrow() {
         if (getHandle() instanceof ProjectileSource) {
             return PoreArrow.of(
-                    ((ProjectileSource) getHandle()).launchProjectile(
+                    ((ProjectileSource)getHandle()).launchProjectile(
                             org.spongepowered.api.entity.projectile.Arrow.class
                     )
             );
@@ -174,7 +175,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public int _INVALID_getLastDamage() {
-        return (int) this.getLastDamage();
+        return (int)this.getLastDamage();
     }
 
     @Override
@@ -184,7 +185,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void _INVALID_setLastDamage(int damage) {
-        this.setLastDamage((double) damage);
+        this.setLastDamage((double)damage);
     }
 
     @Override
@@ -298,7 +299,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public boolean isLeashed() {
-        return getHandle() instanceof Agent && ((Agent) getHandle()).isLeashed();
+        return getHandle() instanceof Agent && ((Agent)getHandle()).isLeashed();
     }
 
     @Override
@@ -316,11 +317,11 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
             if (!(this instanceof Bat) && !(this instanceof EnderDragon) &&
                     !(this instanceof Witch) && !(this instanceof Wither)) {
 
-                ((Agent)getHandle()).setLeashHolder(((PoreEntity) holder).getHandle());
+                ((Agent)getHandle()).setLeashHolder(((PoreEntity)holder).getHandle());
                 return true;
             }
         }
-            return false;
+        return false;
     }
 
     @Override
@@ -330,7 +331,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void _INVALID_damage(int amount) {
-        getHandle().damage((double) amount);
+        getHandle().damage((double)amount);
     }
 
     @Override
@@ -350,7 +351,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public int _INVALID_getHealth() {
-        return (int) getHandle().getHealth();
+        return (int)getHandle().getHealth();
     }
 
     @Override
@@ -370,7 +371,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public int _INVALID_getMaxHealth() {
-        return (int) getMaxHealth();
+        return (int)getMaxHealth();
     }
 
     @Override
@@ -380,7 +381,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void _INVALID_setMaxHealth(int health) {
-        setMaxHealth((double) health);
+        setMaxHealth((double)health);
     }
 
     @Override
@@ -396,7 +397,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     public <T extends Projectile> T launchProjectile(Class<? extends T> projectile, Vector velocity) {
         if (getHandle() instanceof ProjectileSource) {
-            return ProjectileUtil.launchProjectile((ProjectileSource) getHandle(), projectile, velocity);
+            return ProjectileUtil.launchProjectile((ProjectileSource)getHandle(), projectile, velocity);
         }
         throw new UnsupportedOperationException();
     }

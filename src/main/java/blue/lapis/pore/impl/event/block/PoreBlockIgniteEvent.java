@@ -24,13 +24,13 @@
  */
 package blue.lapis.pore.impl.event.block;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.spongepowered.api.event.block.BlockIgniteEvent;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PoreBlockIgniteEvent extends org.bukkit.event.block.BlockIgniteEvent {
 

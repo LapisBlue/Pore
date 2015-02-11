@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.permissions;
 
 import blue.lapis.pore.util.PoreWrapper;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;

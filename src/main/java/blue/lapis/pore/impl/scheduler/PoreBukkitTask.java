@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.scheduler;
 
 import blue.lapis.pore.plugin.PorePluginContainer;
 import blue.lapis.pore.util.PoreWrapper;
+
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.spongepowered.api.service.scheduler.Task;
@@ -46,7 +47,7 @@ public class PoreBukkitTask extends PoreWrapper<Task> implements BukkitTask {
 
     @Override
     public Plugin getOwner() {
-        return ((PorePluginContainer) getHandle().getOwner()).getHandle();
+        return ((PorePluginContainer)getHandle().getOwner()).getHandle();
     }
 
     @Override

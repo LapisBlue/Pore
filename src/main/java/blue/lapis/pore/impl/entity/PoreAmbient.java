@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.spongepowered.api.entity.living.Ambient;
 
 public class PoreAmbient extends PoreLivingEntity implements org.bukkit.entity.Ambient {
@@ -39,7 +40,7 @@ public class PoreAmbient extends PoreLivingEntity implements org.bukkit.entity.A
 
     @Override
     public Ambient getHandle() {
-        return (Ambient) super.getHandle();
+        return (Ambient)super.getHandle();
     }
 
 }

@@ -24,13 +24,13 @@
  */
 package blue.lapis.pore;
 
+import static org.mockito.Mockito.mock;
+
 import org.slf4j.LoggerFactory;
 import org.spongepowered.api.Game;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-
-import static org.mockito.Mockito.mock;
 
 public final class PoreTests {
 

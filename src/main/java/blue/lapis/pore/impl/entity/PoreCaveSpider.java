@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.PoreConverter;
+
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.CaveSpider;
 
@@ -40,7 +41,7 @@ public class PoreCaveSpider extends PoreSpider implements org.bukkit.entity.Cave
 
     @Override
     public CaveSpider getHandle() {
-        return (CaveSpider) super.getHandle();
+        return (CaveSpider)super.getHandle();
     }
 
     @Override
