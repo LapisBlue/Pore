@@ -46,14 +46,14 @@ public class PoreProjectile extends PoreEntity implements org.bukkit.entity.Proj
 
     @Override
     public Projectile getHandle() {
-        return (Projectile)super.getHandle();
+        return (Projectile) super.getHandle();
     }
 
     @Override
     public LivingEntity _INVALID_getShooter() {
         ProjectileSource shooter = getShooter();
         if (shooter instanceof LivingEntity) {
-            return PoreLivingEntity.of((Living)shooter);
+            return PoreLivingEntity.of((Living) shooter);
         }
         throw new UnsupportedOperationException();
     }
@@ -62,19 +62,19 @@ public class PoreProjectile extends PoreEntity implements org.bukkit.entity.Proj
     public ProjectileSource getShooter() {
         org.spongepowered.api.entity.projectile.source.ProjectileSource source = getHandle().getShooter();
         if (source instanceof BlockProjectileSource) {
-            return PoreBlockProjectileSource.of((BlockProjectileSource)source);
+            return PoreBlockProjectileSource.of((BlockProjectileSource) source);
         } else if (source instanceof Living) {
-            return PoreLivingEntity.of((Living)source);
+            return PoreLivingEntity.of((Living) source);
         }
         throw new UnsupportedOperationException();
     }
 
     @Override
     public void _INVALID_setShooter(LivingEntity shooter) {
-        Living spongeShooter = ((PoreLivingEntity)shooter).getHandle();
+        Living spongeShooter = ((PoreLivingEntity) shooter).getHandle();
         if (spongeShooter instanceof org.spongepowered.api.entity.projectile.source.ProjectileSource) {
             getHandle().setShooter(
-                    (org.spongepowered.api.entity.projectile.source.ProjectileSource)spongeShooter);
+                    (org.spongepowered.api.entity.projectile.source.ProjectileSource) spongeShooter);
         } else {
             throw new UnsupportedOperationException();
         }
@@ -83,12 +83,12 @@ public class PoreProjectile extends PoreEntity implements org.bukkit.entity.Proj
     @Override
     public void setShooter(ProjectileSource source) {
         if (source instanceof org.bukkit.projectiles.BlockProjectileSource) {
-            getHandle().setShooter(((PoreBlockProjectileSource)source).getHandle());
+            getHandle().setShooter(((PoreBlockProjectileSource) source).getHandle());
         } else if (source instanceof LivingEntity) {
-            Living spongeSource = ((PoreLivingEntity)source).getHandle();
+            Living spongeSource = ((PoreLivingEntity) source).getHandle();
             if (spongeSource instanceof org.spongepowered.api.entity.projectile.source.ProjectileSource) {
                 getHandle().setShooter(
-                        (org.spongepowered.api.entity.projectile.source.ProjectileSource)spongeSource);
+                        (org.spongepowered.api.entity.projectile.source.ProjectileSource) spongeSource);
             }
         } else {
             throw new UnsupportedOperationException();

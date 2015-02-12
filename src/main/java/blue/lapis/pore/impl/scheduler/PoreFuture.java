@@ -30,6 +30,7 @@ import org.spongepowered.api.service.scheduler.Task;
 import java.util.concurrent.Callable;
 
 class PoreFuture<T> extends AbstractFuture<T> implements Runnable {
+
     private final Callable<T> callable;
     Task handle;
 

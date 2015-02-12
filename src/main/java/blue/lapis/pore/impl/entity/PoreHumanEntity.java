@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -61,8 +62,9 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public String getName() {
-        if (getHandle() instanceof Player)
+        if (getHandle() instanceof Player) {
             return ((Player) getHandle()).getName();
+        }
         throw new NotImplementedException();
     }
 

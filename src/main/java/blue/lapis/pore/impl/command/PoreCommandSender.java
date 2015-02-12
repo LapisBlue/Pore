@@ -44,7 +44,7 @@ public class PoreCommandSender extends PorePermissible implements CommandSender 
 
     @Override
     public CommandSource getHandle() {
-        return (CommandSource)super.getHandle();
+        return (CommandSource) super.getHandle();
     }
 
     @Override

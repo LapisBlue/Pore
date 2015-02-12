@@ -33,6 +33,7 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import java.util.Map;
 
 public class PoreEnchantmentStorageMeta extends PoreItemMeta implements EnchantmentStorageMeta {
+
     @Override
     public boolean hasStoredEnchants() {
         throw new NotImplementedException();

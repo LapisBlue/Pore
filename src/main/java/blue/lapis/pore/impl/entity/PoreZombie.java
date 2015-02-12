@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.monster.Zombie;
 
@@ -55,10 +56,11 @@ public class PoreZombie extends PoreMonster implements org.bukkit.entity.Zombie 
 
     @Override
     public void setBaby(boolean flag) {
-        if (flag)
+        if (flag) {
             getHandle().setBaby();
-        else
+        } else {
             getHandle().setAdult();
+        }
     }
 
     @Override

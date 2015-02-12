@@ -118,9 +118,9 @@ public class EntityEventRelay {
         // Bukkit only has an event for vehicle collisions against other entities
         PoreVehicle vehicle = null;
         if (event.getEntity() instanceof Minecart) {
-            vehicle = PoreMinecart.of((Minecart)event.getEntity());
+            vehicle = PoreMinecart.of((Minecart) event.getEntity());
         } else if (event.getEntity() instanceof Boat) {
-            vehicle = PoreBoat.of((Boat)event.getEntity());
+            vehicle = PoreBoat.of((Boat) event.getEntity());
         }
 
         if (vehicle != null) {
@@ -143,7 +143,7 @@ public class EntityEventRelay {
     public void onEntityDeath(final EntityDeathEvent event) {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.entity.EntityDeathEvent(
-                        PoreLivingEntity.of((Living)event.getEntity()),
+                        PoreLivingEntity.of((Living) event.getEntity()),
                         new ArrayList<ItemStack>(), //TODO: drops
                         0 //TODO: dropped exp
                 )
@@ -152,10 +152,10 @@ public class EntityEventRelay {
 
     @Subscribe
     public void onEntitySpawn(final EntitySpawnEvent event) {
-        if (event.getEntity() instanceof Agent)
+        if (event.getEntity() instanceof Agent) {
             Bukkit.getPluginManager().callEvent(
                     new CreatureSpawnEvent(
-                            PoreCreature.of((Agent)event.getEntity()),
+                            PoreCreature.of((Agent) event.getEntity()),
                             CreatureSpawnEvent.SpawnReason.DEFAULT //TODO: reason
                     ) {
                         @Override
@@ -165,15 +165,16 @@ public class EntityEventRelay {
                         }
                     }
             );
+        }
     }
 
     @Subscribe
     public void onEntityTame(final EntityTameEvent event) {
-        if (event.getEntity() instanceof Tameable && ((Tameable)event.getEntity()).getOwner().isPresent()) {
+        if (event.getEntity() instanceof Tameable && ((Tameable) event.getEntity()).getOwner().isPresent()) {
             Bukkit.getPluginManager().callEvent(
                     new org.bukkit.event.entity.EntityTameEvent(
-                            PoreLivingEntity.of((Living)event.getEntity()),
-                            PoreAnimalTamer.of(((Tameable)event.getEntity()).getOwner().get())
+                            PoreLivingEntity.of((Living) event.getEntity()),
+                            PoreAnimalTamer.of(((Tameable) event.getEntity()).getOwner().get())
                     ) {
                         @Override
                         public void setCancelled(boolean cancelled) {

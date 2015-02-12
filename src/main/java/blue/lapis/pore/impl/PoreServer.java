@@ -96,6 +96,7 @@ import java.util.logging.Logger;
 //TODO: skeleton implementation
 
 public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implements Server {
+
     private final Game game;
     private final Logger logger;
     private final SimpleCommandMap commandMap;
@@ -346,7 +347,9 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
                     delta = newDelta;
                 }
 
-                if (newDelta == 0) break;
+                if (newDelta == 0) {
+                    break;
+                }
             }
         }
 
@@ -422,7 +425,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public boolean unloadWorld(World world, boolean save) {
-        return getHandle().unloadWorld(((PoreWorld)world).getHandle());
+        return getHandle().unloadWorld(((PoreWorld) world).getHandle());
     }
 
     @Override
@@ -462,7 +465,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
         Command command = commandMap.getCommand(name);
 
         if (command instanceof PluginCommand) {
-            return (PluginCommand)command;
+            return (PluginCommand) command;
         } else {
             return null;
         }
@@ -558,7 +561,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
         for (Permissible permissible : permissibles) {
             if (permissible instanceof CommandSender && permissible.hasPermission(permission)) {
-                CommandSender user = (CommandSender)permissible;
+                CommandSender user = (CommandSender) permissible;
                 user.sendMessage(message);
                 count++;
             }

@@ -24,13 +24,13 @@
  */
 package blue.lapis.pore.impl.event.world;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.event.world.ChunkPopulateEvent;
 import org.spongepowered.api.event.world.ChunkPostPopulateEvent;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PoreChunkPopulateEvent extends ChunkPopulateEvent {
 

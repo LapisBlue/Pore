@@ -24,14 +24,14 @@
  */
 package blue.lapis.pore.impl.event.player;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.spongepowered.api.event.message.CommandEvent;
 
 import java.util.Set;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PorePlayerCommandPreprocessEvent extends PlayerCommandPreprocessEvent {
 

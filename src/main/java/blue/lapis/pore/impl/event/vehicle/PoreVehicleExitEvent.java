@@ -24,13 +24,13 @@
  */
 package blue.lapis.pore.impl.event.vehicle;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.event.vehicle.VehicleExitEvent;
 import org.spongepowered.api.event.entity.EntityDismountEvent;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PoreVehicleExitEvent extends VehicleExitEvent {
 

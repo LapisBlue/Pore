@@ -78,7 +78,7 @@ public class PoreServerListPingEvent extends ServerListPingEvent {
 
     @Override
     public void setServerIcon(CachedServerIcon icon) throws IllegalArgumentException, UnsupportedOperationException {
-        handle.getResponse().setFavicon(((PoreCachedServerIcon)icon).getHandle());
+        handle.getResponse().setFavicon(((PoreCachedServerIcon) icon).getHandle());
     }
 
     @Override

@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.inventory.FurnaceInventory;
 import org.spongepowered.api.block.data.Furnace;

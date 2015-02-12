@@ -24,12 +24,12 @@
  */
 package blue.lapis.pore.impl.event.weather;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.World;
 import org.bukkit.event.weather.ThunderChangeEvent;
 import org.spongepowered.api.event.weather.WeatherEvent;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PoreThunderChangeEvent extends ThunderChangeEvent {
 

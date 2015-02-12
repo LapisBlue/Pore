@@ -24,13 +24,13 @@
  */
 package blue.lapis.pore.impl.event.player;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import org.spongepowered.api.event.entity.living.player.PlayerChangeGameModeEvent;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PorePlayerGameModeChangeEvent extends PlayerGameModeChangeEvent {
 

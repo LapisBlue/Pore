@@ -47,7 +47,7 @@ public class PoreBukkitTask extends PoreWrapper<Task> implements BukkitTask {
 
     @Override
     public Plugin getOwner() {
-        return ((PorePluginContainer)getHandle().getOwner()).getHandle();
+        return ((PorePluginContainer) getHandle().getOwner()).getHandle();
     }
 
     @Override

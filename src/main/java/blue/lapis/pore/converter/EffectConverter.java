@@ -87,14 +87,15 @@ public class EffectConverter {
     public static <T> int getDataValue(Effect effect, T data) {
         switch (effect) {
             case POTION_BREAK:
-                return ((Potion)data).toDamageValue() & 0x3F;
+                return ((Potion) data).toDamageValue() & 0x3F;
             case RECORD_PLAY:
-                if (((Material)data).isRecord())
-                    return ((Material)data).getId();
-                else
+                if (((Material) data).isRecord()) {
+                    return ((Material) data).getId();
+                } else {
                     throw new IllegalArgumentException("Data must be a record type!");
+                }
             case SMOKE:
-                switch ((BlockFace)data) {
+                switch ((BlockFace) data) {
                     case UP:
                         return 0;
                     case DOWN:

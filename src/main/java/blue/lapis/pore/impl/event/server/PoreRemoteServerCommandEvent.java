@@ -24,12 +24,12 @@
  */
 package blue.lapis.pore.impl.event.server;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.server.RemoteServerCommandEvent;
 import org.spongepowered.api.event.message.CommandEvent;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PoreRemoteServerCommandEvent extends RemoteServerCommandEvent {
 

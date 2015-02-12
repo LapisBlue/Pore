@@ -47,6 +47,7 @@ import java.util.Set;
 import javax.annotation.Nullable;
 
 final class CachedWrapperConverter<B> implements Function<Object, B> {
+
     private final LoadingCache<Object, Object> cache = CacheBuilder.newBuilder()
             .weakKeys()
             .build(new CacheLoader<Object, Object>() {
@@ -84,7 +85,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
             if (parent == base) {
                 parents.add(entry);
             } else {
-                children.put((Class<? extends B>)parent, entry);
+                children.put((Class<? extends B>) parent, entry);
             }
         }
 
@@ -109,9 +110,9 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
                 ImmutableMap.builder();
 
         for (Map.Entry<Class<? extends B>, Class<?>> child : children) {
-            Class<? extends S> childSponge = (Class<? extends S>)child.getValue();
+            Class<? extends S> childSponge = (Class<? extends S>) child.getValue();
             converterRegistry.put(childSponge,
-                    build(childrenRegistry, childSponge, (Class<? extends P>)child.getKey()));
+                    build(childrenRegistry, childSponge, (Class<? extends P>) child.getKey()));
         }
 
         return new Converter<S, P>(sponge, pore, converterRegistry.build());
@@ -120,10 +121,11 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
     @Nullable
     @SuppressWarnings("unchecked")
     public <P extends B> P get(Object handle) {
-        if (handle == null)
+        if (handle == null) {
             return null;
+        }
 
-        return (P)cache.getUnchecked(handle);
+        return (P) cache.getUnchecked(handle);
     }
 
     @Nullable
@@ -154,11 +156,12 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
     }
 
     static final class Converter<S, P> implements Function<S, P> {
+
         final Constructor<P> constructor;
         final ImmutableMap<Class<? extends S>, Converter<? extends S, ? extends P>> registry;
 
         private Converter(Class<S> sponge, Class<P> pore,
-                          ImmutableMap<Class<? extends S>, Converter<? extends S, ? extends P>> registry) {
+                ImmutableMap<Class<? extends S>, Converter<? extends S, ? extends P>> registry) {
             checkNotNull(sponge, "sponge");
             checkNotNull(pore, "pore");
             this.registry = checkNotNull(registry, "registry");
@@ -185,7 +188,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
 
         @SuppressWarnings("unchecked")
         public Converter<? extends S, ? extends P> findUnchecked(Class<?> sponge) {
-            return find((Class<? extends S>)sponge);
+            return find((Class<? extends S>) sponge);
         }
 
         @Override
@@ -199,7 +202,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
 
         @SuppressWarnings("unchecked")
         public P applyUnchecked(Object input) {
-            return apply((S)input);
+            return apply((S) input);
         }
     }
 
@@ -208,6 +211,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
     }
 
     static final class Builder<B> {
+
         private final Class<B> base;
         private final Set<Class<?>> registered = Sets.newHashSet();
         private final Map<Class<? extends B>, Class<?>> registry = Maps.newLinkedHashMap();
@@ -222,11 +226,13 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
 
             Class<?> parent = pore.getSuperclass();
             while (parent != base) {
-                if (parent == Object.class || parent == null)
+                if (parent == Object.class || parent == null) {
                     throw new AssertionError(String.format("Pore %s does not extend the parent class %s", pore, base));
-                if (!registered.contains(parent))
+                }
+                if (!registered.contains(parent)) {
                     Pore.getTestLogger().warn("Parent class {} for {} ({}) is not registered", parent.getSimpleName(),
                             pore.getSimpleName(), sponge.getSimpleName());
+                }
 
                 parent = parent.getSuperclass();
             }

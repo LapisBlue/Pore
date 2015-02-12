@@ -118,6 +118,7 @@ public final class PoreEventWrapper {
     }
 
     private static class Registration implements HandlerList.Adapter {
+
         private final Class<? extends Event> pore;
         private final Class<? extends org.spongepowered.api.util.event.Event> sponge;
 

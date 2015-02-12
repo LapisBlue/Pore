@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.impl.event.world;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.TreeType;
@@ -31,8 +33,6 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.world.StructureGrowEvent;
 import org.spongepowered.api.event.world.WorldEvent;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PoreStructureGrowEvent extends StructureGrowEvent {
 

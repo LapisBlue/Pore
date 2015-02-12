@@ -46,7 +46,7 @@ public class PoreMinecart extends PoreVehicle implements org.bukkit.entity.Minec
 
     @Override
     public Minecart getHandle() {
-        return (Minecart)super.getHandle();
+        return (Minecart) super.getHandle();
     }
 
     @Override
@@ -56,7 +56,7 @@ public class PoreMinecart extends PoreVehicle implements org.bukkit.entity.Minec
 
     @Override
     public void _INVALID_setDamage(int damage) {
-        this.setDamage((double)damage);
+        this.setDamage((double) damage);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class PoreMinecart extends PoreVehicle implements org.bukkit.entity.Minec
 
     @Override
     public int _INVALID_getDamage() {
-        return (int)this.getDamage();
+        return (int) this.getDamage();
     }
 
     @Override

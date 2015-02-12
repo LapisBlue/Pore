@@ -24,11 +24,11 @@
  */
 package blue.lapis.pore.impl.event.world;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.World;
 import org.spongepowered.api.event.world.WorldUnloadEvent;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PoreWorldUnloadEvent extends org.bukkit.event.world.WorldUnloadEvent {
 

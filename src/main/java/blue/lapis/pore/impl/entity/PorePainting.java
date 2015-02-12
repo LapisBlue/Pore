@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.type.ArtConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+
 import org.bukkit.Art;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.hanging.Painting;

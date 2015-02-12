@@ -136,7 +136,7 @@ public class PlayerEventRelay {
     @Subscribe
     public void onEntityInteractBlock(final EntityInteractBlockEvent event) {
         if (event instanceof PlayerInteractBlockEvent) {
-            final PlayerInteractBlockEvent pEvent = (PlayerInteractBlockEvent)event;
+            final PlayerInteractBlockEvent pEvent = (PlayerInteractBlockEvent) event;
             Bukkit.getPluginManager().callEvent(
                     new org.bukkit.event.player.PlayerInteractEvent(
                             PorePlayer.of(pEvent.getPlayer()),
@@ -219,7 +219,7 @@ public class PlayerEventRelay {
                 Bukkit.getPluginManager().callEvent(
                         new PlayerPickupItemEvent(
                                 PorePlayer.of(event.getPlayer()),
-                                PoreItem.of((org.spongepowered.api.entity.Item)drop),
+                                PoreItem.of((org.spongepowered.api.entity.Item) drop),
                                 0 //TODO: remaining item count
                         ) {
                             @Override

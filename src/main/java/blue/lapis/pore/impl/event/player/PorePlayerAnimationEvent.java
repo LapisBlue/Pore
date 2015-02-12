@@ -24,13 +24,13 @@
  */
 package blue.lapis.pore.impl.event.player;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerAnimationEvent;
 import org.bukkit.event.player.PlayerAnimationType;
 import org.spongepowered.api.event.entity.living.player.PlayerEvent;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PorePlayerAnimationEvent extends PlayerAnimationEvent {
 

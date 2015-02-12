@@ -24,12 +24,12 @@
  */
 package blue.lapis.pore.impl.event.vehicle;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.event.vehicle.VehicleUpdateEvent;
 import org.spongepowered.api.event.entity.EntityUpdateEvent;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PoreVehicleUpdateEvent extends VehicleUpdateEvent {
 

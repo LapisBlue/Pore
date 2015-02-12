@@ -33,7 +33,7 @@ import org.bukkit.util.Vector;
 public class VectorConverter {
 
     public static Vector3d create3i(Location location) {
-        return new Vector3d((int)location.getX(), (int)location.getY(), (int)location.getZ());
+        return new Vector3d((int) location.getX(), (int) location.getY(), (int) location.getZ());
     }
 
     public static Vector3d create3d(Location location) {

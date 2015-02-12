@@ -48,7 +48,7 @@ public class LocationConverter {
     }
 
     public static org.spongepowered.api.world.Location of(Location location) {
-        return new org.spongepowered.api.world.Location(((PoreWorld)location.getWorld()).getHandle(),
+        return new org.spongepowered.api.world.Location(((PoreWorld) location.getWorld()).getHandle(),
                 VectorConverter.create3d(location));
     }
 
@@ -69,21 +69,21 @@ public class LocationConverter {
 
     //TODO: should EulerDirection be used instead of Vector3f?
     public static Location fromVector3iWithRotation(World world, Vector3i locationVector,
-                                                    Vector3f rotationVector) {
+            Vector3f rotationVector) {
         return new Location(PoreWorld.of(world), locationVector.getX(), locationVector.getY(),
                 locationVector.getZ(),
                 rotationVector.getY(), rotationVector.getX());
     }
 
     public static Location fromVector3dwithRotation(World world, Vector3d locationVector,
-                                                    Vector3f rotationVector) {
+            Vector3f rotationVector) {
         return new Location(PoreWorld.of(world), locationVector.getX(), locationVector.getY(),
                 locationVector.getZ(),
                 rotationVector.getY(), rotationVector.getX());
     }
 
     public static Location fromVector3fwithRotation(World world, Vector3f locationVector,
-                                                    Vector3f rotationVector) {
+            Vector3f rotationVector) {
         return new Location(PoreWorld.of(world), locationVector.getX(), locationVector.getY(),
                 locationVector.getZ(),
                 rotationVector.getY(), rotationVector.getX());

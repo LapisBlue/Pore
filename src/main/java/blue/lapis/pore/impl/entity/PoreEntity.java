@@ -214,7 +214,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
     @Override
     public boolean setPassenger(final org.bukkit.entity.Entity passenger) {
         if (!getHandle().getPassenger().isPresent()) {
-            getHandle().setPassenger(((PoreEntity)passenger).getHandle());
+            getHandle().setPassenger(((PoreEntity) passenger).getHandle());
             final PoreEntity mounted = this;
             Pore.getGame().getEventManager().post(new EntityMountEvent() {
 
@@ -233,16 +233,17 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
                 @Override
                 public void setCancelled(boolean cancel) {
                     this.cancelled = cancel;
-                    if (cancel)
+                    if (cancel) {
                         mounted.getHandle().setPassenger(null); //TODO: avoid triggering an event
-                    else
-                        mounted.getHandle().setPassenger(((PoreEntity)passenger).getHandle());
+                    } else {
+                        mounted.getHandle().setPassenger(((PoreEntity) passenger).getHandle());
+                    }
                     //TODO: avoid triggering event
                 }
 
                 @Override
                 public org.spongepowered.api.entity.Entity getEntity() {
-                    return ((PoreEntity)passenger).getHandle();
+                    return ((PoreEntity) passenger).getHandle();
                 }
 
                 @Override
@@ -291,10 +292,11 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
                 @Override
                 public void setCancelled(boolean cancel) {
                     this.cancelled = cancel;
-                    if (cancel)
+                    if (cancel) {
                         dismounted.getHandle().setPassenger(rider); //TODO: avoid triggering an event
-                    else
+                    } else {
                         dismounted.setPassenger(null);
+                    }
                 }
 
                 @Override

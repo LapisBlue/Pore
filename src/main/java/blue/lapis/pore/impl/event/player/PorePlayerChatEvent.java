@@ -24,13 +24,13 @@
  */
 package blue.lapis.pore.impl.event.player;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Player;
 import org.spongepowered.api.event.entity.living.player.PlayerChatEvent;
 
 import java.util.Set;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 @Deprecated
 public class PorePlayerChatEvent extends org.bukkit.event.player.PlayerChatEvent {

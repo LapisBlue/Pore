@@ -57,64 +57,66 @@ public class ProjectileUtil {
     launchProjectile(ProjectileSource source, Class<? extends T> projectile, @Nullable Vector velocity) {
         T entity = null;
         if (projectile.isAssignableFrom(Arrow.class)) {
-            entity = (T)PoreFireball.of(source.launchProjectile(
+            entity = (T) PoreFireball.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.Arrow.class,
                     VectorConverter.create3f(velocity)
             ));
         } else if (projectile.isAssignableFrom(Egg.class)) {
-            entity = (T)PoreFireball.of(source.launchProjectile(
+            entity = (T) PoreFireball.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.Egg.class,
                     VectorConverter.create3f(velocity)
             ));
         } else if (projectile.isAssignableFrom(EnderPearl.class)) {
-            entity = (T)PoreFireball.of(source.launchProjectile(
+            entity = (T) PoreFireball.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.EnderPearl.class,
                     VectorConverter.create3f(velocity)
             ));
         } else if (projectile.isAssignableFrom(Fireball.class)) {
             if (projectile.isAssignableFrom(LargeFireball.class)) {
-                entity = (T)PoreFireball.of(source.launchProjectile(
+                entity = (T) PoreFireball.of(source.launchProjectile(
                         org.spongepowered.api.entity.projectile.fireball.LargeFireball.class,
                         VectorConverter.create3f(velocity)
                 ));
             } else if (projectile.isAssignableFrom(LargeFireball.class)) {
-                entity = (T)PoreFireball.of(source.launchProjectile(
+                entity = (T) PoreFireball.of(source.launchProjectile(
                         org.spongepowered.api.entity.projectile.fireball.SmallFireball.class,
                         VectorConverter.create3f(velocity)
                 ));
             } else if (projectile.isAssignableFrom(LargeFireball.class)) {
-                entity = (T)PoreFireball.of(source.launchProjectile(
+                entity = (T) PoreFireball.of(source.launchProjectile(
                         org.spongepowered.api.entity.projectile.fireball.WitherSkull.class,
                         VectorConverter.create3f(velocity)
                 ));
             } else {
-                entity = (T)PoreFireball.of(source.launchProjectile(
+                entity = (T) PoreFireball.of(source.launchProjectile(
                         org.spongepowered.api.entity.projectile.fireball.Fireball.class,
                         VectorConverter.create3f(velocity)
                 ));
             }
         } else if (projectile.isAssignableFrom(Fish.class)) {
-            entity = (T)PoreFireball.of(source.launchProjectile(
+            entity = (T) PoreFireball.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.FishHook.class,
                     VectorConverter.create3f(velocity)
             ));
         } else if (projectile.isAssignableFrom(Snowball.class)) {
-            entity = (T)PoreFireball.of(source.launchProjectile(
+            entity = (T) PoreFireball.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.Snowball.class,
                     VectorConverter.create3f(velocity)
             ));
         } else if (projectile.isAssignableFrom(ThrownExpBottle.class)) {
-            entity = (T)PoreFireball.of(source.launchProjectile(
+            entity = (T) PoreFireball.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.ThrownExpBottle.class,
                     VectorConverter.create3f(velocity)
             ));
         } else if (projectile.isAssignableFrom(ThrownPotion.class)) {
-            entity = (T)PoreFireball.of(source.launchProjectile(
+            entity = (T) PoreFireball.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.ThrownPotion.class,
                     VectorConverter.create3f(velocity)
             ));
         }
-        if (entity == null) throw new UnsupportedOperationException();
+        if (entity == null) {
+            throw new UnsupportedOperationException();
+        }
         final T finalEntity = entity;
         Pore.getGame().getEventManager().post(new ProjectileLaunchEvent() {
             @Override
@@ -134,7 +136,7 @@ public class ProjectileUtil {
 
             @Override
             public Entity getEntity() {
-                return ((PoreProjectile)finalEntity).getHandle(); //TODO: verify this cast is safe
+                return ((PoreProjectile) finalEntity).getHandle(); //TODO: verify this cast is safe
             }
 
             @Override

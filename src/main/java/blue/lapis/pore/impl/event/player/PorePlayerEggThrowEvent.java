@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.impl.event.player;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.Egg;
@@ -31,8 +33,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerEggThrowEvent;
 import org.spongepowered.api.event.entity.living.player.PlayerEvent;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PorePlayerEggThrowEvent extends PlayerEggThrowEvent {
 

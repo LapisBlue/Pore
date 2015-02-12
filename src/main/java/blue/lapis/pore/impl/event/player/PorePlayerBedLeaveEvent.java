@@ -24,13 +24,13 @@
  */
 package blue.lapis.pore.impl.event.player;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerBedLeaveEvent;
 import org.spongepowered.api.event.entity.living.player.PlayerLeaveBedEvent;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PorePlayerBedLeaveEvent extends PlayerBedLeaveEvent {
 

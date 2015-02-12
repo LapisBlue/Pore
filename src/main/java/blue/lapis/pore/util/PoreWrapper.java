@@ -27,6 +27,7 @@ package blue.lapis.pore.util;
 import com.google.common.base.Preconditions;
 
 public abstract class PoreWrapper<T> {
+
     private final T handle;
 
     protected PoreWrapper(T handle) {

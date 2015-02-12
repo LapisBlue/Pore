@@ -132,7 +132,7 @@ public final class PoreListenerGenerator {
     private static Class<?> load(String name, Class<?> pore, Class<?> sponge, EventPriority priority, Order order) {
         byte[] bytes = generate(name, pore, sponge, priority, order);
         try {
-            return (Class<?>)defineClass.invoke(PoreListenerGenerator.class.getClassLoader(),
+            return (Class<?>) defineClass.invoke(PoreListenerGenerator.class.getClassLoader(),
                     name, bytes, 0, bytes.length);
         } catch (IllegalAccessException e) {
             throw Throwables.propagate(e);
@@ -142,8 +142,8 @@ public final class PoreListenerGenerator {
     }
 
     public static Object createListener(Class<? extends Event> pore,
-                                        Class<? extends org.spongepowered.api.util.event.Event> sponge,
-                                        EventPriority priority) {
+            Class<? extends org.spongepowered.api.util.event.Event> sponge,
+            EventPriority priority) {
 
         try {
             return load(PACKAGE + sponge.getSimpleName() + "$Handler$" + priority.name(), pore, sponge, priority,

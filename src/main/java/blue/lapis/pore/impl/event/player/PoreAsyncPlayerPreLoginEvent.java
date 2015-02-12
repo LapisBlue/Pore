@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.impl.event.player;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerPreLoginEvent;
@@ -31,8 +33,6 @@ import org.spongepowered.api.event.entity.living.player.PlayerEvent;
 
 import java.net.InetAddress;
 import java.util.UUID;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PoreAsyncPlayerPreLoginEvent extends AsyncPlayerPreLoginEvent {
 

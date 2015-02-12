@@ -47,6 +47,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class WorldEntitiesTest {
+
     private PoreWorld world;
 
     @Before

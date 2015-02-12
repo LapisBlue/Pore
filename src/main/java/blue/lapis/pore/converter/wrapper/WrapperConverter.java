@@ -237,6 +237,7 @@ import org.spongepowered.api.world.World;
 public class WrapperConverter {
 
     static final CachedWrapperConverter<PoreWrapper> converter = CachedWrapperConverter.builder(PoreWrapper.class)
+            // @formatter:off
             .register(Favicon.class, PoreCachedServerIcon.class)
 
             // Entities
@@ -353,6 +354,7 @@ public class WrapperConverter {
             .register(Tamer.class, PoreAnimalTamer.class)
             .register(CommandSource.class, PoreCommandSender.class)
                 .register(CommandBlockSource.class, PoreBlockCommandSender.class)
+            // @formatter:on
 
             .build();
 
@@ -366,6 +368,6 @@ public class WrapperConverter {
 
     @SuppressWarnings("unchecked")
     public static <S, P extends PoreWrapper<?>> Function<S, P> getConverter() {
-        return (Function)converter;
+        return (Function) converter;
     }
 }

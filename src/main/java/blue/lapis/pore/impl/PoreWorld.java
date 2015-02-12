@@ -95,7 +95,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     public static PoreWorld of(Extent handle) {
         if (handle instanceof World) {
-            return of((World)handle);
+            return of((World) handle);
         }
         throw new UnsupportedOperationException(); // TODO
     }
@@ -127,8 +127,9 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     @Override
     public int getHighestBlockYAt(int x, int z) {
         for (int y = getMaxHeight(); y >= 0; y++) {
-            if (getHandle().getBlock(x, y, z).getType() != BlockTypes.AIR)
+            if (getHandle().getBlock(x, y, z).getType() != BlockTypes.AIR) {
                 return y;
+            }
         }
         return 0;
     }
@@ -303,7 +304,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         // TODO: Should this be unmodifiable?
         return PoreCollections.<org.spongepowered.api.entity.Entity, Entity>transformToList(
                 getHandle().getEntities(), WrapperConverter
-                .<org.spongepowered.api.entity.Entity, PoreEntity>getConverter()
+                        .<org.spongepowered.api.entity.Entity, PoreEntity>getConverter()
         );
     }
 
@@ -315,7 +316,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         List<LivingEntity> living = Lists.newArrayList();
         for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()) {
             if (e instanceof org.spongepowered.api.entity.living.Living) {
-                living.add(PoreLivingEntity.of((org.spongepowered.api.entity.living.Living)e));
+                living.add(PoreLivingEntity.of((org.spongepowered.api.entity.living.Living) e));
             }
         }
         return living;
@@ -324,14 +325,14 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     @Override
     @SuppressWarnings("unchecked")
     public <T extends Entity> Collection<T> getEntitiesByClass(Class<T> cls) {
-        return (Collection<T>)Collections2.filter(getEntities(), Predicates.instanceOf(cls));
+        return (Collection<T>) Collections2.filter(getEntities(), Predicates.instanceOf(cls));
     }
 
     @Override
     @SuppressWarnings("unchecked")
     @Deprecated
     public <T extends Entity> Collection<T> getEntitiesByClass(final Class<T>... classes) {
-        return (Collection<T>)getEntitiesByClasses(classes);
+        return (Collection<T>) getEntitiesByClasses(classes);
     }
 
     @Override
@@ -341,8 +342,9 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
             @Override
             public boolean apply(@Nullable Entity entity) {
                 for (Class<?> clazz : classes) {
-                    if (clazz.isInstance(entity))
+                    if (clazz.isInstance(entity)) {
                         return true;
+                    }
                 }
 
                 return false;
@@ -358,7 +360,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         List<Player> players = Lists.newArrayList();
         for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()) {
             if (e instanceof org.spongepowered.api.entity.player.Player) {
-                players.add(PorePlayer.of((org.spongepowered.api.entity.player.Player)e));
+                players.add(PorePlayer.of((org.spongepowered.api.entity.player.Player) e));
             }
         }
         return players;
@@ -416,7 +418,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public int getWeatherDuration() {
-        return (int)getHandle().getRemainingDuration();
+        return (int) getHandle().getRemainingDuration();
     }
 
     @Override
@@ -438,7 +440,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public int getThunderDuration() {
-        return isThundering() ? (int)getHandle().getRemainingDuration() : 0;
+        return isThundering() ? (int) getHandle().getRemainingDuration() : 0;
     }
 
     @Override
@@ -458,7 +460,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean createExplosion(double x, double y, double z, float power, boolean setFire,
-                                   boolean breakBlocks) {
+            boolean breakBlocks) {
         throw new NotImplementedException();
     }
 
@@ -551,13 +553,14 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         if ((data != null && data.getClass().equals(effect.getData())) ||
                 (data == null && effect.getData() == null)) {
             this.playEffect(location, effect, data == null ? 0 : EffectConverter.getDataValue(effect, data), radius);
-        } else
+        } else {
             throw new IllegalArgumentException("Invalid data type for effect!");
+        }
     }
 
     @Override
     public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome,
-                                               boolean includeBiomeTempRain) {
+            boolean includeBiomeTempRain) {
         throw new NotImplementedException();
     }
 
@@ -715,8 +718,8 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public void playSound(Location location, Sound sound, float volume, float pitch) {
-        getHandle().playSound(SoundConverter.of(sound), VectorConverter.create3d(location), (double)volume,
-                (double)pitch);
+        getHandle().playSound(SoundConverter.of(sound), VectorConverter.create3d(location), (double) volume,
+                (double) pitch);
     }
 
     @Override
@@ -732,7 +735,9 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean setGameRuleValue(String rule, String value) {
-        if (rule == null) return false;
+        if (rule == null) {
+            return false;
+        }
         getHandle().setGameRule(rule, value);
         return true;
     }

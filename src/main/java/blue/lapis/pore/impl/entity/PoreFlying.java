@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+
 import org.bukkit.entity.Flying;
 import org.spongepowered.api.entity.living.Aerial;
 
@@ -40,7 +41,7 @@ public class PoreFlying extends PoreLivingEntity implements Flying {
 
     @Override
     public Aerial getHandle() {
-        return (Aerial)super.getHandle();
+        return (Aerial) super.getHandle();
     }
 
 }

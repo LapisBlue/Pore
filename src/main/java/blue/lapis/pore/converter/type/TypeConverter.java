@@ -44,20 +44,25 @@ final class TypeConverter<B, S> extends Converter<B, S> {
     }
 
     private static <T> T checkDefined(T result, Object input) {
-        if (result == null)
+        if (result == null) {
             throw new UnsupportedOperationException(input.toString());
+        }
         return result;
     }
 
     @Override
     protected S doForward(B bukkit) {
-        if (bukkit == null) return null;
+        if (bukkit == null) {
+            return null;
+        }
         return checkDefined(bukkitToSponge.get(bukkit), bukkit);
     }
 
     @Override
     protected B doBackward(S sponge) {
-        if (sponge == null) return null;
+        if (sponge == null) {
+            return null;
+        }
         return checkDefined(spongeToBukkit.get(sponge), sponge);
     }
 

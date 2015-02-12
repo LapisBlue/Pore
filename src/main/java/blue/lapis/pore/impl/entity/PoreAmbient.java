@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+
 import org.spongepowered.api.entity.living.Ambient;
 
 public class PoreAmbient extends PoreLivingEntity implements org.bukkit.entity.Ambient {

@@ -41,8 +41,9 @@ public class ItemStackConverter {
 
     public static org.spongepowered.api.item.inventory.ItemStack of(org.bukkit.inventory.ItemStack stack) {
         ItemType type = MaterialConverter.asItem(stack.getType());
-        if (type == null)
+        if (type == null) {
             throw new UnsupportedOperationException();
+        }
         // IntelliJ doesn't recognize the above check and thinks withItemType() may throw an NPE
         //noinspection ConstantConditions
         return Pore.getGame().getRegistry().getItemBuilder() // Eh, this shouldn't be in the registry

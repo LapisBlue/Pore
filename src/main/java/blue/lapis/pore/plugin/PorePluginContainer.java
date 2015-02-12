@@ -30,6 +30,7 @@ import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
 
 public class PorePluginContainer extends PoreWrapper<Plugin> implements PluginContainer {
+
     public PorePluginContainer(Plugin handle) {
         super(handle);
     }

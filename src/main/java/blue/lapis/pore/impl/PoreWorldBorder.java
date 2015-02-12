@@ -95,7 +95,7 @@ public class PoreWorldBorder extends PoreWrapper<WorldBorder> implements org.buk
 
     @Override
     public void setDamageAmount(double damage) {
-        getHandle().setDamageAmount((int)damage);
+        getHandle().setDamageAmount((int) damage);
     }
 
     @Override

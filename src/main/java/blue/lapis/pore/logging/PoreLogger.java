@@ -31,6 +31,7 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 public class PoreLogger extends Logger {
+
     private final org.slf4j.Logger handle;
 
     public PoreLogger(org.slf4j.Logger logger) {

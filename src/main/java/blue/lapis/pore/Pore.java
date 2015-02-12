@@ -50,6 +50,7 @@ import javax.inject.Inject;
  */
 @Plugin(id = "pore", name = "Pore")
 public final class Pore {
+
     protected static Pore instance;
 
     @Inject
@@ -117,7 +118,9 @@ public final class Pore {
     public void onCommand(CommandEvent event) {
         String command = event.getCommand();
         String args = event.getArguments();
-        if (!args.isEmpty()) command = command + ' ' + args;
+        if (!args.isEmpty()) {
+            command = command + ' ' + args;
+        }
 
         if (Pore.getServer().dispatchCommand(PoreCommandSender.of(event.getSource()), command)) {
             event.setCancelled(true);
