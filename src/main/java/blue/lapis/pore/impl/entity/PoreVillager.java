@@ -28,6 +28,7 @@ import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.ProfessionConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
+import com.google.common.collect.Iterables;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.living.villager.Villager;
 
@@ -59,7 +60,7 @@ public class PoreVillager extends PoreAgeable implements org.bukkit.entity.Villa
     @Override
     public void setProfession(Profession profession) {
         //TODO: not really sure what to do here
-        getHandle().setCareer(
-                Pore.getGame().getRegistry().getCareers(ProfessionConverter.of(profession)).get(0));
+        getHandle().setCareer(Iterables.getFirst(
+                Pore.getGame().getRegistry().getCareers(ProfessionConverter.of(profession)), null));
     }
 }

@@ -373,7 +373,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public UUID getUID() {
-        return getHandle().getUniqueID();
+        return getHandle().getUniqueId();
     }
 
     @Override

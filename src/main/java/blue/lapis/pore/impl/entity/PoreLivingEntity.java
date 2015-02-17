@@ -32,6 +32,7 @@ import blue.lapis.pore.util.ProjectileUtil;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Bat;
@@ -56,6 +57,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
@@ -93,13 +95,28 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     }
 
     @Override
+    public List<Block> getLineOfSight(Set<Material> transparent, int maxDistance) {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
     public Block getTargetBlock(HashSet<Byte> transparent, int maxDistance) {
         throw new NotImplementedException(); //TODO
     }
 
     @Override
+    public Block getTargetBlock(Set<Material> transparent, int maxDistance) {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
     public List<Block> getLastTwoTargetBlocks(HashSet<Byte> transparent, int maxDistance) {
         throw new NotImplementedException(); //TODO
+    }
+
+    @Override
+    public List<Block> getLastTwoTargetBlocks(Set<Material> transparent, int maxDistance) {
+        throw new NotImplementedException(); // TODO
     }
 
     @Override

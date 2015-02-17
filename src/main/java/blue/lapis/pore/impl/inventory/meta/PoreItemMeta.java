@@ -28,10 +28,12 @@ package blue.lapis.pore.impl.inventory.meta;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class PoreItemMeta implements ItemMeta {
 
@@ -97,6 +99,26 @@ public class PoreItemMeta implements ItemMeta {
 
     @Override
     public boolean hasConflictingEnchant(Enchantment ench) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void addItemFlags(ItemFlag... itemFlags) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void removeItemFlags(ItemFlag... itemFlags) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Set<ItemFlag> getItemFlags() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean hasItemFlag(ItemFlag flag) {
         throw new NotImplementedException();
     }
 
