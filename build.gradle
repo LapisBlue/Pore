@@ -100,7 +100,7 @@ project('Porekit') {
 
 // Disable tests and checkstyle for SpongeAPI
 project('SpongeAPI') {
-    afterEvaluate { project ->
+    afterEvaluate {
         configure([assemble, build, compileTestJava, javadoc, javadocJar, sourceJar, licenseFormat]) {
             enabled = false
         }
@@ -112,3 +112,8 @@ project('SpongeAPI') {
         }
     }
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
+
