@@ -88,7 +88,7 @@ public class PlayerEventRelay {
                 new org.bukkit.event.player.AsyncPlayerChatEvent(
                         false, //TODO: determine if this needs to be changed
                         PorePlayer.of(event.getPlayer()),
-                        event.getMessage(),
+                        event.getMessage().toLegacy(),
                         players //TODO: players should only include recipients
                 ) {
                     @Override
