@@ -25,6 +25,11 @@
 package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
+import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.entity.PoreEntity;
+import blue.lapis.pore.impl.entity.PoreSlime;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
@@ -39,6 +44,7 @@ public class PoreSlimeSplitEvent extends SlimeSplitEvent {
     public PoreSlimeSplitEvent(EntityEvent handle) {
         super(null, -1);
         this.handle = checkNotNull(handle, "handle");
+        checkState(handle.getEntity() instanceof org.spongepowered.api.entity.living.monster.Slime, "Bad entity type");
     }
 
     public EntityEvent getHandle() {
@@ -47,12 +53,12 @@ public class PoreSlimeSplitEvent extends SlimeSplitEvent {
 
     @Override
     public Slime getEntity() {
-        throw new NotImplementedException();
+        return (Slime)PoreSlime.of(this.getHandle().getEntity());
     }
 
     @Override
     public EntityType getEntityType() {
-        throw new NotImplementedException();
+        return EntityConverter.of(this.getHandle().getEntity().getType());
     }
 
     @Override

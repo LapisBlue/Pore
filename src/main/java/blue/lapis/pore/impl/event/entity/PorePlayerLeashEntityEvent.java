@@ -26,6 +26,8 @@ package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.impl.entity.PoreEntity;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -47,7 +49,7 @@ public class PorePlayerLeashEntityEvent extends PlayerLeashEntityEvent {
 
     @Override
     public Entity getEntity() {
-        throw new NotImplementedException();
+        return PoreEntity.of(this.getHandle().getEntity());
     }
 
     public Entity getLeashHolder() {

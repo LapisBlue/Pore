@@ -25,6 +25,10 @@
 package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
+import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.entity.PoreThrownExpBottle;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
@@ -39,6 +43,8 @@ public class PoreExpBottleEvent extends ExpBottleEvent {
     public PoreExpBottleEvent(EntityEvent handle) {
         super(null, -1);
         this.handle = checkNotNull(handle, "handle");
+        checkState(handle.getEntity() instanceof org.spongepowered.api.entity.projectile.ThrownExpBottle,
+                "Bad entity type");
     }
 
     public EntityEvent getHandle() {
@@ -47,12 +53,12 @@ public class PoreExpBottleEvent extends ExpBottleEvent {
 
     @Override
     public ThrownExpBottle getEntity() {
-        throw new NotImplementedException();
+        return (ThrownExpBottle)PoreThrownExpBottle.of(this.getHandle().getEntity());
     }
 
     @Override
     public EntityType getEntityType() {
-        throw new NotImplementedException();
+        return EntityConverter.of(this.getHandle().getEntity().getType());
     }
 
     @Override

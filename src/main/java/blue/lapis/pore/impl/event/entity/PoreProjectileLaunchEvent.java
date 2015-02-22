@@ -25,6 +25,10 @@
 package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
+import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.entity.PoreProjectile;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
@@ -38,6 +42,7 @@ public class PoreProjectileLaunchEvent extends ProjectileLaunchEvent {
     public PoreProjectileLaunchEvent(org.spongepowered.api.event.entity.ProjectileLaunchEvent handle) {
         super(null);
         this.handle = checkNotNull(handle, "handle");
+        checkState(handle.getEntity() instanceof org.spongepowered.api.entity.projectile.Projectile, "Bad entity type");
     }
 
     public org.spongepowered.api.event.entity.ProjectileLaunchEvent getHandle() {
@@ -46,12 +51,12 @@ public class PoreProjectileLaunchEvent extends ProjectileLaunchEvent {
 
     @Override
     public Projectile getEntity() {
-        throw new NotImplementedException();
+        return (Projectile)PoreProjectile.of(this.getHandle().getEntity());
     }
 
     @Override
     public EntityType getEntityType() {
-        throw new NotImplementedException();
+        return EntityConverter.of(this.getHandle().getEntity().getType());
     }
 
     @Override

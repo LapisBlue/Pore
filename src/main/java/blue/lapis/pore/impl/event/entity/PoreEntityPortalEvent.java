@@ -26,6 +26,9 @@ package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.entity.PoreEntity;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.TravelAgent;
@@ -49,12 +52,12 @@ public class PoreEntityPortalEvent extends EntityPortalEvent {
 
     @Override
     public Entity getEntity() {
-        throw new NotImplementedException();
+        return PoreEntity.of(this.getHandle().getEntity());
     }
 
     @Override
     public EntityType getEntityType() {
-        throw new NotImplementedException();
+        return EntityConverter.of(this.getHandle().getEntity().getType());
     }
 
     @Override

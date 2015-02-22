@@ -25,6 +25,10 @@
 package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
+import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.PortalType;
@@ -32,6 +36,7 @@ import org.bukkit.block.BlockState;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityCreatePortalEvent;
+import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.event.entity.EntityEvent;
 
 import java.util.List;
@@ -43,6 +48,7 @@ public class PoreEntityCreatePortalEvent extends EntityCreatePortalEvent {
     public PoreEntityCreatePortalEvent(EntityEvent handle) {
         super(null, null, null);
         this.handle = checkNotNull(handle, "handle");
+        checkState(handle.getEntity() instanceof Living, "Bad entity type");
     }
 
     public EntityEvent getHandle() {
@@ -51,12 +57,12 @@ public class PoreEntityCreatePortalEvent extends EntityCreatePortalEvent {
 
     @Override
     public LivingEntity getEntity() {
-        throw new NotImplementedException();
+        return (LivingEntity)PoreLivingEntity.of(this.getHandle().getEntity());
     }
 
     @Override
     public EntityType getEntityType() {
-        throw new NotImplementedException();
+        return EntityConverter.of(this.getHandle().getEntity().getType());
     }
 
     @Override

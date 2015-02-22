@@ -25,36 +25,41 @@
 package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
+import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.event.entity.EntityDeathEvent;
+import org.spongepowered.api.entity.living.Living;
 
 import java.util.List;
 
 public class PoreEntityDeathEvent extends org.bukkit.event.entity.EntityDeathEvent {
 
-    private final EntityDeathEvent handle;
+    private final org.spongepowered.api.event.entity.EntityDeathEvent handle;
 
-    public PoreEntityDeathEvent(EntityDeathEvent handle) {
+    public PoreEntityDeathEvent(org.spongepowered.api.event.entity.EntityDeathEvent handle) {
         super(null, null);
         this.handle = checkNotNull(handle, "handle");
+        checkState(handle.getEntity() instanceof Living, "Bad entity type");
     }
 
-    public EntityDeathEvent getHandle() {
+    public org.spongepowered.api.event.entity.EntityDeathEvent getHandle() {
         return this.handle;
     }
 
     @Override
     public LivingEntity getEntity() {
-        throw new NotImplementedException();
+        return (LivingEntity)PoreLivingEntity.of(this.getHandle().getEntity());
     }
 
     @Override
     public EntityType getEntityType() {
-        throw new NotImplementedException();
+        return EntityConverter.of(this.getHandle().getEntity().getType());
     }
 
     @Override

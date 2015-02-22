@@ -26,6 +26,9 @@ package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.entity.PorePlayer;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -49,12 +52,12 @@ public class PorePlayerDeathEvent extends PlayerDeathEvent {
 
     @Override
     public Player getEntity() {
-        throw new NotImplementedException();
+        return (Player)PorePlayer.of(this.getHandle().getEntity());
     }
 
     @Override
     public EntityType getEntityType() {
-        throw new NotImplementedException();
+        return EntityConverter.of(this.getHandle().getEntity().getType());
     }
 
     @Override

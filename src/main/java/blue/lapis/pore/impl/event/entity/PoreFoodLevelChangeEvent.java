@@ -25,11 +25,16 @@
 package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
+import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.entity.PoreHumanEntity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.spongepowered.api.entity.living.Human;
 import org.spongepowered.api.event.entity.EntityEvent;
 
 public class PoreFoodLevelChangeEvent extends FoodLevelChangeEvent {
@@ -39,6 +44,7 @@ public class PoreFoodLevelChangeEvent extends FoodLevelChangeEvent {
     public PoreFoodLevelChangeEvent(EntityEvent handle) {
         super(null, -1);
         this.handle = checkNotNull(handle, "handle");
+        checkState(handle.getEntity() instanceof Human, "Bad entity type");
     }
 
     public EntityEvent getHandle() {
@@ -47,12 +53,12 @@ public class PoreFoodLevelChangeEvent extends FoodLevelChangeEvent {
 
     @Override
     public HumanEntity getEntity() {
-        throw new NotImplementedException();
+        return (HumanEntity)PoreHumanEntity.of(this.getHandle().getEntity());
     }
 
     @Override
     public EntityType getEntityType() {
-        throw new NotImplementedException();
+        return EntityConverter.of(this.getHandle().getEntity().getType());
     }
 
     public int getFoodLevel() {

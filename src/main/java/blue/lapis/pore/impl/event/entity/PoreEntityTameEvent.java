@@ -25,12 +25,17 @@
 package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
+import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityTameEvent;
+import org.spongepowered.api.entity.living.Living;
 
 public class PoreEntityTameEvent extends EntityTameEvent {
 
@@ -39,6 +44,7 @@ public class PoreEntityTameEvent extends EntityTameEvent {
     public PoreEntityTameEvent(org.spongepowered.api.event.entity.EntityTameEvent handle) {
         super(null, null);
         this.handle = checkNotNull(handle, "handle");
+        checkState(handle.getEntity() instanceof Living, "Bad entity type");
     }
 
     public org.spongepowered.api.event.entity.EntityTameEvent getHandle() {
@@ -47,12 +53,12 @@ public class PoreEntityTameEvent extends EntityTameEvent {
 
     @Override
     public LivingEntity getEntity() {
-        throw new NotImplementedException();
+        return (LivingEntity)PoreLivingEntity.of(this.getHandle().getEntity());
     }
 
     @Override
     public EntityType getEntityType() {
-        throw new NotImplementedException();
+        return EntityConverter.of(this.getHandle().getEntity().getType());
     }
 
     @Override

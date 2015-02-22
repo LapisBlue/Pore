@@ -25,6 +25,10 @@
 package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
+import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
@@ -32,6 +36,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityBreakDoorEvent;
+import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.event.entity.EntityEvent;
 
 public class PoreEntityBreakDoorEvent extends EntityBreakDoorEvent {
@@ -41,6 +46,7 @@ public class PoreEntityBreakDoorEvent extends EntityBreakDoorEvent {
     public PoreEntityBreakDoorEvent(EntityEvent handle) {
         super(null, null);
         this.handle = checkNotNull(handle, "handle");
+        checkState(handle.getEntity() instanceof Living, "Bad entity type");
     }
 
     public EntityEvent getHandle() {
@@ -49,12 +55,12 @@ public class PoreEntityBreakDoorEvent extends EntityBreakDoorEvent {
 
     @Override
     public LivingEntity getEntity() {
-        throw new NotImplementedException();
+        return (LivingEntity)PoreLivingEntity.of(this.getHandle().getEntity());
     }
 
     @Override
     public EntityType getEntityType() {
-        throw new NotImplementedException();
+        return EntityConverter.of(this.getHandle().getEntity().getType());
     }
 
     @Override

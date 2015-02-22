@@ -25,6 +25,10 @@
 package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
+import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.entity.PoreSheep;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.DyeColor;
@@ -40,6 +44,7 @@ public class PoreSheepDyeWoolEvent extends SheepDyeWoolEvent {
     public PoreSheepDyeWoolEvent(EntityEvent handle) {
         super(null, null);
         this.handle = checkNotNull(handle, "handle");
+        checkState(handle.getEntity() instanceof org.spongepowered.api.entity.living.animal.Sheep, "Bad entity type");
     }
 
     public EntityEvent getHandle() {
@@ -48,12 +53,12 @@ public class PoreSheepDyeWoolEvent extends SheepDyeWoolEvent {
 
     @Override
     public Sheep getEntity() {
-        throw new NotImplementedException();
+        return (Sheep)PoreSheep.of(this.getHandle().getEntity());
     }
 
     @Override
     public EntityType getEntityType() {
-        throw new NotImplementedException();
+        return EntityConverter.of(this.getHandle().getEntity().getType());
     }
 
     @Override

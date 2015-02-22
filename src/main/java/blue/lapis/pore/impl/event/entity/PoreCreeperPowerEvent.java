@@ -25,6 +25,10 @@
 package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
+import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.entity.PoreCreeper;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Creeper;
@@ -40,6 +44,8 @@ public class PoreCreeperPowerEvent extends CreeperPowerEvent {
     public PoreCreeperPowerEvent(EntityEvent handle) {
         super(null, null);
         this.handle = checkNotNull(handle, "handle");
+        checkState(handle.getEntity() instanceof org.spongepowered.api.entity.living.monster.Creeper,
+                "Bad entity type");
     }
 
     public EntityEvent getHandle() {
@@ -48,12 +54,12 @@ public class PoreCreeperPowerEvent extends CreeperPowerEvent {
 
     @Override
     public Creeper getEntity() {
-        throw new NotImplementedException();
+        return (Creeper)PoreCreeper.of(this.getHandle().getEntity());
     }
 
     @Override
     public EntityType getEntityType() {
-        throw new NotImplementedException();
+        return EntityConverter.of(this.getHandle().getEntity().getType());
     }
 
     @Override
