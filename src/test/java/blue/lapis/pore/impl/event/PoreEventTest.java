@@ -124,7 +124,7 @@ public class PoreEventTest {
     }
 
     @Test
-    public void checkConstructor() throws ReflectiveOperationException {
+    public void checkConstructor() throws Exception {
         events: for (Class<?> eventImpl : poreEvents) {
             for (Constructor<?> constructor : eventImpl.getConstructors()) {
                 Class<?>[] parameters = constructor.getParameterTypes();
