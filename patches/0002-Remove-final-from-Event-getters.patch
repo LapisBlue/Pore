@@ -1,4 +1,4 @@
-From 2bcff1506b29ec8f78fddef4a8fe4b23c0afa9e3 Mon Sep 17 00:00:00 2001
+From e78b4ddf99387dba1f36a87baefa6c4b3d584167 Mon Sep 17 00:00:00 2001
 From: Minecrell <dev@minecrell.net>
 Date: Mon, 26 Jan 2015 22:51:58 +0100
 Subject: [PATCH] Remove final from Event getters
@@ -17,6 +17,19 @@ index 2405205..c0c9b6c 100644
          return block;
      }
  }
+diff --git a/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java b/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java
+index 9ef48c8..4a3a258 100644
+--- a/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java
++++ b/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java
+@@ -141,7 +141,7 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
+      *
+      * @return the amount of damage caused by the event
+      */
+-    public final double getFinalDamage() {
++    public double getFinalDamage() {
+         double damage = 0;
+         for (DamageModifier modifier : MODIFIERS) {
+             damage += getDamage(modifier);
 diff --git a/src/main/java/org/bukkit/event/entity/PlayerLeashEntityEvent.java b/src/main/java/org/bukkit/event/entity/PlayerLeashEntityEvent.java
 index 74d458a..07f978a 100644
 --- a/src/main/java/org/bukkit/event/entity/PlayerLeashEntityEvent.java
@@ -82,19 +95,6 @@ index 0cae9bc..5d88767 100644
          return world;
      }
  }
-diff --git a/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java b/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java
-index 9ef48c8..28f700e 100644
---- a/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java
-+++ b/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java
-@@ -141,7 +141,7 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
-      *
-      * @return the amount of damage caused by the event
-      */
--    public final double getFinalDamage() {
-+    public double getFinalDamage() {
-         double damage = 0;
-         for (DamageModifier modifier : MODIFIERS) {
-             damage += getDamage(modifier);
 -- 
-2.2.2
+2.3.0
 
