@@ -31,8 +31,8 @@ import org.bukkit.Location;
 import org.bukkit.TravelAgent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityEvent;
 import org.bukkit.event.entity.EntityPortalEvent;
+import org.spongepowered.api.event.entity.EntityEvent;
 
 public class PoreEntityPortalEvent extends EntityPortalEvent {
 

@@ -30,8 +30,8 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityEvent;
 import org.bukkit.event.entity.EntityPortalEnterEvent;
+import org.spongepowered.api.event.entity.EntityEvent;
 
 public class PoreEntityPortalEnterEvent extends EntityPortalEnterEvent {
 

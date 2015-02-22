@@ -32,7 +32,7 @@ import org.bukkit.block.BlockState;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityCreatePortalEvent;
-import org.bukkit.event.entity.EntityEvent;
+import org.spongepowered.api.event.entity.EntityEvent;
 
 import java.util.List;
 

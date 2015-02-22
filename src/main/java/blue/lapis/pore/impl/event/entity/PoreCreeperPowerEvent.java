@@ -31,7 +31,7 @@ import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.event.entity.CreeperPowerEvent;
-import org.bukkit.event.entity.EntityEvent;
+import org.spongepowered.api.event.entity.EntityEvent;
 
 public class PoreCreeperPowerEvent extends CreeperPowerEvent {
 

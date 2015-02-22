@@ -29,8 +29,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
-import org.bukkit.event.entity.EntityEvent;
 import org.bukkit.event.entity.HorseJumpEvent;
+import org.spongepowered.api.event.entity.EntityEvent;
 
 public class PoreHorseJumpEvent extends HorseJumpEvent {
 
