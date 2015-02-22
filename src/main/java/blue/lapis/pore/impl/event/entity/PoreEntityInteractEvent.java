@@ -28,6 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -39,15 +40,15 @@ import org.spongepowered.api.entity.living.Living;
 
 public class PoreEntityInteractEvent extends EntityInteractEvent {
 
-    private final org.spongepowered.api.event.entity.EntityInteractEvent handle;
+    private final org.spongepowered.api.event.entity.EntityInteractBlockEvent handle;
 
-    public PoreEntityInteractEvent(org.spongepowered.api.event.entity.EntityInteractEvent handle) {
+    public PoreEntityInteractEvent(org.spongepowered.api.event.entity.EntityInteractBlockEvent handle) {
         super(null, null);
         this.handle = checkNotNull(handle, "handle");
         checkState(handle.getEntity() instanceof Living, "Bad entity type");
     }
 
-    public org.spongepowered.api.event.entity.EntityInteractEvent getHandle() {
+    public org.spongepowered.api.event.entity.EntityInteractBlockEvent getHandle() {
         return this.handle;
     }
 
@@ -62,17 +63,17 @@ public class PoreEntityInteractEvent extends EntityInteractEvent {
     }
 
     @Override
+    public Block getBlock() {
+        return PoreBlock.of(this.getHandle().getBlock());
+    }
+
+    @Override
     public boolean isCancelled() {
         throw new NotImplementedException();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public Block getBlock() {
         throw new NotImplementedException();
     }
 }

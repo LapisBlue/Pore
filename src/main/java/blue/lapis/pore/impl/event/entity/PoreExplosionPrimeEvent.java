@@ -69,21 +69,21 @@ public class PoreExplosionPrimeEvent extends ExplosionPrimeEvent {
 
     @Override
     public boolean getFire() {
-        throw new NotImplementedException();
+        return this.getHandle().isFlamable();
     }
 
     @Override
     public void setFire(boolean fire) {
-        throw new NotImplementedException();
+        getHandle().setFlamable(fire);
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        return this.getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        this.getHandle().setCancelled(cancel);
     }
 }

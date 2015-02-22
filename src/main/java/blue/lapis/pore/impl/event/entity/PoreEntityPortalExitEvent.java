@@ -27,6 +27,7 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -62,46 +63,46 @@ public class PoreEntityPortalExitEvent extends EntityPortalExitEvent {
 
     @Override
     public Location getFrom() {
-        throw new NotImplementedException();
+        return LocationConverter.of(this.getHandle().getOldLocation());
     }
 
     @Override
     public void setFrom(Location from) {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); //TODO: not sure if Sponge is going to support this
     }
 
     @Override
     public Location getTo() {
-        throw new NotImplementedException();
+        return LocationConverter.of(this.getHandle().getNewLocation());
     }
 
     @Override
     public void setTo(Location to) {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); //TODO
     }
 
     @Override
     public Vector getBefore() {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); //TODO
     }
 
     @Override
     public Vector getAfter() {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); //TODO
     }
 
     @Override
     public void setAfter(Vector after) {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); //TODO
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        return this.getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        this.getHandle().setCancelled(cancel);
     }
 }

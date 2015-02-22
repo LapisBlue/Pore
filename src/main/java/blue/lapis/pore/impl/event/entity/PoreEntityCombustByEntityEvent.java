@@ -64,16 +64,6 @@ public class PoreEntityCombustByEntityEvent extends EntityCombustByEntityEvent {
     }
 
     @Override
-    public boolean isCancelled() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
-    }
-
-    @Override
     public int getDuration() {
         throw new NotImplementedException();
     }
@@ -81,5 +71,15 @@ public class PoreEntityCombustByEntityEvent extends EntityCombustByEntityEvent {
     @Override
     public void setDuration(int duration) {
         throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return this.getHandle().isCancelled();
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        this.getHandle().setCancelled(cancel);
     }
 }

@@ -62,17 +62,17 @@ public class PoreEntityTameEvent extends EntityTameEvent {
     }
 
     @Override
-    public boolean isCancelled() {
+    public AnimalTamer getOwner() {
         throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return this.getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public AnimalTamer getOwner() {
-        throw new NotImplementedException();
+        this.getHandle().setCancelled(cancel);
     }
 }

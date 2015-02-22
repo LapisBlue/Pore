@@ -27,9 +27,10 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.converter.type.MaterialConverter;
+import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -61,26 +62,27 @@ public class PoreEntityChangeBlockEvent extends EntityChangeBlockEvent {
 
     @Override
     public Block getBlock() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public boolean isCancelled() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        return PoreBlock.of(this.getHandle().getBlock());
     }
 
     @Override
     public Material getTo() {
-        throw new NotImplementedException();
+        return MaterialConverter.of(this.getHandle().getReplacementBlock().getState().getType());
     }
 
     @Override
+    @SuppressWarnings("deprecation") // no sense in throwing warnings for something we can't fix
     public byte getData() {
-        throw new NotImplementedException();
+        return this.getHandle().getReplacementBlock().getState().getDataValue();
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return this.getHandle().isCancelled();
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        this.getHandle().setCancelled(cancel);
     }
 }

@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.converter.type.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
@@ -34,6 +35,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
+import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.event.entity.EntityChangeHealthEvent;
 
 public class PoreEntityDamageByBlockEvent extends EntityDamageByBlockEvent {
@@ -43,6 +45,7 @@ public class PoreEntityDamageByBlockEvent extends EntityDamageByBlockEvent {
     public PoreEntityDamageByBlockEvent(EntityChangeHealthEvent handle) {
         super(null, null, null, -1.0);
         this.handle = checkNotNull(handle, "handle");
+        checkState(handle.getEntity() instanceof Living, "Bad entity type");
     }
 
     public EntityChangeHealthEvent getHandle() {
@@ -57,16 +60,6 @@ public class PoreEntityDamageByBlockEvent extends EntityDamageByBlockEvent {
     @Override
     public EntityType getEntityType() {
         return EntityConverter.of(this.getHandle().getEntity().getType());
-    }
-
-    @Override
-    public boolean isCancelled() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
     }
 
     @Override
@@ -122,5 +115,15 @@ public class PoreEntityDamageByBlockEvent extends EntityDamageByBlockEvent {
     @Override
     public Block getDamager() {
         throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return this.getHandle().isCancelled();
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        this.getHandle().setCancelled(cancel);
     }
 }

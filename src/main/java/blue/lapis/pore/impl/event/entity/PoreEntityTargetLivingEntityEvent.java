@@ -28,6 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.converter.type.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
+import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
@@ -66,21 +67,23 @@ public class PoreEntityTargetLivingEntityEvent extends EntityTargetLivingEntityE
 
     @Override
     public LivingEntity getTarget() {
-        throw new NotImplementedException();
+        return this.getHandle().getTargetedEntity().isPresent() ?
+                (LivingEntity)PoreLivingEntity.of(this.getHandle().getTargetedEntity().get()) :
+                null;
     }
 
     @Override
     public void setTarget(Entity target) {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); //TODO
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        return this.getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        this.getHandle().setCancelled(cancel);
     }
 }

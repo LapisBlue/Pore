@@ -71,17 +71,17 @@ public class PoreEntityCreatePortalEvent extends EntityCreatePortalEvent {
     }
 
     @Override
+    public PortalType getPortalType() {
+        throw new NotImplementedException();
+    }
+
+    @Override
     public boolean isCancelled() {
         throw new NotImplementedException();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public PortalType getPortalType() {
         throw new NotImplementedException();
     }
 }

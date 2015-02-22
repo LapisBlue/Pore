@@ -59,37 +59,37 @@ public class PoreEntityRegainHealthEvent extends EntityRegainHealthEvent {
     }
 
     @Override
-    public boolean isCancelled() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
-    }
-
-    @Override
     public double getAmount() {
-        throw new NotImplementedException();
+        return this.getHandle().getNewHealth() - this.getHandle().getOldHealth();
     }
 
     @Override
     public int _INVALID_getAmount() {
-        throw new NotImplementedException();
+        return (int)this.getAmount();
     }
 
     @Override
     public void setAmount(double amount) {
-        throw new NotImplementedException();
+        this.getHandle().setNewHealth(this.getHandle().getOldHealth() + amount);
     }
 
     @Override
     public void _INVALID_setAmount(int amount) {
-        throw new NotImplementedException();
+        this.setAmount((double)amount);
     }
 
     @Override
     public RegainReason getRegainReason() {
         throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return this.getHandle().isCancelled();
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        this.getHandle().setCancelled(cancel);
     }
 }

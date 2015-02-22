@@ -27,7 +27,11 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.converter.vector.LocationConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreEntity;
+import blue.lapis.pore.util.PoreCollections;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
@@ -35,6 +39,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.spongepowered.api.block.BlockLoc;
 import org.spongepowered.api.event.entity.EntityExplosionEvent;
 
 import java.util.List;
@@ -63,32 +68,35 @@ public class PoreEntityExplodeEvent extends EntityExplodeEvent {
     }
 
     @Override
+    public List<Block> blockList() {
+        return PoreCollections.<BlockLoc, Block>transformToList(
+                this.getHandle().getBlocks(),
+                WrapperConverter.<BlockLoc, PoreBlock>getConverter()
+        );
+    }
+
+    @Override
+    public Location getLocation() {
+        return LocationConverter.of(this.getHandle().getExplosionLocation());
+    }
+
+    @Override
+    public float getYield() {
+        return (float)this.getHandle().getYield();
+    }
+
+    @Override
+    public void setYield(float yield) {
+        this.getHandle().setYield(yield);
+    }
+
+    @Override
     public boolean isCancelled() {
         throw new NotImplementedException();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public List<Block> blockList() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public Location getLocation() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public float getYield() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setYield(float yield) {
         throw new NotImplementedException();
     }
 }

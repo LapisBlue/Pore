@@ -28,6 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -65,21 +66,21 @@ public class PoreCreatureSpawnEvent extends CreatureSpawnEvent {
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        return this.getHandle().isCancelled();
     }
 
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        this.getHandle().setCancelled(cancel);
     }
 
     @Override
     public Location getLocation() {
-        throw new NotImplementedException();
+        return LocationConverter.of(this.getHandle().getLocation());
     }
 
     @Override
     public CreatureType getCreatureType() {
-        throw new NotImplementedException();
+        return CreatureType.fromEntityType(this.getEntityType());
     }
 
     @Override

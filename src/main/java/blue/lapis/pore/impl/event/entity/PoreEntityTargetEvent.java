@@ -65,21 +65,23 @@ public class PoreEntityTargetEvent extends EntityTargetEvent {
 
     @Override
     public Entity getTarget() {
-        throw new NotImplementedException();
+        return this.getHandle().getTargetedEntity().isPresent() ?
+                PoreEntity.of(getHandle().getTargetedEntity().get()) :
+                null;
     }
 
     @Override
     public void setTarget(Entity target) {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); //TODO: seriously?
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        return this.getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        this.getHandle().setCancelled(cancel);
     }
 }

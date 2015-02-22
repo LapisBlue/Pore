@@ -59,16 +59,6 @@ public class PoreEntityDamageEvent extends EntityDamageEvent {
     }
 
     @Override
-    public boolean isCancelled() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
-    }
-
-    @Override
     public double getOriginalDamage(DamageModifier type) throws IllegalArgumentException {
         throw new NotImplementedException();
     }
@@ -116,5 +106,15 @@ public class PoreEntityDamageEvent extends EntityDamageEvent {
     @Override
     public DamageCause getCause() {
         throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return this.getHandle().isCancelled();
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        this.getHandle().setCancelled(cancel);
     }
 }

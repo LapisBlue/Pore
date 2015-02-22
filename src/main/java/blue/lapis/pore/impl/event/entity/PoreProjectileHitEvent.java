@@ -33,19 +33,19 @@ import blue.lapis.pore.impl.entity.PoreProjectile;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.spongepowered.api.event.entity.EntityCollisionWithEntityEvent;
+import org.spongepowered.api.event.entity.EntityEvent;
 
 public class PoreProjectileHitEvent extends ProjectileHitEvent {
 
-    private final EntityCollisionWithEntityEvent handle;
+    private final EntityEvent handle;
 
-    public PoreProjectileHitEvent(EntityCollisionWithEntityEvent handle) {
+    public PoreProjectileHitEvent(EntityEvent handle) {
         super(null);
         this.handle = checkNotNull(handle, "handle");
         checkState(handle.getEntity() instanceof org.spongepowered.api.entity.projectile.Projectile, "Bad entity type");
     }
 
-    public EntityCollisionWithEntityEvent getHandle() {
+    public EntityEvent getHandle() {
         return this.handle;
     }
 

@@ -63,22 +63,22 @@ public class PoreCreeperPowerEvent extends CreeperPowerEvent {
     }
 
     @Override
-    public boolean isCancelled() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
-    }
-
-    @Override
     public LightningStrike getLightning() {
         throw new NotImplementedException();
     }
 
     @Override
     public PowerCause getCause() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean isCancelled() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
         throw new NotImplementedException();
     }
 }

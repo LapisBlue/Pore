@@ -27,6 +27,7 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -60,7 +61,7 @@ public class PoreEntityTeleportEvent extends EntityTeleportEvent {
 
     @Override
     public Location getFrom() {
-        throw new NotImplementedException();
+        return LocationConverter.of(this.getHandle().getOldLocation());
     }
 
     @Override
@@ -70,7 +71,7 @@ public class PoreEntityTeleportEvent extends EntityTeleportEvent {
 
     @Override
     public Location getTo() {
-        throw new NotImplementedException();
+        return LocationConverter.of(this.getHandle().getNewLocation());
     }
 
     @Override
