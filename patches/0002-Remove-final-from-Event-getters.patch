@@ -82,6 +82,19 @@ index 0cae9bc..5d88767 100644
          return world;
      }
  }
+diff --git a/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java b/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java
+index 9ef48c8..28f700e 100644
+--- a/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java
++++ b/src/main/java/org/bukkit/event/entity/EntityDamageEvent.java
+@@ -141,7 +141,7 @@ public class EntityDamageEvent extends EntityEvent implements Cancellable {
+      *
+      * @return the amount of damage caused by the event
+      */
+-    public final double getFinalDamage() {
++    public double getFinalDamage() {
+         double damage = 0;
+         for (DamageModifier modifier : MODIFIERS) {
+             damage += getDamage(modifier);
 -- 
 2.2.2
 
