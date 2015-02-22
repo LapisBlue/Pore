@@ -37,7 +37,7 @@ public class PorePlayerEditBookEvent extends PlayerEditBookEvent {
     private final PlayerEvent handle;
 
     public PorePlayerEditBookEvent(PlayerEvent handle) {
-        super(null, -1, null, null, false);
+        super(null, 0, null, null, false);
         this.handle = checkNotNull(handle, "handle");
     }
 

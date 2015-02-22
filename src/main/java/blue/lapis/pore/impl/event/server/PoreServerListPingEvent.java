@@ -42,8 +42,12 @@ public class PoreServerListPingEvent extends ServerListPingEvent {
     private final StatusPingEvent handle;
 
     public PoreServerListPingEvent(StatusPingEvent handle) {
-        super(null, null, -1, -1);
+        super(null, null, 0, -1);
         this.handle = checkNotNull(handle, "handle");
+    }
+
+    public StatusPingEvent getHandle() {
+        return handle;
     }
 
     @Override

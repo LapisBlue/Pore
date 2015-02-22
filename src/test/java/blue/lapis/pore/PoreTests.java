@@ -26,6 +26,7 @@ package blue.lapis.pore;
 
 import static org.mockito.Mockito.mock;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.api.Game;
 
@@ -42,6 +43,11 @@ public final class PoreTests {
             pore.logger = LoggerFactory.getLogger("Pore");
             Pore.testLogger = pore.logger;
         }
+    }
+
+    public static Logger getLogger() {
+        mockPlugin();
+        return Pore.getTestLogger();
     }
 
     private static Field modifiers;

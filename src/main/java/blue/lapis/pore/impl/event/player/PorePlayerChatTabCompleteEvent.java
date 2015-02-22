@@ -32,13 +32,14 @@ import org.bukkit.event.player.PlayerChatTabCompleteEvent;
 import org.spongepowered.api.event.entity.living.player.PlayerEvent;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class PorePlayerChatTabCompleteEvent extends PlayerChatTabCompleteEvent {
 
     private final PlayerEvent handle;
 
     public PorePlayerChatTabCompleteEvent(PlayerEvent handle) {
-        super(null, null, null);
+        super(null, "", Collections.<String>emptyList());
         this.handle = checkNotNull(handle, "handle");
     }
 

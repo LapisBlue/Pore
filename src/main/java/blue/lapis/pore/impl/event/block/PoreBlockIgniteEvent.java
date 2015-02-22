@@ -34,15 +34,15 @@ import org.spongepowered.api.event.block.BlockIgniteEvent;
 
 public class PoreBlockIgniteEvent extends org.bukkit.event.block.BlockIgniteEvent {
 
-    private final BlockIgniteEvent event;
+    private final BlockIgniteEvent handle;
 
-    public PoreBlockIgniteEvent(BlockIgniteEvent event) {
+    public PoreBlockIgniteEvent(BlockIgniteEvent handle) {
         super(null, null, null, null);
-        this.event = checkNotNull(event, "event");
+        this.handle = checkNotNull(handle, "handle");
     }
 
-    public BlockIgniteEvent getEvent() {
-        return event;
+    public BlockIgniteEvent getHandle() {
+        return handle;
     }
 
     @Override

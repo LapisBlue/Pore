@@ -29,12 +29,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.spongepowered.api.event.entity.EntityDeathEvent;
 
 import java.util.List;
 
-public class PoreEntityDeathEvent extends EntityDeathEvent {
+public class PoreEntityDeathEvent extends org.bukkit.event.entity.EntityDeathEvent {
 
     private final EntityDeathEvent handle;
 

@@ -24,6 +24,9 @@
  */
 package blue.lapis.pore.impl.event.player;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import com.google.common.base.Preconditions;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Fish;
@@ -36,7 +39,7 @@ public class PorePlayerFishEvent extends org.bukkit.event.player.PlayerFishEvent
 
     public PorePlayerFishEvent(PlayerFishEvent handle) {
         super(null, null, null, null);
-        this.handle = handle;
+        this.handle = checkNotNull(handle, "handle");
     }
 
     public PlayerFishEvent getHandle() {

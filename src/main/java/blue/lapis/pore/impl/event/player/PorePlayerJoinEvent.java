@@ -41,6 +41,10 @@ public class PorePlayerJoinEvent extends org.bukkit.event.player.PlayerJoinEvent
         this.handle = checkNotNull(handle, "handle");
     }
 
+    public PlayerJoinEvent getHandle() {
+        return handle;
+    }
+
     @Override
     public Player getPlayer() {
         return PorePlayer.of(handle.getPlayer());

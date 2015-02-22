@@ -30,9 +30,9 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockEvent;
 import org.bukkit.event.block.BlockMultiPlaceEvent;
 import org.bukkit.inventory.ItemStack;
+import org.spongepowered.api.event.block.BlockEvent;
 
 import java.util.List;
 

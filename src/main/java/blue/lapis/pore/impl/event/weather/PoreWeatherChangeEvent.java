@@ -24,6 +24,9 @@
  */
 package blue.lapis.pore.impl.event.weather;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import com.google.common.base.Preconditions;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.World;
 import org.spongepowered.api.event.weather.WeatherChangeEvent;
@@ -34,7 +37,7 @@ public class PoreWeatherChangeEvent extends org.bukkit.event.weather.WeatherChan
 
     public PoreWeatherChangeEvent(WeatherChangeEvent handle) {
         super(null, false);
-        this.handle = handle;
+        this.handle = checkNotNull(handle, "handle");
     }
 
     public WeatherChangeEvent getHandle() {
