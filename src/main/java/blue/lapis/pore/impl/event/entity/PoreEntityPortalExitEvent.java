@@ -28,24 +28,22 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityExplodeEvent;
-import org.spongepowered.api.event.entity.EntityExplosionEvent;
+import org.bukkit.event.entity.EntityPortalExitEvent;
+import org.bukkit.util.Vector;
+import org.spongepowered.api.event.entity.EntityTeleportEvent;
 
-import java.util.List;
+public class PoreEntityPortalExitEvent extends EntityPortalExitEvent {
 
-public class PoreEntityExplodeEvent extends EntityExplodeEvent {
+    private final EntityTeleportEvent handle;
 
-    private final EntityExplosionEvent handle;
-
-    public PoreEntityExplodeEvent(EntityExplosionEvent handle) {
-        super(null, null, null, -1);
+    public PoreEntityPortalExitEvent(EntityTeleportEvent handle) {
+        super(null, null, null, null, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityExplosionEvent getHandle() {
+    public EntityTeleportEvent getHandle() {
         return this.handle;
     }
 
@@ -60,32 +58,47 @@ public class PoreEntityExplodeEvent extends EntityExplodeEvent {
     }
 
     @Override
+    public Location getFrom() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void setFrom(Location from) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Location getTo() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void setTo(Location to) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Vector getBefore() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Vector getAfter() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void setAfter(Vector after) {
+        throw new NotImplementedException();
+    }
+
+    @Override
     public boolean isCancelled() {
         throw new NotImplementedException();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public List<Block> blockList() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public Location getLocation() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public float getYield() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setYield(float yield) {
         throw new NotImplementedException();
     }
 }

@@ -28,24 +28,22 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
+import org.bukkit.TravelAgent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityExplodeEvent;
-import org.spongepowered.api.event.entity.EntityExplosionEvent;
+import org.bukkit.event.entity.EntityEvent;
+import org.bukkit.event.entity.EntityPortalEvent;
 
-import java.util.List;
+public class PoreEntityPortalEvent extends EntityPortalEvent {
 
-public class PoreEntityExplodeEvent extends EntityExplodeEvent {
+    private final EntityEvent handle;
 
-    private final EntityExplosionEvent handle;
-
-    public PoreEntityExplodeEvent(EntityExplosionEvent handle) {
-        super(null, null, null, -1);
+    public PoreEntityPortalEvent(EntityEvent handle) {
+        super(null, null, null, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityExplosionEvent getHandle() {
+    public EntityEvent getHandle() {
         return this.handle;
     }
 
@@ -60,32 +58,42 @@ public class PoreEntityExplodeEvent extends EntityExplodeEvent {
     }
 
     @Override
-    public boolean isCancelled() {
+    public Location getFrom() {
         throw new NotImplementedException();
     }
 
     @Override
-    public void setCancelled(boolean cancel) {
+    public void setFrom(Location from) {
         throw new NotImplementedException();
     }
 
     @Override
-    public List<Block> blockList() {
+    public Location getTo() {
         throw new NotImplementedException();
     }
 
     @Override
-    public Location getLocation() {
+    public void setTo(Location to) {
         throw new NotImplementedException();
     }
 
     @Override
-    public float getYield() {
+    public void useTravelAgent(boolean useTravelAgent) {
         throw new NotImplementedException();
     }
 
     @Override
-    public void setYield(float yield) {
+    public boolean useTravelAgent() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public TravelAgent getPortalTravelAgent() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void setPortalTravelAgent(TravelAgent travelAgent) {
         throw new NotImplementedException();
     }
 }

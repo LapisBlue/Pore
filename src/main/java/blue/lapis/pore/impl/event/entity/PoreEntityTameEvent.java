@@ -27,30 +27,26 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.Location;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityExplodeEvent;
-import org.spongepowered.api.event.entity.EntityExplosionEvent;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.entity.EntityTameEvent;
 
-import java.util.List;
+public class PoreEntityTameEvent extends EntityTameEvent {
 
-public class PoreEntityExplodeEvent extends EntityExplodeEvent {
+    private final org.spongepowered.api.event.entity.EntityTameEvent handle;
 
-    private final EntityExplosionEvent handle;
-
-    public PoreEntityExplodeEvent(EntityExplosionEvent handle) {
-        super(null, null, null, -1);
+    public PoreEntityTameEvent(org.spongepowered.api.event.entity.EntityTameEvent handle) {
+        super(null, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityExplosionEvent getHandle() {
+    public org.spongepowered.api.event.entity.EntityTameEvent getHandle() {
         return this.handle;
     }
 
     @Override
-    public Entity getEntity() {
+    public LivingEntity getEntity() {
         throw new NotImplementedException();
     }
 
@@ -70,22 +66,7 @@ public class PoreEntityExplodeEvent extends EntityExplodeEvent {
     }
 
     @Override
-    public List<Block> blockList() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public Location getLocation() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public float getYield() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setYield(float yield) {
+    public AnimalTamer getOwner() {
         throw new NotImplementedException();
     }
 }

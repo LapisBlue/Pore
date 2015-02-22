@@ -27,35 +27,53 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.Location;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityExplodeEvent;
-import org.spongepowered.api.event.entity.EntityExplosionEvent;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.inventory.ItemStack;
+import org.spongepowered.api.event.entity.EntityEvent;
 
-import java.util.List;
+public class PoreEntityShootBowEvent extends EntityShootBowEvent {
 
-public class PoreEntityExplodeEvent extends EntityExplodeEvent {
+    private final EntityEvent handle;
 
-    private final EntityExplosionEvent handle;
-
-    public PoreEntityExplodeEvent(EntityExplosionEvent handle) {
-        super(null, null, null, -1);
+    public PoreEntityShootBowEvent(EntityEvent handle) {
+        super(null, null, null, -1f);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityExplosionEvent getHandle() {
+    public EntityEvent getHandle() {
         return this.handle;
     }
 
     @Override
-    public Entity getEntity() {
+    public LivingEntity getEntity() {
         throw new NotImplementedException();
     }
 
     @Override
     public EntityType getEntityType() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public ItemStack getBow() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Entity getProjectile() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void setProjectile(Entity projectile) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public float getForce() {
         throw new NotImplementedException();
     }
 
@@ -66,26 +84,6 @@ public class PoreEntityExplodeEvent extends EntityExplodeEvent {
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public List<Block> blockList() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public Location getLocation() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public float getYield() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setYield(float yield) {
         throw new NotImplementedException();
     }
 }

@@ -22,40 +22,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.impl.event.entity;
+package blue.lapis.pore.impl.event.block;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityExplodeEvent;
-import org.spongepowered.api.event.entity.EntityExplosionEvent;
+import org.bukkit.block.BlockFace;
+import org.bukkit.event.block.BlockFromToEvent;
+import org.spongepowered.api.event.block.BlockChangeEvent;
 
-import java.util.List;
+public class PoreBlockFromToEvent extends BlockFromToEvent {
 
-public class PoreEntityExplodeEvent extends EntityExplodeEvent {
+    private final BlockChangeEvent handle;
 
-    private final EntityExplosionEvent handle;
-
-    public PoreEntityExplodeEvent(EntityExplosionEvent handle) {
-        super(null, null, null, -1);
+    public PoreBlockFromToEvent(BlockChangeEvent handle) {
+        super(null, (Block)null); // type casting removes ambiguity
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityExplosionEvent getHandle() {
-        return this.handle;
+    public BlockChangeEvent getHandle() {
+        return handle;
     }
 
     @Override
-    public Entity getEntity() {
+    public BlockFace getFace() {
         throw new NotImplementedException();
     }
 
     @Override
-    public EntityType getEntityType() {
+    public Block getToBlock() {
         throw new NotImplementedException();
     }
 
@@ -66,26 +62,6 @@ public class PoreEntityExplodeEvent extends EntityExplodeEvent {
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public List<Block> blockList() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public Location getLocation() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public float getYield() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setYield(float yield) {
         throw new NotImplementedException();
     }
 }

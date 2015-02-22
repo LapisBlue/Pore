@@ -28,24 +28,21 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityExplodeEvent;
-import org.spongepowered.api.event.entity.EntityExplosionEvent;
+import org.bukkit.event.entity.EntityEvent;
+import org.bukkit.event.entity.EntityPortalEnterEvent;
 
-import java.util.List;
+public class PoreEntityPortalEnterEvent extends EntityPortalEnterEvent {
 
-public class PoreEntityExplodeEvent extends EntityExplodeEvent {
+    private final EntityEvent handle;
 
-    private final EntityExplosionEvent handle;
-
-    public PoreEntityExplodeEvent(EntityExplosionEvent handle) {
-        super(null, null, null, -1);
+    public PoreEntityPortalEnterEvent(EntityEvent handle) {
+        super(null, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityExplosionEvent getHandle() {
+    public EntityEvent getHandle() {
         return this.handle;
     }
 
@@ -60,32 +57,7 @@ public class PoreEntityExplodeEvent extends EntityExplodeEvent {
     }
 
     @Override
-    public boolean isCancelled() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public List<Block> blockList() {
-        throw new NotImplementedException();
-    }
-
-    @Override
     public Location getLocation() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public float getYield() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setYield(float yield) {
         throw new NotImplementedException();
     }
 }

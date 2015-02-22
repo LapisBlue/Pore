@@ -27,25 +27,21 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.Location;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityExplodeEvent;
-import org.spongepowered.api.event.entity.EntityExplosionEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
+import org.spongepowered.api.event.entity.EntityChangeHealthEvent;
 
-import java.util.List;
+public class PoreEntityRegainHealthEvent extends EntityRegainHealthEvent {
 
-public class PoreEntityExplodeEvent extends EntityExplodeEvent {
+    private final EntityChangeHealthEvent handle;
 
-    private final EntityExplosionEvent handle;
-
-    public PoreEntityExplodeEvent(EntityExplosionEvent handle) {
-        super(null, null, null, -1);
+    public PoreEntityRegainHealthEvent(EntityChangeHealthEvent handle) {
+        super(null, -1, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityExplosionEvent getHandle() {
+    public EntityChangeHealthEvent getHandle() {
         return this.handle;
     }
 
@@ -70,22 +66,27 @@ public class PoreEntityExplodeEvent extends EntityExplodeEvent {
     }
 
     @Override
-    public List<Block> blockList() {
+    public double getAmount() {
         throw new NotImplementedException();
     }
 
     @Override
-    public Location getLocation() {
+    public int _INVALID_getAmount() {
         throw new NotImplementedException();
     }
 
     @Override
-    public float getYield() {
+    public void setAmount(double amount) {
         throw new NotImplementedException();
     }
 
     @Override
-    public void setYield(float yield) {
+    public void _INVALID_setAmount(int amount) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public RegainReason getRegainReason() {
         throw new NotImplementedException();
     }
 }
