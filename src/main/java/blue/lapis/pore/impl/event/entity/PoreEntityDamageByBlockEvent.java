@@ -38,7 +38,7 @@ public class PoreEntityDamageByBlockEvent extends EntityDamageByBlockEvent {
     private final EntityChangeHealthEvent handle;
 
     public PoreEntityDamageByBlockEvent(EntityChangeHealthEvent handle) {
-        super(null, null, null, -1);
+        super(null, null, null, -1.0);
         this.handle = checkNotNull(handle, "handle");
     }
 

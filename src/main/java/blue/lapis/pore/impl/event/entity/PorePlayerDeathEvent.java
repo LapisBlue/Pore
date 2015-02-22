@@ -27,26 +27,28 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.spongepowered.api.event.entity.EntityChangeHealthEvent;
+import org.bukkit.entity.Player;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.inventory.ItemStack;
 
-public class PoreEntityDamageEvent extends EntityDamageEvent {
+import java.util.List;
 
-    private final EntityChangeHealthEvent handle;
+public class PorePlayerDeathEvent extends PlayerDeathEvent {
 
-    public PoreEntityDamageEvent(EntityChangeHealthEvent handle) {
-        super(null, null, -1.0);
+    private final org.spongepowered.api.event.entity.living.player.PlayerDeathEvent handle;
+
+    public PorePlayerDeathEvent(org.spongepowered.api.event.entity.living.player.PlayerDeathEvent handle) {
+        super(null, null, -1, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityChangeHealthEvent getHandle() {
+    public org.spongepowered.api.event.entity.living.player.PlayerDeathEvent getHandle() {
         return this.handle;
     }
 
     @Override
-    public Entity getEntity() {
+    public Player getEntity() {
         throw new NotImplementedException();
     }
 
@@ -56,62 +58,77 @@ public class PoreEntityDamageEvent extends EntityDamageEvent {
     }
 
     @Override
-    public boolean isCancelled() {
+    public String getDeathMessage() {
         throw new NotImplementedException();
     }
 
     @Override
-    public void setCancelled(boolean cancel) {
+    public void setDeathMessage(String deathMessage) {
         throw new NotImplementedException();
     }
 
     @Override
-    public double getOriginalDamage(DamageModifier type) throws IllegalArgumentException {
+    public int getNewExp() {
         throw new NotImplementedException();
     }
 
     @Override
-    public void setDamage(DamageModifier type, double damage) throws IllegalArgumentException, UnsupportedOperationException {
+    public void setNewExp(int exp) {
         throw new NotImplementedException();
     }
 
     @Override
-    public double getDamage(DamageModifier type) throws IllegalArgumentException {
+    public int getNewLevel() {
         throw new NotImplementedException();
     }
 
     @Override
-    public boolean isApplicable(DamageModifier type) throws IllegalArgumentException {
+    public void setNewLevel(int level) {
         throw new NotImplementedException();
     }
 
     @Override
-    public double getDamage() {
+    public int getNewTotalExp() {
         throw new NotImplementedException();
     }
 
     @Override
-    public double getFinalDamage() {
+    public void setNewTotalExp(int totalExp) {
         throw new NotImplementedException();
     }
 
     @Override
-    public int _INVALID_getDamage() {
+    public boolean getKeepLevel() {
         throw new NotImplementedException();
     }
 
     @Override
-    public void setDamage(double damage) {
+    public void setKeepLevel(boolean keepLevel) {
         throw new NotImplementedException();
     }
 
     @Override
-    public void _INVALID_setDamage(int damage) {
+    public boolean getKeepInventory() {
         throw new NotImplementedException();
     }
 
     @Override
-    public DamageCause getCause() {
+    public void setKeepInventory(boolean keepInventory) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public int getDroppedExp() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void setDroppedExp(int exp) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public List<ItemStack> getDrops() {
         throw new NotImplementedException();
     }
 }

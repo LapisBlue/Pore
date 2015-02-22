@@ -27,31 +27,54 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.spongepowered.api.event.entity.EntityChangeHealthEvent;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.ThrownPotion;
+import org.bukkit.event.entity.PotionSplashEvent;
+import org.spongepowered.api.event.entity.EntityEvent;
 
-public class PoreEntityDamageEvent extends EntityDamageEvent {
+import java.util.Collection;
 
-    private final EntityChangeHealthEvent handle;
+public class PorePotionSplashEvent extends PotionSplashEvent {
 
-    public PoreEntityDamageEvent(EntityChangeHealthEvent handle) {
-        super(null, null, -1.0);
+    private final EntityEvent handle;
+
+    public PorePotionSplashEvent(EntityEvent handle) {
+        super(null, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityChangeHealthEvent getHandle() {
+    public EntityEvent getHandle() {
         return this.handle;
     }
 
     @Override
-    public Entity getEntity() {
+    public ThrownPotion getEntity() {
         throw new NotImplementedException();
     }
 
     @Override
     public EntityType getEntityType() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public ThrownPotion getPotion() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Collection<LivingEntity> getAffectedEntities() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public double getIntensity(LivingEntity entity) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void setIntensity(LivingEntity entity, double intensity) {
         throw new NotImplementedException();
     }
 
@@ -62,56 +85,6 @@ public class PoreEntityDamageEvent extends EntityDamageEvent {
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public double getOriginalDamage(DamageModifier type) throws IllegalArgumentException {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setDamage(DamageModifier type, double damage) throws IllegalArgumentException, UnsupportedOperationException {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public double getDamage(DamageModifier type) throws IllegalArgumentException {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public boolean isApplicable(DamageModifier type) throws IllegalArgumentException {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public double getDamage() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public double getFinalDamage() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public int _INVALID_getDamage() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setDamage(double damage) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void _INVALID_setDamage(int damage) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public DamageCause getCause() {
         throw new NotImplementedException();
     }
 }

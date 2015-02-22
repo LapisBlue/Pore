@@ -29,19 +29,18 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.spongepowered.api.event.entity.EntityChangeHealthEvent;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 
-public class PoreEntityDamageEvent extends EntityDamageEvent {
+public class PoreExplosionPrimeEvent extends ExplosionPrimeEvent {
 
-    private final EntityChangeHealthEvent handle;
+    private final org.spongepowered.api.event.entity.ExplosionPrimeEvent handle;
 
-    public PoreEntityDamageEvent(EntityChangeHealthEvent handle) {
-        super(null, null, -1.0);
+    public PoreExplosionPrimeEvent(org.spongepowered.api.event.entity.ExplosionPrimeEvent handle) {
+        super(null, -1f, false);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityChangeHealthEvent getHandle() {
+    public org.spongepowered.api.event.entity.ExplosionPrimeEvent getHandle() {
         return this.handle;
     }
 
@@ -56,62 +55,32 @@ public class PoreEntityDamageEvent extends EntityDamageEvent {
     }
 
     @Override
+    public float getRadius() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void setRadius(float radius) {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public boolean getFire() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public void setFire(boolean fire) {
+        throw new NotImplementedException();
+    }
+
+    @Override
     public boolean isCancelled() {
         throw new NotImplementedException();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public double getOriginalDamage(DamageModifier type) throws IllegalArgumentException {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setDamage(DamageModifier type, double damage) throws IllegalArgumentException, UnsupportedOperationException {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public double getDamage(DamageModifier type) throws IllegalArgumentException {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public boolean isApplicable(DamageModifier type) throws IllegalArgumentException {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public double getDamage() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public double getFinalDamage() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public int _INVALID_getDamage() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setDamage(double damage) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void _INVALID_setDamage(int damage) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public DamageCause getCause() {
         throw new NotImplementedException();
     }
 }

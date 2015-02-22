@@ -27,66 +27,31 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.event.entity.EntityRegainHealthEvent;
-import org.spongepowered.api.event.entity.EntityChangeHealthEvent;
+import org.bukkit.entity.Projectile;
+import org.bukkit.event.entity.ProjectileHitEvent;
+import org.spongepowered.api.event.entity.EntityCollisionWithEntityEvent;
 
-public class PoreEntityRegainHealthEvent extends EntityRegainHealthEvent {
+public class PoreProjectileHitEvent extends ProjectileHitEvent {
 
-    private final EntityChangeHealthEvent handle;
+    private final EntityCollisionWithEntityEvent handle;
 
-    public PoreEntityRegainHealthEvent(EntityChangeHealthEvent handle) {
-        super(null, -1.0, null);
+    public PoreProjectileHitEvent(EntityCollisionWithEntityEvent handle) {
+        super(null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityChangeHealthEvent getHandle() {
+    public EntityCollisionWithEntityEvent getHandle() {
         return this.handle;
     }
 
     @Override
-    public Entity getEntity() {
+    public Projectile getEntity() {
         throw new NotImplementedException();
     }
 
     @Override
     public EntityType getEntityType() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public boolean isCancelled() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public double getAmount() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public int _INVALID_getAmount() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setAmount(double amount) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void _INVALID_setAmount(int amount) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public RegainReason getRegainReason() {
         throw new NotImplementedException();
     }
 }
