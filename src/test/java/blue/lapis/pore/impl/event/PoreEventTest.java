@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.impl.event;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import blue.lapis.pore.Pore;
@@ -32,6 +33,7 @@ import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.google.common.reflect.ClassPath;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.event.Event;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -78,6 +80,26 @@ public class PoreEventTest {
     }
 
     @Test
+    public void checkNames() {
+        for (Class<?> eventImpl : poreEvents) {
+            Class<?> bukkitEvent = eventImpl.getSuperclass();
+
+            String poreName = StringUtils.removeStart(eventImpl.getName(), PORE_PACKAGE + '.');
+            String porePackage = StringUtils.substringBeforeLast(poreName, ".");
+            poreName = StringUtils.substringAfterLast(poreName, ".");
+
+            String bukkitName = StringUtils.removeStart(bukkitEvent.getName(), BUKKIT_PACKAGE + '.');
+            String bukkitPackage = StringUtils.substringBeforeLast(bukkitName, ".");
+            bukkitName = StringUtils.substringAfterLast(bukkitName, ".");
+
+            String expectedName = "Pore" + bukkitName;
+
+            assertTrue(poreName + " should be called " + expectedName, poreName.equals(expectedName));
+            assertTrue(poreName + " is in wrong package: should be in " + PORE_PACKAGE + '.' + bukkitPackage, porePackage.equals(bukkitPackage));
+        }
+    }
+
+    @Test
     public void findUnimplementedEvents() {
         Set<Class<?>> events = Sets.newHashSet(bukkitEvents);
 
@@ -94,9 +116,8 @@ public class PoreEventTest {
     }
 
     private static void checkSpongeEvent(Class<?> eventImpl, Class<?> type) {
-        if (!org.spongepowered.api.util.event.Event.class.isAssignableFrom(type)) {
-            fail(eventImpl.getSimpleName() + ": " + type.getSimpleName() + " is not a sponge event");
-        }
+        assertTrue(eventImpl.getSimpleName() + ": " + type.getSimpleName() + " is not a sponge event",
+                org.spongepowered.api.util.event.Event.class.isAssignableFrom(type));
     }
 
     @Test

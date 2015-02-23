@@ -62,6 +62,8 @@ tasks.withType(JavaCompile) {
 test {
     testLogging {
         showStandardStreams = true
+        exceptionFormat = 'full'
+        events 'skipped'
     }
 }
 
