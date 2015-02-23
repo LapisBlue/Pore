@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.event;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import blue.lapis.pore.Pore;
+import blue.lapis.pore.PoreTests;
 
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableSet;
@@ -108,9 +108,9 @@ public class PoreEventTest {
         }
 
         if (!events.isEmpty()) {
-            Pore.getTestLogger().warn(events.size() + " Bukkit events haven't been implemented yet");
+            PoreTests.getLogger().warn(events.size() + " Bukkit events haven't been implemented yet");
             for (Class<?> event : events) {
-                Pore.getTestLogger().warn("Pore" + event.getSimpleName() + " for " + event.getSimpleName() + " is missing");
+                PoreTests.getLogger().warn("Pore" + event.getSimpleName() + " for " + event.getSimpleName() + " is missing");
             }
         }
     }
