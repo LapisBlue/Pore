@@ -19,12 +19,18 @@ plugins {
 
 // Remapper is not available in the Gradle plugins repository so we need to use the old syntax for that
 apply plugin: 'net.glowstone.remapper'
+apply plugin: 'checkstyle'
 
 defaultTasks 'clean', 'licenseFormat', 'build', 'remap'
 
 // Project information
 group = 'blue.lapis.pore'
 version = '1.0.0-SNAPSHOT'
+
+ext {
+    organization = 'Lapis Blue'
+    inceptionYear = '2014'
+}
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -33,6 +39,8 @@ targetCompatibility = 1.6
 repositories {
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    // Add Sponge repo for custom checkstyle implementation to fix some wrong warnings
+    maven { url 'http://repo.spongepowered.org/maven' }
 }
 
 configurations {
@@ -51,6 +59,8 @@ dependencies {
     testCompile 'org.hamcrest:hamcrest-library:1.3'
     testCompile 'org.mockito:mockito-core:1.10.19'
     testRuntime 'org.slf4j:slf4j-simple:1.7.7'
+
+    checkstyle 'org.spongepowered:checkstyle:6.1.1-sponge1'
 }
 
 // Read source files using UTF-8
@@ -97,6 +107,17 @@ license {
     }
 }
 
+checkstyle {
+    configProperties = [
+        "name"        : project.name,
+        "organization": project.organization,
+        "year"        : project.inceptionYear,
+        "basedir"     : project.projectDir,
+        "severity"    : 'warning'
+    ]
+    configFile = file("checkstyle.xml")
+}
+
 project('Porekit') {
     apply from: rootProject.file('bukkit.gradle')
 }
@@ -110,6 +131,15 @@ project('SpongeAPI') {
         tasks.withType(VerificationTask) {
             enabled = false
         }
+        tasks.withType(Checkstyle) {
+            enabled = false
+        }
+    }
+}
+
+// disable checkstyle for Porekit
+project('SpongeAPI') {
+    afterEvaluate {
         tasks.withType(Checkstyle) {
             enabled = false
         }
