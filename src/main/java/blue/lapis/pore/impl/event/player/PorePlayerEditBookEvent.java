@@ -26,6 +26,8 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.impl.inventory.meta.PoreBookMeta;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerEditBookEvent;
@@ -37,7 +39,7 @@ public class PorePlayerEditBookEvent extends PlayerEditBookEvent {
     private final PlayerEvent handle;
 
     public PorePlayerEditBookEvent(PlayerEvent handle) {
-        super(null, 0, null, null, false);
+        super(null, 0, new PoreBookMeta(), new PoreBookMeta(), false);
         this.handle = checkNotNull(handle, "handle");
     }
 

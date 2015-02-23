@@ -27,23 +27,24 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.impl.entity.PoreEntity;
+import blue.lapis.pore.impl.entity.PorePlayer;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerLeashEntityEvent;
-import org.spongepowered.api.event.entity.EntityEvent;
+import org.spongepowered.api.event.entity.EntityLeashEvent;
 
 public class PorePlayerLeashEntityEvent extends PlayerLeashEntityEvent {
 
-    private final EntityEvent handle;
+    private final EntityLeashEvent handle;
 
-    public PorePlayerLeashEntityEvent(EntityEvent handle) {
+    public PorePlayerLeashEntityEvent(EntityLeashEvent handle) {
         super(null, null, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityEvent getHandle() {
+    public EntityLeashEvent getHandle() {
         return this.handle;
     }
 
@@ -53,21 +54,21 @@ public class PorePlayerLeashEntityEvent extends PlayerLeashEntityEvent {
     }
 
     public Entity getLeashHolder() {
-        throw new NotImplementedException();
+        return PoreEntity.of(this.getHandle().getLeashHolder());
     }
 
     @Override
     public Player getPlayer() {
-        throw new NotImplementedException();
+        return (Player)PorePlayer.of(this.getHandle().getLeashHolder()); //TODO: not sure if this is right
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        return this.getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        this.getHandle().setCancelled(cancel);
     }
 }
