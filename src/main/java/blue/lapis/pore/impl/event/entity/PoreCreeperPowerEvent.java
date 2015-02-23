@@ -55,7 +55,7 @@ public class PoreCreeperPowerEvent extends CreeperPowerEvent {
 
     @Override
     public Creeper getEntity() {
-        return (Creeper)PoreCreeper.of(this.getHandle().getEntity());
+        return (Creeper) PoreCreeper.of(this.getHandle().getEntity());
     }
 
     @Override

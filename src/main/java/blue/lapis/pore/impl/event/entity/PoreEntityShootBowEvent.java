@@ -55,7 +55,7 @@ public class PoreEntityShootBowEvent extends EntityShootBowEvent {
         checkState(handle.getSource().get() instanceof Living, "Bad entity type");
         checkState(handle.getSource().get() instanceof org.spongepowered.api.entity.Entity, "Bad projectile source");
         checkState(handle.getSource().get() instanceof ArmorEquipable, "Bad projectile source");
-        checkState(((ArmorEquipable)handle.getSource().get()).getItemInHand().isPresent(), "Bad source itemstack");
+        checkState(((ArmorEquipable) handle.getSource().get()).getItemInHand().isPresent(), "Bad source itemstack");
     }
 
     public ProjectileLaunchEvent getHandle() {
@@ -64,17 +64,17 @@ public class PoreEntityShootBowEvent extends EntityShootBowEvent {
 
     @Override
     public LivingEntity getEntity() {
-        return PoreLivingEntity.of((Living)this.getHandle().getSource().get());
+        return PoreLivingEntity.of((Living) this.getHandle().getSource().get());
     }
 
     @Override
     public EntityType getEntityType() {
-        return EntityConverter.of(((Living)this.getHandle().getSource().get()).getType());
+        return EntityConverter.of(((Living) this.getHandle().getSource().get()).getType());
     }
 
     @Override
     public ItemStack getBow() {
-        return ItemStackConverter.of(((ArmorEquipable)handle.getSource().get()).getItemInHand().get());
+        return ItemStackConverter.of(((ArmorEquipable) handle.getSource().get()).getItemInHand().get());
     }
 
     @Override

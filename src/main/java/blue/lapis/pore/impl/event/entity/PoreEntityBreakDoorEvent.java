@@ -32,7 +32,6 @@ import blue.lapis.pore.converter.type.MaterialConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -40,7 +39,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityBreakDoorEvent;
 import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.event.entity.EntityChangeBlockEvent;
-import org.spongepowered.api.event.entity.EntityEvent;
 
 public class PoreEntityBreakDoorEvent extends EntityBreakDoorEvent {
 
@@ -58,7 +56,7 @@ public class PoreEntityBreakDoorEvent extends EntityBreakDoorEvent {
 
     @Override
     public LivingEntity getEntity() {
-        return (LivingEntity)PoreLivingEntity.of(this.getHandle().getEntity());
+        return (LivingEntity) PoreLivingEntity.of(this.getHandle().getEntity());
     }
 
     @Override

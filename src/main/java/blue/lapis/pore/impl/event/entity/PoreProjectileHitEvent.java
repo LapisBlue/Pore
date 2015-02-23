@@ -51,7 +51,7 @@ public class PoreProjectileHitEvent extends ProjectileHitEvent {
 
     @Override
     public Projectile getEntity() {
-        return (Projectile)PoreProjectile.of(this.getHandle().getEntity());
+        return (Projectile) PoreProjectile.of(this.getHandle().getEntity());
     }
 
     @Override

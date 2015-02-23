@@ -58,7 +58,7 @@ public class PoreEntityCreatePortalEvent extends EntityCreatePortalEvent {
 
     @Override
     public LivingEntity getEntity() {
-        return (LivingEntity)PoreLivingEntity.of(this.getHandle().getEntity());
+        return (LivingEntity) PoreLivingEntity.of(this.getHandle().getEntity());
     }
 
     @Override

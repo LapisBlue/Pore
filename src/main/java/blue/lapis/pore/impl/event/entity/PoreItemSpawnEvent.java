@@ -53,7 +53,7 @@ public class PoreItemSpawnEvent extends ItemSpawnEvent {
 
     @Override
     public Item getEntity() {
-        return (Item)PoreItem.of(this.getHandle().getEntity());
+        return (Item) PoreItem.of(this.getHandle().getEntity());
     }
 
     @Override

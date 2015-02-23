@@ -29,7 +29,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import blue.lapis.pore.converter.type.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
@@ -59,7 +58,7 @@ public class PoreExplosionPrimeEvent extends ExplosionPrimeEvent {
 
     @Override
     public float getRadius() {
-        return (float)this.getHandle().getRadius();
+        return (float) this.getHandle().getRadius();
     }
 
     @Override

@@ -56,7 +56,7 @@ public class PoreEntityDeathEvent extends org.bukkit.event.entity.EntityDeathEve
 
     @Override
     public LivingEntity getEntity() {
-        return (LivingEntity)PoreLivingEntity.of(this.getHandle().getEntity());
+        return (LivingEntity) PoreLivingEntity.of(this.getHandle().getEntity());
     }
 
     @Override
@@ -66,7 +66,7 @@ public class PoreEntityDeathEvent extends org.bukkit.event.entity.EntityDeathEve
 
     @Override
     public int getDroppedExp() {
-        return (int)this.getHandle().getDroppedExperience();
+        return (int) this.getHandle().getDroppedExperience();
     }
 
     @Override

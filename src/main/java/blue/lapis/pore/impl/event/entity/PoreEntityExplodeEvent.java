@@ -82,7 +82,7 @@ public class PoreEntityExplodeEvent extends EntityExplodeEvent {
 
     @Override
     public float getYield() {
-        return (float)this.getHandle().getYield();
+        return (float) this.getHandle().getYield();
     }
 
     @Override

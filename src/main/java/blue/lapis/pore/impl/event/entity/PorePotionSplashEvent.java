@@ -56,7 +56,7 @@ public class PorePotionSplashEvent extends PotionSplashEvent {
 
     @Override
     public ThrownPotion getEntity() {
-        return (ThrownPotion)PoreThrownPotion.of(this.getHandle().getEntity());
+        return (ThrownPotion) PoreThrownPotion.of(this.getHandle().getEntity());
     }
 
     @Override

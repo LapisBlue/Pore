@@ -30,12 +30,10 @@ import static com.google.common.base.Preconditions.checkState;
 import blue.lapis.pore.converter.type.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreSheep;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Sheep;
 import org.bukkit.event.entity.SheepRegrowWoolEvent;
 import org.spongepowered.api.event.entity.EntityChangeBlockEvent;
-import org.spongepowered.api.event.entity.EntityEvent;
 
 public class PoreSheepRegrowWoolEvent extends SheepRegrowWoolEvent {
 
@@ -53,7 +51,7 @@ public class PoreSheepRegrowWoolEvent extends SheepRegrowWoolEvent {
 
     @Override
     public Sheep getEntity() {
-        return (Sheep)PoreSheep.of(this.getHandle().getEntity());
+        return (Sheep) PoreSheep.of(this.getHandle().getEntity());
     }
 
     @Override

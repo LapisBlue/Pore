@@ -34,7 +34,6 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.spongepowered.api.block.BlockLoc;
 import org.spongepowered.api.event.entity.EntityChangeHealthEvent;
 
 public class PoreEntityDamageByEntityEvent extends EntityDamageByEntityEvent {
@@ -68,7 +67,8 @@ public class PoreEntityDamageByEntityEvent extends EntityDamageByEntityEvent {
     }
 
     @Override
-    public void setDamage(DamageModifier type, double damage) throws IllegalArgumentException, UnsupportedOperationException {
+    public void setDamage(DamageModifier type, double damage)
+            throws IllegalArgumentException, UnsupportedOperationException {
         throw new NotImplementedException();
     }
 

@@ -36,7 +36,6 @@ import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Sheep;
 import org.bukkit.event.entity.SheepDyeWoolEvent;
-import org.spongepowered.api.event.entity.EntityEvent;
 import org.spongepowered.api.event.entity.EntityInteractEntityEvent;
 
 public class PoreSheepDyeWoolEvent extends SheepDyeWoolEvent {
@@ -56,7 +55,7 @@ public class PoreSheepDyeWoolEvent extends SheepDyeWoolEvent {
 
     @Override
     public Sheep getEntity() {
-        return (Sheep)PoreSheep.of(this.getHandle().getEntity());
+        return (Sheep) PoreSheep.of(this.getHandle().getEntity());
     }
 
     @Override
@@ -67,13 +66,13 @@ public class PoreSheepDyeWoolEvent extends SheepDyeWoolEvent {
     @Override
     public DyeColor getColor() {
         return DyeColorConverter.of(
-                ((org.spongepowered.api.entity.living.animal.Sheep)this.getHandle().getTargetEntity()).getColor()
+                ((org.spongepowered.api.entity.living.animal.Sheep) this.getHandle().getTargetEntity()).getColor()
         );
     }
 
     @Override
     public void setColor(DyeColor color) {
-        ((org.spongepowered.api.entity.living.animal.Sheep)this.getHandle()).setColor(DyeColorConverter.of(color));
+        ((org.spongepowered.api.entity.living.animal.Sheep) this.getHandle()).setColor(DyeColorConverter.of(color));
     }
 
     @Override

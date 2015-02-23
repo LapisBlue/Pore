@@ -53,7 +53,7 @@ public class PoreExpBottleEvent extends ExpBottleEvent {
 
     @Override
     public ThrownExpBottle getEntity() {
-        return (ThrownExpBottle)PoreThrownExpBottle.of(this.getHandle().getEntity());
+        return (ThrownExpBottle) PoreThrownExpBottle.of(this.getHandle().getEntity());
     }
 
     @Override

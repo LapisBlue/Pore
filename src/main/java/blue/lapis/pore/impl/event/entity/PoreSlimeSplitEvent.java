@@ -53,7 +53,7 @@ public class PoreSlimeSplitEvent extends SlimeSplitEvent {
 
     @Override
     public Slime getEntity() {
-        return (Slime)PoreSlime.of(this.getHandle().getEntity());
+        return (Slime) PoreSlime.of(this.getHandle().getEntity());
     }
 
     @Override

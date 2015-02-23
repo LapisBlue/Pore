@@ -37,7 +37,7 @@ public class PoreBlockFromToEvent extends BlockFromToEvent {
     private final BlockChangeEvent handle;
 
     public PoreBlockFromToEvent(BlockChangeEvent handle) {
-        super(null, (Block)null); // type casting removes ambiguity
+        super(null, (Block) null); // type casting removes ambiguity
         this.handle = checkNotNull(handle, "handle");
     }
 

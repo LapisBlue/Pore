@@ -64,7 +64,8 @@ public class PoreEntityDamageEvent extends EntityDamageEvent {
     }
 
     @Override
-    public void setDamage(DamageModifier type, double damage) throws IllegalArgumentException, UnsupportedOperationException {
+    public void setDamage(DamageModifier type, double damage)
+            throws IllegalArgumentException, UnsupportedOperationException {
         throw new NotImplementedException();
     }
 

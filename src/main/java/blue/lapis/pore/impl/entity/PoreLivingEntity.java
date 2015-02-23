@@ -323,7 +323,8 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     public Entity getLeashHolder() throws IllegalStateException {
         if (getHandle() instanceof Agent) {
-            return ((Agent) getHandle()).getLeashHolder().isPresent() ? PoreEntity.of(((Agent) getHandle()).getLeashHolder().get()) :
+            return ((Agent) getHandle()).getLeashHolder().isPresent() ?
+                    PoreEntity.of(((Agent) getHandle()).getLeashHolder().get()) :
                     null;
         }
         return null;

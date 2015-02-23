@@ -35,7 +35,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityTeleportEvent;
-import org.spongepowered.api.event.SpongeEventFactory;
 
 public class PoreEntityTeleportEvent extends EntityTeleportEvent {
 

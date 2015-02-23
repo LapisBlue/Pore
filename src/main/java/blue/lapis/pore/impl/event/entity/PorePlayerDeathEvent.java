@@ -52,7 +52,7 @@ public class PorePlayerDeathEvent extends PlayerDeathEvent {
 
     @Override
     public Player getEntity() {
-        return (Player)PorePlayer.of(this.getHandle().getEntity());
+        return (Player) PorePlayer.of(this.getHandle().getEntity());
     }
 
     @Override

@@ -55,7 +55,7 @@ public class PorePigZapEvent extends PigZapEvent {
 
     @Override
     public Pig getEntity() {
-        return (Pig)PorePig.of(this.getHandle().getEntity());
+        return (Pig) PorePig.of(this.getHandle().getEntity());
     }
 
     @Override

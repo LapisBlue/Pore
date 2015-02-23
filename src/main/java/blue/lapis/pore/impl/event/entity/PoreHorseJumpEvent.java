@@ -52,7 +52,7 @@ public class PoreHorseJumpEvent extends HorseJumpEvent {
 
     @Override
     public Horse getEntity() {
-        return (Horse)PoreHorse.of(this.getHandle().getEntity());
+        return (Horse) PoreHorse.of(this.getHandle().getEntity());
     }
 
     @Override

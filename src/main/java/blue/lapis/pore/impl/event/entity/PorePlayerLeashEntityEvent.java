@@ -60,7 +60,7 @@ public class PorePlayerLeashEntityEvent extends PlayerLeashEntityEvent {
 
     @Override
     public Player getPlayer() {
-        return (Player)PorePlayer.of(this.getHandle().getLeashHolder()); //TODO: not sure if this is right
+        return (Player) PorePlayer.of(this.getHandle().getLeashHolder()); //TODO: not sure if this is right
     }
 
     @Override

@@ -36,7 +36,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.event.entity.ItemDespawnEvent;
-import org.spongepowered.api.event.entity.EntityEvent;
 import org.spongepowered.api.event.entity.EntityExpireEvent;
 
 public class PoreItemDespawnEvent extends ItemDespawnEvent {
@@ -55,7 +54,7 @@ public class PoreItemDespawnEvent extends ItemDespawnEvent {
 
     @Override
     public Item getEntity() {
-        return (Item)PoreItem.of(this.getHandle().getEntity());
+        return (Item) PoreItem.of(this.getHandle().getEntity());
     }
 
     @Override

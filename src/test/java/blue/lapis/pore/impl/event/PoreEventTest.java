@@ -95,7 +95,8 @@ public class PoreEventTest {
             String expectedName = "Pore" + bukkitName;
 
             assertTrue(poreName + " should be called " + expectedName, poreName.equals(expectedName));
-            assertTrue(poreName + " is in wrong package: should be in " + PORE_PACKAGE + '.' + bukkitPackage, porePackage.equals(bukkitPackage));
+            assertTrue(poreName + " is in wrong package: should be in " + PORE_PACKAGE + '.' + bukkitPackage,
+                    porePackage.equals(bukkitPackage));
         }
     }
 
@@ -110,7 +111,8 @@ public class PoreEventTest {
         if (!events.isEmpty()) {
             PoreTests.getLogger().warn(events.size() + " Bukkit events haven't been implemented yet");
             for (Class<?> event : events) {
-                PoreTests.getLogger().warn("Pore" + event.getSimpleName() + " for " + event.getSimpleName() + " is missing");
+                PoreTests.getLogger().warn(
+                        "Pore" + event.getSimpleName() + " for " + event.getSimpleName() + " is missing");
             }
         }
     }
@@ -146,7 +148,8 @@ public class PoreEventTest {
 
     @Test
     public void checkConstructor() throws Exception {
-        events: for (Class<?> eventImpl : poreEvents) {
+        events:
+        for (Class<?> eventImpl : poreEvents) {
             for (Constructor<?> constructor : eventImpl.getConstructors()) {
                 Class<?>[] parameters = constructor.getParameterTypes();
                 if (parameters.length == 1) {

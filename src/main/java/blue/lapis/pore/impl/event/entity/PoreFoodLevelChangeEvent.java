@@ -53,7 +53,7 @@ public class PoreFoodLevelChangeEvent extends FoodLevelChangeEvent {
 
     @Override
     public HumanEntity getEntity() {
-        return (HumanEntity)PoreHumanEntity.of(this.getHandle().getEntity());
+        return (HumanEntity) PoreHumanEntity.of(this.getHandle().getEntity());
     }
 
     @Override

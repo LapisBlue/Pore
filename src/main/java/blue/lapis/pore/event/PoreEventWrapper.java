@@ -109,7 +109,8 @@ public final class PoreEventWrapper {
         checkArgument(sponge != null, "No event constructor found in %s", pore);
 
         Class<?> superClass = pore.getSuperclass();
-        checkState(!Modifier.isAbstract(superClass.getModifiers()) && superClass.getName().startsWith("org.bukkit.event"),
+        checkState(
+                !Modifier.isAbstract(superClass.getModifiers()) && superClass.getName().startsWith("org.bukkit.event"),
                 "Not a Bukkit handle event %s", superClass);
         Class<? extends Event> handle = superClass.asSubclass(Event.class);
 
@@ -124,7 +125,8 @@ public final class PoreEventWrapper {
 
         private final EnumMap<EventPriority, Object> listeners = Maps.newEnumMap(EventPriority.class);
 
-        public Registration(Class<? extends Event> pore, Class<? extends org.spongepowered.api.util.event.Event> sponge) {
+        public Registration(Class<? extends Event> pore,
+                Class<? extends org.spongepowered.api.util.event.Event> sponge) {
             this.pore = pore;
             this.sponge = sponge;
         }
