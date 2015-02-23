@@ -38,6 +38,7 @@ import org.bukkit.entity.PigZombie;
 import org.bukkit.event.entity.PigZapEvent;
 import org.spongepowered.api.event.entity.EntityEvent;
 
+//TODO: we could wrap a LightningStrikeEvent, but that could encase multiple entities
 public class PorePigZapEvent extends PigZapEvent {
 
     private final EntityEvent handle;

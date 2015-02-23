@@ -34,19 +34,20 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Sheep;
 import org.bukkit.event.entity.SheepRegrowWoolEvent;
+import org.spongepowered.api.event.entity.EntityChangeBlockEvent;
 import org.spongepowered.api.event.entity.EntityEvent;
 
 public class PoreSheepRegrowWoolEvent extends SheepRegrowWoolEvent {
 
-    private final EntityEvent handle;
+    private final EntityChangeBlockEvent handle;
 
-    public PoreSheepRegrowWoolEvent(EntityEvent handle) {
+    public PoreSheepRegrowWoolEvent(EntityChangeBlockEvent handle) {
         super(null);
         this.handle = checkNotNull(handle, "handle");
         checkState(handle.getEntity() instanceof org.spongepowered.api.entity.living.animal.Sheep, "Bad entity type");
     }
 
-    public EntityEvent getHandle() {
+    public EntityChangeBlockEvent getHandle() {
         return this.handle;
     }
 
@@ -62,11 +63,11 @@ public class PoreSheepRegrowWoolEvent extends SheepRegrowWoolEvent {
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        return this.getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        this.getHandle().setCancelled(cancel);
     }
 }

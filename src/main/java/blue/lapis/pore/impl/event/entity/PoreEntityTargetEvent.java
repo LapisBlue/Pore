@@ -72,7 +72,7 @@ public class PoreEntityTargetEvent extends EntityTargetEvent {
 
     @Override
     public void setTarget(Entity target) {
-        throw new NotImplementedException(); //TODO: seriously?
+        throw new NotImplementedException(); //TODO: waiting on AI API
     }
 
     @Override

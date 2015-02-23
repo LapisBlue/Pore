@@ -28,6 +28,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.converter.type.MaterialConverter;
+import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -37,19 +39,20 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityBreakDoorEvent;
 import org.spongepowered.api.entity.living.Living;
+import org.spongepowered.api.event.entity.EntityChangeBlockEvent;
 import org.spongepowered.api.event.entity.EntityEvent;
 
 public class PoreEntityBreakDoorEvent extends EntityBreakDoorEvent {
 
-    private final EntityEvent handle;
+    private final EntityChangeBlockEvent handle;
 
-    public PoreEntityBreakDoorEvent(EntityEvent handle) {
+    public PoreEntityBreakDoorEvent(EntityChangeBlockEvent handle) {
         super(null, null);
         this.handle = checkNotNull(handle, "handle");
         checkState(handle.getEntity() instanceof Living, "Bad entity type");
     }
 
-    public EntityEvent getHandle() {
+    public EntityChangeBlockEvent getHandle() {
         return handle;
     }
 
@@ -65,26 +68,26 @@ public class PoreEntityBreakDoorEvent extends EntityBreakDoorEvent {
 
     @Override
     public Block getBlock() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public boolean isCancelled() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        return PoreBlock.of(this.getHandle().getBlock());
     }
 
     @Override
     public Material getTo() {
-        throw new NotImplementedException();
+        return MaterialConverter.of(this.getHandle().getReplacementBlock().getState().getType());
     }
 
     @Override
     public byte getData() {
-        throw new NotImplementedException();
+        return this.getHandle().getReplacementBlock().getState().getDataValue();
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return this.getHandle().isCancelled();
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        this.getHandle().setCancelled(cancel);
     }
 }

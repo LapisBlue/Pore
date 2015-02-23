@@ -68,7 +68,7 @@ public class PoreEntityPortalExitEvent extends EntityPortalExitEvent {
 
     @Override
     public void setFrom(Location from) {
-        throw new NotImplementedException(); //TODO: not sure if Sponge is going to support this
+        throw new NotImplementedException(); //TODO: not sure of how to implement this
     }
 
     @Override
@@ -78,7 +78,8 @@ public class PoreEntityPortalExitEvent extends EntityPortalExitEvent {
 
     @Override
     public void setTo(Location to) {
-        throw new NotImplementedException(); //TODO
+        this.setCancelled(true);
+        this.getHandle().getEntity().setLocation(LocationConverter.of(to));
     }
 
     @Override

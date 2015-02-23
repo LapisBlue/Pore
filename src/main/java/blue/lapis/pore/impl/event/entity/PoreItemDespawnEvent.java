@@ -28,6 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.impl.entity.PoreItem;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -36,18 +37,19 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.event.entity.ItemDespawnEvent;
 import org.spongepowered.api.event.entity.EntityEvent;
+import org.spongepowered.api.event.entity.EntityExpireEvent;
 
 public class PoreItemDespawnEvent extends ItemDespawnEvent {
 
-    private final EntityEvent handle;
+    private final EntityExpireEvent handle;
 
-    public PoreItemDespawnEvent(EntityEvent handle) {
+    public PoreItemDespawnEvent(EntityExpireEvent handle) {
         super(null, null);
         this.handle = checkNotNull(handle, "handle");
         checkState(handle.getEntity() instanceof org.spongepowered.api.entity.Item, "Bad entity type");
     }
 
-    public EntityEvent getHandle() {
+    public EntityExpireEvent getHandle() {
         return this.handle;
     }
 
@@ -63,12 +65,12 @@ public class PoreItemDespawnEvent extends ItemDespawnEvent {
 
     @Override
     public Location getLocation() {
-        throw new NotImplementedException();
+        return LocationConverter.of(this.getHandle().getEntity().getLocation());
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); //TODO: not sure if SpongeAPI will implement Cancellable
     }
 
     @Override

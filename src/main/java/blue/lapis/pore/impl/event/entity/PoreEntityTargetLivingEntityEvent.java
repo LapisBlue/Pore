@@ -74,7 +74,7 @@ public class PoreEntityTargetLivingEntityEvent extends EntityTargetLivingEntityE
 
     @Override
     public void setTarget(Entity target) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException(); //TODO: waiting on AI API
     }
 
     @Override

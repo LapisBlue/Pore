@@ -35,6 +35,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityTeleportEvent;
+import org.spongepowered.api.event.SpongeEventFactory;
 
 public class PoreEntityTeleportEvent extends EntityTeleportEvent {
 
@@ -66,7 +67,7 @@ public class PoreEntityTeleportEvent extends EntityTeleportEvent {
 
     @Override
     public void setFrom(Location from) {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); //TODO: eh, not sure of how to implement this
     }
 
     @Override
@@ -76,6 +77,17 @@ public class PoreEntityTeleportEvent extends EntityTeleportEvent {
 
     @Override
     public void setTo(Location to) {
-        throw new NotImplementedException();
+        this.getHandle().setCancelled(true);
+        this.getHandle().getEntity().setLocation(LocationConverter.of(to));
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return this.getHandle().isCancelled();
+    }
+
+    @Override
+    public void setCancelled(boolean cancelled) {
+        this.getHandle().setCancelled(cancelled);
     }
 }

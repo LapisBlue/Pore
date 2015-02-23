@@ -25,11 +25,11 @@
 package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerLeashEntityEvent;
@@ -42,6 +42,7 @@ public class PorePlayerLeashEntityEvent extends PlayerLeashEntityEvent {
     public PorePlayerLeashEntityEvent(EntityLeashEvent handle) {
         super(null, null, null);
         this.handle = checkNotNull(handle, "handle");
+        checkState(handle.getLeashHolder() instanceof Player);
     }
 
     public EntityLeashEvent getHandle() {

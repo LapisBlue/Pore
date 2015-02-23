@@ -27,6 +27,7 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
+import blue.lapis.pore.converter.type.DyeColorConverter;
 import blue.lapis.pore.converter.type.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreSheep;
 
@@ -36,18 +37,20 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Sheep;
 import org.bukkit.event.entity.SheepDyeWoolEvent;
 import org.spongepowered.api.event.entity.EntityEvent;
+import org.spongepowered.api.event.entity.EntityInteractEntityEvent;
 
 public class PoreSheepDyeWoolEvent extends SheepDyeWoolEvent {
 
-    private final EntityEvent handle;
+    private final EntityInteractEntityEvent handle;
 
-    public PoreSheepDyeWoolEvent(EntityEvent handle) {
+    public PoreSheepDyeWoolEvent(EntityInteractEntityEvent handle) {
         super(null, null);
         this.handle = checkNotNull(handle, "handle");
-        checkState(handle.getEntity() instanceof org.spongepowered.api.entity.living.animal.Sheep, "Bad entity type");
+        checkState(handle.getTargetEntity() instanceof org.spongepowered.api.entity.living.animal.Sheep,
+                "Bad entity type");
     }
 
-    public EntityEvent getHandle() {
+    public EntityInteractEntityEvent getHandle() {
         return this.handle;
     }
 
@@ -63,12 +66,14 @@ public class PoreSheepDyeWoolEvent extends SheepDyeWoolEvent {
 
     @Override
     public DyeColor getColor() {
-        throw new NotImplementedException();
+        return DyeColorConverter.of(
+                ((org.spongepowered.api.entity.living.animal.Sheep)this.getHandle().getTargetEntity()).getColor()
+        );
     }
 
     @Override
     public void setColor(DyeColor color) {
-        throw new NotImplementedException();
+        ((org.spongepowered.api.entity.living.animal.Sheep)this.getHandle()).setColor(DyeColorConverter.of(color));
     }
 
     @Override

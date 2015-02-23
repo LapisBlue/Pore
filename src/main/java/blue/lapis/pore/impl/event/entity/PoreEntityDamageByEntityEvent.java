@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.converter.type.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
@@ -33,6 +34,7 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.spongepowered.api.block.BlockLoc;
 import org.spongepowered.api.event.entity.EntityChangeHealthEvent;
 
 public class PoreEntityDamageByEntityEvent extends EntityDamageByEntityEvent {
@@ -42,6 +44,8 @@ public class PoreEntityDamageByEntityEvent extends EntityDamageByEntityEvent {
     public PoreEntityDamageByEntityEvent(EntityChangeHealthEvent handle) {
         super(null, null, null, -1.0);
         this.handle = checkNotNull(handle, "handle");
+        checkState(handle.getCause().isPresent(), "Bad cause");
+        checkState(handle.getCause().get().getCause() instanceof org.spongepowered.api.entity.Entity, "Bad cause");
     }
 
     public EntityChangeHealthEvent getHandle() {

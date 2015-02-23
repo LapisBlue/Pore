@@ -36,6 +36,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityPortalEnterEvent;
 import org.spongepowered.api.event.entity.EntityEvent;
 
+//TODO: waiting on SpongeAPI to add this
 public class PoreEntityPortalEnterEvent extends EntityPortalEnterEvent {
 
     private final EntityEvent handle;

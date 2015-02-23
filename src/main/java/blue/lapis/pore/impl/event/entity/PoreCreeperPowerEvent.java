@@ -37,6 +37,7 @@ import org.bukkit.entity.LightningStrike;
 import org.bukkit.event.entity.CreeperPowerEvent;
 import org.spongepowered.api.event.entity.EntityEvent;
 
+//TODO: we could wrap a LightningStrikeEvent, but that could encase multiple entities
 public class PoreCreeperPowerEvent extends CreeperPowerEvent {
 
     private final EntityEvent handle;

@@ -92,7 +92,7 @@ public class PoreEntityExplodeEvent extends EntityExplodeEvent {
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        return false; //TODO: Sponge fires this event after the entity has exploded - it can't be cancelled
     }
 
     @Override

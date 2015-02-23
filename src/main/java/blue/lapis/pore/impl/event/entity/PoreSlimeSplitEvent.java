@@ -36,6 +36,7 @@ import org.bukkit.entity.Slime;
 import org.bukkit.event.entity.SlimeSplitEvent;
 import org.spongepowered.api.event.entity.EntityEvent;
 
+//TODO: this might work if we wrap EntitySpawnEvent but I'm not sure how we would implement certain methods
 public class PoreSlimeSplitEvent extends SlimeSplitEvent {
 
     private final EntityEvent handle;

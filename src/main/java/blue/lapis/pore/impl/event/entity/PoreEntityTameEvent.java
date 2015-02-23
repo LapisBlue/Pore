@@ -63,7 +63,7 @@ public class PoreEntityTameEvent extends EntityTameEvent {
 
     @Override
     public AnimalTamer getOwner() {
-        throw new NotImplementedException();
+        throw new NotImplementedException(); //TODO: waiting on SpongeAPI
     }
 
     @Override

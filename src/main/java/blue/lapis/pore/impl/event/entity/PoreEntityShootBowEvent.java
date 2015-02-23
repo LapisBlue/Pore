@@ -27,7 +27,9 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
+import blue.lapis.pore.converter.ItemStackConverter;
 import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -36,41 +38,48 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
+import org.spongepowered.api.entity.ArmorEquipable;
 import org.spongepowered.api.entity.living.Living;
-import org.spongepowered.api.event.entity.EntityEvent;
+import org.spongepowered.api.event.entity.ProjectileLaunchEvent;
 
 public class PoreEntityShootBowEvent extends EntityShootBowEvent {
 
-    private final EntityEvent handle;
+    //TODO: no way to cancel this and I'm confused as to what SpongeAPI's getEntity() returns for this event
 
-    public PoreEntityShootBowEvent(EntityEvent handle) {
+    private final ProjectileLaunchEvent handle;
+
+    public PoreEntityShootBowEvent(ProjectileLaunchEvent handle) {
         super(null, null, null, -1f);
         this.handle = checkNotNull(handle, "handle");
-        checkState(handle.getEntity() instanceof Living, "Bad entity type");
+        checkState(handle.getSource().isPresent(), "No projectile source");
+        checkState(handle.getSource().get() instanceof Living, "Bad entity type");
+        checkState(handle.getSource().get() instanceof org.spongepowered.api.entity.Entity, "Bad projectile source");
+        checkState(handle.getSource().get() instanceof ArmorEquipable, "Bad projectile source");
+        checkState(((ArmorEquipable)handle.getSource().get()).getItemInHand().isPresent(), "Bad source itemstack");
     }
 
-    public EntityEvent getHandle() {
+    public ProjectileLaunchEvent getHandle() {
         return this.handle;
     }
 
     @Override
     public LivingEntity getEntity() {
-        return (LivingEntity)PoreLivingEntity.of(this.getHandle().getEntity());
+        return PoreLivingEntity.of((Living)this.getHandle().getSource().get());
     }
 
     @Override
     public EntityType getEntityType() {
-        return EntityConverter.of(this.getHandle().getEntity().getType());
+        return EntityConverter.of(((Living)this.getHandle().getSource().get()).getType());
     }
 
     @Override
     public ItemStack getBow() {
-        throw new NotImplementedException();
+        return ItemStackConverter.of(((ArmorEquipable)handle.getSource().get()).getItemInHand().get());
     }
 
     @Override
     public Entity getProjectile() {
-        throw new NotImplementedException();
+        return PoreEntity.of(this.getHandle().getLaunchedProjectile());
     }
 
     @Override

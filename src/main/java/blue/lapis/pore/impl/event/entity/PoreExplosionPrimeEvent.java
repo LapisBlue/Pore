@@ -59,22 +59,22 @@ public class PoreExplosionPrimeEvent extends ExplosionPrimeEvent {
 
     @Override
     public float getRadius() {
-        throw new NotImplementedException();
+        return (float)this.getHandle().getRadius();
     }
 
     @Override
     public void setRadius(float radius) {
-        throw new NotImplementedException();
+        this.getHandle().setRadius(radius);
     }
 
     @Override
     public boolean getFire() {
-        return this.getHandle().isFlamable();
+        return this.getHandle().isFlamable(); //TODO: isFlamable is misspelled and will be changed
     }
 
     @Override
     public void setFire(boolean fire) {
-        getHandle().setFlamable(fire);
+        getHandle().setFlamable(fire); //TODO: same for setFlamable
     }
 
     @Override
