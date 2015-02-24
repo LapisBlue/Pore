@@ -109,7 +109,6 @@ public class PoreEventTest {
         }
 
         if (!events.isEmpty()) {
-            PoreTests.getLogger().warn(events.size() + " Bukkit events haven't been implemented yet");
             for (Class<?> event : events) {
                 PoreTests.getLogger().warn(
                         "Pore" + event.getSimpleName() + " for " + event.getSimpleName() + " is missing");
