@@ -4,14 +4,21 @@
         "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
 
 <!--
+
     Checkstyle configuration that checks the Google coding conventions from:
+
     -  Google Java Style
        https://google-styleguide.googlecode.com/svn-history/r130/trunk/javaguide.html
+
     Checkstyle is very configurable. Be sure to read the documentation at
     http://checkstyle.sf.net (or in your downloaded distribution).
+
     Most Checks are configurable, be sure to consult the documentation.
+
     To completely disable a check, just comment it out or delete it from the file.
+
     Authors: Max Vetrenko, Ruslan Diachenko, Roman Ivanov.
+
  -->
 
 <module name="Checker">
@@ -36,7 +43,10 @@
             <property name="allowNonPrintableEscapes" value="true"/>
         </module>
         <module name="LineLength">
-            <!--<property name="max" value="100"/>-->
+            <!--
+            <property name="max" value="100"/>
+            <property name="max" value="150"/>
+            -->
             <property name="max" value="120"/>
             <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
         </module>
@@ -49,7 +59,10 @@
         </module>
         <module name="NeedBraces"/>
         <module name="LeftCurly">
-            <!--<property name="maxLineLength" value="100"/>-->
+            <!--
+            <property name="maxLineLength" value="100"/>
+            <property name="maxLineLength" value="150"/>
+            -->
             <property name="maxLineLength" value="120"/>
         </module>
         <module name="RightCurly"/>
@@ -153,13 +166,18 @@
             <property name="ignoreFinal" value="false"/>
             <property name="allowedAbbreviationLength" value="1"/>
         </module>
+        <!--
         <module name="OverloadMethodsDeclarationOrder"/>
         <module name="VariableDeclarationUsageDistance"/>
+        -->
         <module name="CustomImportOrder">
-            <property name="specialImportsRegExp" value="blue.lapis.pore"/>
             <property name="thirdPartyPackageRegExp" value=".*"/>
+            <!--<property name="specialImportsRegExp" value="com.google"/>-->
             <property name="sortImportsInGroupAlphabetically" value="true"/>
             <property name="customImportOrderRules" value="STATIC###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE###STANDARD_JAVA_PACKAGE"/>
+
+            <property name="standardPackageRegExp" value="^(java|javax)\."/>
+            <property name="specialImportsRegExp" value="^blue\.lapis\."/>
         </module>
         <module name="MethodParamPad"/>
         <module name="OperatorWrap">
@@ -196,7 +214,10 @@
             <property name="allowThrowsTagsForSubclasses" value="true"/>
         </module>
         <module name="MethodName">
-            <!--<property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9_]*$"/>-->
+            <!--
+            <property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9_]*$"/>
+            <property name="format" value="^[a-z][a-zA-Z0-9_]*$"/>
+            -->
             <property name="format" value="^(_INVALID_)?[a-z][a-zA-Z0-9_]*$"/>
             <message key="name.invalidPattern"
                      value="Method name ''{0}'' must match pattern ''{1}''."/>
@@ -206,9 +227,11 @@
 
         <module name="RedundantImport"/>
         <module name="RedundantModifier"/>
+        <!--
         <module name="RequireThis">
             <property name="checkMethods" value="false"/>
         </module>
+        -->
     </module>
 
     <module name="NewlineAtEndOfFile"/>

@@ -91,7 +91,6 @@ public class WorldEntitiesTest {
         // This is the same as above actually
         assertEquals(14, world.getEntitiesByClass(Entity.class).size());
         assertEquals(12, world.getEntitiesByClass(LivingEntity.class).size());
-        Collection list = world.getEntitiesByClass(Entity.class);
         assertEquals(7, world.getEntitiesByClass(HumanEntity.class).size());
         assertEquals(5, world.getEntitiesByClass(Player.class).size());
         assertEquals(2, world.getEntitiesByClass(Animals.class).size());

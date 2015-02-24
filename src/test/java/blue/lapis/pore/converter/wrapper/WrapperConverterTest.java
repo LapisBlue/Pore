@@ -52,6 +52,7 @@ public class WrapperConverterTest {
         this.testRegistry = createRegistry();
     }
 
+    @SuppressWarnings("rawtypes")
     private static ListMultimap<Class<?>, Class<?>> createRegistry() {
         ImmutableListMultimap.Builder<Class<?>, Class<?>> builder = ImmutableListMultimap.builder();
 

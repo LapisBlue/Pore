@@ -12,6 +12,7 @@ plugins {
     id 'java'
     id 'eclipse'
     id 'idea'
+    id 'checkstyle'
 
     id 'com.github.hierynomus.license' version '0.11.0'
     id 'com.github.johnrengelman.shadow' version '1.2.1'
@@ -19,18 +20,12 @@ plugins {
 
 // Remapper is not available in the Gradle plugins repository so we need to use the old syntax for that
 apply plugin: 'net.glowstone.remapper'
-apply plugin: 'checkstyle'
 
 defaultTasks 'clean', 'licenseFormat', 'build', 'remap'
 
 // Project information
 group = 'blue.lapis.pore'
 version = '1.0.0-SNAPSHOT'
-
-ext {
-    organization = 'Lapis Blue'
-    inceptionYear = '2014'
-}
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -109,13 +104,10 @@ license {
 
 checkstyle {
     configProperties = [
-        "name"        : project.name,
-        "organization": project.organization,
-        "year"        : project.inceptionYear,
-        "basedir"     : project.projectDir,
-        "severity"    : 'warning'
+            'basedir': project.projectDir,
+            'severity': 'warning'
     ]
-    configFile = file("checkstyle.xml")
+    configFile = file('checkstyle.xml')
 }
 
 project('Porekit') {
@@ -137,16 +129,6 @@ project('SpongeAPI') {
     }
 }
 
-// disable checkstyle for Porekit
-project('SpongeAPI') {
-    afterEvaluate {
-        tasks.withType(Checkstyle) {
-            enabled = false
-        }
-    }
-}
-
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
-

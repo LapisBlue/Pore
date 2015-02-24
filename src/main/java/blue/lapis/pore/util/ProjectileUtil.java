@@ -54,8 +54,7 @@ public class ProjectileUtil {
 
     @SuppressWarnings("unchecked")
     public static <T extends Projectile> T launchProjectile(ProjectileSource source,
-                                                            Class<? extends T> projectile,
-                                                            @Nullable Vector velocity) {
+            Class<? extends T> projectile, @Nullable Vector velocity) {
         T entity = null;
         if (projectile.isAssignableFrom(Arrow.class)) {
             entity = (T) PoreFireball.of(source.launchProjectile(

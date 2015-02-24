@@ -202,7 +202,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void _INVALID_setLastDamage(int damage) {
-        this.setLastDamage((double)damage);
+        this.setLastDamage((double) damage);
     }
 
     @Override

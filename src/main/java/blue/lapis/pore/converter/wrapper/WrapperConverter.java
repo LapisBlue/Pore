@@ -236,6 +236,7 @@ import org.spongepowered.api.world.World;
 
 public class WrapperConverter {
 
+    @SuppressWarnings("rawtypes")
     static final CachedWrapperConverter<PoreWrapper> converter = CachedWrapperConverter.builder(PoreWrapper.class)
             // @formatter:off
             .register(Favicon.class, PoreCachedServerIcon.class)

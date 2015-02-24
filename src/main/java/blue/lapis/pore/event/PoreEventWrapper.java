@@ -127,7 +127,7 @@ public final class PoreEventWrapper {
         private final EnumMap<EventPriority, Object> listeners = Maps.newEnumMap(EventPriority.class);
 
         public Registration(Class<? extends Event> pore,
-                            Class<? extends org.spongepowered.api.util.event.Event> sponge) {
+                Class<? extends org.spongepowered.api.util.event.Event> sponge) {
             this.pore = pore;
             this.sponge = sponge;
         }
