@@ -3,6 +3,9 @@
 
 <suppressions>
     <suppress checks="JavadocMethod" files=".*"/>
+    <suppress checks="OverloadMethodsDeclarationOrder" files=".*"/>
+    <suppress checks="RequireThis" files=".*"/>
     <suppress checks="Indentation" files="package-info\.java"/>
     <suppress checks="AbbreviationAsWordInName" files="TNT"/>
+    <suppress checks="CustomImportOrder" files="PoreServer\.java"/>
 </suppressions>

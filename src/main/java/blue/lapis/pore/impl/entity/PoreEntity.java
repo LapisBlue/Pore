@@ -141,9 +141,9 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
         for (org.bukkit.entity.Entity e : worldEntities) {
             Location loc1 = e.getLocation();
             Location loc2 = this.getLocation();
-            if (Math.abs(loc1.getX() - loc2.getX()) <= x &&
-                    Math.abs(loc1.getY() - loc2.getY()) <= y &&
-                    Math.abs(loc1.getZ() - loc2.getZ()) <= z) {
+            if (Math.abs(loc1.getX() - loc2.getX()) <= x
+                    && Math.abs(loc1.getY() - loc2.getY()) <= y
+                    && Math.abs(loc1.getZ() - loc2.getZ()) <= z) {
                 nearby.add(e);
             }
         }

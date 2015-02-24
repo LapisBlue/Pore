@@ -30,10 +30,10 @@ import org.bukkit.help.HelpTopic;
 import org.bukkit.help.HelpTopicFactory;
 
 //TODO: Bridge
-public class PoreHelpTopicFactory<TCommand extends Command> implements HelpTopicFactory<TCommand> {
+public class PoreHelpTopicFactory<T extends Command> implements HelpTopicFactory<T> {
 
     @Override
-    public HelpTopic createTopic(TCommand command) {
+    public HelpTopic createTopic(T command) {
         throw new NotImplementedException();
     }
 

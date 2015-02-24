@@ -94,17 +94,17 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     }
 
     @Override
+    public void openInventory(InventoryView inventory) {
+        throw new NotImplementedException(); //TODO
+    }
+
+    @Override
     public InventoryView openWorkbench(Location location, boolean force) {
         throw new NotImplementedException(); //TODO
     }
 
     @Override
     public InventoryView openEnchanting(Location location, boolean force) {
-        throw new NotImplementedException(); //TODO
-    }
-
-    @Override
-    public void openInventory(InventoryView inventory) {
         throw new NotImplementedException(); //TODO
     }
 

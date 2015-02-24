@@ -67,9 +67,8 @@ public class PoreEntityTargetLivingEntityEvent extends EntityTargetLivingEntityE
 
     @Override
     public LivingEntity getTarget() {
-        return this.getHandle().getTargetedEntity().isPresent() ?
-                (LivingEntity) PoreLivingEntity.of(this.getHandle().getTargetedEntity().get()) :
-                null;
+        return this.getHandle().getTargetedEntity().isPresent()
+                ? (LivingEntity) PoreLivingEntity.of(this.getHandle().getTargetedEntity().get()) : null;
     }
 
     @Override

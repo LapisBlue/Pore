@@ -169,11 +169,6 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     }
 
     @Override
-    public boolean isChunkLoaded(Chunk chunk) {
-        return chunk.isLoaded();
-    }
-
-    @Override
     public Chunk[] getLoadedChunks() {
         List<Chunk> chunks = new ArrayList<Chunk>();
         for (org.spongepowered.api.world.Chunk chunk : getHandle().getLoadedChunks()) {
@@ -184,8 +179,8 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     }
 
     @Override
-    public void loadChunk(Chunk chunk) {
-        loadChunk(chunk.getX(), chunk.getZ());
+    public boolean isChunkLoaded(Chunk chunk) {
+        return chunk.isLoaded();
     }
 
     @Override
@@ -196,6 +191,11 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     @Override
     public boolean isChunkInUse(int x, int z) {
         throw new NotImplementedException();
+    }
+
+    @Override
+    public void loadChunk(Chunk chunk) {
+        loadChunk(chunk.getX(), chunk.getZ());
     }
 
     @Override
@@ -550,8 +550,8 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public <T> void playEffect(Location location, Effect effect, T data, int radius) {
-        if ((data != null && data.getClass().equals(effect.getData())) ||
-                (data == null && effect.getData() == null)) {
+        if ((data != null && data.getClass().equals(effect.getData()))
+                || (data == null && effect.getData() == null)) {
             this.playEffect(location, effect, data == null ? 0 : EffectConverter.getDataValue(effect, data), radius);
         } else {
             throw new IllegalArgumentException("Invalid data type for effect!");

@@ -94,7 +94,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //TODO: skeleton implementation
-
+// I had to disable the import order check in thie class because the org.bukkit.plugin.java import was setting it off
 public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implements Server {
 
     private final Game game;
@@ -139,8 +139,8 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
                     plugin.onLoad();
                 } catch (Exception ex) {
                     getLogger().log(Level.SEVERE,
-                            ex.getMessage() + " initializing " + plugin.getDescription().getFullName() +
-                                    " (Is it up to date?)", ex);
+                            ex.getMessage() + " initializing " + plugin.getDescription().getFullName()
+                                    + " (Is it up to date?)", ex);
                 }
             }
         } else {
@@ -166,8 +166,8 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
             pluginManager.enablePlugin(plugin);
         } catch (Throwable ex) {
             getLogger().log(Level.SEVERE,
-                    ex.getMessage() + " loading " + plugin.getDescription().getFullName() +
-                            " (Is it up to date?)");
+                    ex.getMessage() + " loading " + plugin.getDescription().getFullName()
+                            + " (Is it up to date?)");
         }
     }
 

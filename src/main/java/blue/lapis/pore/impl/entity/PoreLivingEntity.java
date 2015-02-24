@@ -202,7 +202,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void _INVALID_setLastDamage(int damage) {
-        this.setLastDamage((double) damage);
+        this.setLastDamage((double)damage);
     }
 
     @Override
@@ -323,9 +323,8 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     public Entity getLeashHolder() throws IllegalStateException {
         if (getHandle() instanceof Agent) {
-            return ((Agent) getHandle()).getLeashHolder().isPresent() ?
-                    PoreEntity.of(((Agent) getHandle()).getLeashHolder().get()) :
-                    null;
+            return ((Agent) getHandle()).getLeashHolder().isPresent()
+                    ? PoreEntity.of(((Agent) getHandle()).getLeashHolder().get()) : null;
         }
         return null;
     }
@@ -333,8 +332,8 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     public boolean setLeashHolder(Entity holder) {
         if (getHandle() instanceof Agent) {
-            if (!(this instanceof Bat) && !(this instanceof EnderDragon) &&
-                    !(this instanceof Witch) && !(this instanceof Wither)) {
+            if (!(this instanceof Bat) && !(this instanceof EnderDragon)
+                    && !(this instanceof Witch) && !(this instanceof Wither)) {
 
                 ((Agent) getHandle()).setLeashHolder(((PoreEntity) holder).getHandle());
                 return true;
@@ -349,13 +348,13 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     }
 
     @Override
-    public void _INVALID_damage(int amount) {
-        getHandle().damage((double) amount);
+    public void damage(double amount, Entity source) {
+        damage(amount); //TODO
     }
 
     @Override
-    public void damage(double amount, Entity source) {
-        damage(amount); //TODO
+    public void _INVALID_damage(int amount) {
+        getHandle().damage((double) amount);
     }
 
     @Override

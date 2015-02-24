@@ -170,8 +170,8 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
                 this.constructor = pore.getDeclaredConstructor(sponge);
                 constructor.setAccessible(true);
             } catch (NoSuchMethodException e) {
-                throw new IllegalArgumentException("Pore " + pore + " doesn't have any constructor for Sponge " +
-                        sponge, e);
+                throw new IllegalArgumentException("Pore " + pore + " doesn't have any constructor for Sponge "
+                        + sponge, e);
             }
         }
 

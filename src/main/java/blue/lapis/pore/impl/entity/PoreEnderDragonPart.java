@@ -56,13 +56,13 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
     }
 
     @Override
-    public void _INVALID_damage(int amount) {
-        this.damage((double) amount);
+    public void damage(double amount, Entity source) {
+        getParent().damage(amount, source);
     }
 
     @Override
-    public void damage(double amount, Entity source) {
-        getParent().damage(amount, source);
+    public void _INVALID_damage(int amount) {
+        this.damage((double)amount);
     }
 
     @Override

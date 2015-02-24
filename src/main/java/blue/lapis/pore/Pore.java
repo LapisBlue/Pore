@@ -46,6 +46,8 @@ import org.spongepowered.api.util.event.Subscribe;
 import javax.inject.Inject;
 
 /**
+ * An implementation of the Bukkit API built on Sponge.
+ *
  * @author Lapis Blue
  */
 @Plugin(id = "pore", name = "Pore")

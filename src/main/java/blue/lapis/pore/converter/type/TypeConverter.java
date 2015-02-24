@@ -74,7 +74,7 @@ final class TypeConverter<B, S> extends Converter<B, S> {
         return new MapBuilder<B, S>();
     }
 
-    static abstract class Builder<B, S> {
+    abstract static class Builder<B, S> {
 
         protected final BiMap<B, S> registry = HashBiMap.create();
 

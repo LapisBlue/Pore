@@ -65,9 +65,8 @@ public class PoreEntityTargetEvent extends EntityTargetEvent {
 
     @Override
     public Entity getTarget() {
-        return this.getHandle().getTargetedEntity().isPresent() ?
-                PoreEntity.of(getHandle().getTargetedEntity().get()) :
-                null;
+        return this.getHandle().getTargetedEntity().isPresent()
+                ? PoreEntity.of(getHandle().getTargetedEntity().get()) : null;
     }
 
     @Override

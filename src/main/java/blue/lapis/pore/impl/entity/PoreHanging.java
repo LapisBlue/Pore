@@ -53,13 +53,13 @@ public class PoreHanging extends PoreEntity implements org.bukkit.entity.Hanging
     }
 
     @Override
-    public BlockFace getAttachedFace() {
-        throw new NotImplementedException(); //TODO
+    public void setFacingDirection(BlockFace face) {
+        setFacingDirection(face, false);
     }
 
     @Override
-    public void setFacingDirection(BlockFace face) {
-        setFacingDirection(face, false);
+    public BlockFace getAttachedFace() {
+        throw new NotImplementedException(); //TODO
     }
 
     @Override

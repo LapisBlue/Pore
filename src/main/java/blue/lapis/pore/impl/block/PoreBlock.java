@@ -73,6 +73,12 @@ public class PoreBlock extends PoreWrapper<BlockLoc> implements Block {
     }
 
     @Override
+    public void setData(byte data, boolean applyPhysics) {
+        throw new NotImplementedException(); //TODO: probably going to need some custom data mapping for
+        // BlockStates
+    }
+
+    @Override
     public Block getRelative(int modX, int modY, int modZ) {
         return getWorld().getBlockAt(getX() + modX, getY() + modY, getZ() + modZ);
     }
@@ -156,12 +162,6 @@ public class PoreBlock extends PoreWrapper<BlockLoc> implements Block {
     @Override
     public Chunk getChunk() {
         throw new NotImplementedException();
-    }
-
-    @Override
-    public void setData(byte data, boolean applyPhysics) {
-        throw new NotImplementedException(); //TODO: probably going to need some custom data mapping for
-        // BlockStates
     }
 
     @Override

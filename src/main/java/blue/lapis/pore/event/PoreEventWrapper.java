@@ -86,8 +86,8 @@ public final class PoreEventWrapper {
                     ));
                 }
             } catch (Throwable ex) {
-                Pore.getServer().getLogger().log(Level.SEVERE, "Could not pass event " + event.getEventName() + " to " +
-                        registration.getPlugin().getDescription().getFullName(), ex);
+                Pore.getServer().getLogger().log(Level.SEVERE, "Could not pass event " + event.getEventName() + " to "
+                        + registration.getPlugin().getDescription().getFullName(), ex);
             }
         }
     }
@@ -111,7 +111,8 @@ public final class PoreEventWrapper {
         Class<?> superClass = pore.getSuperclass();
         checkState(
                 !Modifier.isAbstract(superClass.getModifiers()) && superClass.getName().startsWith("org.bukkit.event"),
-                "Not a Bukkit handle event %s", superClass);
+                "Not a Bukkit handle event %s", superClass
+        );
         Class<? extends Event> handle = superClass.asSubclass(Event.class);
 
         HandlerList list = SimplePluginManager.getEventListeners(handle);
@@ -126,7 +127,7 @@ public final class PoreEventWrapper {
         private final EnumMap<EventPriority, Object> listeners = Maps.newEnumMap(EventPriority.class);
 
         public Registration(Class<? extends Event> pore,
-                Class<? extends org.spongepowered.api.util.event.Event> sponge) {
+                            Class<? extends org.spongepowered.api.util.event.Event> sponge) {
             this.pore = pore;
             this.sponge = sponge;
         }
