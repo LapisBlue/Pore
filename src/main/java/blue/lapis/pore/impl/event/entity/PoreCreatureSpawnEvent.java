@@ -69,6 +69,7 @@ public class PoreCreatureSpawnEvent extends CreatureSpawnEvent {
         return this.getHandle().isCancelled();
     }
 
+    @Override
     public void setCancelled(boolean cancel) {
         this.getHandle().setCancelled(cancel);
     }

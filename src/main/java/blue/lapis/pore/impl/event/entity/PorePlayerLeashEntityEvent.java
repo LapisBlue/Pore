@@ -54,6 +54,7 @@ public class PorePlayerLeashEntityEvent extends PlayerLeashEntityEvent {
         return PoreEntity.of(this.getHandle().getEntity());
     }
 
+    @Override
     public Entity getLeashHolder() {
         return PoreEntity.of(this.getHandle().getLeashHolder());
     }

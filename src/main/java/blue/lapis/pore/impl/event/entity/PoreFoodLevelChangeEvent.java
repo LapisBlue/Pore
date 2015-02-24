@@ -61,18 +61,22 @@ public class PoreFoodLevelChangeEvent extends FoodLevelChangeEvent {
         return EntityConverter.of(this.getHandle().getEntity().getType());
     }
 
+    @Override
     public int getFoodLevel() {
         throw new NotImplementedException();
     }
 
+    @Override
     public void setFoodLevel(int level) {
         throw new NotImplementedException();
     }
 
+    @Override
     public boolean isCancelled() {
         throw new NotImplementedException();
     }
 
+    @Override
     public void setCancelled(boolean cancel) {
         throw new NotImplementedException();
     }

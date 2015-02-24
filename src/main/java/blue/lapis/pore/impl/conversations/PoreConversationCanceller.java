@@ -44,6 +44,7 @@ public class PoreConversationCanceller implements ConversationCanceller {
     }
 
 
+    @Override
     public ConversationCanceller clone() {
         throw new NotImplementedException();
     }

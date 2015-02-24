@@ -46,6 +46,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
         return (EnderDragonPart) super.getHandle();
     }
 
+    @Override
     public EnderDragon getParent() {
         return PoreEnderDragon.of(getHandle().getParent());
     }
