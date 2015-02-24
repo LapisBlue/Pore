@@ -93,6 +93,7 @@ shadowJar {
 // License header formatting
 license {
     header file('LICENSE')
+    exclude 'LICENSE'
     exclude '*.txt'
     sourceSets = project.sourceSets
     ignoreFailures false
