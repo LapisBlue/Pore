@@ -28,6 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.spongepowered.api.event.block.BlockEvent;
 
@@ -58,6 +59,11 @@ public class PoreBlockPistonExtendEvent extends BlockPistonExtendEvent {
 
     @Override
     public List<Block> getBlocks() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public BlockFace getDirection() {
         throw new NotImplementedException(); // TODO
     }
 

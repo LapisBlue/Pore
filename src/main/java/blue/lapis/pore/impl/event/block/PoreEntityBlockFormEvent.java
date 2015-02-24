@@ -28,6 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.block.EntityBlockFormEvent;
 import org.spongepowered.api.event.block.BlockEvent;
@@ -52,6 +53,11 @@ public class PoreEntityBlockFormEvent extends EntityBlockFormEvent {
 
     @Override
     public Entity getEntity() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public BlockState getNewState() {
         throw new NotImplementedException(); // TODO
     }
 

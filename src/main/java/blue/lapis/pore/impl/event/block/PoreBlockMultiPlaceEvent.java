@@ -94,4 +94,13 @@ public class PoreBlockMultiPlaceEvent extends BlockMultiPlaceEvent {
         throw new NotImplementedException(); // TODO
     }
 
+    @Override
+    public boolean isCancelled() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        throw new NotImplementedException(); // TODO
+    }
 }

@@ -30,9 +30,12 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.TreeType;
 import org.bukkit.World;
+import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.event.world.StructureGrowEvent;
 import org.spongepowered.api.event.world.WorldEvent;
+
+import java.util.List;
 
 public class PoreStructureGrowEvent extends StructureGrowEvent {
 
@@ -59,6 +62,11 @@ public class PoreStructureGrowEvent extends StructureGrowEvent {
 
     @Override
     public Player getPlayer() {
+        throw new NotImplementedException(); // TODO
+    }
+
+    @Override
+    public List<BlockState> getBlocks() {
         throw new NotImplementedException(); // TODO
     }
 

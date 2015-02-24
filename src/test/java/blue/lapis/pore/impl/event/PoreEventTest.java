@@ -175,4 +175,32 @@ public class PoreEventTest {
         }
     }
 
+    @Test
+    public void checkImplementedMethods() {
+        for (Class<?> eventImpl : poreEvents) {
+            Class<?> bukkitEvent = eventImpl.getSuperclass();
+            for (Method method : bukkitEvent.getMethods()) {
+                int modifiers = method.getModifiers();
+                if (Modifier.isStatic(modifiers) || Modifier.isFinal(modifiers) || isDefault(method)
+                        || method.getDeclaringClass() == Event.class || method.getDeclaringClass() == Object.class
+                        || method.getName().equals("getHandlers") || method.getName().startsWith("_INVALID_")) {
+                    continue;
+                }
+
+                try {
+                    eventImpl.getDeclaredMethod(method.getName(), method.getParameterTypes());
+                } catch (NoSuchMethodException e) {
+                    fail(eventImpl.getSimpleName() + ": should override method " + method);
+                }
+            }
+        }
+    }
+
+    // Taken from JDK8 for compatibility with older Java versions
+    private static boolean isDefault(Method method) {
+        // Default methods are public non-abstract instance methods declared in an interface.
+        return ((method.getModifiers() & (Modifier.ABSTRACT | Modifier.PUBLIC | Modifier.STATIC)) == Modifier.PUBLIC)
+                && method.getDeclaringClass().isInterface();
+    }
+
 }

@@ -46,6 +46,11 @@ public class PoreBlockFromToEvent extends BlockFromToEvent {
     }
 
     @Override
+    public Block getBlock() {
+        throw new NotImplementedException();
+    }
+
+    @Override
     public BlockFace getFace() {
         throw new NotImplementedException();
     }
