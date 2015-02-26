@@ -66,6 +66,9 @@ public class PoreProjectileLaunchEvent extends ProjectileLaunchEvent {
 
     @Override
     public void setCancelled(boolean cancel) {
+        //TODO: we're probably going to have to manage this ourselves
+        // it would involve removing the Projectile from the world and replacing
+        // the consumed ItemStack
         throw new NotImplementedException();
     }
 }
