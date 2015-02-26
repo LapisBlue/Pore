@@ -68,12 +68,12 @@ public class PoreExplosionPrimeEvent extends ExplosionPrimeEvent {
 
     @Override
     public boolean getFire() {
-        return this.getHandle().isFlamable(); //TODO: isFlamable is misspelled and will be changed
+        return this.getHandle().isFlammable();
     }
 
     @Override
     public void setFire(boolean fire) {
-        getHandle().setFlamable(fire); //TODO: same for setFlamable
+        getHandle().setFlammable(fire);
     }
 
     @Override

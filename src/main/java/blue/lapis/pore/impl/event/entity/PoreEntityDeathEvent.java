@@ -66,12 +66,12 @@ public class PoreEntityDeathEvent extends org.bukkit.event.entity.EntityDeathEve
 
     @Override
     public int getDroppedExp() {
-        return (int) this.getHandle().getDroppedExperience();
+        return this.getHandle().getExp();
     }
 
     @Override
     public void setDroppedExp(int exp) {
-        this.getHandle().setDroppedExperience(exp);
+        this.getHandle().setExp(exp);
     }
 
     @Override

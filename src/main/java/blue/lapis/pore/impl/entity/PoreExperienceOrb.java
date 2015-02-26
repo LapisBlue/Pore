@@ -51,7 +51,7 @@ public class PoreExperienceOrb extends PoreEntity implements org.bukkit.entity.E
 
     @Override
     public int getExperience() {
-        return (int) getHandle().getExperience();
+        return getHandle().getExperience();
     }
 
     @Override
