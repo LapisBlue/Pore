@@ -35,6 +35,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.spongepowered.api.event.entity.EntityChangeHealthEvent;
 
+//TODO: Note: do not implement this or its children yet if you do not want a headache
 public class PoreEntityDamageEvent extends EntityDamageEvent {
 
     private final EntityChangeHealthEvent handle;
@@ -91,7 +92,7 @@ public class PoreEntityDamageEvent extends EntityDamageEvent {
 
     @Override
     public int _INVALID_getDamage() {
-        throw new NotImplementedException();
+        return (int)this.getDamage();
     }
 
     @Override
@@ -101,7 +102,7 @@ public class PoreEntityDamageEvent extends EntityDamageEvent {
 
     @Override
     public void _INVALID_setDamage(int damage) {
-        throw new NotImplementedException();
+        this.setDamage((double)damage);
     }
 
     @Override

@@ -28,9 +28,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.entity.PoreAnimalTamer;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -63,7 +63,7 @@ public class PoreEntityTameEvent extends EntityTameEvent {
 
     @Override
     public AnimalTamer getOwner() {
-        throw new NotImplementedException(); //TODO: waiting on SpongeAPI
+        return PoreAnimalTamer.of(this.getHandle().getTamer());
     }
 
     @Override

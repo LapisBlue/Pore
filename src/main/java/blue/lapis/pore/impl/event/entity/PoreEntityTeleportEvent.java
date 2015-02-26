@@ -30,7 +30,7 @@ import blue.lapis.pore.converter.type.EntityConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
-import org.apache.commons.lang.NotImplementedException;
+import com.google.common.base.Optional;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -39,6 +39,8 @@ import org.bukkit.event.entity.EntityTeleportEvent;
 public class PoreEntityTeleportEvent extends EntityTeleportEvent {
 
     private final org.spongepowered.api.event.entity.EntityTeleportEvent handle;
+
+    private Optional<Location> from = Optional.absent(); // so we can implement the ever-useless setFrom method
 
     public PoreEntityTeleportEvent(org.spongepowered.api.event.entity.EntityTeleportEvent handle) {
         super(null, null, null);
@@ -61,12 +63,12 @@ public class PoreEntityTeleportEvent extends EntityTeleportEvent {
 
     @Override
     public Location getFrom() {
-        return LocationConverter.of(this.getHandle().getOldLocation());
+        return this.from.isPresent() ? this.from.get() : LocationConverter.of(this.getHandle().getOldLocation());
     }
 
     @Override
     public void setFrom(Location from) {
-        throw new NotImplementedException(); //TODO: eh, not sure of how to implement this
+        this.from = Optional.fromNullable(from);
     }
 
     @Override

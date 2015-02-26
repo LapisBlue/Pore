@@ -94,7 +94,7 @@ public class PoreEntityDamageByEntityEvent extends EntityDamageByEntityEvent {
 
     @Override
     public int _INVALID_getDamage() {
-        throw new NotImplementedException();
+        return (int)this.getDamage();
     }
 
     @Override
@@ -104,7 +104,7 @@ public class PoreEntityDamageByEntityEvent extends EntityDamageByEntityEvent {
 
     @Override
     public void _INVALID_setDamage(int damage) {
-        throw new NotImplementedException();
+        this.setDamage((double)damage);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class PoreEntityDamageByEntityEvent extends EntityDamageByEntityEvent {
 
     @Override
     public Entity getDamager() {
-        throw new NotImplementedException();
+        return PoreEntity.of((org.spongepowered.api.entity.Entity)this.getHandle().getCause().get().getCause());
     }
 
     @Override

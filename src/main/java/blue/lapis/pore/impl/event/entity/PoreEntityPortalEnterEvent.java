@@ -34,19 +34,19 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityPortalEnterEvent;
-import org.spongepowered.api.event.entity.EntityEvent;
+import org.spongepowered.api.event.entity.EntityEnterPortalEvent;
 
 //TODO: waiting on SpongeAPI to add this
 public class PoreEntityPortalEnterEvent extends EntityPortalEnterEvent {
 
-    private final EntityEvent handle;
+    private final EntityEnterPortalEvent handle;
 
-    public PoreEntityPortalEnterEvent(EntityEvent handle) {
+    public PoreEntityPortalEnterEvent(EntityEnterPortalEvent handle) {
         super(null, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityEvent getHandle() {
+    public EntityEnterPortalEvent getHandle() {
         return this.handle;
     }
 

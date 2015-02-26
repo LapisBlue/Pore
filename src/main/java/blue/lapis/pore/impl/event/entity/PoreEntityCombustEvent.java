@@ -29,7 +29,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import blue.lapis.pore.converter.type.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityCombustEvent;
@@ -60,12 +59,12 @@ public class PoreEntityCombustEvent extends EntityCombustEvent {
 
     @Override
     public int getDuration() {
-        throw new NotImplementedException();
+        return this.getHandle().getFireTicks();
     }
 
     @Override
     public void setDuration(int duration) {
-        throw new NotImplementedException();
+        this.getHandle().setFireTicks(duration);
     }
 
     @Override

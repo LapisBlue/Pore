@@ -31,7 +31,6 @@ import blue.lapis.pore.converter.type.EntityConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -69,11 +68,11 @@ public class PoreEntityInteractEvent extends EntityInteractEvent {
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        return this.getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        this.getHandle().setCancelled(cancel);
     }
 }

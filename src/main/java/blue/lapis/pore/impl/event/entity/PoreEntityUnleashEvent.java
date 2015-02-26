@@ -33,19 +33,18 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityUnleashEvent;
-import org.spongepowered.api.event.entity.EntityEvent;
 
 //TODO: waiting on SpongeAPI to add this
 public class PoreEntityUnleashEvent extends EntityUnleashEvent {
 
-    private final EntityEvent handle;
+    private final org.spongepowered.api.event.entity.EntityUnleashEvent handle;
 
-    public PoreEntityUnleashEvent(EntityEvent handle) {
+    public PoreEntityUnleashEvent(org.spongepowered.api.event.entity.EntityUnleashEvent handle) {
         super(null, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityEvent getHandle() {
+    public org.spongepowered.api.event.entity.EntityUnleashEvent getHandle() {
         return this.handle;
     }
 

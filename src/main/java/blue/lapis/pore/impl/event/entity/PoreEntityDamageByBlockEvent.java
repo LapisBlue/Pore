@@ -28,6 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -98,7 +99,7 @@ public class PoreEntityDamageByBlockEvent extends EntityDamageByBlockEvent {
 
     @Override
     public int _INVALID_getDamage() {
-        throw new NotImplementedException();
+        return (int)this.getDamage();
     }
 
     @Override
@@ -108,7 +109,7 @@ public class PoreEntityDamageByBlockEvent extends EntityDamageByBlockEvent {
 
     @Override
     public void _INVALID_setDamage(int damage) {
-        throw new NotImplementedException();
+        this.setDamage((double)damage);
     }
 
     @Override
@@ -118,7 +119,7 @@ public class PoreEntityDamageByBlockEvent extends EntityDamageByBlockEvent {
 
     @Override
     public Block getDamager() {
-        throw new NotImplementedException();
+        return PoreBlock.of((BlockLoc)this.getHandle().getCause().get().getCause());
     }
 
     @Override

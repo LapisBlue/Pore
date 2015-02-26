@@ -30,6 +30,7 @@ import blue.lapis.pore.converter.type.EntityConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
+import com.google.common.base.Optional;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -40,7 +41,11 @@ import org.spongepowered.api.event.entity.EntityTeleportEvent;
 
 public class PoreEntityPortalExitEvent extends EntityPortalExitEvent {
 
+    // Sponge's concept of this event seems to be different from Bukkit's, so
+    // for now I'm using the teleport event as a handle
     private final EntityTeleportEvent handle;
+
+    private Optional<Location> from = Optional.absent(); // so we can implement the ever-useless setFrom method
 
     public PoreEntityPortalExitEvent(EntityTeleportEvent handle) {
         super(null, null, null, null, null);
@@ -63,12 +68,12 @@ public class PoreEntityPortalExitEvent extends EntityPortalExitEvent {
 
     @Override
     public Location getFrom() {
-        return LocationConverter.of(this.getHandle().getOldLocation());
+        return this.from.isPresent() ? this.from.get() : LocationConverter.of(this.getHandle().getOldLocation());
     }
 
     @Override
     public void setFrom(Location from) {
-        throw new NotImplementedException(); //TODO: not sure of how to implement this
+        this.from = Optional.fromNullable(from);
     }
 
     @Override
@@ -83,12 +88,12 @@ public class PoreEntityPortalExitEvent extends EntityPortalExitEvent {
     }
 
     @Override
-    public Vector getBefore() {
+    public Vector getBefore() { // eh, this will be tricky to implement
         throw new NotImplementedException(); //TODO
     }
 
     @Override
-    public Vector getAfter() {
+    public Vector getAfter() { // WHY DOES SPONGEAPI HAVE NO VELOCITY METHODS
         throw new NotImplementedException(); //TODO
     }
 
