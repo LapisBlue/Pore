@@ -64,18 +64,8 @@ public class PoreEntityRegainHealthEvent extends EntityRegainHealthEvent {
     }
 
     @Override
-    public int _INVALID_getAmount() {
-        return (int) this.getAmount();
-    }
-
-    @Override
     public void setAmount(double amount) {
         this.getHandle().setNewHealth(this.getHandle().getOldHealth() + amount);
-    }
-
-    @Override
-    public void _INVALID_setAmount(int amount) {
-        this.setAmount((double) amount);
     }
 
     @Override

@@ -93,18 +93,8 @@ public class PoreEntityDamageByEntityEvent extends EntityDamageByEntityEvent {
     }
 
     @Override
-    public int _INVALID_getDamage() {
-        return (int)this.getDamage();
-    }
-
-    @Override
     public void setDamage(double damage) {
         throw new NotImplementedException();
-    }
-
-    @Override
-    public void _INVALID_setDamage(int damage) {
-        this.setDamage((double)damage);
     }
 
     @Override

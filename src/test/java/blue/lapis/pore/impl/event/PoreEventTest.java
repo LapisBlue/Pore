@@ -202,4 +202,15 @@ public class PoreEventTest {
                 && method.getDeclaringClass().isInterface();
     }
 
+    @Test
+    public void checkInvalidMethods() {
+        for (Class<?> eventImpl : poreEvents) {
+            for (Method method : eventImpl.getDeclaredMethods()) {
+                if (method.getName().startsWith("_INVALID_")) {
+                    fail(eventImpl.getSimpleName() + ": shouldn't override _INVALID_ method " + method);
+                }
+            }
+        }
+    }
+
 }
