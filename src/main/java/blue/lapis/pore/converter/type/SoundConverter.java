@@ -142,7 +142,7 @@ public final class SoundConverter {
             .add(Sound.SHEEP_SHEAR, SoundTypes.SHEEP_SHEAR)
             .add(Sound.SHEEP_WALK, SoundTypes.SHEEP_WALK)
             .add(Sound.SILVERFISH_HIT, SoundTypes.SILVERFISH_HIT)
-            .add(Sound.SILVERFISH_KILL, SoundTypes.SILVERFISH_KILL)
+            .add(Sound.SILVERFISH_KILL, SoundTypes.SILVERFISH_DEATH)
             .add(Sound.SILVERFISH_IDLE, SoundTypes.SILVERFISH_IDLE)
             .add(Sound.SILVERFISH_WALK, SoundTypes.SILVERFISH_WALK)
             .add(Sound.SKELETON_IDLE, SoundTypes.SKELETON_IDLE)
