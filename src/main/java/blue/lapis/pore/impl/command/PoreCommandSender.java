@@ -49,7 +49,7 @@ public class PoreCommandSender extends PorePermissible implements CommandSender 
 
     @Override
     public String getName() {
-        return "FAIL";
+        return getHandle().getName();
     }
 
     @Override
