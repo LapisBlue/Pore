@@ -25,10 +25,13 @@
 package blue.lapis.pore.impl.event.block;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
-import org.apache.commons.lang.NotImplementedException;
+import blue.lapis.pore.impl.block.PoreBlock;
+
 import org.bukkit.block.Block;
 import org.bukkit.event.block.BlockExpEvent;
+import org.spongepowered.api.event.ExperienceEvent;
 import org.spongepowered.api.event.block.BlockEvent;
 
 public class PoreBlockExpEvent extends BlockExpEvent {
@@ -38,6 +41,7 @@ public class PoreBlockExpEvent extends BlockExpEvent {
     public PoreBlockExpEvent(BlockEvent handle) {
         super(null, -1);
         this.handle = checkNotNull(handle, "handle");
+        checkState(handle instanceof ExperienceEvent, "Not an ExperienceEvent");
     }
 
     public BlockEvent getHandle() {
@@ -46,17 +50,17 @@ public class PoreBlockExpEvent extends BlockExpEvent {
 
     @Override
     public Block getBlock() {
-        throw new NotImplementedException(); // TODO
+        return PoreBlock.of(getHandle().getBlock());
     }
 
     @Override
     public int getExpToDrop() {
-        throw new NotImplementedException(); // TODO
+        return ((ExperienceEvent) getHandle()).getExp();
     }
 
     @Override
     public void setExpToDrop(int exp) {
-        throw new NotImplementedException(); // TODO
+        ((ExperienceEvent) getHandle()).setExp(exp);
     }
 
 }

@@ -26,7 +26,8 @@ package blue.lapis.pore.impl.event.block;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import blue.lapis.pore.impl.block.PoreBlock;
+
 import org.bukkit.block.Block;
 import org.spongepowered.api.event.block.BlockBurnEvent;
 
@@ -45,17 +46,17 @@ public class PoreBlockBurnEvent extends org.bukkit.event.block.BlockBurnEvent {
 
     @Override
     public Block getBlock() {
-        throw new NotImplementedException(); // TODO
+        return PoreBlock.of(getHandle().getBlock());
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException(); // TODO
+        return getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException(); // TODO
+        getHandle().setCancelled(cancel);
     }
 
 }

@@ -26,6 +26,8 @@ package blue.lapis.pore.impl.event.block;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.impl.block.PoreBlock;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -47,7 +49,7 @@ public class PoreBlockPhysicsEvent extends BlockPhysicsEvent {
 
     @Override
     public Block getBlock() {
-        throw new NotImplementedException(); // TODO
+        return PoreBlock.of(getHandle().getBlock());
     }
 
     @Override

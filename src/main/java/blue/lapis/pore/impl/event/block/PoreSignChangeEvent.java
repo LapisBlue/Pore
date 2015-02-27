@@ -26,10 +26,14 @@ package blue.lapis.pore.impl.event.block;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.impl.block.PoreBlock;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.spongepowered.api.event.block.data.SignChangeEvent;
+import org.spongepowered.api.text.message.Message;
+import org.spongepowered.api.text.message.Messages;
 
 public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent {
 
@@ -46,7 +50,7 @@ public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent 
 
     @Override
     public Block getBlock() {
-        throw new NotImplementedException(); // TODO
+        return PoreBlock.of(getHandle().getSign().getBlock());
     }
 
     @Override
@@ -56,27 +60,34 @@ public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent 
 
     @Override
     public String[] getLines() {
-        throw new NotImplementedException(); // TODO
+        Message[] lines = getHandle().getNewMessages();
+        String[] result = new String[lines.length];
+        for (int i = 0; i < lines.length; i++) {
+            result[i] = lines[i].toLegacy();
+        }
+        return result;
     }
 
     @Override
     public String getLine(int index) throws IndexOutOfBoundsException {
-        throw new NotImplementedException(); // TODO
+        return getHandle().getNewMessages()[index].toLegacy();
     }
 
     @Override
     public void setLine(int index, String line) throws IndexOutOfBoundsException {
-        throw new NotImplementedException(); // TODO
+        Message[] lines = getHandle().getNewMessages();
+        lines[index] = Messages.fromLegacy(line);
+        getHandle().setNewMessages(lines);
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException(); // TODO
+        return getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException(); // TODO
+        getHandle().setCancelled(cancel);
     }
 
 }

@@ -26,39 +26,44 @@ package blue.lapis.pore.impl.event.block;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.converter.ItemStackConverter;
+import blue.lapis.pore.impl.block.PoreBlock;
+import blue.lapis.pore.impl.entity.PorePlayer;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.event.block.BlockPlaceEvent;
+import org.spongepowered.api.event.entity.living.player.PlayerPlaceBlockEvent;
 
 public class PoreBlockPlaceEvent extends org.bukkit.event.block.BlockPlaceEvent {
 
-    private final BlockPlaceEvent handle;
+    private final PlayerPlaceBlockEvent handle;
 
-    public PoreBlockPlaceEvent(BlockPlaceEvent handle) {
+    public PoreBlockPlaceEvent(PlayerPlaceBlockEvent handle) {
         super(null, null, null, null, null, false);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public BlockPlaceEvent getHandle() {
+    public PlayerPlaceBlockEvent getHandle() {
         return handle;
     }
 
     @Override
     public Block getBlock() {
-        throw new NotImplementedException(); // TODO
+        return PoreBlock.of(getHandle().getBlock());
     }
 
     @Override
     public Player getPlayer() {
-        throw new NotImplementedException(); // TODO
+        return PorePlayer.of(getHandle().getPlayer());
     }
 
     @Override
     public Block getBlockPlaced() {
-        throw new NotImplementedException(); // TODO
+        // TODO: return PoreBlock.of(getHandle().getReplacementBlock());
+        throw new NotImplementedException();
     }
 
     @Override
@@ -73,7 +78,7 @@ public class PoreBlockPlaceEvent extends org.bukkit.event.block.BlockPlaceEvent 
 
     @Override
     public ItemStack getItemInHand() {
-        throw new NotImplementedException(); // TODO
+        return ItemStackConverter.of(getHandle().getPlayer().getItemInHand().orNull());
     }
 
     @Override
@@ -88,12 +93,12 @@ public class PoreBlockPlaceEvent extends org.bukkit.event.block.BlockPlaceEvent 
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException(); // TODO
+        return getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException(); // TODO
+        getHandle().setCancelled(cancel);
     }
 
 }

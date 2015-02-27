@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.impl.event.block;
 
+import blue.lapis.pore.impl.block.PoreBlock;
+
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
@@ -47,7 +49,7 @@ public class PoreBlockDamageEvent extends BlockDamageEvent {
 
     @Override
     public Block getBlock() {
-        throw new NotImplementedException(); // TODO
+        return PoreBlock.of(getHandle().getBlock());
     }
 
     @Override

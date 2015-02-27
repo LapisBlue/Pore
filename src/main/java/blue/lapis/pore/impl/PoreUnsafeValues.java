@@ -39,6 +39,11 @@ import java.util.List;
 
 public class PoreUnsafeValues implements UnsafeValues {
 
+    public static UnsafeValues INSTANCE = new PoreUnsafeValues();
+
+    private PoreUnsafeValues() {
+    }
+
     @Override
     public Material getMaterialFromInternalName(String name) {
         throw new NotImplementedException();

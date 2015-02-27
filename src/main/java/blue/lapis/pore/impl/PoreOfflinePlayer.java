@@ -31,13 +31,14 @@ import blue.lapis.pore.util.PoreWrapper;
 import com.google.common.base.Optional;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.spongepowered.api.entity.player.User;
 
 import java.util.Map;
 import java.util.UUID;
 
-public class PoreOfflinePlayer extends PoreWrapper<User> implements org.bukkit.OfflinePlayer {
+public class PoreOfflinePlayer extends PoreWrapper<User> implements OfflinePlayer {
 
     public static PoreOfflinePlayer of(User handle) {
         return WrapperConverter.of(PoreOfflinePlayer.class, handle);

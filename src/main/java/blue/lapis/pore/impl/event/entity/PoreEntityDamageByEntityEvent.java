@@ -104,7 +104,7 @@ public class PoreEntityDamageByEntityEvent extends EntityDamageByEntityEvent {
 
     @Override
     public Entity getDamager() {
-        return PoreEntity.of((org.spongepowered.api.entity.Entity)this.getHandle().getCause().get().getCause());
+        return PoreEntity.of((org.spongepowered.api.entity.Entity) this.getHandle().getCause().get().getCause());
     }
 
     @Override

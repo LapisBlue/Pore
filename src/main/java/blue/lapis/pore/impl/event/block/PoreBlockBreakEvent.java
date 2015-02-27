@@ -29,7 +29,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -50,32 +49,32 @@ public class PoreBlockBreakEvent extends BlockBreakEvent {
 
     @Override
     public Player getPlayer() {
-        return PorePlayer.of(handle.getPlayer());
+        return PorePlayer.of(getHandle().getPlayer());
     }
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(handle.getBlock());
+        return PoreBlock.of(getHandle().getBlock());
     }
 
     @Override
     public int getExpToDrop() {
-        throw new NotImplementedException(); // TODO
+        return getHandle().getExp();
     }
 
     @Override
     public void setExpToDrop(int exp) {
-        throw new NotImplementedException(); // TODO
+        getHandle().setExp(exp);
     }
 
     @Override
     public boolean isCancelled() {
-        return handle.isCancelled();
+        return getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        handle.setCancelled(cancel);
+        getHandle().setCancelled(cancel);
     }
 
 }

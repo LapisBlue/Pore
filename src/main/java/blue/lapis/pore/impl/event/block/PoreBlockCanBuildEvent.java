@@ -26,6 +26,9 @@ package blue.lapis.pore.impl.event.block;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.converter.type.MaterialConverter;
+import blue.lapis.pore.impl.block.PoreBlock;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -47,17 +50,17 @@ public class PoreBlockCanBuildEvent extends BlockCanBuildEvent {
 
     @Override
     public Block getBlock() {
-        throw new NotImplementedException(); // TODO
+        return PoreBlock.of(getHandle().getBlock());
     }
 
     @Override
     public Material getMaterial() {
-        throw new NotImplementedException(); // TODO
+        return MaterialConverter.of(getHandle().getBlock().getType());
     }
 
     @Override
     public int getMaterialId() {
-        throw new NotImplementedException(); // TODO
+        return getMaterial().getId();
     }
 
     @Override

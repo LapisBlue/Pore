@@ -109,7 +109,7 @@ public class PoreEntityDamageByBlockEvent extends EntityDamageByBlockEvent {
 
     @Override
     public Block getDamager() {
-        return PoreBlock.of((BlockLoc)this.getHandle().getCause().get().getCause());
+        return PoreBlock.of((BlockLoc) this.getHandle().getCause().get().getCause());
     }
 
     @Override

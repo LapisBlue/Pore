@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.impl.command.PoreConsoleCommandSender;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.impl.scheduler.PoreBukkitScheduler;
 import blue.lapis.pore.impl.util.PoreCachedServerIcon;
@@ -79,6 +80,7 @@ import org.bukkit.util.CachedServerIcon;
 import org.bukkit.util.StringUtil;
 import org.bukkit.util.permissions.DefaultPermissions;
 import org.spongepowered.api.Game;
+import org.spongepowered.api.util.command.source.ConsoleSource;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -93,8 +95,6 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//TODO: skeleton implementation
-// I had to disable the import order check in thie class because the org.bukkit.plugin.java import was setting it off
 public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implements Server {
 
     private final Game game;
@@ -622,7 +622,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public ConsoleCommandSender getConsoleSender() {
-        throw new NotImplementedException();
+        return PoreConsoleCommandSender.of((ConsoleSource) getHandle());
     }
 
     @Override
@@ -693,7 +693,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public String getMotd() {
-        throw new NotImplementedException();
+        return getHandle().getMotd().toLegacy();
     }
 
     @Override
@@ -744,7 +744,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     @Deprecated
     @Override
     public UnsafeValues getUnsafe() {
-        return new PoreUnsafeValues();
+        return PoreUnsafeValues.INSTANCE;
     }
 
     @Override
