@@ -406,7 +406,7 @@ public class PoreInventory extends PoreWrapper<org.spongepowered.api.item.invent
 
     @Override
     public InventoryHolder getHolder() {
-        if (this instanceof CarriedInventory) {
+        if (this.getHandle() instanceof CarriedInventory) {
             Optional<?> carrier = ((CarriedInventory)this.getHandle()).getCarrier();
             if (carrier.isPresent()) {
                 return PoreInventoryHolder.of((Carrier)carrier.get());
