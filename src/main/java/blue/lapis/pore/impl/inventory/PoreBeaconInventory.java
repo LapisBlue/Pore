@@ -24,23 +24,29 @@
  */
 package blue.lapis.pore.impl.inventory;
 
-import org.apache.commons.lang.NotImplementedException;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
+
 import org.bukkit.inventory.BeaconInventory;
 import org.bukkit.inventory.ItemStack;
-
-// TODO: bridge
-
-// TODO: bridge
+import org.spongepowered.api.item.inventory.Inventory;
 
 public class PoreBeaconInventory extends PoreInventory implements BeaconInventory {
 
-    @Override
-    public void setItem(ItemStack item) {
-        throw new NotImplementedException();
+    public static PoreBeaconInventory of(Inventory handle) {
+        return WrapperConverter.of(PoreBeaconInventory.class, handle);
+    }
+
+    protected PoreBeaconInventory(Inventory handle) {
+        super(handle);
     }
 
     @Override
     public ItemStack getItem() {
-        throw new NotImplementedException();
+        return super.getItem(0);
+    }
+
+    @Override
+    public void setItem(ItemStack item) {
+        super.setItem(0, item);
     }
 }

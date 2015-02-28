@@ -24,16 +24,25 @@
  */
 package blue.lapis.pore.impl.inventory;
 
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-
-// TODO: bridge
+import org.spongepowered.api.item.inventory.entity.HumanInventory;
 
 // TODO: bridge
 
 public class PorePlayerInventory extends PoreInventory implements PlayerInventory {
+
+    public static PorePlayerInventory of(HumanInventory handle) {
+        return WrapperConverter.of(PorePlayerInventory.class, handle);
+    }
+
+    protected PorePlayerInventory(HumanInventory handle) {
+        super(handle);
+    }
 
     @Override
     public ItemStack[] getArmorContents() {

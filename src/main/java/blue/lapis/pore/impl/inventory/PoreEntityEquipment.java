@@ -31,8 +31,6 @@ import org.bukkit.inventory.ItemStack;
 
 // TODO: bridge
 
-// TODO: bridge
-
 public class PoreEntityEquipment implements EntityEquipment {
 
     @Override

@@ -24,14 +24,14 @@
  */
 package blue.lapis.pore.impl.inventory;
 
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-// TODO: bridge
 
 // TODO: bridge
 

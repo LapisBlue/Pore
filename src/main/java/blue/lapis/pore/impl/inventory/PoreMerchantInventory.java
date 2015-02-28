@@ -24,10 +24,19 @@
  */
 package blue.lapis.pore.impl.inventory;
 
-import org.bukkit.inventory.MerchantInventory;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-// TODO: bridge
+import org.bukkit.inventory.MerchantInventory;
+import org.spongepowered.api.item.inventory.Inventory;
 
 public class PoreMerchantInventory extends PoreInventory implements MerchantInventory {
+
+    public static PoreMerchantInventory of(Inventory handle) {
+        return WrapperConverter.of(PoreMerchantInventory.class, handle);
+    }
+
+    protected PoreMerchantInventory(Inventory handle) {
+        super(handle);
+    }
 
 }

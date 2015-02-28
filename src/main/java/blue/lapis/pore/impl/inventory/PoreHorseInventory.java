@@ -24,15 +24,24 @@
  */
 package blue.lapis.pore.impl.inventory;
 
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.inventory.HorseInventory;
 import org.bukkit.inventory.ItemStack;
-
-// TODO: bridge
+import org.spongepowered.api.item.inventory.Inventory;
 
 // TODO: bridge
 
 public class PoreHorseInventory extends PoreInventory implements HorseInventory {
+
+    public static PoreHorseInventory of(Inventory handle) {
+        return WrapperConverter.of(PoreHorseInventory.class, handle);
+    }
+
+    protected PoreHorseInventory(Inventory handle) {
+        super(handle);
+    }
 
     @Override
     public ItemStack getSaddle() {

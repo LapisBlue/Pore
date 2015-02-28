@@ -24,16 +24,25 @@
  */
 package blue.lapis.pore.impl.inventory;
 
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Furnace;
 import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.ItemStack;
-
-// TODO: bridge
+import org.spongepowered.api.item.inventory.Inventory;
 
 // TODO: bridge
 
 public class PoreFurnaceInventory extends PoreInventory implements FurnaceInventory {
+
+    public static PoreFurnaceInventory of(Inventory handle) {
+        return WrapperConverter.of(PoreFurnaceInventory.class, handle);
+    }
+
+    protected PoreFurnaceInventory(Inventory handle) {
+        super(handle);
+    }
 
     @Override
     public ItemStack getResult() {

@@ -25,38 +25,24 @@
 package blue.lapis.pore.impl.inventory;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.util.PoreWrapper;
 
-import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.block.DoubleChest;
-import org.bukkit.inventory.DoubleChestInventory;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
+import org.spongepowered.api.item.inventory.Carrier;
 
-// TODO: bridge
+public class PoreInventoryHolder extends PoreWrapper<Carrier> implements InventoryHolder {
 
-// TODO: bridge
-
-public class PoreDoubleChestInventory extends PoreInventory implements DoubleChestInventory {
-
-    public static PoreDoubleChestInventory of(org.spongepowered.api.item.inventory.Inventory handle) {
-        return WrapperConverter.of(PoreDoubleChestInventory.class, handle);
+    public static PoreInventoryHolder of(Carrier handle) {
+        return WrapperConverter.of(PoreInventoryHolder.class, handle);
     }
 
-    protected PoreDoubleChestInventory(org.spongepowered.api.item.inventory.Inventory handle) {
+    private PoreInventoryHolder(Carrier handle) {
         super(handle);
     }
 
     @Override
-    public Inventory getLeftSide() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public Inventory getRightSide() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public DoubleChest getHolder() {
-        throw new NotImplementedException();
+    public Inventory getInventory() {
+        return PoreInventory.of(this.getHandle().getInventory());
     }
 }

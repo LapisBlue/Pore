@@ -26,12 +26,23 @@ package blue.lapis.pore.impl.inventory;
 
 // TODO: bridge
 
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
+import org.spongepowered.api.item.inventory.Inventory;
 
 public class PoreBrewerInventory extends PoreInventory implements BrewerInventory {
+
+    public static PoreBrewerInventory of(Inventory handle) {
+        return WrapperConverter.of(PoreBrewerInventory.class, handle);
+    }
+
+    protected PoreBrewerInventory(Inventory handle) {
+        super(handle);
+    }
 
     @Override
     public ItemStack getIngredient() {

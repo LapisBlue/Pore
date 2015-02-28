@@ -24,12 +24,24 @@
  */
 package blue.lapis.pore.impl.inventory;
 
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.inventory.EnchantingInventory;
 import org.bukkit.inventory.ItemStack;
+import org.spongepowered.api.item.inventory.Inventory;
 
 // TODO: bridge
+
 public class PoreEnchantingInventory extends PoreInventory implements EnchantingInventory {
+
+    public static PoreEnchantingInventory of(Inventory handle) {
+        return WrapperConverter.of(PoreEnchantingInventory.class, handle);
+    }
+
+    protected PoreEnchantingInventory(Inventory handle) {
+        super(handle);
+    }
 
     @Override
     public void setItem(ItemStack item) {

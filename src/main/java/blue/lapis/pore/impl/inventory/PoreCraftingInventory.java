@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.impl.inventory;
 
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
@@ -31,6 +33,14 @@ import org.bukkit.inventory.Recipe;
 
 // TODO: bridge
 public class PoreCraftingInventory extends PoreInventory implements CraftingInventory {
+
+    public static PoreCraftingInventory of(org.spongepowered.api.item.inventory.crafting.CraftingInventory handle) {
+        return WrapperConverter.of(PoreCraftingInventory.class, handle);
+    }
+
+    protected PoreCraftingInventory(org.spongepowered.api.item.inventory.crafting.CraftingInventory handle) {
+        super(handle);
+    }
 
     @Override
     public ItemStack getResult() {

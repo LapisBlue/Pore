@@ -30,8 +30,6 @@ import org.bukkit.inventory.Recipe;
 
 // TODO: bridge
 
-// TODO: bridge
-
 public class PoreRecipe implements Recipe {
 
     @Override
