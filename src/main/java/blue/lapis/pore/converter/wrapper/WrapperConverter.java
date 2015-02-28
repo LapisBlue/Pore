@@ -126,6 +126,9 @@ import blue.lapis.pore.impl.entity.minecart.PorePoweredMinecart;
 import blue.lapis.pore.impl.entity.minecart.PoreRideableMinecart;
 import blue.lapis.pore.impl.entity.minecart.PoreSpawnerMinecart;
 import blue.lapis.pore.impl.entity.minecart.PoreStorageMinecart;
+import blue.lapis.pore.impl.inventory.PoreInventory;
+import blue.lapis.pore.impl.inventory.PoreInventoryHolder;
+import blue.lapis.pore.impl.inventory.PorePlayerInventory;
 import blue.lapis.pore.impl.util.PoreCachedServerIcon;
 import blue.lapis.pore.util.PoreWrapper;
 
@@ -228,6 +231,9 @@ import org.spongepowered.api.entity.vehicle.minecart.MinecartRideable;
 import org.spongepowered.api.entity.vehicle.minecart.MinecartTNT;
 import org.spongepowered.api.entity.weather.Lightning;
 import org.spongepowered.api.entity.weather.WeatherEffect;
+import org.spongepowered.api.item.inventory.Carrier;
+import org.spongepowered.api.item.inventory.Inventory;
+import org.spongepowered.api.item.inventory.entity.HumanInventory;
 import org.spongepowered.api.status.Favicon;
 import org.spongepowered.api.util.command.CommandSource;
 import org.spongepowered.api.util.command.source.CommandBlockSource;
@@ -355,6 +361,11 @@ public class WrapperConverter {
             .register(Tamer.class, PoreAnimalTamer.class)
             .register(CommandSource.class, PoreCommandSender.class)
                 .register(CommandBlockSource.class, PoreBlockCommandSender.class)
+
+            // inventory classes
+            .register(Inventory.class, PoreInventory.class)
+                .register(HumanInventory.class, PorePlayerInventory.class)
+            .register(Carrier.class, PoreInventoryHolder.class)
             // @formatter:on
 
             .build();
