@@ -29,21 +29,21 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.entity.projectile.fireball.Fireball;
+import org.spongepowered.api.entity.projectile.explosive.ExplosiveProjectile;
 
 public class PoreFireball extends PoreProjectile implements org.bukkit.entity.Fireball {
 
-    public static PoreFireball of(Fireball handle) {
+    public static PoreFireball of(ExplosiveProjectile handle) {
         return WrapperConverter.of(PoreFireball.class, handle);
     }
 
-    protected PoreFireball(Fireball handle) {
+    protected PoreFireball(ExplosiveProjectile handle) {
         super(handle);
     }
 
     @Override
-    public Fireball getHandle() {
-        return (Fireball) super.getHandle();
+    public ExplosiveProjectile getHandle() {
+        return (ExplosiveProjectile) super.getHandle();
     }
 
     @Override

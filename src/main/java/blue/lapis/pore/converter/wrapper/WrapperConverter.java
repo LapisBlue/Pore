@@ -216,10 +216,10 @@ import org.spongepowered.api.entity.projectile.Projectile;
 import org.spongepowered.api.entity.projectile.Snowball;
 import org.spongepowered.api.entity.projectile.ThrownExpBottle;
 import org.spongepowered.api.entity.projectile.ThrownPotion;
-import org.spongepowered.api.entity.projectile.fireball.Fireball;
-import org.spongepowered.api.entity.projectile.fireball.LargeFireball;
-import org.spongepowered.api.entity.projectile.fireball.SmallFireball;
-import org.spongepowered.api.entity.projectile.fireball.WitherSkull;
+import org.spongepowered.api.entity.projectile.explosive.ExplosiveProjectile;
+import org.spongepowered.api.entity.projectile.explosive.WitherSkull;
+import org.spongepowered.api.entity.projectile.explosive.fireball.LargeFireball;
+import org.spongepowered.api.entity.projectile.explosive.fireball.SmallFireball;
 import org.spongepowered.api.entity.vehicle.Boat;
 import org.spongepowered.api.entity.vehicle.minecart.Minecart;
 import org.spongepowered.api.entity.vehicle.minecart.MinecartChest;
@@ -317,7 +317,7 @@ public class WrapperConverter {
                     .register(Arrow.class, PoreArrow.class)
                     .register(Egg.class, PoreEgg.class)
                     .register(EnderPearl.class, PoreEnderPearl.class)
-                    .register(Fireball.class, PoreFireball.class)
+                    .register(ExplosiveProjectile.class, PoreFireball.class)
                         .register(LargeFireball.class, PoreLargeFireball.class)
                         .register(SmallFireball.class, PoreSmallFireball.class)
                         .register(WitherSkull.class, PoreWitherSkull.class)

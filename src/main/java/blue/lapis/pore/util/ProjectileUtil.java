@@ -43,6 +43,8 @@ import org.bukkit.entity.ThrownPotion;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.entity.Entity;
+import org.spongepowered.api.entity.projectile.explosive.WitherSkull;
+import org.spongepowered.api.entity.projectile.explosive.fireball.SmallFireball;
 import org.spongepowered.api.entity.projectile.source.ProjectileSource;
 import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.event.entity.ProjectileLaunchEvent;
@@ -74,22 +76,22 @@ public class ProjectileUtil {
         } else if (projectile.isAssignableFrom(Fireball.class)) {
             if (projectile.isAssignableFrom(LargeFireball.class)) {
                 entity = (T) PoreFireball.of(source.launchProjectile(
-                        org.spongepowered.api.entity.projectile.fireball.LargeFireball.class,
+                        org.spongepowered.api.entity.projectile.explosive.fireball.LargeFireball.class,
                         VectorConverter.create3f(velocity)
                 ));
             } else if (projectile.isAssignableFrom(LargeFireball.class)) {
                 entity = (T) PoreFireball.of(source.launchProjectile(
-                        org.spongepowered.api.entity.projectile.fireball.SmallFireball.class,
+                        SmallFireball.class,
                         VectorConverter.create3f(velocity)
                 ));
             } else if (projectile.isAssignableFrom(LargeFireball.class)) {
                 entity = (T) PoreFireball.of(source.launchProjectile(
-                        org.spongepowered.api.entity.projectile.fireball.WitherSkull.class,
+                        WitherSkull.class,
                         VectorConverter.create3f(velocity)
                 ));
             } else {
                 entity = (T) PoreFireball.of(source.launchProjectile(
-                        org.spongepowered.api.entity.projectile.fireball.Fireball.class,
+                        org.spongepowered.api.entity.projectile.explosive.fireball.Fireball.class,
                         VectorConverter.create3f(velocity)
                 ));
             }

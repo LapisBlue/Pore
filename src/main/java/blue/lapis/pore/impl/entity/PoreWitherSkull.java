@@ -28,7 +28,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.entity.projectile.fireball.WitherSkull;
+import org.spongepowered.api.entity.projectile.explosive.WitherSkull;
 
 public class PoreWitherSkull extends PoreFireball implements org.bukkit.entity.WitherSkull {
 
