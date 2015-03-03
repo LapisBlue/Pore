@@ -58,7 +58,7 @@ public class PoreEventTest {
     public static void findEvents() throws Exception {
         ClassPath classPath = ClassPath.from(ClassLoader.getSystemClassLoader());
 
-        ImmutableSet.Builder<Class<?>> builder = ImmutableSet.builder();
+        ImmutableCollection.Builder<Class<?>> builder = ImmutableSet.builder();
 
         for (ClassPath.ClassInfo info : classPath.getTopLevelClassesRecursive(BUKKIT_PACKAGE)) {
             Class<?> event = info.load();
@@ -103,7 +103,7 @@ public class PoreEventTest {
 
     @Test
     public void findUnimplementedEvents() {
-        Set<Class<?>> events = Sets.newHashSet(bukkitEvents);
+        Set<Class<?>> events = Sets.newLinkedHashSet(bukkitEvents);
 
         for (Class<?> eventImpl : poreEvents) {
             events.remove(eventImpl.getSuperclass());
@@ -111,8 +111,8 @@ public class PoreEventTest {
 
         if (!events.isEmpty()) {
             for (Class<?> event : events) {
-                PoreTests.getLogger().warn(
-                        "Pore" + event.getSimpleName() + " for " + event.getSimpleName() + " is missing");
+                String bukkitPackage = StringUtils.removeStart(event.getPackage().getName(), BUKKIT_PACKAGE + '.');
+                PoreTests.getLogger().warn(bukkitPackage + ": Pore" + event.getSimpleName() + " is missing");
             }
         }
     }
