@@ -24,15 +24,23 @@
  */
 package blue.lapis.pore.impl.inventory;
 
+import blue.lapis.pore.converter.ItemStackConverter;
+import blue.lapis.pore.converter.type.MaterialConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.impl.entity.PorePlayer;
 
-import org.apache.commons.lang.NotImplementedException;
+import com.google.common.base.Optional;
+import com.google.common.collect.Iterables;
+import org.apache.commons.lang.Validate;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.spongepowered.api.item.inventory.Slot;
+import org.spongepowered.api.item.inventory.entity.Hotbar;
 import org.spongepowered.api.item.inventory.entity.HumanInventory;
-
-// TODO: bridge
+import org.spongepowered.api.item.inventory.equipment.EquipmentTypes;
+import org.spongepowered.api.item.inventory.properties.SlotIndex;
 
 public class PorePlayerInventory extends PoreInventory implements PlayerInventory {
 
@@ -45,82 +53,135 @@ public class PorePlayerInventory extends PoreInventory implements PlayerInventor
     }
 
     @Override
+    public HumanInventory getHandle() {
+        return (HumanInventory)super.getHandle();
+    }
+
+    @Override
     public ItemStack[] getArmorContents() {
-        throw new NotImplementedException();
+        return new ItemStack[]{this.getHelmet(), this.getChestplate(), this.getLeggings(), this.getBoots()};
     }
 
     @Override
     public ItemStack getHelmet() {
-        throw new NotImplementedException();
+        return this.getArbitraryStack(EquipmentTypes.HEADWEAR);
     }
 
     @Override
     public ItemStack getChestplate() {
-        throw new NotImplementedException();
+        return this.getArbitraryStack(EquipmentTypes.CHESTPLATE);
     }
 
     @Override
     public ItemStack getLeggings() {
-        throw new NotImplementedException();
+        return this.getArbitraryStack(EquipmentTypes.LEGGINGS);
     }
 
     @Override
     public ItemStack getBoots() {
-        throw new NotImplementedException();
+        return this.getArbitraryStack(EquipmentTypes.BOOTS);
     }
 
     @Override
     public void setArmorContents(ItemStack[] items) {
-        throw new NotImplementedException();
+        final int LENGTH = items.length;
+        if (LENGTH > 0) {
+            this.setHelmet(items[0]);
+        }
+        if (LENGTH > 1) {
+            this.setChestplate(items[1]);
+        }
+        if (LENGTH > 2) {
+            this.setLeggings(items[2]);
+        }
+        if (LENGTH > 3) {
+            this.setBoots(items[3]);
+        }
     }
 
     @Override
     public void setHelmet(ItemStack helmet) {
-        throw new NotImplementedException();
+        // this code relies on the notion that Mojang won't implement hydra-people or something
+        Iterables.get(this.getHandle().query(EquipmentTypes.HEADWEAR).<Slot>slots(), 0)
+                .set(ItemStackConverter.of(helmet));
     }
 
     @Override
     public void setChestplate(ItemStack chestplate) {
-        throw new NotImplementedException();
+        Iterables.get(this.getHandle().query(EquipmentTypes.CHESTPLATE).<Slot>slots(), 0)
+                .set(ItemStackConverter.of(chestplate));
     }
 
     @Override
     public void setLeggings(ItemStack leggings) {
-        throw new NotImplementedException();
+        Iterables.get(this.getHandle().query(EquipmentTypes.LEGGINGS).<Slot>slots(), 0)
+                .set(ItemStackConverter.of(leggings));
     }
 
     @Override
     public void setBoots(ItemStack boots) {
-        throw new NotImplementedException();
+        Iterables.get(this.getHandle().query(EquipmentTypes.BOOTS).<Slot>slots(), 0)
+                .set(ItemStackConverter.of(boots));
     }
 
     @Override
     public ItemStack getItemInHand() {
-        throw new NotImplementedException();
+        Hotbar hotbar = this.getHandle().getHotbar();
+        Optional<Slot> slot = hotbar.getSlot(new SlotIndex(hotbar.getSelectedSlotIndex()));
+        if (slot.isPresent()) {
+            Optional<org.spongepowered.api.item.inventory.ItemStack> stack = slot.get().peek();
+            if (stack.isPresent()) {
+                return ItemStackConverter.of(stack.get());
+            }
+        }
+        return null;
     }
 
     @Override
     public void setItemInHand(ItemStack stack) {
-        throw new NotImplementedException();
+        Hotbar hotbar = this.getHandle().getHotbar();
+        Optional<Slot> slot = hotbar.getSlot(new SlotIndex(hotbar.getSelectedSlotIndex()));
+        if (slot.isPresent()) {
+            slot.get().set(ItemStackConverter.of(stack));
+        }
     }
 
     @Override
     public int getHeldItemSlot() {
-        throw new NotImplementedException();
+        return this.getHandle().getHotbar().getSelectedSlotIndex();
     }
 
     @Override
     public void setHeldItemSlot(int slot) {
-        throw new NotImplementedException();
+        Validate.isTrue(slot >= 0 || slot <= 8, "Invalid hotbar slot index");
+        this.getHandle().getHotbar().setSelectedSlotIndex(slot);
     }
 
     @Override
     public int clear(int id, int data) {
-        throw new NotImplementedException();
+        int removed = 0;
+        for (Slot slot : this.getHandle().<Slot>slots()) {
+            Optional<org.spongepowered.api.item.inventory.ItemStack> stackOptional = slot.peek();
+            if (stackOptional.isPresent()) {
+                org.spongepowered.api.item.inventory.ItemStack stack = stackOptional.get();
+                if (id == -1 || stack.getItem() == MaterialConverter.asItem(Material.getMaterial(id))) {
+                    if (data == -1 || stack.getDamage() == data) {
+                        removed += stack.getQuantity();
+                        slot.clear();
+                    }
+                }
+            }
+        }
+        return removed;
     }
 
     @Override
     public Player getHolder() {
-        throw new NotImplementedException();
+        if (this.getHandle().getCarrier().isPresent()) {
+            if (this.getHandle().getCarrier().get() instanceof org.spongepowered.api.entity.player.Player) {
+                return PorePlayer.of((org.spongepowered.api.entity.player.Player)this.getHandle().getCarrier());
+            }
+        }
+        return null;
     }
 }

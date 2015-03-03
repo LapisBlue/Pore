@@ -39,8 +39,11 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.Carrier;
 import org.spongepowered.api.item.inventory.Slot;
+import org.spongepowered.api.item.inventory.crafting.CraftingInventory;
+import org.spongepowered.api.item.inventory.entity.HumanInventory;
 import org.spongepowered.api.item.inventory.properties.SlotIndex;
 import org.spongepowered.api.item.inventory.types.CarriedInventory;
+import org.spongepowered.api.item.inventory.types.GridInventory;
 import org.spongepowered.api.item.inventory.types.OrderedInventory;
 
 import java.util.HashMap;
@@ -129,7 +132,18 @@ public class PoreInventory extends PoreWrapper<org.spongepowered.api.item.invent
 
     @Override
     public HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        HashMap<Integer, ItemStack> notRemoved = new HashMap<Integer, ItemStack>();
+        int i = 0;
+        for (ItemStack stack : items) {
+            Inventory query = this.getHandle().query(ItemStackConverter.of(stack));
+            if (query.getSize() == 0) {
+                notRemoved.put(i, stack);
+                continue;
+            }
+            query.clear(); //TODO: verify this affects the parent as well
+            ++i;
+        }
+        return notRemoved;
     }
 
     /**
@@ -391,6 +405,7 @@ public class PoreInventory extends PoreWrapper<org.spongepowered.api.item.invent
 
     @Override
     public List<HumanEntity> getViewers() {
+        // we're waiting on SpongeAPI for this one
         throw new NotImplementedException();
     }
 
@@ -401,7 +416,33 @@ public class PoreInventory extends PoreWrapper<org.spongepowered.api.item.invent
 
     @Override
     public InventoryType getType() {
-        throw new NotImplementedException();
+        //TODO: partial implementation, needs work
+        // I don't think we can just check the carrier because inventories can be virtual regardless of type
+
+        // for chest
+        // dispenser
+        // dropper
+        // furnace
+        if (this.getHandle() instanceof CraftingInventory) {
+            GridInventory craftingGrid = ((CraftingInventory)this.getHandle()).getCraftingGrid();
+            if (craftingGrid.getRows() == 2) {
+                return InventoryType.CRAFTING;
+            }
+            else {
+                return InventoryType.WORKBENCH;
+            }
+        }
+        // enchanting
+        // brewing
+        if (this.getHandle() instanceof HumanInventory) {
+            return InventoryType.PLAYER;
+        }
+        // creative
+        // villager
+        // ender chest
+        // anvil
+        // beacon
+        return null;
     }
 
     @Override
@@ -415,13 +456,34 @@ public class PoreInventory extends PoreWrapper<org.spongepowered.api.item.invent
         return null;
     }
 
+     // I've worked with Bukkit for more than two years and this method is by far
+     // one of the worst ideas I've seen in it.
     @Override
     public ListIterator<ItemStack> iterator() {
-        throw new NotImplementedException();
+        return this.iterator(0);
     }
 
     @Override
     public ListIterator<ItemStack> iterator(int index) {
-        throw new NotImplementedException();
+        return new ItemStackIterator(this, index);
+    }
+
+    /**
+     * Convenience method for getting the first ItemStack in an inventory that
+     * matches the given criterion.
+     * @param bound The criterion to pass to
+     * {@link org.spongepowered.api.item.inventory.Inventory#query(Object...)}.
+     * @return The first match found in this inventory, or <code>null</code> if
+     *         one cannot be discovered.
+     */
+    protected ItemStack getArbitraryStack(Object bound) {
+        org.spongepowered.api.item.inventory.Inventory query = this.getHandle().query(bound);
+        if (query.capacity() >= 1) {
+            Optional<org.spongepowered.api.item.inventory.ItemStack> stack = query.peek();
+            if (stack.isPresent()) {
+                return ItemStackConverter.of(stack.get());
+            }
+        }
+        return null;
     }
 }
