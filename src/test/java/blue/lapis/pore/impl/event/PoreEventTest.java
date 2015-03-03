@@ -29,6 +29,7 @@ import static org.junit.Assert.fail;
 
 import blue.lapis.pore.PoreTests;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
@@ -146,7 +147,7 @@ public class PoreEventTest {
     }
 
     @Test
-    public void checkConstructor() throws Exception {
+    public void checkConstructor() throws Throwable {
         events:
         for (Class<?> eventImpl : poreEvents) {
             for (Constructor<?> constructor : eventImpl.getConstructors()) {
@@ -159,9 +160,15 @@ public class PoreEventTest {
                             constructor.newInstance(new Object[]{null});
                         } catch (InvocationTargetException e) {
                             Throwable cause = e.getCause();
-                            if (cause != null && cause instanceof NullPointerException) {
-                                continue events;
+                            if (cause != null) {
+                                if (cause instanceof NullPointerException
+                                        && Objects.equal(cause.getMessage(), "handle")) {
+                                    continue events;
+                                }
+
+                                throw cause;
                             }
+
                             throw e;
                         }
 

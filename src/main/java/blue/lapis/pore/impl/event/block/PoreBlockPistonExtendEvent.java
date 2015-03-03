@@ -41,7 +41,7 @@ public class PoreBlockPistonExtendEvent extends BlockPistonExtendEvent {
     private final BlockEvent handle;
 
     public PoreBlockPistonExtendEvent(BlockEvent handle) {
-        super(null, null, null);
+        super(null, -1, null);
         this.handle = checkNotNull(handle, "handle");
     }
 

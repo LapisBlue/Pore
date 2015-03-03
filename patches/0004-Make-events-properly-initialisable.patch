@@ -1,0 +1,143 @@
+From b62ec8f116e2588e8371266570230c9d6f4425e6 Mon Sep 17 00:00:00 2001
+From: Minecrell <dev@minecrell.net>
+Date: Tue, 3 Mar 2015 22:31:03 +0100
+Subject: [PATCH] Make events properly initialisable
+
+
+diff --git a/src/main/java/org/bukkit/event/Event.java b/src/main/java/org/bukkit/event/Event.java
+index fa29c27..e579967 100644
+--- a/src/main/java/org/bukkit/event/Event.java
++++ b/src/main/java/org/bukkit/event/Event.java
+@@ -93,4 +93,8 @@ public abstract class Event {
+          */
+         ALLOW;
+     }
++
++    protected final boolean isPoreEvent() {
++        return getClass().getName().startsWith("blue.lapis.pore.impl.event."); // TODO: Keep up to date
++    }
+ }
+diff --git a/src/main/java/org/bukkit/event/block/BlockMultiPlaceEvent.java b/src/main/java/org/bukkit/event/block/BlockMultiPlaceEvent.java
+index d16e4be..e6b9ee0 100644
+--- a/src/main/java/org/bukkit/event/block/BlockMultiPlaceEvent.java
++++ b/src/main/java/org/bukkit/event/block/BlockMultiPlaceEvent.java
+@@ -19,8 +19,14 @@ public class BlockMultiPlaceEvent extends BlockPlaceEvent {
+     private final List<BlockState> states;
+ 
+     public BlockMultiPlaceEvent(List<BlockState> states, Block clicked, ItemStack itemInHand, Player thePlayer, boolean canBuild) {
+-        super(states.get(0).getBlock(), states.get(0), clicked, itemInHand, thePlayer, canBuild);
+-        this.states = ImmutableList.copyOf(states);
++        super(null, null, clicked, itemInHand, thePlayer, canBuild);
++        if (isPoreEvent()) {
++            this.states = null;
++        } else {
++            this.block = states.get(0).getBlock();
++            this.replacedBlockState = states.get(0);
++            this.states = ImmutableList.copyOf(states);
++        }
+     }
+ 
+     /**
+diff --git a/src/main/java/org/bukkit/event/enchantment/EnchantItemEvent.java b/src/main/java/org/bukkit/event/enchantment/EnchantItemEvent.java
+index de28f1d..a06ceba 100644
+--- a/src/main/java/org/bukkit/event/enchantment/EnchantItemEvent.java
++++ b/src/main/java/org/bukkit/event/enchantment/EnchantItemEvent.java
+@@ -32,7 +32,7 @@ public class EnchantItemEvent extends InventoryEvent implements Cancellable {
+         this.table = table;
+         this.item = item;
+         this.level = level;
+-        this.enchants = new HashMap<Enchantment, Integer>(enchants);
++        this.enchants = isPoreEvent() ? null : new HashMap<Enchantment, Integer>(enchants);
+         this.cancelled = false;
+         this.button = i;
+     }
+diff --git a/src/main/java/org/bukkit/event/player/PlayerEditBookEvent.java b/src/main/java/org/bukkit/event/player/PlayerEditBookEvent.java
+index ea7ecef..ff75381 100644
+--- a/src/main/java/org/bukkit/event/player/PlayerEditBookEvent.java
++++ b/src/main/java/org/bukkit/event/player/PlayerEditBookEvent.java
+@@ -23,11 +23,13 @@ public class PlayerEditBookEvent extends PlayerEvent implements Cancellable {
+     public PlayerEditBookEvent(Player who, int slot, BookMeta previousBookMeta, BookMeta newBookMeta, boolean isSigning) {
+         super(who);
+ 
+-        Validate.isTrue(slot >= 0 && slot <=8, "Slot must be in range 0-8 inclusive");
+-        Validate.notNull(previousBookMeta, "Previous book meta must not be null");
+-        Validate.notNull(newBookMeta, "New book meta must not be null");
++        if (!isPoreEvent()) {
++            Validate.isTrue(slot >= 0 && slot <=8, "Slot must be in range 0-8 inclusive");
++            Validate.notNull(previousBookMeta, "Previous book meta must not be null");
++            Validate.notNull(newBookMeta, "New book meta must not be null");
+ 
+-        Bukkit.getItemFactory().equals(previousBookMeta, newBookMeta);
++            Bukkit.getItemFactory().equals(previousBookMeta, newBookMeta);
++        }
+ 
+         this.previousBookMeta = previousBookMeta;
+         this.newBookMeta = newBookMeta;
+diff --git a/src/main/java/org/bukkit/event/world/ChunkEvent.java b/src/main/java/org/bukkit/event/world/ChunkEvent.java
+index 4710d40..b1bde64 100644
+--- a/src/main/java/org/bukkit/event/world/ChunkEvent.java
++++ b/src/main/java/org/bukkit/event/world/ChunkEvent.java
+@@ -9,7 +9,7 @@ public abstract class ChunkEvent extends WorldEvent {
+     protected Chunk chunk;
+ 
+     protected ChunkEvent(final Chunk chunk) {
+-        super(chunk.getWorld());
++        super(chunk);
+         this.chunk = chunk;
+     }
+ 
+diff --git a/src/main/java/org/bukkit/event/world/PortalCreateEvent.java b/src/main/java/org/bukkit/event/world/PortalCreateEvent.java
+index d83d7a9..c7fb32d 100644
+--- a/src/main/java/org/bukkit/event/world/PortalCreateEvent.java
++++ b/src/main/java/org/bukkit/event/world/PortalCreateEvent.java
+@@ -14,13 +14,13 @@ import java.util.Collection;
+ public class PortalCreateEvent extends WorldEvent implements Cancellable {
+     private static final HandlerList handlers = new HandlerList();
+     private boolean cancel = false;
+-    private final ArrayList<Block> blocks = new ArrayList<Block>();
++    private final ArrayList<Block> blocks;
+     private CreateReason reason = CreateReason.FIRE;
+ 
+     public PortalCreateEvent(final Collection<Block> blocks, final World world, CreateReason reason) {
+         super(world);
+ 
+-        this.blocks.addAll(blocks);
++        this.blocks = isPoreEvent() ? null : new ArrayList<Block>(blocks);
+         this.reason = reason;
+     }
+ 
+diff --git a/src/main/java/org/bukkit/event/world/StructureGrowEvent.java b/src/main/java/org/bukkit/event/world/StructureGrowEvent.java
+index 62d300d..fe57c79 100644
+--- a/src/main/java/org/bukkit/event/world/StructureGrowEvent.java
++++ b/src/main/java/org/bukkit/event/world/StructureGrowEvent.java
+@@ -22,7 +22,7 @@ public class StructureGrowEvent extends WorldEvent implements Cancellable {
+     private final List<BlockState> blocks;
+ 
+     public StructureGrowEvent(final Location location, final TreeType species, final boolean bonemeal, final Player player, final List<BlockState> blocks) {
+-        super(location.getWorld());
++        super(location);
+         this.location = location;
+         this.species = species;
+         this.bonemeal = bonemeal;
+diff --git a/src/main/java/org/bukkit/event/world/WorldEvent.java b/src/main/java/org/bukkit/event/world/WorldEvent.java
+index bd89b81..e4bc7c3 100644
+--- a/src/main/java/org/bukkit/event/world/WorldEvent.java
++++ b/src/main/java/org/bukkit/event/world/WorldEvent.java
+@@ -13,6 +13,14 @@ public abstract class WorldEvent extends Event {
+         this.world = world;
+     }
+ 
++    protected WorldEvent(final org.bukkit.Chunk chunk) {
++        this.world = isPoreEvent() ? null : chunk.getWorld();
++    }
++
++    protected WorldEvent(final org.bukkit.Location location) {
++        this.world = isPoreEvent() ? null : location.getWorld();
++    }
++
+     /**
+      * Gets the world primarily involved with this event
+      *
+-- 
+2.3.1
+

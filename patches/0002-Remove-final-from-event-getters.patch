@@ -1,7 +1,7 @@
-From a366e8518bfb0e58b182210cd4dbb598dd8d2c44 Mon Sep 17 00:00:00 2001
+From 4876d21ad1258d70667d37133215751f2fec95d8 Mon Sep 17 00:00:00 2001
 From: Minecrell <dev@minecrell.net>
-Date: Mon, 26 Jan 2015 22:51:58 +0100
-Subject: [PATCH] Make events properly overridable for Pore
+Date: Tue, 3 Mar 2015 22:19:10 +0100
+Subject: [PATCH] Remove final from event getters
 
 
 diff --git a/src/main/java/org/bukkit/event/block/BlockEvent.java b/src/main/java/org/bukkit/event/block/BlockEvent.java
@@ -56,28 +56,6 @@ index 054efbc..c44bbf8 100644
          return channel;
      }
  
-diff --git a/src/main/java/org/bukkit/event/player/PlayerEditBookEvent.java b/src/main/java/org/bukkit/event/player/PlayerEditBookEvent.java
-index ea7ecef..61e6f75 100644
---- a/src/main/java/org/bukkit/event/player/PlayerEditBookEvent.java
-+++ b/src/main/java/org/bukkit/event/player/PlayerEditBookEvent.java
-@@ -23,11 +23,12 @@ public class PlayerEditBookEvent extends PlayerEvent implements Cancellable {
-     public PlayerEditBookEvent(Player who, int slot, BookMeta previousBookMeta, BookMeta newBookMeta, boolean isSigning) {
-         super(who);
- 
--        Validate.isTrue(slot >= 0 && slot <=8, "Slot must be in range 0-8 inclusive");
--        Validate.notNull(previousBookMeta, "Previous book meta must not be null");
--        Validate.notNull(newBookMeta, "New book meta must not be null");
--
--        Bukkit.getItemFactory().equals(previousBookMeta, newBookMeta);
-+        if (getClass() == PlayerEditBookEvent.class) {
-+            Validate.isTrue(slot >= 0 && slot <=8, "Slot must be in range 0-8 inclusive");
-+            Validate.notNull(previousBookMeta, "Previous book meta must not be null");
-+            Validate.notNull(newBookMeta, "New book meta must not be null");
-+            Bukkit.getItemFactory().equals(previousBookMeta, newBookMeta);
-+        }
- 
-         this.previousBookMeta = previousBookMeta;
-         this.newBookMeta = newBookMeta;
 diff --git a/src/main/java/org/bukkit/event/player/PlayerEvent.java b/src/main/java/org/bukkit/event/player/PlayerEvent.java
 index 0d4833f..20106ce 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerEvent.java
@@ -118,5 +96,5 @@ index 0cae9bc..5d88767 100644
      }
  }
 -- 
-2.3.0
+2.3.1
 
