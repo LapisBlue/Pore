@@ -84,17 +84,17 @@ public class PorePlayerInventory extends PoreInventory implements PlayerInventor
 
     @Override
     public void setArmorContents(ItemStack[] items) {
-        final int LENGTH = items.length;
-        if (LENGTH > 0) {
+        final int length = items.length;
+        if (length > 0) {
             this.setHelmet(items[0]);
         }
-        if (LENGTH > 1) {
+        if (length > 1) {
             this.setChestplate(items[1]);
         }
-        if (LENGTH > 2) {
+        if (length > 2) {
             this.setLeggings(items[2]);
         }
-        if (LENGTH > 3) {
+        if (length > 3) {
             this.setBoots(items[3]);
         }
     }

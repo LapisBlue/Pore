@@ -30,14 +30,15 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.Maps;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.Carrier;
+import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.Slot;
 import org.spongepowered.api.item.inventory.crafting.CraftingInventory;
 import org.spongepowered.api.item.inventory.entity.HumanInventory;
@@ -52,13 +53,13 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
-public class PoreInventory extends PoreWrapper<org.spongepowered.api.item.inventory.Inventory> implements Inventory {
+public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.inventory.Inventory {
 
-    public static PoreInventory of(org.spongepowered.api.item.inventory.Inventory handle) {
+    public static PoreInventory of(Inventory handle) {
         return WrapperConverter.of(PoreInventory.class, handle);
     }
 
-    protected PoreInventory(org.spongepowered.api.item.inventory.Inventory handle) {
+    protected PoreInventory(Inventory handle) {
         super(handle);
     }
 
@@ -100,7 +101,7 @@ public class PoreInventory extends PoreWrapper<org.spongepowered.api.item.invent
     @Override
     public void setItem(int index, ItemStack item) {
         if (this.getHandle() instanceof OrderedInventory) {
-            Optional<org.spongepowered.api.item.inventory.Slot> slot =
+            Optional<Slot> slot =
                     ((OrderedInventory)this.getHandle()).getSlot(new SlotIndex(index));
             if (slot.isPresent()) {
                 slot.get().set(ItemStackConverter.of(item));
@@ -114,7 +115,7 @@ public class PoreInventory extends PoreWrapper<org.spongepowered.api.item.invent
 
     @Override
     public HashMap<Integer, ItemStack> addItem(ItemStack... items) throws IllegalArgumentException {
-        HashMap<Integer, ItemStack> remainder = new HashMap<Integer, ItemStack>();
+        HashMap<Integer, ItemStack> remainder = Maps.newHashMap();
         int i = 0;
         for (ItemStack stack : items) {
             if (stack == null) {
@@ -132,11 +133,11 @@ public class PoreInventory extends PoreWrapper<org.spongepowered.api.item.invent
 
     @Override
     public HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException {
-        HashMap<Integer, ItemStack> notRemoved = new HashMap<Integer, ItemStack>();
+        HashMap<Integer, ItemStack> notRemoved = Maps.newHashMap();
         int i = 0;
         for (ItemStack stack : items) {
             Inventory query = this.getHandle().query(ItemStackConverter.of(stack));
-            if (query.getSize() == 0) {
+            if (query.size() == 0) {
                 notRemoved.put(i, stack);
                 continue;
             }
@@ -154,7 +155,7 @@ public class PoreInventory extends PoreWrapper<org.spongepowered.api.item.invent
      *         in this inventory.
      */
     private HashMap<Integer, ItemStack> getOrderedContents() {
-        HashMap<Integer, ItemStack> matches = new HashMap<Integer, ItemStack>();
+        HashMap<Integer, ItemStack> matches = Maps.newHashMap();
         if (this.getHandle() instanceof OrderedInventory) {
             OrderedInventory ordered = (OrderedInventory)this.getHandle();
             for (int i = 0; i < ordered.size(); i++) {
@@ -296,7 +297,7 @@ public class PoreInventory extends PoreWrapper<org.spongepowered.api.item.invent
 
     @Override
     public HashMap<Integer, ? extends ItemStack> all(Material material) throws IllegalArgumentException {
-        HashMap<Integer, ItemStack> matches = new HashMap<Integer, ItemStack>();
+        HashMap<Integer, ItemStack> matches = Maps.newHashMap();
         for (Map.Entry<Integer, ItemStack> e : this.getOrderedContents().entrySet()) {
             if (e.getValue().getType().equals(material)) {
                 matches.put(e.getKey(), e.getValue());
@@ -307,7 +308,7 @@ public class PoreInventory extends PoreWrapper<org.spongepowered.api.item.invent
 
     @Override
     public HashMap<Integer, ? extends ItemStack> all(ItemStack item) {
-        HashMap<Integer, ItemStack> matches = new HashMap<Integer, ItemStack>();
+        HashMap<Integer, ItemStack> matches = Maps.newHashMap();
         for (Map.Entry<Integer, ItemStack> e : this.getOrderedContents().entrySet()) {
             if (e.getValue().equals(item)) {
                 matches.put(e.getKey(), e.getValue());
@@ -427,8 +428,7 @@ public class PoreInventory extends PoreWrapper<org.spongepowered.api.item.invent
             GridInventory craftingGrid = ((CraftingInventory)this.getHandle()).getCraftingGrid();
             if (craftingGrid.getRows() == 2) {
                 return InventoryType.CRAFTING;
-            }
-            else {
+            } else {
                 return InventoryType.WORKBENCH;
             }
         }
@@ -477,7 +477,7 @@ public class PoreInventory extends PoreWrapper<org.spongepowered.api.item.invent
      *         one cannot be discovered.
      */
     protected ItemStack getArbitraryStack(Object bound) {
-        org.spongepowered.api.item.inventory.Inventory query = this.getHandle().query(bound);
+        Inventory query = this.getHandle().query(bound);
         if (query.capacity() >= 1) {
             Optional<org.spongepowered.api.item.inventory.ItemStack> stack = query.peek();
             if (stack.isPresent()) {
