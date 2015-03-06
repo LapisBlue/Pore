@@ -187,7 +187,7 @@ public class PoreEventTest {
             Class<?> bukkitEvent = eventImpl.getSuperclass();
             for (Method method : bukkitEvent.getMethods()) {
                 int modifiers = method.getModifiers();
-                if (Modifier.isStatic(modifiers) || Modifier.isFinal(modifiers) || isDefault(method)
+                if (Modifier.isStatic(modifiers) || isDefault(method)
                         || method.getDeclaringClass() == Event.class || method.getDeclaringClass() == Object.class
                         || method.getName().equals("getHandlers") || method.getName().startsWith("_INVALID_")) {
                     continue;
