@@ -87,6 +87,7 @@ shadowJar {
     configurations = [project.configurations.bukkit]
     dependencies {
         exclude dependency('com.google.guava:guava')
+        exclude dependency('com.google.code.gson:gson')
     }
 }
 

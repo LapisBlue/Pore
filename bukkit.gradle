@@ -5,7 +5,7 @@ apply plugin: 'idea'
 defaultTasks 'clean', 'build'
 
 group = 'blue.lapis.pore'
-version = '1.8-SNAPSHOT' // TODO: Keep up to date
+version = '1.8.3-R0.1-SNAPSHOT' // TODO: Keep up to date
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -24,6 +24,7 @@ dependencies {
         exclude module: 'junit'
     }
     compile 'com.google.guava:guava:17.0'
+    compile 'com.google.code.gson:gson:2.2.4'
     compile 'org.avaje:ebean:2.8.1'
     compile 'org.yaml:snakeyaml:1.14'
 
