@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.impl;
 
+import blue.lapis.pore.PoreVersion;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.command.PoreConsoleCommandSender;
 import blue.lapis.pore.impl.entity.PorePlayer;
@@ -198,17 +199,17 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public String getName() {
-        return "Pore";
+        return PoreVersion.NAME;
     }
 
     @Override
     public String getVersion() {
-        return game.getImplementationVersion();
+        return PoreVersion.VERSION + '@' + game.getImplementationVersion();
     }
 
     @Override
     public String getBukkitVersion() {
-        return "Pore-" + getVersion();
+        return PoreVersion.API_VERSION + '@' + game.getApiVersion();
     }
 
     @Override

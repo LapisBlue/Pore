@@ -38,6 +38,10 @@ repositories {
     maven { url 'http://repo.spongepowered.org/maven' }
 }
 
+project('Porekit') {
+    apply from: rootProject.file('bukkit.gradle')
+}
+
 configurations {
     bukkit
     compile {
@@ -81,6 +85,16 @@ remap {
 
 jar { // The Pore classes will be created in Pore-VERSION-base.jar first
     classifier = 'base'
+    manifest {
+        attributes(
+                'Specification-Title': 'Bukkit',
+                'Specification-Version': project('Porekit').version,
+                'Specification-Vendor': 'SpigotMC',
+                'Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Implementation-Vendor': 'Lapis'
+        )
+    }
 }
 
 shadowJar {
@@ -110,10 +124,6 @@ checkstyle {
             'severity': 'warning'
     ]
     configFile = file('checkstyle.xml')
-}
-
-project('Porekit') {
-    apply from: rootProject.file('bukkit.gradle')
 }
 
 // Disable tests and checkstyle for SpongeAPI
