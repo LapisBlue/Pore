@@ -106,7 +106,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public Block getBlockAt(int x, int y, int z) {
-        return PoreBlock.of(getHandle().getBlock(x, y, z));
+        return PoreBlock.of(getHandle().getFullBlock(x, y, z));
     }
 
     @Override

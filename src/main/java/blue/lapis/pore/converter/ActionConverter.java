@@ -27,13 +27,14 @@ package blue.lapis.pore.converter;
 import org.bukkit.event.block.Action;
 import org.spongepowered.api.block.BlockLoc;
 import org.spongepowered.api.entity.EntityInteractionType;
+import org.spongepowered.api.entity.EntityInteractionTypes;
 
 public class ActionConverter {
 
     public static Action of(EntityInteractionType type, BlockLoc clicked) {
-        if (type == EntityInteractionType.LEFT_CLICK) {
+        if (type == EntityInteractionTypes.ATTACK) {
             return clicked == null ? Action.LEFT_CLICK_AIR : Action.LEFT_CLICK_BLOCK;
-        } else if (type == EntityInteractionType.RIGHT_CLICK) {
+        } else if (type == EntityInteractionTypes.USE) {
             return clicked == null ? Action.RIGHT_CLICK_AIR : Action.RIGHT_CLICK_BLOCK;
         }
         //TODO: do something about EnitityInteractionType.MIDDLE_CLICK
@@ -42,13 +43,13 @@ public class ActionConverter {
 
     public static EntityInteractionType of(Action action) {
         if (action == Action.LEFT_CLICK_AIR) {
-            return EntityInteractionType.LEFT_CLICK;
+            return EntityInteractionTypes.ATTACK;
         } else if (action == Action.LEFT_CLICK_BLOCK) {
-            return EntityInteractionType.LEFT_CLICK;
+            return EntityInteractionTypes.ATTACK;
         } else if (action == Action.RIGHT_CLICK_AIR) {
-            return EntityInteractionType.RIGHT_CLICK;
+            return EntityInteractionTypes.USE;
         } else if (action == Action.RIGHT_CLICK_BLOCK) {
-            return EntityInteractionType.RIGHT_CLICK;
+            return EntityInteractionTypes.USE;
         }
         //TODO: do somethinb about Action.PHYSICAL
         return null;

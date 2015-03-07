@@ -452,17 +452,17 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public float getExhaustion() {
-        return getHandle().getHunger();
+        return (float) getHandle().getExhaustion();
     }
 
     @Override
     public void setExhaustion(float value) {
-        getHandle().setHunger(value);
+        getHandle().setExhaustion(value);
     }
 
     @Override
     public float getSaturation() {
-        return getHandle().getSaturation();
+        return (float) getHandle().getSaturation();
     }
 
     @Override
@@ -542,12 +542,12 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public boolean getAllowFlight() {
-        return getHandle().getAllowFlight();
+        throw new NotImplementedException();
     }
 
     @Override
     public void setAllowFlight(boolean flight) {
-        getHandle().setAllowFlight(flight);
+        throw new NotImplementedException();
     }
 
     @Override

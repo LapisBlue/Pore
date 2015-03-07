@@ -66,7 +66,7 @@ public class PoreChunk extends PoreWrapper<Chunk> implements org.bukkit.Chunk {
 
     @Override
     public Block getBlock(int x, int y, int z) {
-        return PoreBlock.of(getHandle().getBlock(x, y, z));
+        return PoreBlock.of(getHandle().getFullBlock(x, y, z));
     }
 
     @Override
