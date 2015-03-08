@@ -43,6 +43,32 @@ index 74d458a..07f978a 100644
          return player;
      }
  
+diff --git a/src/main/java/org/bukkit/event/inventory/InventoryCloseEvent.java b/src/main/java/org/bukkit/event/inventory/InventoryCloseEvent.java
+index 19889b2..09550a8 100644
+--- a/src/main/java/org/bukkit/event/inventory/InventoryCloseEvent.java
++++ b/src/main/java/org/bukkit/event/inventory/InventoryCloseEvent.java
+@@ -20,7 +20,7 @@ public class InventoryCloseEvent extends InventoryEvent {
+      *
+      * @return Player who is involved in this event
+      */
+-    public final HumanEntity getPlayer() {
++    public HumanEntity getPlayer() {
+         return transaction.getPlayer();
+     }
+ 
+diff --git a/src/main/java/org/bukkit/event/inventory/InventoryOpenEvent.java b/src/main/java/org/bukkit/event/inventory/InventoryOpenEvent.java
+index c3570aa..5755497 100644
+--- a/src/main/java/org/bukkit/event/inventory/InventoryOpenEvent.java
++++ b/src/main/java/org/bukkit/event/inventory/InventoryOpenEvent.java
+@@ -22,7 +22,7 @@ public class InventoryOpenEvent extends InventoryEvent implements Cancellable {
+      *
+      * @return Player who is involved in this event
+      */
+-    public final HumanEntity getPlayer() {
++    public HumanEntity getPlayer() {
+         return transaction.getPlayer();
+     }
+ 
 diff --git a/src/main/java/org/bukkit/event/player/PlayerChannelEvent.java b/src/main/java/org/bukkit/event/player/PlayerChannelEvent.java
 index 054efbc..c44bbf8 100644
 --- a/src/main/java/org/bukkit/event/player/PlayerChannelEvent.java
