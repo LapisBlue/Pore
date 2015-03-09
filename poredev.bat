@@ -67,17 +67,13 @@ GOTO :EOF
 :clean_patches
     rem Based on https://hub.spigotmc.org/stash/projects/SPIGOT/repos/spigot/browse/rebuildPatches.sh#7
 	setlocal enableDelayedExpansion
-    for /r %%p in (%1\*.patch) do (
-		for /f "delims=" %%c in (%%p) do (
-			if !%%c==""! (
-				set gitver=%%c
-			)
-		)
-        for /f %%i in ('git diff --staged %%p ^| findstr /R "^(\+^|\-)" ^| findstr /R /V "(From [a-z0-9]{32,}^|\-\-\- a^|\+\+\+ b^|.index)"') do set diffs=%%i
-		for /f %%i in ('call :tail "%diffs%" 2 ^| findstr /R /V "^$"') do set tmpStore=%%i
-		for /f %%i in ('call :tail "%tmpStore%" 1 ^| findstr "%gitver%"') do set testver=%%i
+    for /f %%p in ('dir /b /s %1\*.patch') do (
+		SET gitver=tail -n 2 %%p | grep -ve "^$" | tail -n 1
+        SET diffs=git diff --staged %%p | grep -E "^(\+|\-)" | grep -Ev "(From [a-z0-9]{32,}|\-\-\- a|\+\+\+ b|.index)"
+
+        SET testver=echo "%diffs%" | tail -n 2 | grep -ve "^$" | tail -n 1 | grep "%gitver%"
         if !"x%testver%"=="x"! (
-            for /f %%i in ('call :head "%diffs%" 2') do set diffs=%%i
+            SET diffs=echo "%diffs%" | head -n -2
         )
 
         if "x%diffs%"=="x" (
