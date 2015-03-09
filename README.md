@@ -14,7 +14,7 @@ Gradle is used to handle dependencies.
 
 - Clone the repo: `git clone https://github.com/LapisBlue/Pore.git`
 - Navigate to the new directory: `cd Pore`
-- Initialize the project: `./poredev update` (no native Windows script yet, although `sh ./poredev update` may work)
+- Initialize the project: `./poredev update` (`poredev update` on Windows)
 - Compile the project using the Gradle wrapper: `./gradlew` (`gradlew` on Windows)
 
 Questions?
