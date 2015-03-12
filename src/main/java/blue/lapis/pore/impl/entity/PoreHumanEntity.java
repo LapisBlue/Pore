@@ -113,7 +113,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     public InventoryView openWorkbench(Location location, boolean force) {
         BlockLoc block = LocationConverter.of(location).getBlock();
         if (force || block.getType() == BlockTypes.CRAFTING_TABLE) {
-            if (force || block instanceof Carrier) {
+            if (block instanceof Carrier) {
                 return this.openInventory(PoreInventory.of(((Carrier)block).getInventory()));
             }
         }
@@ -124,7 +124,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     public InventoryView openEnchanting(Location location, boolean force) {
         BlockLoc block = LocationConverter.of(location).getBlock();
         if (force || block.getType() == BlockTypes.ENCHANTING_TABLE) {
-            if (force || block instanceof Carrier) {
+            if (block instanceof Carrier) {
                 return this.openInventory(PoreInventory.of(((Carrier)block).getInventory()));
             }
         }
