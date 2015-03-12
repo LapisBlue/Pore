@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.SoundConverter;
+import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
@@ -46,8 +47,14 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
+import org.spongepowered.api.block.BlockLoc;
+import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.effect.sound.SoundType;
 import org.spongepowered.api.entity.player.Player;
+import org.spongepowered.api.entity.player.tab.PlayerTabInfo;
+import org.spongepowered.api.text.message.Message;
+import org.spongepowered.api.text.message.MessageBuilder;
+import org.spongepowered.api.text.message.Messages;
 
 import java.net.InetSocketAddress;
 import java.util.LinkedHashMap;
@@ -81,27 +88,32 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setDisplayName(String name) {
-        throw new NotImplementedException();
+        this.getHandle().setDisplayName(Messages.fromLegacy(name));
     }
 
     @Override
     public String getPlayerListName() {
-        return getDisplayName(); //TODO: temporary measure
+        Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
+        return info.isPresent() ? info.get().getDisplayName().toLegacy() : this.getDisplayName();
     }
 
     @Override
     public void setPlayerListName(String name) {
+        Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
+        if (info.isPresent()) {
+            info.get().setDisplayName(Messages.fromLegacy(name));
+        }
+    }
+
+    @Override
+    public Location getCompassTarget() {
         throw new NotImplementedException();
     }
 
     @Override
     public void setCompassTarget(Location loc) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public Location getCompassTarget() {
         throw new NotImplementedException();
     }
 
@@ -137,7 +149,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void sendRawMessage(String message) {
-        sendMessage(message);
+        this.sendMessage(message);
     }
 
     @Override
@@ -157,12 +169,12 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public boolean isSneaking() {
-        throw new NotImplementedException();
+        return this.getHandle().isSneaking();
     }
 
     @Override
     public void setSneaking(boolean sneak) {
-        throw new NotImplementedException();
+        this.getHandle().setSneaking(sneak);
     }
 
     @Override
@@ -186,12 +198,12 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     }
 
     @Override
-    public void setSleepingIgnored(boolean isSleeping) {
+    public boolean isSleepingIgnored() {
         throw new NotImplementedException();
     }
 
     @Override
-    public boolean isSleepingIgnored() {
+    public void setSleepingIgnored(boolean isSleeping) {
         throw new NotImplementedException();
     }
 
@@ -412,42 +424,42 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void giveExp(int amount) {
-        throw new NotImplementedException();
+        this.getHandle().setTotalExperience(this.getHandle().getTotalExperience() + amount);
     }
 
     @Override
     public void giveExpLevels(int amount) {
-        throw new NotImplementedException();
+        this.getHandle().setLevel(this.getHandle().getLevel() + amount);
     }
 
     @Override
     public float getExp() {
-        throw new NotImplementedException();
+        return this.getHandle().getExperienceSinceLevel() / this.getHandle().getExperienceBetweenLevels();
     }
 
     @Override
     public void setExp(float exp) {
-        throw new NotImplementedException();
+        this.getHandle().setExperienceSinceLevel((int)(this.getHandle().getExperienceBetweenLevels() * exp));
     }
 
     @Override
     public int getLevel() {
-        throw new NotImplementedException();
+        return this.getHandle().getLevel();
     }
 
     @Override
     public void setLevel(int level) {
-        throw new NotImplementedException();
+        this.getHandle().setLevel(level);
     }
 
     @Override
     public int getTotalExperience() {
-        throw new NotImplementedException();
+        return this.getHandle().getTotalExperience();
     }
 
     @Override
     public void setTotalExperience(int exp) {
-        throw new NotImplementedException();
+        this.getHandle().setTotalExperience(exp);
     }
 
     @Override
@@ -472,12 +484,12 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public int getFoodLevel() {
-        throw new NotImplementedException();
+        return (int) this.getHandle().getFoodLevel();
     }
 
     @Override
     public void setFoodLevel(int value) {
-        throw new NotImplementedException();
+        this.getHandle().setFoodLevel(value);
     }
 
     @Override
@@ -527,19 +539,58 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public Location getBedSpawnLocation() {
-        throw new NotImplementedException();
+        return LocationConverter.of(this.getHandle().getBedLocation().orNull());
     }
 
     @Override
     public void setBedSpawnLocation(Location location) {
-        throw new NotImplementedException();
+        this.setBedSpawnLocation(location, false);
     }
 
     @Override
     public void setBedSpawnLocation(Location location, boolean force) {
-        throw new NotImplementedException();
+        org.spongepowered.api.world.Location spongeLoc = LocationConverter.of(location);
+        BlockLoc block = spongeLoc.getBlock();
+        if (force || block.getType() == BlockTypes.BED) {
+            this.getHandle().setBedLocation(spongeLoc);
+        }
     }
 
+    @Override
+    public void hidePlayer(org.bukkit.entity.Player player) {
+        if (!(player instanceof PorePlayer)) { // not sure why this might return false, but just in case
+            throw new UnsupportedOperationException("Cannot check invisibility status of non-wrapped player");
+        }
+        ((PorePlayer)player).getHandle().setInvisibleTo(this.getHandle(), true);
+    }
+
+    @Override
+    public void showPlayer(org.bukkit.entity.Player player) {
+        if (!(player instanceof PorePlayer)) { // not sure why this might return false, but just in case
+            throw new UnsupportedOperationException("Cannot check invisibility status of non-wrapped player");
+        }
+        ((PorePlayer)player).getHandle().setInvisibleTo(this.getHandle(), false);
+    }
+
+    @Override
+    public boolean canSee(org.bukkit.entity.Player player) {
+        if (!(player instanceof PorePlayer)) { // not sure why this might return false, but just in case
+            throw new UnsupportedOperationException("Cannot check invisibility status of non-wrapped player");
+        }
+        return ((PorePlayer)player).getHandle().isInvisibleTo(this.getHandle());
+    }
+
+    @Override
+    public boolean isFlying() {
+        return this.getHandle().isFlying();
+    }
+
+    @Override
+    public void setFlying(boolean value) {
+        this.getHandle().setFlying(value);
+    }
+
+    //TODO: movement speeds and flight toggle will be included with the attributes API
     @Override
     public boolean getAllowFlight() {
         throw new NotImplementedException();
@@ -551,32 +602,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     }
 
     @Override
-    public void hidePlayer(org.bukkit.entity.Player player) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void showPlayer(org.bukkit.entity.Player player) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public boolean canSee(org.bukkit.entity.Player player) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public boolean isFlying() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setFlying(boolean value) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setFlySpeed(float value) throws IllegalArgumentException {
+    public float getWalkSpeed() {
         throw new NotImplementedException();
     }
 
@@ -591,7 +617,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     }
 
     @Override
-    public float getWalkSpeed() {
+    public void setFlySpeed(float value) throws IllegalArgumentException {
         throw new NotImplementedException();
     }
 
@@ -615,8 +641,14 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
         throw new NotImplementedException();
     }
 
+    //TODO: As far as I can tell this is unique to Bukkit, so it'll need to be handled exclusively by Pore.
     @Override
     public boolean isHealthScaled() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public double getHealthScale() {
         throw new NotImplementedException();
     }
 
@@ -627,11 +659,6 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void setHealthScale(double scale) throws IllegalArgumentException {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public double getHealthScale() {
         throw new NotImplementedException();
     }
 

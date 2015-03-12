@@ -24,12 +24,19 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import blue.lapis.pore.converter.ItemStackConverter;
+import blue.lapis.pore.converter.type.GameModeConverter;
+import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.impl.inventory.PoreInventory;
+import blue.lapis.pore.impl.inventory.PoreInventoryView;
+import blue.lapis.pore.impl.inventory.PorePlayerInventory;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -38,7 +45,11 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
+import org.spongepowered.api.block.BlockLoc;
+import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.entity.living.Human;
+import org.spongepowered.api.item.inventory.Carrier;
+import org.spongepowered.api.item.inventory.entity.HumanInventory;
 import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.api.util.Tristate;
 
@@ -66,7 +77,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public PlayerInventory getInventory() {
-        throw new NotImplementedException(); //TODO
+        return PorePlayerInventory.of((HumanInventory)this.getHandle().getInventory());
     }
 
     @Override
@@ -81,7 +92,11 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public InventoryView getOpenInventory() {
-        throw new NotImplementedException(); //TODO
+        return PoreInventoryView.builder()
+                .setPlayer(this)
+                .setTopInventory(this.getHandle().getOpenInventory().orNull())
+                .setBottomInventory(this.getHandle().getInventory())
+                .build();
     }
 
     @Override
@@ -96,27 +111,39 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public InventoryView openWorkbench(Location location, boolean force) {
-        throw new NotImplementedException(); //TODO
+        BlockLoc block = LocationConverter.of(location).getBlock();
+        if (block.getType() == BlockTypes.CRAFTING_TABLE) {
+            if (block instanceof Carrier) {
+                return this.openInventory(PoreInventory.of(((Carrier)block).getInventory()));
+            }
+        }
+        return null;
     }
 
     @Override
     public InventoryView openEnchanting(Location location, boolean force) {
-        throw new NotImplementedException(); //TODO
+        BlockLoc block = LocationConverter.of(location).getBlock();
+        if (block.getType() == BlockTypes.ENCHANTING_TABLE) {
+            if (block instanceof Carrier) {
+                return this.openInventory(PoreInventory.of(((Carrier)block).getInventory()));
+            }
+        }
+        return null;
     }
 
     @Override
     public void closeInventory() {
-        throw new NotImplementedException(); //TODO
+        this.getHandle().closeInventory();
     }
 
     @Override
     public ItemStack getItemInHand() {
-        throw new NotImplementedException(); //TODO
+        return ItemStackConverter.of(this.getHandle().getItemInHand().orNull());
     }
 
     @Override
     public void setItemInHand(ItemStack item) {
-        throw new NotImplementedException(); //TODO
+        this.getHandle().setItemInHand(ItemStackConverter.of(item));
     }
 
     @Override
@@ -141,12 +168,18 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public GameMode getGameMode() {
-        throw new NotImplementedException(); //TODO
+        if (!(this instanceof Player)) {
+            throw new UnsupportedOperationException("Cannot get gamemode of non-player human");
+        }
+        return GameModeConverter.of(((org.spongepowered.api.entity.player.Player)this).getGameMode());
     }
 
     @Override
     public void setGameMode(GameMode mode) {
-        throw new NotImplementedException(); //TODO
+        if (!(this instanceof Player)) {
+            throw new UnsupportedOperationException("Cannot get gamemode of non-player human");
+        }
+        ((org.spongepowered.api.entity.player.Player)this.getHandle()).setGameMode(GameModeConverter.of(mode));
     }
 
     @Override
@@ -156,7 +189,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public int getExpToLevel() {
-        throw new NotImplementedException(); //TODO
+        return this.getHandle().getExperienceBetweenLevels() - this.getHandle().getExperienceSinceLevel();
     }
 
     @Override
