@@ -1,4 +1,4 @@
-From b62ec8f116e2588e8371266570230c9d6f4425e6 Mon Sep 17 00:00:00 2001
+From 8ed8ba404f210bd612713c555dc2c30721cec63c Mon Sep 17 00:00:00 2001
 From: Minecrell <dev@minecrell.net>
 Date: Tue, 3 Mar 2015 22:31:03 +0100
 Subject: [PATCH] Make events properly initialisable
@@ -50,6 +50,23 @@ index de28f1d..a06ceba 100644
 +        this.enchants = isPoreEvent() ? null : new HashMap<Enchantment, Integer>(enchants);
          this.cancelled = false;
          this.button = i;
+     }
+diff --git a/src/main/java/org/bukkit/event/inventory/InventoryClickEvent.java b/src/main/java/org/bukkit/event/inventory/InventoryClickEvent.java
+index 28198b8..20ac7d9 100644
+--- a/src/main/java/org/bukkit/event/inventory/InventoryClickEvent.java
++++ b/src/main/java/org/bukkit/event/inventory/InventoryClickEvent.java
+@@ -62,7 +62,11 @@ public class InventoryClickEvent extends InventoryInteractEvent {
+         super(view);
+         this.slot_type = type;
+         this.rawSlot = slot;
+-        this.whichSlot = view.convertSlot(slot);
++        if (isPoreEvent()) {
++            this.whichSlot = -1;
++        } else {
++            this.whichSlot = view.convertSlot(slot);
++        }
+         this.click = click;
+         this.action = action;
      }
 diff --git a/src/main/java/org/bukkit/event/player/PlayerEditBookEvent.java b/src/main/java/org/bukkit/event/player/PlayerEditBookEvent.java
 index ea7ecef..ff75381 100644
@@ -139,5 +156,5 @@ index bd89b81..e4bc7c3 100644
       * Gets the world primarily involved with this event
       *
 -- 
-2.3.1
+2.3.3
 
