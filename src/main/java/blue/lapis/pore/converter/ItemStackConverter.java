@@ -28,14 +28,18 @@ import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.MaterialConverter;
 
 import org.spongepowered.api.item.ItemType;
+import org.spongepowered.api.item.data.DurabilityData;
+import org.spongepowered.api.item.data.ItemData;
+import org.spongepowered.api.item.inventory.ItemStack;
+import org.spongepowered.api.item.inventory.ItemStackBuilder;
 
 public class ItemStackConverter {
 
     public static org.bukkit.inventory.ItemStack of(org.spongepowered.api.item.inventory.ItemStack stack) {
         return new org.bukkit.inventory.ItemStack(
                 MaterialConverter.of(stack.getItem()),
-                stack.getQuantity(),
-                stack.getDamage()
+                stack.getQuantity()
+                //TODO: durability
         );
     }
 
@@ -49,7 +53,7 @@ public class ItemStackConverter {
         return Pore.getGame().getRegistry().getItemBuilder() // Eh, this shouldn't be in the registry
                 .itemType(type)
                 .quantity(stack.getAmount())
-                .damage(stack.getDurability())
+                //.damage(stack.getDurability()) //TODO: convert to ItemData
                 .maxQuantity(stack.getType().getMaxStackSize())
                 .build();
     }

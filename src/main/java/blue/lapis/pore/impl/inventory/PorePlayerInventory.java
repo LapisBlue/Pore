@@ -36,6 +36,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.spongepowered.api.item.data.DurabilityData;
+import org.spongepowered.api.item.data.ItemData;
 import org.spongepowered.api.item.inventory.Slot;
 import org.spongepowered.api.item.inventory.entity.Hotbar;
 import org.spongepowered.api.item.inventory.entity.HumanInventory;
@@ -165,10 +167,11 @@ public class PorePlayerInventory extends PoreInventory implements PlayerInventor
             if (stackOptional.isPresent()) {
                 org.spongepowered.api.item.inventory.ItemStack stack = stackOptional.get();
                 if (id == -1 || stack.getItem() == MaterialConverter.asItem(Material.getMaterial(id))) {
-                    if (data == -1 || stack.getDamage() == data) {
+                    //TODO: determine damage value
+                    //if (data == -1 || durability == data) {
                         removed += stack.getQuantity();
                         slot.clear();
-                    }
+                    //}
                 }
             }
         }
