@@ -123,6 +123,7 @@ public class PoreCraftItemEvent extends org.bukkit.event.inventory.CraftItemEven
     public boolean isShiftClick() {
         throw new NotImplementedException();
     }
+
     @Override
     public int getSlot() {
         throw new NotImplementedException();
