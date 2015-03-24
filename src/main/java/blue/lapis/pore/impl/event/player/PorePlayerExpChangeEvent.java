@@ -28,7 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Player;
-import org.spongepowered.api.event.entity.living.player.PlayerExpChangeEvent;
+import org.spongepowered.api.event.entity.player.PlayerExpChangeEvent;
 
 public class PorePlayerExpChangeEvent extends org.bukkit.event.player.PlayerExpChangeEvent {
 

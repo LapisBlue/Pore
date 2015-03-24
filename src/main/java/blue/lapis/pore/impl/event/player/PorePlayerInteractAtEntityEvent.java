@@ -31,7 +31,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.event.entity.living.player.PlayerInteractEntityEvent;
+import org.spongepowered.api.event.entity.player.PlayerInteractEntityEvent;
 
 public class PorePlayerInteractAtEntityEvent extends PlayerInteractAtEntityEvent {
 

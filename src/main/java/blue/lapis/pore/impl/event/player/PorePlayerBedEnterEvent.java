@@ -30,7 +30,7 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerBedEnterEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerEnterBedEvent;
+import org.spongepowered.api.event.entity.player.PlayerEnterBedEvent;
 
 public class PorePlayerBedEnterEvent extends PlayerBedEnterEvent {
 

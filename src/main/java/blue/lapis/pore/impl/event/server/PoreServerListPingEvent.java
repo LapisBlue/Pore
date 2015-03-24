@@ -26,13 +26,14 @@ package blue.lapis.pore.impl.event.server;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.converter.TextConverter;
 import blue.lapis.pore.impl.util.PoreCachedServerIcon;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.util.CachedServerIcon;
 import org.spongepowered.api.event.server.StatusPingEvent;
-import org.spongepowered.api.text.message.Messages;
+import org.spongepowered.api.text.Texts;
 
 import java.net.InetAddress;
 import java.util.Iterator;
@@ -57,12 +58,13 @@ public class PoreServerListPingEvent extends ServerListPingEvent {
 
     @Override
     public String getMotd() {
-        return handle.getResponse().getDescription().toLegacy();
+        return TextConverter.of(handle.getResponse().getDescription());
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setMotd(String motd) {
-        handle.getResponse().setDescription(Messages.fromLegacy(motd));
+        handle.getResponse().setDescription(Texts.fromLegacy(motd));
     }
 
     @Override

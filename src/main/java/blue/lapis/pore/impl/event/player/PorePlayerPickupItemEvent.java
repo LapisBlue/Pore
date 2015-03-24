@@ -30,7 +30,7 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerPickupItemEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerPickUpItemEvent;
+import org.spongepowered.api.event.entity.player.PlayerPickUpItemEvent;
 
 public class PorePlayerPickupItemEvent extends PlayerPickupItemEvent {
 

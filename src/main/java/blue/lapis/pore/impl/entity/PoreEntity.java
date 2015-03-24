@@ -83,8 +83,8 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
         loc.setX(getHandle().getLocation().getPosition().getX());
         loc.setY(getHandle().getLocation().getPosition().getX());
         loc.setZ(getHandle().getLocation().getPosition().getX());
-        loc.setPitch(getHandle().getRotation().getX());
-        loc.setYaw(getHandle().getRotation().getY());
+        loc.setPitch((float)getHandle().getRotation().getX());
+        loc.setYaw((float)getHandle().getRotation().getY());
         return loc;
     }
 

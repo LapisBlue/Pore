@@ -32,7 +32,7 @@ import blue.lapis.pore.impl.entity.PorePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerBreakBlockEvent;
+import org.spongepowered.api.event.entity.player.PlayerBreakBlockEvent;
 
 public class PoreBlockBreakEvent extends BlockBreakEvent {
 

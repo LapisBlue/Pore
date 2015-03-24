@@ -30,7 +30,7 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Fish;
 import org.bukkit.entity.Player;
-import org.spongepowered.api.event.entity.living.player.fishing.PlayerFishEvent;
+import org.spongepowered.api.event.entity.player.fishing.PlayerFishEvent;
 
 public class PorePlayerFishEvent extends org.bukkit.event.player.PlayerFishEvent {
 

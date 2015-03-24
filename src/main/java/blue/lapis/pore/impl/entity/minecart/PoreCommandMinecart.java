@@ -34,6 +34,8 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.entity.vehicle.minecart.MinecartCommandBlock;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.Texts;
 
 import java.util.Set;
 
@@ -78,13 +80,19 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void sendMessage(String message) {
-        getHandle().sendMessage(message);
+        getHandle().sendMessage(Texts.fromLegacy(message));
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void sendMessage(String[] messages) {
-        getHandle().sendMessage(messages);
+        Text[] texts = new Text[messages.length];
+        for (int i = 0; i < messages.length; i++) {
+            texts[i] = Texts.fromLegacy(messages[i]);
+        }
+        this.getHandle().sendMessage(texts);
     }
 
     @Override

@@ -39,14 +39,14 @@ import java.util.List;
 
 public class PorePlayerDeathEvent extends PlayerDeathEvent {
 
-    private final org.spongepowered.api.event.entity.living.player.PlayerDeathEvent handle;
+    private final org.spongepowered.api.event.entity.player.PlayerDeathEvent handle;
 
-    public PorePlayerDeathEvent(org.spongepowered.api.event.entity.living.player.PlayerDeathEvent handle) {
+    public PorePlayerDeathEvent(org.spongepowered.api.event.entity.player.PlayerDeathEvent handle) {
         super(null, null, -1, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public org.spongepowered.api.event.entity.living.player.PlayerDeathEvent getHandle() {
+    public org.spongepowered.api.event.entity.player.PlayerDeathEvent getHandle() {
         return this.handle;
     }
 

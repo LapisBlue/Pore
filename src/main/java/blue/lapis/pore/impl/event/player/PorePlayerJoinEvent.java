@@ -26,11 +26,12 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.converter.TextConverter;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
 import org.bukkit.entity.Player;
-import org.spongepowered.api.event.entity.living.player.PlayerJoinEvent;
-import org.spongepowered.api.text.message.Messages;
+import org.spongepowered.api.event.entity.player.PlayerJoinEvent;
+import org.spongepowered.api.text.Texts;
 
 public class PorePlayerJoinEvent extends org.bukkit.event.player.PlayerJoinEvent {
 
@@ -52,12 +53,13 @@ public class PorePlayerJoinEvent extends org.bukkit.event.player.PlayerJoinEvent
 
     @Override
     public String getJoinMessage() {
-        return handle.getJoinMessage().toLegacy();
+        return TextConverter.of(handle.getJoinMessage());
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setJoinMessage(String joinMessage) {
-        handle.setJoinMessage(Messages.fromLegacy(joinMessage));
+        handle.setJoinMessage(Texts.fromLegacy(joinMessage));
     }
 
 }

@@ -22,46 +22,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.impl.event.player;
+package blue.lapis.pore.converter;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.text.format.TextColor;
+import org.spongepowered.api.text.format.TextStyle;
 
-import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.spongepowered.api.event.entity.player.PlayerInteractEntityEvent;
+public class TextConverter {
 
-public class PorePlayerInteractEntityEvent extends org.bukkit.event.player.PlayerInteractEntityEvent {
-
-    private final PlayerInteractEntityEvent handle;
-
-    public PorePlayerInteractEntityEvent(PlayerInteractEntityEvent handle) {
-        super(null, null);
-        this.handle = checkNotNull(handle, "handle");
-    }
-
-    public PlayerInteractEntityEvent getHandle() {
-        return handle;
-    }
-
-    @Override
-    public Player getPlayer() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public Entity getRightClicked() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public boolean isCancelled() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+    /**
+     * Converts the given {@link Text} to a legacy string.
+     * @param text The {@link Text} to convert
+     * @return The corresponding legacy string
+     */
+    public static String of(Text text) {
+        StringBuilder sb = new StringBuilder();
+        for (Text t : text.withChildren()) {
+            if (t.getColor() instanceof TextColor.Base) { // verify it's a legacy-compatible color
+                sb.append(Texts.getLegacyChar())
+                        .append(((TextColor.Base) t.getColor()).getCode());
+            }
+            if (t.getStyle() instanceof TextStyle.Base) { // verify it's a legacy-compatible style
+                sb.append(Texts.getLegacyChar())
+                        .append(((TextStyle.Base) t.getStyle()).getCode());
+            }
+        }
+        return sb.toString();
     }
 
 }

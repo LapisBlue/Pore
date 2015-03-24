@@ -33,7 +33,7 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.event.entity.living.player.PlayerEvent;
+import org.spongepowered.api.event.entity.player.PlayerEvent;
 
 public class PorePlayerBucketEmptyEvent extends PlayerBucketEmptyEvent {
 

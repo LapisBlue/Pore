@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl;
 
 import blue.lapis.pore.PoreVersion;
+import blue.lapis.pore.converter.TextConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.command.PoreConsoleCommandSender;
 import blue.lapis.pore.impl.entity.PorePlayer;
@@ -694,7 +695,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public String getMotd() {
-        return getHandle().getMotd().toLegacy();
+        return TextConverter.of(getHandle().getMotd());
     }
 
     @Override

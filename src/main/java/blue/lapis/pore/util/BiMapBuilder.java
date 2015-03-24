@@ -26,9 +26,6 @@ package blue.lapis.pore.util;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import com.google.common.collect.Maps;
-
-import java.util.Map;
 
 /**
  * Utility class for building Maps via chained method calls.

@@ -30,7 +30,7 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerChangeGameModeEvent;
+import org.spongepowered.api.event.entity.player.PlayerChangeGameModeEvent;
 
 public class PorePlayerGameModeChangeEvent extends PlayerGameModeChangeEvent {
 

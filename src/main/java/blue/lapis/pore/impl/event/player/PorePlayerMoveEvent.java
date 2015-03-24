@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.spongepowered.api.event.entity.living.player.PlayerMoveEvent;
+import org.spongepowered.api.event.entity.player.PlayerMoveEvent;
 
 public class PorePlayerMoveEvent extends org.bukkit.event.player.PlayerMoveEvent {
 

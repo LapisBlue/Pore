@@ -35,7 +35,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.event.entity.living.player.PlayerPlaceBlockEvent;
+import org.spongepowered.api.event.entity.player.PlayerPlaceBlockEvent;
 
 public class PoreBlockPlaceEvent extends org.bukkit.event.block.BlockPlaceEvent {
 

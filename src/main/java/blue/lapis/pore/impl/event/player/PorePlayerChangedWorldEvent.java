@@ -30,7 +30,7 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerChangeWorldEvent;
+import org.spongepowered.api.event.entity.player.PlayerChangeWorldEvent;
 
 public class PorePlayerChangedWorldEvent extends PlayerChangedWorldEvent {
 

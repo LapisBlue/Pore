@@ -24,16 +24,16 @@
  */
 package blue.lapis.pore.converter.vector;
 
-import com.flowpowered.math.vector.Vector3f;
+import com.flowpowered.math.vector.Vector3d;
 import org.bukkit.util.EulerAngle;
 
 public class EulerAngleConverter {
 
-    public static EulerAngle of(Vector3f dir) {
+    public static EulerAngle of(Vector3d dir) {
         return new EulerAngle(dir.getX(), dir.getY(), dir.getZ());
     }
 
-    public static Vector3f of(EulerAngle angle) {
-        return new Vector3f(angle.getX(), angle.getY(), angle.getZ());
+    public static Vector3d of(EulerAngle angle) {
+        return new Vector3d(angle.getX(), angle.getY(), angle.getZ());
     }
 }

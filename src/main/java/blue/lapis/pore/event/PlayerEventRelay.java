@@ -26,6 +26,7 @@ package blue.lapis.pore.event;
 
 import blue.lapis.pore.converter.ActionConverter;
 import blue.lapis.pore.converter.ItemStackConverter;
+import blue.lapis.pore.converter.TextConverter;
 import blue.lapis.pore.converter.type.GameModeConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.impl.PoreWorld;
@@ -42,17 +43,17 @@ import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.event.entity.EntityInteractBlockEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerChangeGameModeEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerChangeWorldEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerChatEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerDeathEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerDropItemEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerInteractBlockEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerInteractEntityEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerJoinEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerMoveEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerPickUpItemEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerQuitEvent;
+import org.spongepowered.api.event.entity.player.PlayerChangeGameModeEvent;
+import org.spongepowered.api.event.entity.player.PlayerChangeWorldEvent;
+import org.spongepowered.api.event.entity.player.PlayerChatEvent;
+import org.spongepowered.api.event.entity.player.PlayerDeathEvent;
+import org.spongepowered.api.event.entity.player.PlayerDropItemEvent;
+import org.spongepowered.api.event.entity.player.PlayerInteractBlockEvent;
+import org.spongepowered.api.event.entity.player.PlayerInteractEntityEvent;
+import org.spongepowered.api.event.entity.player.PlayerJoinEvent;
+import org.spongepowered.api.event.entity.player.PlayerMoveEvent;
+import org.spongepowered.api.event.entity.player.PlayerPickUpItemEvent;
+import org.spongepowered.api.event.entity.player.PlayerQuitEvent;
 import org.spongepowered.api.util.event.Subscribe;
 
 import java.util.ArrayList;
@@ -88,7 +89,7 @@ public class PlayerEventRelay {
                 new org.bukkit.event.player.AsyncPlayerChatEvent(
                         false, //TODO: determine if this needs to be changed
                         PorePlayer.of(event.getPlayer()),
-                        event.getMessage().toLegacy(),
+                        TextConverter.of(event.getMessage()),
                         players //TODO: players should only include recipients
                 ) {
                     @Override
@@ -111,7 +112,7 @@ public class PlayerEventRelay {
                         0, //TODO: new player xp
                         0, //TODO: new total player xp
                         0, //TODO: new player level
-                        event.getDeathMessage().toLegacy()
+                        TextConverter.of(event.getDeathMessage())
                 )
         );
     }
@@ -189,7 +190,7 @@ public class PlayerEventRelay {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.player.PlayerJoinEvent(
                         PorePlayer.of(event.getPlayer()),
-                        event.getJoinMessage().toLegacy()
+                        TextConverter.of(event.getJoinMessage())
                 )
         );
     }
@@ -240,7 +241,7 @@ public class PlayerEventRelay {
         Bukkit.getPluginManager().callEvent(
                 new org.bukkit.event.player.PlayerQuitEvent(
                         PorePlayer.of(event.getPlayer()),
-                        event.getQuitMessage().toLegacy()
+                        TextConverter.of(event.getQuitMessage())
                 )
         );
     }

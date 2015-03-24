@@ -32,7 +32,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.event.entity.living.player.PlayerEvent;
+import org.spongepowered.api.event.entity.player.PlayerEvent;
 
 public class PorePlayerArmorStandManipulateEvent extends PlayerArmorStandManipulateEvent {
 

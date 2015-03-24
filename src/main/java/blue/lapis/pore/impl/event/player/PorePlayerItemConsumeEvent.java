@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.event.entity.living.player.PlayerItemConsumeEvent;
+import org.spongepowered.api.event.entity.player.PlayerItemConsumeEvent;
 
 public class PorePlayerItemConsumeEvent extends org.bukkit.event.player.PlayerItemConsumeEvent {
 

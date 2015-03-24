@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.event.player;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.event.player.PlayerPreLoginEvent;
-import org.spongepowered.api.event.entity.living.player.PlayerEvent;
+import org.spongepowered.api.event.entity.player.PlayerEvent;
 
 import java.net.InetAddress;
 import java.util.UUID;

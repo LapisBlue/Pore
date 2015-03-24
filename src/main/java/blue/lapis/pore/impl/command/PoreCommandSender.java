@@ -30,6 +30,8 @@ import blue.lapis.pore.impl.permissions.PorePermissible;
 
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.Texts;
 import org.spongepowered.api.util.command.CommandSource;
 
 public class PoreCommandSender extends PorePermissible implements CommandSender {
@@ -58,13 +60,19 @@ public class PoreCommandSender extends PorePermissible implements CommandSender 
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void sendMessage(String message) {
-        getHandle().sendMessage(message);
+        getHandle().sendMessage(Texts.fromLegacy(message));
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void sendMessage(String[] messages) {
-        getHandle().sendMessage(messages);
+        Text[] texts = new Text[messages.length];
+        for (int i = 0; i < messages.length; i++) {
+            texts[i] = Texts.fromLegacy(messages[i]);
+        }
+        this.getHandle().sendMessage(texts);
     }
 
 }

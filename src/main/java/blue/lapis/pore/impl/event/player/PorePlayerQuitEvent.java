@@ -26,11 +26,12 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.converter.TextConverter;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
 import org.bukkit.entity.Player;
-import org.spongepowered.api.event.entity.living.player.PlayerQuitEvent;
-import org.spongepowered.api.text.message.Messages;
+import org.spongepowered.api.event.entity.player.PlayerQuitEvent;
+import org.spongepowered.api.text.Texts;
 
 public class PorePlayerQuitEvent extends org.bukkit.event.player.PlayerQuitEvent {
 
@@ -52,12 +53,13 @@ public class PorePlayerQuitEvent extends org.bukkit.event.player.PlayerQuitEvent
 
     @Override
     public String getQuitMessage() {
-        return handle.getQuitMessage().toLegacy();
+        return TextConverter.of(handle.getQuitMessage());
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setQuitMessage(String quitMessage) {
-        handle.setQuitMessage(Messages.fromLegacy(quitMessage));
+        handle.setQuitMessage(Texts.fromLegacy(quitMessage));
     }
 
 }

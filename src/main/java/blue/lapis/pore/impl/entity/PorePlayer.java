@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.Pore;
+import blue.lapis.pore.converter.TextConverter;
 import blue.lapis.pore.converter.type.SoundConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
@@ -52,9 +53,8 @@ import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.effect.sound.SoundType;
 import org.spongepowered.api.entity.player.Player;
 import org.spongepowered.api.entity.player.tab.PlayerTabInfo;
-import org.spongepowered.api.text.message.Message;
-import org.spongepowered.api.text.message.MessageBuilder;
-import org.spongepowered.api.text.message.Messages;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.Texts;
 
 import java.net.InetSocketAddress;
 import java.util.LinkedHashMap;
@@ -84,26 +84,27 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public String getDisplayName() {
-        return getHandle().getDisplayName().toLegacy();
+        return TextConverter.of(getHandle().getDisplayName());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setDisplayName(String name) {
-        this.getHandle().setDisplayName(Messages.fromLegacy(name));
+        this.getHandle().setDisplayName(Texts.fromLegacy(name));
     }
 
     @Override
     public String getPlayerListName() {
         Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
-        return info.isPresent() ? info.get().getDisplayName().toLegacy() : this.getDisplayName();
+        return info.isPresent() ? TextConverter.of(info.get().getDisplayName()) : this.getDisplayName();
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setPlayerListName(String name) {
         Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
         if (info.isPresent()) {
-            info.get().setDisplayName(Messages.fromLegacy(name));
+            info.get().setDisplayName(Texts.fromLegacy(name));
         }
     }
 
@@ -551,6 +552,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     public void setBedSpawnLocation(Location location, boolean force) {
         org.spongepowered.api.world.Location spongeLoc = LocationConverter.of(location);
         BlockLoc block = spongeLoc.getBlock();
+        //noinspection ConstantConditions
         if (force || block.getType() == BlockTypes.BED) {
             this.getHandle().setBedLocation(spongeLoc);
         }
@@ -663,13 +665,19 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void sendMessage(String message) {
-        getHandle().sendMessage(message);
+        getHandle().sendMessage(Texts.fromLegacy(message));
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void sendMessage(String[] messages) {
-        getHandle().sendMessage(messages);
+        Text[] texts = new Text[messages.length];
+        for (int i = 0; i < messages.length; i++) {
+            texts[i] = Texts.fromLegacy(messages[i]);
+        }
+        this.getHandle().sendMessage(texts);
     }
 
     @Override

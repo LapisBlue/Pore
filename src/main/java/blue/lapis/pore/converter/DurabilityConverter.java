@@ -95,7 +95,7 @@ public class DurabilityConverter {
                 .put(DyeColors.WHITE, (int)org.bukkit.DyeColor.WHITE.getDyeData())
                 .build();
         FISH_MAP = BiMapBuilder.<Fish, Integer>builder()
-                .put(Fishes.RAW_FISH, 0)
+                .put(Fishes.COD, 0)
                 .put(Fishes.SALMON, 1)
                 .put(Fishes.CLOWNFISH, 2)
                 .put(Fishes.PUFFERFISH, 3)

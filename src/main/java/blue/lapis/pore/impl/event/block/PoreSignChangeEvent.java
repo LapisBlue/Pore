@@ -26,14 +26,15 @@ package blue.lapis.pore.impl.event.block;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.converter.TextConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.spongepowered.api.event.block.data.SignChangeEvent;
-import org.spongepowered.api.text.message.Message;
-import org.spongepowered.api.text.message.Messages;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.Texts;
 
 public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent {
 
@@ -60,23 +61,24 @@ public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent 
 
     @Override
     public String[] getLines() {
-        Message[] lines = getHandle().getNewMessages();
+        Text[] lines = getHandle().getNewLines();
         String[] result = new String[lines.length];
         for (int i = 0; i < lines.length; i++) {
-            result[i] = lines[i].toLegacy();
+            result[i] = TextConverter.of(lines[i]);
         }
         return result;
     }
 
     @Override
     public String getLine(int index) throws IndexOutOfBoundsException {
-        return getHandle().getNewMessages()[index].toLegacy();
+        return TextConverter.of(getHandle().getNewLines()[index]);
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setLine(int index, String line) throws IndexOutOfBoundsException {
-        Message[] lines = getHandle().getNewMessages();
-        lines[index] = Messages.fromLegacy(line);
+        Text[] lines = getHandle().getNewLines();
+        lines[index] = Texts.fromLegacy(line);
         getHandle().setNewMessages(lines);
     }
 

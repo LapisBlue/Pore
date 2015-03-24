@@ -86,7 +86,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public Location getEyeLocation() {
-        return LocationConverter.fromVector3f(getHandle().getWorld(), getHandle().getEyeLocation());
+        return LocationConverter.fromVector3d(getHandle().getWorld(), getHandle().getEyeLocation());
     }
 
     @Override
