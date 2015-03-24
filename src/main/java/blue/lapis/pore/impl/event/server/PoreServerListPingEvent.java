@@ -26,7 +26,6 @@ package blue.lapis.pore.impl.event.server;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import blue.lapis.pore.converter.TextConverter;
 import blue.lapis.pore.impl.util.PoreCachedServerIcon;
 
 import org.bukkit.entity.Player;
@@ -58,7 +57,7 @@ public class PoreServerListPingEvent extends ServerListPingEvent {
 
     @Override
     public String getMotd() {
-        return TextConverter.of(handle.getResponse().getDescription());
+        return Texts.toLegacy(handle.getResponse().getDescription());
     }
 
     @Override

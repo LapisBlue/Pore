@@ -26,7 +26,6 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import blue.lapis.pore.converter.TextConverter;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
 import org.bukkit.entity.Player;
@@ -53,7 +52,7 @@ public class PorePlayerJoinEvent extends org.bukkit.event.player.PlayerJoinEvent
 
     @Override
     public String getJoinMessage() {
-        return TextConverter.of(handle.getJoinMessage());
+        return Texts.toLegacy(handle.getJoinMessage());
     }
 
     @Override

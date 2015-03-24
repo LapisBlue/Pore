@@ -26,13 +26,13 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import blue.lapis.pore.converter.TextConverter;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.spongepowered.api.event.entity.player.PlayerChatEvent;
+import org.spongepowered.api.text.Texts;
 
 import java.util.IllegalFormatException;
 import java.util.Set;
@@ -58,7 +58,7 @@ public class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent {
     @Override
     @SuppressWarnings("deprecation") // no sense in throwing warnings when we can't fix them
     public String getMessage() {
-        return TextConverter.of(handle.getMessage());
+        return Texts.toLegacy(handle.getMessage());
     }
 
     @Override

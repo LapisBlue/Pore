@@ -26,7 +26,6 @@ package blue.lapis.pore.impl.event.block;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import blue.lapis.pore.converter.TextConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -64,14 +63,14 @@ public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent 
         Text[] lines = getHandle().getNewLines();
         String[] result = new String[lines.length];
         for (int i = 0; i < lines.length; i++) {
-            result[i] = TextConverter.of(lines[i]);
+            result[i] = Texts.toLegacy(lines[i]);
         }
         return result;
     }
 
     @Override
     public String getLine(int index) throws IndexOutOfBoundsException {
-        return TextConverter.of(getHandle().getNewLines()[index]);
+        return Texts.toLegacy(getHandle().getNewLines()[index]);
     }
 
     @Override

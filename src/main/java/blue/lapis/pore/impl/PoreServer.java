@@ -25,7 +25,6 @@
 package blue.lapis.pore.impl;
 
 import blue.lapis.pore.PoreVersion;
-import blue.lapis.pore.converter.TextConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.command.PoreConsoleCommandSender;
 import blue.lapis.pore.impl.entity.PorePlayer;
@@ -82,6 +81,7 @@ import org.bukkit.util.CachedServerIcon;
 import org.bukkit.util.StringUtil;
 import org.bukkit.util.permissions.DefaultPermissions;
 import org.spongepowered.api.Game;
+import org.spongepowered.api.text.Texts;
 import org.spongepowered.api.util.command.source.ConsoleSource;
 
 import java.awt.image.BufferedImage;
@@ -695,7 +695,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public String getMotd() {
-        return TextConverter.of(getHandle().getMotd());
+        return Texts.toLegacy(getHandle().getMotd());
     }
 
     @Override

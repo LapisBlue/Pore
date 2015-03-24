@@ -25,7 +25,6 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.Pore;
-import blue.lapis.pore.converter.TextConverter;
 import blue.lapis.pore.converter.type.SoundConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
@@ -83,8 +82,9 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public String getDisplayName() {
-        return TextConverter.of(getHandle().getDisplayName());
+        return Texts.toLegacy(getHandle().getDisplayName());
     }
 
     @Override
@@ -96,7 +96,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     public String getPlayerListName() {
         Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
-        return info.isPresent() ? TextConverter.of(info.get().getDisplayName()) : this.getDisplayName();
+        return info.isPresent() ? Texts.toLegacy(info.get().getDisplayName()) : this.getDisplayName();
     }
 
     @Override
