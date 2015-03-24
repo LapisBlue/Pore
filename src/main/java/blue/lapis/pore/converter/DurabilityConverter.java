@@ -26,10 +26,10 @@ package blue.lapis.pore.converter;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.MaterialConverter;
-import blue.lapis.pore.util.BiMapBuilder;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -67,16 +67,18 @@ public class DurabilityConverter {
     //TODO: potions, somehow
 
     static {
-        COAL_MAP = BiMapBuilder.<CoalType, Integer>builder()
+        //noinspection ConstantConditions
+        COAL_MAP = ImmutableBiMap.<CoalType, Integer>builder()
                 .put(CoalTypes.COAL, 0)
                 .put(CoalTypes.CHARCOAL, 1)
                 .build();
-        COOKED_FISH_MAP = BiMapBuilder.<CookedFish, Integer>builder()
+        //noinspection ConstantConditions
+        COOKED_FISH_MAP = ImmutableBiMap.<CookedFish, Integer>builder()
                 .put(CookedFishes.COD, 0)
                 .put(CookedFishes.SALMON, 1)
                 .build();
-        //noinspection deprecation
-        DYE_MAP = BiMapBuilder.<DyeColor, Integer>builder()
+        //noinspection deprecation, ConstantConditions
+        DYE_MAP = ImmutableBiMap.<DyeColor, Integer>builder()
                 .put(DyeColors.BLACK, (int)org.bukkit.DyeColor.BLACK.getDyeData())
                 .put(DyeColors.RED, (int)org.bukkit.DyeColor.RED.getDyeData())
                 .put(DyeColors.GREEN, (int)org.bukkit.DyeColor.GREEN.getDyeData())
@@ -94,13 +96,15 @@ public class DurabilityConverter {
                 .put(DyeColors.ORANGE, (int)org.bukkit.DyeColor.ORANGE.getDyeData())
                 .put(DyeColors.WHITE, (int)org.bukkit.DyeColor.WHITE.getDyeData())
                 .build();
-        FISH_MAP = BiMapBuilder.<Fish, Integer>builder()
+        //noinspection ConstantConditions
+        FISH_MAP = ImmutableBiMap.<Fish, Integer>builder()
                 .put(Fishes.COD, 0)
                 .put(Fishes.SALMON, 1)
                 .put(Fishes.CLOWNFISH, 2)
                 .put(Fishes.PUFFERFISH, 3)
                 .build();
-        GOLDEN_APPLE_MAP = BiMapBuilder.<GoldenApple, Integer>builder()
+        //noinspection ConstantConditions
+        GOLDEN_APPLE_MAP = ImmutableBiMap.<GoldenApple, Integer>builder()
                 .put(GoldenApples.GOLDEN_APPLE, 0)
                 .put(GoldenApples.GOLDEN_APPLE, 1)
                 .build();
