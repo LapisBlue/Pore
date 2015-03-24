@@ -154,6 +154,11 @@ public class PoreBlockState extends PoreWrapper<TileEntity> implements BlockStat
     }
 
     @Override
+    public boolean isPlaced() {
+        throw new NotImplementedException();
+    }
+
+    @Override
     public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
         throw new NotImplementedException();
     }
