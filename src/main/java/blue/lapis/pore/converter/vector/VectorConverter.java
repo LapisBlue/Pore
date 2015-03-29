@@ -60,4 +60,9 @@ public class VectorConverter {
         return new Vector(vector.getX(), vector.getY(), vector.getZ());
     }
 
+    public static Vector getUnitVector(Vector vector) {
+        double mag = Math.sqrt(Math.pow(vector.getX(), 2) + Math.pow(vector.getY(), 2) + Math.pow(vector.getZ(), 2));
+        return new Vector(vector.getX() / mag, vector.getY() / mag, vector.getZ());
+    }
+
 }

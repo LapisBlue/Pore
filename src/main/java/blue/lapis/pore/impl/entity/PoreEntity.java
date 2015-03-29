@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.vector.LocationConverter;
+import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreWrapper;
@@ -90,12 +91,12 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public void setVelocity(Vector velocity) {
-        throw new NotImplementedException(); //TODO
+        this.getHandle().setVelocity(VectorConverter.create3d(velocity));
     }
 
     @Override
     public Vector getVelocity() {
-        throw new NotImplementedException(); //TODO
+        return VectorConverter.createBukkitVector(this.getHandle().getVelocity());
     }
 
     @Override
@@ -188,7 +189,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public void sendMessage(String message) {
-
+        //TODO: this isn't implemented in CB for the base entity class. Should we just let it silently fail?
     }
 
     @Override
@@ -480,6 +481,6 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public void setOp(boolean value) {
-
+        // do nothing
     }
 }

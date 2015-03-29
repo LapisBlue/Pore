@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang.NotImplementedException;
@@ -58,17 +59,18 @@ public class PoreFireball extends PoreProjectile implements org.bukkit.entity.Fi
 
     @Override
     public Vector getDirection() {
-        throw new NotImplementedException(); //TODO
+        //TODO: I'm not entirely sure how this method is supposed to behave, so this impl might change
+        return VectorConverter.getUnitVector(this.getVelocity()).multiply(0.1);
     }
 
     @Override
     public void setYield(float yield) {
-        throw new NotImplementedException();
+        this.getHandle().setExplosionPower((int)yield);
     }
 
     @Override
     public float getYield() {
-        throw new NotImplementedException();
+        return this.getHandle().getExplosionPower();
     }
 
     @Override

@@ -28,7 +28,6 @@ import blue.lapis.pore.converter.ItemStackConverter;
 import blue.lapis.pore.converter.vector.EulerAngleConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
@@ -176,12 +175,12 @@ public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entit
 
     @Override
     public boolean hasGravity() {
-        throw new NotImplementedException(); // TODO
+        return this.getHandle().hasGravity();
     }
 
     @Override
     public void setGravity(boolean gravity) {
-        throw new NotImplementedException(); // TODO
+        this.getHandle().setGravity(gravity);
     }
 
     @Override
@@ -196,12 +195,12 @@ public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entit
 
     @Override
     public boolean hasArms() {
-        throw new NotImplementedException(); // TODO
+        return getHandle().doesShowArms();
     }
 
     @Override
     public void setArms(boolean arms) {
-        throw new NotImplementedException(); // TODO
+        this.getHandle().setShowArms(arms);
     }
 
     @Override
