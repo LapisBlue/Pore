@@ -106,7 +106,7 @@ public class DurabilityConverter {
         //noinspection ConstantConditions
         GOLDEN_APPLE_MAP = ImmutableBiMap.<GoldenApple, Integer>builder()
                 .put(GoldenApples.GOLDEN_APPLE, 0)
-                .put(GoldenApples.GOLDEN_APPLE, 1)
+                .put(GoldenApples.ENCHANTED_GOLDEN_APPLE, 1)
                 .build();
     }
 

@@ -26,12 +26,16 @@ package blue.lapis.pore.impl;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.EffectConverter;
+import blue.lapis.pore.converter.type.DifficultyConverter;
+import blue.lapis.pore.converter.type.EntityConverter;
 import blue.lapis.pore.converter.type.EnvironmentConverter;
 import blue.lapis.pore.converter.type.SoundConverter;
+import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreEntity;
+import blue.lapis.pore.impl.entity.PoreFallingSand;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreCollections;
@@ -42,6 +46,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.BlockChangeDelegate;
@@ -272,22 +277,29 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public Entity spawnEntity(Location loc, EntityType type) {
-        throw new NotImplementedException();
+        return PoreEntity.of(
+                getHandle().createEntity(EntityConverter.of(type), VectorConverter.create3d(loc)).orNull()
+        );
     }
 
     @Override
     public LivingEntity spawnCreature(Location loc, EntityType type) {
-        throw new NotImplementedException();
+        Entity spawned = spawnEntity(loc, type);
+        if (!(spawned instanceof LivingEntity)) {
+            throw new IllegalArgumentException("Call to spawnCreature non-living entity type");
+        }
+        return (LivingEntity)spawned;
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public LivingEntity spawnCreature(Location loc, CreatureType type) {
-        throw new NotImplementedException();
+        return spawnCreature(loc, type.toEntityType());
     }
 
     @Override
     public LightningStrike strikeLightning(Location loc) {
-        throw new NotImplementedException();
+        return (LightningStrike)spawnEntity(loc, EntityType.LIGHTNING);
     }
 
     @Override
@@ -297,7 +309,6 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public List<Entity> getEntities() {
-        // TODO: Should this be unmodifiable?
         return PoreCollections.<org.spongepowered.api.entity.Entity, Entity>transformToList(
                 getHandle().getEntities(), WrapperConverter
                         .<org.spongepowered.api.entity.Entity, PoreEntity>getConverter()
@@ -307,8 +318,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     @Override
     public List<LivingEntity> getLivingEntities() {
         // This is basically copying every time, unfortunately there is no real better way because we can't
-        // filter
-        // Lists using Guava
+        // filter lists using Guava
         List<LivingEntity> living = Lists.newArrayList();
         for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()) {
             if (e instanceof org.spongepowered.api.entity.living.Living) {
@@ -506,20 +516,34 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <T extends Entity> T spawn(Location location, Class<T> clazz) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        Entity spawned = spawnEntity(location, EntityType.fromClass(clazz));
+        if (clazz.isAssignableFrom(spawned.getClass())) {
+            return (T) spawned;
+
+        } else {
+            throw new IllegalStateException("Spawned entity was not of the appropriate type: " +
+            "Expected " + clazz + ", found " + spawned.getClass());
+        }
     }
 
     @Override
     public FallingBlock spawnFallingBlock(Location location, Material material, byte data)
             throws IllegalArgumentException {
-        throw new NotImplementedException();
+        Entity spawned = spawnEntity(location, EntityType.FALLING_BLOCK);
+        if (!(spawned instanceof org.spongepowered.api.entity.FallingBlock)) {
+            throw new IllegalStateException("Spawned entity was not falling block!"); //TODO: exception type?
+        }
+        org.spongepowered.api.entity.FallingBlock fb = (org.spongepowered.api.entity.FallingBlock)spawned;
+        //TODO: set type and such
+        return PoreFallingSand.of(fb);
     }
 
     @Override
     public FallingBlock spawnFallingBlock(Location location, int blockId, byte blockData)
             throws IllegalArgumentException {
-        throw new NotImplementedException();
+        return spawnFallingBlock(location, Material.getMaterial(blockId), blockData);
     }
 
     @Override
@@ -628,12 +652,12 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public void setDifficulty(Difficulty difficulty) {
-        throw new NotImplementedException();
+        getHandle().setDifficulty(DifficultyConverter.of(difficulty));
     }
 
     @Override
     public Difficulty getDifficulty() {
-        throw new NotImplementedException();
+        return DifficultyConverter.of(getHandle().getDifficulty());
     }
 
     @Override

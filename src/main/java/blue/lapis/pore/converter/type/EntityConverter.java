@@ -90,7 +90,7 @@ public final class EntityConverter {
                     .add(EntityType.SPLASH_POTION, EntityTypes.SPLASH_POTION)
                     .add(EntityType.SQUID, EntityTypes.SQUID)
                     .add(EntityType.THROWN_EXP_BOTTLE, EntityTypes.THROWN_EXP_BOTTLE)
-                    .add(EntityType.UNKNOWN, EntityTypes.UNKNOWN)
+                    //.add(EntityType.UNKNOWN, EntityTypes.UNKNOWN) //TODO: this is null in Sponge
                     .add(EntityType.VILLAGER, EntityTypes.VILLAGER)
                     .add(EntityType.WEATHER, EntityTypes.WEATHER)
                     .add(EntityType.WITCH, EntityTypes.WITCH)

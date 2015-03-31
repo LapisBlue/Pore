@@ -1,0 +1,43 @@
+From 1942b843072911ea4e5f7331cbdf7e652b09a7f3 Mon Sep 17 00:00:00 2001
+From: caseif <caseif@caseif.net>
+Date: Mon, 30 Mar 2015 23:21:20 -0400
+Subject: [PATCH] Add method to get EntityType from Class
+
+
+diff --git a/src/main/java/org/bukkit/entity/EntityType.java b/src/main/java/org/bukkit/entity/EntityType.java
+index ccc024b..6123b9e 100644
+--- a/src/main/java/org/bukkit/entity/EntityType.java
++++ b/src/main/java/org/bukkit/entity/EntityType.java
+@@ -181,6 +181,8 @@ public enum EntityType {
+ 
+     private static final Map<String, EntityType> NAME_MAP = new HashMap<String, EntityType>();
+     private static final Map<Short, EntityType> ID_MAP = new HashMap<Short, EntityType>();
++    private static final Map<Class<? extends Entity>, EntityType> CLASS_MAP =
++            new HashMap<Class<? extends Entity>, EntityType>();
+ 
+     static {
+         for (EntityType type : values()) {
+@@ -190,6 +192,9 @@ public enum EntityType {
+             if (type.typeId > 0) {
+                 ID_MAP.put(type.typeId, type);
+             }
++            if (type.clazz != null) {
++                CLASS_MAP.put(type.clazz, type);
++            }
+         }
+     }
+ 
+@@ -259,6 +264,10 @@ public enum EntityType {
+         return ID_MAP.get((short) id);
+     }
+ 
++    public static EntityType fromClass(Class<? extends Entity> clazz) {
++        return CLASS_MAP.get(clazz);
++    }
++
+     /**
+      * Some entities cannot be spawned using {@link
+      * World#spawnEntity(Location, EntityType)} or {@link
+-- 
+1.9.4.msysgit.2
+

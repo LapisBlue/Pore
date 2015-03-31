@@ -74,8 +74,7 @@ public class PoreOfflinePlayer extends PoreWrapper<User> implements OfflinePlaye
     public void setBanned(boolean banned) {
         if (banned) {
             getHandle().ban(Bans.of(getHandle()));
-        }
-        else {
+        } else {
             getHandle().pardon();
         }
     }
