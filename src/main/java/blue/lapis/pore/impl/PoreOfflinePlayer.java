@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.impl;
 
+import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreWrapper;
@@ -34,6 +35,7 @@ import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.spongepowered.api.entity.player.User;
+import org.spongepowered.api.util.ban.Bans;
 
 import java.util.Map;
 import java.util.UUID;
@@ -70,7 +72,12 @@ public class PoreOfflinePlayer extends PoreWrapper<User> implements OfflinePlaye
 
     @Override
     public void setBanned(boolean banned) {
-        throw new NotImplementedException();
+        if (banned) {
+            getHandle().ban(Bans.of(getHandle()));
+        }
+        else {
+            getHandle().pardon();
+        }
     }
 
     @Override
@@ -80,7 +87,7 @@ public class PoreOfflinePlayer extends PoreWrapper<User> implements OfflinePlaye
 
     @Override
     public void setWhitelisted(boolean value) {
-        throw new NotImplementedException();
+        getHandle().setWhitelisted(value);
     }
 
     @Override
@@ -110,7 +117,7 @@ public class PoreOfflinePlayer extends PoreWrapper<User> implements OfflinePlaye
 
     @Override
     public Location getBedSpawnLocation() {
-        throw new NotImplementedException();
+        return LocationConverter.of(getHandle().getBedLocation().orNull());
     }
 
     @Override
