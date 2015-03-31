@@ -29,7 +29,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.SkullType;
 import org.bukkit.block.BlockFace;
-import org.spongepowered.api.block.data.Skull;
+import org.spongepowered.api.block.tile.Skull;
 
 public class PoreSkull extends PoreBlockState implements org.bukkit.block.Skull {
 

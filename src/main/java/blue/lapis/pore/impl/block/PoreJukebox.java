@@ -29,7 +29,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.block.Jukebox;
-import org.spongepowered.api.block.data.TileEntity;
+import org.spongepowered.api.block.tile.TileEntity;
 
 public class PoreJukebox extends PoreBlockState implements Jukebox {
 

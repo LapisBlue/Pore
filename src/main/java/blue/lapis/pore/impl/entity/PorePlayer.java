@@ -47,7 +47,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
-import org.spongepowered.api.block.BlockLoc;
 import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.effect.sound.SoundType;
 import org.spongepowered.api.entity.player.Player;
@@ -551,9 +550,8 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     public void setBedSpawnLocation(Location location, boolean force) {
         org.spongepowered.api.world.Location spongeLoc = LocationConverter.of(location);
-        BlockLoc block = spongeLoc.getBlock();
         //noinspection ConstantConditions
-        if (force || block.getType() == BlockTypes.BED) {
+        if (force || spongeLoc.getType() == BlockTypes.BED) {
             this.getHandle().setBedLocation(spongeLoc);
         }
     }

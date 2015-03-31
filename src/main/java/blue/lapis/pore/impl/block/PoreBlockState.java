@@ -38,7 +38,7 @@ import org.bukkit.block.BlockState;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
-import org.spongepowered.api.block.data.TileEntity;
+import org.spongepowered.api.block.tile.TileEntity;
 
 import java.util.List;
 
@@ -80,7 +80,7 @@ public class PoreBlockState extends PoreWrapper<TileEntity> implements BlockStat
 
     @Override
     public World getWorld() {
-        return PoreWorld.of(getHandle().getWorld());
+        return PoreWorld.of(getHandle().getBlock().getExtent());
     }
 
     @Override

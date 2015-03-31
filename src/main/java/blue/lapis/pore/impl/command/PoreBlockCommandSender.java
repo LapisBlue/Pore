@@ -48,7 +48,7 @@ public class PoreBlockCommandSender extends PoreCommandSender implements BlockCo
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(getHandle().getLocation().getBlock());
+        return PoreBlock.of(getHandle().getLocation());
     }
 
 }

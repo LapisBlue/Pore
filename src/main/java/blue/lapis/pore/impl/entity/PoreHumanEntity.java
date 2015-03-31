@@ -34,7 +34,6 @@ import blue.lapis.pore.impl.inventory.PorePlayerInventory;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -45,13 +44,13 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
-import org.spongepowered.api.block.BlockLoc;
 import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.entity.living.Human;
 import org.spongepowered.api.item.inventory.Carrier;
 import org.spongepowered.api.item.inventory.entity.HumanInventory;
 import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.api.util.Tristate;
+import org.spongepowered.api.world.Location;
 
 import java.util.Set;
 
@@ -110,8 +109,8 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     }
 
     @Override
-    public InventoryView openWorkbench(Location location, boolean force) {
-        BlockLoc block = LocationConverter.of(location).getBlock();
+    public InventoryView openWorkbench(org.bukkit.Location location, boolean force) {
+        Location block = LocationConverter.of(location);
         if (force || block.getType() == BlockTypes.CRAFTING_TABLE) {
             if (block instanceof Carrier) {
                 return this.openInventory(PoreInventory.of(((Carrier)block).getInventory()));
@@ -121,8 +120,8 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     }
 
     @Override
-    public InventoryView openEnchanting(Location location, boolean force) {
-        BlockLoc block = LocationConverter.of(location).getBlock();
+    public InventoryView openEnchanting(org.bukkit.Location location, boolean force) {
+        Location block = LocationConverter.of(location);
         if (force || block.getType() == BlockTypes.ENCHANTING_TABLE) {
             if (block instanceof Carrier) {
                 return this.openInventory(PoreInventory.of(((Carrier)block).getInventory()));

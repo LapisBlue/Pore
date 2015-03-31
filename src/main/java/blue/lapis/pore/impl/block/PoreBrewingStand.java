@@ -28,7 +28,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.inventory.BrewerInventory;
-import org.spongepowered.api.block.data.BrewingStand;
+import org.spongepowered.api.block.tile.carrier.BrewingStand;
 
 public class PoreBrewingStand extends PoreBlockState implements org.bukkit.block.BrewingStand {
 

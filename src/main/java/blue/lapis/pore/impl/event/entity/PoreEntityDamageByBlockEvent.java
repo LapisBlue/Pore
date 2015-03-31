@@ -36,9 +36,9 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
-import org.spongepowered.api.block.BlockLoc;
 import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.event.entity.EntityChangeHealthEvent;
+import org.spongepowered.api.world.Location;
 
 public class PoreEntityDamageByBlockEvent extends EntityDamageByBlockEvent {
 
@@ -49,7 +49,7 @@ public class PoreEntityDamageByBlockEvent extends EntityDamageByBlockEvent {
         this.handle = checkNotNull(handle, "handle");
         checkState(handle.getEntity() instanceof Living, "Bad entity type");
         checkState(handle.getCause().isPresent(), "Bad cause");
-        checkState(handle.getCause().get().getCause() instanceof BlockLoc, "Bad cause");
+        checkState(handle.getCause().get().getCause() instanceof Location, "Bad cause");
     }
 
     public EntityChangeHealthEvent getHandle() {
@@ -109,7 +109,7 @@ public class PoreEntityDamageByBlockEvent extends EntityDamageByBlockEvent {
 
     @Override
     public Block getDamager() {
-        return PoreBlock.of((BlockLoc) this.getHandle().getCause().get().getCause());
+        return PoreBlock.of((Location) this.getHandle().getCause().get().getCause());
     }
 
     @Override

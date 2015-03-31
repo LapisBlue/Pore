@@ -29,7 +29,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.inventory.Inventory;
 import org.spongepowered.api.block.BlockState;
-import org.spongepowered.api.block.data.Beacon;
+import org.spongepowered.api.block.tile.carrier.Beacon;
 
 public class PoreBeacon extends PoreBlockState implements org.bukkit.block.Beacon {
 

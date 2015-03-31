@@ -31,7 +31,7 @@ import blue.lapis.pore.impl.block.PoreBlock;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.spongepowered.api.event.block.data.SignChangeEvent;
+import org.spongepowered.api.event.block.tile.SignChangeEvent;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
 

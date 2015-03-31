@@ -30,7 +30,7 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.event.inventory.FurnaceSmeltEvent;
 import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.event.block.data.FurnaceSmeltItemEvent;
+import org.spongepowered.api.event.block.tile.FurnaceSmeltItemEvent;
 
 public class PoreFurnaceSmeltEvent extends FurnaceSmeltEvent {
 

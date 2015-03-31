@@ -25,13 +25,13 @@
 package blue.lapis.pore.converter;
 
 import org.bukkit.event.block.Action;
-import org.spongepowered.api.block.BlockLoc;
 import org.spongepowered.api.entity.EntityInteractionType;
 import org.spongepowered.api.entity.EntityInteractionTypes;
+import org.spongepowered.api.world.Location;
 
 public class ActionConverter {
 
-    public static Action of(EntityInteractionType type, BlockLoc clicked) {
+    public static Action of(EntityInteractionType type, Location clicked) {
         if (type == EntityInteractionTypes.ATTACK) {
             return clicked == null ? Action.LEFT_CLICK_AIR : Action.LEFT_CLICK_BLOCK;
         } else if (type == EntityInteractionTypes.USE) {

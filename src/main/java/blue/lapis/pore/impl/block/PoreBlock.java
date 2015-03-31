@@ -34,7 +34,6 @@ import blue.lapis.pore.util.PoreWrapper;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Chunk;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
@@ -45,20 +44,20 @@ import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
-import org.spongepowered.api.block.BlockLoc;
 import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.block.BlockTypes;
+import org.spongepowered.api.world.Location;
 
 import java.util.Collection;
 import java.util.List;
 
-public class PoreBlock extends PoreWrapper<BlockLoc> implements Block {
+public class PoreBlock extends PoreWrapper<Location> implements Block {
 
-    public static PoreBlock of(BlockLoc handle) {
+    public static PoreBlock of(Location handle) {
         return WrapperConverter.of(PoreBlock.class, handle);
     }
 
-    private PoreBlock(BlockLoc handle) {
+    private PoreBlock(Location handle) {
         super(handle);
     }
 
@@ -136,27 +135,27 @@ public class PoreBlock extends PoreWrapper<BlockLoc> implements Block {
 
     @Override
     public int getX() {
-        return getHandle().getX();
+        return (int)getHandle().getX();
     }
 
     @Override
     public int getY() {
-        return getHandle().getY();
+        return (int)getHandle().getY();
     }
 
     @Override
     public int getZ() {
-        return getHandle().getZ();
+        return (int)getHandle().getZ();
     }
 
     @Override
-    public Location getLocation() {
-        return LocationConverter.of(getHandle().getLocation());
+    public org.bukkit.Location getLocation() {
+        return LocationConverter.of(getHandle());
     }
 
     @Override
-    public Location getLocation(Location loc) {
-        return LocationConverter.apply(loc, getHandle().getLocation());
+    public org.bukkit.Location getLocation(org.bukkit.Location loc) {
+        return LocationConverter.apply(loc, getHandle());
     }
 
     @Override

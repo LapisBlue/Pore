@@ -89,13 +89,9 @@ import javax.annotation.Nullable;
 
 public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
-    public static PoreWorld of(World handle) {
-        return WrapperConverter.of(PoreWorld.class, handle);
-    }
-
     public static PoreWorld of(Extent handle) {
         if (handle instanceof World) {
-            return of((World) handle);
+            return WrapperConverter.of(PoreWorld.class, handle);
         }
         throw new UnsupportedOperationException(); // TODO
     }

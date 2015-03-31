@@ -34,13 +34,12 @@ import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.util.PoreCollections;
 
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.spongepowered.api.block.BlockLoc;
 import org.spongepowered.api.event.entity.EntityExplosionEvent;
+import org.spongepowered.api.world.Location;
 
 import java.util.List;
 
@@ -69,14 +68,14 @@ public class PoreEntityExplodeEvent extends EntityExplodeEvent {
 
     @Override
     public List<Block> blockList() {
-        return PoreCollections.<BlockLoc, Block>transformToList(
+        return PoreCollections.<Location, Block>transformToList(
                 this.getHandle().getBlocks(),
-                WrapperConverter.<BlockLoc, PoreBlock>getConverter()
+                WrapperConverter.<Location, PoreBlock>getConverter()
         );
     }
 
     @Override
-    public Location getLocation() {
+    public org.bukkit.Location getLocation() {
         return LocationConverter.of(this.getHandle().getExplosionLocation());
     }
 

@@ -29,7 +29,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
-import org.spongepowered.api.block.data.Banner;
+import org.spongepowered.api.block.tile.Banner;
 
 import java.util.List;
 
