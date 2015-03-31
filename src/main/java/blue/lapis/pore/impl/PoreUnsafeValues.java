@@ -27,6 +27,7 @@ package blue.lapis.pore.impl;
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.AchievementConverter;
 import blue.lapis.pore.converter.type.MaterialConverter;
+import blue.lapis.pore.converter.type.StatisticConverter;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -54,11 +55,9 @@ public class PoreUnsafeValues implements UnsafeValues {
         Optional<ItemType> item = Pore.getGame().getRegistry().getItem(name);
         if (block.isPresent()) {
             return MaterialConverter.of(block.get());
-        }
-        else if (item.isPresent()) {
+        } else if (item.isPresent()) {
             return MaterialConverter.of(item.get());
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -90,7 +89,13 @@ public class PoreUnsafeValues implements UnsafeValues {
 
     @Override
     public Statistic getStatisticFromInternalName(String name) {
-        throw new NotImplementedException();
+        //TODO: maybe search block and entity stats too if they're not encompassed
+        Optional<org.spongepowered.api.stats.Statistic> stat = Pore.getGame().getRegistry().getStatistic(name);
+        if (stat.isPresent()) {
+            return StatisticConverter.of(stat.get());
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -98,8 +103,7 @@ public class PoreUnsafeValues implements UnsafeValues {
         Optional<Achievement> ach = Pore.getGame().getRegistry().getAchievement(name);
         if (ach.isPresent()) {
             return AchievementConverter.of(ach.get());
-        }
-        else {
+        } else {
             return null;
         }
     }

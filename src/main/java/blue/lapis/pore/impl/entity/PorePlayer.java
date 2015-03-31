@@ -24,9 +24,15 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.AchievementConverter;
+import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.converter.type.MaterialConverter;
 import blue.lapis.pore.converter.type.SoundConverter;
+import blue.lapis.pore.converter.type.StatisticConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
@@ -52,6 +58,9 @@ import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.effect.sound.SoundType;
 import org.spongepowered.api.entity.player.Player;
 import org.spongepowered.api.entity.player.tab.PlayerTabInfo;
+import org.spongepowered.api.stats.BlockStatistic;
+import org.spongepowered.api.stats.EntityStatistic;
+import org.spongepowered.api.stats.StatisticGroup;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
 
@@ -291,96 +300,159 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void incrementStatistic(Statistic statistic) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        incrementStatistic(statistic, 1);
     }
 
     @Override
     public void decrementStatistic(Statistic statistic) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        decrementStatistic(statistic, 1);
     }
 
     @Override
     public void incrementStatistic(Statistic statistic, int amount) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        checkNotNull(statistic, "Statistic must not be null");
+        getHandle().addToStatistic(StatisticConverter.asStdStat(statistic), amount);
     }
 
     @Override
     public void decrementStatistic(Statistic statistic, int amount) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        incrementStatistic(statistic, -amount);
     }
 
     @Override
     public void setStatistic(Statistic statistic, int newValue) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        checkNotNull(statistic, "Statistic must not be null");
+        getHandle().setStatistic(StatisticConverter.asStdStat(statistic), newValue);
     }
 
     @Override
     public int getStatistic(Statistic statistic) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        checkNotNull(statistic, "Statistic must not be null");
+        return getHandle().getStatistic(StatisticConverter.asStdStat(statistic)).or(0L).intValue();
     }
 
     @Override
     public void incrementStatistic(Statistic statistic, Material material) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        incrementStatistic(statistic, material, 1);
     }
 
     @Override
     public void decrementStatistic(Statistic statistic, Material material) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        decrementStatistic(statistic, material, 1);
     }
 
     @Override
     public int getStatistic(Statistic statistic, Material material) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        checkNotNull(statistic, "Statistic must not be null");
+        checkState(statistic.getType() == Statistic.Type.BLOCK,
+                "Cannot augment non-block statistic " + statistic.name());
+        StatisticGroup group = StatisticConverter.asGroupStat(statistic);
+        Optional<BlockStatistic> stat =
+                Pore.getGame().getRegistry().getBlockStatistic(group, MaterialConverter.asBlock(material));
+        if (!stat.isPresent()) {
+            throw new UnsupportedOperationException("Cannot get block statistic " + statistic.name() + " for material "
+                    + material.name());
+        }
+        return getHandle().getStatistic(stat.get()).or(0L).intValue();
     }
 
     @Override
     public void incrementStatistic(Statistic statistic, Material material, int amount)
             throws IllegalArgumentException {
-        throw new NotImplementedException();
+        checkNotNull(statistic, "Statistic must not be null");
+        checkState(statistic.getType() == Statistic.Type.BLOCK,
+                "Cannot augment non-block statistic " + statistic.name());
+        StatisticGroup group = StatisticConverter.asGroupStat(statistic);
+        Optional<BlockStatistic> stat =
+                Pore.getGame().getRegistry().getBlockStatistic(group, MaterialConverter.asBlock(material));
+        if (!stat.isPresent()) {
+            throw new UnsupportedOperationException("Cannot get block statistic " + statistic.name() + " for material "
+                    + material.name());
+        }
+        getHandle().addToStatistic(stat.get(), amount);
     }
 
     @Override
     public void decrementStatistic(Statistic statistic, Material material, int amount)
             throws IllegalArgumentException {
-        throw new NotImplementedException();
+        incrementStatistic(statistic, material, -amount);
     }
 
     @Override
     public void setStatistic(Statistic statistic, Material material, int newValue)
             throws IllegalArgumentException {
-        throw new NotImplementedException();
+        checkNotNull(statistic, "Statistic must not be null");
+        checkState(statistic.getType() == Statistic.Type.BLOCK,
+                "Cannot augment non-block statistic " + statistic.name());
+        StatisticGroup group = StatisticConverter.asGroupStat(statistic);
+        Optional<BlockStatistic> stat =
+                Pore.getGame().getRegistry().getBlockStatistic(group, MaterialConverter.asBlock(material));
+        if (!stat.isPresent()) {
+            throw new UnsupportedOperationException("Cannot get block statistic " + statistic.name() + " for material "
+                    + material.name());
+        }
+        getHandle().setStatistic(stat.get(), newValue);
     }
 
     @Override
     public void incrementStatistic(Statistic statistic, EntityType entityType) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        incrementStatistic(statistic, entityType, 1);
     }
 
     @Override
     public void decrementStatistic(Statistic statistic, EntityType entityType) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        decrementStatistic(statistic, entityType, 1);
     }
 
     @Override
     public int getStatistic(Statistic statistic, EntityType entityType) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        checkNotNull(statistic, "Statistic must not be null");
+        checkState(statistic.getType() == Statistic.Type.ENTITY,
+                "Cannot augment non-entity statistic " + statistic.name());
+        StatisticGroup group = StatisticConverter.asGroupStat(statistic);
+        Optional<EntityStatistic> stat =
+                Pore.getGame().getRegistry().getEntityStatistic(group, EntityConverter.of(entityType));
+        if (!stat.isPresent()) {
+            throw new UnsupportedOperationException("Cannot get entity statistic " + statistic.name() + " for entity "
+                    + entityType.name());
+        }
+        return getHandle().getStatistic(stat.get()).or(0L).intValue();
     }
 
     @Override
     public void incrementStatistic(Statistic statistic, EntityType entityType, int amount)
             throws IllegalArgumentException {
-        throw new NotImplementedException();
+        checkNotNull(statistic, "Statistic must not be null");
+        checkState(statistic.getType() == Statistic.Type.ENTITY,
+                "Cannot augment non-entity statistic " + statistic.name());
+        StatisticGroup group = StatisticConverter.asGroupStat(statistic);
+        Optional<EntityStatistic> stat =
+                Pore.getGame().getRegistry().getEntityStatistic(group, EntityConverter.of(entityType));
+        if (!stat.isPresent()) {
+            throw new UnsupportedOperationException("Cannot get entity statistic " + statistic.name() + " for entity "
+                    + entityType.name());
+        }
+        getHandle().addToStatistic(stat.get(), amount);
     }
 
     @Override
     public void decrementStatistic(Statistic statistic, EntityType entityType, int amount) {
-        throw new NotImplementedException();
+        incrementStatistic(statistic, entityType, -amount);
     }
 
     @Override
     public void setStatistic(Statistic statistic, EntityType entityType, int newValue) {
-        throw new NotImplementedException();
+        checkNotNull(statistic, "Statistic must not be null");
+        checkState(statistic.getType() == Statistic.Type.ENTITY,
+                "Cannot augment non-entity statistic " + statistic.name());
+        StatisticGroup group = StatisticConverter.asGroupStat(statistic);
+        Optional<EntityStatistic> stat =
+                Pore.getGame().getRegistry().getEntityStatistic(group, EntityConverter.of(entityType));
+        if (!stat.isPresent()) {
+            throw new UnsupportedOperationException("Cannot get entity statistic " + statistic.name() + " for entity "
+                    + entityType.name());
+        }
+        getHandle().setStatistic(stat.get(), newValue);
     }
 
     @Override
