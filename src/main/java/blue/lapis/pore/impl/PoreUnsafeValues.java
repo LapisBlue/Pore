@@ -24,38 +24,67 @@
  */
 package blue.lapis.pore.impl;
 
+import blue.lapis.pore.Pore;
+import blue.lapis.pore.converter.type.AchievementConverter;
+import blue.lapis.pore.converter.type.MaterialConverter;
+
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.collect.Iterables;
 import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.Achievement;
 import org.bukkit.Material;
 import org.bukkit.Statistic;
 import org.bukkit.UnsafeValues;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.StringUtil;
+import org.spongepowered.api.block.BlockType;
+import org.spongepowered.api.item.ItemType;
+import org.spongepowered.api.stats.achievement.Achievement;
 
 import java.util.List;
 
-//TODO: skeleton implementation
-
-//TODO: skeleton implementation
-
 public class PoreUnsafeValues implements UnsafeValues {
 
-    public static UnsafeValues INSTANCE = new PoreUnsafeValues();
-
-    private PoreUnsafeValues() {
-    }
+    @SuppressWarnings("deprecation")
+    static UnsafeValues INSTANCE = new PoreUnsafeValues();
 
     @Override
     public Material getMaterialFromInternalName(String name) {
-        throw new NotImplementedException();
+        Optional<BlockType> block = Pore.getGame().getRegistry().getBlock(name);
+        Optional<ItemType> item = Pore.getGame().getRegistry().getItem(name);
+        if (block.isPresent()) {
+            return MaterialConverter.of(block.get());
+        }
+        else if (item.isPresent()) {
+            return MaterialConverter.of(item.get());
+        }
+        else {
+            return null;
+        }
     }
 
     @Override
     public List<String> tabCompleteInternalMaterialName(String token, List<String> completions) {
-        throw new NotImplementedException();
+        return StringUtil.copyPartialMatches(
+                token,
+                Iterables.transform(Pore.getGame().getRegistry().getItems(),
+                        new Function<ItemType, String>() {
+                            @Override
+                            public String apply(final ItemType input) {
+                                return input.getId();
+                            }
+                        }),
+                completions
+        );
     }
 
     @Override
     public ItemStack modifyItemStack(ItemStack stack, String arguments) {
+        //TODO: this is a very evil method which happens to require access to
+        // NBT data. I propose we throw an UnsupportedOperationException and
+        // modify Porekit to rewrite any calls to it since this class isn't
+        // supported anyway.
+        // - caseif
         throw new NotImplementedException();
     }
 
@@ -65,12 +94,40 @@ public class PoreUnsafeValues implements UnsafeValues {
     }
 
     @Override
-    public Achievement getAchievementFromInternalName(String name) {
-        throw new NotImplementedException();
+    public org.bukkit.Achievement getAchievementFromInternalName(String name) {
+        Optional<Achievement> ach = Pore.getGame().getRegistry().getAchievement(name);
+        if (ach.isPresent()) {
+            return AchievementConverter.of(ach.get());
+        }
+        else {
+            return null;
+        }
     }
 
     @Override
     public List<String> tabCompleteInternalStatisticOrAchievementName(String token, List<String> completions) {
-        throw new NotImplementedException();
+        List<String> found = StringUtil.copyPartialMatches(
+                token,
+                Iterables.transform(Pore.getGame().getRegistry().getAchievements(),
+                        new Function<Achievement, String>() {
+                            @Override
+                            public String apply(final Achievement input) {
+                                return input.getInternalName();
+                            }
+                        }),
+                completions
+        );
+        found.addAll(StringUtil.copyPartialMatches(
+                token,
+                Iterables.transform(Pore.getGame().getRegistry().getStatistics(),
+                        new Function<org.spongepowered.api.stats.Statistic, String>() {
+                            @Override
+                            public String apply(final org.spongepowered.api.stats.Statistic input) {
+                                return input.getInternalName();
+                            }
+                        }),
+                completions
+        ));
+        return found;
     }
 }
