@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.Pore;
+import blue.lapis.pore.converter.type.AchievementConverter;
 import blue.lapis.pore.converter.type.SoundConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
@@ -275,17 +276,17 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void awardAchievement(Achievement achievement) {
-        throw new NotImplementedException();
+        getHandle().grantAchievement(AchievementConverter.of(achievement));
     }
 
     @Override
     public void removeAchievement(Achievement achievement) {
-        throw new NotImplementedException();
+        getHandle().revokeAchievement(AchievementConverter.of(achievement));
     }
 
     @Override
     public boolean hasAchievement(Achievement achievement) {
-        throw new NotImplementedException();
+        return getHandle().hasAchievement(AchievementConverter.of(achievement));
     }
 
     @Override

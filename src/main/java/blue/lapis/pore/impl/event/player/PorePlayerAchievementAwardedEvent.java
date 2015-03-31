@@ -26,43 +26,45 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import blue.lapis.pore.converter.type.AchievementConverter;
+import blue.lapis.pore.impl.entity.PorePlayer;
+
 import org.bukkit.Achievement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerAchievementAwardedEvent;
-import org.spongepowered.api.event.entity.player.PlayerEvent;
+import org.spongepowered.api.event.stats.AchievementEvent;
 
 public class PorePlayerAchievementAwardedEvent extends PlayerAchievementAwardedEvent {
 
-    private final PlayerEvent handle;
+    private final AchievementEvent handle;
 
-    public PorePlayerAchievementAwardedEvent(PlayerEvent handle) {
+    public PorePlayerAchievementAwardedEvent(AchievementEvent handle) {
         super(null, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public PlayerEvent getHandle() {
+    public AchievementEvent getHandle() {
         return handle;
     }
 
     @Override
     public Player getPlayer() {
-        throw new NotImplementedException(); // TODO
+        return PorePlayer.of(getHandle().getEntity());
     }
 
     @Override
     public Achievement getAchievement() {
-        throw new NotImplementedException(); // TODO
+        return AchievementConverter.of(getHandle().getAchievement());
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException(); // TODO
+        return getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException(); // TODO
+        getHandle().setCancelled(cancel);
     }
 
 }
