@@ -24,13 +24,25 @@
  */
 package blue.lapis.pore.impl;
 
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.util.PoreWrapper;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.BanEntry;
+import org.spongepowered.api.entity.player.User;
+import org.spongepowered.api.util.ban.Ban;
 
 import java.util.Date;
 
-//TODO: skeleton implementation
-public class PoreBanEntry implements BanEntry {
+public class PoreBanEntry extends PoreWrapper<Ban> implements BanEntry {
+
+    public static PoreBanEntry of(Ban handle) {
+        return WrapperConverter.of(PoreBanEntry.class, handle);
+    }
+
+    protected PoreBanEntry(Ban handle) {
+        super(handle);
+    }
 
     @Override
     public String getTarget() {
@@ -39,7 +51,7 @@ public class PoreBanEntry implements BanEntry {
 
     @Override
     public Date getCreated() {
-        throw new NotImplementedException();
+        return getHandle().getStartDate();
     }
 
     @Override
@@ -49,7 +61,10 @@ public class PoreBanEntry implements BanEntry {
 
     @Override
     public String getSource() {
-        throw new NotImplementedException();
+        if (!getHandle().getSource().isPresent()) {
+            return null;
+        }
+        return getHandle().getSource().get().getName();
     }
 
     @Override
@@ -59,7 +74,10 @@ public class PoreBanEntry implements BanEntry {
 
     @Override
     public Date getExpiration() {
-        throw new NotImplementedException();
+        if (!getHandle().getExpirationDate().isPresent()) {
+            return null;
+        }
+        return getHandle().getExpirationDate().get();
     }
 
     @Override
@@ -69,7 +87,7 @@ public class PoreBanEntry implements BanEntry {
 
     @Override
     public String getReason() {
-        throw new NotImplementedException();
+        return getHandle().getReason().toString();
     }
 
     @Override
