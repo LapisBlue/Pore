@@ -112,7 +112,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     private final BukkitScheduler scheduler = new PoreBukkitScheduler();
 
     public PoreServer(org.spongepowered.api.Game handle, org.slf4j.Logger logger) {
-        super(handle.getServer().get());
+        super(handle.getServer());
         this.game = handle;
         this.logger = new PoreLogger(logger);
         this.commandMap = new SimpleCommandMap(this);

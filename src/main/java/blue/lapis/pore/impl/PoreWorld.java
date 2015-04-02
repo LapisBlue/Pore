@@ -466,7 +466,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean createExplosion(double x, double y, double z, float power, boolean setFire,
-            boolean breakBlocks) {
+                                   boolean breakBlocks) {
         throw new NotImplementedException();
     }
 
@@ -523,8 +523,8 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
             return (T) spawned;
 
         } else {
-            throw new IllegalStateException("Spawned entity was not of the appropriate type: " +
-            "Expected " + clazz + ", found " + spawned.getClass());
+            throw new IllegalStateException("Spawned entity was not of the appropriate type: "
+                    + "Expected " + clazz + ", found " + spawned.getClass());
         }
     }
 
@@ -580,7 +580,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome,
-            boolean includeBiomeTempRain) {
+                                               boolean includeBiomeTempRain) {
         throw new NotImplementedException();
     }
 
@@ -651,19 +651,18 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     }
 
     @Override
-    public void setDifficulty(Difficulty difficulty) {
-        getHandle().setDifficulty(DifficultyConverter.of(difficulty));
+    public Difficulty getDifficulty() {
+        return DifficultyConverter.of(getHandle().getProperties().getDifficulty());
     }
 
     @Override
-    public Difficulty getDifficulty() {
-        return DifficultyConverter.of(getHandle().getDifficulty());
+    public void setDifficulty(Difficulty difficulty) {
+        getHandle().getProperties().setDifficulty(DifficultyConverter.of(difficulty));
     }
 
     @Override
     public File getWorldFolder() {
-        return new File(Bukkit.getWorldContainer(),
-                getHandle().getName()); //TODO: not sure this will always work
+        return new File(Bukkit.getWorldContainer(), getHandle().getName()); //TODO: not sure this will always work
     }
 
     @Override
@@ -758,7 +757,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         if (rule == null) {
             return false;
         }
-        getHandle().setGameRule(rule, value);
+        getHandle().getProperties().setGameRule(rule, value);
         return true;
     }
 
