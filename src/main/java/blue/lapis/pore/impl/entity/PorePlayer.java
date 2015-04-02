@@ -36,8 +36,10 @@ import blue.lapis.pore.converter.type.statistic.StatisticConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.impl.scoreboard.PoreScoreboard;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.Maps;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Achievement;
 import org.bukkit.Effect;
@@ -58,13 +60,17 @@ import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.effect.sound.SoundType;
 import org.spongepowered.api.entity.player.Player;
 import org.spongepowered.api.entity.player.tab.PlayerTabInfo;
+import org.spongepowered.api.resourcepack.ResourcePacks;
 import org.spongepowered.api.stats.BlockStatistic;
 import org.spongepowered.api.stats.EntityStatistic;
 import org.spongepowered.api.stats.StatisticGroup;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
 
+import java.io.FileNotFoundException;
 import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -696,22 +702,28 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void setTexturePack(String url) {
-        throw new NotImplementedException();
+        setResourcePack(url);
     }
 
     @Override
     public void setResourcePack(String url) {
-        throw new NotImplementedException();
+        try {
+            getHandle().sendResourcePack(ResourcePacks.fromUrl(new URL(url)));
+        } catch (FileNotFoundException swallow) {
+            //TODO: okay to swallow?
+        } catch (MalformedURLException swallow) {
+            //TODO: okay to swallow?
+        }
     }
 
     @Override
     public Scoreboard getScoreboard() {
-        throw new NotImplementedException();
+        return PoreScoreboard.of(getHandle().getScoreboard());
     }
 
     @Override
     public void setScoreboard(Scoreboard scoreboard) throws IllegalArgumentException, IllegalStateException {
-        throw new NotImplementedException();
+        getHandle().setScoreboard(((PoreScoreboard) scoreboard).getHandle());
     }
 
     //TODO: As far as I can tell this is unique to Bukkit, so it'll need to be handled exclusively by Pore.
@@ -753,7 +765,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public Map<String, Object> serialize() {
-        Map<String, Object> result = new LinkedHashMap<String, Object>();
+        Map<String, Object> result = Maps.newLinkedHashMap();
         result.put("name", getName());
         return result;
     }
