@@ -29,9 +29,6 @@ import org.bukkit.ChunkSnapshot;
 import org.bukkit.block.Biome;
 
 //TODO: skeleton implementation
-
-//TODO: skeleton implementation
-
 public class PoreChunkSnapshot implements ChunkSnapshot {
 
     @Override

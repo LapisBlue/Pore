@@ -28,7 +28,6 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.BlockChangeDelegate;
 
 //TODO: skeleton implementation
-
 public class PoreBlockChangeDelegate implements BlockChangeDelegate {
 
     @Override

@@ -30,9 +30,6 @@ import org.bukkit.BanEntry;
 import java.util.Date;
 
 //TODO: skeleton implementation
-
-//TODO: skeleton implementation
-
 public class PoreBanEntry implements BanEntry {
 
     @Override

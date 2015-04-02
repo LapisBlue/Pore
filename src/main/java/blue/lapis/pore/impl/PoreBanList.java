@@ -32,9 +32,6 @@ import java.util.Date;
 import java.util.Set;
 
 //TODO: skeleton implementation
-
-//TODO: skeleton implementation
-
 public class PoreBanList implements BanList {
 
     @Override
