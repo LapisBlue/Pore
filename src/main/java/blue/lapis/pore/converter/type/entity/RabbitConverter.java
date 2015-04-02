@@ -22,28 +22,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.type;
+package blue.lapis.pore.converter.type.entity;
+
+import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
-import org.bukkit.block.Biome;
-import org.spongepowered.api.world.difficulty.Difficulties;
-import org.spongepowered.api.world.difficulty.Difficulty;
+import org.bukkit.entity.Rabbit;
+import org.spongepowered.api.entity.living.animal.RabbitType;
+import org.spongepowered.api.entity.living.animal.RabbitTypes;
 
-public class DifficultyConverter {
+public final class RabbitConverter {
 
-    public static final Converter<org.bukkit.Difficulty, Difficulty> CONVERTER =
-            TypeConverter.<org.bukkit.Difficulty, Difficulty>builder()
-                    .add(org.bukkit.Difficulty.PEACEFUL, Difficulties.PEACEFUL)
-                    .add(org.bukkit.Difficulty.EASY, Difficulties.EASY)
-                    .add(org.bukkit.Difficulty.NORMAL, Difficulties.NORMAL)
-                    .add(org.bukkit.Difficulty.HARD, Difficulties.HARD)
+    public static final Converter<Rabbit.Type, RabbitType> CONVERTER = TypeConverter.<Rabbit.Type, RabbitType>builder()
+            .add(Rabbit.Type.BROWN, RabbitTypes.BROWN)
+            .add(Rabbit.Type.WHITE, RabbitTypes.WHITE)
+            .add(Rabbit.Type.BLACK, RabbitTypes.BLACK)
+            .add(Rabbit.Type.BLACK_AND_WHITE, RabbitTypes.BLACK_AND_WHITE)
+            .add(Rabbit.Type.GOLD, RabbitTypes.GOLD)
+            .add(Rabbit.Type.SALT_AND_PEPPER, RabbitTypes.SALT_AND_PEPPER)
+            .add(Rabbit.Type.THE_KILLER_BUNNY, RabbitTypes.KILLER)
             .build();
 
-    public static Difficulty of(org.bukkit.Difficulty biome) {
-        return CONVERTER.convert(biome);
+    public static RabbitType of(Rabbit.Type type) {
+        return CONVERTER.convert(type);
     }
 
-    public static org.bukkit.Difficulty of(Difficulty biomeType) {
-        return CONVERTER.reverse().convert(biomeType);
+    public static Rabbit.Type of(RabbitType type) {
+        return CONVERTER.reverse().convert(type);
     }
+
 }

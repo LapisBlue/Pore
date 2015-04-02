@@ -28,11 +28,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.Pore;
-import blue.lapis.pore.converter.type.AchievementConverter;
-import blue.lapis.pore.converter.type.EntityConverter;
-import blue.lapis.pore.converter.type.MaterialConverter;
-import blue.lapis.pore.converter.type.SoundConverter;
-import blue.lapis.pore.converter.type.StatisticConverter;
+import blue.lapis.pore.converter.type.statistic.AchievementConverter;
+import blue.lapis.pore.converter.type.entity.EntityConverter;
+import blue.lapis.pore.converter.type.material.MaterialConverter;
+import blue.lapis.pore.converter.type.world.effect.SoundConverter;
+import blue.lapis.pore.converter.type.statistic.StatisticConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;

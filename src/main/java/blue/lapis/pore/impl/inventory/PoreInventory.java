@@ -24,8 +24,8 @@
  */
 package blue.lapis.pore.impl.inventory;
 
-import blue.lapis.pore.converter.ItemStackConverter;
-import blue.lapis.pore.converter.type.MaterialConverter;
+import blue.lapis.pore.converter.type.material.ItemStackConverter;
+import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 

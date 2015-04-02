@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
 import org.apache.commons.lang.NotImplementedException;

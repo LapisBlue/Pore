@@ -22,31 +22,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.type;
+package blue.lapis.pore.converter.type.scoreboard;
+
+import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
-import org.bukkit.entity.Rabbit;
-import org.spongepowered.api.entity.living.animal.RabbitType;
-import org.spongepowered.api.entity.living.animal.RabbitTypes;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.spongepowered.api.scoreboard.displayslot.DisplaySlots;
 
-public final class RabbitConverter {
+public class DisplaySlotConverter {
 
-    public static final Converter<Rabbit.Type, RabbitType> CONVERTER = TypeConverter.<Rabbit.Type, RabbitType>builder()
-            .add(Rabbit.Type.BROWN, RabbitTypes.BROWN)
-            .add(Rabbit.Type.WHITE, RabbitTypes.WHITE)
-            .add(Rabbit.Type.BLACK, RabbitTypes.BLACK)
-            .add(Rabbit.Type.BLACK_AND_WHITE, RabbitTypes.BLACK_AND_WHITE)
-            .add(Rabbit.Type.GOLD, RabbitTypes.GOLD)
-            .add(Rabbit.Type.SALT_AND_PEPPER, RabbitTypes.SALT_AND_PEPPER)
-            .add(Rabbit.Type.THE_KILLER_BUNNY, RabbitTypes.KILLER)
-            .build();
+    public static final Converter<DisplaySlot, org.spongepowered.api.scoreboard.displayslot.DisplaySlot> CONVERTER =
+            TypeConverter.<DisplaySlot, org.spongepowered.api.scoreboard.displayslot.DisplaySlot>builder()
+                    .add(DisplaySlot.BELOW_NAME, DisplaySlots.BELOW_NAME)
+                    .add(DisplaySlot.PLAYER_LIST, DisplaySlots.LIST)
+                    .add(DisplaySlot.SIDEBAR, DisplaySlots.SIDEBAR)
+                    .build();
 
-    public static RabbitType of(Rabbit.Type type) {
-        return CONVERTER.convert(type);
+    public static org.spongepowered.api.scoreboard.displayslot.DisplaySlot of(DisplaySlot slot) {
+        return CONVERTER.convert(slot);
     }
 
-    public static Rabbit.Type of(RabbitType type) {
-        return CONVERTER.reverse().convert(type);
+    public static DisplaySlot of(org.spongepowered.api.scoreboard.displayslot.DisplaySlot slot) {
+        return CONVERTER.reverse().convert(slot);
     }
 
 }

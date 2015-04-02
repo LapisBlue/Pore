@@ -40,7 +40,7 @@ import static org.objectweb.asm.Opcodes.NEW;
 import static org.objectweb.asm.Opcodes.RETURN;
 import static org.objectweb.asm.Opcodes.V1_6;
 
-import blue.lapis.pore.converter.type.EventPriorityConverter;
+import blue.lapis.pore.converter.type.plugin.EventPriorityConverter;
 
 import com.google.common.base.Throwables;
 import org.bukkit.event.Event;

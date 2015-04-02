@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.scoreboard;
 
 import static com.google.common.base.Preconditions.checkState;
 
-import blue.lapis.pore.converter.type.DisplaySlotConverter;
+import blue.lapis.pore.converter.type.scoreboard.DisplaySlotConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 

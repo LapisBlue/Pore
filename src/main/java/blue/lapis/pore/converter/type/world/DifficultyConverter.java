@@ -22,31 +22,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.type;
+package blue.lapis.pore.converter.type.world;
+
+import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
-import org.bukkit.Rotation;
-import org.spongepowered.api.util.rotation.Rotations;
+import org.bukkit.block.Biome;
+import org.spongepowered.api.world.difficulty.Difficulties;
+import org.spongepowered.api.world.difficulty.Difficulty;
 
-public final class RotationConverter {
+public class DifficultyConverter {
 
-    public static final Converter<Rotation, org.spongepowered.api.util.rotation.Rotation> CONVERTER =
-            TypeConverter.<Rotation, org.spongepowered.api.util.rotation.Rotation>builder()
-                    .add(Rotation.NONE, Rotations.TOP)
-                    .add(Rotation.CLOCKWISE_45, Rotations.TOP_RIGHT)
-                    .add(Rotation.CLOCKWISE, Rotations.RIGHT)
-                    .add(Rotation.CLOCKWISE_135, Rotations.BOTTOM_RIGHT)
-                    .add(Rotation.FLIPPED, Rotations.BOTTOM)
-                    .add(Rotation.FLIPPED_45, Rotations.BOTTOM_LEFT)
-                    .add(Rotation.COUNTER_CLOCKWISE, Rotations.LEFT)
-                    .add(Rotation.COUNTER_CLOCKWISE_45, Rotations.TOP_LEFT)
-                    .build();
+    public static final Converter<org.bukkit.Difficulty, Difficulty> CONVERTER =
+            TypeConverter.<org.bukkit.Difficulty, Difficulty>builder()
+                    .add(org.bukkit.Difficulty.PEACEFUL, Difficulties.PEACEFUL)
+                    .add(org.bukkit.Difficulty.EASY, Difficulties.EASY)
+                    .add(org.bukkit.Difficulty.NORMAL, Difficulties.NORMAL)
+                    .add(org.bukkit.Difficulty.HARD, Difficulties.HARD)
+            .build();
 
-    public static org.spongepowered.api.util.rotation.Rotation of(Rotation rotation) {
-        return CONVERTER.convert(rotation);
+    public static Difficulty of(org.bukkit.Difficulty biome) {
+        return CONVERTER.convert(biome);
     }
 
-    public static Rotation of(org.spongepowered.api.util.rotation.Rotation rotation) {
-        return CONVERTER.reverse().convert(rotation);
+    public static org.bukkit.Difficulty of(Difficulty biomeType) {
+        return CONVERTER.reverse().convert(biomeType);
     }
 }

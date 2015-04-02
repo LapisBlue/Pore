@@ -27,8 +27,8 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
-import blue.lapis.pore.converter.ItemStackConverter;
-import blue.lapis.pore.converter.type.EntityConverter;
+import blue.lapis.pore.converter.type.material.ItemStackConverter;
+import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 

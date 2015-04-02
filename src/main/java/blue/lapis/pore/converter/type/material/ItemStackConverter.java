@@ -22,10 +22,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter;
+package blue.lapis.pore.converter.type.material;
 
 import blue.lapis.pore.Pore;
-import blue.lapis.pore.converter.type.MaterialConverter;
+import blue.lapis.pore.converter.type.material.DurabilityConverter;
+import blue.lapis.pore.converter.type.material.MaterialConverter;
 
 import org.spongepowered.api.item.ItemType;
 
@@ -35,7 +36,7 @@ public class ItemStackConverter {
         return new org.bukkit.inventory.ItemStack(
                 MaterialConverter.of(stack.getItem()),
                 stack.getQuantity(),
-                (short)DurabilityConverter.getDamageValue(stack.getItemData())
+                (short) DurabilityConverter.getDamageValue(stack.getItemData())
         );
     }
 

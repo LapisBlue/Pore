@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.ItemStackConverter;
+import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.vector.EulerAngleConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 

@@ -25,9 +25,9 @@
 package blue.lapis.pore.impl;
 
 import blue.lapis.pore.Pore;
-import blue.lapis.pore.converter.type.AchievementConverter;
-import blue.lapis.pore.converter.type.MaterialConverter;
-import blue.lapis.pore.converter.type.StatisticConverter;
+import blue.lapis.pore.converter.type.statistic.AchievementConverter;
+import blue.lapis.pore.converter.type.material.MaterialConverter;
+import blue.lapis.pore.converter.type.statistic.StatisticConverter;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -79,11 +79,13 @@ public class PoreUnsafeValues implements UnsafeValues {
 
     @Override
     public ItemStack modifyItemStack(ItemStack stack, String arguments) {
-        //TODO: this is a very evil method which happens to require access to
-        // NBT data. I propose we throw an UnsupportedOperationException and
-        // modify Porekit to rewrite any calls to it since this class isn't
-        // supported anyway.
-        // - caseif
+        /*
+         * TODO: this is a very evil method which happens to require access to
+         * NBT data. I propose we throw an UnsupportedOperationException and
+         * modify Porekit to rewrite any calls to it since this class isn't
+         * supported anyway.
+         * - caseif
+         */
         throw new NotImplementedException();
     }
 

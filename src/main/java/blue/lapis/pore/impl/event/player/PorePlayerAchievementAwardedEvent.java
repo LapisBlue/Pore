@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import blue.lapis.pore.converter.type.AchievementConverter;
+import blue.lapis.pore.converter.type.statistic.AchievementConverter;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
 import org.bukkit.Achievement;

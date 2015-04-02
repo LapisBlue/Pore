@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.scoreboard;
 
 import static com.google.common.base.Preconditions.checkState;
 
-import blue.lapis.pore.converter.type.NameTagVisibilityConverter;
+import blue.lapis.pore.converter.type.scoreboard.NameTagVisibilityConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreOfflinePlayer;
 import blue.lapis.pore.util.PoreWrapper;
@@ -174,7 +174,7 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     public boolean hasPlayer(OfflinePlayer player) throws IllegalArgumentException, IllegalStateException {
         checkState(player != null, "Offline player cannot be null");
         //noinspection ConstantConditions
-        return getHandle().getUsers().contains(((PoreOfflinePlayer)player).getHandle());
+        return getHandle().getUsers().contains(((PoreOfflinePlayer) player).getHandle());
     }
 
 }

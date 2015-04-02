@@ -25,7 +25,7 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.Pore;
-import blue.lapis.pore.converter.type.ProfessionConverter;
+import blue.lapis.pore.converter.type.entity.ProfessionConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import com.google.common.collect.Iterables;

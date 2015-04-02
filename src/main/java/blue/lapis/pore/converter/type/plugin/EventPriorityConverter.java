@@ -22,29 +22,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.type;
+package blue.lapis.pore.converter.type.plugin;
+
+import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
-import org.bukkit.entity.Ocelot;
-import org.spongepowered.api.entity.living.animal.OcelotType;
-import org.spongepowered.api.entity.living.animal.OcelotTypes;
+import org.bukkit.event.EventPriority;
+import org.spongepowered.api.util.event.Order;
 
-public final class OcelotConverter {
+public final class EventPriorityConverter {
 
-    public static final Converter<Ocelot.Type, OcelotType> CONVERTER =
-            TypeConverter.<Ocelot.Type, OcelotType>builder()
-                    .add(Ocelot.Type.BLACK_CAT, OcelotTypes.BLACK_CAT)
-                    .add(Ocelot.Type.RED_CAT, OcelotTypes.RED_CAT)
-                    .add(Ocelot.Type.SIAMESE_CAT, OcelotTypes.SIAMESE_CAT)
-                    .add(Ocelot.Type.WILD_OCELOT, OcelotTypes.WILD_OCELOT)
-                    .build();
+    // TODO: Verify this
+    public static final Converter<EventPriority, Order> CONVERTER = TypeConverter.<EventPriority, Order>builder()
+            .add(EventPriority.LOWEST, Order.PRE)
+            .add(EventPriority.LOW, Order.EARLY)
+            .add(EventPriority.NORMAL, Order.DEFAULT)
+            .add(EventPriority.HIGH, Order.LATE)
+            .add(EventPriority.HIGHEST, Order.LAST)
+            .add(EventPriority.MONITOR, Order.POST)
+            .build();
 
-    public static OcelotType of(Ocelot.Type type) {
-        return CONVERTER.convert(type);
+    public static Order of(EventPriority eventPriority) {
+        return CONVERTER.convert(eventPriority);
     }
 
-    public static Ocelot.Type of(OcelotType type) {
-        return CONVERTER.reverse().convert(type);
+    public static EventPriority of(Order order) {
+        return CONVERTER.reverse().convert(order);
     }
 
 }

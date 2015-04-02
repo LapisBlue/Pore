@@ -22,30 +22,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.type;
+package blue.lapis.pore.converter.type.entity;
+
+import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
-import org.bukkit.entity.Villager;
-import org.spongepowered.api.entity.living.villager.Profession;
-import org.spongepowered.api.entity.living.villager.Professions;
+import org.bukkit.entity.Ocelot;
+import org.spongepowered.api.entity.living.animal.OcelotType;
+import org.spongepowered.api.entity.living.animal.OcelotTypes;
 
-public final class ProfessionConverter {
+public final class OcelotConverter {
 
-    public static final Converter<Villager.Profession, Profession> CONVERTER =
-            TypeConverter.<Villager.Profession, Profession>builder()
-                    .add(Villager.Profession.BLACKSMITH, Professions.BLACKSMITH)
-                    .add(Villager.Profession.BUTCHER, Professions.BUTCHER)
-                    .add(Villager.Profession.FARMER, Professions.FARMER)
-                    .add(Villager.Profession.LIBRARIAN, Professions.LIBRARIAN)
-                    .add(Villager.Profession.PRIEST, Professions.PRIEST)
+    public static final Converter<Ocelot.Type, OcelotType> CONVERTER =
+            TypeConverter.<Ocelot.Type, OcelotType>builder()
+                    .add(Ocelot.Type.BLACK_CAT, OcelotTypes.BLACK_CAT)
+                    .add(Ocelot.Type.RED_CAT, OcelotTypes.RED_CAT)
+                    .add(Ocelot.Type.SIAMESE_CAT, OcelotTypes.SIAMESE_CAT)
+                    .add(Ocelot.Type.WILD_OCELOT, OcelotTypes.WILD_OCELOT)
                     .build();
 
-    public static Profession of(Villager.Profession profession) {
-        return CONVERTER.convert(profession);
+    public static OcelotType of(Ocelot.Type type) {
+        return CONVERTER.convert(type);
     }
 
-    public static Villager.Profession of(Profession profession) {
-        return CONVERTER.reverse().convert(profession);
+    public static Ocelot.Type of(OcelotType type) {
+        return CONVERTER.reverse().convert(type);
     }
 
 }

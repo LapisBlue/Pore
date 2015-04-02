@@ -24,8 +24,8 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.ItemStackConverter;
-import blue.lapis.pore.converter.type.RotationConverter;
+import blue.lapis.pore.converter.type.material.ItemStackConverter;
+import blue.lapis.pore.converter.type.world.RotationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.Rotation;

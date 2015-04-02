@@ -25,6 +25,21 @@
 package blue.lapis.pore.converter.type;
 
 import blue.lapis.pore.PoreTests;
+import blue.lapis.pore.converter.type.entity.HorseConverter;
+import blue.lapis.pore.converter.type.entity.OcelotConverter;
+import blue.lapis.pore.converter.type.entity.RabbitConverter;
+import blue.lapis.pore.converter.type.entity.SkeletonConverter;
+import blue.lapis.pore.converter.type.material.ArtConverter;
+import blue.lapis.pore.converter.type.material.DyeColorConverter;
+import blue.lapis.pore.converter.type.material.MaterialConverter;
+import blue.lapis.pore.converter.type.material.PotionEffectTypeConverter;
+import blue.lapis.pore.converter.type.plugin.EventPriorityConverter;
+import blue.lapis.pore.converter.type.entity.player.GameModeConverter;
+import blue.lapis.pore.converter.type.world.BiomeConverter;
+import blue.lapis.pore.converter.type.world.DirectionConverter;
+import blue.lapis.pore.converter.type.world.EnvironmentConverter;
+import blue.lapis.pore.converter.type.world.RotationConverter;
+import blue.lapis.pore.converter.type.world.effect.SoundConverter;
 
 import org.junit.Test;
 import org.spongepowered.api.block.BlockTypes;

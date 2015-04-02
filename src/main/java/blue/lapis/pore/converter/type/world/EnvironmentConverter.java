@@ -22,35 +22,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter;
+package blue.lapis.pore.converter.type.world;
 
-import blue.lapis.pore.Pore;
-import blue.lapis.pore.converter.type.PotionEffectTypeConverter;
+import blue.lapis.pore.converter.type.TypeConverter;
 
-import org.spongepowered.api.potion.PotionEffectBuilder;
+import com.google.common.base.Converter;
+import org.bukkit.World;
+import org.spongepowered.api.world.DimensionType;
+import org.spongepowered.api.world.DimensionTypes;
 
-public class PotionEffectConverter {
+public final class EnvironmentConverter {
 
-    private static PotionEffectBuilder effectBuilder = Pore.getGame().getRegistry().getPotionEffectBuilder();
+    public static final Converter<World.Environment, DimensionType> CONVERTER =
+            TypeConverter.<World.Environment, DimensionType>builder()
+                    .add(World.Environment.NORMAL, DimensionTypes.OVERWORLD)
+                    .add(World.Environment.NETHER, DimensionTypes.NETHER)
+                    .add(World.Environment.THE_END, DimensionTypes.END)
+                    .build();
 
-    public static org.spongepowered.api.potion.PotionEffect of(org.bukkit.potion.PotionEffect effect) {
-        return effectBuilder
-                .potionType(PotionEffectTypeConverter.of(effect.getType()))
-                .ambience(effect.isAmbient())
-                .amplifier(effect.getAmplifier())
-                .duration(effect.getDuration())
-                .particles(effect.hasParticles())
-                .build();
+    public static DimensionType of(World.Environment environment) {
+        return CONVERTER.convert(environment);
     }
 
-    public static org.bukkit.potion.PotionEffect of(org.spongepowered.api.potion.PotionEffect effect) {
-        return new org.bukkit.potion.PotionEffect(
-                PotionEffectTypeConverter.of(effect.getType()),
-                effect.getDuration(),
-                effect.getAmplifier(),
-                effect.isAmbient(),
-                effect.getShowParticles()
-        );
+    public static World.Environment of(DimensionType dimensionType) {
+        return CONVERTER.reverse().convert(dimensionType);
     }
 
 }

@@ -22,27 +22,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.type;
+package blue.lapis.pore.converter.type.world;
+
+import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.spongepowered.api.scoreboard.displayslot.DisplaySlots;
+import org.bukkit.Rotation;
+import org.spongepowered.api.util.rotation.Rotations;
 
-public class DisplaySlotConverter {
+public final class RotationConverter {
 
-    public static final Converter<DisplaySlot, org.spongepowered.api.scoreboard.displayslot.DisplaySlot> CONVERTER =
-            TypeConverter.<DisplaySlot, org.spongepowered.api.scoreboard.displayslot.DisplaySlot>builder()
-                    .add(DisplaySlot.BELOW_NAME, DisplaySlots.BELOW_NAME)
-                    .add(DisplaySlot.PLAYER_LIST, DisplaySlots.LIST)
-                    .add(DisplaySlot.SIDEBAR, DisplaySlots.SIDEBAR)
+    public static final Converter<Rotation, org.spongepowered.api.util.rotation.Rotation> CONVERTER =
+            TypeConverter.<Rotation, org.spongepowered.api.util.rotation.Rotation>builder()
+                    .add(Rotation.NONE, Rotations.TOP)
+                    .add(Rotation.CLOCKWISE_45, Rotations.TOP_RIGHT)
+                    .add(Rotation.CLOCKWISE, Rotations.RIGHT)
+                    .add(Rotation.CLOCKWISE_135, Rotations.BOTTOM_RIGHT)
+                    .add(Rotation.FLIPPED, Rotations.BOTTOM)
+                    .add(Rotation.FLIPPED_45, Rotations.BOTTOM_LEFT)
+                    .add(Rotation.COUNTER_CLOCKWISE, Rotations.LEFT)
+                    .add(Rotation.COUNTER_CLOCKWISE_45, Rotations.TOP_LEFT)
                     .build();
 
-    public static org.spongepowered.api.scoreboard.displayslot.DisplaySlot of(DisplaySlot slot) {
-        return CONVERTER.convert(slot);
+    public static org.spongepowered.api.util.rotation.Rotation of(Rotation rotation) {
+        return CONVERTER.convert(rotation);
     }
 
-    public static DisplaySlot of(org.spongepowered.api.scoreboard.displayslot.DisplaySlot slot) {
-        return CONVERTER.reverse().convert(slot);
+    public static Rotation of(org.spongepowered.api.util.rotation.Rotation rotation) {
+        return CONVERTER.reverse().convert(rotation);
     }
-
 }

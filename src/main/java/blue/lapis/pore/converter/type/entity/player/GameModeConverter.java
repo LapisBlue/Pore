@@ -22,29 +22,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.type;
+package blue.lapis.pore.converter.type.entity.player;
+
+import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
-import org.bukkit.scoreboard.NameTagVisibility;
-import org.spongepowered.api.scoreboard.Visibilities;
-import org.spongepowered.api.scoreboard.Visibility;
+import org.bukkit.GameMode;
+import org.spongepowered.api.entity.player.gamemode.GameModes;
 
-public class NameTagVisibilityConverter {
+public final class GameModeConverter {
 
-    public static final Converter<NameTagVisibility, Visibility> CONVERTER =
-            TypeConverter.<NameTagVisibility, Visibility>builder()
-                    .add(NameTagVisibility.ALWAYS, Visibilities.ALL)
-                    .add(NameTagVisibility.NEVER, Visibilities.NONE)
-                    .add(NameTagVisibility.HIDE_FOR_OTHER_TEAMS, Visibilities.OWN_TEAM)
-                    .add(NameTagVisibility.HIDE_FOR_OWN_TEAM, Visibilities.OTHER_TEAMS)
+    public static final Converter<GameMode, org.spongepowered.api.entity.player.gamemode.GameMode> CONVERTER =
+            TypeConverter.<GameMode, org.spongepowered.api.entity.player.gamemode.GameMode>builder()
+                    .add(GameMode.SURVIVAL, GameModes.SURVIVAL)
+                    .add(GameMode.CREATIVE, GameModes.CREATIVE)
+                    .add(GameMode.ADVENTURE, GameModes.ADVENTURE)
+                    .add(GameMode.SPECTATOR, GameModes.SPECTATOR)
                     .build();
 
-    public static Visibility of(NameTagVisibility slot) {
-        return CONVERTER.convert(slot);
+    public static org.spongepowered.api.entity.player.gamemode.GameMode of(GameMode gameMode) {
+        return CONVERTER.convert(gameMode);
     }
 
-    public static NameTagVisibility of(Visibility slot) {
-        return CONVERTER.reverse().convert(slot);
+    public static GameMode of(org.spongepowered.api.entity.player.gamemode.GameMode gameMode) {
+        return CONVERTER.reverse().convert(gameMode);
     }
 
 }

@@ -22,28 +22,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.type;
+package blue.lapis.pore.converter.type.scoreboard;
+
+import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
-import org.bukkit.World;
-import org.spongepowered.api.world.DimensionType;
-import org.spongepowered.api.world.DimensionTypes;
+import org.bukkit.scoreboard.NameTagVisibility;
+import org.spongepowered.api.scoreboard.Visibilities;
+import org.spongepowered.api.scoreboard.Visibility;
 
-public final class EnvironmentConverter {
+public class NameTagVisibilityConverter {
 
-    public static final Converter<World.Environment, DimensionType> CONVERTER =
-            TypeConverter.<World.Environment, DimensionType>builder()
-                    .add(World.Environment.NORMAL, DimensionTypes.OVERWORLD)
-                    .add(World.Environment.NETHER, DimensionTypes.NETHER)
-                    .add(World.Environment.THE_END, DimensionTypes.END)
+    public static final Converter<NameTagVisibility, Visibility> CONVERTER =
+            TypeConverter.<NameTagVisibility, Visibility>builder()
+                    .add(NameTagVisibility.ALWAYS, Visibilities.ALL)
+                    .add(NameTagVisibility.NEVER, Visibilities.NONE)
+                    .add(NameTagVisibility.HIDE_FOR_OTHER_TEAMS, Visibilities.OWN_TEAM)
+                    .add(NameTagVisibility.HIDE_FOR_OWN_TEAM, Visibilities.OTHER_TEAMS)
                     .build();
 
-    public static DimensionType of(World.Environment environment) {
-        return CONVERTER.convert(environment);
+    public static Visibility of(NameTagVisibility slot) {
+        return CONVERTER.convert(slot);
     }
 
-    public static World.Environment of(DimensionType dimensionType) {
-        return CONVERTER.reverse().convert(dimensionType);
+    public static NameTagVisibility of(Visibility slot) {
+        return CONVERTER.reverse().convert(slot);
     }
 
 }

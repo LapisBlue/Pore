@@ -33,7 +33,7 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
-final class TypeConverter<B, S> extends Converter<B, S> {
+public final class TypeConverter<B, S> extends Converter<B, S> {
 
     private final ImmutableMap<B, S> bukkitToSponge;
     private final ImmutableMap<S, B> spongeToBukkit;
@@ -66,15 +66,15 @@ final class TypeConverter<B, S> extends Converter<B, S> {
         return checkDefined(spongeToBukkit.get(sponge), sponge);
     }
 
-    static <B extends Enum<B>, S> EnumBuilder<B, S> builder() {
+    public static <B extends Enum<B>, S> EnumBuilder<B, S> builder() {
         return new EnumBuilder<B, S>();
     }
 
-    static <B, S> MapBuilder<B, S> mapBuilder() {
+    public static <B, S> MapBuilder<B, S> mapBuilder() {
         return new MapBuilder<B, S>();
     }
 
-    abstract static class Builder<B, S> {
+    public abstract static class Builder<B, S> {
 
         protected final BiMap<B, S> registry = HashBiMap.create();
 
@@ -87,7 +87,7 @@ final class TypeConverter<B, S> extends Converter<B, S> {
         public abstract TypeConverter<B, S> build();
     }
 
-    static final class MapBuilder<B, S> extends Builder<B, S> {
+    public static final class MapBuilder<B, S> extends Builder<B, S> {
 
         @Override
         public TypeConverter<B, S> build() {
@@ -95,7 +95,7 @@ final class TypeConverter<B, S> extends Converter<B, S> {
         }
     }
 
-    static final class EnumBuilder<B extends Enum<B>, S> extends Builder<B, S> {
+    public static final class EnumBuilder<B extends Enum<B>, S> extends Builder<B, S> {
 
         @Override
         public TypeConverter<B, S> build() {

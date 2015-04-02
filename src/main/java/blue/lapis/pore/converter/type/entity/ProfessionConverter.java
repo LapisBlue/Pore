@@ -22,27 +22,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.type;
+package blue.lapis.pore.converter.type.entity;
+
+import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
-import org.bukkit.entity.Skeleton;
-import org.spongepowered.api.entity.living.monster.SkeletonType;
-import org.spongepowered.api.entity.living.monster.SkeletonTypes;
+import org.bukkit.entity.Villager;
+import org.spongepowered.api.entity.living.villager.Profession;
+import org.spongepowered.api.entity.living.villager.Professions;
 
-public final class SkeletonConverter {
+public final class ProfessionConverter {
 
-    public static final Converter<Skeleton.SkeletonType, SkeletonType> CONVERTER =
-            TypeConverter.<Skeleton.SkeletonType, SkeletonType>builder()
-                    .add(Skeleton.SkeletonType.NORMAL, SkeletonTypes.NORMAL)
-                    .add(Skeleton.SkeletonType.WITHER, SkeletonTypes.WITHER)
+    public static final Converter<Villager.Profession, Profession> CONVERTER =
+            TypeConverter.<Villager.Profession, Profession>builder()
+                    .add(Villager.Profession.BLACKSMITH, Professions.BLACKSMITH)
+                    .add(Villager.Profession.BUTCHER, Professions.BUTCHER)
+                    .add(Villager.Profession.FARMER, Professions.FARMER)
+                    .add(Villager.Profession.LIBRARIAN, Professions.LIBRARIAN)
+                    .add(Villager.Profession.PRIEST, Professions.PRIEST)
                     .build();
 
-    public static SkeletonType of(Skeleton.SkeletonType type) {
-        return CONVERTER.convert(type);
+    public static Profession of(Villager.Profession profession) {
+        return CONVERTER.convert(profession);
     }
 
-    public static Skeleton.SkeletonType of(SkeletonType type) {
-        return CONVERTER.reverse().convert(type);
+    public static Villager.Profession of(Profession profession) {
+        return CONVERTER.reverse().convert(profession);
     }
 
 }

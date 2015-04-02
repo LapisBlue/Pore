@@ -24,8 +24,8 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.PotionEffectConverter;
-import blue.lapis.pore.converter.type.PotionEffectTypeConverter;
+import blue.lapis.pore.converter.type.material.PotionEffectConverter;
+import blue.lapis.pore.converter.type.material.PotionEffectTypeConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.ProjectileUtil;

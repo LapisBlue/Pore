@@ -25,11 +25,11 @@
 package blue.lapis.pore.impl;
 
 import blue.lapis.pore.Pore;
-import blue.lapis.pore.converter.EffectConverter;
-import blue.lapis.pore.converter.type.DifficultyConverter;
-import blue.lapis.pore.converter.type.EntityConverter;
-import blue.lapis.pore.converter.type.EnvironmentConverter;
-import blue.lapis.pore.converter.type.SoundConverter;
+import blue.lapis.pore.converter.type.world.effect.EffectConverter;
+import blue.lapis.pore.converter.type.world.DifficultyConverter;
+import blue.lapis.pore.converter.type.entity.EntityConverter;
+import blue.lapis.pore.converter.type.world.EnvironmentConverter;
+import blue.lapis.pore.converter.type.world.effect.SoundConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.block.PoreBlock;

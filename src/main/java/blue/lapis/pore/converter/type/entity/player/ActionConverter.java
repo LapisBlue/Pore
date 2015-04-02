@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter;
+package blue.lapis.pore.converter.type.entity.player;
 
 import org.bukkit.event.block.Action;
 import org.spongepowered.api.entity.EntityInteractionType;
