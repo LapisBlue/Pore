@@ -22,36 +22,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.impl.scoreboard;
+package blue.lapis.pore.converter.type;
 
-import blue.lapis.pore.converter.wrapper.WrapperConverter;
-import blue.lapis.pore.util.PoreWrapper;
+import com.google.common.base.Converter;
+import org.bukkit.scoreboard.NameTagVisibility;
+import org.spongepowered.api.scoreboard.Visibilities;
+import org.spongepowered.api.scoreboard.Visibility;
 
-import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
-import org.spongepowered.api.scoreboard.ScoreboardBuilder;
+public class NameTagVisibilityConverter {
 
-public class PoreScoreboardManager extends PoreWrapper<ScoreboardBuilder> implements ScoreboardManager {
+    public static final Converter<NameTagVisibility, Visibility> CONVERTER =
+            TypeConverter.<NameTagVisibility, Visibility>builder()
+                    .add(NameTagVisibility.ALWAYS, Visibilities.ALL)
+                    .add(NameTagVisibility.NEVER, Visibilities.NONE)
+                    .add(NameTagVisibility.HIDE_FOR_OTHER_TEAMS, Visibilities.OWN_TEAM)
+                    .add(NameTagVisibility.HIDE_FOR_OWN_TEAM, Visibilities.OTHER_TEAMS)
+                    .build();
 
-    private ScoreboardBuilder handle;
-
-    public static PoreScoreboardManager of(ScoreboardBuilder handle) {
-        return WrapperConverter.of(PoreScoreboardManager.class, handle);
+    public static Visibility of(NameTagVisibility slot) {
+        return CONVERTER.convert(slot);
     }
 
-    protected PoreScoreboardManager(ScoreboardBuilder handle) {
-        super(handle);
-    }
-
-    @Override
-    public Scoreboard getMainScoreboard() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public Scoreboard getNewScoreboard() {
-        throw new NotImplementedException(); // ScoreboardBuilder#build() seems to have the wrong signature atm
+    public static NameTagVisibility of(Visibility slot) {
+        return CONVERTER.reverse().convert(slot);
     }
 
 }

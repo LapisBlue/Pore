@@ -24,26 +24,40 @@
  */
 package blue.lapis.pore.impl.scoreboard;
 
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.util.PoreWrapper;
+
 import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
+import org.spongepowered.api.scoreboard.Score;
+import org.spongepowered.api.text.Texts;
 
-// TODO: Bridge
+public class PoreScore extends PoreWrapper<Score> implements org.bukkit.scoreboard.Score {
+          // and seven years ago
 
-// TODO: Bridge
+    private Score handle;
 
-public class PoreScore implements Score {
+    public static PoreScore of(Score handle) {
+        return WrapperConverter.of(PoreScore.class, handle);
+    }
 
-    @Override
-    public OfflinePlayer getPlayer() {
-        throw new NotImplementedException();
+    protected PoreScore(Score handle) {
+        super(handle);
     }
 
     @Override
+    @SuppressWarnings("deprecation")
+    public OfflinePlayer getPlayer() {
+        return Bukkit.getOfflinePlayer(getEntry());
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
     public String getEntry() {
-        throw new NotImplementedException();
+        return Texts.toLegacy(getHandle().getName());
     }
 
     @Override
@@ -53,17 +67,19 @@ public class PoreScore implements Score {
 
     @Override
     public int getScore() throws IllegalStateException {
-        throw new NotImplementedException();
+        //TODO: check if registered
+        return getHandle().getScore();
     }
 
     @Override
     public void setScore(int score) throws IllegalStateException {
-        throw new NotImplementedException();
+        //TODO: check if registered
+        getHandle().setScore(score);
     }
 
     @Override
     public Scoreboard getScoreboard() {
-        throw new NotImplementedException();
+        return getObjective().getScoreboard();
     }
 
 }

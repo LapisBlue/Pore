@@ -22,36 +22,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.impl.scoreboard;
+package blue.lapis.pore.converter.type;
 
-import blue.lapis.pore.converter.wrapper.WrapperConverter;
-import blue.lapis.pore.util.PoreWrapper;
+import com.google.common.base.Converter;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.spongepowered.api.scoreboard.displayslot.DisplaySlots;
 
-import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
-import org.spongepowered.api.scoreboard.ScoreboardBuilder;
+public class DisplaySlotConverter {
 
-public class PoreScoreboardManager extends PoreWrapper<ScoreboardBuilder> implements ScoreboardManager {
+    public static final Converter<DisplaySlot, org.spongepowered.api.scoreboard.displayslot.DisplaySlot> CONVERTER =
+            TypeConverter.<DisplaySlot, org.spongepowered.api.scoreboard.displayslot.DisplaySlot>builder()
+                    .add(DisplaySlot.BELOW_NAME, DisplaySlots.BELOW_NAME)
+                    .add(DisplaySlot.PLAYER_LIST, DisplaySlots.LIST)
+                    .add(DisplaySlot.SIDEBAR, DisplaySlots.SIDEBAR)
+                    .build();
 
-    private ScoreboardBuilder handle;
-
-    public static PoreScoreboardManager of(ScoreboardBuilder handle) {
-        return WrapperConverter.of(PoreScoreboardManager.class, handle);
+    public static org.spongepowered.api.scoreboard.displayslot.DisplaySlot of(DisplaySlot slot) {
+        return CONVERTER.convert(slot);
     }
 
-    protected PoreScoreboardManager(ScoreboardBuilder handle) {
-        super(handle);
-    }
-
-    @Override
-    public Scoreboard getMainScoreboard() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public Scoreboard getNewScoreboard() {
-        throw new NotImplementedException(); // ScoreboardBuilder#build() seems to have the wrong signature atm
+    public static DisplaySlot of(org.spongepowered.api.scoreboard.displayslot.DisplaySlot slot) {
+        return CONVERTER.reverse().convert(slot);
     }
 
 }

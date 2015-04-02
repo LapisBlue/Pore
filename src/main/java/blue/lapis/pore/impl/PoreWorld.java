@@ -30,7 +30,6 @@ import blue.lapis.pore.converter.type.DifficultyConverter;
 import blue.lapis.pore.converter.type.EntityConverter;
 import blue.lapis.pore.converter.type.EnvironmentConverter;
 import blue.lapis.pore.converter.type.SoundConverter;
-import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
@@ -46,7 +45,6 @@ import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.BlockChangeDelegate;
@@ -466,7 +464,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean createExplosion(double x, double y, double z, float power, boolean setFire,
-                                   boolean breakBlocks) {
+            boolean breakBlocks) {
         throw new NotImplementedException();
     }
 
@@ -580,7 +578,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome,
-                                               boolean includeBiomeTempRain) {
+            boolean includeBiomeTempRain) {
         throw new NotImplementedException();
     }
 

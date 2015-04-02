@@ -24,91 +24,130 @@
  */
 package blue.lapis.pore.impl.scoreboard;
 
+import static com.google.common.base.Preconditions.checkState;
+
+import blue.lapis.pore.converter.type.NameTagVisibilityConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.impl.PoreOfflinePlayer;
+import blue.lapis.pore.util.PoreWrapper;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Sets;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
+import org.spongepowered.api.entity.player.User;
+import org.spongepowered.api.scoreboard.Score;
+import org.spongepowered.api.scoreboard.Team;
+import org.spongepowered.api.text.Texts;
 
 import java.util.Set;
 
-// TODO: Bridge
+public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard.Team {
 
-public class PoreTeam implements Team {
+    private Score handle;
+
+    public static PoreTeam of(Team handle) {
+        return WrapperConverter.of(PoreTeam.class, handle);
+    }
+
+    protected PoreTeam(Team handle) {
+        super(handle);
+    }
 
     @Override
     public String getName() throws IllegalStateException {
-        throw new NotImplementedException();
+        //TODO: check if registered (same goes for all methods throwing an ISE)
+        return getHandle().getName();
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public String getDisplayName() throws IllegalStateException {
-        throw new NotImplementedException();
+        return Texts.toLegacy(getHandle().getDisplayName());
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setDisplayName(String displayName) throws IllegalStateException, IllegalArgumentException {
-        throw new NotImplementedException();
+        getHandle().setDisplayName(Texts.fromLegacy(displayName));
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public String getPrefix() throws IllegalStateException {
-        throw new NotImplementedException();
+        return Texts.toLegacy(getHandle().getPrefix());
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setPrefix(String prefix) throws IllegalStateException, IllegalArgumentException {
-        throw new NotImplementedException();
+        checkState(prefix != null, "Prefix cannot be null");
+        //noinspection ConstantConditions
+        getHandle().setPrefix(Texts.fromLegacy(prefix));
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public String getSuffix() throws IllegalStateException {
-        throw new NotImplementedException();
+        return Texts.toLegacy(getHandle().getSuffix());
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setSuffix(String suffix) throws IllegalStateException, IllegalArgumentException {
-        throw new NotImplementedException();
+        checkState(suffix != null, "Suffix cannot be null");
+        //noinspection ConstantConditions
+        getHandle().setSuffix(Texts.fromLegacy(suffix));
     }
 
     @Override
     public boolean allowFriendlyFire() throws IllegalStateException {
-        throw new NotImplementedException();
+        return getHandle().allowFriendlyFire();
     }
 
     @Override
     public void setAllowFriendlyFire(boolean enabled) throws IllegalStateException {
-        throw new NotImplementedException();
+        getHandle().setAllowFriendlyFire(enabled);
     }
 
     @Override
     public boolean canSeeFriendlyInvisibles() throws IllegalStateException {
-        throw new NotImplementedException();
+        return getHandle().canSeeFriendlyInvisibles();
     }
 
     @Override
     public void setCanSeeFriendlyInvisibles(boolean enabled) throws IllegalStateException {
-        throw new NotImplementedException();
+        getHandle().setCanSeeFriendlyInvisibles(enabled);
     }
 
     @Override
     public NameTagVisibility getNameTagVisibility() throws IllegalArgumentException {
-        throw new NotImplementedException();
+        return NameTagVisibilityConverter.of(getHandle().getNameTagVisibility());
     }
 
     @Override
     public void setNameTagVisibility(NameTagVisibility visibility) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        checkState(visibility != null, "Visibility cannot be null");
+        getHandle().setNameTagVisibility(NameTagVisibilityConverter.of(visibility));
     }
 
     @Override
     public Set<OfflinePlayer> getPlayers() throws IllegalStateException {
-        throw new NotImplementedException();
+        return Sets.newHashSet(Collections2.transform(getHandle().getUsers(),
+                new Function<User, OfflinePlayer>() {
+                    public OfflinePlayer apply(User user) {
+                        return PoreOfflinePlayer.of(user);
+                    }
+                }
+        ));
     }
 
     @Override
     public int getSize() throws IllegalStateException {
-        throw new NotImplementedException();
+        return getHandle().getUsers().size();
     }
 
     @Override
@@ -118,12 +157,12 @@ public class PoreTeam implements Team {
 
     @Override
     public void addPlayer(OfflinePlayer player) throws IllegalStateException, IllegalArgumentException {
-        throw new NotImplementedException();
+        getHandle().addUser(((PoreOfflinePlayer)player).getHandle());
     }
 
     @Override
     public boolean removePlayer(OfflinePlayer player) throws IllegalStateException, IllegalArgumentException {
-        throw new NotImplementedException();
+        return getHandle().removeUser(((PoreOfflinePlayer)player).getHandle());
     }
 
     @Override
@@ -133,7 +172,9 @@ public class PoreTeam implements Team {
 
     @Override
     public boolean hasPlayer(OfflinePlayer player) throws IllegalArgumentException, IllegalStateException {
-        throw new NotImplementedException();
+        checkState(player != null, "Offline player cannot be null");
+        //noinspection ConstantConditions
+        return getHandle().getUsers().contains(((PoreOfflinePlayer)player).getHandle());
     }
 
 }

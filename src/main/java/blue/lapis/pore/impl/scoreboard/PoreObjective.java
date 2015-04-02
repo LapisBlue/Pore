@@ -24,37 +24,54 @@
  */
 package blue.lapis.pore.impl.scoreboard;
 
+import static com.google.common.base.Preconditions.checkState;
+
+import blue.lapis.pore.converter.type.DisplaySlotConverter;
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.util.PoreWrapper;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
+import org.spongepowered.api.scoreboard.objective.Objective;
+import org.spongepowered.api.text.Texts;
 
-//TODO: Bridge
+public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.scoreboard.Objective {
 
-//TODO: Bridge
+    private org.spongepowered.api.scoreboard.Scoreboard handle;
 
-public class PoreObjective implements Objective {
+    public static PoreObjective of(Objective handle) {
+        return WrapperConverter.of(PoreObjective.class, handle);
+    }
+
+    protected PoreObjective(Objective handle) {
+        super(handle);
+    }
 
     @Override
     public String getName() throws IllegalStateException {
-        throw new NotImplementedException();
+        //TODO: check if registered (same goes for all other methods throwing an ISE)
+        return getHandle().getName();
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public String getDisplayName() throws IllegalStateException {
-        throw new NotImplementedException();
+        return Texts.toLegacy(getHandle().getDisplayName());
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setDisplayName(String displayName) throws IllegalStateException, IllegalArgumentException {
-        throw new NotImplementedException();
+        checkState(displayName != null, "Display name cannot be null");
+        getHandle().setDisplayName(Texts.fromLegacy(displayName));
     }
 
     @Override
     public String getCriteria() throws IllegalStateException {
-        throw new NotImplementedException();
+        return getHandle().getCriterion().getName();
     }
 
     @Override
@@ -73,23 +90,27 @@ public class PoreObjective implements Objective {
     }
 
     @Override
-    public void setDisplaySlot(DisplaySlot slot) throws IllegalStateException {
-        throw new NotImplementedException();
+    public DisplaySlot getDisplaySlot() throws IllegalStateException {
+        return DisplaySlotConverter.of(getHandle().getDisplaySlot().orNull());
     }
 
     @Override
-    public DisplaySlot getDisplaySlot() throws IllegalStateException {
-        throw new NotImplementedException();
+    public void setDisplaySlot(DisplaySlot slot) throws IllegalStateException {
+        getHandle().setDisplaySlot(DisplaySlotConverter.of(slot));
     }
 
     @Override
     public Score getScore(OfflinePlayer player) throws IllegalArgumentException, IllegalStateException {
-        throw new NotImplementedException();
+        checkState(player != null, "Offline player cannot be null");
+        //noinspection ConstantConditions
+        return getScore(player.getName());
     }
 
     @Override
     public Score getScore(String entry) throws IllegalArgumentException, IllegalStateException {
-        throw new NotImplementedException();
+        checkState(entry != null, "Entry cannot be null");
+        //TODO: check if registered
+        return PoreScore.of(getHandle().getScore(Texts.of(entry)));
     }
 
 }
