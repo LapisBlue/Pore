@@ -24,12 +24,17 @@
  */
 package blue.lapis.pore.impl;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import blue.lapis.pore.Pore;
+import blue.lapis.pore.converter.type.world.BiomeConverter;
+import blue.lapis.pore.converter.type.world.GeneratorTypeConverter;
 import blue.lapis.pore.converter.type.world.effect.EffectConverter;
 import blue.lapis.pore.converter.type.world.DifficultyConverter;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.converter.type.world.EnvironmentConverter;
 import blue.lapis.pore.converter.type.world.effect.SoundConverter;
+import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
@@ -77,6 +82,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.block.BlockTypes;
+import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.extent.Extent;
 import org.spongepowered.api.world.weather.Weathers;
@@ -250,6 +256,16 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public Item dropItem(Location location, ItemStack item) {
+        //noinspection ConstantConditions
+        Optional<org.spongepowered.api.entity.Entity> created =
+                getHandle().createEntity(EntityTypes.DROPPED_ITEM, VectorConverter.create3d(location));
+        if (!created.isPresent()) {
+            return null;
+        }
+        assert(created instanceof Item);
+        org.spongepowered.api.entity.Item drop = (org.spongepowered.api.entity.Item)created;
+        drop.setPickupDelay(10);
+        //TODO: set ItemStack
         throw new NotImplementedException();
     }
 
@@ -260,7 +276,14 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public Arrow spawnArrow(Location location, Vector direction, float speed, float spread) {
-        throw new NotImplementedException();
+        checkNotNull(location, "Location cannot be null");
+        checkNotNull(direction, "Direction cannot be null");
+        Entity spawned = spawnEntity(location, EntityType.ARROW);
+        assert(spawned instanceof Arrow); // basic sanity check
+        Arrow arrow = (Arrow)spawned;
+        arrow.setVelocity(VectorConverter.getUnitVector(direction).multiply(speed)); // I know, it's weird
+        //TODO: spread
+        return arrow;
     }
 
     @Override
@@ -382,7 +405,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public Location getSpawnLocation() {
-        throw new NotImplementedException();
+        return LocationConverter.of(getHandle().getSpawnLocation());
     }
 
     @Override
@@ -599,13 +622,12 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public Biome getBiome(int x, int z) {
-        //return handle.getBiome(Vectors.create3d(x, 0, z)); //TODO: needs to be wrapped (should we map biomes?)
-        throw new NotImplementedException();
+        return BiomeConverter.of(getHandle().getBiome(x, z));
     }
 
     @Override
     public void setBiome(int x, int z, Biome bio) {
-        throw new NotImplementedException();
+        getHandle().setBiome(x, z, BiomeConverter.of(bio));
     }
 
     @Override
@@ -665,7 +687,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public WorldType getWorldType() {
-        throw new NotImplementedException();
+        return GeneratorTypeConverter.of(getHandle().getCreationSettings().getGeneratorType());
     }
 
     @Override
