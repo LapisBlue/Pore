@@ -132,6 +132,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     @Override
     public int getHighestBlockYAt(int x, int z) {
         for (int y = getMaxHeight(); y >= 0; y++) {
+            //noinspection ConstantConditions
             if (getHandle().getBlock(x, y, z).getType() != BlockTypes.AIR) {
                 return y;
             }
@@ -410,36 +411,41 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean setSpawnLocation(int x, int y, int z) {
-        throw new NotImplementedException();
+        Vector3i position = new Vector3i(x, y, z);
+        getHandle().getProperties().setSpawnPosition(position);
+        return getHandle().getProperties().getSpawnPosition().equals(position);
     }
 
     @Override
     public long getTime() {
-        throw new NotImplementedException();
+        return getHandle().getProperties().getWorldTime() % 24000L;
     }
 
     @Override
     public void setTime(long time) {
-        throw new NotImplementedException();
+        long catchup = 24000 - getHandle().getProperties().getWorldTime() % 24000;
+        getHandle().getProperties().setWorldTime(getHandle().getProperties().getWorldTime() + catchup + time);
     }
 
     @Override
     public long getFullTime() {
-        throw new NotImplementedException();
+        return getHandle().getProperties().getWorldTime();
     }
 
     @Override
     public void setFullTime(long time) {
-        throw new NotImplementedException();
+        getHandle().getProperties().setWorldTime(0);
     }
 
     @Override
     public boolean hasStorm() {
-        return getHandle().getWeather().equals(Weathers.RAIN);
+        return     getHandle().getWeather().equals(Weathers.RAIN)
+                || getHandle().getWeather().equals(Weathers.THUNDER_STORM);
     }
 
     @Override
     public void setStorm(boolean hasStorm) {
+        //noinspection ConstantConditions
         getHandle().forecast(hasStorm ? Weathers.RAIN : Weathers.CLEAR);
     }
 
@@ -455,24 +461,22 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean isThundering() {
-        return getHandle().getWeather().equals(Weathers.THUNDER_STORM);
+        return getHandle().getProperties().isThundering();
     }
 
     @Override
     public void setThundering(boolean thundering) {
-        getHandle().forecast(Weathers.THUNDER_STORM);
+        getHandle().getProperties().setThundering(thundering);
     }
-
-    // TODO: Verify behaviour of this
 
     @Override
     public int getThunderDuration() {
-        return isThundering() ? (int) getHandle().getRemainingDuration() : 0;
+        return isThundering() ? getHandle().getProperties().getThunderTime() : 0;
     }
 
     @Override
     public void setThunderDuration(int duration) {
-        getHandle().forecast(Weathers.THUNDER_STORM, duration);
+        getHandle().getProperties().setThunderTime(duration);
     }
 
     @Override
@@ -562,6 +566,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public FallingBlock spawnFallingBlock(Location location, int blockId, byte blockData)
             throws IllegalArgumentException {
         return spawnFallingBlock(location, Material.getMaterial(blockId), blockData);
@@ -575,8 +580,10 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     @Override
     public void playEffect(Location location, Effect effect, int data, int radius) {
         if (effect.getType() == Effect.Type.SOUND) {
+            //noinspection ConstantConditions
             getHandle().playSound(EffectConverter.toSound(effect, data), VectorConverter.create3d(location), radius);
         } else {
+            //noinspection ConstantConditions
             getHandle().spawnParticles(
                     Pore.getGame().getRegistry().getParticleEffectBuilder(EffectConverter.toParticle(effect)).build(),
                     VectorConverter.create3d(location),
@@ -632,17 +639,17 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public double getTemperature(int x, int z) {
-        throw new NotImplementedException();
+        return getHandle().getBiome(x, z).getTemperature();
     }
 
     @Override
     public double getHumidity(int x, int z) {
-        throw new NotImplementedException();
+        return getHandle().getBiome(x, z).getHumidity();
     }
 
     @Override
     public int getMaxHeight() {
-        throw new NotImplementedException();
+        return getHandle().getBuildHeight();
     }
 
     @Override
@@ -652,12 +659,12 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean getKeepSpawnInMemory() {
-        throw new NotImplementedException();
+        return getHandle().getWorldStorage().getWorldProperties().doesKeepSpawnLoaded();
     }
 
     @Override
     public void setKeepSpawnInMemory(boolean keepLoaded) {
-        throw new NotImplementedException();
+        getHandle().getProperties().setKeepSpawnLoaded(keepLoaded);
     }
 
     @Override
