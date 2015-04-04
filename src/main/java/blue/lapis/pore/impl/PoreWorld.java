@@ -508,7 +508,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public long getSeed() {
-        return getHandle().getWorldSeed();
+        return getHandle().getCreationSettings().getSeed();
     }
 
     @Override
