@@ -272,7 +272,11 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public Item dropItemNaturally(Location location, ItemStack item) {
-        throw new NotImplementedException();
+        // this is how it's expected to behave from what I can understand
+        return dropItem(
+                location.clone().add(Math.random() * 0.85D, Math.random() * 0.85D, Math.random() * 0.85D),
+                item
+        );
     }
 
     @Override
@@ -423,7 +427,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public void setTime(long time) {
-        long catchup = 24000 - getHandle().getProperties().getWorldTime() % 24000;
+        long catchup = 24000L - getHandle().getProperties().getWorldTime() % 24000L;
         getHandle().getProperties().setWorldTime(getHandle().getProperties().getWorldTime() + catchup + time);
     }
 
@@ -434,7 +438,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public void setFullTime(long time) {
-        getHandle().getProperties().setWorldTime(0);
+        getHandle().getProperties().setWorldTime(0L);
     }
 
     @Override

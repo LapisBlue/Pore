@@ -33,7 +33,7 @@ import org.spongepowered.api.world.DimensionTypes;
 
 public final class EnvironmentConverter {
 
-    public static final Converter<World.Environment, DimensionType> CONVERTER =
+    private static final Converter<World.Environment, DimensionType> CONVERTER =
             TypeConverter.<World.Environment, DimensionType>builder()
                     .add(World.Environment.NORMAL, DimensionTypes.OVERWORLD)
                     .add(World.Environment.NETHER, DimensionTypes.NETHER)

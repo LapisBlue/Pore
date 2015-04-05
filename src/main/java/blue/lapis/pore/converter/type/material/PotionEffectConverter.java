@@ -31,7 +31,7 @@ import org.spongepowered.api.potion.PotionEffectBuilder;
 
 public class PotionEffectConverter {
 
-    private static PotionEffectBuilder effectBuilder = Pore.getGame().getRegistry().getPotionEffectBuilder();
+    private static final PotionEffectBuilder effectBuilder = Pore.getGame().getRegistry().getPotionEffectBuilder();
 
     public static org.spongepowered.api.potion.PotionEffect of(org.bukkit.potion.PotionEffect effect) {
         return effectBuilder

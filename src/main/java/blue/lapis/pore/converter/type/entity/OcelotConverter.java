@@ -33,7 +33,7 @@ import org.spongepowered.api.entity.living.animal.OcelotTypes;
 
 public final class OcelotConverter {
 
-    public static final Converter<Ocelot.Type, OcelotType> CONVERTER =
+    private static final Converter<Ocelot.Type, OcelotType> CONVERTER =
             TypeConverter.<Ocelot.Type, OcelotType>builder()
                     .add(Ocelot.Type.BLACK_CAT, OcelotTypes.BLACK_CAT)
                     .add(Ocelot.Type.RED_CAT, OcelotTypes.RED_CAT)

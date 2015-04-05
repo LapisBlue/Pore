@@ -29,7 +29,6 @@ import blue.lapis.pore.util.PoreWrapper;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.BanEntry;
-import org.spongepowered.api.entity.player.User;
 import org.spongepowered.api.util.ban.Ban;
 
 import java.util.Date;

@@ -40,8 +40,6 @@ import org.spongepowered.api.text.Texts;
 
 public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.scoreboard.Objective {
 
-    private org.spongepowered.api.scoreboard.Scoreboard handle;
-
     public static PoreObjective of(Objective handle) {
         return WrapperConverter.of(PoreObjective.class, handle);
     }

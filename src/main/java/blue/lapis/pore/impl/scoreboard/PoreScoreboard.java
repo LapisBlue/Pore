@@ -51,8 +51,6 @@ import java.util.Set;
 
 public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukkit.scoreboard.Scoreboard {
 
-    private Scoreboard handle;
-
     public static PoreScoreboard of(Scoreboard handle) {
         return WrapperConverter.of(PoreScoreboard.class, handle);
     }

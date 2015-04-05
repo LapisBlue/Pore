@@ -35,7 +35,7 @@ import org.spongepowered.api.item.ItemTypes;
 
 public final class MaterialConverter {
 
-    public static final Converter<Material, BlockType> BLOCK_TYPE_CONVERTER =
+    private static final Converter<Material, BlockType> BLOCK_TYPE_CONVERTER =
             TypeConverter.<Material, BlockType>mapBuilder()
                     .add(Material.AIR, BlockTypes.AIR)
                     .add(Material.STONE, BlockTypes.STONE)
@@ -245,7 +245,7 @@ public final class MaterialConverter {
         return BLOCK_TYPE_CONVERTER.reverse().convert(type);
     }
 
-    public static final Converter<Material, ItemType> ITEM_TYPE_CONVERTER =
+    private static final Converter<Material, ItemType> ITEM_TYPE_CONVERTER =
             TypeConverter.<Material, ItemType>mapBuilder()
                     .add(Material.STONE, ItemTypes.STONE)
                     .add(Material.GRASS, ItemTypes.GRASS)

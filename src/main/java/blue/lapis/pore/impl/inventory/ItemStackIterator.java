@@ -33,13 +33,11 @@ import java.util.ListIterator;
  * Literally just a reimplementation of {@link ListIterator}, except it's also
  * responsible for modifying an accompanying inventory.
  */
-public class ItemStackIterator implements ListIterator<ItemStack> {
+class ItemStackIterator implements ListIterator<ItemStack> {
 
-    private final PoreInventory handle;
     private final ListIterator<ItemStack> backing;
 
     ItemStackIterator(PoreInventory inventory, int index) {
-        this.handle = inventory;
         this.backing = Arrays.asList(inventory.getContents()).listIterator(index);
     }
 

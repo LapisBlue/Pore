@@ -31,6 +31,8 @@ import org.spongepowered.api.world.Location;
 
 public class ActionConverter {
 
+    // note: this class doesn't use a converter because such a map would contain duplicates
+
     public static Action of(EntityInteractionType type, Location clicked) {
         if (type == EntityInteractionTypes.ATTACK) {
             return clicked == null ? Action.LEFT_CLICK_AIR : Action.LEFT_CLICK_BLOCK;
@@ -51,7 +53,7 @@ public class ActionConverter {
         } else if (action == Action.RIGHT_CLICK_BLOCK) {
             return EntityInteractionTypes.USE;
         }
-        //TODO: do somethinb about Action.PHYSICAL
+        //TODO: do something about Action.PHYSICAL
         return null;
     }
 

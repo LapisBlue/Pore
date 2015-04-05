@@ -37,7 +37,7 @@ import org.spongepowered.api.entity.living.animal.HorseVariants;
 
 public final class HorseConverter {
 
-    public static final Converter<Horse.Variant, HorseVariant> VARIANT_CONVERTER =
+    private static final Converter<Horse.Variant, HorseVariant> VARIANT_CONVERTER =
             TypeConverter.<Horse.Variant, HorseVariant>builder()
                     .add(Horse.Variant.HORSE, HorseVariants.HORSE)
                     .add(Horse.Variant.DONKEY, HorseVariants.DONKEY)
@@ -54,7 +54,7 @@ public final class HorseConverter {
         return VARIANT_CONVERTER.reverse().convert(variant);
     }
 
-    public static final Converter<Horse.Color, HorseColor> COLOR_CONVERTER =
+    private static final Converter<Horse.Color, HorseColor> COLOR_CONVERTER =
             TypeConverter.<Horse.Color, HorseColor>builder()
                     .add(Horse.Color.WHITE, HorseColors.WHITE)
                     .add(Horse.Color.CREAMY, HorseColors.CREAMY)
@@ -73,7 +73,7 @@ public final class HorseConverter {
         return COLOR_CONVERTER.reverse().convert(color);
     }
 
-    public static final Converter<Horse.Style, HorseStyle> STYLE_CONVERTER =
+    private static final Converter<Horse.Style, HorseStyle> STYLE_CONVERTER =
             TypeConverter.<Horse.Style, HorseStyle>builder()
                     .add(Horse.Style.NONE, HorseStyles.NONE)
                     .add(Horse.Style.WHITE, HorseStyles.WHITE)

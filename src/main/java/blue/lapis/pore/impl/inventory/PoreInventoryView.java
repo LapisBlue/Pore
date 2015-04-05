@@ -37,9 +37,9 @@ import org.spongepowered.api.item.inventory.Inventory;
 //TODO: this wrapper may need to optimized but I'm not sure how we would do that at the moment
 public class PoreInventoryView extends InventoryView {
 
-    private org.bukkit.entity.HumanEntity player;
-    private org.bukkit.inventory.Inventory top;
-    private org.bukkit.inventory.Inventory bottom;
+    private final org.bukkit.entity.HumanEntity player;
+    private final org.bukkit.inventory.Inventory top;
+    private final org.bukkit.inventory.Inventory bottom;
 
     protected PoreInventoryView(org.bukkit.entity.HumanEntity player, org.bukkit.inventory.Inventory top,
                                 org.bukkit.inventory.Inventory bottom) {

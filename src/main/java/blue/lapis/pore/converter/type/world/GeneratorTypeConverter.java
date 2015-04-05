@@ -33,7 +33,7 @@ import org.spongepowered.api.world.GeneratorTypes;
 
 public class GeneratorTypeConverter {
 
-    public static final Converter<WorldType, GeneratorType> CONVERTER =
+    private static final Converter<WorldType, GeneratorType> CONVERTER =
             TypeConverter.<WorldType, GeneratorType>builder()
             .add(WorldType.NORMAL, GeneratorTypes.DEFAULT)
                     .add(WorldType.NORMAL, GeneratorTypes.DEFAULT)

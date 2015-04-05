@@ -33,7 +33,7 @@ import org.spongepowered.api.service.scheduler.Task;
 
 public class PoreBukkitTask extends PoreWrapper<Task> implements BukkitTask {
 
-    private int id;
+    private final int id;
 
     public PoreBukkitTask(Task handle, int id) {
         super(handle);

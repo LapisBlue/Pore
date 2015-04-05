@@ -32,7 +32,7 @@ import org.spongepowered.api.entity.hanging.art.Arts;
 
 public final class ArtConverter {
 
-    public static Converter<Art, org.spongepowered.api.entity.hanging.art.Art> CONVERTER =
+    private static final Converter<Art, org.spongepowered.api.entity.hanging.art.Art> CONVERTER =
             TypeConverter.<Art, org.spongepowered.api.entity.hanging.art.Art>builder()
                     .add(Art.ALBAN, Arts.ALBAN)
                     .add(Art.AZTEC, Arts.AZTEC)

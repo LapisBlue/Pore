@@ -27,13 +27,12 @@ package blue.lapis.pore.converter.type.world;
 import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
-import org.bukkit.block.Biome;
 import org.spongepowered.api.world.difficulty.Difficulties;
 import org.spongepowered.api.world.difficulty.Difficulty;
 
 public class DifficultyConverter {
 
-    public static final Converter<org.bukkit.Difficulty, Difficulty> CONVERTER =
+    private static final Converter<org.bukkit.Difficulty, Difficulty> CONVERTER =
             TypeConverter.<org.bukkit.Difficulty, Difficulty>builder()
                     .add(org.bukkit.Difficulty.PEACEFUL, Difficulties.PEACEFUL)
                     .add(org.bukkit.Difficulty.EASY, Difficulties.EASY)

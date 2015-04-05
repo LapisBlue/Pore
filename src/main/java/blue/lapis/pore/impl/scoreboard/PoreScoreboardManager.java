@@ -34,8 +34,6 @@ import org.spongepowered.api.scoreboard.ScoreboardBuilder;
 
 public class PoreScoreboardManager extends PoreWrapper<ScoreboardBuilder> implements ScoreboardManager {
 
-    private ScoreboardBuilder handle;
-
     public static PoreScoreboardManager of(ScoreboardBuilder handle) {
         return WrapperConverter.of(PoreScoreboardManager.class, handle);
     }

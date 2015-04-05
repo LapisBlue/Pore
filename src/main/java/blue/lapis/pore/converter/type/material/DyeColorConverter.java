@@ -32,7 +32,7 @@ import org.spongepowered.api.item.DyeColors;
 
 public final class DyeColorConverter {
 
-    public static Converter<DyeColor, org.spongepowered.api.item.DyeColor> CONVERTER =
+    private static final Converter<DyeColor, org.spongepowered.api.item.DyeColor> CONVERTER =
             TypeConverter.<DyeColor, org.spongepowered.api.item.DyeColor>builder()
                     .add(DyeColor.BLACK, DyeColors.BLACK)
                     .add(DyeColor.BLUE, DyeColors.BLUE)

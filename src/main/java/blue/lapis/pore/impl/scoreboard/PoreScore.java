@@ -38,8 +38,6 @@ import org.spongepowered.api.text.Texts;
 public class PoreScore extends PoreWrapper<Score> implements org.bukkit.scoreboard.Score {
           // and seven years ago
 
-    private Score handle;
-
     public static PoreScore of(Score handle) {
         return WrapperConverter.of(PoreScore.class, handle);
     }

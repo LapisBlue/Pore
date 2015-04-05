@@ -33,7 +33,7 @@ import org.spongepowered.api.world.biome.BiomeTypes;
 
 public final class BiomeConverter {
 
-    public static final Converter<Biome, BiomeType> CONVERTER = TypeConverter.<Biome, BiomeType>builder()
+    private static final Converter<Biome, BiomeType> CONVERTER = TypeConverter.<Biome, BiomeType>builder()
             .add(Biome.BEACH, BiomeTypes.BEACH)
             .add(Biome.BIRCH_FOREST, BiomeTypes.BIRCH_FOREST)
             .add(Biome.BIRCH_FOREST_HILLS, BiomeTypes.BIRCH_FOREST_HILLS)

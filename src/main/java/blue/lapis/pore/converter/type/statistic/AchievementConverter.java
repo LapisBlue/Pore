@@ -32,7 +32,7 @@ import org.spongepowered.api.stats.achievement.Achievements;
 
 public class AchievementConverter {
 
-    public static final Converter<Achievement, org.spongepowered.api.stats.achievement.Achievement> CONVERTER =
+    private static final Converter<Achievement, org.spongepowered.api.stats.achievement.Achievement> CONVERTER =
             TypeConverter.<Achievement, org.spongepowered.api.stats.achievement.Achievement>builder()
                     .add(Achievement.OPEN_INVENTORY, Achievements.OPEN_INVENTORY)
                     .add(Achievement.MINE_WOOD, Achievements.MINE_WOOD)

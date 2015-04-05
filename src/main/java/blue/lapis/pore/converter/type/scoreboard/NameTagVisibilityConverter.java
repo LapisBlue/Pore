@@ -33,7 +33,7 @@ import org.spongepowered.api.scoreboard.Visibility;
 
 public class NameTagVisibilityConverter {
 
-    public static final Converter<NameTagVisibility, Visibility> CONVERTER =
+    private static final Converter<NameTagVisibility, Visibility> CONVERTER =
             TypeConverter.<NameTagVisibility, Visibility>builder()
                     .add(NameTagVisibility.ALWAYS, Visibilities.ALL)
                     .add(NameTagVisibility.NEVER, Visibilities.NONE)

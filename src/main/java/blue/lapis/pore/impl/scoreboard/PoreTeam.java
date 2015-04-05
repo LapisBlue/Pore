@@ -39,15 +39,12 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
 import org.spongepowered.api.entity.player.User;
-import org.spongepowered.api.scoreboard.Score;
 import org.spongepowered.api.scoreboard.Team;
 import org.spongepowered.api.text.Texts;
 
 import java.util.Set;
 
 public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard.Team {
-
-    private Score handle;
 
     public static PoreTeam of(Team handle) {
         return WrapperConverter.of(PoreTeam.class, handle);

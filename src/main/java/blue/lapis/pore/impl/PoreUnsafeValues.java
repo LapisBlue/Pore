@@ -47,7 +47,7 @@ import java.util.List;
 public class PoreUnsafeValues implements UnsafeValues {
 
     @SuppressWarnings("deprecation")
-    static UnsafeValues INSTANCE = new PoreUnsafeValues();
+    protected static final UnsafeValues INSTANCE = new PoreUnsafeValues();
 
     @Override
     public Material getMaterialFromInternalName(String name) {
