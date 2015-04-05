@@ -211,7 +211,7 @@ public class DurabilityConverter {
             throw new UnsupportedOperationException();
         }
         // no idea why a typecast is necessary here but excluding it makes javac angry
-        T data = Pore.getGame().getRegistry().getItemBuilder().itemType(MaterialConverter.asItem(item.getType()))
+        T data = (T)Pore.getGame().getRegistry().getItemBuilder().itemType(MaterialConverter.asItem(item.getType()))
                 .quantity(1).build().getOrCreateItemData(type).get();
         data.set(map.inverse().get(damage));
         return data;
