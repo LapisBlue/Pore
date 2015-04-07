@@ -26,6 +26,8 @@ package blue.lapis.pore.impl.event.enchantment;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.impl.inventory.PoreInventory;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.HumanEntity;
@@ -34,26 +36,27 @@ import org.bukkit.event.enchantment.PrepareItemEnchantEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.spongepowered.api.event.inventory.InventoryEvent;
 import org.spongepowered.api.event.inventory.ItemEvent;
 
 import java.util.List;
 
 public class PorePrepareItemEnchantEvent extends PrepareItemEnchantEvent {
 
-    private final ItemEvent handle;
+    private final InventoryEvent handle;
 
-    public PorePrepareItemEnchantEvent(ItemEvent handle) {
+    public PorePrepareItemEnchantEvent(InventoryEvent handle) {
         super(null, null, null, null, null, -1);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public ItemEvent getHandle() {
+    public InventoryEvent getHandle() {
         return handle;
     }
 
     @Override
     public Inventory getInventory() {
-        throw new NotImplementedException(); // TODO
+        return PoreInventory.of(getHandle().getInventory());
     }
 
     @Override
@@ -63,7 +66,7 @@ public class PorePrepareItemEnchantEvent extends PrepareItemEnchantEvent {
 
     @Override
     public List<HumanEntity> getViewers() {
-        throw new NotImplementedException(); // TODO
+        return getInventory().getViewers();
     }
 
     @Override
@@ -73,7 +76,7 @@ public class PorePrepareItemEnchantEvent extends PrepareItemEnchantEvent {
 
     @Override
     public Block getEnchantBlock() {
-        throw new NotImplementedException(); // TODO
+        return (Block)getInventory().getHolder();
     }
 
     @Override
