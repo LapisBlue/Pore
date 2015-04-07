@@ -24,41 +24,33 @@
  */
 package blue.lapis.pore.impl.metadata;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.metadata.MetadataStore;
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.plugin.Plugin;
+import org.bukkit.metadata.MetadataStoreBase;
 
-import java.util.List;
-
-// TODO: Bridge
-
-// TODO: Bridge
-
-public class PoreMetadataStore<T> implements MetadataStore<T> {
+public class PoreMetadataStore<T> extends MetadataStoreBase<T> implements MetadataStore<T> {
 
     @Override
-    public void setMetadata(T subject, String metadataKey, MetadataValue newMetadataValue) {
-    }
-
-    @Override
-    public List<MetadataValue> getMetadata(T subject, String metadataKey) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public boolean hasMetadata(T subject, String metadataKey) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void removeMetadata(T subject, String metadataKey, Plugin owningPlugin) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void invalidateAll(Plugin owningPlugin) {
-        throw new NotImplementedException();
+    protected String disambiguate(T subject, String metadataKey) {
+        Class<?> clazz = subject.getClass();
+        if (Block.class.isAssignableFrom(clazz)) {
+            Block b = (Block)subject;
+            return b.getX() + ":" + b.getY() + ":" + b.getZ() + ":" + metadataKey;
+        } else if (Player.class.isAssignableFrom(clazz)) {
+            Player p = (Player)subject;
+            return p.getName().toLowerCase() + ":" + metadataKey;
+        } else if (Entity.class.isAssignableFrom(clazz)) {
+            Entity e = (Entity)subject;
+            return e.getUniqueId().toString() + ":" + metadataKey;
+        } else if (World.class.isAssignableFrom(clazz)) {
+            World w = (World)subject;
+            return w.getUID().toString() + ":" + metadataKey;
+        } else {
+            return subject.toString() + ":" + metadataKey;
+        }
     }
 
 
