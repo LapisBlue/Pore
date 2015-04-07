@@ -24,8 +24,8 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.type.entity.player.GameModeConverter;
+import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.inventory.PoreInventory;

@@ -27,12 +27,12 @@ package blue.lapis.pore.impl;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.Pore;
+import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.converter.type.world.BiomeConverter;
+import blue.lapis.pore.converter.type.world.DifficultyConverter;
+import blue.lapis.pore.converter.type.world.EnvironmentConverter;
 import blue.lapis.pore.converter.type.world.GeneratorTypeConverter;
 import blue.lapis.pore.converter.type.world.effect.EffectConverter;
-import blue.lapis.pore.converter.type.world.DifficultyConverter;
-import blue.lapis.pore.converter.type.entity.EntityConverter;
-import blue.lapis.pore.converter.type.world.EnvironmentConverter;
 import blue.lapis.pore.converter.type.world.effect.SoundConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
@@ -263,7 +263,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         if (!created.isPresent()) {
             return null;
         }
-        assert(created instanceof Item);
+        assert created instanceof Item;
         org.spongepowered.api.entity.Item drop = (org.spongepowered.api.entity.Item)created;
         drop.setPickupDelay(10);
         //TODO: set ItemStack
@@ -284,7 +284,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         checkNotNull(location, "Location cannot be null");
         checkNotNull(direction, "Direction cannot be null");
         Entity spawned = spawnEntity(location, EntityType.ARROW);
-        assert(spawned instanceof Arrow); // basic sanity check
+        assert spawned instanceof Arrow; // basic sanity check
         Arrow arrow = (Arrow)spawned;
         arrow.setVelocity(VectorConverter.getUnitVector(direction).multiply(speed)); // I know, it's weird
         //TODO: spread

@@ -25,8 +25,8 @@
 package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.type.material.ItemStackConverter;
-import blue.lapis.pore.converter.type.world.DirectionConverter;
 import blue.lapis.pore.converter.type.material.MaterialConverter;
+import blue.lapis.pore.converter.type.world.DirectionConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreWorld;

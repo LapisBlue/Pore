@@ -25,7 +25,6 @@
 package blue.lapis.pore.converter.type.material;
 
 import blue.lapis.pore.Pore;
-import blue.lapis.pore.converter.type.material.PotionEffectTypeConverter;
 
 import org.spongepowered.api.potion.PotionEffectBuilder;
 

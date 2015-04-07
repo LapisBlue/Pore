@@ -46,5 +46,4 @@ public class DisplaySlotConverter {
     public static DisplaySlot of(org.spongepowered.api.scoreboard.displayslot.DisplaySlot slot) {
         return CONVERTER.reverse().convert(slot);
     }
-
 }
