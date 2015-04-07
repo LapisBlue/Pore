@@ -58,8 +58,9 @@ public class PoreBukkitScheduler implements BukkitScheduler {
     }
 
     private static void validate(Plugin plugin, Object task) {
-        Preconditions.checkNotNull(plugin, "plugin");
+        Preconditions.checkState(plugin != null, "Plugin is null");
         Preconditions.checkNotNull(task, "task");
+        //noinspection ConstantConditions
         if (!plugin.isEnabled()) {
             throw new IllegalPluginAccessException("Plugin attempted to register task while disabled");
         }
