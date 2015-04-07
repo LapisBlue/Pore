@@ -26,6 +26,10 @@ package blue.lapis.pore.impl.event.block;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.converter.type.material.ItemStackConverter;
+import blue.lapis.pore.converter.vector.VectorConverter;
+import blue.lapis.pore.impl.block.PoreBlock;
+
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
@@ -47,27 +51,27 @@ public class PoreBlockDispenseEvent extends org.bukkit.event.block.BlockDispense
 
     @Override
     public Block getBlock() {
-        throw new NotImplementedException(); // TODO
+        return PoreBlock.of(getHandle().getBlock());
     }
 
     @Override
     public ItemStack getItem() {
-        throw new NotImplementedException(); // TODO
+        return ItemStackConverter.of(getHandle().getDispensedItem());
     }
 
     @Override
     public void setItem(ItemStack item) {
-        throw new NotImplementedException(); // TODO
+        getHandle().setDispensedItem(ItemStackConverter.of(item));
     }
 
     @Override
     public Vector getVelocity() {
-        throw new NotImplementedException(); // TODO
+        return VectorConverter.createBukkitVector(getHandle().getVelocity());
     }
 
     @Override
     public void setVelocity(Vector vel) {
-        throw new NotImplementedException(); // TODO
+        getHandle().setVelocity(VectorConverter.create3d(vel));
     }
 
     @Override

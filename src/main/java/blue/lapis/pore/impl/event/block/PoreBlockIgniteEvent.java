@@ -27,6 +27,7 @@ package blue.lapis.pore.impl.event.block;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.impl.block.PoreBlock;
+import blue.lapis.pore.impl.entity.PoreEntity;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
@@ -54,12 +55,16 @@ public class PoreBlockIgniteEvent extends org.bukkit.event.block.BlockIgniteEven
 
     @Override
     public Player getPlayer() {
-        throw new NotImplementedException(); // TODO
+        return getIgnitingEntity() instanceof Player ? (Player)getIgnitingEntity() : null;
     }
 
     @Override
     public Entity getIgnitingEntity() {
-        throw new NotImplementedException(); // TODO
+        if (getHandle().getCause().isPresent()
+                && getHandle().getCause().get() instanceof org.spongepowered.api.entity.Entity) {
+            return PoreEntity.of((org.spongepowered.api.entity.player.Player) getHandle().getCause());
+        }
+        return null;
     }
 
     @Override

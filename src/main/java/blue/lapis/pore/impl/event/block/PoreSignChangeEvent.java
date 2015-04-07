@@ -27,6 +27,7 @@ package blue.lapis.pore.impl.event.block;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.impl.block.PoreBlock;
+import blue.lapis.pore.impl.entity.PorePlayer;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
@@ -55,10 +56,13 @@ public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent 
 
     @Override
     public Player getPlayer() {
-        throw new NotImplementedException(); // TODO
+        return getHandle().getCause() instanceof org.spongepowered.api.entity.player.Player
+                ? PorePlayer.of((org.spongepowered.api.entity.player.Player) getHandle().getCause())
+                : null;
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public String[] getLines() {
         Text[] lines = getHandle().getNewLines();
         String[] result = new String[lines.length];
@@ -69,6 +73,7 @@ public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent 
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public String getLine(int index) throws IndexOutOfBoundsException {
         return Texts.toLegacy(getHandle().getNewLines()[index]);
     }

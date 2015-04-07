@@ -170,7 +170,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
         if (!(this instanceof Player)) {
             throw new UnsupportedOperationException("Cannot get gamemode of non-player human");
         }
-        return GameModeConverter.of(((org.spongepowered.api.entity.player.Player)this).getGameMode());
+        return GameModeConverter.of(((org.spongepowered.api.entity.player.Player)this.getHandle()).getGameMode());
     }
 
     @Override

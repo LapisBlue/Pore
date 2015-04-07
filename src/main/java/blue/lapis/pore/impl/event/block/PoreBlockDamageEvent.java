@@ -59,7 +59,7 @@ public class PoreBlockDamageEvent extends BlockDamageEvent {
 
     @Override
     public ItemStack getItemInHand() {
-        throw new NotImplementedException(); // TODO
+        return getPlayer().getItemInHand();
     }
 
     @Override
