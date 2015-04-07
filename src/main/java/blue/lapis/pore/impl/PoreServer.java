@@ -30,7 +30,6 @@ import blue.lapis.pore.impl.command.PoreConsoleCommandSender;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.impl.scheduler.PoreBukkitScheduler;
 import blue.lapis.pore.impl.util.PoreCachedServerIcon;
-import blue.lapis.pore.logging.PoreLogger;
 import blue.lapis.pore.util.PoreCollections;
 import blue.lapis.pore.util.PoreWrapper;
 
@@ -114,7 +113,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     public PoreServer(org.spongepowered.api.Game handle, org.slf4j.Logger logger) {
         super(handle.getServer());
         this.game = handle;
-        this.logger = new PoreLogger(logger);
+        this.logger = Logger.getLogger(logger.getName());
         this.commandMap = new SimpleCommandMap(this);
         this.pluginManager = new SimplePluginManager(this, commandMap);
         this.servicesManager = new SimpleServicesManager();

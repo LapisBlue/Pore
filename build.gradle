@@ -43,16 +43,19 @@ project('Porekit') {
 }
 
 configurations {
-    bukkit
+    shadow
     compile {
-        extendsFrom bukkit
+        extendsFrom shadow
     }
 }
 
 // Project dependencies
 dependencies {
     compile project('SpongeAPI') // TODO: Change to Sponge's Maven repo in the future
-    bukkit project('Porekit')
+    shadow project('Porekit')
+    shadow('org.slf4j:jul-to-slf4j:1.7.7') {
+        transitive = false
+    }
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
@@ -98,11 +101,14 @@ jar { // The Pore classes will be created in Pore-VERSION-base.jar first
 }
 
 shadowJar {
-    configurations = [project.configurations.bukkit]
+    configurations = [project.configurations.shadow]
     dependencies {
         exclude dependency('com.google.guava:guava')
         exclude dependency('com.google.code.gson:gson')
     }
+
+    // Relocate jul-to-slf4j
+    relocate 'org.slf4j.bridge', 'blue.lapis.pore.lib.org.slf4j.bridge'
 }
 
 // License header formatting
