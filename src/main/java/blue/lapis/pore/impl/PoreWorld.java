@@ -399,6 +399,11 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     }
 
     @Override
+    public Collection<Entity> getNearbyEntities(Location location, double x, double y, double z) {
+        throw new NotImplementedException();
+    }
+
+    @Override
     public String getName() {
         return getHandle().getName();
     }

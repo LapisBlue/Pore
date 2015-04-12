@@ -17,10 +17,8 @@ apply_patches() {
     repo=$(basename $1)
     target=$2
     patchdir=$3
-    branch=${4:-origin/master}
 
     cd "$basedir/$source"
-    git reset --hard "$branch" >/dev/null
     git branch -f upstream >/dev/null
 
     cd "$basedir"
