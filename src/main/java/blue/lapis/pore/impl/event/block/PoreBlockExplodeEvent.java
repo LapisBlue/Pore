@@ -22,85 +22,58 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.impl.event.enchantment;
+package blue.lapis.pore.impl.event.block;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import blue.lapis.pore.impl.inventory.PoreInventory;
-
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.block.Block;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.enchantment.PrepareItemEnchantEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
-import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.event.inventory.InventoryEvent;
+import org.bukkit.event.block.BlockExplodeEvent;
+import org.spongepowered.api.event.block.BlockEvent;
 
 import java.util.List;
 
-public class PorePrepareItemEnchantEvent extends PrepareItemEnchantEvent {
+public class PoreBlockExplodeEvent extends BlockExplodeEvent {
 
-    private final InventoryEvent handle;
+    private final BlockEvent handle;
 
-    public PorePrepareItemEnchantEvent(InventoryEvent handle) {
-        super(null, null, null, null, null, -1);
+    public PoreBlockExplodeEvent(BlockEvent handle) {
+        super(null, null, -1);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public InventoryEvent getHandle() {
+    public BlockEvent getHandle() {
         return handle;
     }
 
     @Override
-    public Inventory getInventory() {
-        return PoreInventory.of(getHandle().getInventory());
+    public Block getBlock() {
+        throw new NotImplementedException();
     }
 
     @Override
-    public InventoryView getView() {
-        throw new NotImplementedException(); // TODO
+    public List<Block> blockList() {
+        throw new NotImplementedException();
     }
 
     @Override
-    public List<HumanEntity> getViewers() {
-        return getInventory().getViewers();
+    public float getYield() {
+        throw new NotImplementedException();
     }
 
     @Override
-    public Player getEnchanter() {
-        throw new NotImplementedException(); // TODO
-    }
-
-    @Override
-    public Block getEnchantBlock() {
-        return (Block)getInventory().getHolder();
-    }
-
-    @Override
-    public ItemStack getItem() {
-        throw new NotImplementedException(); // TODO
-    }
-
-    @Override
-    public int[] getExpLevelCostsOffered() {
-        throw new NotImplementedException(); // TODO
-    }
-
-    @Override
-    public int getEnchantmentBonus() {
-        throw new NotImplementedException(); // TODO
+    public void setYield(float yield) {
+        throw new NotImplementedException();
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException();
     }
 
 }
