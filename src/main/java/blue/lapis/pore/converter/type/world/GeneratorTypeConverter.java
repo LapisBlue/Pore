@@ -35,11 +35,11 @@ public class GeneratorTypeConverter {
 
     private static final Converter<WorldType, GeneratorType> CONVERTER =
             TypeConverter.<WorldType, GeneratorType>builder()
-            .add(WorldType.NORMAL, GeneratorTypes.DEFAULT)
+                    .add(WorldType.NORMAL, GeneratorTypes.DEFAULT)
                     .add(WorldType.NORMAL, GeneratorTypes.DEFAULT)
                     .add(WorldType.FLAT, GeneratorTypes.FLAT)
-                    .add(WorldType.LARGE_BIOMES, GeneratorTypes.LARGE_BIOMES)
-                    .add(WorldType.AMPLIFIED, GeneratorTypes.AMPLIFIED)
+                    /*.add(WorldType.LARGE_BIOMES, GeneratorTypes.LARGE_BIOME)
+                    .add(WorldType.AMPLIFIED, GeneratorTypes.AMPLIFIED) TODO */
                     .add(WorldType.CUSTOMIZED, GeneratorTypes.DEBUG) //TODO: no idea whether this is right
             .build();
 

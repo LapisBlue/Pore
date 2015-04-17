@@ -27,6 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
+import org.spongepowered.api.data.manipulators.entities.SleepingData;
 import org.spongepowered.api.entity.living.Bat;
 
 public class PoreBat extends PoreAmbient implements org.bukkit.entity.Bat {
@@ -51,12 +52,19 @@ public class PoreBat extends PoreAmbient implements org.bukkit.entity.Bat {
 
     @Override
     public boolean isAwake() {
-        return getHandle().isAwake();
+        return !has(SleepingData.class); // TODO: ???
     }
 
     @Override
     public void setAwake(boolean state) {
-        getHandle().setAwake(state);
+        // TODO: ???
+        if (state != isAwake()) {
+            if (state) {
+                remove(SleepingData.class);
+            } else {
+                set(getOrCreate(SleepingData.class));
+            }
+        }
     }
 
 }

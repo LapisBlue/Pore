@@ -167,7 +167,7 @@ import org.spongepowered.api.entity.living.Bat;
 import org.spongepowered.api.entity.living.Human;
 import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.entity.living.Squid;
-import org.spongepowered.api.entity.living.Tameable;
+import org.spongepowered.api.entity.living.Villager;
 import org.spongepowered.api.entity.living.animal.Animal;
 import org.spongepowered.api.entity.living.animal.Chicken;
 import org.spongepowered.api.entity.living.animal.Cow;
@@ -203,7 +203,6 @@ import org.spongepowered.api.entity.living.monster.Witch;
 import org.spongepowered.api.entity.living.monster.Wither;
 import org.spongepowered.api.entity.living.monster.Zombie;
 import org.spongepowered.api.entity.living.monster.ZombiePigman;
-import org.spongepowered.api.entity.living.villager.Villager;
 import org.spongepowered.api.entity.player.Player;
 import org.spongepowered.api.entity.player.User;
 import org.spongepowered.api.entity.projectile.Arrow;
@@ -291,7 +290,7 @@ public class WrapperConverter {
                                 .register(Pig.class, PorePig.class)
                                 .register(Rabbit.class, PoreRabbit.class)
                                 .register(Sheep.class, PoreSheep.class)
-                                .register(Tameable.class, PoreTameable.class)
+                                //.register(Tameable.class, PoreTameable.class) TODO
                                     .register(Horse.class, PoreHorse.class)
                                     .register(Ocelot.class, PoreOcelot.class)
                                     .register(Wolf.class, PoreWolf.class)

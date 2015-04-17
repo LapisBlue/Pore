@@ -28,6 +28,8 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
+import org.spongepowered.api.data.manipulators.entities.CriticalHitData;
+import org.spongepowered.api.data.manipulators.entities.KnockbackData;
 import org.spongepowered.api.entity.projectile.Arrow;
 
 public class PoreArrow extends PoreProjectile implements org.bukkit.entity.Arrow {
@@ -52,22 +54,30 @@ public class PoreArrow extends PoreProjectile implements org.bukkit.entity.Arrow
 
     @Override
     public int getKnockbackStrength() {
-        return getHandle().getKnockbackStrength();
+        return get(KnockbackData.class).getKnockbackStrength();
     }
 
     @Override
     public void setKnockbackStrength(int knockbackStrength) {
-        getHandle().setKnockbackStrength(knockbackStrength);
+        KnockbackData data = getOrCreate(KnockbackData.class);
+        data.setKnockbackStrength(knockbackStrength);
+        set(data);
     }
 
     @Override
     public boolean isCritical() {
-        return getHandle().isCritical();
+        return has(CriticalHitData.class);
     }
 
     @Override
     public void setCritical(boolean critical) {
-        getHandle().setCritical(critical);
+        if (critical != isCritical()) {
+            if (critical) {
+                set(getOrCreate(CriticalHitData.class));
+            } else {
+                remove(CriticalHitData.class);
+            }
+        }
     }
 
     @Override

@@ -95,13 +95,13 @@ public final class PoreEventWrapper {
     public static void register(Class<? extends Event> pore) {
         checkNotNull(pore, "pore");
 
-        Class<? extends org.spongepowered.api.util.event.Event> sponge = null;
+        Class<? extends org.spongepowered.api.event.Event> sponge = null;
         for (Constructor<?> constructor : pore.getConstructors()) {
             Class<?>[] parameters = constructor.getParameterTypes();
             if (parameters.length == 1) {
                 Class<?> parameter = parameters[0];
-                if (org.spongepowered.api.util.event.Event.class.isAssignableFrom(parameter)) {
-                    sponge = parameter.asSubclass(org.spongepowered.api.util.event.Event.class);
+                if (org.spongepowered.api.event.Event.class.isAssignableFrom(parameter)) {
+                    sponge = parameter.asSubclass(org.spongepowered.api.event.Event.class);
                 }
             }
         }
@@ -122,12 +122,12 @@ public final class PoreEventWrapper {
     private static class Registration implements HandlerList.Adapter {
 
         private final Class<? extends Event> pore;
-        private final Class<? extends org.spongepowered.api.util.event.Event> sponge;
+        private final Class<? extends org.spongepowered.api.event.Event> sponge;
 
         private final EnumMap<EventPriority, Object> listeners = Maps.newEnumMap(EventPriority.class);
 
         public Registration(Class<? extends Event> pore,
-                Class<? extends org.spongepowered.api.util.event.Event> sponge) {
+                Class<? extends org.spongepowered.api.event.Event> sponge) {
             this.pore = pore;
             this.sponge = sponge;
         }
@@ -161,14 +161,14 @@ public final class PoreEventWrapper {
         }
     }
 
-    private static final Map<org.spongepowered.api.util.event.Event, Event> cache = new MapMaker().weakKeys().makeMap();
+    private static final Map<org.spongepowered.api.event.Event, Event> cache = new MapMaker().weakKeys().makeMap();
 
     @SuppressWarnings("unchecked")
-    public static <T extends Event> T get(org.spongepowered.api.util.event.Event handle) {
+    public static <T extends Event> T get(org.spongepowered.api.event.Event handle) {
         return handle != null ? (T) cache.get(handle) : null;
     }
 
-    public static void set(org.spongepowered.api.util.event.Event handle, Event event) {
+    public static void set(org.spongepowered.api.event.Event handle, Event event) {
         cache.put(handle, event);
     }
 

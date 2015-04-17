@@ -27,6 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
+import org.spongepowered.api.data.manipulators.entities.ElderData;
 import org.spongepowered.api.entity.living.monster.Guardian;
 
 public class PoreGuardian extends PoreMonster implements org.bukkit.entity.Guardian {
@@ -51,11 +52,17 @@ public class PoreGuardian extends PoreMonster implements org.bukkit.entity.Guard
 
     @Override
     public boolean isElder() {
-        return getHandle().isElder();
+        return has(ElderData.class);
     }
 
     @Override
     public void setElder(boolean shouldBeElder) {
-        getHandle().setElder(shouldBeElder);
+        if (shouldBeElder != isElder()) {
+            if (shouldBeElder) {
+                set(getOrCreate(ElderData.class));
+            } else {
+                remove(ElderData.class);
+            }
+        }
     }
 }

@@ -50,8 +50,8 @@ import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
-import org.spongepowered.api.util.event.Order;
-import org.spongepowered.api.util.event.Subscribe;
+import org.spongepowered.api.event.Order;
+import org.spongepowered.api.event.Subscribe;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -69,7 +69,7 @@ public final class PoreListenerGenerator {
     private static final String EVENT_WRAPPER_CLASS = Type.getInternalName(PoreEventWrapper.class);
 
     private static final String EVENT_CLASS = Type.getInternalName(Event.class);
-    private static final String SPONGE_EVENT_CLASS = Type.getInternalName(org.spongepowered.api.util.event.Event.class);
+    private static final String SPONGE_EVENT_CLASS = Type.getInternalName(org.spongepowered.api.event.Event.class);
 
     private static final String GET_CACHE = "(L" + SPONGE_EVENT_CLASS + ";)L" + EVENT_CLASS + ';';
     private static final String SET_CACHE = "(L" + SPONGE_EVENT_CLASS + ";L" + EVENT_CLASS + ";)V";
@@ -146,7 +146,7 @@ public final class PoreListenerGenerator {
     }
 
     public static Object createListener(Class<? extends Event> pore,
-            Class<? extends org.spongepowered.api.util.event.Event> sponge,
+            Class<? extends org.spongepowered.api.event.Event> sponge,
             EventPriority priority) {
 
         try {

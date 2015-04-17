@@ -27,9 +27,11 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingSand;
+import org.spongepowered.api.data.manipulators.entities.FallingBlockData;
 import org.spongepowered.api.entity.FallingBlock;
 
 public class PoreFallingSand extends PoreEntity implements FallingSand {
@@ -54,7 +56,7 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
 
     @Override
     public Material getMaterial() {
-        return MaterialConverter.of(getHandle().getBlockState().getType());
+        return MaterialConverter.of(get(FallingBlockData.class).getBlockState().getType());
     }
 
     @Override
@@ -64,16 +66,19 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
 
     @Override
     public byte getBlockData() {
-        return getHandle().getBlockState().getDataValue();
+        // TODO
+        throw new NotImplementedException();
     }
 
     @Override
     public boolean getDropItem() {
-        return getHandle().getCanDropAsItem();
+        return get(FallingBlockData.class).getCanDropAsItem();
     }
 
     @Override
     public void setDropItem(boolean drop) {
-        getHandle().setCanDropAsItem(drop);
+        FallingBlockData data = getOrCreate(FallingBlockData.class);
+        data.setCanDropAsItem(drop);
+        set(data);
     }
 }

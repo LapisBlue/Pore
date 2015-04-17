@@ -28,8 +28,8 @@ import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
 import org.bukkit.entity.Skeleton;
-import org.spongepowered.api.entity.living.monster.SkeletonType;
-import org.spongepowered.api.entity.living.monster.SkeletonTypes;
+import org.spongepowered.api.data.types.SkeletonType;
+import org.spongepowered.api.data.types.SkeletonTypes;
 
 public final class SkeletonConverter {
 
