@@ -119,7 +119,7 @@ public class PoreEventTest {
 
     private static void checkSpongeEvent(Class<?> eventImpl, Class<?> type) {
         assertTrue(eventImpl.getSimpleName() + ": " + type.getSimpleName() + " is not a sponge event",
-                org.spongepowered.api.util.event.Event.class.isAssignableFrom(type));
+                org.spongepowered.api.event.Event.class.isAssignableFrom(type));
     }
 
     @Test
@@ -154,7 +154,7 @@ public class PoreEventTest {
                 Class<?>[] parameters = constructor.getParameterTypes();
                 if (parameters.length == 1) {
                     Class<?> handle = parameters[0];
-                    if (org.spongepowered.api.util.event.Event.class.isAssignableFrom(handle)) {
+                    if (org.spongepowered.api.event.Event.class.isAssignableFrom(handle)) {
                         // Check for null check
                         try {
                             constructor.newInstance(new Object[]{null});

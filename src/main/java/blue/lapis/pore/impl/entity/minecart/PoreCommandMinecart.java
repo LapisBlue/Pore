@@ -33,6 +33,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
+import org.spongepowered.api.data.manipulators.CommandData;
 import org.spongepowered.api.entity.vehicle.minecart.MinecartCommandBlock;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
@@ -61,22 +62,23 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
 
     @Override
     public String getCommand() {
-        return getHandle().getCommand();
+        return get(CommandData.class).getStoredCommand();
     }
 
     @Override
     public void setCommand(String command) {
-        getHandle().setCommand(command);
+        getOrCreate(CommandData.class).setStoredCommand(command);
     }
 
     @Override
     public String getName() {
-        return getHandle().getCommandName();
+        return getHandle().getName();
     }
 
     @Override
     public void setName(String name) {
-        getHandle().setCommandName(name);
+       // getHandle().setCommandName(name); TODO ??
+        throw new NotImplementedException();
     }
 
     @Override

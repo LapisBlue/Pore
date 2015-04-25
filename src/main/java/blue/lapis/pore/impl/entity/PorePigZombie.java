@@ -28,6 +28,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.PigZombie;
+import org.spongepowered.api.data.manipulators.entities.AngerableData;
 import org.spongepowered.api.entity.living.monster.ZombiePigman;
 
 public class PorePigZombie extends PoreZombie implements PigZombie {
@@ -52,12 +53,14 @@ public class PorePigZombie extends PoreZombie implements PigZombie {
 
     @Override
     public int getAnger() {
-        return getHandle().getAngerLevel();
+        return get(AngerableData.class).getAngerLevel();
     }
 
     @Override
     public void setAnger(int level) {
-        getHandle().setAngerLevel(level);
+        AngerableData angerable = getOrCreate(AngerableData.class);
+        angerable.setAngerLevel(level);
+        set(angerable);
     }
 
     @Override

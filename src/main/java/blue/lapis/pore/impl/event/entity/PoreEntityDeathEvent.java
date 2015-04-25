@@ -28,16 +28,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.converter.type.entity.EntityConverter;
-import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.entity.Item;
 import org.spongepowered.api.entity.living.Living;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PoreEntityDeathEvent extends org.bukkit.event.entity.EntityDeathEvent {
@@ -76,11 +74,6 @@ public class PoreEntityDeathEvent extends org.bukkit.event.entity.EntityDeathEve
 
     @Override
     public List<ItemStack> getDrops() {
-        // not sure if there's a better way of doing this, but the conversions are kind of weird
-        List<ItemStack> items = new ArrayList<ItemStack>();
-        for (Item item : this.getHandle().getDroppedItems()) {
-            items.add(ItemStackConverter.of(item.getItemStack()));
-        }
-        return items;
+        throw new NotImplementedException(); // TODO: drops are separated from EntityDeathEvent
     }
 }

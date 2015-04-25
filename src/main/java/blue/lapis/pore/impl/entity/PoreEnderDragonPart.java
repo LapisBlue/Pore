@@ -63,12 +63,12 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
 
     @Override
     public void _INVALID_damage(int amount) {
-        this.damage((double) amount);
+        this.damage(amount);
     }
 
     @Override
     public void _INVALID_damage(int amount, Entity source) {
-        this.damage((double) amount, source);
+        this.damage(amount, source);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
 
     @Override
     public void _INVALID_setHealth(int health) {
-        this.setHealth((double) health);
+        this.setHealth(health);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
 
     @Override
     public void _INVALID_setMaxHealth(int health) {
-        this.setMaxHealth((double) health);
+        this.setMaxHealth(health);
     }
 
     @Override

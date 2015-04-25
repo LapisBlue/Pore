@@ -49,9 +49,19 @@ import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
+import org.spongepowered.api.data.manipulators.DisplayNameData;
+import org.spongepowered.api.data.manipulators.PotionEffectData;
+import org.spongepowered.api.data.manipulators.entities.BreathingData;
+import org.spongepowered.api.data.manipulators.entities.DamageableData;
+import org.spongepowered.api.data.manipulators.entities.EyeLocationData;
+import org.spongepowered.api.data.manipulators.entities.HealthData;
+import org.spongepowered.api.data.manipulators.entities.LeashData;
 import org.spongepowered.api.entity.living.Agent;
 import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.entity.projectile.source.ProjectileSource;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.Text.Literal;
+import org.spongepowered.api.text.Texts;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -76,7 +86,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public double getEyeHeight() {
-        return getHandle().getEyeHeight();
+        return get(EyeLocationData.class).getEyeHeight();
     }
 
     @Override
@@ -86,7 +96,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public Location getEyeLocation() {
-        return LocationConverter.fromVector3d(getHandle().getWorld(), getHandle().getEyeLocation());
+        return LocationConverter.fromVector3d(getHandle().getWorld(), get(EyeLocationData.class).getEyeLocation());
     }
 
     @Override
@@ -157,37 +167,37 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public int getRemainingAir() {
-        return getHandle().getRemainingAir();
+        return get(BreathingData.class).getRemainingAir();
     }
 
     @Override
     public void setRemainingAir(int ticks) {
-        getHandle().setRemainingAir(ticks);
+        get(BreathingData.class).setRemainingAir(ticks);
     }
 
     @Override
     public int getMaximumAir() {
-        return getHandle().getMaxAir();
+        return get(BreathingData.class).getMaxAir();
     }
 
     @Override
     public void setMaximumAir(int ticks) {
-        getHandle().setMaxAir(ticks);
+        get(BreathingData.class).setMaxAir(ticks);
     }
 
     @Override
     public int getMaximumNoDamageTicks() {
-        return getHandle().getMaxInvulnerabilityTicks();
+        return get(DamageableData.class).getMaxInvulnerabilityTicks();
     }
 
     @Override
     public void setMaximumNoDamageTicks(int ticks) {
-        getHandle().setMaxInvulnerabilityTicks(ticks);
+        get(DamageableData.class).setMaxInvulnerabilityTicks(ticks);
     }
 
     @Override
     public double getLastDamage() {
-        return getHandle().getLastDamage();
+        return get(DamageableData.class).getLastDamage().get();
     }
 
     @Override
@@ -197,22 +207,22 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void setLastDamage(double damage) {
-        getHandle().setLastDamage(damage);
+        get(DamageableData.class).setLastDamage(damage);
     }
 
     @Override
     public void _INVALID_setLastDamage(int damage) {
-        this.setLastDamage((double) damage);
+        this.setLastDamage(damage);
     }
 
     @Override
     public int getNoDamageTicks() {
-        return getHandle().getInvulnerabilityTicks();
+        return get(DamageableData.class).getInvulnerabilityTicks();
     }
 
     @Override
     public void setNoDamageTicks(int ticks) {
-        getHandle().setInvulnerabilityTicks(ticks);
+        get(DamageableData.class).setInvulnerabilityTicks(ticks);
     }
 
     @Override
@@ -228,8 +238,8 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     public boolean addPotionEffect(PotionEffect effect, boolean force) {
         org.spongepowered.api.potion.PotionEffect eff = PotionEffectConverter.of(effect);
-        getHandle().addPotionEffect(eff, force);
-        return getHandle().hasPotionEffect(eff.getType());
+        get(PotionEffectData.class).addPotionEffect(eff, force);
+        return get(PotionEffectData.class).hasPotionEffect(eff.getType());
     }
 
     @Override
@@ -246,18 +256,18 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public boolean hasPotionEffect(PotionEffectType type) {
-        return getHandle().hasPotionEffect(PotionEffectTypeConverter.of(type));
+        return get(PotionEffectData.class).hasPotionEffect(PotionEffectTypeConverter.of(type));
     }
 
     @Override
     public void removePotionEffect(PotionEffectType type) {
-        getHandle().removePotionEffect(PotionEffectTypeConverter.of(type));
+        get(PotionEffectData.class).removePotionEffect(PotionEffectTypeConverter.of(type));
     }
 
     @Override
     public Collection<PotionEffect> getActivePotionEffects() {
         List<PotionEffect> effects = new ArrayList<PotionEffect>();
-        for (org.spongepowered.api.potion.PotionEffect effect : getHandle().getPotionEffects()) {
+        for (org.spongepowered.api.potion.PotionEffect effect : get(PotionEffectData.class).getPotionEffects()) {
             effects.add(PotionEffectConverter.of(effect));
         }
         return effects;
@@ -285,46 +295,46 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void setCanPickupItems(boolean pickup) {
-        if (getHandle() instanceof Agent) {
-            ((Agent) getHandle()).setCanPickupItems(pickup);
-        }
+        throw new NotImplementedException(); //TODO
     }
 
     @Override
     public boolean getCanPickupItems() {
-        return getHandle() instanceof Agent && ((Agent) getHandle()).getCanPickupItems();
+        throw new NotImplementedException(); //TODO
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setCustomName(String name) {
-        getHandle().setCustomName(name);
+        get(DisplayNameData.class).setDisplayName(Texts.fromLegacy(name)); //TODO deprecated
     }
 
     @Override
     public String getCustomName() {
-        return getHandle().getCustomName();
+        Text.Literal text = (Literal) get(DisplayNameData.class).getDisplayName();//TODO Working?
+        return text.getContent();
     }
 
     @Override
     public void setCustomNameVisible(boolean flag) {
-        getHandle().setCustomNameVisible(flag);
+        get(DisplayNameData.class).setCustomNameVisible(flag);
     }
 
     @Override
     public boolean isCustomNameVisible() {
-        return getHandle().isCustomNameVisible();
+        return get(DisplayNameData.class).isCustomNameVisible();
     }
 
     @Override
     public boolean isLeashed() {
-        return getHandle() instanceof Agent && ((Agent) getHandle()).isLeashed();
+        return getHandle() instanceof Agent && has(LeashData.class);
     }
 
     @Override
     public Entity getLeashHolder() throws IllegalStateException {
         if (getHandle() instanceof Agent) {
-            return ((Agent) getHandle()).getLeashHolder().isPresent()
-                    ? PoreEntity.of(((Agent) getHandle()).getLeashHolder().get()) : null;
+            return get(LeashData.class).getLeashHolder() != null 
+                    ? PoreEntity.of(get(LeashData.class).getLeashHolder()) : null;
         }
         return null;
     }
@@ -335,7 +345,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
             if (!(this instanceof Bat) && !(this instanceof EnderDragon)
                     && !(this instanceof Witch) && !(this instanceof Wither)) {
 
-                ((Agent) getHandle()).setLeashHolder(((PoreEntity) holder).getHandle());
+                getOrCreate(LeashData.class).setLeashHolder(((PoreEntity) holder).getHandle());
                 return true;
             }
         }
@@ -344,7 +354,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void damage(double amount) {
-        getHandle().damage(amount);
+        get(HealthData.class).damage(amount);
     }
 
     @Override
@@ -354,7 +364,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void _INVALID_damage(int amount) {
-        getHandle().damage((double) amount);
+        get(HealthData.class).damage(amount);
     }
 
     @Override
@@ -364,27 +374,27 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public double getHealth() {
-        return getHandle().getHealth();
+        return get(HealthData.class).getHealth();
     }
 
     @Override
     public int _INVALID_getHealth() {
-        return (int) getHandle().getHealth();
+        return (int) get(HealthData.class).getHealth();
     }
 
     @Override
     public void setHealth(double health) {
-        getHandle().setHealth(health);
+        getOrCreate(HealthData.class).setHealth(health);
     }
 
     @Override
     public void _INVALID_setHealth(int health) {
-        getHandle().setHealth(health);
+        getOrCreate(HealthData.class).setHealth(health);
     }
 
     @Override
     public double getMaxHealth() {
-        return getHandle().getMaxHealth();
+        return get(HealthData.class).getMaxHealth();
     }
 
     @Override
@@ -394,12 +404,12 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void setMaxHealth(double health) {
-        getHandle().setMaxHealth(health);
+        getOrCreate(HealthData.class).setMaxHealth(health);
     }
 
     @Override
     public void _INVALID_setMaxHealth(int health) {
-        setMaxHealth((double) health);
+        setMaxHealth(health);
     }
 
     @Override

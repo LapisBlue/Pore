@@ -265,7 +265,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         }
         assert created instanceof Item;
         org.spongepowered.api.entity.Item drop = (org.spongepowered.api.entity.Item)created;
-        drop.setPickupDelay(10);
+        //TODO: drop.setPickupDelay(10);
         //TODO: set ItemStack
         throw new NotImplementedException();
     }

@@ -32,6 +32,8 @@ import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
+import org.apache.commons.lang.NotImplementedException;
+
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -76,7 +78,9 @@ public class PoreEntityBreakDoorEvent extends EntityBreakDoorEvent {
 
     @Override
     public byte getData() {
-        return this.getHandle().getReplacementBlock().getState().getDataValue();
+        //TODO: deprecated and removed from SpongeAPI
+        //return this.getHandle().getReplacementBlock().getState().getDataValue();
+        throw new NotImplementedException(); 
     }
 
     @Override

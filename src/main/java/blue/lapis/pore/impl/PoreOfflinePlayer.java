@@ -34,8 +34,10 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.spongepowered.api.data.manipulators.entities.JoinData;
+import org.spongepowered.api.data.manipulators.entities.RespawnLocationData;
+import org.spongepowered.api.data.manipulators.entities.WhitelistData;
 import org.spongepowered.api.entity.player.User;
-import org.spongepowered.api.util.ban.Bans;
 
 import java.util.Map;
 import java.util.UUID;
@@ -67,26 +69,28 @@ public class PoreOfflinePlayer extends PoreWrapper<User> implements OfflinePlaye
 
     @Override
     public boolean isBanned() {
-        return getHandle().isBanned();
+        throw new NotImplementedException();//TODO: Use the BanService
     }
 
     @Override
-    public void setBanned(boolean banned) {
-        if (banned) {
-            getHandle().ban(Bans.of(getHandle()));
-        } else {
-            getHandle().pardon();
-        }
+    public void setBanned(boolean banned) {       
+        throw new NotImplementedException();//TODO: Use the BanService
     }
 
     @Override
     public boolean isWhitelisted() {
-        return getHandle().isWhitelisted();
+        return getHandle().getData(WhitelistData.class).isPresent();
     }
 
     @Override
     public void setWhitelisted(boolean value) {
-        getHandle().setWhitelisted(value);
+        if (value != isWhitelisted()) {
+            if (value) {
+                getHandle().offer(getHandle().getOrCreate(WhitelistData.class).get());
+            } else {
+                getHandle().remove(WhitelistData.class);
+            }
+        }
     }
 
     @Override
@@ -101,22 +105,22 @@ public class PoreOfflinePlayer extends PoreWrapper<User> implements OfflinePlaye
 
     @Override
     public long getFirstPlayed() {
-        return getHandle().getFirstPlayed().getTime();
+        return getHandle().getData(JoinData.class).get().getFirstPlayed().getTime();
     }
 
     @Override
     public long getLastPlayed() {
-        return getHandle().getLastPlayed().getTime();
+        return getHandle().getData(JoinData.class).get().getLastPlayed().getTime();
     }
 
     @Override
     public boolean hasPlayedBefore() {
-        return getHandle().hasJoinedBefore();
+        return getHandle().getData(JoinData.class).get().hasJoinedBefore();
     }
 
     @Override
     public Location getBedSpawnLocation() {
-        return LocationConverter.of(getHandle().getBedLocation().orNull());
+        return LocationConverter.of(getHandle().getData(RespawnLocationData.class).get().getRespawnLocation());
     }
 
     @Override

@@ -24,13 +24,9 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import static org.spongepowered.api.data.manipulators.catalogs.CatalogEntityData.AGEABLE_DATA;
-
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import com.google.common.base.Optional;
 import org.apache.commons.lang.NotImplementedException;
-import org.spongepowered.api.data.manipulators.catalogs.CatalogEntityData;
 import org.spongepowered.api.data.manipulators.entities.AgeableData;
 import org.spongepowered.api.data.manipulators.entities.BreedableData;
 import org.spongepowered.api.entity.living.Ageable;

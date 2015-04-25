@@ -50,7 +50,8 @@ public class PoreHanging extends PoreEntity implements org.bukkit.entity.Hanging
     @Override
     public boolean setFacingDirection(BlockFace face, boolean force) {
         DirectionalData data = getOrCreate(DirectionalData.class);
-        data.setHangingDirection(DirectionConverter.of(face), force);
+        data.setValue(DirectionConverter.of(face));//TODO: missing a boolean (DirectionConverter.of(face), force);
+        set(data);
 
         return true; //TODO
     }

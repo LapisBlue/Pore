@@ -30,6 +30,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.HorseInventory;
+import org.spongepowered.api.data.manipulators.entities.HorseData;
 import org.spongepowered.api.entity.living.animal.Horse;
 
 public class PoreHorse extends PoreTameable implements org.bukkit.entity.Horse {
@@ -54,32 +55,32 @@ public class PoreHorse extends PoreTameable implements org.bukkit.entity.Horse {
 
     @Override
     public Variant getVariant() {
-        return HorseConverter.of(getHandle().getVariant());
+        return HorseConverter.of(get(HorseData.class).getVariant());
     }
 
     @Override
     public void setVariant(Variant variant) {
-        getHandle().setVariant(HorseConverter.of(variant));
+        get(HorseData.class).setVariant(HorseConverter.of(variant));
     }
 
     @Override
     public Color getColor() {
-        return HorseConverter.of(getHandle().getColor());
+        return HorseConverter.of(get(HorseData.class).getColor());
     }
 
     @Override
     public void setColor(Color color) {
-        getHandle().setColor(HorseConverter.of(color));
+        get(HorseData.class).setColor(HorseConverter.of(color));
     }
 
     @Override
     public Style getStyle() {
-        return HorseConverter.of(getHandle().getStyle());
+        return HorseConverter.of(get(HorseData.class).getStyle());
     }
 
     @Override
     public void setStyle(Style style) {
-        getHandle().setStyle(HorseConverter.of(style));
+        get(HorseData.class).setStyle(HorseConverter.of(style));
     }
 
     @Override

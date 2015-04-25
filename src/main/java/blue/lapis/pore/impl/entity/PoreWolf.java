@@ -30,6 +30,8 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
+import org.spongepowered.api.data.manipulators.DyeableData;
+import org.spongepowered.api.data.manipulators.entities.SittingData;
 import org.spongepowered.api.entity.living.animal.Wolf;
 
 public class PoreWolf extends PoreTameable implements org.bukkit.entity.Wolf {
@@ -64,21 +66,29 @@ public class PoreWolf extends PoreTameable implements org.bukkit.entity.Wolf {
 
     @Override
     public boolean isSitting() {
-        return getHandle().isSitting();
+        return has(SittingData.class);
     }
 
     @Override
     public void setSitting(boolean sitting) {
-        getHandle().setSitting(sitting);
+        if (sitting != isSitting()) {
+            if (sitting) {
+                set(getOrCreate(SittingData.class));
+            } else {
+                remove(SittingData.class);
+            }
+        }
     }
 
     @Override
     public DyeColor getCollarColor() {
-        return DyeColorConverter.of(getHandle().getColor());
+        return DyeColorConverter.of(get(DyeableData.class).getValue());
     }
 
     @Override
     public void setCollarColor(DyeColor color) {
-        getHandle().setColor(DyeColorConverter.of(color));
+        DyeableData dyeable = getOrCreate(DyeableData.class);
+        dyeable.setValue(DyeColorConverter.of(color));
+        set(dyeable);
     }
 }

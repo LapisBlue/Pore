@@ -24,7 +24,6 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
@@ -40,7 +39,6 @@ import org.bukkit.Location;
 import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Vehicle;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.metadata.MetadataValue;
@@ -49,7 +47,6 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.Game;
 import org.spongepowered.api.data.DataManipulator;
 import org.spongepowered.api.data.DataTransactionResult;
 import org.spongepowered.api.data.manipulators.entities.IgniteableData;
@@ -57,9 +54,6 @@ import org.spongepowered.api.data.manipulators.entities.PassengerData;
 import org.spongepowered.api.data.manipulators.entities.VehicleData;
 import org.spongepowered.api.data.manipulators.entities.VelocityData;
 import org.spongepowered.api.entity.Entity;
-import org.spongepowered.api.event.entity.EntityDismountEvent;
-import org.spongepowered.api.event.entity.EntityMountEvent;
-import org.spongepowered.api.util.event.callback.CallbackList;
 
 import java.util.List;
 import java.util.Set;
@@ -116,8 +110,8 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
         loc.setX(getHandle().getLocation().getPosition().getX());
         loc.setY(getHandle().getLocation().getPosition().getX());
         loc.setZ(getHandle().getLocation().getPosition().getX());
-        loc.setPitch((float)getHandle().getRotation().getX());
-        loc.setYaw((float)getHandle().getRotation().getY());
+        loc.setPitch((float) getHandle().getRotation().getX());
+        loc.setYaw((float) getHandle().getRotation().getY());
         return loc;
     }
 

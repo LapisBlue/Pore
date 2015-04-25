@@ -27,6 +27,8 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
+import org.spongepowered.api.data.manipulators.entities.AgeableData;
+import org.spongepowered.api.data.manipulators.entities.VillagerZombieData;
 import org.spongepowered.api.entity.living.monster.Zombie;
 
 public class PoreZombie extends PoreMonster implements org.bukkit.entity.Zombie {
@@ -51,25 +53,31 @@ public class PoreZombie extends PoreMonster implements org.bukkit.entity.Zombie 
 
     @Override
     public boolean isBaby() {
-        return getHandle().isBaby();
+        return get(AgeableData.class).isBaby();
     }
 
     @Override
     public void setBaby(boolean flag) {
         if (flag) {
-            getHandle().setBaby();
+            get(AgeableData.class).setBaby();
         } else {
-            getHandle().setAdult();
+            get(AgeableData.class).setAdult();
         }
     }
 
     @Override
     public boolean isVillager() {
-        return getHandle().isVillagerZombie();
+        return !has(VillagerZombieData.class);
     }
 
     @Override
     public void setVillager(boolean flag) {
-        getHandle().setVillagerZombie(flag);
+        if (flag != isVillager()) {
+            if (flag) {
+                remove(VillagerZombieData.class);
+            } else {
+                set(getOrCreate(VillagerZombieData.class));
+            }
+        }
     }
 }
