@@ -24,13 +24,13 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreWrapper;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Bukkit;
@@ -47,11 +47,13 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.Game;
+import org.spongepowered.api.data.DataManipulator;
+import org.spongepowered.api.data.DataTransactionResult;
+import org.spongepowered.api.data.manipulators.entities.IgniteableData;
+import org.spongepowered.api.data.manipulators.entities.PassengerData;
+import org.spongepowered.api.data.manipulators.entities.VehicleData;
+import org.spongepowered.api.data.manipulators.entities.VelocityData;
 import org.spongepowered.api.entity.Entity;
-import org.spongepowered.api.event.entity.EntityDismountEvent;
-import org.spongepowered.api.event.entity.EntityMountEvent;
-import org.spongepowered.api.util.event.callback.CallbackList;
 
 import java.util.List;
 import java.util.Set;
@@ -68,6 +70,30 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
         super(handle);
     }
 
+    protected <T extends DataManipulator<T>> T get(Class<T> dataClass) {
+        return getOptional(dataClass).get();
+    }
+
+    protected <T extends DataManipulator<T>> Optional<T> getOptional(Class<T> dataClass) {
+        return getHandle().getData(dataClass);
+    }
+
+    protected <T extends DataManipulator<T>> boolean has(Class<T> dataClass) {
+        return getOptional(dataClass).isPresent();
+    }
+
+    protected <T extends DataManipulator<T>> T getOrCreate(Class<T> dataClass) {
+        return getHandle().getOrCreate(dataClass).get();
+    }
+
+    protected <T extends DataManipulator<T>> DataTransactionResult set(T data) {
+        return getHandle().offer(data);
+    }
+
+    protected <T extends DataManipulator<T>> boolean remove(Class<T> dataClass) {
+        return getHandle().remove(dataClass);
+    }
+
     @Override
     public EntityType getType() {
         return EntityType.UNKNOWN;
@@ -80,23 +106,25 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public Location getLocation(Location loc) {
-        loc.setWorld(null); //TODO: correct parameter when possible
+        loc.setWorld(getWorld());
         loc.setX(getHandle().getLocation().getPosition().getX());
         loc.setY(getHandle().getLocation().getPosition().getX());
         loc.setZ(getHandle().getLocation().getPosition().getX());
-        loc.setPitch((float)getHandle().getRotation().getX());
-        loc.setYaw((float)getHandle().getRotation().getY());
+        loc.setPitch((float) getHandle().getRotation().getX());
+        loc.setYaw((float) getHandle().getRotation().getY());
         return loc;
     }
 
     @Override
-    public void setVelocity(Vector velocity) {
-        this.getHandle().setVelocity(VectorConverter.create3d(velocity));
+    public Vector getVelocity() {
+        return VectorConverter.createBukkitVector(get(VelocityData.class).getVelocity());
     }
 
     @Override
-    public Vector getVelocity() {
-        return VectorConverter.createBukkitVector(this.getHandle().getVelocity());
+    public void setVelocity(Vector velocity) {
+        VelocityData data = getOrCreate(VelocityData.class);
+        data.setVelocity(VectorConverter.create3d(velocity));
+        set(data);
     }
 
     @Override
@@ -159,17 +187,19 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public int getFireTicks() {
-        return getHandle().getFireTicks();
+        return get(IgniteableData.class).getFireTicks();
     }
 
     @Override
     public int getMaxFireTicks() {
-        return getHandle().getFireDelay();
+        return get(IgniteableData.class).getFireDelay();
     }
 
     @Override
     public void setFireTicks(int ticks) {
-        getHandle().setFireTicks(ticks);
+        IgniteableData igniteable = getOrCreate(IgniteableData.class);
+        igniteable.setFireTicks(ticks);
+        set(igniteable);
     }
 
     @Override
@@ -209,115 +239,31 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public org.bukkit.entity.Entity getPassenger() {
-        return getHandle().getPassenger().isPresent() ? PoreEntity.of(getHandle().getPassenger().get()) : null;
+        Optional<VehicleData> data = getOptional(VehicleData.class);
+        return data.isPresent() ? PoreEntity.of(data.get().getPassenger()) : null;
     }
 
     @Override
     public boolean setPassenger(final org.bukkit.entity.Entity passenger) {
-        if (!getHandle().getPassenger().isPresent()) {
-            getHandle().setPassenger(((PoreEntity) passenger).getHandle());
-            final PoreEntity mounted = this;
-            Pore.getGame().getEventManager().post(new EntityMountEvent() {
-
-                private boolean cancelled = false;
-
-                @Override
-                public org.spongepowered.api.entity.Entity getVehicle() {
-                    return mounted.getHandle();
-                }
-
-                @Override
-                public boolean isCancelled() {
-                    return cancelled;
-                }
-
-                @Override
-                public void setCancelled(boolean cancel) {
-                    this.cancelled = cancel;
-                    if (cancel) {
-                        mounted.getHandle().setPassenger(null); //TODO: avoid triggering an event
-                    } else {
-                        mounted.getHandle().setPassenger(((PoreEntity) passenger).getHandle());
-                    }
-                    //TODO: avoid triggering event
-                }
-
-                @Override
-                public org.spongepowered.api.entity.Entity getEntity() {
-                    return ((PoreEntity) passenger).getHandle();
-                }
-
-                @Override
-                public Game getGame() {
-                    return Pore.getGame();
-                }
-
-                @Override
-                public CallbackList getCallbacks() {
-                    return null; //TODO: determine what to return here
-                }
-            });
-            return true;
-        } else if (passenger == null) {
-            getHandle().setPassenger(null);
-            return true;
+        if (passenger != null) {
+            VehicleData data = getOrCreate(VehicleData.class);
+            data.setPassenger(((PoreEntity) passenger).getHandle());
+            set(data);
+        } else {
+            remove(VehicleData.class);
         }
-        return false;
+
+        return true;
     }
 
     @Override
     public boolean isEmpty() {
-        return !getHandle().getPassenger().isPresent();
+        return !getOptional(VehicleData.class).isPresent();
     }
 
     @Override
     public boolean eject() {
-        if (getHandle().getPassenger().isPresent()) {
-            final org.spongepowered.api.entity.Entity rider = getHandle().getPassenger().get();
-            getHandle().setPassenger(null);
-            final PoreEntity dismounted = this;
-            Pore.getGame().getEventManager().post(new EntityDismountEvent() {
-
-                private boolean cancelled = false;
-
-                @Override
-                public org.spongepowered.api.entity.Entity getDismounted() {
-                    return dismounted.getHandle();
-                }
-
-                @Override
-                public boolean isCancelled() {
-                    return cancelled;
-                }
-
-                @Override
-                public void setCancelled(boolean cancel) {
-                    this.cancelled = cancel;
-                    if (cancel) {
-                        dismounted.getHandle().setPassenger(rider); //TODO: avoid triggering an event
-                    } else {
-                        dismounted.setPassenger(null);
-                    }
-                }
-
-                @Override
-                public org.spongepowered.api.entity.Entity getEntity() {
-                    return rider;
-                }
-
-                @Override
-                public Game getGame() {
-                    return Pore.getGame();
-                }
-
-                @Override
-                public CallbackList getCallbacks() {
-                    return null; //TODO: determine what to return here
-                }
-            });
-            return true;
-        }
-        return false;
+        return setPassenger(null);
     }
 
     @Override
@@ -362,21 +308,19 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public boolean isInsideVehicle() {
-        return getHandle().getVehicle().isPresent();
+        return getHandle().getData(PassengerData.class).isPresent();
     }
 
     @Override
     public boolean leaveVehicle() {
-        if (getHandle().getVehicle().isPresent()) {
-            getHandle().setVehicle(null);
-            return true;
-        }
-        return false;
+        Optional<PassengerData> data = getOptional(PassengerData.class);
+        return data.isPresent() && data.get().setVehicle(null); // TODO: ???
     }
 
     @Override
     public org.bukkit.entity.Entity getVehicle() {
-        return getHandle().getVehicle().isPresent() ? PoreEntity.of(getHandle().getVehicle().get()) : null;
+        Optional<PassengerData> data = getOptional(PassengerData.class);
+        return data.isPresent() ? PoreEntity.of(data.get().getVehicle()) : null;
     }
 
     @Override

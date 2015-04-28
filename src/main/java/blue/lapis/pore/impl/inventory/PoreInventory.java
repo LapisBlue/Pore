@@ -50,6 +50,7 @@ import org.spongepowered.api.item.inventory.types.OrderedInventory;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -80,7 +81,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
 
     @Override
     public String getName() {
-        return this.getHandle().getName().getTranslation().get();
+        return this.getHandle().getName().getTranslation().get(Locale.ENGLISH);
     }
 
     @Override

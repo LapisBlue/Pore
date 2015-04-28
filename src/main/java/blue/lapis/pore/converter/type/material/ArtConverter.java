@@ -28,12 +28,12 @@ import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
 import org.bukkit.Art;
-import org.spongepowered.api.entity.hanging.art.Arts;
+import org.spongepowered.api.data.types.Arts;
 
 public final class ArtConverter {
 
-    private static final Converter<Art, org.spongepowered.api.entity.hanging.art.Art> CONVERTER =
-            TypeConverter.<Art, org.spongepowered.api.entity.hanging.art.Art>builder()
+    private static final Converter<Art, org.spongepowered.api.data.types.Art> CONVERTER =
+            TypeConverter.<Art, org.spongepowered.api.data.types.Art>builder()
                     .add(Art.ALBAN, Arts.ALBAN)
                     .add(Art.AZTEC, Arts.AZTEC)
                     .add(Art.AZTEC2, Arts.AZTEC_2)
@@ -61,11 +61,11 @@ public final class ArtConverter {
                     .add(Art.WITHER, Arts.WITHER)
                     .build();
 
-    public static org.spongepowered.api.entity.hanging.art.Art of(Art art) {
+    public static org.spongepowered.api.data.types.Art of(Art art) {
         return CONVERTER.convert(art);
     }
 
-    public static Art of(org.spongepowered.api.entity.hanging.art.Art art) {
+    public static Art of(org.spongepowered.api.data.types.Art art) {
         return CONVERTER.reverse().convert(art);
     }
 

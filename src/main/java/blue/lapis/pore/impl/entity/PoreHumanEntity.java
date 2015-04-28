@@ -45,8 +45,11 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.block.BlockTypes;
+import org.spongepowered.api.data.DataHolder;
+import org.spongepowered.api.data.manipulators.entities.ExperienceHolderData;
+import org.spongepowered.api.data.manipulators.entities.GameModeData;
+import org.spongepowered.api.data.manipulators.items.InventoryItemData;
 import org.spongepowered.api.entity.living.Human;
-import org.spongepowered.api.item.inventory.Carrier;
 import org.spongepowered.api.item.inventory.entity.HumanInventory;
 import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.api.util.Tristate;
@@ -112,8 +115,10 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     public InventoryView openWorkbench(org.bukkit.Location location, boolean force) {
         Location block = LocationConverter.of(location);
         if (force || block.getType() == BlockTypes.CRAFTING_TABLE) {
-            if (block instanceof Carrier) {
-                return this.openInventory(PoreInventory.of(((Carrier)block).getInventory()));
+            if (block instanceof DataHolder) {
+                return this.openInventory(PoreInventory.of(
+                        block.getData(InventoryItemData.class).get().getInventory() // TODO: is this right?
+                ));
             }
         }
         return null;
@@ -123,8 +128,10 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     public InventoryView openEnchanting(org.bukkit.Location location, boolean force) {
         Location block = LocationConverter.of(location);
         if (force || block.getType() == BlockTypes.ENCHANTING_TABLE) {
-            if (block instanceof Carrier) {
-                return this.openInventory(PoreInventory.of(((Carrier)block).getInventory()));
+            if (block instanceof DataHolder) {
+                return this.openInventory(PoreInventory.of(
+                        block.getData(InventoryItemData.class).get().getInventory() //TODO: is this right?
+                ));
             }
         }
         return null;
@@ -170,7 +177,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
         if (!(this instanceof Player)) {
             throw new UnsupportedOperationException("Cannot get gamemode of non-player human");
         }
-        return GameModeConverter.of(((org.spongepowered.api.entity.player.Player)this.getHandle()).getGameMode());
+        return GameModeConverter.of(this.get(GameModeData.class).getGameMode());
     }
 
     @Override
@@ -178,7 +185,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
         if (!(this instanceof Player)) {
             throw new UnsupportedOperationException("Cannot get gamemode of non-player human");
         }
-        ((org.spongepowered.api.entity.player.Player)this.getHandle()).setGameMode(GameModeConverter.of(mode));
+        this.get(GameModeData.class).setGameMode(GameModeConverter.of(mode));
     }
 
     @Override
@@ -188,7 +195,8 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public int getExpToLevel() {
-        return this.getHandle().getExperienceBetweenLevels() - this.getHandle().getExperienceSinceLevel();
+        return this.get(ExperienceHolderData.class).getExperienceBetweenLevels()
+                - this.get(ExperienceHolderData.class).getExperienceSinceLevel();
     }
 
     @Override

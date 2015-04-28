@@ -28,6 +28,8 @@ import blue.lapis.pore.converter.type.entity.OcelotConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
+import org.spongepowered.api.data.manipulators.entities.OcelotData;
+import org.spongepowered.api.data.manipulators.entities.SittingData;
 import org.spongepowered.api.entity.living.animal.Ocelot;
 
 public class PoreOcelot extends PoreTameable implements org.bukkit.entity.Ocelot {
@@ -52,21 +54,29 @@ public class PoreOcelot extends PoreTameable implements org.bukkit.entity.Ocelot
 
     @Override
     public Type getCatType() {
-        return OcelotConverter.of(getHandle().getOcelotType());
+        return OcelotConverter.of(get(OcelotData.class).getValue());
     }
 
     @Override
     public void setCatType(Type type) {
-        getHandle().setOcelotType(OcelotConverter.of(type));
+        OcelotData ocelot = getOrCreate(OcelotData.class);
+        ocelot.setValue(OcelotConverter.of(type));
+        set(ocelot);
     }
 
     @Override
     public boolean isSitting() {
-        return getHandle().isSitting();
+        return has(SittingData.class);
     }
 
     @Override
     public void setSitting(boolean sitting) {
-        getHandle().setSitting(sitting);
+        if (sitting != isSitting()) {
+            if (sitting) {
+                set(getOrCreate(SittingData.class));
+            } else {
+                remove(SittingData.class);
+            }
+        }
     }
 }

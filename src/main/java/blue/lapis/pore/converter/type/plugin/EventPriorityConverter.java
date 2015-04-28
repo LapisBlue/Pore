@@ -28,7 +28,7 @@ import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
 import org.bukkit.event.EventPriority;
-import org.spongepowered.api.util.event.Order;
+import org.spongepowered.api.event.Order;
 
 public final class EventPriorityConverter {
 

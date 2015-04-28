@@ -63,12 +63,14 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public byte getData() {
-        return getHandle().getState().getDataValue();
+        // TODO return getHandle().getState().getDataValue();
+        throw new NotImplementedException();
     }
 
     @Override
     public void setData(byte data) {
-        getHandle().replaceWith(getHandle().getState().getType().getStateFromDataValue(data));
+        // TODO getHandle().replaceWith(getHandle().getState().getType().getStateFromDataValue(data));
+        throw new NotImplementedException();
     }
 
     @Override

@@ -57,6 +57,17 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
 import org.spongepowered.api.block.BlockTypes;
+import org.spongepowered.api.data.manipulators.DisplayNameData;
+import org.spongepowered.api.data.manipulators.entities.AchievementData;
+import org.spongepowered.api.data.manipulators.entities.ExperienceHolderData;
+import org.spongepowered.api.data.manipulators.entities.FlyingData;
+import org.spongepowered.api.data.manipulators.entities.FoodData;
+import org.spongepowered.api.data.manipulators.entities.InvisibilityData;
+import org.spongepowered.api.data.manipulators.entities.JoinData;
+import org.spongepowered.api.data.manipulators.entities.RespawnLocationData;
+import org.spongepowered.api.data.manipulators.entities.SneakingData;
+import org.spongepowered.api.data.manipulators.entities.StatisticData;
+import org.spongepowered.api.data.manipulators.entities.WhitelistData;
 import org.spongepowered.api.effect.sound.SoundType;
 import org.spongepowered.api.entity.player.Player;
 import org.spongepowered.api.entity.player.tab.PlayerTabInfo;
@@ -71,6 +82,7 @@ import java.io.FileNotFoundException;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -98,16 +110,17 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     @SuppressWarnings("deprecation")
     public String getDisplayName() {
-        return Texts.toLegacy(getHandle().getDisplayName());
+        return Texts.toLegacy(get(DisplayNameData.class).getDisplayName());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setDisplayName(String name) {
-        this.getHandle().setDisplayName(Texts.fromLegacy(name));
+        this.get(DisplayNameData.class).setDisplayName(Texts.fromLegacy(name));
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public String getPlayerListName() {
         Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
         return info.isPresent() ? Texts.toLegacy(info.get().getDisplayName()) : this.getDisplayName();
@@ -184,12 +197,18 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public boolean isSneaking() {
-        return this.getHandle().isSneaking();
+        return this.has(SneakingData.class);
     }
 
     @Override
     public void setSneaking(boolean sneak) {
-        this.getHandle().setSneaking(sneak);
+        if (sneak != isSneaking()) {
+            if (sneak) {
+                set(getOrCreate(SneakingData.class));
+            } else {
+                remove(SneakingData.class);
+            }
+        }
     }
 
     @Override
@@ -234,17 +253,16 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void playSound(Location location, Sound sound, float volume, float pitch) {
-        getHandle().playSound(SoundConverter.of(sound), VectorConverter.create3d(location), (double) volume,
-                (double) pitch);
+        getHandle().playSound(SoundConverter.of(sound), VectorConverter.create3d(location), volume, pitch);
     }
 
     @Override
     public void playSound(Location location, String sound, float volume, float pitch) {
         // TODO: Isn't the String sound the ID and not the name?
-        Optional<SoundType> spongeSound = Pore.getGame().getRegistry().getSound(sound);
+        //TODO: no idea whether this is right
+        Optional<SoundType> spongeSound = Pore.getGame().getRegistry().getType(SoundType.class, sound);
         if (spongeSound.isPresent()) {
-            getHandle().playSound(spongeSound.get(), VectorConverter.create3d(location),
-                    (double) volume, (double) pitch);
+            getHandle().playSound(spongeSound.get(), VectorConverter.create3d(location), volume, pitch);
         }
     }
 
@@ -290,17 +308,24 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void awardAchievement(Achievement achievement) {
-        getHandle().grantAchievement(AchievementConverter.of(achievement));
+        getOrCreate(AchievementData.class).add(AchievementConverter.of(achievement));
     }
 
     @Override
-    public void removeAchievement(Achievement achievement) {
-        getHandle().revokeAchievement(AchievementConverter.of(achievement));
+    public void removeAchievement(Achievement achievement) { //TODO: no idea whether this is right
+        List<org.spongepowered.api.stats.achievement.Achievement> list = get(AchievementData.class).getAll();
+        if (list.contains(AchievementConverter.of(achievement))) {
+            for (int i = 0; i < list.size(); i++) {
+                if (get(AchievementData.class).get(i).get() == AchievementConverter.of(achievement)) {
+                    get(AchievementData.class).remove(i);
+                }
+            }
+        }
     }
 
     @Override
     public boolean hasAchievement(Achievement achievement) {
-        return getHandle().hasAchievement(AchievementConverter.of(achievement));
+        return get(AchievementData.class).contains(AchievementConverter.of(achievement));
     }
 
     @Override
@@ -316,7 +341,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     public void incrementStatistic(Statistic statistic, int amount) throws IllegalArgumentException {
         checkNotNull(statistic, "Statistic must not be null");
-        getHandle().addToStatistic(StatisticConverter.asStdStat(statistic), amount);
+        getOrCreate(StatisticData.class).set(StatisticConverter.asStdStat(statistic), (long) amount);
     }
 
     @Override
@@ -327,13 +352,13 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     public void setStatistic(Statistic statistic, int newValue) throws IllegalArgumentException {
         checkNotNull(statistic, "Statistic must not be null");
-        getHandle().setStatistic(StatisticConverter.asStdStat(statistic), newValue);
+        getOrCreate(StatisticData.class).set(StatisticConverter.asStdStat(statistic), (long) newValue);
     }
 
     @Override
     public int getStatistic(Statistic statistic) throws IllegalArgumentException {
         checkNotNull(statistic, "Statistic must not be null");
-        return getHandle().getStatistic(StatisticConverter.asStdStat(statistic)).or(0L).intValue();
+        return get(StatisticData.class).get(StatisticConverter.asStdStat(statistic)).or(0L).intValue();
     }
 
     @Override
@@ -358,7 +383,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
             throw new UnsupportedOperationException("Cannot get block statistic " + statistic.name() + " for material "
                     + material.name());
         }
-        return getHandle().getStatistic(stat.get()).or(0L).intValue();
+        return get(StatisticData.class).get(stat.get()).or(0L).intValue();
     }
 
     @Override
@@ -374,7 +399,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
             throw new UnsupportedOperationException("Cannot get block statistic " + statistic.name() + " for material "
                     + material.name());
         }
-        getHandle().addToStatistic(stat.get(), amount);
+        getOrCreate(StatisticData.class).set(stat.get(), (long) amount);
     }
 
     @Override
@@ -396,7 +421,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
             throw new UnsupportedOperationException("Cannot get block statistic " + statistic.name() + " for material "
                     + material.name());
         }
-        getHandle().setStatistic(stat.get(), newValue);
+        getOrCreate(StatisticData.class).set(stat.get(), (long) newValue);
     }
 
     @Override
@@ -421,7 +446,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
             throw new UnsupportedOperationException("Cannot get entity statistic " + statistic.name() + " for entity "
                     + entityType.name());
         }
-        return getHandle().getStatistic(stat.get()).or(0L).intValue();
+        return get(StatisticData.class).get(stat.get()).or(0L).intValue();
     }
 
     @Override
@@ -437,7 +462,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
             throw new UnsupportedOperationException("Cannot get entity statistic " + statistic.name() + " for entity "
                     + entityType.name());
         }
-        getHandle().addToStatistic(stat.get(), amount);
+        getOrCreate(StatisticData.class).set(stat.get(), (long) amount);
     }
 
     @Override
@@ -457,7 +482,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
             throw new UnsupportedOperationException("Cannot get entity statistic " + statistic.name() + " for entity "
                     + entityType.name());
         }
-        getHandle().setStatistic(stat.get(), newValue);
+        getOrCreate(StatisticData.class).set(stat.get(), (long) newValue);
     }
 
     @Override
@@ -502,72 +527,75 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void giveExp(int amount) {
-        this.getHandle().setTotalExperience(this.getHandle().getTotalExperience() + amount);
+        this.get(ExperienceHolderData.class).setTotalExperience(
+                this.get(ExperienceHolderData.class).getTotalExperience() + amount);
     }
 
     @Override
     public void giveExpLevels(int amount) {
-        this.getHandle().setLevel(this.getHandle().getLevel() + amount);
+        this.get(ExperienceHolderData.class).setLevel(this.get(ExperienceHolderData.class).getLevel() + amount);
     }
 
     @Override
     public float getExp() {
-        return this.getHandle().getExperienceSinceLevel() / this.getHandle().getExperienceBetweenLevels();
+        return this.get(ExperienceHolderData.class).getExperienceSinceLevel()
+                / this.get(ExperienceHolderData.class).getExperienceBetweenLevels();
     }
 
     @Override
     public void setExp(float exp) {
-        this.getHandle().setExperienceSinceLevel((int)(this.getHandle().getExperienceBetweenLevels() * exp));
+        this.get(ExperienceHolderData.class).setExperienceSinceLevel(
+                (int) (this.get(ExperienceHolderData.class).getExperienceBetweenLevels() * exp));
     }
 
     @Override
     public int getLevel() {
-        return this.getHandle().getLevel();
+        return this.get(ExperienceHolderData.class).getLevel();
     }
 
     @Override
     public void setLevel(int level) {
-        this.getHandle().setLevel(level);
+        this.get(ExperienceHolderData.class).setLevel(level);
     }
 
     @Override
     public int getTotalExperience() {
-        return this.getHandle().getTotalExperience();
+        return this.get(ExperienceHolderData.class).getTotalExperience();
     }
 
     @Override
     public void setTotalExperience(int exp) {
-        this.getHandle().setTotalExperience(exp);
+        this.get(ExperienceHolderData.class).setTotalExperience(exp);
     }
 
     @Override
     public float getExhaustion() {
-        return (float) getHandle().getExhaustion();
+        return (float) get(FoodData.class).getExhaustion();
     }
 
     @Override
     public void setExhaustion(float value) {
-        getHandle().setExhaustion(value);
+        get(FoodData.class).setExhaustion(value);
     }
 
     @Override
     public float getSaturation() {
-        return (float) getHandle().getSaturation();
+        return (float) get(FoodData.class).getSaturation();
     }
 
     @Override
     public void setSaturation(float value) {
-        getHandle().setSaturation(value);
+        get(FoodData.class).setSaturation(value);
     }
 
     @Override
     public int getFoodLevel() {
-        return (int) this.getHandle().getFoodLevel();
+        return (int) this.get(FoodData.class).getFoodLevel();
     }
 
     @Override
     public void setFoodLevel(int value) {
-        this.getHandle().setFoodLevel(value);
+        this.get(FoodData.class).setFoodLevel(value);
     }
 
     @Override
@@ -577,22 +605,28 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public boolean isBanned() {
-        return getHandle().isBanned();
+        throw new NotImplementedException();//TODO: Use the BanService
     }
 
     @Override
     public void setBanned(boolean banned) {
-        throw new NotImplementedException();
+        throw new NotImplementedException();//TODO: Use the BanService
     }
 
     @Override
     public boolean isWhitelisted() {
-        return getHandle().isWhitelisted();
+        return has(WhitelistData.class);
     }
 
     @Override
     public void setWhitelisted(boolean value) {
-        throw new NotImplementedException();
+        if (value != isWhitelisted()) {
+            if (value) {
+                set(getOrCreate(WhitelistData.class));
+            } else {
+                remove(WhitelistData.class);
+            }
+        }
     }
 
     @Override
@@ -602,22 +636,22 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public long getFirstPlayed() {
-        return getHandle().getFirstPlayed().getTime();
+        return get(JoinData.class).getFirstPlayed().getTime();
     }
 
     @Override
     public long getLastPlayed() {
-        return getHandle().getLastPlayed().getTime();
+        return get(JoinData.class).getLastPlayed().getTime();
     }
 
     @Override
     public boolean hasPlayedBefore() {
-        return getHandle().hasJoinedBefore();
+        return get(JoinData.class).hasJoinedBefore();
     }
 
     @Override
     public Location getBedSpawnLocation() {
-        return LocationConverter.of(this.getHandle().getBedLocation().orNull());
+        return LocationConverter.of(this.get(RespawnLocationData.class).getRespawnLocation());
     }
 
     @Override
@@ -630,7 +664,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
         org.spongepowered.api.world.Location spongeLoc = LocationConverter.of(location);
         //noinspection ConstantConditions
         if (force || spongeLoc.getType() == BlockTypes.BED) {
-            this.getHandle().setBedLocation(spongeLoc);
+            this.get(RespawnLocationData.class).setRespawnLocation(spongeLoc);
         }
     }
 
@@ -639,7 +673,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
         if (!(player instanceof PorePlayer)) { // not sure why this might return false, but just in case
             throw new UnsupportedOperationException("Cannot check invisibility status of non-wrapped player");
         }
-        ((PorePlayer)player).getHandle().setInvisibleTo(this.getHandle(), true);
+        ((PorePlayer) player).get(InvisibilityData.class).setInvisibleTo(this.getHandle(), true);
     }
 
     @Override
@@ -647,7 +681,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
         if (!(player instanceof PorePlayer)) { // not sure why this might return false, but just in case
             throw new UnsupportedOperationException("Cannot check invisibility status of non-wrapped player");
         }
-        ((PorePlayer)player).getHandle().setInvisibleTo(this.getHandle(), false);
+        ((PorePlayer) player).get(InvisibilityData.class).setInvisibleTo(this.getHandle(), false);
     }
 
     @Override
@@ -655,17 +689,23 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
         if (!(player instanceof PorePlayer)) { // not sure why this might return false, but just in case
             throw new UnsupportedOperationException("Cannot check invisibility status of non-wrapped player");
         }
-        return ((PorePlayer)player).getHandle().isInvisibleTo(this.getHandle());
+        return ((PorePlayer) player).get(InvisibilityData.class).isInvisibleTo(this.getHandle());
     }
 
     @Override
     public boolean isFlying() {
-        return this.getHandle().isFlying();
+        return this.has(FlyingData.class);
     }
 
     @Override
     public void setFlying(boolean value) {
-        this.getHandle().setFlying(value);
+        if (value != isFlying()) {
+            if (value) {
+                this.set(getOrCreate(FlyingData.class));
+            } else {
+                this.remove(FlyingData.class);
+            }
+        }
     }
 
     //TODO: movement speeds and flight toggle will be included with the attributes API

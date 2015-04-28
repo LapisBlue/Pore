@@ -36,7 +36,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
-import org.bukkit.Bukkit;
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -46,6 +46,7 @@ import org.spongepowered.api.scoreboard.Scoreboard;
 import org.spongepowered.api.scoreboard.TeamBuilder;
 import org.spongepowered.api.scoreboard.critieria.Criterion;
 import org.spongepowered.api.scoreboard.objective.ObjectiveBuilder;
+import org.spongepowered.api.text.Texts;
 
 import java.util.Set;
 
@@ -66,7 +67,8 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
         //noinspection ConstantConditions
         builder.name(name);
         if (criteria != null) {
-            Optional<Criterion> criterion = Pore.getGame().getRegistry().getCriterion(criteria);
+            Optional<Criterion> criterion = Pore.getGame().getRegistry()
+                            .getType(Criterion.class, criteria); //TODO: no idea whether this is right
             if (criterion.isPresent()) {
                 builder.criterion(criterion.get());
             }
@@ -85,7 +87,8 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     public Set<Objective> getObjectivesByCriteria(String criteria) throws IllegalArgumentException {
         checkState(criteria != null, "Criterion cannot be null");
         //noinspection ConstantConditions
-        Optional<Criterion> c = Pore.getGame().getRegistry().getCriterion(criteria);
+        Optional<Criterion> c = Pore.getGame().getRegistry()
+                .getType(Criterion.class, criteria); //TODO: no idea whether this is right
         checkState(c.isPresent(), "Invalid criterion");
         return Sets.newHashSet(Collections2.transform(getHandle().getObjectivesByCriteria(c.get()),
                 new Function<org.spongepowered.api.scoreboard.objective.Objective, Objective>() {
@@ -121,10 +124,12 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public Set<Score> getScores(String entry) throws IllegalArgumentException {
         checkState(entry != null, "Entry cannot be null");
+        //TODO deprecated, not sure this is right
         //noinspection ConstantConditions
-        return Sets.newHashSet(Collections2.transform(getHandle().getScores(entry),
+        return Sets.newHashSet(Collections2.transform(getHandle().getScores(Texts.fromLegacy(entry)),
                 new Function<org.spongepowered.api.scoreboard.Score, Score>() {
                     public Score apply(org.spongepowered.api.scoreboard.Score score) {
                         return PoreScore.of(score);
@@ -141,10 +146,11 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void resetScores(String entry) throws IllegalArgumentException {
         checkState(entry != null, "Entry cannot be null");
         //noinspection ConstantConditions
-        getHandle().removeScores(entry);
+        getHandle().removeScores(Texts.fromLegacy(entry)); //TODO deprecated, not sure this is right
     }
 
     @Override
@@ -189,18 +195,19 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     @Override
     @SuppressWarnings("deprecation")
     public Set<OfflinePlayer> getPlayers() {
-        return Sets.newHashSet(Collections2.transform(getHandle().getEntries(),
+        /*return Sets.newHashSet(Collections2.transform(getHandle().getEntries(),
                 new Function<String, OfflinePlayer>() {
                     public OfflinePlayer apply(String entry) {
                         return Bukkit.getOfflinePlayer(entry);
                     }
                 }
-        ));
+        ));*/ //TODO
+        throw new NotImplementedException();
     }
 
     @Override
     public Set<String> getEntries() {
-        return getHandle().getEntries();
+        throw new NotImplementedException();
     }
 
     @Override

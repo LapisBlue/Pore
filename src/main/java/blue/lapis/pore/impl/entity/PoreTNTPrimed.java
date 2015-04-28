@@ -30,6 +30,7 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.TNTPrimed;
+import org.spongepowered.api.data.manipulators.entities.FuseData;
 import org.spongepowered.api.entity.explosive.PrimedTNT;
 
 public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
@@ -54,12 +55,14 @@ public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
 
     @Override
     public void setFuseTicks(int fuseTicks) {
-        getHandle().setFuseDuration(fuseTicks);
+        FuseData fuse = getOrCreate(FuseData.class);
+        fuse.setFuseDuration(fuseTicks);
+        set(fuse);
     }
 
     @Override
     public int getFuseTicks() {
-        return getHandle().getFuseDuration();
+        return get(FuseData.class).getFuseDuration();
     }
 
     @Override

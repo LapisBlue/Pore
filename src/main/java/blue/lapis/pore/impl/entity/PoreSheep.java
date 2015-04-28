@@ -29,6 +29,8 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
+import org.spongepowered.api.data.manipulators.DyeableData;
+import org.spongepowered.api.data.manipulators.entities.ShearedData;
 import org.spongepowered.api.entity.living.animal.Sheep;
 
 public class PoreSheep extends PoreAnimals implements org.bukkit.entity.Sheep {
@@ -53,21 +55,29 @@ public class PoreSheep extends PoreAnimals implements org.bukkit.entity.Sheep {
 
     @Override
     public boolean isSheared() {
-        return getHandle().isSheared();
+        return has(ShearedData.class);
     }
 
     @Override
     public void setSheared(boolean flag) {
-        getHandle().setSheared(flag);
+        if (flag != isSheared()) {
+            if (flag) {
+                set(getOrCreate(ShearedData.class));
+            } else {
+                remove(ShearedData.class);
+            }
+        }
     }
 
     @Override
     public DyeColor getColor() {
-        return DyeColorConverter.of(getHandle().getColor());
+        return DyeColorConverter.of(get(DyeableData.class).getValue());
     }
 
     @Override
     public void setColor(DyeColor color) {
-        getHandle().setColor(DyeColorConverter.of(color));
+        DyeableData dyeable = getOrCreate(DyeableData.class);
+        dyeable.setValue(DyeColorConverter.of(color));
+        set(dyeable);
     }
 }

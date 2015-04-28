@@ -166,7 +166,7 @@ public class PorePlayerInventory extends PoreInventory implements PlayerInventor
             if (stackOptional.isPresent()) {
                 org.spongepowered.api.item.inventory.ItemStack stack = stackOptional.get();
                 if (id == -1 || stack.getItem() == MaterialConverter.asItem(Material.getMaterial(id))) {
-                    int damage = DurabilityConverter.getDamageValue(stack.getItemData());
+                    int damage = DurabilityConverter.getDamageValue(stack.getManipulators());
                     if (data == -1 || damage == data) {
                         removed += stack.getQuantity();
                         slot.clear();

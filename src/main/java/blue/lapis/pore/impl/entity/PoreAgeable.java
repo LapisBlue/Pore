@@ -27,6 +27,8 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang.NotImplementedException;
+import org.spongepowered.api.data.manipulators.entities.AgeableData;
+import org.spongepowered.api.data.manipulators.entities.BreedableData;
 import org.spongepowered.api.entity.living.Ageable;
 
 public class PoreAgeable extends PoreCreature implements org.bukkit.entity.Ageable {
@@ -46,12 +48,14 @@ public class PoreAgeable extends PoreCreature implements org.bukkit.entity.Ageab
 
     @Override
     public int getAge() {
-        return getHandle().getAge();
+        return get(AgeableData.class).getAge();
     }
 
     @Override
     public void setAge(int age) {
-        getHandle().setAge(age);
+        AgeableData data = getOrCreate(AgeableData.class);
+        data.setAge(age);
+        set(data);
     }
 
     @Override
@@ -66,26 +70,37 @@ public class PoreAgeable extends PoreCreature implements org.bukkit.entity.Ageab
 
     @Override
     public void setBaby() {
-        getHandle().setBaby();
+        AgeableData data = get(AgeableData.class);
+        data.setBaby();
+        set(data);
     }
 
     @Override
     public void setAdult() {
-        getHandle().setAdult();
+        AgeableData data = get(AgeableData.class);
+        data.setAdult();
+        set(data);
     }
 
     @Override
     public boolean isAdult() {
-        return !getHandle().isBaby(); // erm... okay then...
+        return !get(AgeableData.class).isBaby(); // erm... okay then...
     }
 
     @Override
     public boolean canBreed() {
-        return getHandle().canBreed();
+        return has(BreedableData.class);
     }
 
     @Override
     public void setBreed(boolean breed) {
-        getHandle().setBreeding(breed);
+        // TODO: ???
+        if (breed != canBreed()) {
+            if (breed) {
+                set(getOrCreate(BreedableData.class));
+            } else {
+                remove(BreedableData.class);
+            }
+        }
     }
 }

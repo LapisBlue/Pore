@@ -26,7 +26,6 @@ package blue.lapis.pore.impl.scoreboard;
 
 import static com.google.common.base.Preconditions.checkState;
 
-import blue.lapis.pore.converter.type.scoreboard.DisplaySlotConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
@@ -89,12 +88,12 @@ public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.
 
     @Override
     public DisplaySlot getDisplaySlot() throws IllegalStateException {
-        return DisplaySlotConverter.of(getHandle().getDisplaySlot().orNull());
+        throw new NotImplementedException();
     }
 
     @Override
     public void setDisplaySlot(DisplaySlot slot) throws IllegalStateException {
-        getHandle().setDisplaySlot(DisplaySlotConverter.of(slot));
+        throw new NotImplementedException();
     }
 
     @Override

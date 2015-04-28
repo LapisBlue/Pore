@@ -31,6 +31,8 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
+import org.spongepowered.api.data.manipulators.entities.BodyPartRotationalData;
+import org.spongepowered.api.data.manipulators.entities.InvisibilityData;
 import org.spongepowered.api.entity.living.ArmorStand;
 
 public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entity.ArmorStand {
@@ -105,62 +107,74 @@ public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entit
 
     @Override
     public EulerAngle getBodyPose() {
-        return EulerAngleConverter.of(getHandle().getBodyRotation());
+        return EulerAngleConverter.of(get(BodyPartRotationalData.class).getBodyRotation());
     }
 
     @Override
     public void setBodyPose(EulerAngle pose) {
-        getHandle().setBodyDirection(EulerAngleConverter.of(pose));
+        BodyPartRotationalData data = getOrCreate(BodyPartRotationalData.class);
+        data.setBodyDirection(EulerAngleConverter.of(pose));
+        set(data);
     }
 
     @Override
     public EulerAngle getLeftArmPose() {
-        return EulerAngleConverter.of(getHandle().getLeftArmDirection());
+        return EulerAngleConverter.of(get(BodyPartRotationalData.class).getLeftArmDirection());
     }
 
     @Override
     public void setLeftArmPose(EulerAngle pose) {
-        getHandle().setLeftArmDirection(EulerAngleConverter.of(pose));
+        BodyPartRotationalData data = getOrCreate(BodyPartRotationalData.class);
+        data.setLeftArmDirection(EulerAngleConverter.of(pose));
+        set(data);
     }
 
     @Override
     public EulerAngle getRightArmPose() {
-        return EulerAngleConverter.of(getHandle().getRightArmDirection());
+        return EulerAngleConverter.of(get(BodyPartRotationalData.class).getRightArmDirection());
     }
 
     @Override
     public void setRightArmPose(EulerAngle pose) {
-        getHandle().setRightArmDirection(EulerAngleConverter.of(pose));
+        BodyPartRotationalData data = getOrCreate(BodyPartRotationalData.class);
+        data.setRightArmDirection(EulerAngleConverter.of(pose));
+        set(data);
     }
 
     @Override
     public EulerAngle getLeftLegPose() {
-        return EulerAngleConverter.of(getHandle().getLeftLegDirection());
+        return EulerAngleConverter.of(get(BodyPartRotationalData.class).getLeftLegDirection());
     }
 
     @Override
     public void setLeftLegPose(EulerAngle pose) {
-        getHandle().setLeftLegDirection(EulerAngleConverter.of(pose));
+        BodyPartRotationalData data = getOrCreate(BodyPartRotationalData.class);
+        data.setLeftLegDirection(EulerAngleConverter.of(pose));
+        set(data);
     }
 
     @Override
     public EulerAngle getRightLegPose() {
-        return EulerAngleConverter.of(getHandle().getRightLegDirection());
+        return EulerAngleConverter.of(get(BodyPartRotationalData.class).getRightLegDirection());
     }
 
     @Override
     public void setRightLegPose(EulerAngle pose) {
-        getHandle().setRightLegDirection(EulerAngleConverter.of(pose));
+        BodyPartRotationalData data = getOrCreate(BodyPartRotationalData.class);
+        data.setRightLegDirection(EulerAngleConverter.of(pose));
+        set(data);
     }
 
     @Override
     public EulerAngle getHeadPose() {
-        return EulerAngleConverter.of(getHandle().getHeadDirection());
+        return EulerAngleConverter.of(get(BodyPartRotationalData.class).getHeadDirection());
     }
 
     @Override
     public void setHeadPose(EulerAngle pose) {
-        getHandle().setHeadDirection(EulerAngleConverter.of(pose));
+        BodyPartRotationalData data = getOrCreate(BodyPartRotationalData.class);
+        data.setHeadDirection(EulerAngleConverter.of(pose));
+        set(data);
     }
 
     @Override
@@ -185,12 +199,18 @@ public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entit
 
     @Override
     public boolean isVisible() {
-        return !getHandle().isInvisible();
+        return !has(InvisibilityData.class); // TODO: ???
     }
 
     @Override
     public void setVisible(boolean visible) {
-        getHandle().setInvisible(!visible);
+        if (visible != isVisible()) {
+            if (visible) {
+                remove(InvisibilityData.class);
+            } else {
+                set(getOrCreate(InvisibilityData.class));
+            }
+        }
     }
 
     @Override

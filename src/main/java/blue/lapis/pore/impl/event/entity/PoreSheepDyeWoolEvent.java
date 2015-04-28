@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.converter.type.material.DyeColorConverter;
-import blue.lapis.pore.impl.entity.PoreSheep;
+import blue.lapis.pore.impl.entity.PoreEntity;
 
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
@@ -54,7 +54,7 @@ public class PoreSheepDyeWoolEvent extends SheepDyeWoolEvent {
 
     @Override
     public Sheep getEntity() {
-        return (Sheep) PoreSheep.of(this.getHandle().getEntity());
+        return (Sheep) PoreEntity.of(this.getHandle().getEntity());
     }
 
     @Override
@@ -65,13 +65,14 @@ public class PoreSheepDyeWoolEvent extends SheepDyeWoolEvent {
     @Override
     public DyeColor getColor() {
         return DyeColorConverter.of(
-                ((org.spongepowered.api.entity.living.animal.Sheep) this.getHandle().getTargetEntity()).getColor()
-        );
+                ((org.spongepowered.api.entity.living.animal.Sheep) this.getHandle().getTargetEntity()).getDyeData()
+                .getValue());
     }
 
     @Override
     public void setColor(DyeColor color) {
-        ((org.spongepowered.api.entity.living.animal.Sheep) this.getHandle()).setColor(DyeColorConverter.of(color));
+        ((org.spongepowered.api.entity.living.animal.Sheep) this.getHandle()).getDyeData()
+                .setValue(DyeColorConverter.of(color));
     }
 
     @Override

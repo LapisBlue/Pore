@@ -28,40 +28,44 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Creature;
-import org.spongepowered.api.entity.living.Tameable;
+import org.spongepowered.api.data.manipulators.entities.TameableData;
 import org.spongepowered.api.entity.living.animal.Animal;
 
 public class PoreTameable extends PoreAnimals implements org.bukkit.entity.Tameable, Creature {
 
-    public static PoreTameable of(Tameable handle) {
+    public static PoreTameable of(Animal handle) {
         return WrapperConverter.of(PoreTameable.class, handle);
     }
 
-    protected PoreTameable(Tameable handle) {
-        super((Animal) handle);
-    }
-
-    private Tameable getTameable() {
-        return (Tameable) getHandle();
+    protected PoreTameable(Animal handle) {
+        super(handle);
     }
 
     @Override
     public boolean isTamed() {
-        return getTameable().isTamed();
+        return has(TameableData.class);
     }
 
     @Override
     public void setTamed(boolean tame) {
-        getTameable().setTamed(tame);
+        if (tame != isTamed()) {
+            if (tame) {
+                set(getOrCreate(TameableData.class));
+            } else {
+                remove(TameableData.class);
+            }
+        }
     }
 
     @Override
     public AnimalTamer getOwner() {
-        return getTameable().getOwner().isPresent() ? PoreAnimalTamer.of(getTameable().getOwner().get()) : null;
+        return get(TameableData.class).getOwner() != null
+                ? PoreAnimalTamer.of(get(TameableData.class).getOwner())
+                : null;
     }
 
     @Override
     public void setOwner(AnimalTamer tamer) {
-        getTameable().setOwner(((PoreAnimalTamer) tamer).getHandle());
+        get(TameableData.class).setOwner(((PoreAnimalTamer) tamer).getHandle());
     }
 }

@@ -34,7 +34,7 @@ public class ItemStackConverter {
         return new org.bukkit.inventory.ItemStack(
                 MaterialConverter.of(stack.getItem()),
                 stack.getQuantity(),
-                (short) DurabilityConverter.getDamageValue(stack.getItemData())
+                (short) DurabilityConverter.getDamageValue(stack.getManipulators())
         );
     }
 
@@ -50,7 +50,7 @@ public class ItemStackConverter {
                 .itemType(type)
                 .quantity(stack.getAmount())
                 .itemData(DurabilityConverter.getItemData(stack))
-                .maxQuantity(stack.getType().getMaxStackSize())
+                //.maxQuantity(stack.getType().getMaxStackSize()) TODO
                 .build();
     }
 

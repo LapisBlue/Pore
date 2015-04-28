@@ -51,8 +51,8 @@ public class PoreUnsafeValues implements UnsafeValues {
 
     @Override
     public Material getMaterialFromInternalName(String name) {
-        Optional<BlockType> block = Pore.getGame().getRegistry().getBlock(name);
-        Optional<ItemType> item = Pore.getGame().getRegistry().getItem(name);
+        Optional<BlockType> block = Pore.getGame().getRegistry().getType(BlockType.class, name); //TODO is this right?
+        Optional<ItemType> item = Pore.getGame().getRegistry().getType(ItemType.class, name); //TODO is this right?
         if (block.isPresent()) {
             return MaterialConverter.of(block.get());
         } else if (item.isPresent()) {
@@ -66,7 +66,7 @@ public class PoreUnsafeValues implements UnsafeValues {
     public List<String> tabCompleteInternalMaterialName(String token, List<String> completions) {
         return StringUtil.copyPartialMatches(
                 token,
-                Iterables.transform(Pore.getGame().getRegistry().getItems(),
+                Iterables.transform(Pore.getGame().getRegistry().getAllOf(ItemType.class), //TODO is this right?
                         new Function<ItemType, String>() {
                             @Override
                             public String apply(final ItemType input) {
@@ -92,7 +92,9 @@ public class PoreUnsafeValues implements UnsafeValues {
     @Override
     public Statistic getStatisticFromInternalName(String name) {
         //TODO: maybe search block and entity stats too if they're not encompassed
-        Optional<org.spongepowered.api.stats.Statistic> stat = Pore.getGame().getRegistry().getStatistic(name);
+        //TODO is this right?
+        Optional<org.spongepowered.api.stats.Statistic> stat =
+                Pore.getGame().getRegistry().getType(org.spongepowered.api.stats.Statistic.class, name);
         if (stat.isPresent()) {
             return StatisticConverter.of(stat.get());
         } else {
@@ -102,7 +104,7 @@ public class PoreUnsafeValues implements UnsafeValues {
 
     @Override
     public org.bukkit.Achievement getAchievementFromInternalName(String name) {
-        Optional<Achievement> ach = Pore.getGame().getRegistry().getAchievement(name);
+        Optional<Achievement> ach = Pore.getGame().getRegistry().getType(Achievement.class, name); //TODO is this right?
         if (ach.isPresent()) {
             return AchievementConverter.of(ach.get());
         } else {
@@ -114,24 +116,24 @@ public class PoreUnsafeValues implements UnsafeValues {
     public List<String> tabCompleteInternalStatisticOrAchievementName(String token, List<String> completions) {
         List<String> found = StringUtil.copyPartialMatches(
                 token,
-                Iterables.transform(Pore.getGame().getRegistry().getAchievements(),
+                Iterables.transform(Pore.getGame().getRegistry().getAllOf(Achievement.class), //TODO is this right?
                         new Function<Achievement, String>() {
                             @Override
                             public String apply(final Achievement input) {
-                                return input.getInternalName();
+                                return input.getName();
                             }
                         }),
                 completions
         );
         found.addAll(StringUtil.copyPartialMatches(
                 token,
-                Iterables.transform(Pore.getGame().getRegistry().getStatistics(),
+                Iterables.transform(Pore.getGame().getRegistry().getAllOf(org.spongepowered.api.stats.Statistic.class),
                         new Function<org.spongepowered.api.stats.Statistic, String>() {
                             @Override
                             public String apply(final org.spongepowered.api.stats.Statistic input) {
-                                return input.getInternalName();
+                                return input.getName();
                             }
-                        }),
+                        }), //TODO is this right?
                 completions
         ));
         return found;

@@ -30,6 +30,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
+import org.spongepowered.api.data.manipulators.entities.ExplosiveRadiusData;
 import org.spongepowered.api.entity.projectile.explosive.ExplosiveProjectile;
 
 public class PoreFireball extends PoreProjectile implements org.bukkit.entity.Fireball {
@@ -64,13 +65,15 @@ public class PoreFireball extends PoreProjectile implements org.bukkit.entity.Fi
     }
 
     @Override
-    public void setYield(float yield) {
-        this.getHandle().setExplosionPower((int)yield);
+    public float getYield() { // TODO: ???
+        return get(ExplosiveRadiusData.class).getExplosionRadius();
     }
 
     @Override
-    public float getYield() {
-        return this.getHandle().getExplosionPower();
+    public void setYield(float yield) {
+        ExplosiveRadiusData data = getOrCreate(ExplosiveRadiusData.class);
+        data.setExplosionRadius((int) yield);
+        set(data);
     }
 
     @Override

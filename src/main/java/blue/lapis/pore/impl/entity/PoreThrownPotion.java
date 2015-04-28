@@ -31,6 +31,7 @@ import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
+import org.spongepowered.api.data.manipulators.RepresentedItemData;
 import org.spongepowered.api.entity.projectile.ThrownPotion;
 
 import java.util.Collection;
@@ -62,11 +63,13 @@ public class PoreThrownPotion extends PoreProjectile implements org.bukkit.entit
 
     @Override
     public ItemStack getItem() {
-        return ItemStackConverter.of(getHandle().getItem());
+        return ItemStackConverter.of(get(RepresentedItemData.class).getValue());
     }
 
     @Override
     public void setItem(ItemStack item) {
-        getHandle().setItem(ItemStackConverter.of(item));
+        RepresentedItemData potion = getOrCreate(RepresentedItemData.class);
+        potion.setValue(ItemStackConverter.of(item));
+        set(potion);
     }
 }

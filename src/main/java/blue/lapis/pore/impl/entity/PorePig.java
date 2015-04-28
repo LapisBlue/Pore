@@ -27,6 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
+import org.spongepowered.api.data.manipulators.entities.SaddleData;
 import org.spongepowered.api.entity.living.animal.Pig;
 
 public class PorePig extends PoreAnimals implements org.bukkit.entity.Pig {
@@ -51,11 +52,17 @@ public class PorePig extends PoreAnimals implements org.bukkit.entity.Pig {
 
     @Override
     public boolean hasSaddle() {
-        return getHandle().isSaddled();
+        return has(SaddleData.class);
     }
 
     @Override
     public void setSaddle(boolean saddled) {
-        getHandle().setSaddled(saddled);
+        if (saddled != hasSaddle()) {
+            if (saddled) {
+                set(getOrCreate(SaddleData.class));
+            } else {
+                remove(SaddleData.class);
+            }
+        }
     }
 }

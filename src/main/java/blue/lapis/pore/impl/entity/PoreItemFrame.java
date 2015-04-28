@@ -31,6 +31,8 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.Rotation;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
+import org.spongepowered.api.data.manipulators.RepresentedItemData;
+import org.spongepowered.api.data.manipulators.RotationalData;
 import org.spongepowered.api.entity.hanging.ItemFrame;
 
 public class PoreItemFrame extends PoreHanging implements org.bukkit.entity.ItemFrame {
@@ -55,21 +57,25 @@ public class PoreItemFrame extends PoreHanging implements org.bukkit.entity.Item
 
     @Override
     public ItemStack getItem() {
-        return getHandle().getItem().isPresent() ? ItemStackConverter.of(getHandle().getItem().get()) : null;
+        return has(RepresentedItemData.class) ? ItemStackConverter.of(get(RepresentedItemData.class).getValue()) : null;
     }
 
     @Override
     public void setItem(ItemStack item) {
-        getHandle().setItem(ItemStackConverter.of(item));
+        RepresentedItemData representeditem = getOrCreate(RepresentedItemData.class);
+        representeditem.setValue(ItemStackConverter.of(item));
+        set(representeditem);
     }
 
     @Override
     public Rotation getRotation() {
-        return RotationConverter.of(getHandle().getItemRotation());
+        return RotationConverter.of(get(RotationalData.class).getValue());
     }
 
     @Override
     public void setRotation(Rotation rotation) throws IllegalArgumentException {
-        getHandle().setRotation(RotationConverter.of(rotation));
+        RotationalData rotational = getOrCreate(RotationalData.class);
+        rotational.setValue(RotationConverter.of(rotation));
+        set(rotational);
     }
 }
