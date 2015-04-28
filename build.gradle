@@ -95,7 +95,8 @@ jar { // The Pore classes will be created in Pore-VERSION-base.jar first
                 'Specification-Vendor': 'SpigotMC',
                 'Implementation-Title': project.name,
                 'Implementation-Version': project.version,
-                'Implementation-Vendor': 'Lapis'
+                'Implementation-Vendor': 'Lapis',
+                'Main-Class': 'blue.lapis.pore.util.InfoMain'
         )
     }
 }
