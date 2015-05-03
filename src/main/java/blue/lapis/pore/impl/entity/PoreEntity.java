@@ -71,7 +71,8 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
     }
 
     protected <T extends DataManipulator<T>> T get(Class<T> dataClass) {
-        return getOptional(dataClass).get();
+        Optional<T> optional = getOptional(dataClass);
+        return optional.isPresent() ? optional.get() : null;
     }
 
     protected <T extends DataManipulator<T>> Optional<T> getOptional(Class<T> dataClass) {
