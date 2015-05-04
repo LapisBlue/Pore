@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.inventory.ItemStack;
@@ -47,12 +47,12 @@ public class PorePlayerItemBreakEvent extends PlayerItemBreakEvent {
 
     @Override
     public Player getPlayer() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public ItemStack getBrokenItem() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

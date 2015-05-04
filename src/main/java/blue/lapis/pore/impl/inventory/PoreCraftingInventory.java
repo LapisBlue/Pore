@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.inventory;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -44,26 +44,26 @@ public class PoreCraftingInventory extends PoreInventory implements CraftingInve
 
     @Override
     public ItemStack getResult() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public ItemStack[] getMatrix() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setResult(ItemStack newResult) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setMatrix(ItemStack[] contents) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Recipe getRecipe() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

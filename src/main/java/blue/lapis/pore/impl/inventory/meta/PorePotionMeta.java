@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.inventory.meta;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -39,42 +39,42 @@ public class PorePotionMeta extends PoreItemMeta implements PotionMeta {
 
     @Override
     public boolean hasCustomEffects() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public List<PotionEffect> getCustomEffects() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean addCustomEffect(PotionEffect effect, boolean overwrite) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean removeCustomEffect(PotionEffectType type) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean hasCustomEffect(PotionEffectType type) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean setMainEffect(PotionEffectType type) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean clearCustomEffects() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public PotionMeta clone() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

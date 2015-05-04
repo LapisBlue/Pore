@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.vehicle;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
@@ -47,17 +47,17 @@ public class PoreVehicleMoveEvent extends VehicleMoveEvent {
 
     @Override
     public Vehicle getVehicle() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public Location getFrom() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public Location getTo() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
 }

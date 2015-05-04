@@ -28,7 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.impl.inventory.PoreInventory;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Item;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.inventory.Inventory;
@@ -54,16 +54,16 @@ public class PoreInventoryPickupItemEvent extends InventoryPickupItemEvent {
 
     @Override
     public Item getItem() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

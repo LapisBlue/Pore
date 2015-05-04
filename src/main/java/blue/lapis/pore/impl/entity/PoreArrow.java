@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.data.manipulators.entities.CriticalHitData;
 import org.spongepowered.api.data.manipulators.entities.KnockbackData;
@@ -82,12 +82,12 @@ public class PoreArrow extends PoreProjectile implements org.bukkit.entity.Arrow
 
     @Override
     public boolean doesBounce() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setBounce(boolean doesBounce) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

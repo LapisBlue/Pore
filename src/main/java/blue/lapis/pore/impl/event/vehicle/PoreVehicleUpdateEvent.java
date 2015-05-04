@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.vehicle;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.event.vehicle.VehicleUpdateEvent;
 import org.spongepowered.api.event.entity.EntityUpdateEvent;
@@ -46,7 +46,7 @@ public class PoreVehicleUpdateEvent extends VehicleUpdateEvent {
 
     @Override
     public Vehicle getVehicle() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
 }

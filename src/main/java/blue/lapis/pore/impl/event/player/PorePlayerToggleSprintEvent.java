@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.spongepowered.api.event.entity.player.PlayerEvent;
@@ -46,23 +46,23 @@ public class PorePlayerToggleSprintEvent extends PlayerToggleSprintEvent {
 
     @Override
     public Player getPlayer() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 
     @Override
     public boolean isSprinting() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

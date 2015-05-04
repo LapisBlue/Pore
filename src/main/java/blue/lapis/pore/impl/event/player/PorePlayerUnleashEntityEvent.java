@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -48,32 +48,32 @@ public class PorePlayerUnleashEntityEvent extends PlayerUnleashEntityEvent {
 
     @Override
     public Player getPlayer() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Entity getEntity() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public EntityType getEntityType() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public UnleashReason getReason() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

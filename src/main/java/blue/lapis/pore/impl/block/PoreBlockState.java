@@ -28,7 +28,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreWrapper;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -60,7 +60,7 @@ public class PoreBlockState extends PoreWrapper<TileEntity> implements BlockStat
 
     @Override
     public MaterialData getData() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -115,7 +115,7 @@ public class PoreBlockState extends PoreWrapper<TileEntity> implements BlockStat
 
     @Override
     public void setData(MaterialData data) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -125,22 +125,22 @@ public class PoreBlockState extends PoreWrapper<TileEntity> implements BlockStat
 
     @Override
     public boolean setTypeId(int type) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean update() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean update(boolean force) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean update(boolean force, boolean applyPhysics) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -150,31 +150,31 @@ public class PoreBlockState extends PoreWrapper<TileEntity> implements BlockStat
 
     @Override
     public void setRawData(byte data) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isPlaced() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public List<MetadataValue> getMetadata(String metadataKey) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean hasMetadata(String metadataKey) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

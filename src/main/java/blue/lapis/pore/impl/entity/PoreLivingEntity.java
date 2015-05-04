@@ -30,7 +30,7 @@ import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.ProjectileUtil;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -101,32 +101,32 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public List<Block> getLineOfSight(HashSet<Byte> transparent, int maxDistance) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public List<Block> getLineOfSight(Set<Material> transparent, int maxDistance) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public Block getTargetBlock(HashSet<Byte> transparent, int maxDistance) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public Block getTargetBlock(Set<Material> transparent, int maxDistance) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public List<Block> getLastTwoTargetBlocks(HashSet<Byte> transparent, int maxDistance) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public List<Block> getLastTwoTargetBlocks(Set<Material> transparent, int maxDistance) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
@@ -227,7 +227,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public Player getKiller() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
@@ -275,32 +275,32 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public boolean hasLineOfSight(Entity other) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public boolean getRemoveWhenFarAway() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void setRemoveWhenFarAway(boolean remove) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public EntityEquipment getEquipment() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void setCanPickupItems(boolean pickup) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public boolean getCanPickupItems() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
@@ -414,7 +414,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void resetMaxHealth() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

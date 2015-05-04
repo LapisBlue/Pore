@@ -28,7 +28,7 @@ import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Location;
 import org.spongepowered.api.world.WorldBorder;
 
@@ -44,7 +44,7 @@ public class PoreWorldBorder extends PoreWrapper<WorldBorder> implements org.buk
 
     @Override
     public void reset() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override

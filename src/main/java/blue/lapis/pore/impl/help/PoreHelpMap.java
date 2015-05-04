@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.help;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.help.HelpMap;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.help.HelpTopicFactory;
@@ -40,32 +40,32 @@ public class PoreHelpMap implements HelpMap {
 
     @Override
     public HelpTopic getHelpTopic(String topicName) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Collection<HelpTopic> getHelpTopics() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void addTopic(HelpTopic topic) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void clear() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void registerHelpTopicFactory(Class<?> commandClass, HelpTopicFactory<?> factory) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public List<String> getIgnoredPlugins() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.inventory;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.inventory.ItemStack;
@@ -47,7 +47,7 @@ public class PoreFurnaceBurnEvent extends FurnaceBurnEvent {
 
     @Override
     public Block getBlock() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -57,37 +57,37 @@ public class PoreFurnaceBurnEvent extends FurnaceBurnEvent {
 
     @Override
     public ItemStack getFuel() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getBurnTime() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setBurnTime(int burnTime) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isBurning() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setBurning(boolean burning) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -61,17 +61,17 @@ public class PoreEntityCombustByBlockEvent extends EntityCombustByBlockEvent {
 
     @Override
     public Block getCombuster() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getDuration() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setDuration(int duration) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

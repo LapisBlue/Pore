@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.spongepowered.api.block.tile.CommandBlock;
 
 public class PoreCommandBlock extends PoreBlockState implements org.bukkit.block.CommandBlock {
@@ -46,22 +46,22 @@ public class PoreCommandBlock extends PoreBlockState implements org.bukkit.block
 
     @Override
     public String getCommand() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public void setCommand(String command) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public String getName() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public void setName(String name) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
 }

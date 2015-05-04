@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.spongepowered.api.event.entity.player.PlayerDropItemEvent;
@@ -46,22 +46,22 @@ public class PorePlayerDropItemEvent extends org.bukkit.event.player.PlayerDropI
 
     @Override
     public Player getPlayer() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public Item getItemDrop() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
 }

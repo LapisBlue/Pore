@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.world;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.World;
 import org.bukkit.event.world.WorldInitEvent;
 import org.spongepowered.api.event.world.WorldEvent;
@@ -46,7 +46,7 @@ public class PoreWorldInitEvent extends WorldInitEvent {
 
     @Override
     public World getWorld() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
 }

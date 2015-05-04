@@ -30,7 +30,7 @@ import static com.google.common.base.Preconditions.checkState;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.PortalType;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.EntityType;
@@ -68,21 +68,21 @@ public class PoreEntityCreatePortalEvent extends EntityCreatePortalEvent {
 
     @Override
     public List<BlockState> getBlocks() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public PortalType getPortalType() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

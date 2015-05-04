@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.server;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.server.ServerCommandEvent;
 import org.spongepowered.api.event.message.CommandEvent;
@@ -46,17 +46,17 @@ public class PoreServerCommandEvent extends ServerCommandEvent {
 
     @Override
     public CommandSender getSender() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public String getCommand() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public void setCommand(String message) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
 }

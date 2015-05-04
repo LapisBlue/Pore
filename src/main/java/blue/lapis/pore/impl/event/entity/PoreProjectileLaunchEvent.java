@@ -30,7 +30,7 @@ import static com.google.common.base.Preconditions.checkState;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreProjectile;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
@@ -61,7 +61,7 @@ public class PoreProjectileLaunchEvent extends ProjectileLaunchEvent {
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -69,6 +69,6 @@ public class PoreProjectileLaunchEvent extends ProjectileLaunchEvent {
         //TODO: we're probably going to have to manage this ourselves
         // it would involve removing the Projectile from the world and replacing
         // the consumed ItemStack
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.FurnaceInventory;
 import org.spongepowered.api.block.tile.carrier.Furnace;
 
@@ -47,26 +47,26 @@ public class PoreFurnace extends PoreBlockState implements org.bukkit.block.Furn
 
     @Override
     public short getBurnTime() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setBurnTime(short burnTime) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public short getCookTime() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setCookTime(short cookTime) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public FurnaceInventory getInventory() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

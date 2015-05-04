@@ -28,7 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.impl.block.PoreBlock;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.spongepowered.api.event.block.BlockEvent;
@@ -53,12 +53,12 @@ public class PoreLeavesDecayEvent extends LeavesDecayEvent {
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
 }

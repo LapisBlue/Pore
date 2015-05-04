@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.event.block;
 import blue.lapis.pore.impl.block.PoreBlock;
 
 import com.google.common.base.Preconditions;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockDamageEvent;
@@ -54,7 +54,7 @@ public class PoreBlockDamageEvent extends BlockDamageEvent {
 
     @Override
     public Player getPlayer() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
@@ -64,22 +64,22 @@ public class PoreBlockDamageEvent extends BlockDamageEvent {
 
     @Override
     public boolean getInstaBreak() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public void setInstaBreak(boolean bool) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
 }

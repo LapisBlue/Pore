@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
@@ -70,7 +70,7 @@ public class PoreEntityRegainHealthEvent extends EntityRegainHealthEvent {
 
     @Override
     public RegainReason getRegainReason() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

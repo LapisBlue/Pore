@@ -33,7 +33,7 @@ import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.util.PoreCollections;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -96,6 +96,6 @@ public class PoreEntityExplodeEvent extends EntityExplodeEvent {
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

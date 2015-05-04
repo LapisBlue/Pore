@@ -27,7 +27,7 @@ package blue.lapis.pore.impl;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.BanEntry;
 import org.spongepowered.api.util.ban.Ban;
 
@@ -45,7 +45,7 @@ public class PoreBanEntry extends PoreWrapper<Ban> implements BanEntry {
 
     @Override
     public String getTarget() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -55,7 +55,7 @@ public class PoreBanEntry extends PoreWrapper<Ban> implements BanEntry {
 
     @Override
     public void setCreated(Date created) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -68,7 +68,7 @@ public class PoreBanEntry extends PoreWrapper<Ban> implements BanEntry {
 
     @Override
     public void setSource(String source) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -81,7 +81,7 @@ public class PoreBanEntry extends PoreWrapper<Ban> implements BanEntry {
 
     @Override
     public void setExpiration(Date expiration) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -91,11 +91,11 @@ public class PoreBanEntry extends PoreWrapper<Ban> implements BanEntry {
 
     @Override
     public void setReason(String reason) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void save() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.spongepowered.api.entity.projectile.Firework;
@@ -53,12 +53,12 @@ public class PoreFirework extends PoreEntity implements org.bukkit.entity.Firewo
 
     @Override
     public FireworkMeta getFireworkMeta() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void setFireworkMeta(FireworkMeta meta) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override

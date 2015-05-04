@@ -30,7 +30,7 @@ import static com.google.common.base.Preconditions.checkState;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreHumanEntity;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
@@ -63,21 +63,21 @@ public class PoreFoodLevelChangeEvent extends FoodLevelChangeEvent {
 
     @Override
     public int getFoodLevel() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setFoodLevel(int level) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

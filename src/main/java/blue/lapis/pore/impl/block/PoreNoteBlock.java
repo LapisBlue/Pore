@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Instrument;
 import org.bukkit.block.NoteBlock;
 import org.spongepowered.api.block.tile.Note;
@@ -48,36 +48,36 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
 
     @Override
     public org.bukkit.Note getNote() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public byte getRawNote() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setNote(org.bukkit.Note note) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setRawNote(byte note) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean play() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean play(byte instrument, byte note) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean play(Instrument instrument, org.bukkit.Note note) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

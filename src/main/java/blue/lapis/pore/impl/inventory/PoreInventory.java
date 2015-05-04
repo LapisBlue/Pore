@@ -31,7 +31,7 @@ import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Maps;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
@@ -408,7 +408,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
     @Override
     public List<HumanEntity> getViewers() {
         // we're waiting on SpongeAPI for this one
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

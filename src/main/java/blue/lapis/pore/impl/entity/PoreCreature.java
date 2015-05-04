@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
 import org.spongepowered.api.entity.living.Agent;
@@ -48,11 +48,11 @@ public class PoreCreature extends PoreLivingEntity implements Creature {
 
     @Override
     public void setTarget(LivingEntity target) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public LivingEntity getTarget() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

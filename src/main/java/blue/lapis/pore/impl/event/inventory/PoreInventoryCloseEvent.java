@@ -28,7 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.impl.inventory.PoreInventory;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -61,11 +61,11 @@ public class PoreInventoryCloseEvent extends org.bukkit.event.inventory.Inventor
 
     @Override
     public InventoryView getView() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public HumanEntity getPlayer() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

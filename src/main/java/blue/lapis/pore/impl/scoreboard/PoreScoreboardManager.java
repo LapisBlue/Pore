@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.scoreboard;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.spongepowered.api.scoreboard.ScoreboardBuilder;
@@ -44,12 +44,12 @@ public class PoreScoreboardManager extends PoreWrapper<ScoreboardBuilder> implem
 
     @Override
     public Scoreboard getMainScoreboard() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Scoreboard getNewScoreboard() {
-        throw new NotImplementedException(); // ScoreboardBuilder#build() seems to have the wrong signature atm
+        throw new NotImplementedException("TODO"); // ScoreboardBuilder#build() seems to have the wrong signature atm
     }
 
 }

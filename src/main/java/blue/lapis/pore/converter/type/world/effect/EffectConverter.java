@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.converter.type.world.effect;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
@@ -50,7 +50,7 @@ public class EffectConverter {
                 case EXTINGUISH:
                     return SoundTypes.FIZZ; //TODO: verify this is the correct sound
                 case RECORD_PLAY:
-                    throw new NotImplementedException();
+                    throw new NotImplementedException("TODO");
                 case GHAST_SHRIEK:
                     return SoundTypes.GHAST_SCREAM;
                 case GHAST_SHOOT:
@@ -64,7 +64,7 @@ public class EffectConverter {
                 case ZOMBIE_DESTROY_DOOR:
                     return SoundTypes.ZOMBIE_WOODBREAK;
                 case STEP_SOUND:
-                    throw new NotImplementedException(); //TODO: determine generic type of block
+                    throw new NotImplementedException("TODO"); //TODO: determine generic type of block
                 default:
                     return null;
             }

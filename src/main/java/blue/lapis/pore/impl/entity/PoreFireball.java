@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.data.manipulators.entities.ExplosiveRadiusData;
@@ -55,7 +55,7 @@ public class PoreFireball extends PoreProjectile implements org.bukkit.entity.Fi
 
     @Override
     public void setDirection(Vector direction) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
@@ -78,11 +78,11 @@ public class PoreFireball extends PoreProjectile implements org.bukkit.entity.Fi
 
     @Override
     public void setIsIncendiary(boolean isIncendiary) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isIncendiary() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

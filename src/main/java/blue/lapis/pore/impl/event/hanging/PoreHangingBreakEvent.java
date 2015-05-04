@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.impl.entity.PoreHanging;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Hanging;
 import org.bukkit.event.hanging.HangingBreakEvent;
 import org.spongepowered.api.event.entity.EntityEvent;
@@ -55,17 +55,17 @@ public class PoreHangingBreakEvent extends HangingBreakEvent {
 
     @Override
     public HangingBreakEvent.RemoveCause getCause() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

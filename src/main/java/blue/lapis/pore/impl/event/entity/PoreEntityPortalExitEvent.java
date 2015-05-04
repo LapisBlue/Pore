@@ -31,7 +31,7 @@ import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
 import com.google.common.base.Optional;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -89,17 +89,17 @@ public class PoreEntityPortalExitEvent extends EntityPortalExitEvent {
 
     @Override
     public Vector getBefore() { // eh, this will be tricky to implement
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public Vector getAfter() { // WHY DOES SPONGEAPI HAVE NO VELOCITY METHODS
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void setAfter(Vector after) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override

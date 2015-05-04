@@ -32,7 +32,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreWrapper;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -64,18 +64,18 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
     @Override
     public byte getData() {
         // TODO return getHandle().getState().getDataValue();
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setData(byte data) {
         // TODO getHandle().replaceWith(getHandle().getState().getType().getStateFromDataValue(data));
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setData(byte data, boolean applyPhysics) {
-        throw new NotImplementedException(); //TODO: probably going to need some custom data mapping for
+        throw new NotImplementedException("TODO"); //TODO: probably going to need some custom data mapping for
         // BlockStates
     }
 
@@ -162,7 +162,7 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public Chunk getChunk() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -186,22 +186,22 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public BlockFace getFace(Block block) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public BlockState getState() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Biome getBiome() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setBiome(Biome bio) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -226,12 +226,12 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public int getBlockPower(BlockFace face) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getBlockPower() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -246,17 +246,17 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public double getTemperature() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public double getHumidity() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public PistonMoveReaction getPistonMoveReaction() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -271,32 +271,32 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public Collection<ItemStack> getDrops() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Collection<ItemStack> getDrops(ItemStack tool) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public List<MetadataValue> getMetadata(String metadataKey) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean hasMetadata(String metadataKey) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

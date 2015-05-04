@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.type.entity.HorseConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.HorseInventory;
 import org.spongepowered.api.data.manipulators.entities.HorseData;
@@ -85,47 +85,47 @@ public class PoreHorse extends PoreTameable implements org.bukkit.entity.Horse {
 
     @Override
     public boolean isCarryingChest() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setCarryingChest(boolean chest) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getDomestication() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setDomestication(int level) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getMaxDomestication() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setMaxDomestication(int level) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public double getJumpStrength() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setJumpStrength(double strength) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public HorseInventory getInventory() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

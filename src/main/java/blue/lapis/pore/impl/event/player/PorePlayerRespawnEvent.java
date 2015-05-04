@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.spongepowered.api.event.entity.player.PlayerRespawnEvent;
@@ -46,22 +46,22 @@ public class PorePlayerRespawnEvent extends org.bukkit.event.player.PlayerRespaw
 
     @Override
     public Player getPlayer() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Location getRespawnLocation() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setRespawnLocation(Location respawnLocation) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isBedSpawn() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

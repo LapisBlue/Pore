@@ -29,7 +29,7 @@ import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.util.PoreWrapper;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -71,13 +71,13 @@ public class PoreChunk extends PoreWrapper<Chunk> implements org.bukkit.Chunk {
 
     @Override
     public ChunkSnapshot getChunkSnapshot() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome,
             boolean includeBiomeTempRain) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -95,7 +95,7 @@ public class PoreChunk extends PoreWrapper<Chunk> implements org.bukkit.Chunk {
 
     @Override
     public BlockState[] getTileEntities() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

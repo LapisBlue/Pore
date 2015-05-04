@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -62,6 +62,6 @@ public class PoreEntityPortalEnterEvent extends EntityPortalEnterEvent {
 
     @Override
     public Location getLocation() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

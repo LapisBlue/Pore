@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.projectiles.PoreBlockProjectileSource;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.projectiles.ProjectileSource;
 import org.spongepowered.api.entity.living.Living;
@@ -97,11 +97,11 @@ public class PoreProjectile extends PoreEntity implements org.bukkit.entity.Proj
 
     @Override
     public boolean doesBounce() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void setBounce(boolean doesBounce) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 }

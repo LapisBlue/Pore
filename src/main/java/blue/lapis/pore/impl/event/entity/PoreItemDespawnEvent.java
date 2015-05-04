@@ -31,7 +31,7 @@ import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.impl.entity.PoreItem;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
@@ -69,11 +69,11 @@ public class PoreItemDespawnEvent extends ItemDespawnEvent {
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException(); //TODO: not sure if SpongeAPI will implement Cancellable
+        throw new NotImplementedException("TODO"); //TODO: not sure if SpongeAPI will implement Cancellable
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

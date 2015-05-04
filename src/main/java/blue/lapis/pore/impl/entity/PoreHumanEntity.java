@@ -32,7 +32,7 @@ import blue.lapis.pore.impl.inventory.PoreInventory;
 import blue.lapis.pore.impl.inventory.PoreInventoryView;
 import blue.lapis.pore.impl.inventory.PorePlayerInventory;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.GameMode;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -84,12 +84,12 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public Inventory getEnderChest() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public boolean setWindowProperty(InventoryView.Property prop, int value) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
@@ -103,12 +103,12 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public InventoryView openInventory(Inventory inventory) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void openInventory(InventoryView inventory) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
@@ -154,22 +154,22 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public ItemStack getItemOnCursor() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void setItemOnCursor(ItemStack item) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public boolean isSleeping() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public int getSleepTicks() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
@@ -190,7 +190,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public boolean isBlocking() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
@@ -226,46 +226,46 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void removeAttachment(PermissionAttachment attachment) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void recalculatePermissions() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public Set<PermissionAttachmentInfo> getEffectivePermissions() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public boolean isOp() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void setOp(boolean value) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 }

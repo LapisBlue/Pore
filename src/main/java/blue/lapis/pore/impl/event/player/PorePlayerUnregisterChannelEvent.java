@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerUnregisterChannelEvent;
 import org.spongepowered.api.event.entity.player.PlayerEvent;
@@ -46,12 +46,12 @@ public class PorePlayerUnregisterChannelEvent extends PlayerUnregisterChannelEve
 
     @Override
     public Player getPlayer() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public String getChannel() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

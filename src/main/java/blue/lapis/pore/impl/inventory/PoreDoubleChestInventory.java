@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.inventory;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.DoubleChest;
 import org.bukkit.inventory.DoubleChestInventory;
 import org.bukkit.inventory.Inventory;
@@ -47,16 +47,16 @@ public class PoreDoubleChestInventory extends PoreInventory implements DoubleChe
 
     @Override
     public Inventory getLeftSide() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Inventory getRightSide() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public DoubleChest getHolder() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

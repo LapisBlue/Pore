@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.entity.minecart;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.CommandMinecart;
 import org.bukkit.permissions.Permission;
@@ -78,7 +78,7 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
     @Override
     public void setName(String name) {
        // getHandle().setCommandName(name); TODO ??
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -99,67 +99,67 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
 
     @Override
     public boolean isPermissionSet(String name) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isPermissionSet(Permission perm) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean hasPermission(String name) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean hasPermission(Permission perm) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void removeAttachment(PermissionAttachment attachment) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void recalculatePermissions() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Set<PermissionAttachmentInfo> getEffectivePermissions() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isOp() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setOp(boolean value) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 

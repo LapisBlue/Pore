@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.server;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.event.server.MapInitializeEvent;
 import org.bukkit.map.MapView;
 import org.spongepowered.api.event.GameEvent;
@@ -46,7 +46,7 @@ public class PoreMapInitializeEvent extends MapInitializeEvent {
 
     @Override
     public MapView getMap() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
 }

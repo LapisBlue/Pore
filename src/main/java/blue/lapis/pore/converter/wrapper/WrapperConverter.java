@@ -107,7 +107,6 @@ import blue.lapis.pore.impl.entity.PoreSnowman;
 import blue.lapis.pore.impl.entity.PoreSpider;
 import blue.lapis.pore.impl.entity.PoreSquid;
 import blue.lapis.pore.impl.entity.PoreTNTPrimed;
-import blue.lapis.pore.impl.entity.PoreTameable;
 import blue.lapis.pore.impl.entity.PoreThrownExpBottle;
 import blue.lapis.pore.impl.entity.PoreThrownPotion;
 import blue.lapis.pore.impl.entity.PoreVillager;

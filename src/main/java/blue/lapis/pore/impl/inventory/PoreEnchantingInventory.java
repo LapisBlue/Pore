@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.inventory;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.EnchantingInventory;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.Inventory;
@@ -45,21 +45,21 @@ public class PoreEnchantingInventory extends PoreInventory implements Enchanting
 
     @Override
     public void setItem(ItemStack item) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public ItemStack getItem() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setSecondary(ItemStack item) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public ItemStack getSecondary() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

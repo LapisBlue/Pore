@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.inventory;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Furnace;
 import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.ItemStack;
@@ -46,36 +46,36 @@ public class PoreFurnaceInventory extends PoreInventory implements FurnaceInvent
 
     @Override
     public ItemStack getResult() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public ItemStack getFuel() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public ItemStack getSmelting() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setFuel(ItemStack stack) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setResult(ItemStack stack) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setSmelting(ItemStack stack) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Furnace getHolder() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

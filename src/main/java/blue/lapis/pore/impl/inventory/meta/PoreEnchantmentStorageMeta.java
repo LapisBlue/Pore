@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.inventory.meta;
 
 // TODO: bridge
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
@@ -36,41 +36,41 @@ public class PoreEnchantmentStorageMeta extends PoreItemMeta implements Enchantm
 
     @Override
     public boolean hasStoredEnchants() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean hasStoredEnchant(Enchantment ench) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getStoredEnchantLevel(Enchantment ench) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Map<Enchantment, Integer> getStoredEnchants() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean addStoredEnchant(Enchantment ench, int level, boolean ignoreLevelRestriction) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean removeStoredEnchant(Enchantment ench) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean hasConflictingStoredEnchant(Enchantment ench) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public EnchantmentStorageMeta clone() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

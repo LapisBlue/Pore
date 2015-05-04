@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.spongepowered.api.data.manipulators.entities.AgeableData;
 import org.spongepowered.api.data.manipulators.entities.BreedableData;
 import org.spongepowered.api.entity.living.Ageable;
@@ -60,12 +60,12 @@ public class PoreAgeable extends PoreCreature implements org.bukkit.entity.Ageab
 
     @Override
     public void setAgeLock(boolean lock) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean getAgeLock() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

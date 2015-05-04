@@ -28,7 +28,7 @@ import blue.lapis.pore.Pore;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -86,7 +86,7 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 
     @Override
     public void cancelTask(int taskId) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -105,22 +105,22 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 
     @Override
     public boolean isCurrentlyRunning(int taskId) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isQueued(int taskId) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public List<BukkitWorker> getActiveWorkers() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public List<BukkitTask> getPendingTasks() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

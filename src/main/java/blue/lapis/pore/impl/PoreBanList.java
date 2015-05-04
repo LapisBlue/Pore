@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 
@@ -36,26 +36,26 @@ public class PoreBanList implements BanList {
 
     @Override
     public BanEntry getBanEntry(String target) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public BanEntry addBan(String target, String reason, Date expires, String source) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Set<BanEntry> getBanEntries() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isBanned(String target) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void pardon(String target) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

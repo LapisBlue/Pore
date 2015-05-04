@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.help;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.command.Command;
 import org.bukkit.help.HelpTopic;
 import org.bukkit.help.HelpTopicFactory;
@@ -34,7 +34,7 @@ public class PoreHelpTopicFactory<T extends Command> implements HelpTopicFactory
 
     @Override
     public HelpTopic createTopic(T command) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

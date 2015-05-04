@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Entity;
 import org.spongepowered.api.entity.living.complex.EnderDragonPart;
@@ -93,7 +93,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
 
     @Override
     public double getMaxHealth() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

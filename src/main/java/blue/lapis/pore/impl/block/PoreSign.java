@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.spongepowered.api.block.tile.Sign;
 
 public class PoreSign extends PoreBlockState implements org.bukkit.block.Sign {
@@ -46,16 +46,16 @@ public class PoreSign extends PoreBlockState implements org.bukkit.block.Sign {
 
     @Override
     public String[] getLines() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public String getLine(int index) throws IndexOutOfBoundsException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setLine(int index, String line) throws IndexOutOfBoundsException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

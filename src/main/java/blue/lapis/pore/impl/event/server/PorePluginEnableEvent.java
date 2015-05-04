@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.server;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.event.GameEvent;
@@ -47,7 +47,7 @@ public class PorePluginEnableEvent extends PluginEnableEvent {
 
     @Override
     public Plugin getPlugin() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
 }

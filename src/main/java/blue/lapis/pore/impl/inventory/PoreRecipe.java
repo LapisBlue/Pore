@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.inventory;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 
@@ -34,6 +34,6 @@ public class PoreRecipe implements Recipe {
 
     @Override
     public ItemStack getResult() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

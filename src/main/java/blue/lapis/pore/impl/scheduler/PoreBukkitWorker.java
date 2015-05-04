@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.scheduler;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitWorker;
 
@@ -34,17 +34,17 @@ public class PoreBukkitWorker implements BukkitWorker {
 
     @Override
     public int getTaskId() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Plugin getOwner() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Thread getThread() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

@@ -25,7 +25,7 @@
 package blue.lapis.pore.impl.event.player;
 
 import com.google.common.base.Preconditions;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.event.player.PlayerPreLoginEvent;
 import org.spongepowered.api.event.entity.player.PlayerEvent;
 
@@ -47,47 +47,47 @@ public class PorePlayerPreLoginEvent extends PlayerPreLoginEvent {
 
     @Override
     public String getName() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public UUID getUniqueId() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public InetAddress getAddress() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Result getResult() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setResult(Result result) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public String getKickMessage() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setKickMessage(String message) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void allow() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void disallow(Result result, String message) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

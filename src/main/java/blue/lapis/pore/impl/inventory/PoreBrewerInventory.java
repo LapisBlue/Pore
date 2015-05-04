@@ -28,7 +28,7 @@ package blue.lapis.pore.impl.inventory;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.BrewingStand;
 import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.ItemStack;
@@ -46,16 +46,16 @@ public class PoreBrewerInventory extends PoreInventory implements BrewerInventor
 
     @Override
     public ItemStack getIngredient() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setIngredient(ItemStack ingredient) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public BrewingStand getHolder() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

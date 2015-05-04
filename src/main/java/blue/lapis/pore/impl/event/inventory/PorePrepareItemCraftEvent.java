@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.impl.inventory.PoreCraftingInventory;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.InventoryView;
@@ -65,16 +65,16 @@ public class PorePrepareItemCraftEvent extends PrepareItemCraftEvent {
 
     @Override
     public InventoryView getView() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Recipe getRecipe() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isRepair() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

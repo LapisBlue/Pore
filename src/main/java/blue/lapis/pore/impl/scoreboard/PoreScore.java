@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.scoreboard;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.Objective;
@@ -60,7 +60,7 @@ public class PoreScore extends PoreWrapper<Score> implements org.bukkit.scoreboa
 
     @Override
     public Objective getObjective() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

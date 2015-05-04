@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.map;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapCursorCollection;
 import org.bukkit.map.MapFont;
@@ -38,42 +38,42 @@ public class PoreMapCanvas implements MapCanvas {
 
     @Override
     public MapView getMapView() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public MapCursorCollection getCursors() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setCursors(MapCursorCollection cursors) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setPixel(int x, int y, byte color) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public byte getPixel(int x, int y) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public byte getBasePixel(int x, int y) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void drawImage(int x, int y, Image image) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void drawText(int x, int y, MapFont font, String text) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

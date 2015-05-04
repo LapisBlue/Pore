@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.inventory;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.HorseInventory;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.Inventory;
@@ -45,21 +45,21 @@ public class PoreHorseInventory extends PoreInventory implements HorseInventory 
 
     @Override
     public ItemStack getSaddle() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public ItemStack getArmor() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setSaddle(ItemStack stack) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setArmor(ItemStack stack) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

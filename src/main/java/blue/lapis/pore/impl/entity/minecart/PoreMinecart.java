@@ -28,7 +28,7 @@ import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.entity.PoreVehicle;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
 import org.bukkit.util.Vector;
@@ -61,7 +61,7 @@ public class PoreMinecart extends PoreVehicle implements org.bukkit.entity.Minec
 
     @Override
     public void setDamage(double damage) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -71,7 +71,7 @@ public class PoreMinecart extends PoreVehicle implements org.bukkit.entity.Minec
 
     @Override
     public double getDamage() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -116,21 +116,21 @@ public class PoreMinecart extends PoreVehicle implements org.bukkit.entity.Minec
 
     @Override
     public MaterialData getDisplayBlock() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setDisplayBlock(MaterialData material) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getDisplayBlockOffset() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setDisplayBlockOffset(int offset) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

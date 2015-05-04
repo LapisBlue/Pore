@@ -31,7 +31,7 @@ import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -68,43 +68,43 @@ public class PoreEntityDamageByBlockEvent extends EntityDamageByBlockEvent {
 
     @Override
     public double getOriginalDamage(DamageModifier type) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setDamage(DamageModifier type, double damage)
             throws IllegalArgumentException, UnsupportedOperationException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public double getDamage(DamageModifier type) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isApplicable(DamageModifier type) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public double getDamage() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public double getFinalDamage() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setDamage(double damage) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public DamageCause getCause() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

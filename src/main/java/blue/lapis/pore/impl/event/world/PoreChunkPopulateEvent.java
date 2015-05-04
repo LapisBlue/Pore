@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.world;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.event.world.ChunkPopulateEvent;
@@ -47,12 +47,12 @@ public class PoreChunkPopulateEvent extends ChunkPopulateEvent {
 
     @Override
     public World getWorld() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public Chunk getChunk() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
 }

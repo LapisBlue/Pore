@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.BrewerInventory;
 import org.spongepowered.api.block.tile.carrier.BrewingStand;
 
@@ -47,16 +47,16 @@ public class PoreBrewingStand extends PoreBlockState implements org.bukkit.block
 
     @Override
     public int getBrewingTime() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setBrewingTime(int brewTime) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public BrewerInventory getInventory() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

@@ -29,13 +29,11 @@ import blue.lapis.pore.Pore;
 import com.google.common.base.Optional;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
-import org.apache.commons.lang.NotImplementedException;
-import org.bukkit.Material;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.api.data.DataManipulator;
 import org.spongepowered.api.data.manipulators.DyeableData;
 import org.spongepowered.api.data.manipulators.SingleValueData;
-import org.spongepowered.api.data.manipulators.catalogs.CatalogItemData;
 import org.spongepowered.api.data.manipulators.items.CoalItemData;
 import org.spongepowered.api.data.manipulators.items.CookedFishItemData;
 import org.spongepowered.api.data.manipulators.items.DurabilityData;
@@ -53,10 +51,7 @@ import org.spongepowered.api.data.types.Fishes;
 import org.spongepowered.api.data.types.GoldenApple;
 import org.spongepowered.api.data.types.GoldenApples;
 
-import java.util.Arrays;
 import java.util.Collection;
-
-import javax.xml.crypto.Data;
 
 public class DurabilityConverter {
 
@@ -162,7 +157,7 @@ public class DurabilityConverter {
             DyeColor type = ((DyeableData)data).getValue();
             return DYE_MAP.containsKey(type) ? DYE_MAP.get(type) : -1;
         } else if (data instanceof SpawnableData) {
-            throw new NotImplementedException();
+            throw new NotImplementedException("TODO");
         } else if (data instanceof FishData) {
             Fish type = ((FishData)data).getValue();
             return FISH_MAP.containsKey(type) ? FISH_MAP.get(type) : -1;

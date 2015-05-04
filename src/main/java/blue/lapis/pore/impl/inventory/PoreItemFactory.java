@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.inventory;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFactory;
@@ -37,36 +37,36 @@ public class PoreItemFactory implements ItemFactory {
 
     @Override
     public ItemMeta getItemMeta(Material material) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isApplicable(ItemMeta meta, ItemStack stack) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isApplicable(ItemMeta meta, Material material) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean equals(ItemMeta meta1, ItemMeta meta2) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public ItemMeta asMetaFor(ItemMeta meta, ItemStack stack) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public ItemMeta asMetaFor(ItemMeta meta, Material material) throws IllegalArgumentException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Color getDefaultLeatherColor() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

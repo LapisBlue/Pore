@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.entity.projectile.explosive.WitherSkull;
 
@@ -52,11 +52,11 @@ public class PoreWitherSkull extends PoreFireball implements org.bukkit.entity.W
 
     @Override
     public void setCharged(boolean charged) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public boolean isCharged() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 }

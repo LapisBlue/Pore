@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInventoryEvent;
 import org.bukkit.inventory.Inventory;
@@ -48,12 +48,12 @@ public class PorePlayerInventoryEvent extends PlayerInventoryEvent {
 
     @Override
     public Player getPlayer() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Inventory getInventory() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

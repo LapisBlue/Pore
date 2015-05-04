@@ -31,7 +31,7 @@ import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -76,7 +76,7 @@ public class PoreEntityChangeBlockEvent extends EntityChangeBlockEvent {
     public byte getData() {
         //TODO: deprecated and removed from SpongeAPI
         //return this.getHandle().getReplacementBlock().getState().getDataValue();
-        throw new NotImplementedException(); 
+        throw new NotImplementedException("TODO");
     }
 
     @Override

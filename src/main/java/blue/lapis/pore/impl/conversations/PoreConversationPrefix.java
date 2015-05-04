@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.conversations;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.ConversationPrefix;
 
@@ -36,7 +36,7 @@ public class PoreConversationPrefix implements ConversationPrefix {
 
     @Override
     public String getPrefix(ConversationContext context) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.inventory.meta;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.DyeColor;
 import org.bukkit.block.banner.Pattern;
 
@@ -36,46 +36,46 @@ public class PoreBannerMeta extends PoreItemMeta implements org.bukkit.inventory
 
     @Override
     public DyeColor getBaseColor() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setBaseColor(DyeColor color) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public List<Pattern> getPatterns() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setPatterns(List<Pattern> patterns) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void addPattern(Pattern pattern) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Pattern getPattern(int i) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Pattern removePattern(int i) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setPattern(int i, Pattern pattern) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int numberOfPatterns() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

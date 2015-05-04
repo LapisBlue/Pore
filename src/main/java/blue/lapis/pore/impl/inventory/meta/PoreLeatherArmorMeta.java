@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.inventory.meta;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Color;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
@@ -36,17 +36,17 @@ public class PoreLeatherArmorMeta extends PoreItemMeta implements LeatherArmorMe
 
     @Override
     public Color getColor() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setColor(Color color) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public LeatherArmorMeta clone() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

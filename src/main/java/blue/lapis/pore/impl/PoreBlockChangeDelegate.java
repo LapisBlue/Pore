@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.BlockChangeDelegate;
 
 //TODO: skeleton implementation
@@ -32,36 +32,36 @@ public class PoreBlockChangeDelegate implements BlockChangeDelegate {
 
     @Override
     public boolean setRawTypeId(int x, int y, int z, int typeId) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean setRawTypeIdAndData(int x, int y, int z, int typeId, int data) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean setTypeId(int x, int y, int z, int typeId) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean setTypeIdAndData(int x, int y, int z, int typeId, int data) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getTypeId(int x, int y, int z) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getHeight() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isEmpty(int x, int y, int z) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

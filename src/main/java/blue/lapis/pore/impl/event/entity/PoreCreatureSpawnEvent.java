@@ -31,7 +31,7 @@ import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.EntityType;
@@ -86,6 +86,6 @@ public class PoreCreatureSpawnEvent extends CreatureSpawnEvent {
 
     @Override
     public SpawnReason getSpawnReason() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

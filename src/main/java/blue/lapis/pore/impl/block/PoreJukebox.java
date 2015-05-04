@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.block.Jukebox;
 import org.spongepowered.api.block.tile.TileEntity;
@@ -43,21 +43,21 @@ public class PoreJukebox extends PoreBlockState implements Jukebox {
 
     @Override
     public Material getPlaying() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setPlaying(Material record) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isPlaying() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean eject() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

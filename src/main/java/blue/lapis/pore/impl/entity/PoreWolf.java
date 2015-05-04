@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.type.material.DyeColorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
 import org.spongepowered.api.data.manipulators.DyeableData;
@@ -56,12 +56,12 @@ public class PoreWolf extends PoreTameable implements org.bukkit.entity.Wolf {
 
     @Override
     public boolean isAngry() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void setAngry(boolean angry) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override

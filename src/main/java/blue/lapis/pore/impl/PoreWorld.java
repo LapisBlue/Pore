@@ -51,7 +51,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.BlockChangeDelegate;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -196,7 +196,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean isChunkInUse(int x, int z) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -236,23 +236,23 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean unloadChunkRequest(int x, int z) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean unloadChunkRequest(int x, int z, boolean safe) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 
     @Override
     public boolean regenerateChunk(int x, int z) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean refreshChunk(int x, int z) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -267,7 +267,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         org.spongepowered.api.entity.Item drop = (org.spongepowered.api.entity.Item)created;
         //TODO: drop.setPickupDelay(10);
         //TODO: set ItemStack
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -293,12 +293,12 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean generateTree(Location location, TreeType type) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean generateTree(Location loc, TreeType type, BlockChangeDelegate delegate) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -330,7 +330,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public LightningStrike strikeLightningEffect(Location loc) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -400,7 +400,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public Collection<Entity> getNearbyEntities(Location location, double x, double y, double z) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -490,28 +490,28 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean createExplosion(double x, double y, double z, float power) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean createExplosion(double x, double y, double z, float power, boolean setFire) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean createExplosion(double x, double y, double z, float power, boolean setFire,
             boolean breakBlocks) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean createExplosion(Location loc, float power) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean createExplosion(Location loc, float power, boolean setFire) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -526,27 +526,27 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean getPVP() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setPVP(boolean pvp) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public ChunkGenerator getGenerator() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void save() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public List<BlockPopulator> getPopulators() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -618,22 +618,22 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     @Override
     public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome,
             boolean includeBiomeTempRain) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setSpawnFlags(boolean allowMonsters, boolean allowAnimals) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean getAllowAnimals() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean getAllowMonsters() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -663,7 +663,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public int getSeaLevel() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -678,12 +678,12 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean isAutoSave() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setAutoSave(boolean value) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -708,67 +708,67 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean canGenerateStructures() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public long getTicksPerAnimalSpawns() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setTicksPerAnimalSpawns(int ticksPerAnimalSpawns) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public long getTicksPerMonsterSpawns() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setTicksPerMonsterSpawns(int ticksPerMonsterSpawns) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getMonsterSpawnLimit() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setMonsterSpawnLimit(int limit) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getAnimalSpawnLimit() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setAnimalSpawnLimit(int limit) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getWaterAnimalSpawnLimit() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setWaterAnimalSpawnLimit(int limit) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getAmbientSpawnLimit() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setAmbientSpawnLimit(int limit) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -809,31 +809,31 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public void setMetadata(String metadataKey, MetadataValue newMetadataValue) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public List<MetadataValue> getMetadata(String metadataKey) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean hasMetadata(String metadataKey) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void removeMetadata(String metadataKey, Plugin owningPlugin) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void sendPluginMessage(Plugin source, String channel, byte[] message) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Set<String> getListeningPluginChannels() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

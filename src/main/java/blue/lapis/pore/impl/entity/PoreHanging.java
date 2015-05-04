@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.type.world.DirectionConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.BlockFace;
 import org.spongepowered.api.data.manipulators.blocks.DirectionalData;
 import org.spongepowered.api.entity.hanging.Hanging;
@@ -63,7 +63,7 @@ public class PoreHanging extends PoreEntity implements org.bukkit.entity.Hanging
 
     @Override
     public BlockFace getAttachedFace() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override

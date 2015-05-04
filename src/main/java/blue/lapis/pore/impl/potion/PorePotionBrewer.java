@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.potion;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.potion.PotionBrewer;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -36,12 +36,12 @@ public class PorePotionBrewer implements PotionBrewer {
 
     @Override
     public PotionEffect createEffect(PotionEffectType potion, int duration, int amplifier) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Collection<PotionEffect> getEffectsFromDamage(int damage) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

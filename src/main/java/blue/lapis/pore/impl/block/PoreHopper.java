@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.Inventory;
 import org.spongepowered.api.block.tile.carrier.Hopper;
 
@@ -47,6 +47,6 @@ public class PoreHopper extends PoreBlockState implements org.bukkit.block.Hoppe
 
     @Override
     public Inventory getInventory() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

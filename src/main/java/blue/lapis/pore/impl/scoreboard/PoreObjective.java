@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkState;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Score;
@@ -73,27 +73,27 @@ public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.
 
     @Override
     public boolean isModifiable() throws IllegalStateException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Scoreboard getScoreboard() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void unregister() throws IllegalStateException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public DisplaySlot getDisplaySlot() throws IllegalStateException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setDisplaySlot(DisplaySlot slot) throws IllegalStateException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

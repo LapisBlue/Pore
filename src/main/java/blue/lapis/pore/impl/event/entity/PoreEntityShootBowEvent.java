@@ -32,7 +32,7 @@ import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -84,21 +84,21 @@ public class PoreEntityShootBowEvent extends EntityShootBowEvent {
 
     @Override
     public void setProjectile(Entity projectile) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public float getForce() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.world;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.World;
 import org.spongepowered.api.event.world.WorldUnloadEvent;
 
@@ -45,17 +45,17 @@ public class PoreWorldUnloadEvent extends org.bukkit.event.world.WorldUnloadEven
 
     @Override
     public World getWorld() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
 }

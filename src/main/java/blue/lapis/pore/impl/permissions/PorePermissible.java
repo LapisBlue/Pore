@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.permissions;
 
 import blue.lapis.pore.util.PoreWrapper;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
@@ -45,12 +45,12 @@ public class PorePermissible extends PoreWrapper<Subject> implements Permissible
 
     @Override
     public boolean isOp() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setOp(boolean value) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -75,37 +75,37 @@ public class PorePermissible extends PoreWrapper<Subject> implements Permissible
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void removeAttachment(PermissionAttachment attachment) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void recalculatePermissions() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Set<PermissionAttachmentInfo> getEffectivePermissions() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

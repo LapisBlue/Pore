@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Player;
 import org.spongepowered.api.event.entity.player.PlayerLevelChangeEvent;
 
@@ -45,17 +45,17 @@ public class PorePlayerLevelChangeEvent extends org.bukkit.event.player.PlayerLe
 
     @Override
     public Player getPlayer() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getOldLevel() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getNewLevel() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

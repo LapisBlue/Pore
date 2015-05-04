@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.projectiles.BlockProjectileSource;
 import org.spongepowered.api.block.tile.carrier.Dispenser;
@@ -48,16 +48,16 @@ public class PoreDispenser extends PoreBlockState implements org.bukkit.block.Di
 
     @Override
     public BlockProjectileSource getBlockProjectileSource() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean dispense() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Inventory getInventory() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

@@ -30,7 +30,7 @@ import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -62,7 +62,7 @@ public class PoreEntityTargetLivingEntityEvent extends EntityTargetLivingEntityE
 
     @Override
     public TargetReason getReason() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -73,7 +73,7 @@ public class PoreEntityTargetLivingEntityEvent extends EntityTargetLivingEntityE
 
     @Override
     public void setTarget(Entity target) {
-        throw new NotImplementedException(); //TODO: waiting on AI API
+        throw new NotImplementedException("TODO"); //TODO: waiting on AI API
     }
 
     @Override

@@ -30,7 +30,7 @@ import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.base.Optional;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -69,12 +69,12 @@ public class PoreOfflinePlayer extends PoreWrapper<User> implements OfflinePlaye
 
     @Override
     public boolean isBanned() {
-        throw new NotImplementedException();//TODO: Use the BanService
+        throw new NotImplementedException("TODO");//TODO: Use the BanService
     }
 
     @Override
     public void setBanned(boolean banned) {       
-        throw new NotImplementedException();//TODO: Use the BanService
+        throw new NotImplementedException("TODO");//TODO: Use the BanService
     }
 
     @Override
@@ -125,16 +125,16 @@ public class PoreOfflinePlayer extends PoreWrapper<User> implements OfflinePlaye
 
     @Override
     public Map<String, Object> serialize() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isOp() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setOp(boolean value) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

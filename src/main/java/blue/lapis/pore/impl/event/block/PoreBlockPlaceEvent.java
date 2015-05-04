@@ -30,7 +30,7 @@ import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
@@ -63,17 +63,17 @@ public class PoreBlockPlaceEvent extends org.bukkit.event.block.BlockPlaceEvent 
     @Override
     public Block getBlockPlaced() {
         // TODO: return PoreBlock.of(getHandle().getReplacementBlock());
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public BlockState getBlockReplacedState() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public Block getBlockAgainst() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
@@ -83,12 +83,12 @@ public class PoreBlockPlaceEvent extends org.bukkit.event.block.BlockPlaceEvent 
 
     @Override
     public boolean canBuild() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public void setBuild(boolean canBuild) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override

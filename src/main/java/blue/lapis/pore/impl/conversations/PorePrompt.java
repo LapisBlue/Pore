@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.conversations;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.Prompt;
 
@@ -36,17 +36,17 @@ public class PorePrompt implements Prompt {
 
     @Override
     public String getPromptText(ConversationContext context) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean blocksForInput(ConversationContext context) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Prompt acceptInput(ConversationContext context, String input) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

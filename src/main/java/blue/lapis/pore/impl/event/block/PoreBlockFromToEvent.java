@@ -28,7 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.impl.block.PoreBlock;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.block.BlockFromToEvent;
@@ -54,13 +54,13 @@ public class PoreBlockFromToEvent extends BlockFromToEvent {
 
     @Override
     public BlockFace getFace() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Block getToBlock() {
         // TODO: return PoreBlock.of(getHandle().getReplacementBlock());
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

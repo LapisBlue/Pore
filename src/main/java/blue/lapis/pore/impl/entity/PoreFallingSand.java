@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingSand;
@@ -67,7 +67,7 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
     @Override
     public byte getBlockData() {
         // TODO
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

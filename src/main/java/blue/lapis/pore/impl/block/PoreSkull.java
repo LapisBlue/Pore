@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.SkullType;
 import org.bukkit.block.BlockFace;
 import org.spongepowered.api.block.tile.Skull;
@@ -48,36 +48,36 @@ public class PoreSkull extends PoreBlockState implements org.bukkit.block.Skull 
 
     @Override
     public boolean hasOwner() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public String getOwner() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean setOwner(String name) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public BlockFace getRotation() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setRotation(BlockFace rotation) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public SkullType getSkullType() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setSkullType(SkullType skullType) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

@@ -34,7 +34,7 @@ import blue.lapis.pore.util.PoreWrapper;
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
@@ -149,7 +149,7 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
 
     @Override
     public Scoreboard getScoreboard() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -164,7 +164,7 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
 
     @Override
     public void unregister() throws IllegalStateException {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

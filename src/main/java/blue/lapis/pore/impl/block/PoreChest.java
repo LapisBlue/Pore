@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.Inventory;
 import org.spongepowered.api.block.tile.carrier.Chest;
 
@@ -47,11 +47,11 @@ public class PoreChest extends PoreBlockState implements org.bukkit.block.Chest 
 
     @Override
     public Inventory getBlockInventory() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Inventory getInventory() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

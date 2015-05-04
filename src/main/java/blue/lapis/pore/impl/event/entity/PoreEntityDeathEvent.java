@@ -30,7 +30,7 @@ import static com.google.common.base.Preconditions.checkState;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
@@ -74,6 +74,6 @@ public class PoreEntityDeathEvent extends org.bukkit.event.entity.EntityDeathEve
 
     @Override
     public List<ItemStack> getDrops() {
-        throw new NotImplementedException(); // TODO: drops are separated from EntityDeathEvent
+        throw new NotImplementedException("TODO"); // TODO: drops are separated from EntityDeathEvent
     }
 }

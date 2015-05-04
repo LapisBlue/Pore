@@ -30,7 +30,7 @@ import static com.google.common.base.Preconditions.checkState;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreThrownExpBottle;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ThrownExpBottle;
 import org.bukkit.event.entity.ExpBottleEvent;
@@ -63,21 +63,21 @@ public class PoreExpBottleEvent extends ExpBottleEvent {
 
     @Override
     public boolean getShowEffect() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setShowEffect(final boolean showEffect) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getExperience() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setExperience(final int exp) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

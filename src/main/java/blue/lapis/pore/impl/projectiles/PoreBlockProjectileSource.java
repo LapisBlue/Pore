@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.projectiles;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Projectile;
 import org.bukkit.util.Vector;
@@ -46,16 +46,16 @@ public class PoreBlockProjectileSource
 
     @Override
     public <T extends Projectile> T launchProjectile(Class<? extends T> projectile) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public <T extends Projectile> T launchProjectile(Class<? extends T> projectile, Vector velocity) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Block getBlock() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 }

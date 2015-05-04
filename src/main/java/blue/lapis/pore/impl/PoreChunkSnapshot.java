@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.ChunkSnapshot;
 import org.bukkit.block.Biome;
 
@@ -33,67 +33,67 @@ public class PoreChunkSnapshot implements ChunkSnapshot {
 
     @Override
     public int getX() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getZ() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public String getWorldName() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getBlockTypeId(int x, int y, int z) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getBlockData(int x, int y, int z) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getBlockSkyLight(int x, int y, int z) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getBlockEmittedLight(int x, int y, int z) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getHighestBlockYAt(int x, int z) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Biome getBiome(int x, int z) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public double getRawBiomeTemperature(int x, int z) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public double getRawBiomeRainfall(int x, int z) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public long getCaptureFullTime() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isSectionEmpty(int sy) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     //TODO: Placeholder class, may just call PoreChunk's methods

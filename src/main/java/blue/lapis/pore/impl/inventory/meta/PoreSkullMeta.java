@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.inventory.meta;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.meta.SkullMeta;
 
 // TODO: bridge
@@ -35,22 +35,22 @@ public class PoreSkullMeta extends PoreItemMeta implements SkullMeta {
 
     @Override
     public String getOwner() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean hasOwner() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean setOwner(String owner) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public SkullMeta clone() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

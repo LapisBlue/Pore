@@ -26,7 +26,7 @@ package blue.lapis.pore.impl.event.server;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.event.server.ServiceUnregisterEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.spongepowered.api.event.GameEvent;
@@ -46,7 +46,7 @@ public class PoreServiceUnregisterEvent extends ServiceUnregisterEvent {
 
     @Override
     public RegisteredServiceProvider<?> getProvider() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
 }

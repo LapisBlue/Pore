@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.conversations;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.conversations.Conversable;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
@@ -37,32 +37,32 @@ public class PoreConversable implements Conversable {
 
     @Override
     public boolean isConversing() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void acceptConversationInput(String input) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean beginConversation(Conversation conversation) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void abandonConversation(Conversation conversation) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void abandonConversation(Conversation conversation, ConversationAbandonedEvent details) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void sendRawMessage(String message) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
 }

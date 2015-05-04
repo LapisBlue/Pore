@@ -32,7 +32,7 @@ import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
@@ -183,7 +183,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
     @Override
     public int getEntityId() { // note to self - this is the ID of the entity in the world, and unrelated to
         // its UUID
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
@@ -235,7 +235,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public String getName() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -269,22 +269,22 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public float getFallDistance() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void setFallDistance(float distance) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void setLastDamageCause(EntityDamageEvent event) {
-        throw new NotImplementedException(); //TODO: Sponge counterpart planned for 1.1
+        throw new NotImplementedException("TODO"); //TODO: Sponge counterpart planned for 1.1
     }
 
     @Override
     public EntityDamageEvent getLastDamageCause() {
-        throw new NotImplementedException(); //TODO: Sponge counterpart planned for 1.1
+        throw new NotImplementedException("TODO"); //TODO: Sponge counterpart planned for 1.1
     }
 
     @Override
@@ -294,17 +294,17 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public int getTicksLived() {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void setTicksLived(int value) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void playEffect(EntityEffect type) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -326,97 +326,97 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public void setCustomName(String name) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public String getCustomName() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public void setCustomNameVisible(boolean flag) {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public boolean isCustomNameVisible() {
-        throw new NotImplementedException(); // TODO
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public void setMetadata(String s, MetadataValue metadataValue) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public List<MetadataValue> getMetadata(String s) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public boolean hasMetadata(String s) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public void removeMetadata(String s, Plugin plugin) {
-        throw new NotImplementedException(); //TODO
+        throw new NotImplementedException("TODO"); //TODO
     }
 
     @Override
     public boolean isPermissionSet(String name) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isPermissionSet(Permission perm) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean hasPermission(String name) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean hasPermission(Permission perm) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void removeAttachment(PermissionAttachment attachment) {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void recalculatePermissions() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Set<PermissionAttachmentInfo> getEffectivePermissions() {
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

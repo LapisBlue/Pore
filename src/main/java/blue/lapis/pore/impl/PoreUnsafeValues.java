@@ -32,7 +32,7 @@ import blue.lapis.pore.converter.type.statistic.StatisticConverter;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.collect.Iterables;
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.Statistic;
 import org.bukkit.UnsafeValues;
@@ -86,7 +86,7 @@ public class PoreUnsafeValues implements UnsafeValues {
          * supported anyway.
          * - caseif
          */
-        throw new NotImplementedException();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
