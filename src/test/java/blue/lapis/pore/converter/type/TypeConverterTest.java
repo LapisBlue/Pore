@@ -34,8 +34,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.spongepowered.api.util.annotation.CatalogedBy;
-import org.spongepowered.api.world.DimensionTypes;
-import org.spongepowered.api.world.GeneratorTypes;
 
 import java.util.Set;
 
@@ -55,9 +53,6 @@ public class TypeConverterTest {
                 PoreTests.setConstants(catalogedBy.value());
             }
         }
-
-        // These are missing @CatalogedBy for some reason
-        PoreTests.setConstants(DimensionTypes.class, GeneratorTypes.class);
     }
 
     @Parameterized.Parameters(name = "{0}")
