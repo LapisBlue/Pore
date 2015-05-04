@@ -29,7 +29,10 @@ import org.spongepowered.api.entity.EntityInteractionType;
 import org.spongepowered.api.entity.EntityInteractionTypes;
 import org.spongepowered.api.world.Location;
 
-public class ActionConverter {
+public final class ActionConverter {
+
+    private ActionConverter() {
+    }
 
     // note: this class doesn't use a converter because such a map would contain duplicates
 

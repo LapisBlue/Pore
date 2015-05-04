@@ -53,7 +53,10 @@ import org.spongepowered.api.data.types.GoldenApples;
 
 import java.util.Collection;
 
-public class DurabilityConverter {
+public final class DurabilityConverter {
+
+    private DurabilityConverter() {
+    }
 
     private static final BiMap<CoalType, Integer> COAL_MAP;
     private static final BiMap<CookedFish, Integer> COOKED_FISH_MAP;
@@ -111,7 +114,7 @@ public class DurabilityConverter {
      * Derives a raw damage value from a collection of {@link DataManipulator}.
      * @param data The {@link DataManipulator} list to derive a value from
      * @return The raw damage value corresponding to the data list, or
-     * <code>0</code> if one cannot be obtained.
+     * {@code 0} if one cannot be obtained.
      */
 
     public static int getDamageValue(Collection<? extends DataManipulator<?>> data) {
@@ -128,8 +131,8 @@ public class DurabilityConverter {
     /**
      * Converts a given {@link DataManipulator} value to a raw damage value.
      * @param data The {@link DataManipulator} value to convert
-     * @return The raw damage value corresponding to <code>data</code>, or
-     * <code>0</code> if one cannot be obtained.
+     * @return The raw damage value corresponding to {@code data}, or
+     * {@code 0} if one cannot be obtained.
      */
     public static int getDamageValue(DataManipulator<?> data) {
         if (data instanceof SingleValueData) {
@@ -143,8 +146,8 @@ public class DurabilityConverter {
     /**
      * Converts a given {@link SingleValueData} value to a raw damage value.
      * @param data The {@link SingleValueData} value to convert
-     * @return The raw damage value corresponding to <code>data</code>, or
-     * <code>0</code> if one cannot be obtained.
+     * @return The raw damage value corresponding to {@code data}, or
+     * {@code 0} if one cannot be obtained.
      */
     public static int getDamageValueFromEnum(SingleValueData<?, ?> data) {
         if (data instanceof CoalItemData) {
@@ -172,7 +175,7 @@ public class DurabilityConverter {
     /**
      * Obtains {@link DataManipulator} from an ItemStack.
      * @param item The ItemStack to retrieve {@link DataManipulator} from
-     * @return The obtained {@link DataManipulator}, or <code>null</code> if none can
+     * @return The obtained {@link DataManipulator}, or {@code null} if none can
      *         be discerned
      */
     @SuppressWarnings("rawtypes") // I tried parameterizing the return value but Java absolutely spazzed out about it

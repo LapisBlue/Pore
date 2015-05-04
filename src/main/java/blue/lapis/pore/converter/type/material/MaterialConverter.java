@@ -35,6 +35,9 @@ import org.spongepowered.api.item.ItemTypes;
 
 public final class MaterialConverter {
 
+    private MaterialConverter() {
+    }
+
     private static final Converter<Material, BlockType> BLOCK_TYPE_CONVERTER =
             TypeConverter.<Material, BlockType>mapBuilder()
                     .add(Material.AIR, BlockTypes.AIR)

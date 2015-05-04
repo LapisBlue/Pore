@@ -33,6 +33,9 @@ import org.spongepowered.api.data.types.RabbitTypes;
 
 public final class RabbitConverter {
 
+    private RabbitConverter() {
+    }
+
     public static final Converter<Rabbit.Type, RabbitType> CONVERTER = TypeConverter.<Rabbit.Type, RabbitType>builder()
             .add(Rabbit.Type.BROWN, RabbitTypes.BROWN)
             .add(Rabbit.Type.WHITE, RabbitTypes.WHITE)

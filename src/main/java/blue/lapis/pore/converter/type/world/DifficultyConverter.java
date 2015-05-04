@@ -30,7 +30,10 @@ import com.google.common.base.Converter;
 import org.spongepowered.api.world.difficulty.Difficulties;
 import org.spongepowered.api.world.difficulty.Difficulty;
 
-public class DifficultyConverter {
+public final class DifficultyConverter {
+
+    private DifficultyConverter() {
+    }
 
     private static final Converter<org.bukkit.Difficulty, Difficulty> CONVERTER =
             TypeConverter.<org.bukkit.Difficulty, Difficulty>builder()

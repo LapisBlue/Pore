@@ -26,14 +26,13 @@ package blue.lapis.pore.converter.type.material;
 
 import blue.lapis.pore.Pore;
 
-import org.spongepowered.api.potion.PotionEffectBuilder;
+public final class PotionEffectConverter {
 
-public class PotionEffectConverter {
-
-    private static final PotionEffectBuilder effectBuilder = Pore.getGame().getRegistry().getPotionEffectBuilder();
+    private PotionEffectConverter() {
+    }
 
     public static org.spongepowered.api.potion.PotionEffect of(org.bukkit.potion.PotionEffect effect) {
-        return effectBuilder
+        return Pore.getGame().getRegistry().getPotionEffectBuilder()
                 .potionType(PotionEffectTypeConverter.of(effect.getType()))
                 .ambience(effect.isAmbient())
                 .amplifier(effect.getAmplifier())

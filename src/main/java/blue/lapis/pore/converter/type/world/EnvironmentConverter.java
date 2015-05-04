@@ -33,6 +33,9 @@ import org.spongepowered.api.world.DimensionTypes;
 
 public final class EnvironmentConverter {
 
+    private EnvironmentConverter() {
+    }
+
     private static final Converter<World.Environment, DimensionType> CONVERTER =
             TypeConverter.<World.Environment, DimensionType>builder()
                     .add(World.Environment.NORMAL, DimensionTypes.OVERWORLD)

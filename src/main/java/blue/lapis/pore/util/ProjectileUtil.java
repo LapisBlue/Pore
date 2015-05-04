@@ -52,7 +52,10 @@ import org.spongepowered.api.util.event.callback.CallbackList;
 
 import javax.annotation.Nullable;
 
-public class ProjectileUtil {
+public final class ProjectileUtil {
+
+    private ProjectileUtil() {
+    }
 
     @SuppressWarnings("unchecked")
     public static <T extends Projectile> T launchProjectile(ProjectileSource source,
@@ -74,6 +77,7 @@ public class ProjectileUtil {
                     VectorConverter.create3d(velocity)
             ));
         } else if (projectile.isAssignableFrom(Fireball.class)) {
+            // TODO: The same check multiple times...?!
             if (projectile.isAssignableFrom(LargeFireball.class)) {
                 entity = (T) PoreFireball.of(source.launchProjectile(
                         org.spongepowered.api.entity.projectile.explosive.fireball.LargeFireball.class,

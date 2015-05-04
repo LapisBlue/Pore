@@ -32,6 +32,9 @@ import org.spongepowered.api.util.Direction;
 
 public final class DirectionConverter {
 
+    private DirectionConverter() {
+    }
+
     private static final Converter<BlockFace, Direction> CONVERTER = TypeConverter.<BlockFace, Direction>builder()
             .add(BlockFace.NORTH, Direction.NORTH)
             .add(BlockFace.EAST, Direction.EAST)

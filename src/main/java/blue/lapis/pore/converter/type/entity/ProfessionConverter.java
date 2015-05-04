@@ -33,6 +33,9 @@ import org.spongepowered.api.data.types.Professions;
 
 public final class ProfessionConverter {
 
+    private ProfessionConverter() {
+    }
+
     public static final Converter<Villager.Profession, Profession> CONVERTER =
             TypeConverter.<Villager.Profession, Profession>builder()
                     .add(Villager.Profession.BLACKSMITH, Professions.BLACKSMITH)

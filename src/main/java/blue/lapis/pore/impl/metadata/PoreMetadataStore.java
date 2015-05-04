@@ -38,18 +38,18 @@ public class PoreMetadataStore<T> extends MetadataStoreBase<T> implements Metada
         Class<?> clazz = subject.getClass();
         if (Block.class.isAssignableFrom(clazz)) {
             Block b = (Block)subject;
-            return b.getX() + ":" + b.getY() + ":" + b.getZ() + ":" + metadataKey;
+            return b.getX() + ":" + b.getY() + ':' + b.getZ() + ':' + metadataKey;
         } else if (Player.class.isAssignableFrom(clazz)) {
             Player p = (Player)subject;
-            return p.getName().toLowerCase() + ":" + metadataKey;
+            return p.getName().toLowerCase() + ':' + metadataKey;
         } else if (Entity.class.isAssignableFrom(clazz)) {
             Entity e = (Entity)subject;
-            return e.getUniqueId().toString() + ":" + metadataKey;
+            return e.getUniqueId() + ":" + metadataKey;
         } else if (World.class.isAssignableFrom(clazz)) {
             World w = (World)subject;
-            return w.getUID().toString() + ":" + metadataKey;
+            return w.getUID() + ":" + metadataKey;
         } else {
-            return subject.toString() + ":" + metadataKey;
+            return subject + ":" + metadataKey;
         }
     }
 

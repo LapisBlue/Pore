@@ -32,7 +32,10 @@ import com.flowpowered.math.vector.Vector3i;
 import org.bukkit.Location;
 import org.spongepowered.api.world.World;
 
-public class LocationConverter {
+public final class LocationConverter {
+
+    private LocationConverter() {
+    }
 
     public static Location apply(Location loc, org.spongepowered.api.world.Location spongeLocation) {
         loc.setWorld(PoreWorld.of(spongeLocation.getExtent()));

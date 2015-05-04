@@ -32,6 +32,9 @@ import org.spongepowered.api.util.rotation.Rotations;
 
 public final class RotationConverter {
 
+    private RotationConverter() {
+    }
+
     public static final Converter<Rotation, org.spongepowered.api.util.rotation.Rotation> CONVERTER =
             TypeConverter.<Rotation, org.spongepowered.api.util.rotation.Rotation>builder()
                     .add(Rotation.NONE, Rotations.TOP)

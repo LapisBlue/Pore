@@ -33,6 +33,9 @@ import org.spongepowered.api.effect.sound.SoundTypes;
 
 public final class SoundConverter {
 
+    private SoundConverter() {
+    }
+
     public static final Converter<Sound, SoundType> CONVERTER = TypeConverter.<Sound, SoundType>builder()
             .add(Sound.AMBIENCE_CAVE, SoundTypes.AMBIENCE_CAVE)
             .add(Sound.AMBIENCE_RAIN, SoundTypes.AMBIENCE_RAIN)

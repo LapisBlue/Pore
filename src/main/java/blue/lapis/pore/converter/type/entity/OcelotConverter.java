@@ -33,6 +33,9 @@ import org.spongepowered.api.data.types.OcelotTypes;
 
 public final class OcelotConverter {
 
+    private OcelotConverter() {
+    }
+
     private static final Converter<Ocelot.Type, OcelotType> CONVERTER =
             TypeConverter.<Ocelot.Type, OcelotType>builder()
                     .add(Ocelot.Type.BLACK_CAT, OcelotTypes.BLACK_CAT)

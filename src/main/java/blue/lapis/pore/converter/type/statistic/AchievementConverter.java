@@ -30,7 +30,10 @@ import com.google.common.base.Converter;
 import org.bukkit.Achievement;
 import org.spongepowered.api.stats.achievement.Achievements;
 
-public class AchievementConverter {
+public final class AchievementConverter {
+
+    private AchievementConverter() {
+    }
 
     private static final Converter<Achievement, org.spongepowered.api.stats.achievement.Achievement> CONVERTER =
             TypeConverter.<Achievement, org.spongepowered.api.stats.achievement.Achievement>builder()

@@ -32,6 +32,9 @@ import org.spongepowered.api.data.types.DyeColors;
 
 public final class DyeColorConverter {
 
+    private DyeColorConverter() {
+    }
+
     private static final Converter<DyeColor, org.spongepowered.api.data.types.DyeColor> CONVERTER =
             TypeConverter.<DyeColor, org.spongepowered.api.data.types.DyeColor>builder()
                     .add(DyeColor.BLACK, DyeColors.BLACK)

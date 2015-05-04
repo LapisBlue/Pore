@@ -32,6 +32,9 @@ import org.spongepowered.api.entity.EntityTypes;
 
 public final class EntityConverter {
 
+    private EntityConverter() {
+    }
+
     private static final Converter<org.bukkit.entity.EntityType, org.spongepowered.api.entity.EntityType> CONVERTER =
             TypeConverter.<org.bukkit.entity.EntityType, org.spongepowered.api.entity.EntityType>builder()
                     .add(EntityType.ARMOR_STAND, EntityTypes.ARMOR_STAND)

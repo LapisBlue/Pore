@@ -34,7 +34,10 @@ import org.spongepowered.api.effect.particle.ParticleTypes;
 import org.spongepowered.api.effect.sound.SoundType;
 import org.spongepowered.api.effect.sound.SoundTypes;
 
-public class EffectConverter {
+public final class EffectConverter {
+
+    private EffectConverter() {
+    }
 
     public static SoundType toSound(Effect effect, int data) {
         if (effect.getType() == Effect.Type.SOUND) {

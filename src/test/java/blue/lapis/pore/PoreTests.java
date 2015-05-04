@@ -26,14 +26,19 @@ package blue.lapis.pore;
 
 import static org.mockito.Mockito.mock;
 
+import com.google.common.reflect.ClassPath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.api.Game;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 public final class PoreTests {
+
+    private PoreTests() {
+    }
 
     public static void mockPlugin() {
         if (Pore.instance == null) {
@@ -61,15 +66,31 @@ public final class PoreTests {
 
         for (Class<?> type : classes) {
             for (Field field : type.getFields()) {
-                if (Modifier.isStatic(field.getModifiers())) {
-                    if (Modifier.isFinal(field.getModifiers())) {
-                        modifiers.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+                int access = field.getModifiers();
+                if (Modifier.isPublic(access) && Modifier.isStatic(access)) {
+                    if (field.get(null) != null) {
+                        continue;
+                    }
+
+                    if (Modifier.isFinal(access)) {
+                        modifiers.setInt(field, access & ~Modifier.FINAL);
+                        field.setAccessible(true);
                     }
 
                     field.set(null, mock(field.getType()));
                 }
             }
         }
+    }
+
+    private static ClassPath classPath;
+
+    public static ClassPath getClassPath() throws IOException {
+        if (classPath == null) {
+            classPath = ClassPath.from(ClassLoader.getSystemClassLoader());
+        }
+
+        return classPath;
     }
 
 }

@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.impl.event;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -56,11 +57,9 @@ public class PoreEventTest {
 
     @BeforeClass
     public static void findEvents() throws Exception {
-        ClassPath classPath = ClassPath.from(ClassLoader.getSystemClassLoader());
-
         ImmutableCollection.Builder<Class<?>> builder = ImmutableSet.builder();
 
-        for (ClassPath.ClassInfo info : classPath.getTopLevelClassesRecursive(BUKKIT_PACKAGE)) {
+        for (ClassPath.ClassInfo info : PoreTests.getClassPath().getTopLevelClassesRecursive(BUKKIT_PACKAGE)) {
             Class<?> event = info.load();
             if (Event.class.isAssignableFrom(event) && !Modifier.isAbstract(event.getModifiers())) {
                 builder.add(event);
@@ -70,7 +69,7 @@ public class PoreEventTest {
         bukkitEvents = builder.build();
         builder = ImmutableSet.builder();
 
-        for (ClassPath.ClassInfo info : classPath.getTopLevelClassesRecursive(PORE_PACKAGE)) {
+        for (ClassPath.ClassInfo info : PoreTests.getClassPath().getTopLevelClassesRecursive(PORE_PACKAGE)) {
             Class<?> type = info.load();
             if (Event.class.isAssignableFrom(type)) {
                 builder.add(type);
@@ -95,9 +94,9 @@ public class PoreEventTest {
 
             String expectedName = "Pore" + bukkitName;
 
-            assertTrue(poreName + " should be called " + expectedName, poreName.equals(expectedName));
-            assertTrue(poreName + " is in wrong package: should be in " + PORE_PACKAGE + '.' + bukkitPackage,
-                    porePackage.equals(bukkitPackage));
+            assertEquals(poreName + " should be called " + expectedName, poreName, expectedName);
+            assertEquals(poreName + " is in wrong package: should be in " + PORE_PACKAGE + '.' + bukkitPackage,
+                    porePackage, bukkitPackage);
         }
     }
 
@@ -112,7 +111,7 @@ public class PoreEventTest {
         if (!events.isEmpty()) {
             for (Class<?> event : events) {
                 String bukkitPackage = StringUtils.removeStart(event.getPackage().getName(), BUKKIT_PACKAGE + '.');
-                PoreTests.getLogger().warn(bukkitPackage + ": Pore" + event.getSimpleName() + " is missing");
+                PoreTests.getLogger().warn("{}: Pore{} is missing", bukkitPackage, event.getSimpleName());
             }
         }
     }

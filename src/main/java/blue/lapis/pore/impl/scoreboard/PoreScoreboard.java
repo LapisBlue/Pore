@@ -92,6 +92,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
         checkState(c.isPresent(), "Invalid criterion");
         return Sets.newHashSet(Collections2.transform(getHandle().getObjectivesByCriteria(c.get()),
                 new Function<org.spongepowered.api.scoreboard.objective.Objective, Objective>() {
+                    @Override
                     public Objective apply(org.spongepowered.api.scoreboard.objective.Objective obj) {
                         return PoreObjective.of(obj);
                     }
@@ -103,6 +104,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     public Set<Objective> getObjectives() {
         return Sets.newHashSet(Collections2.transform(getHandle().getObjectives(),
                 new Function<org.spongepowered.api.scoreboard.objective.Objective, Objective>() {
+                    @Override
                     public Objective apply(org.spongepowered.api.scoreboard.objective.Objective obj) {
                         return PoreObjective.of(obj);
                     }
@@ -131,6 +133,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
         //noinspection ConstantConditions
         return Sets.newHashSet(Collections2.transform(getHandle().getScores(Texts.fromLegacy(entry)),
                 new Function<org.spongepowered.api.scoreboard.Score, Score>() {
+                    @Override
                     public Score apply(org.spongepowered.api.scoreboard.Score score) {
                         return PoreScore.of(score);
                     }
@@ -176,6 +179,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     public Set<Team> getTeams() {
         return Sets.newHashSet(Collections2.transform(getHandle().getTeams(),
                 new Function<org.spongepowered.api.scoreboard.Team, Team>() {
+                    @Override
                     public Team apply(org.spongepowered.api.scoreboard.Team team) {
                         return PoreTeam.of(team);
                     }

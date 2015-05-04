@@ -28,7 +28,10 @@ import blue.lapis.pore.Pore;
 
 import org.spongepowered.api.item.ItemType;
 
-public class ItemStackConverter {
+public final class ItemStackConverter {
+
+    private ItemStackConverter() {
+    }
 
     public static org.bukkit.inventory.ItemStack of(org.spongepowered.api.item.inventory.ItemStack stack) {
         return new org.bukkit.inventory.ItemStack(

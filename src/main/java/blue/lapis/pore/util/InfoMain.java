@@ -32,7 +32,10 @@ import javax.swing.JOptionPane;
  * Displays an informative message if the user attempts to run the jar file as a
  * standalone program.
  */
-public class InfoMain {
+public final class InfoMain {
+
+    private InfoMain() {
+    }
 
     private static final String ERROR = "You've just attempted to run the Pore jar file.\n\n"
             + "Pore is a plugin for platforms implementing SpongeAPI, and must be installed on such in order "

@@ -31,7 +31,10 @@ import org.bukkit.Statistic;
 import org.spongepowered.api.stats.StatisticGroups;
 import org.spongepowered.api.stats.Statistics;
 
-public class StatisticConverter {
+public final class StatisticConverter {
+
+    private StatisticConverter() {
+    }
 
     public static final Converter<Statistic, org.spongepowered.api.stats.Statistic> STD_CONVERTER =
             TypeConverter.<Statistic, org.spongepowered.api.stats.Statistic>builder()

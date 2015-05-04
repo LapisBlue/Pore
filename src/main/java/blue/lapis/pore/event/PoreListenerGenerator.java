@@ -58,6 +58,9 @@ import java.lang.reflect.Method;
 
 public final class PoreListenerGenerator {
 
+    private PoreListenerGenerator() {
+    }
+
     private static final String PACKAGE = PoreListenerGenerator.class.getPackage().getName() + '.';
 
     private static final String ANNOTATION_DESCRIPTOR = Type.getDescriptor(Subscribe.class);

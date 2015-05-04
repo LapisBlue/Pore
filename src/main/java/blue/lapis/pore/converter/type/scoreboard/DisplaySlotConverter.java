@@ -30,7 +30,10 @@ import com.google.common.base.Converter;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.spongepowered.api.scoreboard.displayslot.DisplaySlots;
 
-public class DisplaySlotConverter {
+public final class DisplaySlotConverter {
+
+    private DisplaySlotConverter() {
+    }
 
     private static final Converter<DisplaySlot, org.spongepowered.api.scoreboard.displayslot.DisplaySlot> CONVERTER =
             TypeConverter.<DisplaySlot, org.spongepowered.api.scoreboard.displayslot.DisplaySlot>builder()

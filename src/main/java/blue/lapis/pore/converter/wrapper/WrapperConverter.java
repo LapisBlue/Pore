@@ -238,7 +238,10 @@ import org.spongepowered.api.util.command.source.CommandBlockSource;
 import org.spongepowered.api.world.Chunk;
 import org.spongepowered.api.world.World;
 
-public class WrapperConverter {
+public final class WrapperConverter {
+
+    private WrapperConverter() {
+    }
 
     @SuppressWarnings("rawtypes")
     static final CachedWrapperConverter<PoreWrapper> converter = CachedWrapperConverter.builder(PoreWrapper.class)

@@ -54,6 +54,9 @@ import java.util.logging.Level;
 
 public final class PoreEventWrapper {
 
+    private PoreEventWrapper() {
+    }
+
     public static void register() {
         register(PorePlayerJoinEvent.class);
         register(PorePlayerQuitEvent.class);

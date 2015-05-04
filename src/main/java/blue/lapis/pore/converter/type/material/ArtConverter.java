@@ -32,6 +32,9 @@ import org.spongepowered.api.data.types.Arts;
 
 public final class ArtConverter {
 
+    private ArtConverter() {
+    }
+
     private static final Converter<Art, org.spongepowered.api.data.types.Art> CONVERTER =
             TypeConverter.<Art, org.spongepowered.api.data.types.Art>builder()
                     .add(Art.ALBAN, Arts.ALBAN)

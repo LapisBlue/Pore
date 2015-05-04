@@ -30,7 +30,10 @@ import com.flowpowered.math.vector.Vector3i;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
-public class VectorConverter {
+public final class VectorConverter {
+
+    private VectorConverter() {
+    }
 
     public static Vector3d create3i(Location location) {
         return new Vector3d((int) location.getX(), (int) location.getY(), (int) location.getZ());

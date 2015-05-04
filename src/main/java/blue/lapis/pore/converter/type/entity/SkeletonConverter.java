@@ -33,6 +33,9 @@ import org.spongepowered.api.data.types.SkeletonTypes;
 
 public final class SkeletonConverter {
 
+    private SkeletonConverter() {
+    }
+
     public static final Converter<Skeleton.SkeletonType, SkeletonType> CONVERTER =
             TypeConverter.<Skeleton.SkeletonType, SkeletonType>builder()
                     .add(Skeleton.SkeletonType.NORMAL, SkeletonTypes.NORMAL)

@@ -32,6 +32,9 @@ import org.spongepowered.api.entity.player.gamemode.GameModes;
 
 public final class GameModeConverter {
 
+    private GameModeConverter() {
+    }
+
     private static final Converter<GameMode, org.spongepowered.api.entity.player.gamemode.GameMode> CONVERTER =
             TypeConverter.<GameMode, org.spongepowered.api.entity.player.gamemode.GameMode>builder()
                     .add(GameMode.SURVIVAL, GameModes.SURVIVAL)

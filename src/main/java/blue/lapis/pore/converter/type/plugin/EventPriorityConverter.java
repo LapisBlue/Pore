@@ -32,6 +32,9 @@ import org.spongepowered.api.event.Order;
 
 public final class EventPriorityConverter {
 
+    private EventPriorityConverter() {
+    }
+
     // TODO: Verify this
     private static final Converter<EventPriority, Order> CONVERTER = TypeConverter.<EventPriority, Order>builder()
             .add(EventPriority.LOWEST, Order.PRE)

@@ -37,6 +37,9 @@ import org.spongepowered.api.data.types.HorseVariants;
 
 public final class HorseConverter {
 
+    private HorseConverter() {
+    }
+
     private static final Converter<Horse.Variant, HorseVariant> VARIANT_CONVERTER =
             TypeConverter.<Horse.Variant, HorseVariant>builder()
                     .add(Horse.Variant.HORSE, HorseVariants.HORSE)

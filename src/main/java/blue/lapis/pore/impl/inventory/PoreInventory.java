@@ -138,7 +138,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
         int i = 0;
         for (ItemStack stack : items) {
             Inventory query = this.getHandle().query(ItemStackConverter.of(stack));
-            if (query.size() == 0) {
+            if (query.isEmpty()) {
                 notRemoved.put(i, stack);
                 continue;
             }
@@ -300,7 +300,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
     public HashMap<Integer, ? extends ItemStack> all(Material material) throws IllegalArgumentException {
         HashMap<Integer, ItemStack> matches = Maps.newHashMap();
         for (Map.Entry<Integer, ItemStack> e : this.getOrderedContents().entrySet()) {
-            if (e.getValue().getType().equals(material)) {
+            if (e.getValue().getType() == material) {
                 matches.put(e.getKey(), e.getValue());
             }
         }
@@ -474,7 +474,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
      * matches the given criterion.
      * @param bound The criterion to pass to
      * {@link org.spongepowered.api.item.inventory.Inventory#query(Object...)}.
-     * @return The first match found in this inventory, or <code>null</code> if
+     * @return The first match found in this inventory, or {@code null} if
      *         one cannot be discovered.
      */
     protected ItemStack getArbitraryStack(Object bound) {

@@ -135,6 +135,7 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     public Set<OfflinePlayer> getPlayers() throws IllegalStateException {
         return Sets.newHashSet(Collections2.transform(getHandle().getUsers(),
                 new Function<User, OfflinePlayer>() {
+                    @Override
                     public OfflinePlayer apply(User user) {
                         return PoreOfflinePlayer.of(user);
                     }

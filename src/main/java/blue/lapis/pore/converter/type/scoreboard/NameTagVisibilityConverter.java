@@ -31,7 +31,10 @@ import org.bukkit.scoreboard.NameTagVisibility;
 import org.spongepowered.api.scoreboard.Visibilities;
 import org.spongepowered.api.scoreboard.Visibility;
 
-public class NameTagVisibilityConverter {
+public final class NameTagVisibilityConverter {
+
+    private NameTagVisibilityConverter() {
+    }
 
     private static final Converter<NameTagVisibility, Visibility> CONVERTER =
             TypeConverter.<NameTagVisibility, Visibility>builder()

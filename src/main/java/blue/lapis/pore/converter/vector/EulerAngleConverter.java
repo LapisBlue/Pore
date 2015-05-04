@@ -27,7 +27,10 @@ package blue.lapis.pore.converter.vector;
 import com.flowpowered.math.vector.Vector3d;
 import org.bukkit.util.EulerAngle;
 
-public class EulerAngleConverter {
+public final class EulerAngleConverter {
+
+    private EulerAngleConverter() {
+    }
 
     public static EulerAngle of(Vector3d dir) {
         return new EulerAngle(dir.getX(), dir.getY(), dir.getZ());

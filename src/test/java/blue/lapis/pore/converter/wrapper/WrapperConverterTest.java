@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.converter.wrapper;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.withSettings;
 
@@ -100,7 +100,7 @@ public class WrapperConverterTest {
     @Test
     public void resolve() {
         for (Class<?> pore : testRegistry.keySet()) {
-            assertEquals(pore, WrapperConverter.of(create(pore)).getClass());
+            assertSame(pore, WrapperConverter.of(create(pore)).getClass());
         }
     }
 }

@@ -31,11 +31,13 @@ import org.bukkit.WorldType;
 import org.spongepowered.api.world.GeneratorType;
 import org.spongepowered.api.world.GeneratorTypes;
 
-public class GeneratorTypeConverter {
+public final class GeneratorTypeConverter {
+
+    private GeneratorTypeConverter() {
+    }
 
     private static final Converter<WorldType, GeneratorType> CONVERTER =
             TypeConverter.<WorldType, GeneratorType>builder()
-                    .add(WorldType.NORMAL, GeneratorTypes.DEFAULT)
                     .add(WorldType.NORMAL, GeneratorTypes.DEFAULT)
                     .add(WorldType.FLAT, GeneratorTypes.FLAT)
                     /*.add(WorldType.LARGE_BIOMES, GeneratorTypes.LARGE_BIOME)
@@ -44,7 +46,6 @@ public class GeneratorTypeConverter {
             .build();
 
     public static GeneratorType of(WorldType worldType) {
-
         return CONVERTER.convert(worldType);
     }
 

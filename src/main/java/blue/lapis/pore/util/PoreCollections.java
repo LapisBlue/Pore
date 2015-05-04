@@ -31,7 +31,10 @@ import com.google.common.collect.Lists;
 import java.util.Collection;
 import java.util.List;
 
-public class PoreCollections {
+public final class PoreCollections {
+
+    private PoreCollections() {
+    }
 
     public static <F, T> Collection<T> transform(Collection<F> from, Function<? super F, T> function) {
         if (from instanceof List) {

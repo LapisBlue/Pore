@@ -25,128 +25,56 @@
 package blue.lapis.pore.converter.type;
 
 import blue.lapis.pore.PoreTests;
-import blue.lapis.pore.converter.type.entity.HorseConverter;
-import blue.lapis.pore.converter.type.entity.OcelotConverter;
-import blue.lapis.pore.converter.type.entity.RabbitConverter;
-import blue.lapis.pore.converter.type.entity.SkeletonConverter;
-import blue.lapis.pore.converter.type.entity.player.GameModeConverter;
-import blue.lapis.pore.converter.type.material.ArtConverter;
-import blue.lapis.pore.converter.type.material.DyeColorConverter;
-import blue.lapis.pore.converter.type.material.MaterialConverter;
-import blue.lapis.pore.converter.type.material.PotionEffectTypeConverter;
-import blue.lapis.pore.converter.type.plugin.EventPriorityConverter;
-import blue.lapis.pore.converter.type.world.BiomeConverter;
-import blue.lapis.pore.converter.type.world.DirectionConverter;
-import blue.lapis.pore.converter.type.world.EnvironmentConverter;
-import blue.lapis.pore.converter.type.world.RotationConverter;
-import blue.lapis.pore.converter.type.world.effect.SoundConverter;
 
+import com.google.common.collect.ImmutableSet;
+import com.google.common.reflect.ClassPath;
+import org.apache.commons.lang3.StringUtils;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.spongepowered.api.block.BlockTypes;
-import org.spongepowered.api.data.types.Arts;
-import org.spongepowered.api.data.types.DyeColors;
-import org.spongepowered.api.data.types.HorseColors;
-import org.spongepowered.api.data.types.HorseStyles;
-import org.spongepowered.api.data.types.HorseVariants;
-import org.spongepowered.api.data.types.OcelotTypes;
-import org.spongepowered.api.data.types.RabbitTypes;
-import org.spongepowered.api.data.types.SkeletonTypes;
-import org.spongepowered.api.effect.sound.SoundTypes;
-import org.spongepowered.api.entity.player.gamemode.GameModes;
-import org.spongepowered.api.item.ItemTypes;
-import org.spongepowered.api.potion.PotionEffectTypes;
-import org.spongepowered.api.util.rotation.Rotations;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.spongepowered.api.util.annotation.CatalogedBy;
 import org.spongepowered.api.world.DimensionTypes;
-import org.spongepowered.api.world.biome.BiomeTypes;
+import org.spongepowered.api.world.GeneratorTypes;
 
+import java.util.Set;
+
+@RunWith(Parameterized.class)
 public class TypeConverterTest {
 
-    @Test
-    public void testArt() throws Exception {
-        PoreTests.setConstants(Arts.class);
-        new ArtConverter();
+    private static final String API_PACKAGE = "org.spongepowered.api";
+    private static final String CONVERTER_PACKAGE = "blue.lapis.pore.converter.type";
+    private static final String CONVERTER_PREFIX = CONVERTER_PACKAGE + '.';
+
+    @BeforeClass
+    public static void initializeCatalogs() throws Exception {
+        for (ClassPath.ClassInfo info : PoreTests.getClassPath().getTopLevelClassesRecursive(API_PACKAGE)) {
+            Class<?> loaded = info.load();
+            CatalogedBy catalogedBy = loaded.getAnnotation(CatalogedBy.class);
+            if (catalogedBy != null) {
+                PoreTests.setConstants(catalogedBy.value());
+            }
+        }
+
+        // These are missing @CatalogedBy for some reason
+        PoreTests.setConstants(DimensionTypes.class, GeneratorTypes.class);
     }
 
-    @Test
-    public void testBiome() throws Exception {
-        PoreTests.setConstants(BiomeTypes.class);
-        new BiomeConverter();
+    @Parameterized.Parameters(name = "{0}")
+    public static Set<String> getConverters() throws Exception {
+        ImmutableSet.Builder<String> converters = ImmutableSet.builder();
+        for (ClassPath.ClassInfo converter : PoreTests.getClassPath().getTopLevelClassesRecursive(CONVERTER_PACKAGE)) {
+            converters.add(StringUtils.removeStart(converter.getName(), CONVERTER_PREFIX));
+        }
+        return converters.build();
     }
 
-    @Test
-    public void testDirection() throws Exception {
-        new DirectionConverter();
-    }
+    @Parameterized.Parameter
+    public String converter;
 
     @Test
-    public void testDyeColor() throws Exception {
-        PoreTests.setConstants(DyeColors.class);
-        new DyeColorConverter();
-    }
-
-    @Test
-    public void testEnvironment() throws Exception {
-        PoreTests.setConstants(DimensionTypes.class);
-        new EnvironmentConverter();
-    }
-
-    @Test
-    public void testEventPriority() throws Exception {
-        new EventPriorityConverter();
-    }
-
-    @Test
-    public void testGameMode() throws Exception {
-        PoreTests.setConstants(GameModes.class);
-        new GameModeConverter();
-    }
-
-    @Test
-    public void testHorse() throws Exception {
-        PoreTests.setConstants(HorseVariants.class, HorseColors.class, HorseStyles.class);
-        new HorseConverter();
-    }
-
-    @Test
-    public void testMaterial() throws Exception {
-        PoreTests.setConstants(BlockTypes.class, ItemTypes.class);
-        new MaterialConverter();
-    }
-
-    @Test
-    public void testOcelot() throws Exception {
-        PoreTests.setConstants(OcelotTypes.class);
-        new OcelotConverter();
-    }
-
-    @Test
-    public void testPotionEffectType() throws Exception {
-        PoreTests.setConstants(PotionEffectTypes.class);
-        new PotionEffectTypeConverter();
-    }
-
-    @Test
-    public void testRabbit() throws Exception {
-        PoreTests.setConstants(RabbitTypes.class);
-        new RabbitConverter();
-    }
-
-    @Test
-    public void testRotation() throws Exception {
-        PoreTests.setConstants(Rotations.class);
-        new RotationConverter();
-    }
-
-    @Test
-    public void testSkeleton() throws Exception {
-        PoreTests.setConstants(SkeletonTypes.class);
-        new SkeletonConverter();
-    }
-
-    @Test
-    public void testSound() throws Exception {
-        PoreTests.setConstants(SoundTypes.class);
-        new SoundConverter();
+    public void load() throws ClassNotFoundException {
+        Class.forName(CONVERTER_PREFIX + converter, true, ClassLoader.getSystemClassLoader());
     }
 
 }
