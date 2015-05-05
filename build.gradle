@@ -33,9 +33,10 @@ targetCompatibility = 1.6
 // Project repositories
 repositories {
     mavenCentral()
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    // Add Sponge repo for custom checkstyle implementation to fix some wrong warnings
-    maven { url 'http://repo.spongepowered.org/maven' }
+    maven {
+        name = 'sponge'
+        url = 'http://repo.spongepowered.org/maven'
+    }
 }
 
 project('Porekit') {
@@ -55,7 +56,9 @@ ext {
 
 // Project dependencies
 dependencies {
-    compile project('SpongeAPI') // TODO: Change to Sponge's Maven repo in the future
+    // To update, go to https://repo.spongepowered.org/maven/org/spongepowered/spongeapi/2.1-SNAPSHOT/
+    // Then pick latest version (or whatever version you want)
+    compile 'org.spongepowered:spongeapi:2.1-20150505.054044-24'
     shadow project('Porekit')
     shadow("org.slf4j:jul-to-slf4j:$slf4jVersion") {
         transitive = false
@@ -137,21 +140,6 @@ checkstyle {
     configFile = file('checkstyle.xml')
 }
 
-// Disable tests and checkstyle for SpongeAPI
-project('SpongeAPI') {
-    afterEvaluate {
-        configure([assemble, build, compileTestJava, javadoc, javadocJar, sourceJar, licenseFormat]) {
-            enabled = false
-        }
-        tasks.withType(VerificationTask) {
-            enabled = false
-        }
-        tasks.withType(Checkstyle) {
-            enabled = false
-        }
-    }
-}
-
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.3'
+    gradleVersion = '2.4'
 }
