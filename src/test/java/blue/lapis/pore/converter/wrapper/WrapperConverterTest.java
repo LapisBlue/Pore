@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.converter.wrapper;
 
+import static blue.lapis.pore.PoreTests.PACKAGE;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.withSettings;
@@ -35,21 +36,38 @@ import com.google.common.collect.ImmutableListMultimap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ListMultimap;
-import org.junit.Before;
+import org.apache.commons.lang3.StringUtils;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+@RunWith(Parameterized.class)
 public class WrapperConverterTest {
 
-    private ListMultimap<Class<?>, Class<?>> testRegistry;
+    private static final String IMPL_PREFIX = PACKAGE + "impl.";
 
-    @Before
-    public void initConverters() {
+    @BeforeClass
+    public static void initPlugin() {
         PoreTests.mockPlugin();
-        this.testRegistry = createRegistry();
+    }
+
+    @Parameterized.Parameters(name = "{0}")
+    public static Set<Object[]> getObjects() throws Exception {
+        ImmutableSet.Builder<Object[]> objects = ImmutableSet.builder();
+        ListMultimap<Class<?>, Class<?>> registry = createRegistry();
+        for (Class<?> type : registry.keySet()) {
+            objects.add(new Object[]{
+                    StringUtils.removeStart(type.getName(), IMPL_PREFIX),
+                    type,
+                    registry.get(type)
+            });
+        }
+        return objects.build();
     }
 
     @SuppressWarnings("rawtypes")
@@ -86,8 +104,14 @@ public class WrapperConverterTest {
         }
     }
 
-    private Object create(Class<?> pore) {
-        List<Class<?>> interfaces = testRegistry.get(pore);
+    @Parameterized.Parameter
+    public String name;
+    @Parameterized.Parameter(1)
+    public Class<?> pore;
+    @Parameterized.Parameter(2)
+    public List<Class<?>> interfaces;
+
+    private Object create() {
         Class<?> base = interfaces.get(0);
         if (interfaces.size() == 1) {
             return mock(base);
@@ -99,8 +123,7 @@ public class WrapperConverterTest {
 
     @Test
     public void resolve() {
-        for (Class<?> pore : testRegistry.keySet()) {
-            assertSame(pore, WrapperConverter.of(create(pore)).getClass());
-        }
+        assertSame(pore, WrapperConverter.of(create()).getClass());
     }
+
 }

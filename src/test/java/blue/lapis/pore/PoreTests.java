@@ -40,6 +40,8 @@ public final class PoreTests {
     private PoreTests() {
     }
 
+    public static final String PACKAGE = "blue.lapis.pore.";
+
     public static void mockPlugin() {
         if (Pore.instance == null) {
             Pore pore = new Pore();

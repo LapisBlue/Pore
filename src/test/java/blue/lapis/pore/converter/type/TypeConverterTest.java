@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.converter.type;
 
+import static blue.lapis.pore.PoreTests.PACKAGE;
+
 import blue.lapis.pore.PoreTests;
 
 import com.google.common.collect.ImmutableSet;
@@ -41,7 +43,7 @@ import java.util.Set;
 public class TypeConverterTest {
 
     private static final String API_PACKAGE = "org.spongepowered.api";
-    private static final String CONVERTER_PACKAGE = "blue.lapis.pore.converter.type";
+    private static final String CONVERTER_PACKAGE = PACKAGE + "converter.type";
     private static final String CONVERTER_PREFIX = CONVERTER_PACKAGE + '.';
 
     @BeforeClass

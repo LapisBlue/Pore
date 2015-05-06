@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.impl.event;
 
+import static blue.lapis.pore.PoreTests.PACKAGE;
+
 import blue.lapis.pore.PoreTests;
 import blue.lapis.pore.test.IgnoreResult;
 
@@ -41,7 +43,7 @@ import java.util.Set;
 public class PoreEventTest {
 
     static final String BUKKIT_PACKAGE = "org.bukkit.event";
-    static final String PORE_PACKAGE = "blue.lapis.pore.impl.event";
+    static final String PORE_PACKAGE = PACKAGE + "impl.event";
 
     @Rule
     public IgnoreResult ignoreResult = new IgnoreResult();
