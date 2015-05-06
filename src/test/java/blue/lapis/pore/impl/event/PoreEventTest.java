@@ -24,197 +24,62 @@
  */
 package blue.lapis.pore.impl.event;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import blue.lapis.pore.PoreTests;
+import blue.lapis.pore.test.IgnoreResult;
 
-import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableCollection;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import com.google.common.reflect.ClassPath;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.event.Event;
-import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.util.Set;
 
 public class PoreEventTest {
 
-    private static final String BUKKIT_PACKAGE = "org.bukkit.event";
-    private static final String PORE_PACKAGE = "blue.lapis.pore.impl.event";
+    static final String BUKKIT_PACKAGE = "org.bukkit.event";
+    static final String PORE_PACKAGE = "blue.lapis.pore.impl.event";
 
-    private static ImmutableCollection<Class<?>> bukkitEvents;
-    private static ImmutableCollection<Class<?>> poreEvents;
+    @Rule
+    public IgnoreResult ignoreResult = new IgnoreResult();
 
-    @BeforeClass
-    public static void findEvents() throws Exception {
-        ImmutableCollection.Builder<Class<?>> builder = ImmutableSet.builder();
+    @Test
+    public void findUnimplementedEvents() throws IOException {
+        Set<Class<?>> events = Sets.newLinkedHashSet();
 
         for (ClassPath.ClassInfo info : PoreTests.getClassPath().getTopLevelClassesRecursive(BUKKIT_PACKAGE)) {
-            Class<?> event = info.load();
-            if (Event.class.isAssignableFrom(event) && !Modifier.isAbstract(event.getModifiers())) {
-                builder.add(event);
+            try {
+                Class<?> event = info.load();
+                if (Event.class.isAssignableFrom(event) && !Modifier.isAbstract(event.getModifiers())) {
+                    events.add(event);
+                }
+            } catch (Throwable e) {
+                PoreTests.getLogger().warn("Failed to load {}", info, e);
             }
         }
-
-        bukkitEvents = builder.build();
-        builder = ImmutableSet.builder();
 
         for (ClassPath.ClassInfo info : PoreTests.getClassPath().getTopLevelClassesRecursive(PORE_PACKAGE)) {
-            Class<?> type = info.load();
-            if (Event.class.isAssignableFrom(type)) {
-                builder.add(type);
+            Class<?> type;
+            try {
+                type = info.load();
+                if (!Event.class.isAssignableFrom(type)) {
+                    continue;
+                }
+            } catch (Throwable e) {
+                PoreTests.getLogger().warn("Failed to load {}", info, e);
+                continue;
             }
-        }
 
-        poreEvents = builder.build();
-    }
-
-    @Test
-    public void checkNames() {
-        for (Class<?> eventImpl : poreEvents) {
-            Class<?> bukkitEvent = eventImpl.getSuperclass();
-
-            String poreName = StringUtils.removeStart(eventImpl.getName(), PORE_PACKAGE + '.');
-            String porePackage = StringUtils.substringBeforeLast(poreName, ".");
-            poreName = StringUtils.substringAfterLast(poreName, ".");
-
-            String bukkitName = StringUtils.removeStart(bukkitEvent.getName(), BUKKIT_PACKAGE + '.');
-            String bukkitPackage = StringUtils.substringBeforeLast(bukkitName, ".");
-            bukkitName = StringUtils.substringAfterLast(bukkitName, ".");
-
-            String expectedName = "Pore" + bukkitName;
-
-            assertEquals(poreName + " should be called " + expectedName, poreName, expectedName);
-            assertEquals(poreName + " is in wrong package: should be in " + PORE_PACKAGE + '.' + bukkitPackage,
-                    porePackage, bukkitPackage);
-        }
-    }
-
-    @Test
-    public void findUnimplementedEvents() {
-        Set<Class<?>> events = Sets.newLinkedHashSet(bukkitEvents);
-
-        for (Class<?> eventImpl : poreEvents) {
-            events.remove(eventImpl.getSuperclass());
+            events.remove(type.getSuperclass());
         }
 
         if (!events.isEmpty()) {
             for (Class<?> event : events) {
                 String bukkitPackage = StringUtils.removeStart(event.getPackage().getName(), BUKKIT_PACKAGE + '.');
                 PoreTests.getLogger().warn("{}: Pore{} is missing", bukkitPackage, event.getSimpleName());
-            }
-        }
-    }
-
-    private static void checkSpongeEvent(Class<?> eventImpl, Class<?> type) {
-        assertTrue(eventImpl.getSimpleName() + ": " + type.getSimpleName() + " is not a sponge event",
-                org.spongepowered.api.event.Event.class.isAssignableFrom(type));
-    }
-
-    @Test
-    public void checkHandleGetter() {
-        for (Class<?> eventImpl : poreEvents) {
-            try {
-                Method method = eventImpl.getMethod("getHandle");
-                checkSpongeEvent(eventImpl, method.getReturnType());
-            } catch (NoSuchMethodException ignored) {
-                fail(eventImpl.getSimpleName() + ": missing getHandle() method (handle getter)");
-            }
-        }
-    }
-
-    @Test
-    public void checkHandleField() {
-        for (Class<?> eventImpl : poreEvents) {
-            try {
-                Field field = eventImpl.getDeclaredField("handle");
-                checkSpongeEvent(eventImpl, field.getType());
-            } catch (NoSuchFieldException e) {
-                fail(eventImpl.getSimpleName() + ": missing handle field");
-            }
-        }
-    }
-
-    @Test
-    public void checkConstructor() throws Throwable {
-        events:
-        for (Class<?> eventImpl : poreEvents) {
-            for (Constructor<?> constructor : eventImpl.getConstructors()) {
-                Class<?>[] parameters = constructor.getParameterTypes();
-                if (parameters.length == 1) {
-                    Class<?> handle = parameters[0];
-                    if (org.spongepowered.api.event.Event.class.isAssignableFrom(handle)) {
-                        // Check for null check
-                        try {
-                            constructor.newInstance(new Object[]{null});
-                        } catch (InvocationTargetException e) {
-                            Throwable cause = e.getCause();
-                            if (cause != null) {
-                                if (cause instanceof NullPointerException
-                                        && Objects.equal(cause.getMessage(), "handle")) {
-                                    continue events;
-                                }
-
-                                throw cause;
-                            }
-
-                            throw e;
-                        }
-
-                        fail(eventImpl.getSimpleName() + ": missing null-check for handle");
-                    }
-                }
-            }
-
-            fail(eventImpl.getSimpleName() + ": missing handle constructor");
-        }
-    }
-
-    @Test
-    public void checkImplementedMethods() {
-        for (Class<?> eventImpl : poreEvents) {
-            Class<?> bukkitEvent = eventImpl.getSuperclass();
-            for (Method method : bukkitEvent.getMethods()) {
-                int modifiers = method.getModifiers();
-                if (Modifier.isStatic(modifiers) || isDefault(method)
-                        || method.getDeclaringClass() == Event.class || method.getDeclaringClass() == Object.class
-                        || method.getName().equals("getHandlers") || method.getName().startsWith("_INVALID_")) {
-                    continue;
-                }
-
-                try {
-                    eventImpl.getDeclaredMethod(method.getName(), method.getParameterTypes());
-                } catch (NoSuchMethodException e) {
-                    fail(eventImpl.getSimpleName() + ": should override method " + method);
-                }
-            }
-        }
-    }
-
-    // Taken from JDK8 for compatibility with older Java versions
-    private static boolean isDefault(Method method) {
-        // Default methods are public non-abstract instance methods declared in an interface.
-        return ((method.getModifiers() & (Modifier.ABSTRACT | Modifier.PUBLIC | Modifier.STATIC)) == Modifier.PUBLIC)
-                && method.getDeclaringClass().isInterface();
-    }
-
-    @Test
-    public void checkInvalidMethods() {
-        for (Class<?> eventImpl : poreEvents) {
-            for (Method method : eventImpl.getDeclaredMethods()) {
-                if (method.getName().startsWith("_INVALID_")) {
-                    fail(eventImpl.getSimpleName() + ": shouldn't override _INVALID_ method " + method);
-                }
             }
         }
     }
