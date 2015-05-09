@@ -29,11 +29,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.Pore;
+import blue.lapis.pore.converter.type.plugin.EventPriorityConverter;
 import blue.lapis.pore.impl.event.block.PoreBlockBreakEvent;
 import blue.lapis.pore.impl.event.player.PoreAsyncPlayerChatEvent;
 import blue.lapis.pore.impl.event.player.PorePlayerJoinEvent;
 import blue.lapis.pore.impl.event.player.PorePlayerQuitEvent;
 import blue.lapis.pore.impl.event.server.PoreServerListPingEvent;
+import blue.lapis.pore.util.constructor.PoreConstructors;
+import blue.lapis.pore.util.constructor.SimpleConstructor;
 
 import com.google.common.collect.MapMaker;
 import com.google.common.collect.Maps;
@@ -119,31 +122,42 @@ public final class PoreEventWrapper {
         Class<? extends Event> handle = superClass.asSubclass(Event.class);
 
         HandlerList list = SimplePluginManager.getEventListeners(handle);
-        list.addAdapter(new Registration(pore, sponge));
+        list.addAdapter(create(pore, sponge));
     }
 
-    private static class Registration implements HandlerList.Adapter {
+    private static <P extends Event, S extends org.spongepowered.api.event.Event> Registration<P, S> create(
+            Class<P> pore, Class<S> sponge) {
+        return new Registration<P, S>(pore, sponge);
+    }
 
-        private final Class<? extends Event> pore;
-        private final Class<? extends org.spongepowered.api.event.Event> sponge;
+    private static class Registration<P extends Event,
+            S extends org.spongepowered.api.event.Event> implements HandlerList.Adapter {
 
-        private final EnumMap<EventPriority, Object> listeners = Maps.newEnumMap(EventPriority.class);
+        private final Class<P> pore;
+        private final Class<S> sponge;
+        private SimpleConstructor<P, S> constructor;
 
-        public Registration(Class<? extends Event> pore,
-                Class<? extends org.spongepowered.api.event.Event> sponge) {
+        private final EnumMap<EventPriority, PoreEventHandler<S>> listeners = Maps.newEnumMap(EventPriority.class);
+
+        public Registration(Class<P> pore, Class<S> sponge) {
             this.pore = pore;
             this.sponge = sponge;
         }
 
         @Override
         public void register(EventPriority priority) {
-            Object listener = listeners.get(priority);
+            PoreEventHandler<S> listener = listeners.get(priority);
             if (listener == null) {
-                listener = PoreListenerGenerator.createListener(pore, sponge, priority);
+                if (constructor == null) {
+                    this.constructor = PoreConstructors.create(pore, sponge);
+                }
+
+                listener = new PoreEventHandler<S>(priority, constructor);
                 listeners.put(priority, listener);
             }
 
-            Pore.getGame().getEventManager().register(Pore.getInstance(), listener);
+            Pore.getGame().getEventManager().register(Pore.getInstance(), sponge,
+                    EventPriorityConverter.of(priority), listener);
         }
 
         @Override

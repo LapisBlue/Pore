@@ -50,7 +50,7 @@ public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent 
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(getHandle().getSign().getBlock());
+        return PoreBlock.of(getHandle().getTile().getBlock());
     }
 
     @Override

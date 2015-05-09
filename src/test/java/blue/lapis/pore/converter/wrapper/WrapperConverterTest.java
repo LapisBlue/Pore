@@ -85,7 +85,7 @@ public class WrapperConverterTest {
 
     private static void scan(ImmutableMultimap.Builder<Class<?>, Class<?>> builder, Class<?> sponge,
             Set<Class<?>> parents, CachedWrapperConverter.Converter<?, ?> converter) {
-        Class<?> pore = converter.constructor.getDeclaringClass();
+        Class<?> pore = converter.constructor.getType();
         builder.put(pore, sponge);
 
         ImmutableSet.Builder<Class<?>> parentsBuilder = ImmutableSet.<Class<?>>builder().add(sponge);

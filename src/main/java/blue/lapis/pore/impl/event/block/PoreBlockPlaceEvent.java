@@ -57,7 +57,7 @@ public class PoreBlockPlaceEvent extends org.bukkit.event.block.BlockPlaceEvent 
 
     @Override
     public Player getPlayer() {
-        return PorePlayer.of(getHandle().getPlayer());
+        return PorePlayer.of(getHandle().getUser());
     }
 
     @Override
@@ -78,7 +78,7 @@ public class PoreBlockPlaceEvent extends org.bukkit.event.block.BlockPlaceEvent 
 
     @Override
     public ItemStack getItemInHand() {
-        return ItemStackConverter.of(getHandle().getPlayer().getItemInHand().orNull());
+        return ItemStackConverter.of(getHandle().getUser().getItemInHand().orNull());
     }
 
     @Override

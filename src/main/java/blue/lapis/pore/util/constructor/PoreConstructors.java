@@ -22,43 +22,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.impl.event.player;
+package blue.lapis.pore.util.constructor;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+public final class PoreConstructors {
 
-import blue.lapis.pore.impl.entity.PorePlayer;
-
-import org.bukkit.entity.Player;
-import org.spongepowered.api.event.entity.player.PlayerJoinEvent;
-import org.spongepowered.api.text.Texts;
-
-public class PorePlayerJoinEvent extends org.bukkit.event.player.PlayerJoinEvent {
-
-    private final PlayerJoinEvent handle;
-
-    public PorePlayerJoinEvent(PlayerJoinEvent handle) {
-        super(null, null);
-        this.handle = checkNotNull(handle, "handle");
+    private PoreConstructors() {
     }
 
-    public PlayerJoinEvent getHandle() {
-        return handle;
-    }
+    private static final SimpleConstructor.Provider PROVIDER = new SimpleClassConstructor.Provider();
 
-    @Override
-    public Player getPlayer() {
-        return PorePlayer.of(handle.getUser());
-    }
-
-    @Override
-    public String getJoinMessage() {
-        return Texts.toLegacy(handle.getJoinMessage());
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public void setJoinMessage(String joinMessage) {
-        handle.setJoinMessage(Texts.fromLegacy(joinMessage));
+    public static <T, P> SimpleConstructor<T, P> create(Class<T> type, Class<P> parameter) {
+        try {
+            return PROVIDER.create(type, parameter);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create constructor for " + type + " with " + parameter, e);
+        }
     }
 
 }

@@ -49,7 +49,7 @@ public class PoreBlockBreakEvent extends BlockBreakEvent {
 
     @Override
     public Player getPlayer() {
-        return PorePlayer.of(getHandle().getPlayer());
+        return PorePlayer.of(getHandle().getUser());
     }
 
     @Override

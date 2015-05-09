@@ -52,7 +52,7 @@ public class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent {
 
     @Override
     public Player getPlayer() {
-        return PorePlayer.of(handle.getPlayer());
+        return PorePlayer.of(handle.getUser());
     }
 
     @Override

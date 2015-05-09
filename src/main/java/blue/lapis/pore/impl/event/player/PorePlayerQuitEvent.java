@@ -47,7 +47,7 @@ public class PorePlayerQuitEvent extends org.bukkit.event.player.PlayerQuitEvent
 
     @Override
     public Player getPlayer() {
-        return PorePlayer.of(handle.getPlayer());
+        return PorePlayer.of(handle.getUser());
     }
 
     @Override

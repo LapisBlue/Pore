@@ -37,7 +37,7 @@ public class PoreInventoryHolder extends PoreWrapper<Carrier> implements Invento
         return WrapperConverter.of(PoreInventoryHolder.class, handle);
     }
 
-    private PoreInventoryHolder(Carrier handle) {
+    protected PoreInventoryHolder(Carrier handle) {
         super(handle);
     }
 

@@ -28,6 +28,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.Pore;
+import blue.lapis.pore.util.constructor.PoreConstructors;
+import blue.lapis.pore.util.constructor.SimpleConstructor;
 
 import com.google.common.base.Function;
 import com.google.common.cache.CacheBuilder;
@@ -39,7 +41,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
-import java.lang.reflect.Constructor;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -157,7 +158,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
 
     static final class Converter<S, P> implements Function<S, P> {
 
-        final Constructor<P> constructor;
+        final SimpleConstructor<P, S> constructor;
         final ImmutableMap<Class<? extends S>, Converter<? extends S, ? extends P>> registry;
 
         private Converter(Class<S> sponge, Class<P> pore,
@@ -165,14 +166,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
             checkNotNull(sponge, "sponge");
             checkNotNull(pore, "pore");
             this.registry = checkNotNull(registry, "registry");
-
-            try {
-                this.constructor = pore.getDeclaredConstructor(sponge);
-                constructor.setAccessible(true);
-            } catch (NoSuchMethodException e) {
-                throw new IllegalArgumentException("Pore " + pore + " doesn't have any constructor for Sponge "
-                        + sponge, e);
-            }
+            this.constructor = PoreConstructors.create(pore, sponge);
         }
 
         public Converter<? extends S, ? extends P> find(Class<? extends S> sponge) {
@@ -193,11 +187,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
 
         @Override
         public P apply(S input) {
-            try { // Create the pore wrapper
-                return constructor.newInstance(input);
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to create Pore wrapper for " + input.getClass(), e);
-            }
+            return constructor.construct(input);
         }
 
         @SuppressWarnings("unchecked")

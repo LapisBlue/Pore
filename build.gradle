@@ -58,7 +58,7 @@ ext {
 dependencies {
     // To update, go to https://repo.spongepowered.org/maven/org/spongepowered/spongeapi/2.1-SNAPSHOT/
     // Then pick latest version (or whatever version you want)
-    compile 'org.spongepowered:spongeapi:2.1-20150505.054044-24'
+    compile 'org.spongepowered:spongeapi:2.1-20150511.040534-44'
     shadow project('Porekit')
     shadow("org.slf4j:jul-to-slf4j:$slf4jVersion") {
         transitive = false

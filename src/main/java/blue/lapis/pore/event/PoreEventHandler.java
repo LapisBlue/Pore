@@ -22,43 +22,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.impl.event.player;
+package blue.lapis.pore.event;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import blue.lapis.pore.util.constructor.SimpleConstructor;
 
-import blue.lapis.pore.impl.entity.PorePlayer;
+import org.bukkit.event.EventPriority;
+import org.spongepowered.api.event.Event;
+import org.spongepowered.api.event.EventHandler;
 
-import org.bukkit.entity.Player;
-import org.spongepowered.api.event.entity.player.PlayerJoinEvent;
-import org.spongepowered.api.text.Texts;
+final class PoreEventHandler<T extends Event> implements EventHandler<T> {
 
-public class PorePlayerJoinEvent extends org.bukkit.event.player.PlayerJoinEvent {
+    private final EventPriority priority;
+    private final SimpleConstructor<? extends org.bukkit.event.Event, T> constructor;
 
-    private final PlayerJoinEvent handle;
-
-    public PorePlayerJoinEvent(PlayerJoinEvent handle) {
-        super(null, null);
-        this.handle = checkNotNull(handle, "handle");
-    }
-
-    public PlayerJoinEvent getHandle() {
-        return handle;
+    PoreEventHandler(EventPriority priority, SimpleConstructor<? extends org.bukkit.event.Event, T> constructor) {
+        this.priority = priority;
+        this.constructor = constructor;
     }
 
     @Override
-    public Player getPlayer() {
-        return PorePlayer.of(handle.getUser());
-    }
+    public void handle(T handle) {
+        org.bukkit.event.Event event = PoreEventWrapper.get(handle);
+        if (event == null) {
+            PoreEventWrapper.set(handle, event = constructor.construct(handle));
+        }
 
-    @Override
-    public String getJoinMessage() {
-        return Texts.toLegacy(handle.getJoinMessage());
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public void setJoinMessage(String joinMessage) {
-        handle.setJoinMessage(Texts.fromLegacy(joinMessage));
+        PoreEventWrapper.call(event, priority);
     }
 
 }

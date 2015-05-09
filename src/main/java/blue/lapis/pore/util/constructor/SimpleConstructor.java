@@ -22,43 +22,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.impl.event.player;
+package blue.lapis.pore.util.constructor;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+public interface SimpleConstructor<T, P> {
 
-import blue.lapis.pore.impl.entity.PorePlayer;
+    Class<T> getType();
+    
+    T construct(P parameter);
 
-import org.bukkit.entity.Player;
-import org.spongepowered.api.event.entity.player.PlayerJoinEvent;
-import org.spongepowered.api.text.Texts;
+    interface Provider {
 
-public class PorePlayerJoinEvent extends org.bukkit.event.player.PlayerJoinEvent {
+        <T, P> SimpleConstructor<T, P> create(Class<T> type, Class<P> parameter) throws Exception;
 
-    private final PlayerJoinEvent handle;
-
-    public PorePlayerJoinEvent(PlayerJoinEvent handle) {
-        super(null, null);
-        this.handle = checkNotNull(handle, "handle");
-    }
-
-    public PlayerJoinEvent getHandle() {
-        return handle;
-    }
-
-    @Override
-    public Player getPlayer() {
-        return PorePlayer.of(handle.getUser());
-    }
-
-    @Override
-    public String getJoinMessage() {
-        return Texts.toLegacy(handle.getJoinMessage());
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public void setJoinMessage(String joinMessage) {
-        handle.setJoinMessage(Texts.fromLegacy(joinMessage));
     }
 
 }
