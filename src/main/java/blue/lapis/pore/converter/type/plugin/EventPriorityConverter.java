@@ -35,9 +35,8 @@ public final class EventPriorityConverter {
     private EventPriorityConverter() {
     }
 
-    // TODO: Verify this
     private static final Converter<EventPriority, Order> CONVERTER = TypeConverter.<EventPriority, Order>builder()
-            .add(EventPriority.LOWEST, Order.PRE)
+            .add(EventPriority.LOWEST, Order.FIRST)
             .add(EventPriority.LOW, Order.EARLY)
             .add(EventPriority.NORMAL, Order.DEFAULT)
             .add(EventPriority.HIGH, Order.LATE)
