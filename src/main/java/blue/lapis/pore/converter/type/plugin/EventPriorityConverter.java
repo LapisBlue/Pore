@@ -35,14 +35,15 @@ public final class EventPriorityConverter {
     private EventPriorityConverter() {
     }
 
-    private static final Converter<EventPriority, Order> CONVERTER = TypeConverter.<EventPriority, Order>builder()
-            .add(EventPriority.LOWEST, Order.FIRST)
-            .add(EventPriority.LOW, Order.EARLY)
-            .add(EventPriority.NORMAL, Order.DEFAULT)
-            .add(EventPriority.HIGH, Order.LATE)
-            .add(EventPriority.HIGHEST, Order.LAST)
-            .add(EventPriority.MONITOR, Order.POST)
-            .build();
+    private static final Converter<EventPriority, Order> CONVERTER =
+            TypeConverter.builder(EventPriority.class, Order.class)
+                    .add(EventPriority.LOWEST, Order.FIRST)
+                    .add(EventPriority.LOW, Order.EARLY)
+                    .add(EventPriority.NORMAL, Order.DEFAULT)
+                    .add(EventPriority.HIGH, Order.LATE)
+                    .add(EventPriority.HIGHEST, Order.LAST)
+                    .add(EventPriority.MONITOR, Order.POST)
+                    .build();
 
     public static Order of(EventPriority eventPriority) {
         return CONVERTER.convert(eventPriority);

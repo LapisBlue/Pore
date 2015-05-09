@@ -41,7 +41,7 @@ public final class HorseConverter {
     }
 
     private static final Converter<Horse.Variant, HorseVariant> VARIANT_CONVERTER =
-            TypeConverter.<Horse.Variant, HorseVariant>builder()
+            TypeConverter.builder(Horse.Variant.class, HorseVariant.class)
                     .add(Horse.Variant.HORSE, HorseVariants.HORSE)
                     .add(Horse.Variant.DONKEY, HorseVariants.DONKEY)
                     .add(Horse.Variant.MULE, HorseVariants.MULE)
@@ -58,7 +58,7 @@ public final class HorseConverter {
     }
 
     private static final Converter<Horse.Color, HorseColor> COLOR_CONVERTER =
-            TypeConverter.<Horse.Color, HorseColor>builder()
+            TypeConverter.builder(Horse.Color.class, HorseColor.class)
                     .add(Horse.Color.WHITE, HorseColors.WHITE)
                     .add(Horse.Color.CREAMY, HorseColors.CREAMY)
                     .add(Horse.Color.CHESTNUT, HorseColors.CHESTNUT)
@@ -77,7 +77,7 @@ public final class HorseConverter {
     }
 
     private static final Converter<Horse.Style, HorseStyle> STYLE_CONVERTER =
-            TypeConverter.<Horse.Style, HorseStyle>builder()
+            TypeConverter.builder(Horse.Style.class, HorseStyle.class)
                     .add(Horse.Style.NONE, HorseStyles.NONE)
                     .add(Horse.Style.WHITE, HorseStyles.WHITE)
                     .add(Horse.Style.WHITEFIELD, HorseStyles.WHITEFIELD)

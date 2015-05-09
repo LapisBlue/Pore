@@ -36,7 +36,7 @@ public final class RotationConverter {
     }
 
     public static final Converter<Rotation, org.spongepowered.api.util.rotation.Rotation> CONVERTER =
-            TypeConverter.<Rotation, org.spongepowered.api.util.rotation.Rotation>builder()
+            TypeConverter.builder(Rotation.class, org.spongepowered.api.util.rotation.Rotation.class)
                     .add(Rotation.NONE, Rotations.TOP)
                     .add(Rotation.CLOCKWISE_45, Rotations.TOP_RIGHT)
                     .add(Rotation.CLOCKWISE, Rotations.RIGHT)

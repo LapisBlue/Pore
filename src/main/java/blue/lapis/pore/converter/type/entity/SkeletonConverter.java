@@ -37,7 +37,7 @@ public final class SkeletonConverter {
     }
 
     public static final Converter<Skeleton.SkeletonType, SkeletonType> CONVERTER =
-            TypeConverter.<Skeleton.SkeletonType, SkeletonType>builder()
+            TypeConverter.builder(Skeleton.SkeletonType.class, SkeletonType.class)
                     .add(Skeleton.SkeletonType.NORMAL, SkeletonTypes.NORMAL)
                     .add(Skeleton.SkeletonType.WITHER, SkeletonTypes.WITHER)
                     .build();

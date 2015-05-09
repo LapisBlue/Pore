@@ -33,6 +33,8 @@ import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
+import java.util.Map;
+
 public final class TypeConverter<B, S> extends Converter<B, S> {
 
     private final ImmutableMap<B, S> bukkitToSponge;
@@ -66,17 +68,20 @@ public final class TypeConverter<B, S> extends Converter<B, S> {
         return checkDefined(spongeToBukkit.get(sponge), sponge);
     }
 
-    public static <B extends Enum<B>, S> EnumBuilder<B, S> builder() {
-        return new EnumBuilder<B, S>();
+    public static <B, S> Builder<B, S> builder(Class<B> bukkit, Class<S> sponge) {
+        return new Builder<B, S>(bukkit, sponge);
     }
 
-    public static <B, S> MapBuilder<B, S> mapBuilder() {
-        return new MapBuilder<B, S>();
-    }
+    public static class Builder<B, S> {
 
-    public abstract static class Builder<B, S> {
+        private final Class<B> bukkit;
+        private final Class<S> sponge;
+        private final BiMap<B, S> registry = HashBiMap.create();
 
-        protected final BiMap<B, S> registry = HashBiMap.create();
+        public Builder(Class<B> bukkit, Class<S> sponge) {
+            this.bukkit = bukkit;
+            this.sponge = sponge;
+        }
 
         public Builder<B, S> add(B bukkit, S sponge) {
             checkState(registry.put(checkNotNull(bukkit, "bukkit"), checkNotNull(sponge, "sponge")) == null,
@@ -84,23 +89,18 @@ public final class TypeConverter<B, S> extends Converter<B, S> {
             return this;
         }
 
-        public abstract TypeConverter<B, S> build();
-    }
-
-    public static final class MapBuilder<B, S> extends Builder<B, S> {
-
-        @Override
         public TypeConverter<B, S> build() {
-            return new TypeConverter<B, S>(ImmutableMap.copyOf(registry), ImmutableMap.copyOf(registry.inverse()));
+            return new TypeConverter<B, S>(create(bukkit, registry), create(sponge, registry.inverse()));
         }
-    }
 
-    public static final class EnumBuilder<B extends Enum<B>, S> extends Builder<B, S> {
+        private static <K, V> ImmutableMap<K, V> create(Class<K> keyType, Map<K, V> input) {
+            if (keyType.isEnum()) {
+                return Maps.immutableEnumMap((Map) input);
+            }
 
-        @Override
-        public TypeConverter<B, S> build() {
-            return new TypeConverter<B, S>(Maps.immutableEnumMap(registry), ImmutableMap.copyOf(registry.inverse()));
+            return ImmutableMap.copyOf(input);
         }
 
     }
+
 }

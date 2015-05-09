@@ -35,26 +35,27 @@ public final class DirectionConverter {
     private DirectionConverter() {
     }
 
-    private static final Converter<BlockFace, Direction> CONVERTER = TypeConverter.<BlockFace, Direction>builder()
-            .add(BlockFace.NORTH, Direction.NORTH)
-            .add(BlockFace.EAST, Direction.EAST)
-            .add(BlockFace.SOUTH, Direction.SOUTH)
-            .add(BlockFace.WEST, Direction.WEST)
-            .add(BlockFace.UP, Direction.UP)
-            .add(BlockFace.DOWN, Direction.DOWN)
-            .add(BlockFace.NORTH_EAST, Direction.NORTHEAST)
-            .add(BlockFace.NORTH_WEST, Direction.NORTHWEST)
-            .add(BlockFace.SOUTH_EAST, Direction.SOUTHEAST)
-            .add(BlockFace.SOUTH_WEST, Direction.SOUTHWEST)
-            .add(BlockFace.WEST_NORTH_WEST, Direction.WEST_NORTHWEST)
-            .add(BlockFace.NORTH_NORTH_WEST, Direction.NORTH_NORTHWEST)
-            .add(BlockFace.NORTH_NORTH_EAST, Direction.NORTH_NORTHEAST)
-            .add(BlockFace.EAST_NORTH_EAST, Direction.EAST_NORTHEAST)
-            .add(BlockFace.EAST_SOUTH_EAST, Direction.EAST_SOUTHEAST)
-            .add(BlockFace.SOUTH_SOUTH_EAST, Direction.SOUTH_SOUTHEAST)
-            .add(BlockFace.SOUTH_SOUTH_WEST, Direction.SOUTH_SOUTHWEST)
-            .add(BlockFace.WEST_SOUTH_WEST, Direction.WEST_SOUTHWEST)
-            .build();
+    private static final Converter<BlockFace, Direction> CONVERTER =
+            TypeConverter.builder(BlockFace.class, Direction.class)
+                    .add(BlockFace.NORTH, Direction.NORTH)
+                    .add(BlockFace.EAST, Direction.EAST)
+                    .add(BlockFace.SOUTH, Direction.SOUTH)
+                    .add(BlockFace.WEST, Direction.WEST)
+                    .add(BlockFace.UP, Direction.UP)
+                    .add(BlockFace.DOWN, Direction.DOWN)
+                    .add(BlockFace.NORTH_EAST, Direction.NORTHEAST)
+                    .add(BlockFace.NORTH_WEST, Direction.NORTHWEST)
+                    .add(BlockFace.SOUTH_EAST, Direction.SOUTHEAST)
+                    .add(BlockFace.SOUTH_WEST, Direction.SOUTHWEST)
+                    .add(BlockFace.WEST_NORTH_WEST, Direction.WEST_NORTHWEST)
+                    .add(BlockFace.NORTH_NORTH_WEST, Direction.NORTH_NORTHWEST)
+                    .add(BlockFace.NORTH_NORTH_EAST, Direction.NORTH_NORTHEAST)
+                    .add(BlockFace.EAST_NORTH_EAST, Direction.EAST_NORTHEAST)
+                    .add(BlockFace.EAST_SOUTH_EAST, Direction.EAST_SOUTHEAST)
+                    .add(BlockFace.SOUTH_SOUTH_EAST, Direction.SOUTH_SOUTHEAST)
+                    .add(BlockFace.SOUTH_SOUTH_WEST, Direction.SOUTH_SOUTHWEST)
+                    .add(BlockFace.WEST_SOUTH_WEST, Direction.WEST_SOUTHWEST)
+                    .build();
 
     public static Direction of(BlockFace blockFace) {
         return CONVERTER.convert(blockFace);

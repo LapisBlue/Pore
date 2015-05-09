@@ -37,7 +37,7 @@ public final class OcelotConverter {
     }
 
     private static final Converter<Ocelot.Type, OcelotType> CONVERTER =
-            TypeConverter.<Ocelot.Type, OcelotType>builder()
+            TypeConverter.builder(Ocelot.Type.class, OcelotType.class)
                     .add(Ocelot.Type.BLACK_CAT, OcelotTypes.BLACK_CAT)
                     .add(Ocelot.Type.RED_CAT, OcelotTypes.RED_CAT)
                     .add(Ocelot.Type.SIAMESE_CAT, OcelotTypes.SIAMESE_CAT)

@@ -36,15 +36,16 @@ public final class RabbitConverter {
     private RabbitConverter() {
     }
 
-    public static final Converter<Rabbit.Type, RabbitType> CONVERTER = TypeConverter.<Rabbit.Type, RabbitType>builder()
-            .add(Rabbit.Type.BROWN, RabbitTypes.BROWN)
-            .add(Rabbit.Type.WHITE, RabbitTypes.WHITE)
-            .add(Rabbit.Type.BLACK, RabbitTypes.BLACK)
-            .add(Rabbit.Type.BLACK_AND_WHITE, RabbitTypes.BLACK_AND_WHITE)
-            .add(Rabbit.Type.GOLD, RabbitTypes.GOLD)
-            .add(Rabbit.Type.SALT_AND_PEPPER, RabbitTypes.SALT_AND_PEPPER)
-            .add(Rabbit.Type.THE_KILLER_BUNNY, RabbitTypes.KILLER)
-            .build();
+    public static final Converter<Rabbit.Type, RabbitType> CONVERTER =
+            TypeConverter.builder(Rabbit.Type.class, RabbitType.class)
+                    .add(Rabbit.Type.BROWN, RabbitTypes.BROWN)
+                    .add(Rabbit.Type.WHITE, RabbitTypes.WHITE)
+                    .add(Rabbit.Type.BLACK, RabbitTypes.BLACK)
+                    .add(Rabbit.Type.BLACK_AND_WHITE, RabbitTypes.BLACK_AND_WHITE)
+                    .add(Rabbit.Type.GOLD, RabbitTypes.GOLD)
+                    .add(Rabbit.Type.SALT_AND_PEPPER, RabbitTypes.SALT_AND_PEPPER)
+                    .add(Rabbit.Type.THE_KILLER_BUNNY, RabbitTypes.KILLER)
+                    .build();
 
     public static RabbitType of(Rabbit.Type type) {
         return CONVERTER.convert(type);

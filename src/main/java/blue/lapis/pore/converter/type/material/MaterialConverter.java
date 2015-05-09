@@ -39,7 +39,7 @@ public final class MaterialConverter {
     }
 
     private static final Converter<Material, BlockType> BLOCK_TYPE_CONVERTER =
-            TypeConverter.<Material, BlockType>mapBuilder()
+            TypeConverter.builder(Material.class, BlockType.class)
                     .add(Material.AIR, BlockTypes.AIR)
                     .add(Material.STONE, BlockTypes.STONE)
                     .add(Material.GRASS, BlockTypes.GRASS)
@@ -249,7 +249,7 @@ public final class MaterialConverter {
     }
 
     private static final Converter<Material, ItemType> ITEM_TYPE_CONVERTER =
-            TypeConverter.<Material, ItemType>mapBuilder()
+            TypeConverter.builder(Material.class, ItemType.class)
                     .add(Material.STONE, ItemTypes.STONE)
                     .add(Material.GRASS, ItemTypes.GRASS)
                     .add(Material.DIRT, ItemTypes.DIRT)

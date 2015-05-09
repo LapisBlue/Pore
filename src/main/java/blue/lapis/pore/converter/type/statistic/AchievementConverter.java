@@ -36,7 +36,7 @@ public final class AchievementConverter {
     }
 
     private static final Converter<Achievement, org.spongepowered.api.stats.achievement.Achievement> CONVERTER =
-            TypeConverter.<Achievement, org.spongepowered.api.stats.achievement.Achievement>builder()
+            TypeConverter.builder(Achievement.class, org.spongepowered.api.stats.achievement.Achievement.class)
                     .add(Achievement.OPEN_INVENTORY, Achievements.OPEN_INVENTORY)
                     .add(Achievement.MINE_WOOD, Achievements.MINE_WOOD)
                     .add(Achievement.BUILD_WORKBENCH, Achievements.BUILD_WORKBENCH)

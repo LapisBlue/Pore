@@ -36,7 +36,7 @@ public final class DisplaySlotConverter {
     }
 
     private static final Converter<DisplaySlot, org.spongepowered.api.scoreboard.displayslot.DisplaySlot> CONVERTER =
-            TypeConverter.<DisplaySlot, org.spongepowered.api.scoreboard.displayslot.DisplaySlot>builder()
+            TypeConverter.builder(DisplaySlot.class, org.spongepowered.api.scoreboard.displayslot.DisplaySlot.class)
                     .add(DisplaySlot.BELOW_NAME, DisplaySlots.BELOW_NAME)
                     .add(DisplaySlot.PLAYER_LIST, DisplaySlots.LIST)
                     .add(DisplaySlot.SIDEBAR, DisplaySlots.SIDEBAR)

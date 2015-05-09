@@ -37,7 +37,7 @@ public final class EnvironmentConverter {
     }
 
     private static final Converter<World.Environment, DimensionType> CONVERTER =
-            TypeConverter.<World.Environment, DimensionType>builder()
+            TypeConverter.builder(World.Environment.class, DimensionType.class)
                     .add(World.Environment.NORMAL, DimensionTypes.OVERWORLD)
                     .add(World.Environment.NETHER, DimensionTypes.NETHER)
                     .add(World.Environment.THE_END, DimensionTypes.END)

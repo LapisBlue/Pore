@@ -37,7 +37,7 @@ public final class GeneratorTypeConverter {
     }
 
     private static final Converter<WorldType, GeneratorType> CONVERTER =
-            TypeConverter.<WorldType, GeneratorType>builder()
+            TypeConverter.builder(WorldType.class, GeneratorType.class)
                     .add(WorldType.NORMAL, GeneratorTypes.DEFAULT)
                     .add(WorldType.FLAT, GeneratorTypes.FLAT)
                     /*.add(WorldType.LARGE_BIOMES, GeneratorTypes.LARGE_BIOME)

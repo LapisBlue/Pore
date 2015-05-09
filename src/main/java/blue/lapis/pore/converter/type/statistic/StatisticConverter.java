@@ -37,7 +37,7 @@ public final class StatisticConverter {
     }
 
     public static final Converter<Statistic, org.spongepowered.api.stats.Statistic> STD_CONVERTER =
-            TypeConverter.<Statistic, org.spongepowered.api.stats.Statistic>builder()
+            TypeConverter.builder(Statistic.class, org.spongepowered.api.stats.Statistic.class)
                     .add(Statistic.ANIMALS_BRED, Statistics.ANIMALS_BRED)
                     .add(Statistic.ARMOR_CLEANED, Statistics.ARMOR_CLEANED)
                     .add(Statistic.BANNER_CLEANED, Statistics.BANNER_CLEANED)
@@ -89,7 +89,7 @@ public final class StatisticConverter {
                     .build();
 
     public static final Converter<Statistic, org.spongepowered.api.stats.StatisticGroup> GROUP_CONVERTER =
-            TypeConverter.<Statistic, org.spongepowered.api.stats.StatisticGroup>builder()
+            TypeConverter.builder(Statistic.class, org.spongepowered.api.stats.StatisticGroup.class)
                     .add(Statistic.BREAK_ITEM, StatisticGroups.BREAK_ITEM)
                     .add(Statistic.CRAFT_ITEM, StatisticGroups.CRAFT_ITEM)
                     .add(Statistic.ENTITY_KILLED_BY, StatisticGroups.KILLED_BY_ENTITY)

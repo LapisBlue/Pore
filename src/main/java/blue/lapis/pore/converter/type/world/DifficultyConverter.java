@@ -36,7 +36,7 @@ public final class DifficultyConverter {
     }
 
     private static final Converter<org.bukkit.Difficulty, Difficulty> CONVERTER =
-            TypeConverter.<org.bukkit.Difficulty, Difficulty>builder()
+            TypeConverter.builder(org.bukkit.Difficulty.class, Difficulty.class)
                     .add(org.bukkit.Difficulty.PEACEFUL, Difficulties.PEACEFUL)
                     .add(org.bukkit.Difficulty.EASY, Difficulties.EASY)
                     .add(org.bukkit.Difficulty.NORMAL, Difficulties.NORMAL)

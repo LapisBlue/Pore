@@ -36,7 +36,7 @@ public final class SoundConverter {
     private SoundConverter() {
     }
 
-    public static final Converter<Sound, SoundType> CONVERTER = TypeConverter.<Sound, SoundType>builder()
+    public static final Converter<Sound, SoundType> CONVERTER = TypeConverter.builder(Sound.class, SoundType.class)
             .add(Sound.AMBIENCE_CAVE, SoundTypes.AMBIENCE_CAVE)
             .add(Sound.AMBIENCE_RAIN, SoundTypes.AMBIENCE_RAIN)
             .add(Sound.AMBIENCE_THUNDER, SoundTypes.AMBIENCE_THUNDER)

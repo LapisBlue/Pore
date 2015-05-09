@@ -37,7 +37,7 @@ public final class NameTagVisibilityConverter {
     }
 
     private static final Converter<NameTagVisibility, Visibility> CONVERTER =
-            TypeConverter.<NameTagVisibility, Visibility>builder()
+            TypeConverter.builder(NameTagVisibility.class, Visibility.class)
                     .add(NameTagVisibility.ALWAYS, Visibilities.ALL)
                     .add(NameTagVisibility.NEVER, Visibilities.NONE)
                     .add(NameTagVisibility.HIDE_FOR_OTHER_TEAMS, Visibilities.OWN_TEAM)

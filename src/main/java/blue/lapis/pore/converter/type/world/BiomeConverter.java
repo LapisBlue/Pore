@@ -36,7 +36,7 @@ public final class BiomeConverter {
     private BiomeConverter() {
     }
 
-    private static final Converter<Biome, BiomeType> CONVERTER = TypeConverter.<Biome, BiomeType>builder()
+    private static final Converter<Biome, BiomeType> CONVERTER = TypeConverter.builder(Biome.class, BiomeType.class)
             .add(Biome.BEACH, BiomeTypes.BEACH)
             .add(Biome.BIRCH_FOREST, BiomeTypes.BIRCH_FOREST)
             .add(Biome.BIRCH_FOREST_HILLS, BiomeTypes.BIRCH_FOREST_HILLS)

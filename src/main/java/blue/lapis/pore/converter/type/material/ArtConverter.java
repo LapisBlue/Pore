@@ -36,7 +36,7 @@ public final class ArtConverter {
     }
 
     private static final Converter<Art, org.spongepowered.api.data.types.Art> CONVERTER =
-            TypeConverter.<Art, org.spongepowered.api.data.types.Art>builder()
+            TypeConverter.builder(Art.class, org.spongepowered.api.data.types.Art.class)
                     .add(Art.ALBAN, Arts.ALBAN)
                     .add(Art.AZTEC, Arts.AZTEC)
                     .add(Art.AZTEC2, Arts.AZTEC_2)

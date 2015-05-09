@@ -36,7 +36,7 @@ public final class PotionEffectTypeConverter {
     }
 
     public static final Converter<PotionEffectType, org.spongepowered.api.potion.PotionEffectType> CONVERTER =
-            TypeConverter.<PotionEffectType, org.spongepowered.api.potion.PotionEffectType>mapBuilder()
+            TypeConverter.builder(PotionEffectType.class, org.spongepowered.api.potion.PotionEffectType.class)
                     .add(PotionEffectType.SPEED, PotionEffectTypes.SPEED)
                     .add(PotionEffectType.SLOW, PotionEffectTypes.SLOWNESS)
                     .add(PotionEffectType.FAST_DIGGING, PotionEffectTypes.HASTE)

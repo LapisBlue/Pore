@@ -37,7 +37,7 @@ public final class ProfessionConverter {
     }
 
     public static final Converter<Villager.Profession, Profession> CONVERTER =
-            TypeConverter.<Villager.Profession, Profession>builder()
+            TypeConverter.builder(Villager.Profession.class, Profession.class)
                     .add(Villager.Profession.BLACKSMITH, Professions.BLACKSMITH)
                     .add(Villager.Profession.BUTCHER, Professions.BUTCHER)
                     .add(Villager.Profession.FARMER, Professions.FARMER)
