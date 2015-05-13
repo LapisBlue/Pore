@@ -26,7 +26,6 @@ package blue.lapis.pore;
 
 import blue.lapis.pore.event.PoreEventWrapper;
 import blue.lapis.pore.impl.PoreServer;
-import blue.lapis.pore.impl.command.PoreCommandSender;
 import blue.lapis.pore.plugin.PorePluginContainer;
 
 import com.google.common.base.Preconditions;
@@ -36,7 +35,6 @@ import org.slf4j.bridge.SLF4JBridgeHandler;
 import org.slf4j.helpers.NOPLogger;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.event.Subscribe;
-import org.spongepowered.api.event.message.CommandEvent;
 import org.spongepowered.api.event.state.PreInitializationEvent;
 import org.spongepowered.api.event.state.ServerAboutToStartEvent;
 import org.spongepowered.api.event.state.ServerStartingEvent;
@@ -119,19 +117,6 @@ public final class Pore {
         instance = null;
         server = null;
         logger = null;
-    }
-
-    @Subscribe
-    public void onCommand(CommandEvent event) {
-        String command = event.getCommand();
-        String args = event.getArguments();
-        if (!args.isEmpty()) {
-            command = command + ' ' + args;
-        }
-
-        if (Pore.getServer().dispatchCommand(PoreCommandSender.of(event.getSource()), command)) {
-            event.setCancelled(true);
-        }
     }
 
     static Logger testLogger = NOPLogger.NOP_LOGGER;

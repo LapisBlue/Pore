@@ -26,6 +26,7 @@ package blue.lapis.pore.impl;
 
 import blue.lapis.pore.PoreVersion;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.impl.command.PoreCommandMap;
 import blue.lapis.pore.impl.command.PoreConsoleCommandSender;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.impl.scheduler.PoreBukkitScheduler;
@@ -114,7 +115,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
         super(handle.getServer());
         this.game = handle;
         this.logger = Logger.getLogger(logger.getName());
-        this.commandMap = new SimpleCommandMap(this);
+        this.commandMap = new PoreCommandMap(this);
         this.pluginManager = new SimplePluginManager(this, commandMap);
         this.servicesManager = new SimpleServicesManager();
         Bukkit.setServer(this);
@@ -125,9 +126,6 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     }
 
     public void loadPlugins() {
-        // Clear the command map
-        commandMap.clearCommands();
-
         if (pluginsDir.isDirectory()) {
             // Clear plugins and prepare to load
             pluginManager.clearPlugins();
