@@ -65,7 +65,7 @@ public class PoreCommandMap extends SimpleCommandMap {
 
         Object plugin = Pore.getInstance();
         if (command instanceof PluginCommand) {
-            plugin = ((PluginCommand) command).getPlugin();
+            plugin = Pore.getPlugin(((PluginCommand) command).getPlugin());
         }
 
         List<String> aliases = Lists.newArrayList(command.getAliases());
