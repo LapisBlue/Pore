@@ -1,11 +1,11 @@
-From eefb0a0c4cd37a75d22913313535b58f1b5ce5e9 Mon Sep 17 00:00:00 2001
+From 2a8c925d9e95887c6cc5aba972dd2b9470560a79 Mon Sep 17 00:00:00 2001
 From: Minecrell <dev@minecrell.net>
 Date: Thu, 14 May 2015 15:05:09 +0200
 Subject: [PATCH] Remove plugin prefixes and use normal logger instead
 
 
 diff --git a/src/main/java/org/bukkit/plugin/java/JavaPlugin.java b/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
-index c961b18..b008619 100644
+index c961b18..75e9f80 100644
 --- a/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
 +++ b/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
 @@ -56,7 +56,7 @@ public abstract class JavaPlugin extends PluginBase {
@@ -22,7 +22,7 @@ index c961b18..b008619 100644
          this.classLoader = classLoader;
          this.configFile = new File(dataFolder, "config.yml");
 -        this.logger = new PluginLogger(this);
-+        this.logger = Logger.getLogger(description.getName());
++        this.logger = Logger.getLogger("pore." + description.getName());
  
          if (description.isDatabaseEnabled()) {
              ServerConfig db = new ServerConfig();

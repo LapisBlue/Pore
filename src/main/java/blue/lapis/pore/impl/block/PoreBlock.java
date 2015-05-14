@@ -57,7 +57,7 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
         return WrapperConverter.of(PoreBlock.class, handle);
     }
 
-    private PoreBlock(Location handle) {
+    protected PoreBlock(Location handle) {
         super(handle);
     }
 

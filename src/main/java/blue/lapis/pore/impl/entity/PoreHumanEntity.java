@@ -261,7 +261,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public boolean isOp() {
-        throw new NotImplementedException("TODO"); //TODO
+        return hasPermission("pore.op");
     }
 
     @Override

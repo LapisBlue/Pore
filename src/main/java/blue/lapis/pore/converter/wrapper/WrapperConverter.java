@@ -29,6 +29,7 @@ import blue.lapis.pore.impl.PoreOfflinePlayer;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.impl.block.PoreBanner;
 import blue.lapis.pore.impl.block.PoreBeacon;
+import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.block.PoreBrewingStand;
 import blue.lapis.pore.impl.block.PoreChest;
 import blue.lapis.pore.impl.block.PoreCommandBlock;
@@ -238,6 +239,7 @@ import org.spongepowered.api.util.command.CommandSource;
 import org.spongepowered.api.util.command.source.CommandBlockSource;
 import org.spongepowered.api.util.command.source.ConsoleSource;
 import org.spongepowered.api.world.Chunk;
+import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
 public final class WrapperConverter {
@@ -370,6 +372,10 @@ public final class WrapperConverter {
             .register(Inventory.class, PoreInventory.class)
                 .register(HumanInventory.class, PorePlayerInventory.class)
             .register(Carrier.class, PoreInventoryHolder.class)
+
+            // Well, more or less...
+            .register(Location.class, PoreBlock.class)
+
             // @formatter:on
 
             .build();

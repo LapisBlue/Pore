@@ -29,6 +29,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.command.PoreCommandMap;
 import blue.lapis.pore.impl.command.PoreConsoleCommandSender;
 import blue.lapis.pore.impl.entity.PorePlayer;
+import blue.lapis.pore.impl.help.PoreHelpMap;
 import blue.lapis.pore.impl.scheduler.PoreBukkitScheduler;
 import blue.lapis.pore.impl.util.PoreCachedServerIcon;
 import blue.lapis.pore.util.PoreCollections;
@@ -106,6 +107,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     private final ServicesManager servicesManager;
     private final Messenger messenger = new StandardMessenger();
     private final Warning.WarningState warnState = Warning.WarningState.DEFAULT;
+    private final HelpMap helpMap = new PoreHelpMap();
     private final File pluginsDir = new File(".", "bukkit-plugins");
     //TODO: use actual server directory, currently set to working directory
 
@@ -641,7 +643,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public HelpMap getHelpMap() {
-        throw new NotImplementedException("TODO");
+        return helpMap;
     }
 
     @Override
