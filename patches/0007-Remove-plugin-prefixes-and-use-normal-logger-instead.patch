@@ -1,0 +1,31 @@
+From eefb0a0c4cd37a75d22913313535b58f1b5ce5e9 Mon Sep 17 00:00:00 2001
+From: Minecrell <dev@minecrell.net>
+Date: Thu, 14 May 2015 15:05:09 +0200
+Subject: [PATCH] Remove plugin prefixes and use normal logger instead
+
+
+diff --git a/src/main/java/org/bukkit/plugin/java/JavaPlugin.java b/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
+index c961b18..b008619 100644
+--- a/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
++++ b/src/main/java/org/bukkit/plugin/java/JavaPlugin.java
+@@ -56,7 +56,7 @@ public abstract class JavaPlugin extends PluginBase {
+     private EbeanServer ebean = null;
+     private FileConfiguration newConfig = null;
+     private File configFile = null;
+-    private PluginLogger logger = null;
++    private Logger logger = null;
+ 
+     public JavaPlugin() {
+         final ClassLoader classLoader = this.getClass().getClassLoader();
+@@ -351,7 +351,7 @@ public abstract class JavaPlugin extends PluginBase {
+         this.dataFolder = dataFolder;
+         this.classLoader = classLoader;
+         this.configFile = new File(dataFolder, "config.yml");
+-        this.logger = new PluginLogger(this);
++        this.logger = Logger.getLogger(description.getName());
+ 
+         if (description.isDatabaseEnabled()) {
+             ServerConfig db = new ServerConfig();
+-- 
+2.4.0
+
