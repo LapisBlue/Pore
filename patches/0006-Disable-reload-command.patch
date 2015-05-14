@@ -1,0 +1,22 @@
+From e158ceea4bdc0fe924cf325c6c44ef4314d04f0d Mon Sep 17 00:00:00 2001
+From: Minecrell <dev@minecrell.net>
+Date: Thu, 14 May 2015 12:30:12 +0200
+Subject: [PATCH] Disable reload command
+
+
+diff --git a/src/main/java/org/bukkit/command/SimpleCommandMap.java b/src/main/java/org/bukkit/command/SimpleCommandMap.java
+index a229d08..513485c 100644
+--- a/src/main/java/org/bukkit/command/SimpleCommandMap.java
++++ b/src/main/java/org/bukkit/command/SimpleCommandMap.java
+@@ -29,7 +29,7 @@ public class SimpleCommandMap implements CommandMap {
+ 
+     private void setDefaultCommands() {
+         register("bukkit", new VersionCommand("version"));
+-        register("bukkit", new ReloadCommand("reload"));
++        //register("bukkit", new ReloadCommand("reload"));
+         register("bukkit", new PluginsCommand("plugins"));
+         register("bukkit", new TimingsCommand("timings"));
+     }
+-- 
+2.4.0
+
