@@ -41,7 +41,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.extent.Extent;
 
+import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -113,6 +116,13 @@ public class WrapperConverterTest {
 
     private Object create() {
         Class<?> base = interfaces.get(0);
+
+        if (!base.isInterface() && Modifier.isFinal(base.getModifiers())) {
+            if (base == Location.class) {
+                return new Location(mock(Extent.class), 0, 0, 0);
+            }
+        }
+
         if (interfaces.size() == 1) {
             return mock(base);
         } else {
