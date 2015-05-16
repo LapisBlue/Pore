@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.impl.block;
 
+import blue.lapis.pore.converter.data.block.BlockDataConverter;
 import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.type.world.DirectionConverter;
@@ -63,20 +64,18 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public byte getData() {
-        // TODO return getHandle().getState().getDataValue();
-        throw new NotImplementedException("TODO");
+        return (byte)BlockDataConverter.INSTANCE.getDataValue(getHandle());
     }
 
     @Override
     public void setData(byte data) {
-        // TODO getHandle().replaceWith(getHandle().getState().getType().getStateFromDataValue(data));
-        throw new NotImplementedException("TODO");
+        setData(data, true);
     }
 
     @Override
     public void setData(byte data, boolean applyPhysics) {
-        throw new NotImplementedException("TODO"); //TODO: probably going to need some custom data mapping for
-        // BlockStates
+        BlockDataConverter.INSTANCE.setDataValue(getHandle(), data);
+        //TODO: applyPhysics
     }
 
     @Override

@@ -646,7 +646,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public boolean hasPlayedBefore() {
-        return get(JoinData.class).hasJoinedBefore();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

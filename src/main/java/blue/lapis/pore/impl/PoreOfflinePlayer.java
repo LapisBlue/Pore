@@ -115,7 +115,7 @@ public class PoreOfflinePlayer extends PoreWrapper<User> implements OfflinePlaye
 
     @Override
     public boolean hasPlayedBefore() {
-        return getHandle().getData(JoinData.class).get().hasJoinedBefore();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
