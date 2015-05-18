@@ -30,7 +30,7 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.TNTPrimed;
-import org.spongepowered.api.data.manipulators.entities.FuseData;
+import org.spongepowered.api.data.manipulator.entity.FuseData;
 import org.spongepowered.api.entity.explosive.PrimedTNT;
 
 public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {

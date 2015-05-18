@@ -30,7 +30,7 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.block.tile.MobSpawner;
+import org.spongepowered.api.block.tileentity.MobSpawner;
 
 public class PoreCreatureSpawner extends PoreBlockState implements CreatureSpawner {
 

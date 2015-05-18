@@ -28,7 +28,7 @@ import blue.lapis.pore.converter.type.entity.SkeletonConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulators.entities.SkeletonData;
+import org.spongepowered.api.data.manipulator.entity.SkeletonData;
 import org.spongepowered.api.entity.living.monster.Skeleton;
 
 public class PoreSkeleton extends PoreMonster implements org.bukkit.entity.Skeleton {

@@ -28,7 +28,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.Inventory;
-import org.spongepowered.api.block.tile.carrier.Dropper;
+import org.spongepowered.api.block.tileentity.carrier.Dropper;
 
 public class PoreDropper extends PoreBlockState implements org.bukkit.block.Dropper {
 

@@ -32,7 +32,7 @@ import blue.lapis.pore.impl.entity.PorePlayer;
 import org.bukkit.Achievement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerAchievementAwardedEvent;
-import org.spongepowered.api.event.stats.AchievementEvent;
+import org.spongepowered.api.event.statistic.AchievementEvent;
 
 public class PorePlayerAchievementAwardedEvent extends PlayerAchievementAwardedEvent {
 

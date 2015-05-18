@@ -28,8 +28,8 @@ import blue.lapis.pore.converter.type.entity.OcelotConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulators.entities.OcelotData;
-import org.spongepowered.api.data.manipulators.entities.SittingData;
+import org.spongepowered.api.data.manipulator.entity.OcelotData;
+import org.spongepowered.api.data.manipulator.entity.SittingData;
 import org.spongepowered.api.entity.living.animal.Ocelot;
 
 public class PoreOcelot extends PoreTameable implements org.bukkit.entity.Ocelot {

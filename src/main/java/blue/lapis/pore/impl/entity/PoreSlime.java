@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulators.entities.SlimeData;
+import org.spongepowered.api.data.manipulator.entity.SlimeData;
 import org.spongepowered.api.entity.living.monster.Slime;
 
 public class PoreSlime extends PoreLivingEntity implements org.bukkit.entity.Slime {

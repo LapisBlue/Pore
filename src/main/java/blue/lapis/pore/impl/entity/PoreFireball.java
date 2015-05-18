@@ -30,7 +30,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.data.manipulators.entities.ExplosiveRadiusData;
+import org.spongepowered.api.data.manipulator.entity.ExplosiveRadiusData;
 import org.spongepowered.api.entity.projectile.explosive.ExplosiveProjectile;
 
 public class PoreFireball extends PoreProjectile implements org.bukkit.entity.Fireball {

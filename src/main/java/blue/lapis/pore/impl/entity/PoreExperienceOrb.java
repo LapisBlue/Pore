@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulators.entities.ExperienceHolderData;
+import org.spongepowered.api.data.manipulator.entity.ExperienceHolderData;
 import org.spongepowered.api.entity.ExperienceOrb;
 
 public class PoreExperienceOrb extends PoreEntity implements org.bukkit.entity.ExperienceOrb {

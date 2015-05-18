@@ -32,7 +32,7 @@ import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.block.BlockTypes;
-import org.spongepowered.api.data.manipulators.SingleValueData;
+import org.spongepowered.api.data.manipulator.SingleValueData;
 import org.spongepowered.api.world.Location;
 
 import java.util.Map;
@@ -50,7 +50,7 @@ public class BlockDataConverter implements DataConverter<Location> {
     }
 
     //TODO: this method is slightly horrific
-    @Override
+    @Override @SuppressWarnings("rawtypes")
     public short getDataValue(Location target) {
         Optional<SingleValueData> data = getDataObject(target);
         if (!data.isPresent()) {
@@ -77,6 +77,7 @@ public class BlockDataConverter implements DataConverter<Location> {
         data.setValue(value.get());
     }
 
+    @SuppressWarnings("rawtypes")
     private DataTypeConverter getConverter(Location target) {
         if (!CONVERTERS.containsKey(target.getType())) {
             throw new IllegalArgumentException("Cannot convert data for block type " + target.getType().getName());

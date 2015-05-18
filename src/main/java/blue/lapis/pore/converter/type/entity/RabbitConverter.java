@@ -28,8 +28,8 @@ import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
 import org.bukkit.entity.Rabbit;
-import org.spongepowered.api.data.types.RabbitType;
-import org.spongepowered.api.data.types.RabbitTypes;
+import org.spongepowered.api.data.type.RabbitType;
+import org.spongepowered.api.data.type.RabbitTypes;
 
 public final class RabbitConverter {
 

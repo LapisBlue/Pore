@@ -52,13 +52,13 @@ public class PorePlayerQuitEvent extends org.bukkit.event.player.PlayerQuitEvent
 
     @Override
     public String getQuitMessage() {
-        return Texts.toLegacy(handle.getQuitMessage());
+        return Texts.toLegacy(handle.getNewMessage());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setQuitMessage(String quitMessage) {
-        handle.setQuitMessage(Texts.fromLegacy(quitMessage));
+        handle.setNewMessage(Texts.fromLegacy(quitMessage));
     }
 
 }

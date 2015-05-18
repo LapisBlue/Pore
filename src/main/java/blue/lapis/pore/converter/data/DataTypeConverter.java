@@ -25,7 +25,7 @@
 package blue.lapis.pore.converter.data;
 
 import com.google.common.base.Optional;
-import org.spongepowered.api.data.manipulators.SingleValueData;
+import org.spongepowered.api.data.manipulator.SingleValueData;
 
 public interface DataTypeConverter<T extends SingleValueData<V, T>, V> {
 

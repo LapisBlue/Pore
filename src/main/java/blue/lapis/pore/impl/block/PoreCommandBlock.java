@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.block;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang3.NotImplementedException;
-import org.spongepowered.api.block.tile.CommandBlock;
+import org.spongepowered.api.block.tileentity.CommandBlock;
 
 public class PoreCommandBlock extends PoreBlockState implements org.bukkit.block.CommandBlock {
 

@@ -29,7 +29,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.BlockFace;
-import org.spongepowered.api.data.manipulators.blocks.DirectionalData;
+import org.spongepowered.api.data.manipulator.block.DirectionalData;
 import org.spongepowered.api.entity.hanging.Hanging;
 
 public class PoreHanging extends PoreEntity implements org.bukkit.entity.Hanging {

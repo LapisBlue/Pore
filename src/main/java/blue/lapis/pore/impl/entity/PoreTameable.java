@@ -28,7 +28,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Creature;
-import org.spongepowered.api.data.manipulators.entities.TameableData;
+import org.spongepowered.api.data.manipulator.entity.TameableData;
 import org.spongepowered.api.entity.living.animal.Animal;
 
 public class PoreTameable extends PoreAnimals implements org.bukkit.entity.Tameable, Creature {

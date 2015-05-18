@@ -28,7 +28,7 @@ import blue.lapis.pore.converter.type.entity.RabbitConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulators.entities.RabbitData;
+import org.spongepowered.api.data.manipulator.entity.RabbitData;
 import org.spongepowered.api.entity.living.animal.Rabbit;
 
 public class PoreRabbit extends PoreAnimals implements org.bukkit.entity.Rabbit {

@@ -30,7 +30,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.HorseInventory;
-import org.spongepowered.api.data.manipulators.entities.HorseData;
+import org.spongepowered.api.data.manipulator.entity.HorseData;
 import org.spongepowered.api.entity.living.animal.Horse;
 
 public class PoreHorse extends PoreTameable implements org.bukkit.entity.Horse {

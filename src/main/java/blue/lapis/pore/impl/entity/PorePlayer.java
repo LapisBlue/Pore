@@ -57,24 +57,24 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
 import org.spongepowered.api.block.BlockTypes;
-import org.spongepowered.api.data.manipulators.DisplayNameData;
-import org.spongepowered.api.data.manipulators.entities.AchievementData;
-import org.spongepowered.api.data.manipulators.entities.ExperienceHolderData;
-import org.spongepowered.api.data.manipulators.entities.FlyingData;
-import org.spongepowered.api.data.manipulators.entities.FoodData;
-import org.spongepowered.api.data.manipulators.entities.InvisibilityData;
-import org.spongepowered.api.data.manipulators.entities.JoinData;
-import org.spongepowered.api.data.manipulators.entities.RespawnLocationData;
-import org.spongepowered.api.data.manipulators.entities.SneakingData;
-import org.spongepowered.api.data.manipulators.entities.StatisticData;
-import org.spongepowered.api.data.manipulators.entities.WhitelistData;
+import org.spongepowered.api.data.manipulator.DisplayNameData;
+import org.spongepowered.api.data.manipulator.entity.AchievementData;
+import org.spongepowered.api.data.manipulator.entity.ExperienceHolderData;
+import org.spongepowered.api.data.manipulator.entity.FlyingData;
+import org.spongepowered.api.data.manipulator.entity.FoodData;
+import org.spongepowered.api.data.manipulator.entity.InvisibilityData;
+import org.spongepowered.api.data.manipulator.entity.JoinData;
+import org.spongepowered.api.data.manipulator.entity.RespawnLocationData;
+import org.spongepowered.api.data.manipulator.entity.SneakingData;
+import org.spongepowered.api.data.manipulator.entity.StatisticData;
+import org.spongepowered.api.data.manipulator.entity.WhitelistData;
 import org.spongepowered.api.effect.sound.SoundType;
 import org.spongepowered.api.entity.player.Player;
 import org.spongepowered.api.entity.player.tab.PlayerTabInfo;
 import org.spongepowered.api.resourcepack.ResourcePacks;
-import org.spongepowered.api.stats.BlockStatistic;
-import org.spongepowered.api.stats.EntityStatistic;
-import org.spongepowered.api.stats.StatisticGroup;
+import org.spongepowered.api.statistic.BlockStatistic;
+import org.spongepowered.api.statistic.EntityStatistic;
+import org.spongepowered.api.statistic.StatisticGroup;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
 
@@ -313,7 +313,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void removeAchievement(Achievement achievement) { //TODO: no idea whether this is right
-        List<org.spongepowered.api.stats.achievement.Achievement> list = get(AchievementData.class).getAll();
+        List<org.spongepowered.api.statistic.achievement.Achievement> list = get(AchievementData.class).getAll();
         if (list.contains(AchievementConverter.of(achievement))) {
             for (int i = 0; i < list.size(); i++) {
                 if (get(AchievementData.class).get(i).get() == AchievementConverter.of(achievement)) {

@@ -29,8 +29,8 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulators.DyeableData;
-import org.spongepowered.api.data.manipulators.entities.ShearedData;
+import org.spongepowered.api.data.manipulator.DyeableData;
+import org.spongepowered.api.data.manipulator.entity.ShearedData;
 import org.spongepowered.api.entity.living.animal.Sheep;
 
 public class PoreSheep extends PoreAnimals implements org.bukkit.entity.Sheep {

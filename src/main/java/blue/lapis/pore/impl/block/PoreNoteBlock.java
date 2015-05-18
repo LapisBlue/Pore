@@ -29,7 +29,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Instrument;
 import org.bukkit.block.NoteBlock;
-import org.spongepowered.api.block.tile.Note;
+import org.spongepowered.api.block.tileentity.Note;
 
 public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
 

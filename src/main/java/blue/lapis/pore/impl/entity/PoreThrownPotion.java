@@ -31,7 +31,7 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
-import org.spongepowered.api.data.manipulators.RepresentedItemData;
+import org.spongepowered.api.data.manipulator.RepresentedItemData;
 import org.spongepowered.api.entity.projectile.ThrownPotion;
 
 import java.util.Collection;

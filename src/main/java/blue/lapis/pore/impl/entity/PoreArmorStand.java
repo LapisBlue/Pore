@@ -31,8 +31,8 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
-import org.spongepowered.api.data.manipulators.entities.BodyPartRotationalData;
-import org.spongepowered.api.data.manipulators.entities.InvisibilityData;
+import org.spongepowered.api.data.manipulator.entity.BodyPartRotationalData;
+import org.spongepowered.api.data.manipulator.entity.InvisibilityData;
 import org.spongepowered.api.entity.living.ArmorStand;
 
 public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entity.ArmorStand {

@@ -30,7 +30,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import com.google.common.collect.Iterables;
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulators.entities.CareerData;
+import org.spongepowered.api.data.manipulator.entity.CareerData;
 import org.spongepowered.api.entity.living.Villager;
 
 public class PoreVillager extends PoreAgeable implements org.bukkit.entity.Villager {

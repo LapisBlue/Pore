@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulators.blocks.PoweredData;
+import org.spongepowered.api.data.manipulator.block.PoweredData;
 import org.spongepowered.api.entity.living.monster.Creeper;
 
 public class PoreCreeper extends PoreMonster implements org.bukkit.entity.Creeper {

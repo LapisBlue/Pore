@@ -28,7 +28,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.FurnaceInventory;
-import org.spongepowered.api.block.tile.carrier.Furnace;
+import org.spongepowered.api.block.tileentity.carrier.Furnace;
 
 public class PoreFurnace extends PoreBlockState implements org.bukkit.block.Furnace {
 

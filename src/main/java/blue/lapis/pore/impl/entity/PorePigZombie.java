@@ -28,7 +28,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.PigZombie;
-import org.spongepowered.api.data.manipulators.entities.AngerableData;
+import org.spongepowered.api.data.manipulator.entity.AngerableData;
 import org.spongepowered.api.entity.living.monster.ZombiePigman;
 
 public class PorePigZombie extends PoreZombie implements PigZombie {

@@ -31,8 +31,8 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.bukkit.Rotation;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.data.manipulators.RepresentedItemData;
-import org.spongepowered.api.data.manipulators.RotationalData;
+import org.spongepowered.api.data.manipulator.RepresentedItemData;
+import org.spongepowered.api.data.manipulator.RotationalData;
 import org.spongepowered.api.entity.hanging.ItemFrame;
 
 public class PoreItemFrame extends PoreHanging implements org.bukkit.entity.ItemFrame {

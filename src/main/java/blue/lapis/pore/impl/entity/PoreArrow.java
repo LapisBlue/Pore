@@ -28,8 +28,8 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulators.entities.CriticalHitData;
-import org.spongepowered.api.data.manipulators.entities.KnockbackData;
+import org.spongepowered.api.data.manipulator.entity.CriticalHitData;
+import org.spongepowered.api.data.manipulator.entity.KnockbackData;
 import org.spongepowered.api.entity.projectile.Arrow;
 
 public class PoreArrow extends PoreProjectile implements org.bukkit.entity.Arrow {

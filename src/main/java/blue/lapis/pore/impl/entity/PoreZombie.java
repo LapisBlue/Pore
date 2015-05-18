@@ -27,8 +27,8 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulators.entities.AgeableData;
-import org.spongepowered.api.data.manipulators.entities.VillagerZombieData;
+import org.spongepowered.api.data.manipulator.entity.AgeableData;
+import org.spongepowered.api.data.manipulator.entity.VillagerZombieData;
 import org.spongepowered.api.entity.living.monster.Zombie;
 
 public class PoreZombie extends PoreMonster implements org.bukkit.entity.Zombie {

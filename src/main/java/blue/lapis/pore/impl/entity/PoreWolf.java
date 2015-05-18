@@ -30,8 +30,8 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulators.DyeableData;
-import org.spongepowered.api.data.manipulators.entities.SittingData;
+import org.spongepowered.api.data.manipulator.DyeableData;
+import org.spongepowered.api.data.manipulator.entity.SittingData;
 import org.spongepowered.api.entity.living.animal.Wolf;
 
 public class PoreWolf extends PoreTameable implements org.bukkit.entity.Wolf {

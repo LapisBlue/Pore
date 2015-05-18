@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRegisterChannelEvent;
-import org.spongepowered.api.event.net.PlayerConnectionRegisterChannelEvent;
+import org.spongepowered.api.event.network.PlayerConnectionRegisterChannelEvent;
 
 public class PorePlayerRegisterChannelEvent extends PlayerRegisterChannelEvent {
 

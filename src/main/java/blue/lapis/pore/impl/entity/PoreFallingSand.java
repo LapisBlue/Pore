@@ -31,7 +31,7 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingSand;
-import org.spongepowered.api.data.manipulators.entities.FallingBlockData;
+import org.spongepowered.api.data.manipulator.entity.FallingBlockData;
 import org.spongepowered.api.entity.FallingBlock;
 
 public class PoreFallingSand extends PoreEntity implements FallingSand {

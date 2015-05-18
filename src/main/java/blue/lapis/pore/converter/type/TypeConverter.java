@@ -93,6 +93,7 @@ public final class TypeConverter<B, S> extends Converter<B, S> {
             return new TypeConverter<B, S>(create(bukkit, registry), create(sponge, registry.inverse()));
         }
 
+        @SuppressWarnings({"unchecked", "rawtypes"})
         private static <K, V> ImmutableMap<K, V> create(Class<K> keyType, Map<K, V> input) {
             if (keyType.isEnum()) {
                 return Maps.immutableEnumMap((Map) input);

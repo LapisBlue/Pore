@@ -29,7 +29,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.projectiles.BlockProjectileSource;
-import org.spongepowered.api.block.tile.carrier.Dispenser;
+import org.spongepowered.api.block.tileentity.carrier.Dispenser;
 
 public class PoreDispenser extends PoreBlockState implements org.bukkit.block.Dispenser {
 

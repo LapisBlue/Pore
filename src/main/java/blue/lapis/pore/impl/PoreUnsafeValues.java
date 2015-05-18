@@ -40,7 +40,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.StringUtil;
 import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.item.ItemType;
-import org.spongepowered.api.stats.achievement.Achievement;
+import org.spongepowered.api.statistic.achievement.Achievement;
 
 import java.util.List;
 
@@ -93,8 +93,8 @@ public class PoreUnsafeValues implements UnsafeValues {
     public Statistic getStatisticFromInternalName(String name) {
         //TODO: maybe search block and entity stats too if they're not encompassed
         //TODO is this right?
-        Optional<org.spongepowered.api.stats.Statistic> stat =
-                Pore.getGame().getRegistry().getType(org.spongepowered.api.stats.Statistic.class, name);
+        Optional<org.spongepowered.api.statistic.Statistic> stat =
+                Pore.getGame().getRegistry().getType(org.spongepowered.api.statistic.Statistic.class, name);
         if (stat.isPresent()) {
             return StatisticConverter.of(stat.get());
         } else {
@@ -127,10 +127,10 @@ public class PoreUnsafeValues implements UnsafeValues {
         );
         found.addAll(StringUtil.copyPartialMatches(
                 token,
-                Iterables.transform(Pore.getGame().getRegistry().getAllOf(org.spongepowered.api.stats.Statistic.class),
-                        new Function<org.spongepowered.api.stats.Statistic, String>() {
+                Iterables.transform(Pore.getGame().getRegistry().getAllOf(org.spongepowered.api.statistic.Statistic.class),
+                        new Function<org.spongepowered.api.statistic.Statistic, String>() {
                             @Override
-                            public String apply(final org.spongepowered.api.stats.Statistic input) {
+                            public String apply(final org.spongepowered.api.statistic.Statistic input) {
                                 return input.getName();
                             }
                         }), //TODO is this right?

@@ -28,15 +28,15 @@ import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
 import org.bukkit.Achievement;
-import org.spongepowered.api.stats.achievement.Achievements;
+import org.spongepowered.api.statistic.achievement.Achievements;
 
 public final class AchievementConverter {
 
     private AchievementConverter() {
     }
 
-    private static final Converter<Achievement, org.spongepowered.api.stats.achievement.Achievement> CONVERTER =
-            TypeConverter.builder(Achievement.class, org.spongepowered.api.stats.achievement.Achievement.class)
+    private static final Converter<Achievement, org.spongepowered.api.statistic.achievement.Achievement> CONVERTER =
+            TypeConverter.builder(Achievement.class, org.spongepowered.api.statistic.achievement.Achievement.class)
                     .add(Achievement.OPEN_INVENTORY, Achievements.OPEN_INVENTORY)
                     .add(Achievement.MINE_WOOD, Achievements.MINE_WOOD)
                     .add(Achievement.BUILD_WORKBENCH, Achievements.BUILD_WORKBENCH)
@@ -73,11 +73,11 @@ public final class AchievementConverter {
                     .add(Achievement.OVERPOWERED, Achievements.OVERPOWERED)
                     .build();
 
-    public static org.spongepowered.api.stats.achievement.Achievement of(Achievement achievement) {
+    public static org.spongepowered.api.statistic.achievement.Achievement of(Achievement achievement) {
         return CONVERTER.convert(achievement);
     }
 
-    public static Achievement of(org.spongepowered.api.stats.achievement.Achievement achievement) {
+    public static Achievement of(org.spongepowered.api.statistic.achievement.Achievement achievement) {
         return CONVERTER.reverse().convert(achievement);
     }
 

@@ -34,9 +34,9 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.spongepowered.api.data.manipulators.entities.JoinData;
-import org.spongepowered.api.data.manipulators.entities.RespawnLocationData;
-import org.spongepowered.api.data.manipulators.entities.WhitelistData;
+import org.spongepowered.api.data.manipulator.entity.JoinData;
+import org.spongepowered.api.data.manipulator.entity.RespawnLocationData;
+import org.spongepowered.api.data.manipulator.entity.WhitelistData;
 import org.spongepowered.api.entity.player.User;
 
 import java.util.Map;

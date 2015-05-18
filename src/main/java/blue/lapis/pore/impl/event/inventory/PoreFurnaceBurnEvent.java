@@ -30,7 +30,7 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.event.block.tile.FurnaceConsumeFuelEvent;
+import org.spongepowered.api.event.block.tileentity.FurnaceConsumeFuelEvent;
 
 public class PoreFurnaceBurnEvent extends FurnaceBurnEvent {
 

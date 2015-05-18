@@ -31,9 +31,11 @@ import blue.lapis.pore.impl.entity.PorePlayer;
 
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.spongepowered.api.event.block.tile.SignChangeEvent;
+import org.spongepowered.api.event.block.tileentity.SignChangeEvent;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
+
+import java.util.List;
 
 public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent {
 
@@ -63,10 +65,10 @@ public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent 
     @Override
     @SuppressWarnings("deprecation")
     public String[] getLines() {
-        Text[] lines = getHandle().getNewLines();
-        String[] result = new String[lines.length];
-        for (int i = 0; i < lines.length; i++) {
-            result[i] = Texts.toLegacy(lines[i]);
+        List<Text> lines = getHandle().getNewData().getLines();
+        String[] result = new String[lines.size()];
+        for (int i = 0; i < lines.size(); i++) {
+            result[i] = Texts.toLegacy(lines.get(i));
         }
         return result;
     }
@@ -74,15 +76,13 @@ public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent 
     @Override
     @SuppressWarnings("deprecation")
     public String getLine(int index) throws IndexOutOfBoundsException {
-        return Texts.toLegacy(getHandle().getNewLines()[index]);
+        return Texts.toLegacy(getHandle().getNewData().getLine(index));
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setLine(int index, String line) throws IndexOutOfBoundsException {
-        Text[] lines = getHandle().getNewLines();
-        lines[index] = Texts.fromLegacy(line);
-        getHandle().setNewMessages(lines);
+        getHandle().setNewData(getHandle().getNewData().setLine(index, Texts.fromLegacy(line)));
     }
 
     @Override

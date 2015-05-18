@@ -28,8 +28,8 @@ import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
 import org.bukkit.entity.Ocelot;
-import org.spongepowered.api.data.types.OcelotType;
-import org.spongepowered.api.data.types.OcelotTypes;
+import org.spongepowered.api.data.type.OcelotType;
+import org.spongepowered.api.data.type.OcelotTypes;
 
 public final class OcelotConverter {
 

@@ -28,15 +28,15 @@ import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
 import org.bukkit.DyeColor;
-import org.spongepowered.api.data.types.DyeColors;
+import org.spongepowered.api.data.type.DyeColors;
 
 public final class DyeColorConverter {
 
     private DyeColorConverter() {
     }
 
-    private static final Converter<DyeColor, org.spongepowered.api.data.types.DyeColor> CONVERTER =
-            TypeConverter.builder(DyeColor.class, org.spongepowered.api.data.types.DyeColor.class)
+    private static final Converter<DyeColor, org.spongepowered.api.data.type.DyeColor> CONVERTER =
+            TypeConverter.builder(DyeColor.class, org.spongepowered.api.data.type.DyeColor.class)
                     .add(DyeColor.BLACK, DyeColors.BLACK)
                     .add(DyeColor.BLUE, DyeColors.BLUE)
                     .add(DyeColor.BROWN, DyeColors.BROWN)
@@ -55,11 +55,11 @@ public final class DyeColorConverter {
                     .add(DyeColor.YELLOW, DyeColors.YELLOW)
                     .build();
 
-    public static org.spongepowered.api.data.types.DyeColor of(DyeColor color) {
+    public static org.spongepowered.api.data.type.DyeColor of(DyeColor color) {
         return CONVERTER.convert(color);
     }
 
-    public static DyeColor of(org.spongepowered.api.data.types.DyeColor color) {
+    public static DyeColor of(org.spongepowered.api.data.type.DyeColor color) {
         return CONVERTER.reverse().convert(color);
     }
 

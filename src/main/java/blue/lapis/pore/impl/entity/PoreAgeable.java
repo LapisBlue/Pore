@@ -27,8 +27,8 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang3.NotImplementedException;
-import org.spongepowered.api.data.manipulators.entities.AgeableData;
-import org.spongepowered.api.data.manipulators.entities.BreedableData;
+import org.spongepowered.api.data.manipulator.entity.AgeableData;
+import org.spongepowered.api.data.manipulator.entity.BreedableData;
 import org.spongepowered.api.entity.living.Ageable;
 
 public class PoreAgeable extends PoreCreature implements org.bukkit.entity.Ageable {

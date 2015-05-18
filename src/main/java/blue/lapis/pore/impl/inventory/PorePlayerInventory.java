@@ -41,7 +41,7 @@ import org.spongepowered.api.item.inventory.Slot;
 import org.spongepowered.api.item.inventory.entity.Hotbar;
 import org.spongepowered.api.item.inventory.entity.HumanInventory;
 import org.spongepowered.api.item.inventory.equipment.EquipmentTypes;
-import org.spongepowered.api.item.inventory.properties.SlotIndex;
+import org.spongepowered.api.item.inventory.property.SlotIndex;
 
 public class PorePlayerInventory extends PoreInventory implements PlayerInventory {
 

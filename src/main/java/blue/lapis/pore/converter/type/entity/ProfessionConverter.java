@@ -28,8 +28,8 @@ import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
 import org.bukkit.entity.Villager;
-import org.spongepowered.api.data.types.Profession;
-import org.spongepowered.api.data.types.Professions;
+import org.spongepowered.api.data.type.Profession;
+import org.spongepowered.api.data.type.Professions;
 
 public final class ProfessionConverter {
 

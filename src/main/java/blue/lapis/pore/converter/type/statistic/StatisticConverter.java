@@ -28,16 +28,16 @@ import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
 import org.bukkit.Statistic;
-import org.spongepowered.api.stats.StatisticGroups;
-import org.spongepowered.api.stats.Statistics;
+import org.spongepowered.api.statistic.StatisticGroups;
+import org.spongepowered.api.statistic.Statistics;
 
 public final class StatisticConverter {
 
     private StatisticConverter() {
     }
 
-    public static final Converter<Statistic, org.spongepowered.api.stats.Statistic> STD_CONVERTER =
-            TypeConverter.builder(Statistic.class, org.spongepowered.api.stats.Statistic.class)
+    public static final Converter<Statistic, org.spongepowered.api.statistic.Statistic> STD_CONVERTER =
+            TypeConverter.builder(Statistic.class, org.spongepowered.api.statistic.Statistic.class)
                     .add(Statistic.ANIMALS_BRED, Statistics.ANIMALS_BRED)
                     .add(Statistic.ARMOR_CLEANED, Statistics.ARMOR_CLEANED)
                     .add(Statistic.BANNER_CLEANED, Statistics.BANNER_CLEANED)
@@ -88,8 +88,8 @@ public final class StatisticConverter {
                     .add(Statistic.WALK_ONE_CM, Statistics.WALK_DISTANCE)
                     .build();
 
-    public static final Converter<Statistic, org.spongepowered.api.stats.StatisticGroup> GROUP_CONVERTER =
-            TypeConverter.builder(Statistic.class, org.spongepowered.api.stats.StatisticGroup.class)
+    public static final Converter<Statistic, org.spongepowered.api.statistic.StatisticGroup> GROUP_CONVERTER =
+            TypeConverter.builder(Statistic.class, org.spongepowered.api.statistic.StatisticGroup.class)
                     .add(Statistic.BREAK_ITEM, StatisticGroups.BREAK_ITEM)
                     .add(Statistic.CRAFT_ITEM, StatisticGroups.CRAFT_ITEM)
                     .add(Statistic.ENTITY_KILLED_BY, StatisticGroups.KILLED_BY_ENTITY)
@@ -98,19 +98,19 @@ public final class StatisticConverter {
                     .add(Statistic.USE_ITEM, StatisticGroups.USE_ITEM)
                     .build();
 
-    public static org.spongepowered.api.stats.Statistic asStdStat(Statistic statistic) {
+    public static org.spongepowered.api.statistic.Statistic asStdStat(Statistic statistic) {
         return STD_CONVERTER.convert(statistic);
     }
 
-    public static org.spongepowered.api.stats.StatisticGroup asGroupStat(Statistic statistic) {
+    public static org.spongepowered.api.statistic.StatisticGroup asGroupStat(Statistic statistic) {
         return GROUP_CONVERTER.convert(statistic);
     }
 
-    public static Statistic of(org.spongepowered.api.stats.Statistic statistic) {
+    public static Statistic of(org.spongepowered.api.statistic.Statistic statistic) {
         return STD_CONVERTER.reverse().convert(statistic);
     }
 
-    public static Statistic of(org.spongepowered.api.stats.StatisticGroup statistic) {
+    public static Statistic of(org.spongepowered.api.statistic.StatisticGroup statistic) {
         return GROUP_CONVERTER.reverse().convert(statistic);
     }
 }

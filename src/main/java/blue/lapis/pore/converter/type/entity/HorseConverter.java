@@ -28,12 +28,12 @@ import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
 import org.bukkit.entity.Horse;
-import org.spongepowered.api.data.types.HorseColor;
-import org.spongepowered.api.data.types.HorseColors;
-import org.spongepowered.api.data.types.HorseStyle;
-import org.spongepowered.api.data.types.HorseStyles;
-import org.spongepowered.api.data.types.HorseVariant;
-import org.spongepowered.api.data.types.HorseVariants;
+import org.spongepowered.api.data.type.HorseColor;
+import org.spongepowered.api.data.type.HorseColors;
+import org.spongepowered.api.data.type.HorseStyle;
+import org.spongepowered.api.data.type.HorseStyles;
+import org.spongepowered.api.data.type.HorseVariant;
+import org.spongepowered.api.data.type.HorseVariants;
 
 public final class HorseConverter {
 

@@ -42,10 +42,10 @@ import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.Slot;
 import org.spongepowered.api.item.inventory.crafting.CraftingInventory;
 import org.spongepowered.api.item.inventory.entity.HumanInventory;
-import org.spongepowered.api.item.inventory.properties.SlotIndex;
-import org.spongepowered.api.item.inventory.types.CarriedInventory;
-import org.spongepowered.api.item.inventory.types.GridInventory;
-import org.spongepowered.api.item.inventory.types.OrderedInventory;
+import org.spongepowered.api.item.inventory.property.SlotIndex;
+import org.spongepowered.api.item.inventory.type.CarriedInventory;
+import org.spongepowered.api.item.inventory.type.GridInventory;
+import org.spongepowered.api.item.inventory.type.OrderedInventory;
 
 import java.util.HashMap;
 import java.util.List;

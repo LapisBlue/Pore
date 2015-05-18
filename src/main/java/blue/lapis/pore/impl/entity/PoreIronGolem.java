@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulators.entities.PlayerCreatedData;
+import org.spongepowered.api.data.manipulator.entity.PlayerCreatedData;
 import org.spongepowered.api.entity.living.golem.IronGolem;
 
 public class PoreIronGolem extends PoreGolem implements org.bukkit.entity.IronGolem {
