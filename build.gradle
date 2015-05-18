@@ -21,7 +21,7 @@ plugins {
 // Remapper is not available in the Gradle plugins repository so we need to use the old syntax for that
 apply plugin: 'net.glowstone.remapper'
 
-defaultTasks 'clean', 'licenseFormat', 'build', 'remap'
+defaultTasks 'clean', 'licenseFormat', 'build'
 
 // Project information
 group = 'blue.lapis.pore'
@@ -99,6 +99,8 @@ remap {
     inputTask = shadowJar
     outputFilename = jar.archiveName
 }
+
+assemble.dependsOn remap
 
 jar { // The Pore classes will be created in Pore-VERSION-base.jar first
     classifier = 'base'
