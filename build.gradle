@@ -143,7 +143,7 @@ checkstyle {
             'basedir': project.projectDir,
             'severity': 'warning'
     ]
-    configFile = file('checkstyle.xml')
+    configFile = file('etc/checkstyle.xml')
 }
 
 task wrapper(type: Wrapper) {

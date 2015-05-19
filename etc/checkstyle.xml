@@ -236,7 +236,7 @@
 
     <module name="NewlineAtEndOfFile"/>
     <module name="SuppressionFilter">
-        <property name="file" value="${basedir}/checkstyle-suppressions.xml"/>
+        <property name="file" value="${basedir}/etc/checkstyle-suppressions.xml"/>
     </module>
 
     <property name="basedir" value="${basedir}"/>
