@@ -1,12 +1,12 @@
 buildscript {
     repositories {
         maven {
-            name = 'minecrell'
-            url = 'http://repo.minecrell.net/snapshots'
+            name = 'lapis'
+            url = 'http://repo.lapis.blue/snapshots'
         }
     }
     dependencies {
-        classpath 'net.minecrell.pore:poregradle:1.0-SNAPSHOT'
+        classpath 'blue.lapis.pore:poregradle:1.0-SNAPSHOT'
     }
 }
 
@@ -21,7 +21,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '1.2.1'
 }
 
-apply plugin: 'net.minecrell.pore'
+apply plugin: 'blue.lapis.pore'
 
 defaultTasks 'clean', 'licenseFormat', 'build'
 
@@ -40,8 +40,8 @@ repositories {
         url = 'http://repo.spongepowered.org/maven'
     }
     maven {
-        name = 'minecrell'
-        url = 'http://repo.minecrell.net/snapshots'
+        name = 'lapis'
+        url = 'http://repo.lapis.blue/snapshots'
     }
 }
 
@@ -67,7 +67,7 @@ dependencies {
     // To update, go to https://repo.spongepowered.org/maven/org/spongepowered/spongeapi/2.1-SNAPSHOT/
     // Then pick latest version (or whatever version you want)
     compile 'org.spongepowered:spongeapi:2.1-20150518.024812-71'
-    runtime 'net.minecrell.pore:tweaker:1.0-SNAPSHOT'
+    runtime 'blue.lapis.pore:tweaker:1.0-SNAPSHOT'
 
     shadow project('Porekit')
     shadowRuntime 'mysql:mysql-connector-java:5.1.35'
