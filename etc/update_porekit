@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# JDK to publish the repo with
+jdk=${1:-openjdk6}
+
+# Ensure all commands complete successfully
+set -e
+
+# Make sure we're running the right Travis JDK version
+[[ -z "$TRAVIS_JDK_VERSION" ||  "$TRAVIS_JDK_VERSION" = "$jdk" ]]
+[[ "$TRAVIS_BRANCH" = "master" ]]
+
+echo "Updating Porekit..."
+
+# Initialize the ssh-agent so we can use Git later for deploying
+eval $(ssh-agent)
+# Set up our Git environment
+$DEPLOY_ROOT/setup_git
+
+root=$PWD
+
+push() {
+    cd $root/$1
+    git remote add porekit git@github.com:LapisBlue/Porekit.git
+    git checkout -B $2
+    git push -f porekit $2
+}
+
+push lib/Bukkit spigot
+push Porekit master
+
+# Kill the ssh-agent because we're done with deploying
+eval $(ssh-agent -k)
+
+echo "Done! Successfully updated Porekit! :)"
