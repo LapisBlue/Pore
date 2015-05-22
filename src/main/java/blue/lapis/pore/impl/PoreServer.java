@@ -204,12 +204,12 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public String getVersion() {
-        return PoreVersion.VERSION + '@' + game.getImplementationVersion();
+        return PoreVersion.VERSION + '@' + game.getPlatform().getVersion();
     }
 
     @Override
     public String getBukkitVersion() {
-        return PoreVersion.API_VERSION + '@' + game.getApiVersion();
+        return PoreVersion.API_VERSION + '@' + game.getPlatform().getApiVersion();
     }
 
     @Override
