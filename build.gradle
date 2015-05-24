@@ -17,6 +17,8 @@ plugins {
     id 'idea'
     id 'checkstyle'
 
+    id 'net.minecrell.gitpatcher' version '0.5.1'
+
     id 'com.github.hierynomus.license' version '0.11.0'
     id 'com.github.johnrengelman.shadow' version '1.2.1'
 }
@@ -45,8 +47,16 @@ repositories {
     }
 }
 
+patches {
+    submodule = 'lib/Bukkit'
+    target = file('Porekit')
+    patches = file('patches')
+}
+
 project('Porekit') {
     apply from: rootProject.file('bukkit.gradle')
+
+    compileJava.dependsOn rootProject.tasks.applyPatches
 }
 
 configurations {

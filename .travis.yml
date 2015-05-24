@@ -10,16 +10,13 @@ jdk:
 before_install:
   - git config --global user.name "Lapislazuli"
   - git config --global user.email "lapislazuli@lapis.blue"
-install:
-  - ./poredev update
-  - ./gradlew assemble
 
 env:
   global:
     - LAPIS_DEPLOY=https://github.com/LapisBlue/Deploy.git DEPLOY_ROOT=/tmp/lapis/deploy
     - secure: "zjPKbHmJf/XmRRdfsfCVSwXA0V6nzuqGwZeEi95UVTBuGANklLh47k2ChuX94E9sx9ZoaGcJoiruAEZ0Bke2iObLP/n1uzZvf+rWBBfkx4Q0D1s19hq7NraKUOWfvD+CC9b9MBfulYFaXek56udbE7HZsLQgOryogm4D68vg+oE="
 
-after_success: git clone $LAPIS_DEPLOY $DEPLOY_ROOT && ./etc/update_porekit
+after_success: ./etc/update_porekit
 
 notifications:
   email: false

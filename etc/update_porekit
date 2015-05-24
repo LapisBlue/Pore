@@ -10,6 +10,8 @@ set -e
 [[ -z "$TRAVIS_JDK_VERSION" ||  "$TRAVIS_JDK_VERSION" = "$jdk" ]]
 [[ "$TRAVIS_BRANCH" = "master" ]]
 
+git clone $LAPIS_DEPLOY $DEPLOY_ROOT
+
 echo "Updating Porekit..."
 
 # Initialize the ssh-agent so we can use Git later for deploying
