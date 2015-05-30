@@ -169,6 +169,11 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     }
 
     @Override
+    public Team getEntryTeam(String entry) throws IllegalArgumentException {
+        throw new NotImplementedException("TODO");
+    }
+
+    @Override
     public Team getTeam(String teamName) throws IllegalArgumentException {
         checkState(teamName != null, "Team name cannot be null");
         //noinspection ConstantConditions

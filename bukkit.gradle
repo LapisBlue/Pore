@@ -5,7 +5,7 @@ apply plugin: 'idea'
 defaultTasks 'clean', 'build'
 
 group = 'blue.lapis.pore'
-version = '1.8.5-R0.1-SNAPSHOT' // TODO: Keep up to date
+version = '1.8.6-R0.1-SNAPSHOT' // TODO: Keep up to date
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6

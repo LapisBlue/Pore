@@ -144,6 +144,11 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     }
 
     @Override
+    public Set<String> getEntries() throws IllegalStateException {
+        throw new NotImplementedException("TODO");
+    }
+
+    @Override
     public int getSize() throws IllegalStateException {
         return getHandle().getUsers().size();
     }
@@ -159,8 +164,18 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     }
 
     @Override
+    public void addEntry(String entry) throws IllegalStateException, IllegalArgumentException {
+        throw new NotImplementedException("TODO");
+    }
+
+    @Override
     public boolean removePlayer(OfflinePlayer player) throws IllegalStateException, IllegalArgumentException {
         return getHandle().removeUser(((PoreOfflinePlayer)player).getHandle());
+    }
+
+    @Override
+    public boolean removeEntry(String entry) throws IllegalStateException, IllegalArgumentException {
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -173,6 +188,11 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
         checkState(player != null, "Offline player cannot be null");
         //noinspection ConstantConditions
         return getHandle().getUsers().contains(((PoreOfflinePlayer) player).getHandle());
+    }
+
+    @Override
+    public boolean hasEntry(String entry) throws IllegalArgumentException, IllegalStateException {
+        throw new NotImplementedException("TODO");
     }
 
 }
