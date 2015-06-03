@@ -33,19 +33,19 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.spongepowered.api.event.entity.EntityChangeHealthEvent;
+import org.spongepowered.api.event.entity.living.LivingChangeHealthEvent;
 
 //TODO: Note: do not implement this or its children yet if you do not want a headache
 public class PoreEntityDamageEvent extends EntityDamageEvent {
 
-    private final EntityChangeHealthEvent handle;
+    private final LivingChangeHealthEvent handle;
 
-    public PoreEntityDamageEvent(EntityChangeHealthEvent handle) {
+    public PoreEntityDamageEvent(LivingChangeHealthEvent handle) {
         super(null, null, -1.0);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityChangeHealthEvent getHandle() {
+    public LivingChangeHealthEvent getHandle() {
         return this.handle;
     }
 

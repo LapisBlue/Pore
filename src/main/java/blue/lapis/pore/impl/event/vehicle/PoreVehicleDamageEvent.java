@@ -30,18 +30,18 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Vehicle;
 import org.bukkit.event.vehicle.VehicleDamageEvent;
-import org.spongepowered.api.event.entity.EntityChangeHealthEvent;
+import org.spongepowered.api.event.entity.living.LivingChangeHealthEvent;
 
 public class PoreVehicleDamageEvent extends VehicleDamageEvent {
 
-    private final EntityChangeHealthEvent handle;
+    private final LivingChangeHealthEvent handle;
 
-    public PoreVehicleDamageEvent(EntityChangeHealthEvent handle) {
+    public PoreVehicleDamageEvent(LivingChangeHealthEvent handle) {
         super(null, null, -1);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityChangeHealthEvent getHandle() {
+    public LivingChangeHealthEvent getHandle() {
         return handle;
     }
 

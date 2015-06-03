@@ -37,14 +37,14 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageByBlockEvent;
 import org.spongepowered.api.entity.living.Living;
-import org.spongepowered.api.event.entity.EntityChangeHealthEvent;
+import org.spongepowered.api.event.entity.living.LivingChangeHealthEvent;
 import org.spongepowered.api.world.Location;
 
 public class PoreEntityDamageByBlockEvent extends EntityDamageByBlockEvent {
 
-    private final EntityChangeHealthEvent handle;
+    private final LivingChangeHealthEvent handle;
 
-    public PoreEntityDamageByBlockEvent(EntityChangeHealthEvent handle) {
+    public PoreEntityDamageByBlockEvent(LivingChangeHealthEvent handle) {
         super(null, null, null, -1.0);
         this.handle = checkNotNull(handle, "handle");
         checkState(handle.getEntity() instanceof Living, "Bad entity type");
@@ -52,7 +52,7 @@ public class PoreEntityDamageByBlockEvent extends EntityDamageByBlockEvent {
         checkState(handle.getCause().get().getCause() instanceof Location, "Bad cause");
     }
 
-    public EntityChangeHealthEvent getHandle() {
+    public LivingChangeHealthEvent getHandle() {
         return this.handle;
     }
 

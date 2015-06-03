@@ -34,20 +34,20 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.spongepowered.api.event.entity.EntityChangeHealthEvent;
+import org.spongepowered.api.event.entity.living.LivingChangeHealthEvent;
 
 public class PoreEntityDamageByEntityEvent extends EntityDamageByEntityEvent {
 
-    private final EntityChangeHealthEvent handle;
+    private final LivingChangeHealthEvent handle;
 
-    public PoreEntityDamageByEntityEvent(EntityChangeHealthEvent handle) {
+    public PoreEntityDamageByEntityEvent(LivingChangeHealthEvent handle) {
         super(null, null, null, -1.0);
         this.handle = checkNotNull(handle, "handle");
         checkState(handle.getCause().isPresent(), "Bad cause");
         checkState(handle.getCause().get().getCause() instanceof org.spongepowered.api.entity.Entity, "Bad cause");
     }
 
-    public EntityChangeHealthEvent getHandle() {
+    public LivingChangeHealthEvent getHandle() {
         return this.handle;
     }
 

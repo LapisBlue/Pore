@@ -1,14 +1,14 @@
-From 8ed8ba404f210bd612713c555dc2c30721cec63c Mon Sep 17 00:00:00 2001
+From 4f42d0a63396ab7606e0075d106e62149869cf48 Mon Sep 17 00:00:00 2001
 From: Minecrell <dev@minecrell.net>
 Date: Tue, 3 Mar 2015 22:31:03 +0100
 Subject: [PATCH] Make events properly initialisable
 
 
 diff --git a/src/main/java/org/bukkit/event/Event.java b/src/main/java/org/bukkit/event/Event.java
-index fa29c27..e579967 100644
+index 6677e1b..d8ce291 100644
 --- a/src/main/java/org/bukkit/event/Event.java
 +++ b/src/main/java/org/bukkit/event/Event.java
-@@ -93,4 +93,8 @@ public abstract class Event {
+@@ -95,4 +95,8 @@ public abstract class Event {
           */
          ALLOW;
      }
@@ -156,5 +156,5 @@ index bd89b81..e4bc7c3 100644
       * Gets the world primarily involved with this event
       *
 -- 
-2.3.3
+2.4.2
 
