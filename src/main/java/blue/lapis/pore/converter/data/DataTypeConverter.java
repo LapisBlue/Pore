@@ -24,17 +24,25 @@
  */
 package blue.lapis.pore.converter.data;
 
+import com.google.common.base.Converter;
 import com.google.common.base.Optional;
 import org.spongepowered.api.data.manipulator.SingleValueData;
 
-public interface DataTypeConverter<T extends SingleValueData<V, T>, V> {
+public abstract class DataTypeConverter<T extends SingleValueData<V, T>, V> {
 
-    short of(V data);
+    protected abstract Converter<V, Integer> getConverter();
 
-    Optional<V> of(short data);
+    public short of(V data) {
+        Integer value = getConverter().convert(data);
+        return value != null ? value.shortValue() : 0;
+    }
 
-    Class<T> getDataClass();
+    public Optional<V> of(short data) {
+        return Optional.fromNullable(getConverter().reverse().convert((int)data));
+    }
 
-    Class<V> getValueClass();
+    public abstract Class<T> getDataClass();
+
+    public abstract Class<V> getValueClass();
 
 }

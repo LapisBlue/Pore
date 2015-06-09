@@ -28,40 +28,31 @@ import blue.lapis.pore.converter.data.DataTypeConverter;
 import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
-import org.spongepowered.api.data.manipulator.block.BigMushroomData;
-import org.spongepowered.api.data.type.BigMushroomType;
-import org.spongepowered.api.data.type.BigMushroomTypes;
+import org.spongepowered.api.data.manipulator.block.BrickData;
+import org.spongepowered.api.data.type.BrickType;
+import org.spongepowered.api.data.type.BrickTypes;
 
-public class BigMushroomDataConverter extends DataTypeConverter<BigMushroomData, BigMushroomType> {
+public class BrickDataConverter extends DataTypeConverter<BrickData, BrickType> {
 
-    private static final Converter<BigMushroomType, Integer> CONVERTER =
-            TypeConverter.builder(BigMushroomType.class, Integer.class)
-                    .add(BigMushroomTypes.ALL_INSIDE, 0)
-                    .add(BigMushroomTypes.NORTH_WEST, 1)
-                    .add(BigMushroomTypes.NORTH, 2)
-                    .add(BigMushroomTypes.NORTH_EAST, 3)
-                    .add(BigMushroomTypes.WEST, 4)
-                    .add(BigMushroomTypes.CENTER, 5)
-                    .add(BigMushroomTypes.EAST, 6)
-                    .add(BigMushroomTypes.SOUTH_WEST, 7)
-                    .add(BigMushroomTypes.SOUTH, 8)
-                    .add(BigMushroomTypes.SOUTH_EAST, 9)
-                    .add(BigMushroomTypes.STEM, 10)
-                    .add(BigMushroomTypes.ALL_OUTSIDE, 14)
-                    .add(BigMushroomTypes.ALL_STEM, 15)
+    private static final Converter<BrickType, Integer> CONVERTER =
+            TypeConverter.builder(BrickType.class, Integer.class)
+                    .add(BrickTypes.DEFAULT, 0)
+                    .add(BrickTypes.MOSSY, 1)
+                    .add(BrickTypes.CRACKED, 2)
+                    .add(BrickTypes.CHISELED, 3)
                     .build();
 
-    public Converter<BigMushroomType, Integer> getConverter() {
+    public Converter<BrickType, Integer> getConverter() {
         return CONVERTER;
     }
 
     @Override
-    public Class<BigMushroomData> getDataClass() {
-        return BigMushroomData.class;
+    public Class<BrickData> getDataClass() {
+        return BrickData.class;
     }
 
     @Override
-    public Class<BigMushroomType> getValueClass() {
-        return BigMushroomType.class;
+    public Class<BrickType> getValueClass() {
+        return BrickType.class;
     }
 }
