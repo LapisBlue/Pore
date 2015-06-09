@@ -127,7 +127,8 @@ public class PoreUnsafeValues implements UnsafeValues {
         );
         found.addAll(StringUtil.copyPartialMatches(
                 token,
-                Iterables.transform(Pore.getGame().getRegistry().getAllOf(org.spongepowered.api.statistic.Statistic.class),
+                Iterables.transform(
+                        Pore.getGame().getRegistry().getAllOf(org.spongepowered.api.statistic.Statistic.class),
                         new Function<org.spongepowered.api.statistic.Statistic, String>() {
                             @Override
                             public String apply(final org.spongepowered.api.statistic.Statistic input) {

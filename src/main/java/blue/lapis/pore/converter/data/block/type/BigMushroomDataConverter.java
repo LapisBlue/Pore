@@ -24,44 +24,40 @@
  */
 package blue.lapis.pore.converter.data.block.type;
 
+import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataTypeConverter;
 import blue.lapis.pore.converter.type.TypeConverter;
 
-import com.google.common.base.Converter;
 import org.spongepowered.api.data.manipulator.block.BigMushroomData;
 import org.spongepowered.api.data.type.BigMushroomType;
 import org.spongepowered.api.data.type.BigMushroomTypes;
 
-public class BigMushroomDataConverter extends DataTypeConverter<BigMushroomData, BigMushroomType> {
+public class BigMushroomDataConverter extends DataTypeConverter {
 
-    private static final Converter<BigMushroomType, Integer> CONVERTER =
-            TypeConverter.builder(BigMushroomType.class, Integer.class)
-                    .add(BigMushroomTypes.ALL_INSIDE, 0)
-                    .add(BigMushroomTypes.NORTH_WEST, 1)
-                    .add(BigMushroomTypes.NORTH, 2)
-                    .add(BigMushroomTypes.NORTH_EAST, 3)
-                    .add(BigMushroomTypes.WEST, 4)
-                    .add(BigMushroomTypes.CENTER, 5)
-                    .add(BigMushroomTypes.EAST, 6)
-                    .add(BigMushroomTypes.SOUTH_WEST, 7)
-                    .add(BigMushroomTypes.SOUTH, 8)
-                    .add(BigMushroomTypes.SOUTH_EAST, 9)
-                    .add(BigMushroomTypes.STEM, 10)
-                    .add(BigMushroomTypes.ALL_OUTSIDE, 14)
-                    .add(BigMushroomTypes.ALL_STEM, 15)
-                    .build();
-
-    public Converter<BigMushroomType, Integer> getConverter() {
-        return CONVERTER;
+    private BigMushroomDataConverter() {
+        converters.put(
+                TypeConverter.builder(AbstractDataValue.class, Byte.class)
+                        .add(new BigMushroomDataValue(BigMushroomTypes.ALL_INSIDE), (byte)0)
+                        .add(new BigMushroomDataValue(BigMushroomTypes.NORTH_WEST), (byte)1)
+                        .add(new BigMushroomDataValue(BigMushroomTypes.NORTH), (byte)2)
+                        .add(new BigMushroomDataValue(BigMushroomTypes.NORTH_EAST), (byte)3)
+                        .add(new BigMushroomDataValue(BigMushroomTypes.WEST), (byte)4)
+                        .add(new BigMushroomDataValue(BigMushroomTypes.CENTER), (byte)5)
+                        .add(new BigMushroomDataValue(BigMushroomTypes.EAST), (byte)6)
+                        .add(new BigMushroomDataValue(BigMushroomTypes.SOUTH_WEST), (byte)7)
+                        .add(new BigMushroomDataValue(BigMushroomTypes.SOUTH), (byte)8)
+                        .add(new BigMushroomDataValue(BigMushroomTypes.SOUTH_EAST), (byte)9)
+                        .add(new BigMushroomDataValue(BigMushroomTypes.STEM), (byte)10)
+                        .add(new BigMushroomDataValue(BigMushroomTypes.ALL_OUTSIDE), (byte)14)
+                        .add(new BigMushroomDataValue(BigMushroomTypes.ALL_STEM), (byte)15)
+                        .build(),
+                (byte)4);
+        applicableTypes.add(BigMushroomData.class);
     }
 
-    @Override
-    public Class<BigMushroomData> getDataClass() {
-        return BigMushroomData.class;
-    }
-
-    @Override
-    public Class<BigMushroomType> getValueClass() {
-        return BigMushroomType.class;
+    static class BigMushroomDataValue extends AbstractDataValue<BigMushroomData, BigMushroomType> {
+        public BigMushroomDataValue(BigMushroomType value) {
+            super(BigMushroomData.class, value);
+        }
     }
 }

@@ -65,9 +65,9 @@ public class WrapperConverterTest {
         ListMultimap<Class<?>, Class<?>> registry = createRegistry();
         for (Class<?> type : registry.keySet()) {
             objects.add(new Object[]{
-                    StringUtils.removeStart(type.getName(), IMPL_PREFIX),
-                    type,
-                    registry.get(type)
+                StringUtils.removeStart(type.getName(), IMPL_PREFIX),
+                type,
+                registry.get(type)
             });
         }
         return objects.build();
@@ -87,7 +87,7 @@ public class WrapperConverterTest {
     }
 
     private static void scan(ImmutableMultimap.Builder<Class<?>, Class<?>> builder, Class<?> sponge,
-            Set<Class<?>> parents, CachedWrapperConverter.Converter<?, ?> converter) {
+                             Set<Class<?>> parents, CachedWrapperConverter.Converter<?, ?> converter) {
         Class<?> pore = converter.constructor.getType();
         builder.put(pore, sponge);
 

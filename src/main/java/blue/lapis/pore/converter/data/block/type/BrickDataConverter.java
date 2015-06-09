@@ -24,35 +24,32 @@
  */
 package blue.lapis.pore.converter.data.block.type;
 
+import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataTypeConverter;
 import blue.lapis.pore.converter.type.TypeConverter;
 
-import com.google.common.base.Converter;
 import org.spongepowered.api.data.manipulator.block.BrickData;
 import org.spongepowered.api.data.type.BrickType;
 import org.spongepowered.api.data.type.BrickTypes;
 
-public class BrickDataConverter extends DataTypeConverter<BrickData, BrickType> {
+public class BrickDataConverter extends DataTypeConverter {
 
-    private static final Converter<BrickType, Integer> CONVERTER =
-            TypeConverter.builder(BrickType.class, Integer.class)
-                    .add(BrickTypes.DEFAULT, 0)
-                    .add(BrickTypes.MOSSY, 1)
-                    .add(BrickTypes.CRACKED, 2)
-                    .add(BrickTypes.CHISELED, 3)
-                    .build();
-
-    public Converter<BrickType, Integer> getConverter() {
-        return CONVERTER;
+    private BrickDataConverter() {
+        converters.put(
+                TypeConverter.builder(AbstractDataValue.class, Byte.class)
+                        .add(new BrickDataValue(BrickTypes.DEFAULT), (byte)0)
+                        .add(new BrickDataValue(BrickTypes.MOSSY), (byte)1)
+                        .add(new BrickDataValue(BrickTypes.CRACKED), (byte)2)
+                        .add(new BrickDataValue(BrickTypes.CHISELED), (byte)3)
+                        .build(),
+                (byte) 2
+        );
+        applicableTypes.add(BrickData.class);
     }
 
-    @Override
-    public Class<BrickData> getDataClass() {
-        return BrickData.class;
-    }
-
-    @Override
-    public Class<BrickType> getValueClass() {
-        return BrickType.class;
+    static class BrickDataValue extends AbstractDataValue<BrickData, BrickType> {
+        public BrickDataValue(BrickType value) {
+            super(BrickData.class, value);
+        }
     }
 }

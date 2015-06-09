@@ -24,10 +24,24 @@
  */
 package blue.lapis.pore.converter.data;
 
-public interface DataConverter<T> {
+import org.spongepowered.api.data.manipulator.SingleValueData;
 
-    byte getDataValue(T target);
+public class AbstractDataValue<T extends SingleValueData<V, T>, V> {
 
-    void setDataValue(T target, byte dataValue);
+    private final Class<T> clazz;
+    private final V value;
+
+    public AbstractDataValue(Class<T> dataClass, V value) {
+        this.clazz = dataClass;
+        this.value = value;
+    }
+
+    public Class<T> getDataClass() {
+        return this.clazz;
+    }
+
+    public V getValue() {
+        return this.value;
+    }
 
 }

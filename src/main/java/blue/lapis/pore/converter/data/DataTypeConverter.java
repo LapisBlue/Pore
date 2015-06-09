@@ -25,24 +25,47 @@
 package blue.lapis.pore.converter.data;
 
 import com.google.common.base.Converter;
-import com.google.common.base.Optional;
+import com.google.common.collect.Lists;
+import org.apache.commons.lang3.NotImplementedException;
 import org.spongepowered.api.data.manipulator.SingleValueData;
 
-public abstract class DataTypeConverter<T extends SingleValueData<V, T>, V> {
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-    protected abstract Converter<V, Integer> getConverter();
+public abstract class DataTypeConverter {
 
-    public short of(V data) {
-        Integer value = getConverter().convert(data);
-        return value != null ? value.shortValue() : 0;
+    @SuppressWarnings("rawtypes")
+    protected final LinkedHashMap<Converter<AbstractDataValue, Byte>, Byte> converters
+            = new LinkedHashMap<Converter<AbstractDataValue, Byte>, Byte>();
+
+    protected final ArrayList<Class<? extends SingleValueData<?, ?>>> applicableTypes = Lists.newArrayList();
+
+    public Collection<Class<? extends SingleValueData<?, ?>>> getApplicableDataTypes() {
+        return applicableTypes;
     }
 
-    public Optional<V> of(short data) {
-        return Optional.fromNullable(getConverter().reverse().convert((int)data));
+    public byte of(Collection<SingleValueData<?, ?>> data) {
+        throw new NotImplementedException("TODO");
     }
 
-    public abstract Class<T> getDataClass();
-
-    public abstract Class<V> getValueClass();
+    @SuppressWarnings("rawtypes") // I am very tired and do not feel like dealing with generics anymore
+    public Collection<AbstractDataValue> of(byte data) {
+        ArrayList<AbstractDataValue> converted = new ArrayList<AbstractDataValue>();
+        int i = 0;
+        for (Map.Entry<Converter<AbstractDataValue, Byte>, Byte> e : converters.entrySet()) {
+            Converter<AbstractDataValue, Byte> c = e.getKey();
+            int bitsToConsider = e.getValue(); // the number of bits to consider from the data byte
+            assert bitsToConsider <= 8; // we can't consider more than 8 bits within a single byte
+            byte masked = data;
+            masked >>= i; // right-shift to discard bits considered in previous iterations
+            byte mask = (byte)(Math.pow(2, bitsToConsider) - 1); // calculate the bitmask based on the size
+            masked |= mask; // apply the mask
+            converted.add(c.reverse().convert(masked));
+            i += bitsToConsider; // increment the offset for future iterations
+        }
+        return converted;
+    }
 
 }
