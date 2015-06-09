@@ -25,12 +25,14 @@
 package blue.lapis.pore.converter.data;
 
 import com.google.common.base.Converter;
+import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
-import org.apache.commons.lang3.NotImplementedException;
+import com.google.common.collect.Maps;
 import org.spongepowered.api.data.manipulator.SingleValueData;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -46,8 +48,30 @@ public abstract class DataTypeConverter {
         return applicableTypes;
     }
 
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public byte of(Collection<SingleValueData<?, ?>> data) {
-        throw new NotImplementedException("TODO");
+        HashMap<Class<? extends SingleValueData>, SingleValueData> dataMap = Maps.newHashMap();
+        for (SingleValueData datum : data) {
+            dataMap.put(datum.getClass(), datum);
+        }
+        Converter<AbstractDataValue, Byte>[] converterList
+                = (Converter<AbstractDataValue, Byte>[])converters.keySet().toArray();
+        Byte[] bitSetSizes = (Byte[])converters.values().toArray();
+        byte finalValue = 0;
+        byte bitOffset = 0;
+        for (int i = 0; i < applicableTypes.size(); i++) {
+            byte bitsToConsider = bitSetSizes[i];
+            assert bitOffset + bitsToConsider <= 8;
+            if (dataMap.containsKey(applicableTypes.get(i))) {
+                SingleValueData datum = dataMap.get(applicableTypes.get(i));
+                Converter<AbstractDataValue, Byte> c = converterList[i];
+                byte dataValue = Optional.fromNullable(c.convert(AbstractDataValue.of(datum)))
+                        .or((byte) 0);
+                finalValue += (byte) (dataValue << bitOffset);
+            }
+            bitOffset += bitsToConsider;
+        }
+        return finalValue;
     }
 
     @SuppressWarnings("rawtypes") // I am very tired and do not feel like dealing with generics anymore
@@ -57,7 +81,7 @@ public abstract class DataTypeConverter {
         for (Map.Entry<Converter<AbstractDataValue, Byte>, Byte> e : converters.entrySet()) {
             Converter<AbstractDataValue, Byte> c = e.getKey();
             int bitsToConsider = e.getValue(); // the number of bits to consider from the data byte
-            assert bitsToConsider <= 8; // we can't consider more than 8 bits within a single byte
+            assert i + bitsToConsider <= 8; // we can't consider more than 8 bits within a single byte
             byte masked = data;
             masked >>= i; // right-shift to discard bits considered in previous iterations
             byte mask = (byte)(Math.pow(2, bitsToConsider) - 1); // calculate the bitmask based on the size

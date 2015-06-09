@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.converter.data;
 
+import com.google.common.base.Objects;
 import org.spongepowered.api.data.manipulator.SingleValueData;
 
 public class AbstractDataValue<T extends SingleValueData<V, T>, V> {
@@ -42,6 +43,16 @@ public class AbstractDataValue<T extends SingleValueData<V, T>, V> {
 
     public V getValue() {
         return this.value;
+    }
+
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public static AbstractDataValue of(SingleValueData data) {
+        return new AbstractDataValue(data.getClass(), data.getValue());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(clazz, value);
     }
 
 }
