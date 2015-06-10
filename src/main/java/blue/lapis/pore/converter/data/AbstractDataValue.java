@@ -47,7 +47,25 @@ public class AbstractDataValue<T extends SingleValueData<V, T>, V> {
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static AbstractDataValue of(SingleValueData data) {
-        return new AbstractDataValue(data.getClass(), data.getValue());
+        try {
+            return new AbstractDataValue(Class.forName(data.getClass().getName().split("\\$")[0]), data.getValue());
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    private static <T> boolean nullSafeEquals(T obj1, T obj2) {
+        boolean bothNull = (obj1 == null && obj2 == null);
+        boolean equal = (obj1 != null && obj1.equals(obj2));
+        return (obj1 == null && obj2 == null) || (obj1 != null && obj1.equals(obj2));
+    }
+
+    @Override
+    public boolean equals(Object otherDataValue) {
+        return otherDataValue instanceof AbstractDataValue
+                && nullSafeEquals(getDataClass(), ((AbstractDataValue)otherDataValue).getDataClass())
+                && nullSafeEquals(getValue(), ((AbstractDataValue)otherDataValue).getValue());
     }
 
     @Override

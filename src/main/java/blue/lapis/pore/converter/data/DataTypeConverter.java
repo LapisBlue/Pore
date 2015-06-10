@@ -24,8 +24,8 @@
  */
 package blue.lapis.pore.converter.data;
 
-import com.google.common.base.Converter;
 import com.google.common.base.Optional;
+import com.google.common.collect.BiMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.spongepowered.api.data.manipulator.SingleValueData;
@@ -39,8 +39,8 @@ import java.util.Map;
 public abstract class DataTypeConverter {
 
     @SuppressWarnings("rawtypes")
-    protected final LinkedHashMap<Converter<AbstractDataValue, Byte>, Byte> converters
-            = new LinkedHashMap<Converter<AbstractDataValue, Byte>, Byte>();
+    protected final LinkedHashMap<BiMap<AbstractDataValue, Byte>, Byte> converters
+            = new LinkedHashMap<BiMap<AbstractDataValue, Byte>, Byte>();
 
     protected final ArrayList<Class<? extends SingleValueData<?, ?>>> applicableTypes = Lists.newArrayList();
 
@@ -50,24 +50,24 @@ public abstract class DataTypeConverter {
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     public byte of(Collection<SingleValueData<?, ?>> data) {
-        HashMap<Class<? extends SingleValueData>, SingleValueData> dataMap = Maps.newHashMap();
+        HashMap<String, SingleValueData> dataMap = Maps.newHashMap();
         for (SingleValueData datum : data) {
-            dataMap.put(datum.getClass(), datum);
+            dataMap.put(datum.getClass().getName().split("\\$")[0], datum);
         }
-        Converter<AbstractDataValue, Byte>[] converterList
-                = (Converter<AbstractDataValue, Byte>[])converters.keySet().toArray();
-        Byte[] bitSetSizes = (Byte[])converters.values().toArray();
+        BiMap<AbstractDataValue, Byte>[] biMapList = new BiMap[converters.size()];
+        converters.keySet().toArray(biMapList);
+        Byte[] bitSetSizes = new Byte[converters.size()];
+        converters.values().toArray(bitSetSizes);
         byte finalValue = 0;
         byte bitOffset = 0;
         for (int i = 0; i < applicableTypes.size(); i++) {
             byte bitsToConsider = bitSetSizes[i];
             assert bitOffset + bitsToConsider <= 8;
-            if (dataMap.containsKey(applicableTypes.get(i))) {
-                SingleValueData datum = dataMap.get(applicableTypes.get(i));
-                Converter<AbstractDataValue, Byte> c = converterList[i];
-                byte dataValue = Optional.fromNullable(c.convert(AbstractDataValue.of(datum)))
-                        .or((byte) 0);
-                finalValue += (byte) (dataValue << bitOffset);
+            if (dataMap.containsKey(applicableTypes.get(i).getName())) {
+                SingleValueData datum = dataMap.get(applicableTypes.get(i).getName());
+                BiMap<AbstractDataValue, Byte> bm = biMapList[i];
+                AbstractDataValue adv = AbstractDataValue.of(datum);
+                finalValue += bm.containsKey(adv) ? bm.get(adv) << bitOffset : 0;
             }
             bitOffset += bitsToConsider;
         }
@@ -78,15 +78,15 @@ public abstract class DataTypeConverter {
     public Collection<AbstractDataValue> of(byte data) {
         ArrayList<AbstractDataValue> converted = new ArrayList<AbstractDataValue>();
         int i = 0;
-        for (Map.Entry<Converter<AbstractDataValue, Byte>, Byte> e : converters.entrySet()) {
-            Converter<AbstractDataValue, Byte> c = e.getKey();
+        for (Map.Entry<BiMap<AbstractDataValue, Byte>, Byte> e : converters.entrySet()) {
+            BiMap<AbstractDataValue, Byte> c = e.getKey();
             int bitsToConsider = e.getValue(); // the number of bits to consider from the data byte
             assert i + bitsToConsider <= 8; // we can't consider more than 8 bits within a single byte
             byte masked = data;
             masked >>= i; // right-shift to discard bits considered in previous iterations
             byte mask = (byte)(Math.pow(2, bitsToConsider) - 1); // calculate the bitmask based on the size
-            masked |= mask; // apply the mask
-            converted.add(c.reverse().convert(masked));
+            masked &= mask; // apply the mask
+            converted.add(c.inverse().get(masked));
             i += bitsToConsider; // increment the offset for future iterations
         }
         return converted;

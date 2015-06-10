@@ -28,6 +28,7 @@ import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataTypeConverter;
 import blue.lapis.pore.converter.type.TypeConverter;
 
+import com.google.common.collect.ImmutableBiMap;
 import org.spongepowered.api.data.manipulator.block.BigMushroomData;
 import org.spongepowered.api.data.type.BigMushroomType;
 import org.spongepowered.api.data.type.BigMushroomTypes;
@@ -36,20 +37,20 @@ public class BigMushroomDataConverter extends DataTypeConverter {
 
     private BigMushroomDataConverter() {
         converters.put(
-                TypeConverter.builder(AbstractDataValue.class, Byte.class)
-                        .add(new BigMushroomDataValue(BigMushroomTypes.ALL_INSIDE), (byte)0)
-                        .add(new BigMushroomDataValue(BigMushroomTypes.NORTH_WEST), (byte)1)
-                        .add(new BigMushroomDataValue(BigMushroomTypes.NORTH), (byte)2)
-                        .add(new BigMushroomDataValue(BigMushroomTypes.NORTH_EAST), (byte)3)
-                        .add(new BigMushroomDataValue(BigMushroomTypes.WEST), (byte)4)
-                        .add(new BigMushroomDataValue(BigMushroomTypes.CENTER), (byte)5)
-                        .add(new BigMushroomDataValue(BigMushroomTypes.EAST), (byte)6)
-                        .add(new BigMushroomDataValue(BigMushroomTypes.SOUTH_WEST), (byte)7)
-                        .add(new BigMushroomDataValue(BigMushroomTypes.SOUTH), (byte)8)
-                        .add(new BigMushroomDataValue(BigMushroomTypes.SOUTH_EAST), (byte)9)
-                        .add(new BigMushroomDataValue(BigMushroomTypes.STEM), (byte)10)
-                        .add(new BigMushroomDataValue(BigMushroomTypes.ALL_OUTSIDE), (byte)14)
-                        .add(new BigMushroomDataValue(BigMushroomTypes.ALL_STEM), (byte)15)
+                ImmutableBiMap.<AbstractDataValue, Byte>builder()
+                        .put(new BigMushroomDataValue(BigMushroomTypes.ALL_INSIDE), (byte) 0)
+                        .put(new BigMushroomDataValue(BigMushroomTypes.NORTH_WEST), (byte) 1)
+                        .put(new BigMushroomDataValue(BigMushroomTypes.NORTH), (byte) 2)
+                        .put(new BigMushroomDataValue(BigMushroomTypes.NORTH_EAST), (byte) 3)
+                        .put(new BigMushroomDataValue(BigMushroomTypes.WEST), (byte) 4)
+                        .put(new BigMushroomDataValue(BigMushroomTypes.CENTER), (byte) 5)
+                        .put(new BigMushroomDataValue(BigMushroomTypes.EAST), (byte) 6)
+                        .put(new BigMushroomDataValue(BigMushroomTypes.SOUTH_WEST), (byte) 7)
+                        .put(new BigMushroomDataValue(BigMushroomTypes.SOUTH), (byte) 8)
+                        .put(new BigMushroomDataValue(BigMushroomTypes.SOUTH_EAST), (byte) 9)
+                        .put(new BigMushroomDataValue(BigMushroomTypes.STEM), (byte) 10)
+                        .put(new BigMushroomDataValue(BigMushroomTypes.ALL_OUTSIDE), (byte) 14)
+                        .put(new BigMushroomDataValue(BigMushroomTypes.ALL_STEM), (byte)15)
                         .build(),
                 (byte)4);
         applicableTypes.add(BigMushroomData.class);

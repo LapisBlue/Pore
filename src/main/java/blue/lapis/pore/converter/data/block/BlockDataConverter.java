@@ -68,7 +68,7 @@ public class BlockDataConverter implements DataConverter<Location> {
             return CONVERTER_OBJECTS.get(clazz);
         } else {
             try {
-                Constructor<?> c = clazz.getConstructor();
+                Constructor<?> c = clazz.getDeclaredConstructors()[0];
                 c.setAccessible(true);
                 return (DataTypeConverter) c.newInstance();
             } catch (IllegalAccessException ex) {
@@ -76,8 +76,6 @@ public class BlockDataConverter implements DataConverter<Location> {
             } catch (InstantiationException ex) {
                 e = ex;
             } catch (InvocationTargetException ex) {
-                e = ex;
-            } catch (NoSuchMethodException ex) {
                 e = ex;
             }
             Pore.getLogger().error("Failed to instantiate " + clazz.getName());
