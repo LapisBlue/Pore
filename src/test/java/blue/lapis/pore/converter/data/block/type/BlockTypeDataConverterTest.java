@@ -58,6 +58,7 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Collections;
 
+@SuppressWarnings("rawtypes")
 public class BlockTypeDataConverterTest {
 
     @Before
@@ -77,7 +78,6 @@ public class BlockTypeDataConverterTest {
         PoreTests.setConstants(BrickTypes.class);
     }
 
-    @SuppressWarnings("rawtypes")
     public <T extends SingleValueData<V, T>, V> void testSingleAbstraction(BlockType blockType, Class<T> dataClass,
                                                                            byte inputByte, V expectedValue)
             throws Exception {
@@ -86,7 +86,6 @@ public class BlockTypeDataConverterTest {
         testAbstraction(blockType, inputByte, outputColl);
     }
 
-    @SuppressWarnings("rawtypes")
     public <T extends SingleValueData<V, T>, V> void testSingleDeabstraction(BlockType blockType, Class<T> dataClass,
                                                                              V inputValue, byte expectedByte,
                                                                              boolean invert) throws Exception {
@@ -101,7 +100,6 @@ public class BlockTypeDataConverterTest {
         testSingleDeabstraction(blockType, dataClass, inputValue, expectedByte, false);
     }
 
-    @SuppressWarnings("rawtypes")
     public void testAbstraction(BlockType blockType, byte inputByte,
                                 Collection<? extends AbstractDataValue<? extends SingleValueData, ?>> expectedData)
             throws Exception {
@@ -115,7 +113,7 @@ public class BlockTypeDataConverterTest {
         assertTrue(expectedData.containsAll(derived));
     }
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings("unchecked")
     public void testDeabstraction(BlockType blockType,
                                   Collection<? extends AbstractDataValue<? extends SingleValueData, ?>> inputData,
                                   byte expectedByte, boolean invert) throws Exception {
@@ -124,9 +122,8 @@ public class BlockTypeDataConverterTest {
         for (AbstractDataValue datum : inputData) {
             SingleValueData<?, ?> spongeDatum = (SingleValueData<?, ?>)mock(datum.getDataClass());
             when(spongeDatum.getValue()).thenReturn(datum.getValue());
-            Optional<? extends SingleValueData<?, ?>> optData = Optional.fromNullable(spongeDatum);
-            // for some unknown reason IntellIJ doesn't think the next line compiles, but javac handles it fine
-            when(loc.getData((Class<DataManipulator>)datum.getDataClass())).thenReturn(optData);
+            when(loc.getData((Class<DataManipulator>)datum.getDataClass()))
+                    .thenReturn(Optional.<DataManipulator>fromNullable(spongeDatum));
         }
         Block block = PoreBlock.of(loc);
         if (invert) {
@@ -136,7 +133,6 @@ public class BlockTypeDataConverterTest {
         }
     }
 
-    @SuppressWarnings("rawtypes")
     public void testDeabstraction(BlockType blockType,
                                   Collection<? extends AbstractDataValue<? extends SingleValueData, ?>> inputData,
                                   byte expectedByte) throws Exception {
@@ -144,11 +140,15 @@ public class BlockTypeDataConverterTest {
     }
 
     @Test
+    public void testBitmasking() throws Exception {
+        // 245 = 5 | ((2^4 - 1) << 4), i.e. 0101 -> 11110101
+        testSingleAbstraction(BlockTypes.BROWN_MUSHROOM_BLOCK, BigMushroomData.class, (byte) 245,
+                BigMushroomTypes.CENTER);
+    }
+
+    @Test
     public void testBigMushroomAbstraction() throws Exception {
         testSingleAbstraction(BlockTypes.BROWN_MUSHROOM_BLOCK, BigMushroomData.class, (byte) 5,
-                BigMushroomTypes.CENTER);
-        // 245 = 5 & ((2^4 - 1) << 4), i.e. 11110101
-        testSingleAbstraction(BlockTypes.BROWN_MUSHROOM_BLOCK, BigMushroomData.class, (byte) 245,
                 BigMushroomTypes.CENTER);
     }
 
@@ -164,17 +164,12 @@ public class BlockTypeDataConverterTest {
     public void testBrickAbstraction() throws Exception {
         testSingleAbstraction(BlockTypes.STONEBRICK, BrickData.class, (byte) 3,
                 BrickTypes.CHISELED);
-        // 243 = 5 & ((2^4 - 1) << 4), i.e. 11110011
-        testSingleAbstraction(BlockTypes.STONEBRICK, BrickData.class, (byte) 243,
-                BrickTypes.CHISELED);
     }
 
     @Test
     public void testBrickDeabstraction() throws Exception {
         testSingleDeabstraction(BlockTypes.STONEBRICK, BrickData.class, BrickTypes.CHISELED,
                 (byte) 3);
-        testSingleDeabstraction(BlockTypes.STONEBRICK, BrickData.class, BrickTypes.CHISELED,
-                (byte) 2, true);
     }
 
 }

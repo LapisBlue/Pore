@@ -35,6 +35,7 @@ import org.spongepowered.api.data.type.BrickTypes;
 
 public class BrickDataConverter extends DataTypeConverter {
 
+    @SuppressWarnings("rawtypes")
     private BrickDataConverter() {
         converters.put(
                 ImmutableBiMap.<AbstractDataValue, Byte>builder()

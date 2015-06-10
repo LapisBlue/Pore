@@ -35,6 +35,7 @@ import org.spongepowered.api.data.type.BigMushroomTypes;
 
 public class BigMushroomDataConverter extends DataTypeConverter {
 
+    @SuppressWarnings("rawtypes")
     private BigMushroomDataConverter() {
         converters.put(
                 ImmutableBiMap.<AbstractDataValue, Byte>builder()
