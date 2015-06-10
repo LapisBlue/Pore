@@ -67,7 +67,7 @@ public abstract class DataTypeConverter {
                 SingleValueData datum = dataMap.get(applicableTypes.get(i).getName());
                 BiMap<AbstractDataValue, Byte> bm = biMapList[i];
                 AbstractDataValue adv = AbstractDataValue.of(datum);
-                finalValue += bm.containsKey(adv) ? bm.get(adv) << bitOffset : 0;
+                finalValue |= bm.containsKey(adv) ? bm.get(adv) << bitOffset : 0; // mask the value onto the data byte
             }
             bitOffset += bitsToConsider;
         }
