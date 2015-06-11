@@ -57,6 +57,7 @@ public class BlockDataConverter implements DataConverter<Location> {
                     .put(BlockTypes.RED_MUSHROOM_BLOCK, getConverter(BigMushroomDataConverter.class))
                     .put(BlockTypes.STONEBRICK, getConverter(BrickDataConverter.class))
                     .put(BlockTypes.LEAVES, getConverter(LeavesDataConverter.class))
+                    .put(BlockTypes.LEAVES2, getConverter(Leaves2DataConverter.class))
                     .put(BlockTypes.LOG, getConverter(LogDataConverter.class))
                     .put(BlockTypes.LOG2, getConverter(Log2DataConverter.class))
                     .put(BlockTypes.PLANKS, getConverter(PlanksDataConverter.class))

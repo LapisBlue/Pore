@@ -28,7 +28,6 @@ import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testConversion;
 import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testDeabstraction;
 import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testSingleAbstraction;
 import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testSingleConversion;
-import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testSingleDeabstraction;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.PoreTests;
@@ -134,6 +133,22 @@ public class BlockTypeDataConverterTest {
                 new LeavesDataConverter.DecayableDataValue(true)
         );
         testConversion(BlockTypes.LEAVES, (byte) 5, expected);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testLeaves2Conversion() throws Exception {
+        Collection<? extends AbstractDataValue<? extends DataManipulator, ?>> input = Arrays.asList(
+                new LogDataConverter.TreeDataValue(TreeTypes.DARK_OAK),
+                new LeavesDataConverter.DecayableDataValue(false)
+        );
+        testDeabstraction(BlockTypes.LEAVES2, (byte) 1, input);
+        testSingleAbstraction(BlockTypes.LEAVES2, TreeData.class, (byte) 1, TreeTypes.DARK_OAK);
+        Collection<? extends AbstractDataValue<? extends DataManipulator, ?>> expected = Arrays.asList(
+                new LogDataConverter.TreeDataValue(TreeTypes.DARK_OAK),
+                new LeavesDataConverter.DecayableDataValue(true)
+        );
+        testConversion(BlockTypes.LEAVES2, (byte) 5, expected);
     }
 
 }
