@@ -28,10 +28,6 @@ import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataConverter;
 import blue.lapis.pore.converter.data.DataTypeConverter;
-import blue.lapis.pore.converter.data.block.type.BigMushroomDataConverter;
-import blue.lapis.pore.converter.data.block.type.BrickDataConverter;
-import blue.lapis.pore.converter.data.block.type.Log2DataConverter;
-import blue.lapis.pore.converter.data.block.type.LogDataConverter;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;

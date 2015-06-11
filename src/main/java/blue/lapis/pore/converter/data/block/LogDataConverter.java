@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.data.block.type;
+package blue.lapis.pore.converter.data.block;
 
 import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataTypeConverter;

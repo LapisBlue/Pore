@@ -22,12 +22,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.data.block.type;
+package blue.lapis.pore.converter.data.block;
 
 import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataTypeConverter;
-import blue.lapis.pore.converter.data.block.type.LogDataConverter.AxisDataValue;
-import blue.lapis.pore.converter.data.block.type.LogDataConverter.TreeDataValue;
 
 import com.google.common.collect.ImmutableBiMap;
 import org.spongepowered.api.data.manipulator.block.AxisData;
@@ -41,18 +39,18 @@ public class Log2DataConverter extends DataTypeConverter {
     private Log2DataConverter() {
         converters.put(
                 ImmutableBiMap.<AbstractDataValue, Byte>builder()
-                        .put(new TreeDataValue(TreeTypes.ACACIA), (byte) 0)
-                        .put(new TreeDataValue(TreeTypes.DARK_OAK), (byte) 1)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.ACACIA), (byte) 0)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.DARK_OAK), (byte) 1)
                         .build(),
                 (byte) 2
         );
         applicableTypes.add(TreeData.class);
         converters.put(
                 ImmutableBiMap.<AbstractDataValue, Byte>builder()
-                        .put(new AxisDataValue(Axis.Y), (byte) 0)
-                        .put(new AxisDataValue(Axis.X), (byte) 1)
-                        .put(new AxisDataValue(Axis.Z), (byte) 2)
-                        .put(new AxisDataValue(null), (byte) 3)
+                        .put(new LogDataConverter.AxisDataValue(Axis.Y), (byte) 0)
+                        .put(new LogDataConverter.AxisDataValue(Axis.X), (byte) 1)
+                        .put(new LogDataConverter.AxisDataValue(Axis.Z), (byte) 2)
+                        .put(new LogDataConverter.AxisDataValue(null), (byte) 3)
                         .build(),
                 (byte) 2
         );

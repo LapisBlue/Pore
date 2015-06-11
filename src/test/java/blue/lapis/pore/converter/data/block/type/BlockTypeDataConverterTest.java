@@ -31,6 +31,7 @@ import static blue.lapis.pore.converter.data.block.type.BTDCTestUtil.testSingleC
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.PoreTests;
 import blue.lapis.pore.converter.data.AbstractDataValue;
+import blue.lapis.pore.converter.data.block.LogDataConverter;
 
 import org.junit.Before;
 import org.junit.Test;
