@@ -75,7 +75,7 @@ public abstract class DataTypeConverter {
     }
 
     @SuppressWarnings("rawtypes") // I am very tired and do not feel like dealing with generics anymore
-    public Collection<AbstractDataValue> of(byte data) {
+    public Collection<AbstractDataValue> of(byte data) throws IllegalArgumentException {
         ArrayList<AbstractDataValue> converted = new ArrayList<AbstractDataValue>();
         int i = 0;
         for (Map.Entry<BiMap<AbstractDataValue, Byte>, Byte> e : converters.entrySet()) {
@@ -86,6 +86,10 @@ public abstract class DataTypeConverter {
             masked >>= i; // right-shift to discard bits considered in previous iterations
             byte mask = (byte)(Math.pow(2, bitsToConsider) - 1); // calculate the bitmask based on the size
             masked &= mask; // apply the mask
+            if (!c.containsValue(masked)) {
+                throw new IllegalArgumentException("Out of bounds data byte" + data + " for "
+                        + this.getClass().getSimpleName());
+            }
             converted.add(c.inverse().get(masked));
             i += bitsToConsider; // increment the offset for future iterations
         }

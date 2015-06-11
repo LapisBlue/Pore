@@ -26,7 +26,6 @@ package blue.lapis.pore.converter.data.block;
 
 import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataTypeConverter;
-import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.collect.ImmutableBiMap;
 import org.spongepowered.api.data.manipulator.block.BigMushroomData;

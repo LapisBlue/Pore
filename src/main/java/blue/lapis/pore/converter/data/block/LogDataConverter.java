@@ -29,10 +29,7 @@ import blue.lapis.pore.converter.data.DataTypeConverter;
 
 import com.google.common.collect.ImmutableBiMap;
 import org.spongepowered.api.data.manipulator.block.AxisData;
-import org.spongepowered.api.data.manipulator.block.BrickData;
 import org.spongepowered.api.data.manipulator.block.TreeData;
-import org.spongepowered.api.data.type.BrickType;
-import org.spongepowered.api.data.type.BrickTypes;
 import org.spongepowered.api.data.type.TreeType;
 import org.spongepowered.api.data.type.TreeTypes;
 import org.spongepowered.api.util.Axis;

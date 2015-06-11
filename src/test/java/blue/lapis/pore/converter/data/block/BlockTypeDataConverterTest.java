@@ -22,16 +22,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.data.block.type;
+package blue.lapis.pore.converter.data.block;
 
-import static blue.lapis.pore.converter.data.block.type.BTDCTestUtil.testConversion;
-import static blue.lapis.pore.converter.data.block.type.BTDCTestUtil.testSingleAbstraction;
-import static blue.lapis.pore.converter.data.block.type.BTDCTestUtil.testSingleConversion;
+import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testConversion;
+import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testSingleAbstraction;
+import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testSingleConversion;
+import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testSingleDeabstraction;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.PoreTests;
 import blue.lapis.pore.converter.data.AbstractDataValue;
-import blue.lapis.pore.converter.data.block.LogDataConverter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +39,7 @@ import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.data.manipulator.SingleValueData;
 import org.spongepowered.api.data.manipulator.block.BigMushroomData;
 import org.spongepowered.api.data.manipulator.block.BrickData;
+import org.spongepowered.api.data.manipulator.block.TreeData;
 import org.spongepowered.api.data.type.BigMushroomTypes;
 import org.spongepowered.api.data.type.BrickTypes;
 import org.spongepowered.api.data.type.TreeTypes;
@@ -77,16 +78,19 @@ public class BlockTypeDataConverterTest {
                 BigMushroomTypes.CENTER);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testOutOfBoundsByte() throws Exception {
+        testSingleAbstraction(BlockTypes.PLANKS, TreeData.class, (byte) 7, TreeTypes.JUNGLE);
+    }
+
     @Test
     public void testBigMushroomConversion() throws Exception {
-        testSingleConversion(BlockTypes.BROWN_MUSHROOM_BLOCK, BigMushroomData.class, (byte) 5,
-                BigMushroomTypes.CENTER);
+        testSingleConversion(BlockTypes.BROWN_MUSHROOM_BLOCK, BigMushroomData.class, (byte) 5, BigMushroomTypes.CENTER);
     }
 
     @Test
     public void testBrickConversion() throws Exception {
-        testSingleConversion(BlockTypes.STONEBRICK, BrickData.class, (byte) 3,
-                BrickTypes.CHISELED);
+        testSingleConversion(BlockTypes.STONEBRICK, BrickData.class, (byte) 3, BrickTypes.CHISELED);
     }
 
     @SuppressWarnings("unchecked")
@@ -117,6 +121,11 @@ public class BlockTypeDataConverterTest {
                 new LogDataConverter.AxisDataValue(null)
         );
         testConversion(BlockTypes.LOG2, (byte) 13, expected);
+    }
+
+    @Test
+    public void testPlanksConversion() throws Exception {
+        testSingleAbstraction(BlockTypes.PLANKS, TreeData.class, (byte) 3, TreeTypes.JUNGLE);
     }
 
 }
