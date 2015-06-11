@@ -24,51 +24,46 @@
  */
 package blue.lapis.pore.converter.data.block;
 
+import static blue.lapis.pore.converter.data.block.LogDataConverter.TreeDataValue;
+
 import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataTypeConverter;
 
 import com.google.common.collect.ImmutableBiMap;
 import org.spongepowered.api.data.manipulator.block.AxisData;
+import org.spongepowered.api.data.manipulator.block.DecayableData;
 import org.spongepowered.api.data.manipulator.block.TreeData;
-import org.spongepowered.api.data.type.TreeType;
 import org.spongepowered.api.data.type.TreeTypes;
 import org.spongepowered.api.util.Axis;
 
-public class LogDataConverter extends DataTypeConverter {
+public class LeavesDataConverter extends DataTypeConverter {
 
     @SuppressWarnings("rawtypes")
-    private LogDataConverter() {
+    private LeavesDataConverter() {
         converters.put(
                 ImmutableBiMap.<AbstractDataValue, Byte>builder()
                         .put(new TreeDataValue(TreeTypes.OAK), (byte) 0)
                         .put(new TreeDataValue(TreeTypes.SPRUCE), (byte) 1)
                         .put(new TreeDataValue(TreeTypes.BIRCH), (byte) 2)
-                        .put(new TreeDataValue(TreeTypes.JUNGLE), (byte)3)
+                        .put(new TreeDataValue(TreeTypes.JUNGLE), (byte) 3)
                         .build(),
                 (byte) 2
         );
         applicableTypes.add(TreeData.class);
         converters.put(
                 ImmutableBiMap.<AbstractDataValue, Byte>builder()
-                        .put(new AxisDataValue(Axis.Y), (byte) 0)
-                        .put(new AxisDataValue(Axis.X), (byte) 1)
-                        .put(new AxisDataValue(Axis.Z), (byte) 2)
-                        //TODO: add mapping for data value 3 (not yet in SpongeAPI)
+                        .put(new DecayableDataValue(false), (byte) 0)
+                        .put(new DecayableDataValue(true), (byte) 1)
                         .build(),
-                (byte) 2
+                (byte) 1
         );
-        applicableTypes.add(AxisData.class);
+        applicableTypes.add(DecayableData.class);
     }
 
-    static class TreeDataValue extends AbstractDataValue<TreeData, TreeType> {
-        public TreeDataValue(TreeType value) {
-            super(TreeData.class, value);
-        }
-    }
-
-    static class AxisDataValue extends AbstractDataValue<AxisData, Axis> {
-        public AxisDataValue(Axis value) {
-            super(AxisData.class, value);
+    // ew ew ew ew ew ew ew ew ew ew ew ew ew
+    static class DecayableDataValue extends AbstractDataValue<DecayableData, Object> {
+        public DecayableDataValue(boolean flag) {
+            super(DecayableData.class, flag ? FLAG : ABSENT);
         }
     }
 }

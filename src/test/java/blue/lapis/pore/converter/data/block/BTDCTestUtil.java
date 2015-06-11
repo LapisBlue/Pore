@@ -33,7 +33,6 @@ import static org.mockito.Mockito.when;
 
 import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataTypeConverter;
-import blue.lapis.pore.converter.data.block.BlockDataConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 
 import com.google.common.base.Optional;
@@ -53,7 +52,7 @@ import java.util.Collections;
 @SuppressWarnings("rawtypes")
 public class BTDCTestUtil {
 
-    public static <T extends SingleValueData<V, T>, V> void testSingleAbstraction(BlockType blockType,
+    public static <T extends DataManipulator<T>, V> void testSingleAbstraction(BlockType blockType,
                                                                                   Class<T> dataClass, byte inputByte,
                                                                                   V expectedValue, boolean invert)
             throws Exception {
@@ -62,13 +61,13 @@ public class BTDCTestUtil {
         testAbstraction(blockType, inputByte, outputColl, invert);
     }
 
-    public static <T extends SingleValueData<V, T>, V> void testSingleAbstraction(BlockType blockType,
+    public static <T extends DataManipulator<T>, V> void testSingleAbstraction(BlockType blockType,
                                                                                   Class<T> dataClass, byte rawData,
                                                                                   V abstractedData) throws Exception {
         testSingleAbstraction(blockType, dataClass, rawData, abstractedData, false);
     }
 
-    public static <T extends SingleValueData<V, T>, V> void testSingleDeabstraction(BlockType blockType,
+    public static <T extends DataManipulator<T>, V> void testSingleDeabstraction(BlockType blockType,
                                                                                     Class<T> dataClass, byte rawData,
                                                                                     V abstractedData, boolean invert)
             throws Exception {
@@ -77,7 +76,7 @@ public class BTDCTestUtil {
         testDeabstraction(blockType, rawData, inputColl, invert);
     }
 
-    public static <T extends SingleValueData<V, T>, V> void testSingleDeabstraction(BlockType blockType,
+    public static <T extends DataManipulator<T>, V> void testSingleDeabstraction(BlockType blockType,
                                                                                     Class<T> dataClass, byte rawData,
                                                                                     V abstractedData) throws Exception {
         testSingleDeabstraction(blockType, dataClass, rawData, abstractedData, false);
@@ -85,7 +84,7 @@ public class BTDCTestUtil {
 
     @SuppressWarnings("unchecked")
     public static void testAbstraction(BlockType blockType, byte rawData,
-                                Collection<? extends AbstractDataValue<? extends SingleValueData, ?>> abstractedData,
+                                Collection<? extends AbstractDataValue<? extends DataManipulator, ?>> abstractedData,
                                 boolean invert) throws Exception {
         Location loc = new Location(mock(Extent.class), 0, 0, 0);
         when(loc.getType()).thenReturn(blockType);
@@ -96,26 +95,29 @@ public class BTDCTestUtil {
         if (invert) {
             assertFalse(derived.containsAll(abstractedData) && abstractedData.containsAll(derived));
         } else {
-            assertTrue(derived.containsAll(abstractedData));
-            assertTrue(abstractedData.containsAll(derived));
+            assertTrue("Missing expected data values", derived.containsAll(abstractedData));
+            assertTrue("Found unexpected data values", abstractedData.containsAll(derived));
         }
     }
 
     public static void testAbstraction(BlockType blockType, byte rawData,
-                                Collection<? extends AbstractDataValue<? extends SingleValueData, ?>> abstractedData)
+                                Collection<? extends AbstractDataValue<? extends DataManipulator, ?>> abstractedData)
             throws Exception {
         testAbstraction(blockType, rawData, abstractedData, false);
     }
 
     @SuppressWarnings("unchecked")
     public static void testDeabstraction(BlockType blockType, byte rawData,
-                                  Collection<? extends AbstractDataValue<? extends SingleValueData, ?>> abstractedData,
+                                  Collection<? extends AbstractDataValue<? extends DataManipulator, ?>> abstractedData,
                                   boolean invert) throws Exception {
         Location loc = new Location(mock(Extent.class), 0, 0, 0);
         when(loc.getType()).thenReturn(blockType);
         for (AbstractDataValue datum : abstractedData) {
-            SingleValueData<?, ?> spongeDatum = (SingleValueData<?, ?>)mock(datum.getDataClass());
-            when(spongeDatum.getValue()).thenReturn(datum.getValue());
+            DataManipulator<?> spongeDatum = datum.getValue() != AbstractDataValue.ABSENT
+                    ? (DataManipulator<?>)mock(datum.getDataClass()) : null;
+            if (spongeDatum instanceof SingleValueData) {
+                when(((SingleValueData)spongeDatum).getValue()).thenReturn(datum.getValue());
+            }
             when(loc.getData((Class<DataManipulator>)datum.getDataClass()))
                     .thenReturn(Optional.<DataManipulator>fromNullable(spongeDatum));
         }
@@ -129,25 +131,25 @@ public class BTDCTestUtil {
 
     @SuppressWarnings("unchecked")
     public static void testDeabstraction(BlockType blockType, byte rawData,
-                                  Collection<? extends AbstractDataValue<? extends SingleValueData, ?>> abstractedData)
+                                  Collection<? extends AbstractDataValue<? extends DataManipulator, ?>> abstractedData)
             throws Exception {
         testDeabstraction(blockType, rawData, abstractedData, false);
     }
 
     public static void testConversion(BlockType blockType, byte rawData,
-                               Collection<? extends AbstractDataValue<? extends SingleValueData, ?>> abstractedData,
+                               Collection<? extends AbstractDataValue<? extends DataManipulator, ?>> abstractedData,
                                boolean invert) throws Exception {
         testAbstraction(blockType, rawData, abstractedData, invert);
         testDeabstraction(blockType, rawData, abstractedData, invert);
     }
 
     public static void testConversion(BlockType blockType, byte rawData,
-                               Collection<? extends AbstractDataValue<? extends SingleValueData, ?>> abstractedData)
+                               Collection<? extends AbstractDataValue<? extends DataManipulator, ?>> abstractedData)
             throws Exception {
         testConversion(blockType, rawData, abstractedData, false);
     }
 
-    public static <T extends SingleValueData<V, T>, V> void testSingleConversion(BlockType blockType,
+    public static <T extends DataManipulator<T>, V> void testSingleConversion(BlockType blockType,
                                                                                  Class<T> dataClass, byte rawData,
                                                                                  V abstractedData, boolean invert)
             throws Exception {
@@ -156,7 +158,7 @@ public class BTDCTestUtil {
     }
 
 
-    public static <T extends SingleValueData<V, T>, V> void testSingleConversion(BlockType blockType,
+    public static <T extends DataManipulator<T>, V> void testSingleConversion(BlockType blockType,
                                                                                  Class<T> dataClass, byte rawData,
                                                                                  V abstractedData) throws Exception {
         testSingleConversion(blockType, dataClass, rawData, abstractedData, false);

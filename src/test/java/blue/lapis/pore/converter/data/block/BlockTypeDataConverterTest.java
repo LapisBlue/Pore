@@ -25,6 +25,7 @@
 package blue.lapis.pore.converter.data.block;
 
 import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testConversion;
+import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testDeabstraction;
 import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testSingleAbstraction;
 import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testSingleConversion;
 import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testSingleDeabstraction;
@@ -36,6 +37,7 @@ import blue.lapis.pore.converter.data.AbstractDataValue;
 import org.junit.Before;
 import org.junit.Test;
 import org.spongepowered.api.block.BlockTypes;
+import org.spongepowered.api.data.DataManipulator;
 import org.spongepowered.api.data.manipulator.SingleValueData;
 import org.spongepowered.api.data.manipulator.block.BigMushroomData;
 import org.spongepowered.api.data.manipulator.block.BrickData;
@@ -101,31 +103,37 @@ public class BlockTypeDataConverterTest {
                 new LogDataConverter.AxisDataValue(Axis.X)
         );
         testConversion(BlockTypes.LOG, (byte) 5, expected);
-        expected = Arrays.asList(
-                new LogDataConverter.TreeDataValue(TreeTypes.SPRUCE),
-                new LogDataConverter.AxisDataValue(null)
-        );
-        testConversion(BlockTypes.LOG, (byte) 13, expected);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testLog2Conversion() throws Exception {
-        Collection<? extends AbstractDataValue<? extends SingleValueData, ?>> expected = Arrays.asList(
+        Collection<? extends AbstractDataValue<? extends DataManipulator, ?>> expected = Arrays.asList(
                 new LogDataConverter.TreeDataValue(TreeTypes.DARK_OAK),
                 new LogDataConverter.AxisDataValue(Axis.X)
         );
         testConversion(BlockTypes.LOG2, (byte) 5, expected);
-        expected = Arrays.asList(
-                new LogDataConverter.TreeDataValue(TreeTypes.DARK_OAK),
-                new LogDataConverter.AxisDataValue(null)
-        );
-        testConversion(BlockTypes.LOG2, (byte) 13, expected);
     }
 
     @Test
     public void testPlanksConversion() throws Exception {
         testSingleAbstraction(BlockTypes.PLANKS, TreeData.class, (byte) 3, TreeTypes.JUNGLE);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testLeavesConversion() throws Exception {
+        Collection<? extends AbstractDataValue<? extends DataManipulator, ?>> input = Arrays.asList(
+                new LogDataConverter.TreeDataValue(TreeTypes.SPRUCE),
+                new LeavesDataConverter.DecayableDataValue(false)
+        );
+        testDeabstraction(BlockTypes.LEAVES, (byte) 1, input);
+        testSingleAbstraction(BlockTypes.LEAVES, TreeData.class, (byte) 1, TreeTypes.SPRUCE);
+        Collection<? extends AbstractDataValue<? extends DataManipulator, ?>> expected = Arrays.asList(
+                new LogDataConverter.TreeDataValue(TreeTypes.SPRUCE),
+                new LeavesDataConverter.DecayableDataValue(true)
+        );
+        testConversion(BlockTypes.LEAVES, (byte) 5, expected);
     }
 
 }

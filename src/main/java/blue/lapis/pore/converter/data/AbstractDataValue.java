@@ -25,9 +25,16 @@
 package blue.lapis.pore.converter.data;
 
 import com.google.common.base.Objects;
+import org.spongepowered.api.data.DataManipulator;
 import org.spongepowered.api.data.manipulator.SingleValueData;
 
-public class AbstractDataValue<T extends SingleValueData<V, T>, V> {
+import java.util.UUID;
+
+public class AbstractDataValue<T extends DataManipulator<T>, V> {
+
+    // yeah, this is... less than elegant
+    public static final Object FLAG = UUID.randomUUID();
+    public static final Object ABSENT = UUID.randomUUID();
 
     private final Class<T> clazz;
     private final V value;
@@ -35,6 +42,12 @@ public class AbstractDataValue<T extends SingleValueData<V, T>, V> {
     public AbstractDataValue(Class<T> dataClass, V value) {
         this.clazz = dataClass;
         this.value = value;
+    }
+
+    @SuppressWarnings("unchecked")
+    public AbstractDataValue(Class<T> dataClass) {
+        this.clazz = dataClass;
+        this.value = (V)FLAG;
     }
 
     public Class<T> getDataClass() {
@@ -46,9 +59,11 @@ public class AbstractDataValue<T extends SingleValueData<V, T>, V> {
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
-    public static AbstractDataValue of(SingleValueData data) {
+    public static <T extends DataManipulator<T>> AbstractDataValue of(DataManipulator<T> data) {
         try {
-            return new AbstractDataValue(Class.forName(data.getClass().getName().split("\\$")[0]), data.getValue());
+            Class<?> clazz = Class.forName(data.getClass().getName().split("\\$")[0]);
+            return new AbstractDataValue(clazz,
+                    data instanceof SingleValueData ? ((SingleValueData)data).getValue() : FLAG);
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
@@ -56,8 +71,6 @@ public class AbstractDataValue<T extends SingleValueData<V, T>, V> {
     }
 
     private static <T> boolean nullSafeEquals(T obj1, T obj2) {
-        boolean bothNull = (obj1 == null && obj2 == null);
-        boolean equal = (obj1 != null && obj1.equals(obj2));
         return (obj1 == null && obj2 == null) || (obj1 != null && obj1.equals(obj2));
     }
 

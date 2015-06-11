@@ -34,6 +34,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.block.BlockTypes;
+import org.spongepowered.api.data.DataManipulator;
 import org.spongepowered.api.data.manipulator.SingleValueData;
 import org.spongepowered.api.world.Location;
 
@@ -55,6 +56,7 @@ public class BlockDataConverter implements DataConverter<Location> {
                     .put(BlockTypes.BROWN_MUSHROOM_BLOCK, getConverter(BigMushroomDataConverter.class))
                     .put(BlockTypes.RED_MUSHROOM_BLOCK, getConverter(BigMushroomDataConverter.class))
                     .put(BlockTypes.STONEBRICK, getConverter(BrickDataConverter.class))
+                    .put(BlockTypes.LEAVES, getConverter(LeavesDataConverter.class))
                     .put(BlockTypes.LOG, getConverter(LogDataConverter.class))
                     .put(BlockTypes.LOG2, getConverter(Log2DataConverter.class))
                     .put(BlockTypes.PLANKS, getConverter(PlanksDataConverter.class))
@@ -89,14 +91,11 @@ public class BlockDataConverter implements DataConverter<Location> {
     @SuppressWarnings({"rawtypes", "unchecked"})
     public byte getDataValue(Location target) {
         DataTypeConverter converter = getConverter(target);
-        ArrayList<SingleValueData<?, ?>> data = new ArrayList<SingleValueData<?, ?>>();
-        for (Class<? extends SingleValueData> clazz : converter.getApplicableDataTypes()) {
-            // SingleValueData extends DataManipulator, idk why javac thinks the below call is unchecked
-            Optional<?> optData = target.getData(clazz);
+        ArrayList<DataManipulator<?>> data = new ArrayList<DataManipulator<?>>();
+        for (Class<? extends DataManipulator> clazz : converter.getApplicableDataTypes()) {
+            Optional<? extends DataManipulator> optData = target.getData(clazz);
             if (optData.isPresent()) {
-                if (optData.get() instanceof SingleValueData) {
-                    data.add((SingleValueData)optData.get());
-                }
+                data.add(optData.get());
             }
         }
         return converter.of(data);
@@ -108,8 +107,12 @@ public class BlockDataConverter implements DataConverter<Location> {
         DataTypeConverter converter = getConverter(target);
         Collection<AbstractDataValue> data = converter.of(dataValue);
         for (AbstractDataValue datum : data) {
-            SingleValueData svd = (SingleValueData) target.getOrCreate(datum.getDataClass()).get();
-            svd.setValue(datum.getValue());
+            if (datum.getValue() != AbstractDataValue.ABSENT) {
+                DataManipulator dm = (DataManipulator) target.getOrCreate(datum.getDataClass()).get();
+                if (datum instanceof SingleValueData) {
+                    ((SingleValueData) dm).setValue(datum.getValue());
+                }
+            }
         }
     }
 
