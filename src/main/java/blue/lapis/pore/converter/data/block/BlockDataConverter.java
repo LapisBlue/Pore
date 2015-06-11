@@ -30,6 +30,8 @@ import blue.lapis.pore.converter.data.DataConverter;
 import blue.lapis.pore.converter.data.DataTypeConverter;
 import blue.lapis.pore.converter.data.block.type.BigMushroomDataConverter;
 import blue.lapis.pore.converter.data.block.type.BrickDataConverter;
+import blue.lapis.pore.converter.data.block.type.Log2DataConverter;
+import blue.lapis.pore.converter.data.block.type.LogDataConverter;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
@@ -57,6 +59,8 @@ public class BlockDataConverter implements DataConverter<Location> {
                     .put(BlockTypes.BROWN_MUSHROOM_BLOCK, getConverter(BigMushroomDataConverter.class))
                     .put(BlockTypes.RED_MUSHROOM_BLOCK, getConverter(BigMushroomDataConverter.class))
                     .put(BlockTypes.STONEBRICK, getConverter(BrickDataConverter.class))
+                    .put(BlockTypes.LOG, getConverter(LogDataConverter.class))
+                    .put(BlockTypes.LOG2, getConverter(Log2DataConverter.class))
                     .build();
 
     private BlockDataConverter() {

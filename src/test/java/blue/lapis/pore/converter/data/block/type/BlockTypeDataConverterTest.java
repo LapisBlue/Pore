@@ -24,39 +24,28 @@
  */
 package blue.lapis.pore.converter.data.block.type;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static blue.lapis.pore.converter.data.block.type.BTDCTestUtil.testConversion;
+import static blue.lapis.pore.converter.data.block.type.BTDCTestUtil.testSingleAbstraction;
+import static blue.lapis.pore.converter.data.block.type.BTDCTestUtil.testSingleConversion;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.PoreTests;
 import blue.lapis.pore.converter.data.AbstractDataValue;
-import blue.lapis.pore.converter.data.DataTypeConverter;
-import blue.lapis.pore.converter.data.block.BlockDataConverter;
-import blue.lapis.pore.impl.block.PoreBlock;
 
-import com.google.common.base.Optional;
-import org.bukkit.block.Block;
 import org.junit.Before;
 import org.junit.Test;
-import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.block.BlockTypes;
-import org.spongepowered.api.data.DataManipulator;
 import org.spongepowered.api.data.manipulator.SingleValueData;
 import org.spongepowered.api.data.manipulator.block.BigMushroomData;
 import org.spongepowered.api.data.manipulator.block.BrickData;
 import org.spongepowered.api.data.type.BigMushroomTypes;
 import org.spongepowered.api.data.type.BrickTypes;
-import org.spongepowered.api.world.Location;
-import org.spongepowered.api.world.extent.Extent;
+import org.spongepowered.api.data.type.TreeTypes;
+import org.spongepowered.api.util.Axis;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 
 @SuppressWarnings("rawtypes")
 public class BlockTypeDataConverterTest {
@@ -73,70 +62,11 @@ public class BlockTypeDataConverterTest {
     }
 
     public void setConstants() throws Exception {
+        PoreTests.setConstants(Axis.class);
         PoreTests.setConstants(BlockTypes.class);
         PoreTests.setConstants(BigMushroomTypes.class);
         PoreTests.setConstants(BrickTypes.class);
-    }
-
-    public <T extends SingleValueData<V, T>, V> void testSingleAbstraction(BlockType blockType, Class<T> dataClass,
-                                                                           byte inputByte, V expectedValue)
-            throws Exception {
-        AbstractDataValue<T, V> output = new AbstractDataValue<T, V>(dataClass, expectedValue);
-        Collection<AbstractDataValue<T, V>> outputColl = Collections.singletonList(output);
-        testAbstraction(blockType, inputByte, outputColl);
-    }
-
-    public <T extends SingleValueData<V, T>, V> void testSingleDeabstraction(BlockType blockType, Class<T> dataClass,
-                                                                             V inputValue, byte expectedByte,
-                                                                             boolean invert) throws Exception {
-        AbstractDataValue<T, V> input = new AbstractDataValue<T, V>(dataClass, inputValue);
-        Collection<AbstractDataValue<T, V>> inputColl = Collections.singletonList(input);
-        testDeabstraction(blockType, inputColl, expectedByte, invert);
-    }
-
-    public <T extends SingleValueData<V, T>, V> void testSingleDeabstraction(BlockType blockType, Class<T> dataClass,
-                                                                             V inputValue, byte expectedByte)
-            throws Exception {
-        testSingleDeabstraction(blockType, dataClass, inputValue, expectedByte, false);
-    }
-
-    public void testAbstraction(BlockType blockType, byte inputByte,
-                                Collection<? extends AbstractDataValue<? extends SingleValueData, ?>> expectedData)
-            throws Exception {
-        Location loc = new Location(mock(Extent.class), 0, 0, 0);
-        when(loc.getType()).thenReturn(blockType);
-        Method getConverter = BlockDataConverter.class.getDeclaredMethod("getConverter", Location.class);
-        getConverter.setAccessible(true);
-        DataTypeConverter converter = (DataTypeConverter) getConverter.invoke(BlockDataConverter.INSTANCE, loc);
-        Collection<AbstractDataValue> derived = converter.of(inputByte);
-        assertTrue(derived.containsAll(expectedData));
-        assertTrue(expectedData.containsAll(derived));
-    }
-
-    @SuppressWarnings("unchecked")
-    public void testDeabstraction(BlockType blockType,
-                                  Collection<? extends AbstractDataValue<? extends SingleValueData, ?>> inputData,
-                                  byte expectedByte, boolean invert) throws Exception {
-        Location loc = new Location(mock(Extent.class), 0, 0, 0);
-        when(loc.getType()).thenReturn(blockType);
-        for (AbstractDataValue datum : inputData) {
-            SingleValueData<?, ?> spongeDatum = (SingleValueData<?, ?>)mock(datum.getDataClass());
-            when(spongeDatum.getValue()).thenReturn(datum.getValue());
-            when(loc.getData((Class<DataManipulator>)datum.getDataClass()))
-                    .thenReturn(Optional.<DataManipulator>fromNullable(spongeDatum));
-        }
-        Block block = PoreBlock.of(loc);
-        if (invert) {
-            assertNotEquals((long) expectedByte, (long) block.getData());
-        } else {
-            assertEquals(expectedByte, block.getData());
-        }
-    }
-
-    public void testDeabstraction(BlockType blockType,
-                                  Collection<? extends AbstractDataValue<? extends SingleValueData, ?>> inputData,
-                                  byte expectedByte) throws Exception {
-        testDeabstraction(blockType, inputData, expectedByte, false);
+        PoreTests.setConstants(TreeTypes.class);
     }
 
     @Test
@@ -147,29 +77,45 @@ public class BlockTypeDataConverterTest {
     }
 
     @Test
-    public void testBigMushroomAbstraction() throws Exception {
-        testSingleAbstraction(BlockTypes.BROWN_MUSHROOM_BLOCK, BigMushroomData.class, (byte) 5,
+    public void testBigMushroomConversion() throws Exception {
+        testSingleConversion(BlockTypes.BROWN_MUSHROOM_BLOCK, BigMushroomData.class, (byte) 5,
                 BigMushroomTypes.CENTER);
     }
 
     @Test
-    public void testBigMushroomDeabstraction() throws Exception {
-        testSingleDeabstraction(BlockTypes.BROWN_MUSHROOM_BLOCK, BigMushroomData.class, BigMushroomTypes.ALL_OUTSIDE,
-                (byte) 14);
-        testSingleDeabstraction(BlockTypes.BROWN_MUSHROOM_BLOCK, BigMushroomData.class, BigMushroomTypes.ALL_OUTSIDE,
-                (byte) 5, true);
-    }
-
-    @Test
-    public void testBrickAbstraction() throws Exception {
-        testSingleAbstraction(BlockTypes.STONEBRICK, BrickData.class, (byte) 3,
+    public void testBrickConversion() throws Exception {
+        testSingleConversion(BlockTypes.STONEBRICK, BrickData.class, (byte) 3,
                 BrickTypes.CHISELED);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
-    public void testBrickDeabstraction() throws Exception {
-        testSingleDeabstraction(BlockTypes.STONEBRICK, BrickData.class, BrickTypes.CHISELED,
-                (byte) 3);
+    public void testLogConversion() throws Exception {
+        Collection<? extends AbstractDataValue<? extends SingleValueData, ?>> expected = Arrays.asList(
+                new LogDataConverter.TreeDataValue(TreeTypes.SPRUCE),
+                new LogDataConverter.AxisDataValue(Axis.X)
+        );
+        testConversion(BlockTypes.LOG, (byte) 5, expected);
+        expected = Arrays.asList(
+                new LogDataConverter.TreeDataValue(TreeTypes.SPRUCE),
+                new LogDataConverter.AxisDataValue(null)
+        );
+        testConversion(BlockTypes.LOG, (byte) 13, expected);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testLog2Conversion() throws Exception {
+        Collection<? extends AbstractDataValue<? extends SingleValueData, ?>> expected = Arrays.asList(
+                new LogDataConverter.TreeDataValue(TreeTypes.DARK_OAK),
+                new LogDataConverter.AxisDataValue(Axis.X)
+        );
+        testConversion(BlockTypes.LOG2, (byte) 5, expected);
+        expected = Arrays.asList(
+                new LogDataConverter.TreeDataValue(TreeTypes.DARK_OAK),
+                new LogDataConverter.AxisDataValue(null)
+        );
+        testConversion(BlockTypes.LOG2, (byte) 13, expected);
     }
 
 }
