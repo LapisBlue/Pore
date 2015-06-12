@@ -55,7 +55,7 @@ public class PoreScore extends PoreWrapper<Score> implements org.bukkit.scoreboa
     @Override
     @SuppressWarnings("deprecation")
     public String getEntry() {
-        return Texts.toLegacy(getHandle().getName());
+        return Texts.legacy().to(getHandle().getName());
     }
 
     @Override

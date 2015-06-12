@@ -77,6 +77,7 @@ import org.spongepowered.api.statistic.EntityStatistic;
 import org.spongepowered.api.statistic.StatisticGroup;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.util.TextMessageException;
 
 import java.io.FileNotFoundException;
 import java.net.InetSocketAddress;
@@ -110,20 +111,24 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     @SuppressWarnings("deprecation")
     public String getDisplayName() {
-        return Texts.toLegacy(get(DisplayNameData.class).getDisplayName());
+        return Texts.legacy().to(get(DisplayNameData.class).getDisplayName());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setDisplayName(String name) {
-        this.get(DisplayNameData.class).setDisplayName(Texts.fromLegacy(name));
+        try {
+            this.get(DisplayNameData.class).setDisplayName(Texts.legacy().from(name));
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public String getPlayerListName() {
         Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
-        return info.isPresent() ? Texts.toLegacy(info.get().getDisplayName()) : this.getDisplayName();
+        return info.isPresent() ? Texts.legacy().to(info.get().getDisplayName()) : this.getDisplayName();
     }
 
     @Override
@@ -131,7 +136,11 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     public void setPlayerListName(String name) {
         Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
         if (info.isPresent()) {
-            info.get().setDisplayName(Texts.fromLegacy(name));
+            try {
+                info.get().setDisplayName(Texts.legacy().from(name));
+            } catch (TextMessageException ex) {
+                throw new IllegalArgumentException(ex);
+            }
         }
     }
 
@@ -789,7 +798,11 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     @SuppressWarnings("deprecation")
     public void sendMessage(String message) {
-        getHandle().sendMessage(Texts.fromLegacy(message));
+        try {
+            getHandle().sendMessage(Texts.legacy().from(message));
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
     @Override
@@ -797,7 +810,11 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     public void sendMessage(String[] messages) {
         Text[] texts = new Text[messages.length];
         for (int i = 0; i < messages.length; i++) {
-            texts[i] = Texts.fromLegacy(messages[i]);
+            try {
+                texts[i] = Texts.legacy().from(messages[i]);
+            } catch (TextMessageException ex) {
+                throw new IllegalArgumentException(ex);
+            }
         }
         this.getHandle().sendMessage(texts);
     }

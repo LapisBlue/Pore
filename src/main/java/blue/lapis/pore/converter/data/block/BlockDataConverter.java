@@ -91,7 +91,7 @@ public class BlockDataConverter implements DataConverter<Location> {
     @SuppressWarnings({"rawtypes", "unchecked"})
     public byte getDataValue(Collection<DataManipulator<?>> manipulators, BlockType target) {
         final DataTypeConverter converter = getConverter(target);
-        Collection <DataManipulator<?>> data = Collections2.filter(manipulators, new Predicate<DataManipulator<?>>() {
+        Collection<DataManipulator<?>> data = Collections2.filter(manipulators, new Predicate<DataManipulator<?>>() {
             @Override
             public boolean apply(DataManipulator<?> input) {
                 if (input == null) {

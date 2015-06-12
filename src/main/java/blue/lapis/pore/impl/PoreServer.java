@@ -694,7 +694,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public String getMotd() {
-        return Texts.toLegacy(getHandle().getMotd());
+        return Texts.legacy().to(getHandle().getMotd());
     }
 
     @Override

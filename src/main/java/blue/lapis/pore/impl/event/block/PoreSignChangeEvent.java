@@ -34,6 +34,7 @@ import org.bukkit.entity.Player;
 import org.spongepowered.api.event.block.tileentity.SignChangeEvent;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.util.TextMessageException;
 
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent 
         List<Text> lines = getHandle().getNewData().getLines();
         String[] result = new String[lines.size()];
         for (int i = 0; i < lines.size(); i++) {
-            result[i] = Texts.toLegacy(lines.get(i));
+            result[i] = Texts.legacy().to(lines.get(i));
         }
         return result;
     }
@@ -76,13 +77,17 @@ public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent 
     @Override
     @SuppressWarnings("deprecation")
     public String getLine(int index) throws IndexOutOfBoundsException {
-        return Texts.toLegacy(getHandle().getNewData().getLine(index));
+        return Texts.legacy().to(getHandle().getNewData().getLine(index));
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setLine(int index, String line) throws IndexOutOfBoundsException {
-        getHandle().setNewData(getHandle().getNewData().setLine(index, Texts.fromLegacy(line)));
+        try {
+            getHandle().setNewData(getHandle().getNewData().setLine(index, Texts.legacy().from(line)));
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
     @Override

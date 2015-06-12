@@ -31,6 +31,7 @@ import blue.lapis.pore.impl.entity.PorePlayer;
 import org.bukkit.entity.Player;
 import org.spongepowered.api.event.entity.player.PlayerQuitEvent;
 import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.util.TextMessageException;
 
 public class PorePlayerQuitEvent extends org.bukkit.event.player.PlayerQuitEvent {
 
@@ -52,13 +53,17 @@ public class PorePlayerQuitEvent extends org.bukkit.event.player.PlayerQuitEvent
 
     @Override
     public String getQuitMessage() {
-        return Texts.toLegacy(handle.getNewMessage());
+        return Texts.legacy().to(handle.getNewMessage());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setQuitMessage(String quitMessage) {
-        handle.setNewMessage(Texts.fromLegacy(quitMessage));
+        try {
+            handle.setNewMessage(Texts.legacy().from(quitMessage));
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
 }

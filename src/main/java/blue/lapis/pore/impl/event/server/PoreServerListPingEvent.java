@@ -33,6 +33,7 @@ import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.util.CachedServerIcon;
 import org.spongepowered.api.event.server.StatusPingEvent;
 import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.util.TextMessageException;
 
 import java.net.InetAddress;
 import java.util.Iterator;
@@ -57,13 +58,17 @@ public class PoreServerListPingEvent extends ServerListPingEvent {
 
     @Override
     public String getMotd() {
-        return Texts.toLegacy(handle.getResponse().getDescription());
+        return Texts.legacy().to(handle.getResponse().getDescription());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setMotd(String motd) {
-        handle.getResponse().setDescription(Texts.fromLegacy(motd));
+        try {
+            handle.getResponse().setDescription(Texts.legacy().from(motd));
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
     @Override

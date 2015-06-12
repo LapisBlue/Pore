@@ -58,7 +58,7 @@ public class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent {
     @Override
     @SuppressWarnings("deprecation") // no sense in throwing warnings when we can't fix them
     public String getMessage() {
-        return Texts.toLegacy(handle.getMessage());
+        return Texts.legacy().to(handle.getMessage());
     }
 
     @Override

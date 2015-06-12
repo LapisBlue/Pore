@@ -31,7 +31,6 @@ import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.withSettings;
 
 import blue.lapis.pore.PoreTests;
-import blue.lapis.pore.impl.block.PoreBlockState;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.collect.ImmutableListMultimap;
@@ -39,8 +38,6 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ListMultimap;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,7 +48,6 @@ import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.extent.Extent;
 
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -127,8 +123,6 @@ public class WrapperConverterTest {
         if (!base.isInterface() && Modifier.isFinal(base.getModifiers())) {
             if (base == Location.class) {
                 return new Location(mock(Extent.class), 0, 0, 0);
-            } else if (base.getSuperclass() == TileEntity.class) {
-
             }
         }
 

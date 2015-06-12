@@ -36,6 +36,7 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.spongepowered.api.scoreboard.objective.Objective;
 import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.util.TextMessageException;
 
 public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.scoreboard.Objective {
 
@@ -56,14 +57,19 @@ public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.
     @Override
     @SuppressWarnings("deprecation")
     public String getDisplayName() throws IllegalStateException {
-        return Texts.toLegacy(getHandle().getDisplayName());
+        return Texts.legacy().to(getHandle().getDisplayName());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setDisplayName(String displayName) throws IllegalStateException, IllegalArgumentException {
-        checkState(displayName != null, "Display name cannot be null");
-        getHandle().setDisplayName(Texts.fromLegacy(displayName));
+        checkState(displayName != null, "Display name must not be null");
+        try {
+            //noinspection ConstantConditions
+            getHandle().setDisplayName(Texts.legacy().from(displayName));
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
     @Override

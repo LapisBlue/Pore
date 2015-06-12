@@ -32,6 +32,7 @@ import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.util.TextMessageException;
 import org.spongepowered.api.util.command.CommandSource;
 
 public class PoreCommandSender extends PorePermissible implements CommandSender {
@@ -62,7 +63,11 @@ public class PoreCommandSender extends PorePermissible implements CommandSender 
     @Override
     @SuppressWarnings("deprecation")
     public void sendMessage(String message) {
-        getHandle().sendMessage(Texts.fromLegacy(message));
+        try {
+            getHandle().sendMessage(Texts.legacy().from(message));
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
     @Override
@@ -70,7 +75,11 @@ public class PoreCommandSender extends PorePermissible implements CommandSender 
     public void sendMessage(String[] messages) {
         Text[] texts = new Text[messages.length];
         for (int i = 0; i < messages.length; i++) {
-            texts[i] = Texts.fromLegacy(messages[i]);
+            try {
+                texts[i] = Texts.legacy().from(messages[i]);
+            } catch (TextMessageException ex) {
+                throw new IllegalArgumentException(ex);
+            }
         }
         this.getHandle().sendMessage(texts);
     }

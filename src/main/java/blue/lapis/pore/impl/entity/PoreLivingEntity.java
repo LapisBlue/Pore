@@ -62,6 +62,7 @@ import org.spongepowered.api.entity.projectile.source.ProjectileSource;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Text.Literal;
 import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.util.TextMessageException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -306,7 +307,11 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     @SuppressWarnings("deprecation")
     public void setCustomName(String name) {
-        get(DisplayNameData.class).setDisplayName(Texts.fromLegacy(name)); //TODO deprecated
+        try {
+            get(DisplayNameData.class).setDisplayName(Texts.legacy().from(name));
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
     @Override
@@ -333,7 +338,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     public Entity getLeashHolder() throws IllegalStateException {
         if (getHandle() instanceof Agent) {
-            return get(LeashData.class).getLeashHolder() != null 
+            return get(LeashData.class).getLeashHolder() != null
                     ? PoreEntity.of(get(LeashData.class).getLeashHolder()) : null;
         }
         return null;

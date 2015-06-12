@@ -32,6 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.bukkit.command.Command;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.util.TextMessageException;
 import org.spongepowered.api.util.annotation.NonnullByDefault;
 import org.spongepowered.api.util.command.CommandCallable;
 import org.spongepowered.api.util.command.CommandException;
@@ -76,13 +77,23 @@ public class PoreCommandCallable extends PoreWrapper<Command> implements Command
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public Optional<? extends Text> getHelp(CommandSource source) {
-        return Optional.of(Texts.fromLegacy(getHandle().getDescription()));
+        try {
+            return Optional.of(Texts.legacy().from(getHandle().getDescription()));
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public Text getUsage(CommandSource source) {
-        return Texts.fromLegacy(getHandle().getUsage());
+        try {
+            return Texts.legacy().from(getHandle().getUsage());
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
 }

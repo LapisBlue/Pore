@@ -31,6 +31,7 @@ import blue.lapis.pore.impl.entity.PorePlayer;
 import org.bukkit.entity.Player;
 import org.spongepowered.api.event.entity.player.PlayerJoinEvent;
 import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.util.TextMessageException;
 
 public class PorePlayerJoinEvent extends org.bukkit.event.player.PlayerJoinEvent {
 
@@ -52,13 +53,17 @@ public class PorePlayerJoinEvent extends org.bukkit.event.player.PlayerJoinEvent
 
     @Override
     public String getJoinMessage() {
-        return Texts.toLegacy(handle.getNewMessage());
+        return Texts.legacy().to(handle.getNewMessage());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setJoinMessage(String joinMessage) {
-        handle.setNewMessage(Texts.fromLegacy(joinMessage));
+        try {
+            handle.setNewMessage(Texts.legacy().from(joinMessage));
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
 }

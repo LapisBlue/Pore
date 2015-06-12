@@ -24,12 +24,10 @@
  */
 package blue.lapis.pore.converter.data;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.spongepowered.api.data.DataManipulator;
-import org.spongepowered.api.data.manipulator.SingleValueData;
 
 import java.util.ArrayList;
 import java.util.Collection;

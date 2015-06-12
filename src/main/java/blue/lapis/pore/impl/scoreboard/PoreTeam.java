@@ -41,6 +41,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.spongepowered.api.entity.player.User;
 import org.spongepowered.api.scoreboard.Team;
 import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.util.TextMessageException;
 
 import java.util.Set;
 
@@ -63,41 +64,54 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     @Override
     @SuppressWarnings("deprecation")
     public String getDisplayName() throws IllegalStateException {
-        return Texts.toLegacy(getHandle().getDisplayName());
+        return Texts.legacy().to(getHandle().getDisplayName());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setDisplayName(String displayName) throws IllegalStateException, IllegalArgumentException {
-        getHandle().setDisplayName(Texts.fromLegacy(displayName));
+        checkState(displayName.length() > 32, "Display name must not be longer than 32 characters");
+        try {
+            getHandle().setDisplayName(Texts.legacy().from(displayName));
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public String getPrefix() throws IllegalStateException {
-        return Texts.toLegacy(getHandle().getPrefix());
+        return Texts.legacy().to(getHandle().getPrefix());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setPrefix(String prefix) throws IllegalStateException, IllegalArgumentException {
-        checkState(prefix != null, "Prefix cannot be null");
-        //noinspection ConstantConditions
-        getHandle().setPrefix(Texts.fromLegacy(prefix));
+        checkState(prefix != null, "Prefix must not be null");
+        try {
+            //noinspection ConstantConditions
+            getHandle().setPrefix(Texts.legacy().from(prefix));
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public String getSuffix() throws IllegalStateException {
-        return Texts.toLegacy(getHandle().getSuffix());
+        return Texts.legacy().to(getHandle().getSuffix());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setSuffix(String suffix) throws IllegalStateException, IllegalArgumentException {
-        checkState(suffix != null, "Suffix cannot be null");
+        checkState(suffix != null, "Suffix must not be null");
         //noinspection ConstantConditions
-        getHandle().setSuffix(Texts.fromLegacy(suffix));
+        try {
+            getHandle().setSuffix(Texts.legacy().from(suffix));
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
     @Override

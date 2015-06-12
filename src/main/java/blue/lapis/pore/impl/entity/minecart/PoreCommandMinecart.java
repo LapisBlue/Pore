@@ -37,6 +37,7 @@ import org.spongepowered.api.data.manipulator.CommandData;
 import org.spongepowered.api.entity.vehicle.minecart.MinecartCommandBlock;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.util.TextMessageException;
 
 import java.util.Set;
 
@@ -77,14 +78,18 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
 
     @Override
     public void setName(String name) {
-       // getHandle().setCommandName(name); TODO ??
+        // getHandle().setCommandName(name); TODO ??
         throw new NotImplementedException("TODO");
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void sendMessage(String message) {
-        getHandle().sendMessage(Texts.fromLegacy(message));
+        try {
+            getHandle().sendMessage(Texts.legacy().from(message));
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
     @Override
@@ -92,7 +97,11 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
     public void sendMessage(String[] messages) {
         Text[] texts = new Text[messages.length];
         for (int i = 0; i < messages.length; i++) {
-            texts[i] = Texts.fromLegacy(messages[i]);
+            try {
+                texts[i] = Texts.legacy().from(messages[i]);
+            } catch (TextMessageException ex) {
+                throw new IllegalArgumentException(ex);
+            }
         }
         this.getHandle().sendMessage(texts);
     }
