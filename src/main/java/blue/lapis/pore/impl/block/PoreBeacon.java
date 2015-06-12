@@ -25,8 +25,8 @@
 package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.impl.inventory.PoreInventory;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.Inventory;
 import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.block.tileentity.carrier.Beacon;
@@ -42,12 +42,12 @@ public class PoreBeacon extends PoreBlockState implements org.bukkit.block.Beaco
     }
 
     @Override
-    public Beacon getHandle() {
-        return (Beacon) super.getHandle();
+    Beacon getTileEntity() {
+        return (Beacon) super.getTileEntity();
     }
 
     @Override
     public Inventory getInventory() {
-        throw new NotImplementedException("TODO");
+        return PoreInventory.of(getTileEntity().getInventory());
     }
 }

@@ -39,9 +39,10 @@ public class PoreCommandBlock extends PoreBlockState implements org.bukkit.block
         super(handle);
     }
 
+
     @Override
-    public CommandBlock getHandle() {
-        return (CommandBlock) super.getHandle();
+    CommandBlock getTileEntity() {
+        return (CommandBlock) super.getTileEntity();
     }
 
     @Override
@@ -56,7 +57,7 @@ public class PoreCommandBlock extends PoreBlockState implements org.bukkit.block
 
     @Override
     public String getName() {
-        throw new NotImplementedException("TODO"); // TODO
+        return getTileEntity().getName();
     }
 
     @Override

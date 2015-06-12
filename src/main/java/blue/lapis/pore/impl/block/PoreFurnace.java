@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.impl.inventory.PoreFurnaceInventory;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.FurnaceInventory;
@@ -41,8 +42,8 @@ public class PoreFurnace extends PoreBlockState implements org.bukkit.block.Furn
     }
 
     @Override
-    public Furnace getHandle() {
-        return (Furnace) super.getHandle();
+    Furnace getTileEntity() {
+        return (Furnace) super.getTileEntity();
     }
 
     @Override
@@ -67,6 +68,6 @@ public class PoreFurnace extends PoreBlockState implements org.bukkit.block.Furn
 
     @Override
     public FurnaceInventory getInventory() {
-        throw new NotImplementedException("TODO");
+        return PoreFurnaceInventory.of(getTileEntity().getInventory());
     }
 }

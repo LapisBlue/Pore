@@ -27,9 +27,11 @@ package blue.lapis.pore.converter.wrapper;
 import static blue.lapis.pore.PoreTests.PACKAGE;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.withSettings;
 
 import blue.lapis.pore.PoreTests;
+import blue.lapis.pore.impl.block.PoreBlockState;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.collect.ImmutableListMultimap;
@@ -37,14 +39,19 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ListMultimap;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.tileentity.TileEntity;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.extent.Extent;
 
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -65,9 +72,9 @@ public class WrapperConverterTest {
         ListMultimap<Class<?>, Class<?>> registry = createRegistry();
         for (Class<?> type : registry.keySet()) {
             objects.add(new Object[]{
-                StringUtils.removeStart(type.getName(), IMPL_PREFIX),
-                type,
-                registry.get(type)
+                    StringUtils.removeStart(type.getName(), IMPL_PREFIX),
+                    type,
+                    registry.get(type)
             });
         }
         return objects.build();
@@ -120,15 +127,26 @@ public class WrapperConverterTest {
         if (!base.isInterface() && Modifier.isFinal(base.getModifiers())) {
             if (base == Location.class) {
                 return new Location(mock(Extent.class), 0, 0, 0);
+            } else if (base.getSuperclass() == TileEntity.class) {
+
             }
         }
 
+        Object mock;
         if (interfaces.size() == 1) {
-            return mock(base);
+            mock = mock(base);
         } else {
-            return mock(base, withSettings().extraInterfaces(
+            mock = mock(base, withSettings().extraInterfaces(
                     interfaces.subList(1, interfaces.size()).toArray(new Class<?>[interfaces.size() - 1])));
         }
+        // o.b.BlockState's subclasses break this test because of incongruencies between SpongeAPI and Bukkit
+        // this code basically assures that a NullPointerException won't be thrown while converting
+        if (base.getPackage().getName().startsWith("org.spongepowered.api.block.tileentity")) {
+            Location loc = new Location(mock(Extent.class), 0, 0, 0);
+            when(loc.getState()).thenReturn(mock(BlockState.class));
+            when(((TileEntity) mock).getBlock()).thenReturn(loc);
+        }
+        return mock;
     }
 
     @Test

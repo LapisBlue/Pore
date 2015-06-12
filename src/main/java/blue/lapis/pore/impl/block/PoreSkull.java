@@ -42,8 +42,8 @@ public class PoreSkull extends PoreBlockState implements org.bukkit.block.Skull 
     }
 
     @Override
-    public Skull getHandle() {
-        return (Skull) super.getHandle();
+    Skull getTileEntity() {
+        return (Skull) super.getTileEntity();
     }
 
     @Override

@@ -24,6 +24,10 @@
  */
 package blue.lapis.pore.converter.data;
 
+import org.spongepowered.api.data.DataManipulator;
+
+import java.util.Collection;
+
 public interface DataConverter<T> {
 
     byte getDataValue(T target);

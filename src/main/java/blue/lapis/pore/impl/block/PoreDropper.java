@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.impl.inventory.PoreInventory;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.Inventory;
@@ -41,8 +42,8 @@ public class PoreDropper extends PoreBlockState implements org.bukkit.block.Drop
     }
 
     @Override
-    public Dropper getHandle() {
-        return (Dropper) super.getHandle();
+    Dropper getTileEntity() {
+        return (Dropper) super.getTileEntity();
     }
 
     @Override
@@ -52,6 +53,6 @@ public class PoreDropper extends PoreBlockState implements org.bukkit.block.Drop
 
     @Override
     public Inventory getInventory() {
-        throw new NotImplementedException("TODO");
+        return PoreInventory.of(getTileEntity().getInventory());
     }
 }

@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.impl.block;
 
+import blue.lapis.pore.converter.data.block.BlockDataConverter;
+import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreWrapper;
@@ -34,28 +36,54 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
+import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.block.tileentity.TileEntity;
 
 import java.util.List;
 
-public class PoreBlockState extends PoreWrapper<TileEntity> implements BlockState {
+public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukkit.block.BlockState {
 
-    // TODO: Actually block states exist even without tile entities
-    public static PoreBlockState of(TileEntity handle) {
+    private org.spongepowered.api.world.Location block;
+    private TileEntity tileEntity;
+
+    public static PoreBlockState of(org.spongepowered.api.world.Location block) {
+        PoreBlockState state = WrapperConverter.of(PoreBlockState.class, block.getState());
+        if (state != null) {
+            state.setBlock(block);
+        }
+        return state;
+    }
+
+    public static PoreBlockState of(org.spongepowered.api.block.BlockState handle) {
         return WrapperConverter.of(PoreBlockState.class, handle);
     }
 
-    protected PoreBlockState(TileEntity handle) {
+    protected PoreBlockState(BlockState handle) {
         super(handle);
+    }
+
+    protected PoreBlockState(TileEntity handle) {
+        super(handle
+                .getBlock()
+                .getState());
+        this.block = handle.getBlock();
+        this.tileEntity = handle;
+    }
+
+    TileEntity getTileEntity() {
+        return tileEntity;
+    }
+
+    protected void setBlock(org.spongepowered.api.world.Location block) {
+        this.block = block;
     }
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(getHandle().getBlock());
+        return PoreBlock.of(block);
     }
 
     @Override
@@ -65,52 +93,57 @@ public class PoreBlockState extends PoreWrapper<TileEntity> implements BlockStat
 
     @Override
     public Material getType() {
-        return getBlock().getType();
+        return MaterialConverter.of(getHandle().getType());
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public int getTypeId() {
-        return getBlock().getTypeId();
+        return getType().getId();
     }
 
     @Override
     public byte getLightLevel() {
-        return getBlock().getLightLevel();
+        //noinspection ConstantConditions
+        return isPlaced() ? getBlock().getLightLevel() : null;
     }
 
     @Override
     public World getWorld() {
-        return PoreWorld.of(getHandle().getBlock().getExtent());
+        return PoreWorld.of(block.getExtent());
     }
 
     @Override
     public int getX() {
-        return getBlock().getX();
+        //noinspection ConstantConditions
+        return isPlaced() ? getBlock().getX() : null;
     }
 
     @Override
     public int getY() {
-        return getBlock().getY();
+        //noinspection ConstantConditions
+        return isPlaced() ? getBlock().getY() : null;
     }
 
     @Override
     public int getZ() {
-        return getBlock().getZ();
+        //noinspection ConstantConditions
+        return isPlaced() ? getBlock().getZ() : null;
     }
 
     @Override
     public Location getLocation() {
-        return getBlock().getLocation();
+        return isPlaced() ? getBlock().getLocation() : null;
     }
 
     @Override
     public Location getLocation(Location loc) {
-        return getBlock().getLocation(loc);
+        return isPlaced() ? getBlock().getLocation(loc) : null;
     }
 
     @Override
     public Chunk getChunk() {
-        return getBlock().getChunk();
+        return isPlaced() ? getBlock().getChunk() : null;
     }
 
     @Override
@@ -120,12 +153,17 @@ public class PoreBlockState extends PoreWrapper<TileEntity> implements BlockStat
 
     @Override
     public void setType(Material type) {
-        getBlock().setType(type);
+        //TODO: this isn't right
+        if (isPlaced()) {
+            getBlock().setType(type);
+        }
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public boolean setTypeId(int type) {
-        throw new NotImplementedException("TODO");
+        setType(Material.getMaterial(type));
+        return true;
     }
 
     @Override
@@ -145,7 +183,7 @@ public class PoreBlockState extends PoreWrapper<TileEntity> implements BlockStat
 
     @Override
     public byte getRawData() {
-        return getBlock().getData();
+        return BlockDataConverter.INSTANCE.getDataValue(getHandle().getManipulators(), getHandle().getType());
     }
 
     @Override
@@ -155,7 +193,7 @@ public class PoreBlockState extends PoreWrapper<TileEntity> implements BlockStat
 
     @Override
     public boolean isPlaced() {
-        throw new NotImplementedException("TODO");
+        return isPlaced();
     }
 
     @Override

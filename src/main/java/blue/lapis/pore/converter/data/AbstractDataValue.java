@@ -66,8 +66,8 @@ public class AbstractDataValue<T extends DataManipulator<T>, V> {
                     data instanceof SingleValueData ? ((SingleValueData)data).getValue() : FLAG);
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     private static <T> boolean nullSafeEquals(T obj1, T obj2) {

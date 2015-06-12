@@ -40,8 +40,8 @@ public class PoreSign extends PoreBlockState implements org.bukkit.block.Sign {
     }
 
     @Override
-    public Sign getHandle() {
-        return (Sign) super.getHandle();
+    Sign getTileEntity() {
+        return (Sign) super.getTileEntity();
     }
 
     @Override

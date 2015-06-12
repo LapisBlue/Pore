@@ -44,8 +44,8 @@ public class PoreBanner extends PoreBlockState implements org.bukkit.block.Banne
     }
 
     @Override
-    public Banner getHandle() {
-        return (Banner) super.getHandle();
+    Banner getTileEntity() {
+        return (Banner) super.getTileEntity();
     }
 
     @Override

@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.impl.inventory.PoreInventory;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.Inventory;
@@ -41,8 +42,8 @@ public class PoreChest extends PoreBlockState implements org.bukkit.block.Chest 
     }
 
     @Override
-    public Chest getHandle() {
-        return (Chest) super.getHandle();
+    Chest getTileEntity() {
+        return (Chest) super.getTileEntity();
     }
 
     @Override
@@ -52,6 +53,6 @@ public class PoreChest extends PoreBlockState implements org.bukkit.block.Chest 
 
     @Override
     public Inventory getInventory() {
-        throw new NotImplementedException("TODO");
+        return PoreInventory.of(getTileEntity().getInventory());
     }
 }

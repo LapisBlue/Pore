@@ -27,6 +27,7 @@ package blue.lapis.pore.impl.block;
 import blue.lapis.pore.converter.data.block.BlockDataConverter;
 import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.type.material.MaterialConverter;
+import blue.lapis.pore.converter.type.world.BiomeConverter;
 import blue.lapis.pore.converter.type.world.DirectionConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
@@ -185,17 +186,37 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public BlockFace getFace(Block block) {
-        throw new NotImplementedException("TODO");
+        int displacement = Math.abs(block.getX() - getX()) + Math.abs(block.getY() - getY())
+                + Math.abs(block.getZ() - getZ());
+        if (displacement > 1) {
+            return null;
+        } else if (displacement == 0) {
+            return BlockFace.SELF;
+        } else if (block.getX() > getX()) {
+            return BlockFace.EAST;
+        } else if (block.getX() < getX()) {
+            return BlockFace.WEST;
+        } else if (block.getY() > getY()) {
+            return BlockFace.UP;
+        } else if (block.getY() < getY()) {
+            return BlockFace.DOWN;
+        } else if (block.getZ() > getZ()) {
+            return BlockFace.NORTH;
+        } else if (block.getZ() < getZ()) {
+            return BlockFace.SOUTH;
+        } else {
+            return null; // I don't think this is logically possible
+        }
     }
 
     @Override
     public BlockState getState() {
-        throw new NotImplementedException("TODO");
+        return PoreBlockState.of(getHandle().getState());
     }
 
     @Override
     public Biome getBiome() {
-        throw new NotImplementedException("TODO");
+        return BiomeConverter.of(getHandle().getBiome());
     }
 
     @Override
@@ -230,7 +251,7 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public int getBlockPower() {
-        throw new NotImplementedException("TODO");
+        return getBlockPower(BlockFace.SELF);
     }
 
     @Override
@@ -245,7 +266,7 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public double getTemperature() {
-        throw new NotImplementedException("TODO");
+        return getHandle().getTemperature();
     }
 
     @Override

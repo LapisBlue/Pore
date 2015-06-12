@@ -29,7 +29,8 @@ import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataConverter;
 import blue.lapis.pore.converter.data.DataTypeConverter;
 
-import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import org.spongepowered.api.block.BlockType;
@@ -40,7 +41,6 @@ import org.spongepowered.api.world.Location;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
@@ -55,12 +55,12 @@ public class BlockDataConverter implements DataConverter<Location> {
             ImmutableMap.<BlockType, DataTypeConverter>builder()
                     .put(BlockTypes.BROWN_MUSHROOM_BLOCK, getConverter(BigMushroomDataConverter.class))
                     .put(BlockTypes.RED_MUSHROOM_BLOCK, getConverter(BigMushroomDataConverter.class))
-                    .put(BlockTypes.STONEBRICK, getConverter(BrickDataConverter.class))
                     .put(BlockTypes.LEAVES, getConverter(LeavesDataConverter.class))
                     .put(BlockTypes.LEAVES2, getConverter(Leaves2DataConverter.class))
                     .put(BlockTypes.LOG, getConverter(LogDataConverter.class))
                     .put(BlockTypes.LOG2, getConverter(Log2DataConverter.class))
                     .put(BlockTypes.PLANKS, getConverter(PlanksDataConverter.class))
+                    .put(BlockTypes.STONEBRICK, getConverter(BrickDataConverter.class))
                     .build();
 
     private BlockDataConverter() {
@@ -88,24 +88,38 @@ public class BlockDataConverter implements DataConverter<Location> {
         }
     }
 
-    @Override
     @SuppressWarnings({"rawtypes", "unchecked"})
-    public byte getDataValue(Location target) {
-        DataTypeConverter converter = getConverter(target);
-        ArrayList<DataManipulator<?>> data = new ArrayList<DataManipulator<?>>();
-        for (Class<? extends DataManipulator> clazz : converter.getApplicableDataTypes()) {
-            Optional<? extends DataManipulator> optData = target.getData(clazz);
-            if (optData.isPresent()) {
-                data.add(optData.get());
+    public byte getDataValue(Collection<DataManipulator<?>> manipulators, BlockType target) {
+        final DataTypeConverter converter = getConverter(target);
+        Collection <DataManipulator<?>> data = Collections2.filter(manipulators, new Predicate<DataManipulator<?>>() {
+            @Override
+            public boolean apply(DataManipulator<?> input) {
+                if (input == null) {
+                    return false;
+                }
+                try {
+                    Class<? extends DataManipulator<?>> clazz = (Class<? extends DataManipulator<?>>)
+                            Class.forName(input.getClass().getName().split("\\$")[0]);
+                    return converter.getApplicableDataTypes().contains(clazz);
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                    return false;
+                }
             }
-        }
+        });
         return converter.of(data);
     }
 
     @Override
     @SuppressWarnings({"rawtypes", "unchecked"})
+    public byte getDataValue(Location target) {
+        return getDataValue(target.getManipulators(), target.getType());
+    }
+
+    @Override
+    @SuppressWarnings({"rawtypes", "unchecked"})
     public void setDataValue(Location target, byte dataValue) {
-        DataTypeConverter converter = getConverter(target);
+        DataTypeConverter converter = getConverter(target.getType());
         Collection<AbstractDataValue> data = converter.of(dataValue);
         for (AbstractDataValue datum : data) {
             if (datum.getValue() != AbstractDataValue.ABSENT) {
@@ -118,11 +132,11 @@ public class BlockDataConverter implements DataConverter<Location> {
     }
 
     @SuppressWarnings("rawtypes")
-    private DataTypeConverter getConverter(Location target) {
-        if (!CONVERTER_MAP.containsKey(target.getType())) {
-            throw new IllegalArgumentException("Cannot convert data for block type " + target.getType().getName());
+    private DataTypeConverter getConverter(BlockType target) {
+        if (!CONVERTER_MAP.containsKey(target)) {
+            throw new IllegalArgumentException("Cannot convert data for block type " + target.getName());
         }
-        return CONVERTER_MAP.get(target.getType());
+        return CONVERTER_MAP.get(target);
     }
 
 }

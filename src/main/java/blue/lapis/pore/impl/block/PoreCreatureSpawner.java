@@ -43,8 +43,8 @@ public class PoreCreatureSpawner extends PoreBlockState implements CreatureSpawn
     }
 
     @Override
-    public MobSpawner getHandle() {
-        return (MobSpawner) super.getHandle();
+    MobSpawner getTileEntity() {
+        return (MobSpawner) super.getTileEntity();
     }
 
     @Override

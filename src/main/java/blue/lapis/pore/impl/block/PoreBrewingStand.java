@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.impl.inventory.PoreBrewerInventory;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.BrewerInventory;
@@ -40,9 +41,10 @@ public class PoreBrewingStand extends PoreBlockState implements org.bukkit.block
         super(handle);
     }
 
+
     @Override
-    public BrewingStand getHandle() {
-        return (BrewingStand) super.getHandle();
+    BrewingStand getTileEntity() {
+        return (BrewingStand) super.getTileEntity();
     }
 
     @Override
@@ -57,6 +59,6 @@ public class PoreBrewingStand extends PoreBlockState implements org.bukkit.block
 
     @Override
     public BrewerInventory getInventory() {
-        throw new NotImplementedException("TODO");
+        return PoreBrewerInventory.of(getTileEntity().getInventory());
     }
 }

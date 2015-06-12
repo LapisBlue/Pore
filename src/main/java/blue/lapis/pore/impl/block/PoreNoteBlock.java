@@ -24,11 +24,13 @@
  */
 package blue.lapis.pore.impl.block;
 
+import blue.lapis.pore.converter.type.world.effect.NoteConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Instrument;
 import org.bukkit.block.NoteBlock;
+import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.block.tileentity.Note;
 
 public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
@@ -42,18 +44,20 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
     }
 
     @Override
-    public Note getHandle() {
-        return (Note) super.getHandle();
+    Note getTileEntity() {
+        return (Note) super.getTileEntity();
     }
 
     @Override
     public org.bukkit.Note getNote() {
-        throw new NotImplementedException("TODO");
+        return NoteConverter.of(getTileEntity().getData().isPresent()
+                ? getTileEntity().getData().get().getNote() : null);
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public byte getRawNote() {
-        throw new NotImplementedException("TODO");
+        return getNote().getId();
     }
 
     @Override
@@ -63,12 +67,13 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
 
     @Override
     public void setRawNote(byte note) {
-        throw new NotImplementedException("TODO");
+        setNote(new org.bukkit.Note(note));
     }
 
     @Override
     public boolean play() {
-        throw new NotImplementedException("TODO");
+        getTileEntity().playNote();
+        return getTileEntity().getBlock().getType() == BlockTypes.NOTEBLOCK;
     }
 
     @Override
