@@ -22,7 +22,6 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  */
-
 package blue.lapis.pore.lib.org.slf4j.bridge;
 
 import org.slf4j.Logger;

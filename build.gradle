@@ -89,6 +89,8 @@ configurations {
 
 // Project dependencies
 dependencies {
+    compile project('ap')
+
     // To update, go to https://repo.spongepowered.org/maven/org/spongepowered/spongeapi/2.1-SNAPSHOT/
     // Then pick latest version (or whatever version you want)
     compile 'org.spongepowered:spongeapi:2.1-20150708.033636-126'
@@ -107,8 +109,15 @@ dependencies {
 
 // Read source files using UTF-8
 tasks.withType(JavaCompile) {
-    options.compilerArgs += ['-Xlint:all', '-Xlint:-deprecation']
+    options.compilerArgs += [
+            '-Xlint:all',
+            '-Xlint:-deprecation'
+    ]
     options.encoding = 'UTF-8'
+}
+
+compileJava {
+    options.compilerArgs += ['-processor', 'blue.lapis.pore.event.EventProcessor']
 }
 
 test {
@@ -117,6 +126,10 @@ test {
         exceptionFormat = 'full'
         events 'skipped'
     }
+}
+
+compileTestJava {
+    options.compilerArgs += '-proc:none'
 }
 
 // Remap the older Bukkit methods

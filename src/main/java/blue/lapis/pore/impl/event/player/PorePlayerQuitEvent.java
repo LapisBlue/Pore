@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
 import org.bukkit.entity.Player;
@@ -33,6 +34,7 @@ import org.spongepowered.api.event.entity.player.PlayerQuitEvent;
 import org.spongepowered.api.text.Texts;
 import org.spongepowered.api.util.TextMessageException;
 
+@RegisterEvent
 public class PorePlayerQuitEvent extends org.bukkit.event.player.PlayerQuitEvent {
 
     private final PlayerQuitEvent handle;

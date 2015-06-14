@@ -30,16 +30,12 @@ import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.plugin.EventPriorityConverter;
-import blue.lapis.pore.impl.event.block.PoreBlockBreakEvent;
-import blue.lapis.pore.impl.event.player.PoreAsyncPlayerChatEvent;
-import blue.lapis.pore.impl.event.player.PorePlayerJoinEvent;
-import blue.lapis.pore.impl.event.player.PorePlayerQuitEvent;
-import blue.lapis.pore.impl.event.server.PoreServerListPingEvent;
 import blue.lapis.pore.util.constructor.PoreConstructors;
 import blue.lapis.pore.util.constructor.SimpleConstructor;
 
 import com.google.common.collect.MapMaker;
 import com.google.common.collect.Maps;
+import com.google.common.reflect.ClassPath;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
@@ -49,6 +45,12 @@ import org.bukkit.plugin.RegisteredListener;
 import org.bukkit.plugin.SimplePluginManager;
 import org.spongepowered.api.service.event.EventManager;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.util.EnumMap;
@@ -57,17 +59,37 @@ import java.util.logging.Level;
 
 public final class PoreEventWrapper {
 
+    private static final String EVENT_PACKAGE = "blue.lapis.pore.impl.event";
+
     private PoreEventWrapper() {
     }
 
+    @SuppressWarnings("unchecked")
     public static void register() {
-        register(PorePlayerJoinEvent.class);
-        register(PorePlayerQuitEvent.class);
-        register(PoreAsyncPlayerChatEvent.class);
-
-        register(PoreBlockBreakEvent.class);
-
-        register(PoreServerListPingEvent.class);
+        try {
+            long time = System.currentTimeMillis();
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(PoreEventWrapper.class.getResourceAsStream("/events.txt"))
+            );
+            String line;
+            while ((line = reader.readLine()) != null) {
+                try {
+                    Class<?> eventClass = Class.forName(line);
+                    if (Event.class.isAssignableFrom(eventClass)) {
+                        register((Class<? extends Event>)eventClass);
+                    } else {
+                        Pore.getLogger().warn("Class " + line + " is marked to be registered but does not implement "
+                                + "Event");
+                    }
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                    Pore.getLogger().warn("Failed to register class " + line + " as an event");
+                }
+            }
+            Pore.getLogger().debug("Registered events in " + (System.currentTimeMillis() - time) + "ms");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public static void call(Event event, EventPriority priority) {

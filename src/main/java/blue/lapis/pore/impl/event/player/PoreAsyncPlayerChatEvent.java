@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
 import org.apache.commons.lang3.NotImplementedException;
@@ -37,6 +38,7 @@ import org.spongepowered.api.text.Texts;
 import java.util.IllegalFormatException;
 import java.util.Set;
 
+@RegisterEvent
 public class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent {
 
     private final PlayerChatEvent handle;

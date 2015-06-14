@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.event.block;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
@@ -34,6 +35,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.spongepowered.api.event.entity.player.PlayerBreakBlockEvent;
 
+@RegisterEvent
 public class PoreBlockBreakEvent extends BlockBreakEvent {
 
     private final PlayerBreakBlockEvent handle;
