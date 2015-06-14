@@ -25,24 +25,26 @@
 package blue.lapis.pore.impl.event.block;
 
 import blue.lapis.pore.impl.block.PoreBlock;
+import blue.lapis.pore.impl.block.PoreBlockState;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.event.block.BlockGrowEvent;
+import org.spongepowered.api.event.block.BlockChangeEvent;
 import org.spongepowered.api.event.block.BlockEvent;
 
 public class PoreBlockGrowEvent extends BlockGrowEvent {
 
-    private final BlockEvent handle;
+    private final BlockChangeEvent handle;
 
-    public PoreBlockGrowEvent(BlockEvent handle) {
+    public PoreBlockGrowEvent(BlockChangeEvent handle) {
         super(null, null);
         this.handle = Preconditions.checkNotNull(handle, "handle");
     }
 
-    public BlockEvent getHandle() {
+    public BlockChangeEvent getHandle() {
         return handle;
     }
 
@@ -53,17 +55,17 @@ public class PoreBlockGrowEvent extends BlockGrowEvent {
 
     @Override
     public BlockState getNewState() {
-        throw new NotImplementedException("TODO"); // TODO
+        return PoreBlockState.of(getHandle().getReplacementBlock().getState());
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException("TODO"); // TODO
+        return getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException("TODO"); // TODO
+        getHandle().setCancelled(cancel);
     }
 
 }

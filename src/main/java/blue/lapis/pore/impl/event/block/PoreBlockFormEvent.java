@@ -27,23 +27,23 @@ package blue.lapis.pore.impl.event.block;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.impl.block.PoreBlock;
+import blue.lapis.pore.impl.block.PoreBlockState;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.event.block.BlockFormEvent;
-import org.spongepowered.api.event.block.BlockEvent;
+import org.spongepowered.api.event.block.BlockChangeEvent;
 
 public class PoreBlockFormEvent extends BlockFormEvent {
 
-    private final BlockEvent handle;
+    private final BlockChangeEvent handle;
 
-    public PoreBlockFormEvent(BlockEvent handle) {
+    public PoreBlockFormEvent(BlockChangeEvent handle) {
         super(null, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public BlockEvent getHandle() {
+    public BlockChangeEvent getHandle() {
         return handle;
     }
 
@@ -54,17 +54,17 @@ public class PoreBlockFormEvent extends BlockFormEvent {
 
     @Override
     public BlockState getNewState() {
-        throw new NotImplementedException("TODO"); // TODO
+        return PoreBlockState.of(getHandle().getReplacementBlock().getState());
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException("TODO"); // TODO
+        return getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException("TODO"); // TODO
+        getHandle().setCancelled(cancel);
     }
 
 }
