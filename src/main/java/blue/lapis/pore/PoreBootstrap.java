@@ -35,6 +35,7 @@ import org.spongepowered.api.event.state.ServerStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
 
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
 import java.net.URLClassLoader;
 
 /**
@@ -43,9 +44,9 @@ import java.net.URLClassLoader;
 @Plugin(id = "pore", name = "Pore")
 public class PoreBootstrap {
 
-    Class<?> poreClass;
-    Object poreInstance;
-    URLClassLoader poreClassLoader;
+    private Class<?> poreClass;
+    private Object poreInstance;
+    private URLClassLoader poreClassLoader;
 
     @Inject
     private Game game;
@@ -55,14 +56,13 @@ public class PoreBootstrap {
 
     @Subscribe
     public void onInitialization(PreInitializationEvent event) {
-        poreClassLoader = new URLClassLoader(null, getClass().getClassLoader());
+        URL urls[] = new URL[] {getClass().getProtectionDomain().getCodeSource().getLocation()};
+        poreClassLoader = new URLClassLoader(urls, getClass().getClassLoader());
         try {
             poreClass = Class.forName("blue.lapis.pore.Pore", true, poreClassLoader);
+            poreInstance = poreClass.getConstructor(Game.class, Logger.class).newInstance(game, logger);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
-        try {
-            poreInstance = poreClass.getConstructor(Game.class, Logger.class).newInstance(game, logger);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
