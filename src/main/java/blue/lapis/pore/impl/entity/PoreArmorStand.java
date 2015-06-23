@@ -28,6 +28,7 @@ import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.vector.EulerAngleConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
@@ -231,5 +232,15 @@ public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entit
     @Override
     public void setSmall(boolean small) {
         getHandle().setSmall(small);
+    }
+
+    @Override
+    public boolean isMarker() {
+        throw new NotImplementedException("TODO");
+    }
+
+    @Override
+    public void setMarker(boolean marker) {
+        throw new NotImplementedException("TODO");
     }
 }

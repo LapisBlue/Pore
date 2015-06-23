@@ -113,13 +113,13 @@ public class BlockDataConverter implements DataConverter<Location> {
     @Override
     @SuppressWarnings({"rawtypes", "unchecked"})
     public byte getDataValue(Location target) {
-        return getDataValue(target.getManipulators(), target.getType());
+        return getDataValue(target.getManipulators(), target.getBlockType());
     }
 
     @Override
     @SuppressWarnings({"rawtypes", "unchecked"})
     public void setDataValue(Location target, byte dataValue) {
-        DataTypeConverter converter = getConverter(target.getType());
+        DataTypeConverter converter = getConverter(target.getBlockType());
         Collection<AbstractDataValue> data = converter.of(dataValue);
         for (AbstractDataValue datum : data) {
             if (datum.getValue() != AbstractDataValue.ABSENT) {
