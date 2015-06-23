@@ -57,7 +57,7 @@ public class BlockTypeDataConverterTest {
     public void setupEnvironment() throws Exception {
         Field instance = Pore.class.getDeclaredField("instance");
         instance.setAccessible(true);
-        instance.set(null, new Pore());
+        instance.set(null, Pore.getInstance());
         Field logger = Pore.class.getDeclaredField("logger");
         logger.setAccessible(true);
         logger.set(instance.get(null), PoreTests.getLogger());

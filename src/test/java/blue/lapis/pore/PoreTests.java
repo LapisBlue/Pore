@@ -44,11 +44,9 @@ public final class PoreTests {
 
     public static void mockPlugin() {
         if (Pore.instance == null) {
-            Pore pore = new Pore();
-            Pore.instance = pore;
-            pore.game = mock(Game.class);
-            pore.logger = LoggerFactory.getLogger("Pore");
-            Pore.testLogger = pore.logger;
+            Logger logger = LoggerFactory.getLogger("Pore");
+            Pore.instance = new Pore(mock(Game.class), logger);
+            Pore.testLogger = logger;
         }
     }
 
