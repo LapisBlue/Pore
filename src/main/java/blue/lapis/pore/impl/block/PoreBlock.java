@@ -96,12 +96,12 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public Material getType() {
-        return MaterialConverter.of(getHandle().getType());
+        return MaterialConverter.of(getHandle().getBlockType());
     }
 
     @Override
     public void setType(Material type) {
-        getHandle().replaceWith(MaterialConverter.asBlock(type));
+        getHandle().setBlockType(MaterialConverter.asBlock(type));
     }
 
     @Override
@@ -174,8 +174,8 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
     public boolean setTypeId(int type, boolean applyPhysics) {
         //TODO: applyPhysics
         BlockType blockType = MaterialConverter.asBlock(Material.getMaterial(type));
-        getHandle().replaceWith(blockType);
-        return getHandle().getType().equals(blockType);
+        getHandle().setBlockType(blockType);
+        return getHandle().getBlockType().equals(blockType);
     }
 
     @Override
@@ -211,7 +211,7 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public BlockState getState() {
-        return PoreBlockState.of(getHandle().getState());
+        return PoreBlockState.of(getHandle().getBlock());
     }
 
     @Override
@@ -226,22 +226,22 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public boolean isBlockPowered() {
-        return getHandle().isPowered();
+        return getHandle().isBlockPowered();
     }
 
     @Override
     public boolean isBlockIndirectlyPowered() {
-        return getHandle().isIndirectlyPowered();
+        return getHandle().isBlockIndirectlyPowered();
     }
 
     @Override
     public boolean isBlockFacePowered(BlockFace face) {
-        return getHandle().isFacePowered(DirectionConverter.of(face));
+        return getHandle().isBlockFacePowered(DirectionConverter.of(face));
     }
 
     @Override
     public boolean isBlockFaceIndirectlyPowered(BlockFace face) {
-        return getHandle().isFaceIndirectlyPowered(DirectionConverter.of(face));
+        return getHandle().isBlockFaceIndirectlyPowered(DirectionConverter.of(face));
     }
 
     @Override
@@ -256,12 +256,12 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public boolean isEmpty() {
-        return getHandle().getType() == BlockTypes.AIR;
+        return getHandle().getBlockType() == BlockTypes.AIR;
     }
 
     @Override
     public boolean isLiquid() {
-        return getHandle().getType().isLiquid();
+        return getHandle().getBlockType().isLiquid();
     }
 
     @Override
@@ -281,12 +281,12 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public boolean breakNaturally() {
-        return getHandle().dig();
+        return getHandle().digBlock();
     }
 
     @Override
     public boolean breakNaturally(ItemStack tool) {
-        return getHandle().digWith(ItemStackConverter.of(tool));
+        return getHandle().digBlockWith(ItemStackConverter.of(tool));
     }
 
     @Override

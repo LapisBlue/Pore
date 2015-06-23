@@ -52,6 +52,7 @@ import org.bukkit.Statistic;
 import org.bukkit.WeatherType;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
@@ -672,7 +673,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     public void setBedSpawnLocation(Location location, boolean force) {
         org.spongepowered.api.world.Location spongeLoc = LocationConverter.of(location);
         //noinspection ConstantConditions
-        if (force || spongeLoc.getType() == BlockTypes.BED) {
+        if (force || spongeLoc.getBlockType() == BlockTypes.BED) {
             this.get(RespawnLocationData.class).setRespawnLocation(spongeLoc);
         }
     }
@@ -782,6 +783,16 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public double getHealthScale() {
+        throw new NotImplementedException("TODO");
+    }
+
+    @Override
+    public Entity getSpectatorTarget() {
+        throw new NotImplementedException("TODO");
+    }
+
+    @Override
+    public void setSpectatorTarget(Entity entity) {
         throw new NotImplementedException("TODO");
     }
 

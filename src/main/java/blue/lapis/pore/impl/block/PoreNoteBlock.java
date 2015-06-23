@@ -73,7 +73,7 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
     @Override
     public boolean play() {
         getTileEntity().playNote();
-        return getTileEntity().getBlock().getType() == BlockTypes.NOTEBLOCK;
+        return getTileEntity().getBlock().getBlockType() == BlockTypes.NOTEBLOCK;
     }
 
     @Override

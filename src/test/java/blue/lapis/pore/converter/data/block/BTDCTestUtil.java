@@ -114,7 +114,7 @@ public class BTDCTestUtil {
                                                  abstractedData,
                                          boolean invert) throws Exception {
         Location loc = new Location(mock(Extent.class), 0, 0, 0);
-        when(loc.getType()).thenReturn(blockType);
+        when(loc.getBlockType()).thenReturn(blockType);
         /*for (AbstractDataValue datum : abstractedData) {
             DataManipulator<?> spongeDatum = datum.getValue() != AbstractDataValue.ABSENT
                     ? (DataManipulator<?>) mock(datum.getDataClass()) : null;

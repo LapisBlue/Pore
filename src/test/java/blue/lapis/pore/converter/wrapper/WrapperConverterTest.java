@@ -137,7 +137,7 @@ public class WrapperConverterTest {
         // this code basically assures that a NullPointerException won't be thrown while converting
         if (base.getPackage().getName().startsWith("org.spongepowered.api.block.tileentity")) {
             Location loc = new Location(mock(Extent.class), 0, 0, 0);
-            when(loc.getState()).thenReturn(mock(BlockState.class));
+            when(loc.getBlock()).thenReturn(mock(BlockState.class));
             when(((TileEntity) mock).getBlock()).thenReturn(loc);
         }
         return mock;

@@ -658,7 +658,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public int getMaxHeight() {
-        return getHandle().getBuildHeight();
+        throw new NotImplementedException("TODO");
     }
 
     @Override

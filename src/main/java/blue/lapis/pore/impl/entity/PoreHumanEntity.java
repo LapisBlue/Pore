@@ -114,7 +114,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     @Override
     public InventoryView openWorkbench(org.bukkit.Location location, boolean force) {
         Location block = LocationConverter.of(location);
-        if (force || block.getType() == BlockTypes.CRAFTING_TABLE) {
+        if (force || block.getBlockType() == BlockTypes.CRAFTING_TABLE) {
             if (block instanceof DataHolder) {
                 return this.openInventory(PoreInventory.of(
                         block.getData(InventoryItemData.class).get().getInventory() // TODO: is this right?
@@ -127,7 +127,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     @Override
     public InventoryView openEnchanting(org.bukkit.Location location, boolean force) {
         Location block = LocationConverter.of(location);
-        if (force || block.getType() == BlockTypes.ENCHANTING_TABLE) {
+        if (force || block.getBlockType() == BlockTypes.ENCHANTING_TABLE) {
             if (block instanceof DataHolder) {
                 return this.openInventory(PoreInventory.of(
                         block.getData(InventoryItemData.class).get().getInventory() //TODO: is this right?

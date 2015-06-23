@@ -55,7 +55,7 @@ public class PoreBlockCanBuildEvent extends BlockCanBuildEvent {
 
     @Override
     public Material getMaterial() {
-        return MaterialConverter.of(getHandle().getBlock().getType());
+        return MaterialConverter.of(getHandle().getBlock().getBlockType());
     }
 
     @Override

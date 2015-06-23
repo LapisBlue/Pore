@@ -50,7 +50,7 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukki
     private TileEntity tileEntity;
 
     public static PoreBlockState of(org.spongepowered.api.world.Location block) {
-        PoreBlockState state = WrapperConverter.of(PoreBlockState.class, block.getState());
+        PoreBlockState state = WrapperConverter.of(PoreBlockState.class, block.getBlock());
         if (state != null) {
             state.setBlock(block);
         }
@@ -66,9 +66,7 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukki
     }
 
     protected PoreBlockState(TileEntity handle) {
-        super(handle
-                .getBlock()
-                .getState());
+        super(handle.getBlock().getBlock());
         this.block = handle.getBlock();
         this.tileEntity = handle;
     }
