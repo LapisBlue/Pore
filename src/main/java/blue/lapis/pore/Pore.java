@@ -34,6 +34,7 @@ import org.bukkit.plugin.PluginLoadOrder;
 import org.slf4j.Logger;
 import org.slf4j.helpers.NOPLogger;
 import org.spongepowered.api.Game;
+import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
 
 /**
@@ -45,16 +46,19 @@ public final class Pore {
 
     protected static Pore instance;
 
-    Pore(Game game, Logger logger) {
-        this.game = game;
-        this.logger = logger;
-        onInitialization();
-    }
-
     protected Game game;
     protected Logger logger;
 
     private PoreServer server;
+
+    protected Pore() {
+    }
+
+    public Pore(Game game, Logger logger) {
+        this.game = game;
+        this.logger = logger;
+        onInitialization();
+    }
 
     public static Pore getInstance() {
         return Preconditions.checkNotNull(instance);

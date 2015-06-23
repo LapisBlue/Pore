@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.command;
 
 import blue.lapis.pore.Pore;
+import blue.lapis.pore.PoreBootstrap;
 import blue.lapis.pore.command.PoreCommandCallable;
 
 import com.google.common.base.Function;
@@ -63,7 +64,7 @@ public class PoreCommandMap extends SimpleCommandMap {
         // TODO: Label
         // TODO: Fallback prefix
 
-        Object plugin = Pore.getInstance();
+        Object plugin = PoreBootstrap.getInstance();
         if (command instanceof PluginCommand) {
             plugin = Pore.getPlugin(((PluginCommand) command).getPlugin());
         }

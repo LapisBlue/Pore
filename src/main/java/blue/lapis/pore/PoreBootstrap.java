@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore;
 
+import blue.lapis.pore.util.PoreClassLoader;
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import org.slf4j.Logger;
 import org.spongepowered.api.Game;
@@ -35,6 +37,7 @@ import org.spongepowered.api.event.state.ServerStoppingEvent;
 import org.spongepowered.api.plugin.Plugin;
 
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -43,6 +46,8 @@ import java.net.URLClassLoader;
  */
 @Plugin(id = "pore", name = "Pore")
 public class PoreBootstrap {
+
+    private static PoreBootstrap instance;
 
     private Class<?> poreClass;
     private Object poreInstance;
@@ -54,10 +59,23 @@ public class PoreBootstrap {
     @Inject
     private Logger logger;
 
+    public static PoreBootstrap getInstance() {
+        return Preconditions.checkNotNull(instance);
+    }
+
     @Subscribe
     public void onInitialization(PreInitializationEvent event) {
-        URL urls[] = new URL[] {getClass().getProtectionDomain().getCodeSource().getLocation()};
-        poreClassLoader = new URLClassLoader(urls, getClass().getClassLoader());
+        instance = this;
+        URL[] urls;
+        try {
+            urls = new URL[]{
+                    new URL(getClass().getProtectionDomain().getCodeSource().getLocation()
+                            .toString().split("!")[0] + "!/")
+            };
+        } catch (MalformedURLException ex) {
+            throw new RuntimeException(ex);
+        }
+        poreClassLoader = new PoreClassLoader(urls, null);
         try {
             poreClass = Class.forName("blue.lapis.pore.Pore", true, poreClassLoader);
             poreInstance = poreClass.getConstructor(Game.class, Logger.class).newInstance(game, logger);

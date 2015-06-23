@@ -29,7 +29,6 @@ import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testDeabstractio
 import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testSingleAbstraction;
 import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testSingleConversion;
 
-import blue.lapis.pore.Pore;
 import blue.lapis.pore.PoreTests;
 import blue.lapis.pore.converter.data.AbstractDataValue;
 
@@ -46,7 +45,6 @@ import org.spongepowered.api.data.type.BrickTypes;
 import org.spongepowered.api.data.type.TreeTypes;
 import org.spongepowered.api.util.Axis;
 
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -55,12 +53,7 @@ public class BlockTypeDataConverterTest {
 
     @Before
     public void setupEnvironment() throws Exception {
-        Field instance = Pore.class.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(null, Pore.getInstance());
-        Field logger = Pore.class.getDeclaredField("logger");
-        logger.setAccessible(true);
-        logger.set(instance.get(null), PoreTests.getLogger());
+        PoreTests.mockPlugin();
         setConstants();
     }
 

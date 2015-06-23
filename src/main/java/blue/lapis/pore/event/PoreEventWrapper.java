@@ -29,6 +29,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.Pore;
+import blue.lapis.pore.PoreBootstrap;
 import blue.lapis.pore.converter.type.plugin.EventPriorityConverter;
 import blue.lapis.pore.impl.event.block.PoreBlockBreakEvent;
 import blue.lapis.pore.impl.event.player.PoreAsyncPlayerChatEvent;
@@ -156,7 +157,7 @@ public final class PoreEventWrapper {
                 listeners.put(priority, listener);
             }
 
-            Pore.getGame().getEventManager().register(Pore.getInstance(), sponge,
+            Pore.getGame().getEventManager().register(PoreBootstrap.getInstance(), sponge,
                     EventPriorityConverter.of(priority), listener);
         }
 
