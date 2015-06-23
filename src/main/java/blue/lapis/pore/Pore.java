@@ -49,16 +49,19 @@ import javax.inject.Inject;
  *
  * @author Lapis Blue
  */
-@Plugin(id = "pore", name = "Pore")
 public final class Pore {
 
     protected static Pore instance;
 
-    @Inject
-    protected Game game;
+    Pore(Game game, Logger logger) {
+        this.game = game;
+        this.logger = logger;
+        onInitialization();
+    }
 
-    @Inject
+    protected Game game;
     protected Logger logger;
+
     private PoreServer server;
 
     public static Pore getInstance() {
@@ -81,8 +84,7 @@ public final class Pore {
         return new PorePluginContainer(plugin);
     }
 
-    @Subscribe
-    public void onInitialization(PreInitializationEvent event) {
+    public void onInitialization() {
         instance = this;
 
         // Initialize logging
@@ -98,18 +100,15 @@ public final class Pore {
         server.loadPlugins();
     }
 
-    @Subscribe
-    public void onAboutToStart(ServerAboutToStartEvent event) {
+    public void onAboutToStart() {
         server.enablePlugins(PluginLoadOrder.STARTUP);
     }
 
-    @Subscribe
-    public void onStarting(ServerStartingEvent event) {
+    public void onStarting() {
         server.enablePlugins(PluginLoadOrder.POSTWORLD);
     }
 
-    @Subscribe
-    public void onShutdown(ServerStoppingEvent event) {
+    public void onShutdown() {
         logger.info("Disabling Bukkit plugins, please wait...");
         server.disablePlugins();
         logger.info("Finished disabling Bukkit plugins!");
