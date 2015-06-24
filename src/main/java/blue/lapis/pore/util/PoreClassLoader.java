@@ -27,6 +27,7 @@ package blue.lapis.pore.util;
 import blue.lapis.pore.PoreBootstrap;
 import com.google.common.collect.Sets;
 
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Set;
@@ -36,9 +37,35 @@ public class PoreClassLoader extends URLClassLoader {
     private static Set<String> exclusions = Sets.newHashSet(
             "blue.lapis.pore.PoreBootstrap"
     );
+    private final ClassLoader parent;
 
     public PoreClassLoader(URL[] urls, ClassLoader parent) {
-        super(urls, parent);
+        super(urls, null);
+        this.parent = parent;
+    }
+
+    @Override
+    protected Class<?> findClass(String name) throws ClassNotFoundException {
+        try {
+            if (!exclusions.contains(name)) {
+                return super.findClass(name);
+            }
+        } catch (ClassNotFoundException ignored) {
+            try {
+                return findClass0(name, PoreBootstrap.class.getClassLoader());
+            } catch (ClassNotFoundException ignored2) {}
+        }
+        return findClass0(name, this.parent);
+    }
+
+    private static Class<?> findClass0(String name, ClassLoader loader) throws ClassNotFoundException {
+        try {
+            Method method = loader.getClass().getDeclaredMethod("findClass", String.class);
+            method.setAccessible(true);
+            return (Class<?>) method.invoke(loader, name);
+        } catch (Throwable e) {
+            throw new ClassNotFoundException(name);
+        }
     }
 
     @Override
@@ -47,7 +74,11 @@ public class PoreClassLoader extends URLClassLoader {
             if (!exclusions.contains(name)) {
                 return super.loadClass(name);
             }
-        } catch (ClassNotFoundException ignored) {}
-        return PoreBootstrap.class.getClassLoader().loadClass(name);
+        } catch (ClassNotFoundException ignored) {
+            try {
+                return PoreBootstrap.class.getClassLoader().loadClass(name);
+            } catch (ClassNotFoundException ignored2) {}
+        }
+        return this.parent.loadClass(name);
     }
 }

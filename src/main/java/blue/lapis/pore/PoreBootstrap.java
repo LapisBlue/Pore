@@ -75,7 +75,7 @@ public class PoreBootstrap {
         } catch (MalformedURLException ex) {
             throw new RuntimeException(ex);
         }
-        poreClassLoader = new PoreClassLoader(urls, null);
+        poreClassLoader = new PoreClassLoader(urls, this.getClass().getClassLoader());
         try {
             poreClass = Class.forName("blue.lapis.pore.Pore", true, poreClassLoader);
             poreInstance = poreClass.getConstructor(Game.class, Logger.class).newInstance(game, logger);
