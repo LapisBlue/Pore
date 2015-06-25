@@ -24,17 +24,25 @@
  */
 package blue.lapis.pore;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import blue.lapis.pore.event.PoreEventWrapper;
 import blue.lapis.pore.impl.PoreServer;
+import blue.lapis.pore.launch.PoreImpl;
 import blue.lapis.pore.lib.org.slf4j.bridge.SLF4JBridgeHandler;
 import blue.lapis.pore.plugin.PorePluginContainer;
 
 import com.google.common.base.Preconditions;
+import com.google.inject.Inject;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginLoadOrder;
 import org.slf4j.Logger;
 import org.slf4j.helpers.NOPLogger;
 import org.spongepowered.api.Game;
-import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.event.state.PreInitializationEvent;
+import org.spongepowered.api.event.state.ServerAboutToStartEvent;
+import org.spongepowered.api.event.state.ServerStartingEvent;
+import org.spongepowered.api.event.state.ServerStoppingEvent;
 import org.spongepowered.api.plugin.PluginContainer;
 
 /**
@@ -42,47 +50,52 @@ import org.spongepowered.api.plugin.PluginContainer;
  *
  * @author Lapis Blue
  */
-public final class Pore {
+public final class Pore implements PoreImpl {
 
-    protected static Pore instance;
+    static Pore instance;
 
-    protected Game game;
-    protected Logger logger;
+    private final Game game;
+    private final Logger logger;
+    private final PluginContainer plugin;
 
     private PoreServer server;
 
-    protected Pore() {
-    }
+    @Inject
+    public Pore(Game game, Logger logger, PluginContainer plugin) {
+        Preconditions.checkState(instance == null, "Pore is already initialized");
+        instance = this;
 
-    public Pore(Game game, Logger logger) {
-        this.game = game;
-        this.logger = logger;
-        onInitialization();
+        this.game = checkNotNull(game, "game");
+        this.logger = checkNotNull(logger, "logger");
+        this.plugin = checkNotNull(plugin, "plugin");
     }
 
     public static Pore getInstance() {
-        return Preconditions.checkNotNull(instance);
-    }
-
-    public static Logger getLogger() {
-        return getInstance().logger;
-    }
-
-    public static PoreServer getServer() {
-        return getInstance().server;
+        return checkNotNull(instance, "instance");
     }
 
     public static Game getGame() {
         return getInstance().game;
     }
 
-    public static PluginContainer getPlugin(org.bukkit.plugin.Plugin plugin) {
+    public static Logger getLogger() {
+        return getInstance().logger;
+    }
+
+    public static PluginContainer getPlugin() {
+        return getInstance().plugin;
+    }
+
+    public static PoreServer getServer() {
+        return getInstance().server;
+    }
+
+    public static PluginContainer getPlugin(Plugin plugin) {
         return new PorePluginContainer(plugin);
     }
 
-    public void onInitialization() {
-        instance = this;
-
+    @Override
+    public void onPreInit(PreInitializationEvent event) {
         // Initialize logging
         SLF4JBridgeHandler.removeHandlersForRootLogger();
         SLF4JBridgeHandler.install();
@@ -96,22 +109,21 @@ public final class Pore {
         server.loadPlugins();
     }
 
-    public void onAboutToStart() {
+    @Override
+    public void onAboutToStart(ServerAboutToStartEvent event) {
         server.enablePlugins(PluginLoadOrder.STARTUP);
     }
 
-    public void onStarting() {
+    @Override
+    public void onStarting(ServerStartingEvent event) {
         server.enablePlugins(PluginLoadOrder.POSTWORLD);
     }
 
-    public void onShutdown() {
+    @Override
+    public void onShutdown(ServerStoppingEvent event) {
         logger.info("Disabling Bukkit plugins, please wait...");
         server.disablePlugins();
         logger.info("Finished disabling Bukkit plugins!");
-
-        instance = null;
-        server = null;
-        logger = null;
     }
 
     static Logger testLogger = NOPLogger.NOP_LOGGER;

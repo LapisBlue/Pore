@@ -22,46 +22,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.util;
+package blue.lapis.pore.launch;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.spongepowered.api.event.state.PreInitializationEvent;
+import org.spongepowered.api.event.state.ServerAboutToStartEvent;
+import org.spongepowered.api.event.state.ServerStartingEvent;
+import org.spongepowered.api.event.state.ServerStoppingEvent;
 
-import com.google.common.collect.ImmutableSet;
+public interface PoreImpl {
 
-import java.net.URL;
-import java.net.URLClassLoader;
+    void onPreInit(PreInitializationEvent event);
 
-public class PoreClassLoader extends URLClassLoader {
+    void onAboutToStart(ServerAboutToStartEvent event);
 
-    private static ImmutableSet<String> EXCLUSIONS = ImmutableSet.of(
-            "blue.lapis.pore.launch."
-    );
+    void onStarting(ServerStartingEvent event);
 
-    private final ClassLoader parent;
-
-    public PoreClassLoader(ClassLoader parent, URL... urls) {
-        super(urls, null);
-        this.parent = checkNotNull(parent, "parent");
-    }
-
-    @Override
-    protected Class<?> findClass(String name) throws ClassNotFoundException {
-        try {
-            boolean included = true;
-            for (String exclusion : EXCLUSIONS) {
-                if (name.startsWith(exclusion)) {
-                    included = false;
-                    break;
-                }
-            }
-
-            if (included) {
-                return super.findClass(name);
-            }
-        } catch (ClassNotFoundException ignored) {
-        }
-
-        return this.parent.loadClass(name);
-    }
+    void onShutdown(ServerStoppingEvent event);
 
 }

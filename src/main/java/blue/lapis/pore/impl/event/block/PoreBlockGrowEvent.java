@@ -28,12 +28,10 @@ import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.block.PoreBlockState;
 
 import com.google.common.base.Preconditions;
-import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.event.block.BlockGrowEvent;
 import org.spongepowered.api.event.block.BlockChangeEvent;
-import org.spongepowered.api.event.block.BlockEvent;
 
 public class PoreBlockGrowEvent extends BlockGrowEvent {
 

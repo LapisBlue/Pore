@@ -25,13 +25,12 @@
 package blue.lapis.pore;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import com.google.common.reflect.ClassPath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongepowered.api.Game;
-import org.spongepowered.api.Server;
+import org.spongepowered.api.plugin.PluginContainer;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -46,10 +45,8 @@ public final class PoreTests {
 
     public static void mockPlugin() {
         if (Pore.instance == null) {
-            Pore.instance = new Pore();
-            Pore.instance.game = mock(Game.class);
-            Pore.instance.logger = LoggerFactory.getLogger("Pore");
-            Pore.testLogger = Pore.instance.logger;
+            new Pore(mock(Game.class), LoggerFactory.getLogger("Pore"), mock(PluginContainer.class));
+            Pore.testLogger = Pore.getLogger();
         }
     }
 
