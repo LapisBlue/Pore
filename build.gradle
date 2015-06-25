@@ -76,7 +76,7 @@ configurations {
 dependencies {
     // To update, go to https://repo.spongepowered.org/maven/org/spongepowered/spongeapi/2.1-SNAPSHOT/
     // Then pick latest version (or whatever version you want)
-    compile 'org.spongepowered:spongeapi:2.1-20150625.005803-114'
+    compile 'org.spongepowered:spongeapi:2.1-20150625.182927-116'
     runtime 'blue.lapis.pore:tweaker:1.0-SNAPSHOT'
 
     shadow project('Porekit')
@@ -131,6 +131,7 @@ shadowJar {
     dependencies {
         exclude dependency('com.google.guava:guava')
         exclude dependency('com.google.code.gson:gson')
+        exclude dependency('org.yaml:snakeyaml')
     }
 }
 
