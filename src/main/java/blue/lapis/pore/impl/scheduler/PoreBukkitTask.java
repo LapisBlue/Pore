@@ -52,7 +52,7 @@ public class PoreBukkitTask extends PoreWrapper<Task> implements BukkitTask {
 
     @Override
     public boolean isSync() {
-        return getHandle().isSynchronous();
+        return !getHandle().isAsynchronous();
     }
 
     @Override

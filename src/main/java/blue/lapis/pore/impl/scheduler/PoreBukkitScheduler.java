@@ -26,7 +26,6 @@ package blue.lapis.pore.impl.scheduler;
 
 import blue.lapis.pore.Pore;
 
-import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.plugin.IllegalPluginAccessException;
@@ -35,9 +34,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.scheduler.BukkitWorker;
-import org.spongepowered.api.service.scheduler.AsynchronousScheduler;
-import org.spongepowered.api.service.scheduler.SynchronousScheduler;
+import org.spongepowered.api.service.scheduler.SchedulerService;
 import org.spongepowered.api.service.scheduler.Task;
+import org.spongepowered.api.service.scheduler.TaskBuilder;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -49,12 +48,12 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 
     private static final AtomicInteger id = new AtomicInteger();
 
-    private static SynchronousScheduler sync() {
-        return Pore.getGame().getSyncScheduler();
+    private static SchedulerService getScheduler() {
+        return Pore.getGame().getScheduler();
     }
 
-    private static AsynchronousScheduler async() {
-        return Pore.getGame().getAsyncScheduler();
+    private static TaskBuilder newTask() {
+        return getScheduler().getTaskBuilder();
     }
 
     private static void validate(Plugin plugin, Object task) {
@@ -75,13 +74,8 @@ public class PoreBukkitScheduler implements BukkitScheduler {
     public <T> Future<T> callSyncMethod(Plugin plugin, Callable<T> task) {
         validate(plugin, task);
         PoreFuture<T> future = new PoreFuture<T>(task);
-        Optional<Task> spongeTask = sync().runTask(Pore.getPlugin(plugin), future);
-        if (spongeTask.isPresent()) {
-            future.handle = spongeTask.get();
-            return future;
-        }
-
-        return null;
+        future.handle = newTask().execute(future).submit(Pore.getPlugin(plugin));
+        return future;
     }
 
     @Override
@@ -91,14 +85,14 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 
     @Override
     public void cancelTasks(Plugin plugin) {
-        for (Task task : sync().getScheduledTasks(Pore.getPlugin(plugin))) {
+        for (Task task : getScheduler().getScheduledTasks(Pore.getPlugin(plugin))) {
             task.cancel();
         }
     }
 
     @Override
     public void cancelAllTasks() {
-        for (Task task : sync().getScheduledTasks()) {
+        for (Task task : getScheduler().getScheduledTasks()) {
             task.cancel();
         }
     }
@@ -126,48 +120,47 @@ public class PoreBukkitScheduler implements BukkitScheduler {
     @Override
     public BukkitTask runTask(Plugin plugin, Runnable task) throws IllegalArgumentException {
         validate(plugin, task);
-        Optional<Task> spongeTask = sync().runTask(Pore.getPlugin(plugin), task);
-        return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get(), id.incrementAndGet()) : null;
+        return new PoreBukkitTask(newTask().execute(task).submit(Pore.getPlugin(plugin)), id.incrementAndGet());
     }
 
     @Override
     public BukkitTask runTaskAsynchronously(Plugin plugin, Runnable task) throws IllegalArgumentException {
         validate(plugin, task);
-        Optional<Task> spongeTask = async().runTask(Pore.getPlugin(plugin), task);
-        return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get(), id.incrementAndGet()) : null;
+        return new PoreBukkitTask(newTask().async().execute(task).submit(Pore.getPlugin(plugin)), id.incrementAndGet());
     }
 
     @Override
     public BukkitTask runTaskLater(Plugin plugin, Runnable task, long delay) throws IllegalArgumentException {
         validate(plugin, task);
-        Optional<Task> spongeTask = sync().runTaskAfter(Pore.getPlugin(plugin), task, delay);
-        return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get(), id.incrementAndGet()) : null;
+        return new PoreBukkitTask(newTask().delay(delay).execute(task)
+                .submit(Pore.getPlugin(plugin)), id.incrementAndGet());
     }
 
     @Override
     public BukkitTask runTaskLaterAsynchronously(Plugin plugin, Runnable task, long delay)
             throws IllegalArgumentException {
         validate(plugin, task);
-        Optional<Task> spongeTask = async().runTaskAfter(Pore.getPlugin(plugin), task,
-                TimeUnit.MILLISECONDS, ticksToMillis(delay));
-        return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get(), id.incrementAndGet()) : null;
+        return new PoreBukkitTask(newTask().async().delay(ticksToMillis(delay), TimeUnit.MILLISECONDS).execute(task)
+                .submit(Pore.getPlugin(plugin)), id.incrementAndGet());
     }
 
     @Override
     public BukkitTask runTaskTimer(Plugin plugin, Runnable task, long delay, long period)
             throws IllegalArgumentException {
         validate(plugin, task);
-        Optional<Task> spongeTask = sync().runRepeatingTaskAfter(Pore.getPlugin(plugin), task, delay, period);
-        return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get(), id.incrementAndGet()) : null;
+        return new PoreBukkitTask(newTask().delay(delay).interval(period).execute(task)
+                .submit(Pore.getPlugin(plugin)), id.incrementAndGet());
     }
 
     @Override
     public BukkitTask runTaskTimerAsynchronously(Plugin plugin, Runnable task, long delay, long period)
             throws IllegalArgumentException {
         validate(plugin, task);
-        Optional<Task> spongeTask = async().runRepeatingTaskAfter(Pore.getPlugin(plugin), task,
-                TimeUnit.MILLISECONDS, ticksToMillis(delay), ticksToMillis(period));
-        return spongeTask.isPresent() ? new PoreBukkitTask(spongeTask.get(), id.incrementAndGet()) : null;
+        return new PoreBukkitTask(newTask().async()
+                .delay(ticksToMillis(delay), TimeUnit.MILLISECONDS)
+                .interval(ticksToMillis(period), TimeUnit.MILLISECONDS)
+                .execute(task)
+                .submit(Pore.getPlugin(plugin)), id.incrementAndGet());
     }
 
     @Override
