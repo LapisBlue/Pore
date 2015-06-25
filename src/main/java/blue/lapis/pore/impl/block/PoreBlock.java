@@ -117,17 +117,17 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public byte getLightLevel() {
-        return getHandle().getLuminance();
+        return (byte)getHandle().getLuminance();
     }
 
     @Override
     public byte getLightFromSky() {
-        return getHandle().getLuminanceFromSky();
+        return (byte)getHandle().getLuminanceFromSky();
     }
 
     @Override
     public byte getLightFromBlocks() {
-        return getHandle().getLuminanceFromGround();
+        return (byte)getHandle().getLuminanceFromGround();
     }
 
     @Override
