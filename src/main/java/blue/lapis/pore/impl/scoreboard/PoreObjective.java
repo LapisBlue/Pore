@@ -24,16 +24,18 @@
  */
 package blue.lapis.pore.impl.scoreboard;
 
-import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Preconditions.checkArgument;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
+import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
+import org.spongepowered.api.scoreboard.critieria.Criteria;
 import org.spongepowered.api.scoreboard.objective.Objective;
 import org.spongepowered.api.text.Texts;
 import org.spongepowered.api.util.TextMessageException;
@@ -50,20 +52,22 @@ public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.
 
     @Override
     public String getName() throws IllegalStateException {
-        //TODO: check if registered (same goes for all other methods throwing an ISE)
+        checkState();
         return getHandle().getName();
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public String getDisplayName() throws IllegalStateException {
+        checkState();
         return Texts.legacy().to(getHandle().getDisplayName());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setDisplayName(String displayName) throws IllegalStateException, IllegalArgumentException {
-        checkState(displayName != null, "Display name must not be null");
+        checkState();
+        checkArgument(displayName != null, "Display name must not be null");
         try {
             //noinspection ConstantConditions
             getHandle().setDisplayName(Texts.legacy().from(displayName));
@@ -74,46 +78,65 @@ public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.
 
     @Override
     public String getCriteria() throws IllegalStateException {
+        checkState();
         return getHandle().getCriterion().getName();
     }
 
     @Override
     public boolean isModifiable() throws IllegalStateException {
-        throw new NotImplementedException("TODO");
+        checkState();
+        // TODO: I might try to get a method into SpongeAPI, but this will do for now
+        return getHandle().getCriterion() == Criteria.HEALTH;
     }
 
     @Override
     public Scoreboard getScoreboard() {
-        throw new NotImplementedException("TODO");
+        //TODO: eh, this might be screwy because Bukkit doesn't account for multiple parents
+        return PoreScoreboard.of(
+                (org.spongepowered.api.scoreboard.Scoreboard)getHandle().getScoreboards().toArray()[0]
+        );
     }
 
     @Override
     public void unregister() throws IllegalStateException {
-        throw new NotImplementedException("TODO");
+        checkState();
+        for (org.spongepowered.api.scoreboard.Scoreboard sb : getHandle().getScoreboards()) {
+            sb.removeObjective(getHandle());
+        }
     }
 
     @Override
     public DisplaySlot getDisplaySlot() throws IllegalStateException {
+        // I genuinely have no idea why this isn't implemented in SpongeAPI
+        checkState();
         throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setDisplaySlot(DisplaySlot slot) throws IllegalStateException {
+        // same goes for this one
+        checkState();
         throw new NotImplementedException("TODO");
     }
 
     @Override
     public Score getScore(OfflinePlayer player) throws IllegalArgumentException, IllegalStateException {
-        checkState(player != null, "Offline player cannot be null");
+        checkState();
+        checkArgument(player != null, "Offline player cannot be null");
         //noinspection ConstantConditions
         return getScore(player.getName());
     }
 
     @Override
     public Score getScore(String entry) throws IllegalArgumentException, IllegalStateException {
-        checkState(entry != null, "Entry cannot be null");
-        //TODO: check if registered
+        checkState();
+        checkArgument(entry != null, "Entry cannot be null");
+        //noinspection ConstantConditions
         return PoreScore.of(getHandle().getScore(Texts.of(entry)));
+    }
+
+    private void checkState() throws IllegalStateException {
+        Preconditions.checkState(!getHandle().getScoreboards().isEmpty(), "Objective has been unregistered");
     }
 
 }

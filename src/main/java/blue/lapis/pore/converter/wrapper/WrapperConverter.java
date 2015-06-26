@@ -30,6 +30,7 @@ import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.impl.block.PoreBanner;
 import blue.lapis.pore.impl.block.PoreBeacon;
 import blue.lapis.pore.impl.block.PoreBlock;
+import blue.lapis.pore.impl.block.PoreBlockState;
 import blue.lapis.pore.impl.block.PoreBrewingStand;
 import blue.lapis.pore.impl.block.PoreChest;
 import blue.lapis.pore.impl.block.PoreCommandBlock;
@@ -38,6 +39,7 @@ import blue.lapis.pore.impl.block.PoreDispenser;
 import blue.lapis.pore.impl.block.PoreDropper;
 import blue.lapis.pore.impl.block.PoreFurnace;
 import blue.lapis.pore.impl.block.PoreHopper;
+import blue.lapis.pore.impl.block.PoreJukebox;
 import blue.lapis.pore.impl.block.PoreNoteBlock;
 import blue.lapis.pore.impl.block.PoreSign;
 import blue.lapis.pore.impl.block.PoreSkull;
@@ -134,8 +136,10 @@ import blue.lapis.pore.impl.util.PoreCachedServerIcon;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.base.Function;
+import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.block.tileentity.Banner;
 import org.spongepowered.api.block.tileentity.CommandBlock;
+import org.spongepowered.api.block.tileentity.Jukebox;
 import org.spongepowered.api.block.tileentity.MobSpawner;
 import org.spongepowered.api.block.tileentity.Note;
 import org.spongepowered.api.block.tileentity.Sign;
@@ -343,6 +347,7 @@ public final class WrapperConverter {
                 .register(Boat.class, PoreBoat.class)
 
             //.register(TileEntity.class, PoreTileEntity.class)
+            .register(BlockState.class, PoreBlockState.class)
                 .register(Banner.class, PoreBanner.class)
                 .register(Beacon.class, PoreBeacon.class)
                 .register(BrewingStand.class, PoreBrewingStand.class)
@@ -353,11 +358,10 @@ public final class WrapperConverter {
                 .register(Dropper.class, PoreDropper.class)
                 .register(Furnace.class, PoreFurnace.class)
                 .register(Hopper.class, PoreHopper.class)
-                //.register(Jukebox.clas, PoreJukebox.class)
+                .register(Jukebox.class, PoreJukebox.class)
                 .register(Note.class, PoreNoteBlock.class)
                 .register(Sign.class, PoreSign.class)
                 .register(Skull.class, PoreSkull.class)
-
 
             .register(Chunk.class, PoreChunk.class)
             .register(User.class, PoreOfflinePlayer.class)

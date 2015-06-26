@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.impl.scoreboard;
 
-import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Preconditions.checkArgument;
 
 import blue.lapis.pore.converter.type.scoreboard.NameTagVisibilityConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
@@ -32,9 +32,10 @@ import blue.lapis.pore.impl.PoreOfflinePlayer;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
-import org.apache.commons.lang3.NotImplementedException;
+import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
@@ -57,20 +58,22 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
 
     @Override
     public String getName() throws IllegalStateException {
-        //TODO: check if registered (same goes for all methods throwing an ISE)
+        checkState();
         return getHandle().getName();
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public String getDisplayName() throws IllegalStateException {
+        checkState();
         return Texts.legacy().to(getHandle().getDisplayName());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setDisplayName(String displayName) throws IllegalStateException, IllegalArgumentException {
-        checkState(displayName.length() > 32, "Display name must not be longer than 32 characters");
+        checkState();
+        checkArgument(displayName.length() > 32, "Display name must not be longer than 32 characters");
         try {
             getHandle().setDisplayName(Texts.legacy().from(displayName));
         } catch (TextMessageException ex) {
@@ -81,13 +84,15 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     @Override
     @SuppressWarnings("deprecation")
     public String getPrefix() throws IllegalStateException {
+        checkState();
         return Texts.legacy().to(getHandle().getPrefix());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setPrefix(String prefix) throws IllegalStateException, IllegalArgumentException {
-        checkState(prefix != null, "Prefix must not be null");
+        checkState();
+        checkArgument(prefix != null, "Prefix must not be null");
         try {
             //noinspection ConstantConditions
             getHandle().setPrefix(Texts.legacy().from(prefix));
@@ -99,15 +104,17 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     @Override
     @SuppressWarnings("deprecation")
     public String getSuffix() throws IllegalStateException {
+        checkState();
         return Texts.legacy().to(getHandle().getSuffix());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setSuffix(String suffix) throws IllegalStateException, IllegalArgumentException {
-        checkState(suffix != null, "Suffix must not be null");
-        //noinspection ConstantConditions
+        checkState();
+        checkArgument(suffix != null, "Suffix must not be null");
         try {
+            //noinspection ConstantConditions
             getHandle().setSuffix(Texts.legacy().from(suffix));
         } catch (TextMessageException ex) {
             throw new IllegalArgumentException(ex);
@@ -116,37 +123,44 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
 
     @Override
     public boolean allowFriendlyFire() throws IllegalStateException {
+        checkState();
         return getHandle().allowFriendlyFire();
     }
 
     @Override
     public void setAllowFriendlyFire(boolean enabled) throws IllegalStateException {
+        checkState();
         getHandle().setAllowFriendlyFire(enabled);
     }
 
     @Override
     public boolean canSeeFriendlyInvisibles() throws IllegalStateException {
+        checkState();
         return getHandle().canSeeFriendlyInvisibles();
     }
 
     @Override
     public void setCanSeeFriendlyInvisibles(boolean enabled) throws IllegalStateException {
+        checkState();
         getHandle().setCanSeeFriendlyInvisibles(enabled);
     }
 
     @Override
     public NameTagVisibility getNameTagVisibility() throws IllegalArgumentException {
+        checkState(); // this is technically against documentation but the documentation is stupid for this method
         return NameTagVisibilityConverter.of(getHandle().getNameTagVisibility());
     }
 
     @Override
     public void setNameTagVisibility(NameTagVisibility visibility) throws IllegalArgumentException {
-        checkState(visibility != null, "Visibility cannot be null");
+        checkState(); // same for this
+        checkArgument(visibility != null, "Visibility cannot be null");
         getHandle().setNameTagVisibility(NameTagVisibilityConverter.of(visibility));
     }
 
     @Override
     public Set<OfflinePlayer> getPlayers() throws IllegalStateException {
+        checkState();
         return Sets.newHashSet(Collections2.transform(getHandle().getUsers(),
                 new Function<User, OfflinePlayer>() {
                     @Override
@@ -159,54 +173,95 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
 
     @Override
     public Set<String> getEntries() throws IllegalStateException {
-        throw new NotImplementedException("TODO");
+        checkState();
+        return Sets.newHashSet(Collections2.transform(getHandle().getUsers(),
+                new Function<User, String>() {
+                    @Override
+                    public String apply(User user) {
+                        return user.getName();
+                    }
+                }
+        ));
     }
 
     @Override
     public int getSize() throws IllegalStateException {
+        checkState();
         return getHandle().getUsers().size();
     }
 
     @Override
     public Scoreboard getScoreboard() {
-        throw new NotImplementedException("TODO");
+        //TODO: this method might behave weirdly
+        return PoreScoreboard.of(
+                (org.spongepowered.api.scoreboard.Scoreboard) getHandle().getScoreboards().toArray()[0]
+        );
     }
 
     @Override
     public void addPlayer(OfflinePlayer player) throws IllegalStateException, IllegalArgumentException {
-        getHandle().addUser(((PoreOfflinePlayer)player).getHandle());
+        checkState();
+        checkArgument(player != null, "Player cannot be null");
+        //noinspection ConstantConditions
+        getHandle().addUser(((PoreOfflinePlayer) player).getHandle());
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void addEntry(String entry) throws IllegalStateException, IllegalArgumentException {
-        throw new NotImplementedException("TODO");
+        checkArgument(entry != null, "Entry cannot be null");
+        addPlayer(Bukkit.getOfflinePlayer(entry));
     }
 
     @Override
     public boolean removePlayer(OfflinePlayer player) throws IllegalStateException, IllegalArgumentException {
-        return getHandle().removeUser(((PoreOfflinePlayer)player).getHandle());
+        checkArgument(player != null, "Player cannot be null");
+        //noinspection ConstantConditions
+        return removeEntry(player.getName());
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public boolean removeEntry(String entry) throws IllegalStateException, IllegalArgumentException {
-        throw new NotImplementedException("TODO");
+        checkState();
+        checkArgument(entry != null, "Entry cannot be null");
+        for (User user : getHandle().getUsers()) {
+            if (user.getName().equals(entry)) {
+                return getHandle().removeUser(user);
+            }
+        }
+        return false;
     }
 
     @Override
     public void unregister() throws IllegalStateException {
-        throw new NotImplementedException("TODO");
+        checkState();
+        for (org.spongepowered.api.scoreboard.Scoreboard scoreboard : getHandle().getScoreboards()) {
+            scoreboard.removeTeam(getHandle());
+        }
     }
 
     @Override
     public boolean hasPlayer(OfflinePlayer player) throws IllegalArgumentException, IllegalStateException {
-        checkState(player != null, "Offline player cannot be null");
+        checkArgument(player != null, "Offline player cannot be null");
         //noinspection ConstantConditions
-        return getHandle().getUsers().contains(((PoreOfflinePlayer) player).getHandle());
+        return hasEntry(player.getName());
     }
 
     @Override
     public boolean hasEntry(String entry) throws IllegalArgumentException, IllegalStateException {
-        throw new NotImplementedException("TODO");
+        checkState();
+        checkArgument(entry != null, "Entry cannot be null");
+        for (User user : getHandle().getUsers()) {
+            if (user.getName().equals(entry)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void checkState() throws IllegalStateException {
+        Preconditions.checkState(!getHandle().getScoreboards().isEmpty(), "Team has been unregistered");
     }
 
 }

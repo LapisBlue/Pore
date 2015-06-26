@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.impl.scoreboard;
 
+import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
@@ -44,12 +45,13 @@ public class PoreScoreboardManager extends PoreWrapper<ScoreboardBuilder> implem
 
     @Override
     public Scoreboard getMainScoreboard() {
+        //TODO: scoreboard are per-world
         throw new NotImplementedException("TODO");
     }
 
     @Override
     public Scoreboard getNewScoreboard() {
-        throw new NotImplementedException("TODO"); // ScoreboardBuilder#build() seems to have the wrong signature atm
+        return PoreScoreboard.of(Pore.getGame().getRegistry().getScoreboardBuilder().build());
     }
 
 }

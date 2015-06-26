@@ -27,7 +27,7 @@ package blue.lapis.pore.impl.scoreboard;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
-import org.apache.commons.lang3.NotImplementedException;
+import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.Objective;
@@ -60,24 +60,28 @@ public class PoreScore extends PoreWrapper<Score> implements org.bukkit.scoreboa
 
     @Override
     public Objective getObjective() {
-        throw new NotImplementedException("TODO");
+        return (Objective)getHandle().getObjectives().toArray()[0];
     }
 
     @Override
     public int getScore() throws IllegalStateException {
-        //TODO: check if registered
+        checkState();
         return getHandle().getScore();
     }
 
     @Override
     public void setScore(int score) throws IllegalStateException {
-        //TODO: check if registered
+        checkState();
         getHandle().setScore(score);
     }
 
     @Override
     public Scoreboard getScoreboard() {
         return getObjective().getScoreboard();
+    }
+
+    private void checkState() throws IllegalStateException {
+        Preconditions.checkState(!getHandle().getObjectives().isEmpty(), "Score has been unregistered");
     }
 
 }
