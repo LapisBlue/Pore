@@ -29,6 +29,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
+import blue.lapis.pore.converter.type.entity.player.GameModeConverter;
 import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.type.statistic.AchievementConverter;
 import blue.lapis.pore.converter.type.statistic.StatisticConverter;
@@ -43,6 +44,7 @@ import com.google.common.collect.Maps;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Achievement;
 import org.bukkit.Effect;
+import org.bukkit.GameMode;
 import org.bukkit.Instrument;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -63,11 +65,13 @@ import org.spongepowered.api.data.manipulator.entity.AchievementData;
 import org.spongepowered.api.data.manipulator.entity.ExperienceHolderData;
 import org.spongepowered.api.data.manipulator.entity.FlyingData;
 import org.spongepowered.api.data.manipulator.entity.FoodData;
+import org.spongepowered.api.data.manipulator.entity.GameModeData;
 import org.spongepowered.api.data.manipulator.entity.InvisibilityData;
 import org.spongepowered.api.data.manipulator.entity.JoinData;
 import org.spongepowered.api.data.manipulator.entity.RespawnLocationData;
 import org.spongepowered.api.data.manipulator.entity.SneakingData;
 import org.spongepowered.api.data.manipulator.entity.StatisticData;
+import org.spongepowered.api.data.manipulator.entity.VelocityData;
 import org.spongepowered.api.data.manipulator.entity.WhitelistData;
 import org.spongepowered.api.effect.sound.SoundType;
 import org.spongepowered.api.entity.player.Player;
@@ -112,14 +116,16 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     @SuppressWarnings("deprecation")
     public String getDisplayName() {
-        return Texts.legacy().to(get(DisplayNameData.class).getDisplayName());
+        return has(DisplayNameData.class)
+                ? Texts.legacy().to(getHandle().getDisplayNameData().getDisplayName())
+                : getName();
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setDisplayName(String name) {
         try {
-            this.get(DisplayNameData.class).setDisplayName(Texts.legacy().from(name));
+            getHandle().offer(getHandle().getDisplayNameData().setDisplayName(Texts.legacy().from(name)));
         } catch (TextMessageException ex) {
             throw new IllegalArgumentException(ex);
         }
@@ -207,7 +213,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public boolean isSneaking() {
-        return this.has(SneakingData.class);
+        return has(SneakingData.class);
     }
 
     @Override
@@ -243,12 +249,16 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public boolean isSleepingIgnored() {
+        //TODO: This feature is deeply implemented in CB, so I have no damn clue how we're going to manage to implement
+        // this on top of Sponge short of mixins (which is obviously a really bad idea).
         throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setSleepingIgnored(boolean isSleeping) {
-        throw new NotImplementedException("TODO");
+        //TODO: Same deal here. I commented the NotImplementedExcpetion out temporarily to keep Essentials from
+        // freaking out every two seconds when it tries to call this method from a scheduler.
+        //throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -661,12 +671,14 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public Location getBedSpawnLocation() {
-        return LocationConverter.of(this.get(RespawnLocationData.class).getRespawnLocation());
+        return has(RespawnLocationData.class)
+                ? LocationConverter.of(get(RespawnLocationData.class).getRespawnLocation())
+                : getWorld().getSpawnLocation();
     }
 
     @Override
     public void setBedSpawnLocation(Location location) {
-        this.setBedSpawnLocation(location, false);
+        setBedSpawnLocation(location, false);
     }
 
     @Override
@@ -674,7 +686,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
         org.spongepowered.api.world.Location spongeLoc = LocationConverter.of(location);
         //noinspection ConstantConditions
         if (force || spongeLoc.getBlockType() == BlockTypes.BED) {
-            this.get(RespawnLocationData.class).setRespawnLocation(spongeLoc);
+            getOrCreate(RespawnLocationData.class).setRespawnLocation(spongeLoc);
         }
     }
 
@@ -721,12 +733,14 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     //TODO: movement speeds and flight toggle will be included with the attributes API
     @Override
     public boolean getAllowFlight() {
-        throw new NotImplementedException("TODO");
+        return has(FlyingData.class);
     }
 
     @Override
     public void setAllowFlight(boolean flight) {
-        throw new NotImplementedException("TODO");
+        if (!has(FlyingData.class)) {
+            set(getOrCreate(FlyingData.class));
+        }
     }
 
     @Override
@@ -850,5 +864,17 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     public UUID getUniqueId() {
         return getHandle().getUniqueId();
+    }
+
+    @Override
+    public GameMode getGameMode() {
+        return GameModeConverter.of(getHandle().getGameModeData().getGameMode());
+    }
+
+    @Override
+    public void setGameMode(GameMode mode) {
+        GameModeData gmData = getHandle().getGameModeData();
+        gmData.setGameMode(GameModeConverter.of(mode));
+        getHandle().offer(gmData);
     }
 }

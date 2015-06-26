@@ -174,18 +174,12 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public GameMode getGameMode() {
-        if (!(this instanceof Player)) {
-            throw new UnsupportedOperationException("Cannot get gamemode of non-player human");
-        }
-        return GameModeConverter.of(this.get(GameModeData.class).getGameMode());
+        throw new UnsupportedOperationException("Cannot get gamemode of non-player human");
     }
 
     @Override
     public void setGameMode(GameMode mode) {
-        if (!(this instanceof Player)) {
-            throw new UnsupportedOperationException("Cannot get gamemode of non-player human");
-        }
-        this.get(GameModeData.class).setGameMode(GameModeConverter.of(mode));
+        throw new UnsupportedOperationException("Cannot get gamemode of non-player human");
     }
 
     @Override

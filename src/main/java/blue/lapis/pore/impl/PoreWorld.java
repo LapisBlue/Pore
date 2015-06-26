@@ -85,6 +85,7 @@ import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.extent.Extent;
+import org.spongepowered.api.world.gen.WorldGeneratorModifier;
 import org.spongepowered.api.world.weather.Weathers;
 
 import java.io.File;
@@ -658,7 +659,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public int getMaxHeight() {
-        throw new NotImplementedException("TODO");
+        return getHandle().getDimension().getBuildHeight();
     }
 
     @Override
