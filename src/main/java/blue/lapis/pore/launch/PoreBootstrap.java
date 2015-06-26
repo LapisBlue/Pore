@@ -44,7 +44,7 @@ public class PoreBootstrap {
 
     private static final String IMPLEMENTATION_CLASS = "blue.lapis.pore.Pore";
 
-    private final PoreImpl pore;
+    private final PoreEventManager pore;
 
     @Inject
     public PoreBootstrap(Injector injector) {
@@ -63,7 +63,7 @@ public class PoreBootstrap {
             ClassLoader loader = new PoreClassLoader(getClass().getClassLoader(),
                     new URL(location.getProtocol(), location.getHost(), location.getPort(), path));
             Class<?> poreClass = Class.forName(IMPLEMENTATION_CLASS, true, loader);
-            this.pore = (PoreImpl) injector.getInstance(poreClass);
+            this.pore = (PoreEventManager) injector.getInstance(poreClass);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Failed to load Pore implementation", e);
         } catch (MalformedURLException e) {

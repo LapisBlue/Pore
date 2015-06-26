@@ -28,7 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.event.PoreEventWrapper;
 import blue.lapis.pore.impl.PoreServer;
-import blue.lapis.pore.launch.PoreImpl;
+import blue.lapis.pore.launch.PoreEventManager;
 import blue.lapis.pore.lib.org.slf4j.bridge.SLF4JBridgeHandler;
 import blue.lapis.pore.plugin.PorePluginContainer;
 
@@ -50,7 +50,7 @@ import org.spongepowered.api.plugin.PluginContainer;
  *
  * @author Lapis Blue
  */
-public final class Pore implements PoreImpl {
+public final class Pore implements PoreEventManager {
 
     static Pore instance;
 

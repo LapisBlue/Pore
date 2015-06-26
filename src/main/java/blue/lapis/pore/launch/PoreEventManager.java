@@ -29,7 +29,7 @@ import org.spongepowered.api.event.state.ServerAboutToStartEvent;
 import org.spongepowered.api.event.state.ServerStartingEvent;
 import org.spongepowered.api.event.state.ServerStoppingEvent;
 
-public interface PoreImpl {
+public interface PoreEventManager {
 
     void onPreInit(PreInitializationEvent event);
 
