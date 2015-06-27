@@ -47,7 +47,9 @@ final class PoreEventHandler<T extends Event> implements EventHandler<T> {
             PoreEventWrapper.set(handle, event = constructor.construct(handle));
         }
 
-        PoreEventWrapper.call(event, priority);
+        if (event.isValid()) { // verify the Bukkit event is applicable to the particular wrapped Sponge event
+            PoreEventWrapper.call(event, priority);
+        }
     }
 
 }
