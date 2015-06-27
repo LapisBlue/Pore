@@ -1,0 +1,29 @@
+From d4fa887075714299b83652ba8a104d3901ccb123 Mon Sep 17 00:00:00 2001
+From: caseif <caseif@caseif.net>
+Date: Sat, 27 Jun 2015 15:28:06 -0400
+Subject: [PATCH] Add validity check supermethod to top Event class
+
+
+diff --git a/src/main/java/org/bukkit/event/Event.java b/src/main/java/org/bukkit/event/Event.java
+index d8ce291..0071e8f 100644
+--- a/src/main/java/org/bukkit/event/Event.java
++++ b/src/main/java/org/bukkit/event/Event.java
+@@ -99,4 +99,15 @@ public abstract class Event {
+     protected final boolean isPoreEvent() {
+         return getClass().getName().startsWith("blue.lapis.pore.impl.event."); // TODO: Keep up to date
+     }
++
++    /**
++     * Returns <code>true</code> if this {@link Event} should be called for
++     * its wrapped Sponge event, otherwise returns <code>false</code>.
++     *
++     * @return Whether this {@link Event} should be called for
++     *         its wrapped Sponge event
++     */
++    public boolean isValid() {
++        return true;
++    }
+ }
+-- 
+1.9.4.msysgit.2
+
