@@ -31,7 +31,7 @@ defaultTasks 'clean', 'licenseFormat', 'build'
 group = 'blue.lapis.pore'
 version = '1.0.0-SNAPSHOT'
 
-// we end up with a format like 1.0.0-SNAPSHOT-git(f874a8b)-jnks174
+// we end up with a format like 1.0.0-SNAPSHOT-git(master-f874a8b)-jnks174
 // the Git commit or the build number will be excluded if they can't be determined, respectively
 ext.versionSuffix = version.contains('SNAPSHOT')
     ? (
@@ -91,7 +91,7 @@ configurations {
 dependencies {
     // To update, go to https://repo.spongepowered.org/maven/org/spongepowered/spongeapi/2.1-SNAPSHOT/
     // Then pick latest version (or whatever version you want)
-    compile 'org.spongepowered:spongeapi:2.1-20150625.182927-116'
+    compile 'org.spongepowered:spongeapi:2.1-20150708.033636-126'
     runtime 'blue.lapis.pore:tweaker:1.0-SNAPSHOT'
 
     shadow project('Porekit')
