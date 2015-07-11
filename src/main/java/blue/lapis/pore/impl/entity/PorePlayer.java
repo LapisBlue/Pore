@@ -82,6 +82,8 @@ import org.spongepowered.api.statistic.EntityStatistic;
 import org.spongepowered.api.statistic.StatisticGroup;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.text.title.Title;
+import org.spongepowered.api.text.title.Titles;
 import org.spongepowered.api.util.TextMessageException;
 
 import java.io.FileNotFoundException;
@@ -808,6 +810,16 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     public void setSpectatorTarget(Entity entity) {
         throw new NotImplementedException("TODO");
+    }
+
+    @Override
+    public void sendTitle(String title, String subtitle) {
+        getHandle().sendTitle(Titles.of(Texts.legacy().fromUnchecked(title), Texts.legacy().fromUnchecked(subtitle)));
+    }
+
+    @Override
+    public void resetTitle() {
+        getHandle().resetTitle();
     }
 
     @Override
