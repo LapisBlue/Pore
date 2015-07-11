@@ -95,7 +95,7 @@ dependencies {
     runtime 'blue.lapis.pore:tweaker:1.0-SNAPSHOT'
 
     shadow project('Porekit')
-    shadowRuntime 'mysql:mysql-connector-java:5.1.35'
+    shadowRuntime 'mysql:mysql-connector-java:5.1.36'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
