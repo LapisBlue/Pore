@@ -41,7 +41,7 @@ import javax.tools.Diagnostic;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 
-@SupportedAnnotationTypes("blue.lapis.pore.event.Register")
+@SupportedAnnotationTypes("blue.lapis.pore.event.RegisterEvent")
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
 public class EventProcessor extends AbstractProcessor {
 
@@ -84,14 +84,14 @@ public class EventProcessor extends AbstractProcessor {
         for (TypeElement anno : annotations) {
             for (Element e : roundEnv.getElementsAnnotatedWith(anno)) {
                 if (!(e instanceof TypeElement)) {
-                    throw new IllegalStateException("@Register element has unexpected type "
+                    throw new IllegalStateException("@" + anno.getSimpleName() + " element has unexpected type "
                             + e.getClass().getSimpleName());
                 }
                 if (e.getKind() == ElementKind.CLASS) {
                     events.add(((TypeElement) e).getQualifiedName().toString());
                 } else {
-                    processingEnv.getMessager().printMessage(Diagnostic.Kind.WARNING, "Found @Register annotation "
-                            + "on a non-class element");
+                    processingEnv.getMessager().printMessage(Diagnostic.Kind.WARNING, "Found @" + anno.getSimpleName()
+                            + " annotation on a non-class element");
                 }
             }
         }
