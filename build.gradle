@@ -39,13 +39,14 @@ targetCompatibility = 1.6
 // Project repositories
 repositories {
     mavenCentral()
+    jcenter()
     maven {
         name = 'sponge'
         url = 'http://repo.spongepowered.org/maven'
     }
     maven {
         name = 'lapis'
-        url = 'http://repo.lapis.blue/snapshots'
+        url = 'http://repo.lapis.blue/releases'
     }
 }
 
@@ -81,7 +82,7 @@ dependencies {
     // To update, go to https://repo.spongepowered.org/maven/org/spongepowered/spongeapi/2.1-SNAPSHOT/
     // Then pick latest version (or whatever version you want)
     compile 'org.spongepowered:spongeapi:2.1-20150708.033636-126'
-    runtime 'blue.lapis.pore:tweaker:1.0-SNAPSHOT'
+    runtime 'blue.lapis.methodremapper:tweaker:0.1'
 
     shadow project('Porekit')
     shadowRuntime 'mysql:mysql-connector-java:5.1.36'
