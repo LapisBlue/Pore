@@ -22,32 +22,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.data.block;
-
-import static blue.lapis.pore.converter.data.block.LogDataConverter.TreeDataValue;
+package blue.lapis.pore.converter.data.block.type;
 
 import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataTypeConverter;
 
 import com.google.common.collect.ImmutableBiMap;
-import org.spongepowered.api.data.manipulator.block.TreeData;
-import org.spongepowered.api.data.type.TreeTypes;
+import org.spongepowered.api.data.manipulator.block.BrickData;
+import org.spongepowered.api.data.type.BrickType;
+import org.spongepowered.api.data.type.BrickTypes;
 
-public class PlanksDataConverter extends DataTypeConverter {
+public class BrickDataConverter extends DataTypeConverter {
 
     @SuppressWarnings("rawtypes")
-    private PlanksDataConverter() {
+    private BrickDataConverter() {
         converters.put(
                 ImmutableBiMap.<AbstractDataValue, Byte>builder()
-                        .put(new TreeDataValue(TreeTypes.OAK), (byte) 0)
-                        .put(new TreeDataValue(TreeTypes.SPRUCE), (byte) 1)
-                        .put(new TreeDataValue(TreeTypes.BIRCH), (byte) 2)
-                        .put(new TreeDataValue(TreeTypes.JUNGLE), (byte)3)
-                        .put(new TreeDataValue(TreeTypes.ACACIA), (byte)4)
-                        .put(new TreeDataValue(TreeTypes.DARK_OAK), (byte)5)
+                        .put(new BrickDataValue(BrickTypes.DEFAULT), (byte) 0)
+                        .put(new BrickDataValue(BrickTypes.MOSSY), (byte) 1)
+                        .put(new BrickDataValue(BrickTypes.CRACKED), (byte) 2)
+                        .put(new BrickDataValue(BrickTypes.CHISELED), (byte)3)
                         .build(),
-                (byte) 4
+                (byte) 2
         );
-        applicableTypes.add(TreeData.class);
+        applicableTypes.add(BrickData.class);
+    }
+
+    static class BrickDataValue extends AbstractDataValue<BrickData, BrickType> {
+        public BrickDataValue(BrickType value) {
+            super(BrickData.class, value);
+        }
     }
 }

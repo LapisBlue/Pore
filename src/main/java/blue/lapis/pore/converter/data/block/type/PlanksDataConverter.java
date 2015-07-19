@@ -22,38 +22,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.data.block;
+package blue.lapis.pore.converter.data.block.type;
 
 import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataTypeConverter;
 
 import com.google.common.collect.ImmutableBiMap;
-import org.spongepowered.api.data.manipulator.block.AxisData;
 import org.spongepowered.api.data.manipulator.block.TreeData;
 import org.spongepowered.api.data.type.TreeTypes;
-import org.spongepowered.api.util.Axis;
 
-public class Log2DataConverter extends DataTypeConverter {
+public class PlanksDataConverter extends DataTypeConverter {
 
     @SuppressWarnings("rawtypes")
-    private Log2DataConverter() {
+    private PlanksDataConverter() {
         converters.put(
                 ImmutableBiMap.<AbstractDataValue, Byte>builder()
-                        .put(new LogDataConverter.TreeDataValue(TreeTypes.ACACIA), (byte) 0)
-                        .put(new LogDataConverter.TreeDataValue(TreeTypes.DARK_OAK), (byte) 1)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.OAK), (byte) 0)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.SPRUCE), (byte) 1)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.BIRCH), (byte) 2)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.JUNGLE), (byte)3)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.ACACIA), (byte)4)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.DARK_OAK), (byte)5)
                         .build(),
-                (byte) 2
+                (byte) 4
         );
         applicableTypes.add(TreeData.class);
-        converters.put(
-                ImmutableBiMap.<AbstractDataValue, Byte>builder()
-                        .put(new LogDataConverter.AxisDataValue(Axis.Y), (byte) 0)
-                        .put(new LogDataConverter.AxisDataValue(Axis.X), (byte) 1)
-                        .put(new LogDataConverter.AxisDataValue(Axis.Z), (byte) 2)
-                        .put(new LogDataConverter.AxisDataValue(null), (byte) 3)
-                        .build(),
-                (byte) 2
-        );
-        applicableTypes.add(AxisData.class);
     }
 }

@@ -28,6 +28,13 @@ import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataConverter;
 import blue.lapis.pore.converter.data.DataTypeConverter;
+import blue.lapis.pore.converter.data.block.type.BigMushroomDataConverter;
+import blue.lapis.pore.converter.data.block.type.BrickDataConverter;
+import blue.lapis.pore.converter.data.block.type.Leaves2DataConverter;
+import blue.lapis.pore.converter.data.block.type.LeavesDataConverter;
+import blue.lapis.pore.converter.data.block.type.Log2DataConverter;
+import blue.lapis.pore.converter.data.block.type.LogDataConverter;
+import blue.lapis.pore.converter.data.block.type.PlanksDataConverter;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;

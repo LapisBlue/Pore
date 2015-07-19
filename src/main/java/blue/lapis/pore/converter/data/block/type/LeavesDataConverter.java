@@ -22,10 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.data.block;
-
-import static blue.lapis.pore.converter.data.block.LeavesDataConverter.DecayableDataValue;
-import static blue.lapis.pore.converter.data.block.LogDataConverter.TreeDataValue;
+package blue.lapis.pore.converter.data.block.type;
 
 import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataTypeConverter;
@@ -35,14 +32,16 @@ import org.spongepowered.api.data.manipulator.block.DecayableData;
 import org.spongepowered.api.data.manipulator.block.TreeData;
 import org.spongepowered.api.data.type.TreeTypes;
 
-public class Leaves2DataConverter extends DataTypeConverter {
+public class LeavesDataConverter extends DataTypeConverter {
 
     @SuppressWarnings("rawtypes")
-    private Leaves2DataConverter() {
+    private LeavesDataConverter() {
         converters.put(
                 ImmutableBiMap.<AbstractDataValue, Byte>builder()
-                        .put(new TreeDataValue(TreeTypes.ACACIA), (byte) 0)
-                        .put(new TreeDataValue(TreeTypes.DARK_OAK), (byte) 1)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.OAK), (byte) 0)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.SPRUCE), (byte) 1)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.BIRCH), (byte) 2)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.JUNGLE), (byte) 3)
                         .build(),
                 (byte) 2
         );
@@ -55,5 +54,12 @@ public class Leaves2DataConverter extends DataTypeConverter {
                 (byte) 1
         );
         applicableTypes.add(DecayableData.class);
+    }
+
+    // ew ew ew ew ew ew ew ew ew ew ew ew ew
+    static class DecayableDataValue extends AbstractDataValue<DecayableData, Object> {
+        public DecayableDataValue(boolean flag) {
+            super(DecayableData.class, flag ? FLAG : ABSENT);
+        }
     }
 }

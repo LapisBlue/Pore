@@ -22,35 +22,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.data.block;
+package blue.lapis.pore.converter.data.block.type;
 
 import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataTypeConverter;
 
 import com.google.common.collect.ImmutableBiMap;
-import org.spongepowered.api.data.manipulator.block.BrickData;
-import org.spongepowered.api.data.type.BrickType;
-import org.spongepowered.api.data.type.BrickTypes;
+import org.spongepowered.api.data.manipulator.block.AxisData;
+import org.spongepowered.api.data.manipulator.block.TreeData;
+import org.spongepowered.api.data.type.TreeTypes;
+import org.spongepowered.api.util.Axis;
 
-public class BrickDataConverter extends DataTypeConverter {
+public class Log2DataConverter extends DataTypeConverter {
 
     @SuppressWarnings("rawtypes")
-    private BrickDataConverter() {
+    private Log2DataConverter() {
         converters.put(
                 ImmutableBiMap.<AbstractDataValue, Byte>builder()
-                        .put(new BrickDataValue(BrickTypes.DEFAULT), (byte) 0)
-                        .put(new BrickDataValue(BrickTypes.MOSSY), (byte) 1)
-                        .put(new BrickDataValue(BrickTypes.CRACKED), (byte) 2)
-                        .put(new BrickDataValue(BrickTypes.CHISELED), (byte)3)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.ACACIA), (byte) 0)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.DARK_OAK), (byte) 1)
                         .build(),
                 (byte) 2
         );
-        applicableTypes.add(BrickData.class);
-    }
-
-    static class BrickDataValue extends AbstractDataValue<BrickData, BrickType> {
-        public BrickDataValue(BrickType value) {
-            super(BrickData.class, value);
-        }
+        applicableTypes.add(TreeData.class);
+        converters.put(
+                ImmutableBiMap.<AbstractDataValue, Byte>builder()
+                        .put(new LogDataConverter.AxisDataValue(Axis.Y), (byte) 0)
+                        .put(new LogDataConverter.AxisDataValue(Axis.X), (byte) 1)
+                        .put(new LogDataConverter.AxisDataValue(Axis.Z), (byte) 2)
+                        .put(new LogDataConverter.AxisDataValue(null), (byte) 3)
+                        .build(),
+                (byte) 2
+        );
+        applicableTypes.add(AxisData.class);
     }
 }
