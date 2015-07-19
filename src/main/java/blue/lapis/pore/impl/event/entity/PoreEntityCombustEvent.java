@@ -27,6 +27,7 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.converter.type.entity.EntityConverter;
+import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
 import org.bukkit.entity.Entity;
@@ -34,6 +35,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityCombustEvent;
 import org.spongepowered.api.event.entity.EntityIgniteEvent;
 
+@RegisterEvent
 public class PoreEntityCombustEvent extends EntityCombustEvent {
 
     private final EntityIgniteEvent handle;

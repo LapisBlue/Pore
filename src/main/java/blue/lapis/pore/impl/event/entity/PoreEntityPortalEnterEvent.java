@@ -27,16 +27,18 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.converter.type.entity.EntityConverter;
+import blue.lapis.pore.event.RegisterEvent;
+import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
-import org.apache.commons.lang3.NotImplementedException;
+import com.flowpowered.math.vector.Vector3i;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityPortalEnterEvent;
 import org.spongepowered.api.event.entity.EntityEnterPortalEvent;
 
-//TODO: waiting on SpongeAPI to add this
+@RegisterEvent
 public class PoreEntityPortalEnterEvent extends EntityPortalEnterEvent {
 
     private final EntityEnterPortalEvent handle;
@@ -62,6 +64,8 @@ public class PoreEntityPortalEnterEvent extends EntityPortalEnterEvent {
 
     @Override
     public Location getLocation() {
-        throw new NotImplementedException("TODO");
+        Vector3i blockPos = getHandle().getEntity().getLocation().getBlockPosition();
+        return new Location(PoreWorld.of(getHandle().getEntity().getWorld()),
+                blockPos.getX(), blockPos.getY(), blockPos.getZ());
     }
 }

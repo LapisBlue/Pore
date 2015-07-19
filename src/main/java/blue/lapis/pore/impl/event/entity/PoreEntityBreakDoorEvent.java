@@ -27,12 +27,13 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
+import blue.lapis.pore.converter.data.block.BlockDataConverter;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.converter.type.material.MaterialConverter;
+import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -41,6 +42,7 @@ import org.bukkit.event.entity.EntityBreakDoorEvent;
 import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.event.entity.EntityChangeBlockEvent;
 
+@RegisterEvent
 public class PoreEntityBreakDoorEvent extends EntityBreakDoorEvent {
 
     private final EntityChangeBlockEvent handle;
@@ -77,9 +79,7 @@ public class PoreEntityBreakDoorEvent extends EntityBreakDoorEvent {
 
     @Override
     public byte getData() {
-        //TODO: deprecated and removed from SpongeAPI
-        //return this.getHandle().getReplacementBlock().getState().getDataValue();
-        throw new NotImplementedException("TODO");
+        return BlockDataConverter.INSTANCE.getDataValue(getHandle().getReplacementBlock().getState());
     }
 
     @Override

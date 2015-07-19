@@ -78,8 +78,10 @@ public class PoreEntityTeleportEvent extends EntityTeleportEvent {
 
     @Override
     public void setTo(Location to) {
-        this.getHandle().setCancelled(true);
-        this.getHandle().getEntity().setLocation(LocationConverter.of(to));
+        //TODO: no, this isn't right
+        // we'll need to fire a new event and wrap it with this object
+        //this.getHandle().setCancelled(true);
+        //this.getHandle().getEntity().setLocation(LocationConverter.of(to));
     }
 
     @Override

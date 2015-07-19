@@ -27,6 +27,7 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
+import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
@@ -35,6 +36,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerLeashEntityEvent;
 import org.spongepowered.api.event.entity.EntityLeashEvent;
 
+@RegisterEvent
 public class PorePlayerLeashEntityEvent extends PlayerLeashEntityEvent {
 
     private final EntityLeashEvent handle;
@@ -42,7 +44,7 @@ public class PorePlayerLeashEntityEvent extends PlayerLeashEntityEvent {
     public PorePlayerLeashEntityEvent(EntityLeashEvent handle) {
         super(null, null, null);
         this.handle = checkNotNull(handle, "handle");
-        checkState(handle.getLeashHolder() instanceof Player);
+        checkState(handle.getLeashHolder() instanceof Player, "Bad leash holder entity type");
     }
 
     public EntityLeashEvent getHandle() {
@@ -73,4 +75,10 @@ public class PorePlayerLeashEntityEvent extends PlayerLeashEntityEvent {
     public void setCancelled(boolean cancel) {
         this.getHandle().setCancelled(cancel);
     }
+
+    @Override
+    public boolean isValid() {
+        return getHandle().getLeashHolder() instanceof Player;
+    }
+
 }

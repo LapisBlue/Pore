@@ -61,17 +61,18 @@ public class PoreEntityCombustByBlockEvent extends EntityCombustByBlockEvent {
 
     @Override
     public Block getCombuster() {
+        //TODO: Sponge issue
         throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getDuration() {
-        throw new NotImplementedException("TODO");
+        return getHandle().getFireTicks();
     }
 
     @Override
     public void setDuration(int duration) {
-        throw new NotImplementedException("TODO");
+        getHandle().setFireTicks(duration);
     }
 
     @Override

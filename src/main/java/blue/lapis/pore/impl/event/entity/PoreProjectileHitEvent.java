@@ -28,6 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.converter.type.entity.EntityConverter;
+import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.entity.PoreProjectile;
 
 import org.bukkit.entity.EntityType;
@@ -35,6 +36,7 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.spongepowered.api.event.entity.EntityCollisionEvent;
 
+@RegisterEvent
 public class PoreProjectileHitEvent extends ProjectileHitEvent {
 
     private final EntityCollisionEvent handle;
@@ -58,4 +60,10 @@ public class PoreProjectileHitEvent extends ProjectileHitEvent {
     public EntityType getEntityType() {
         return EntityConverter.of(this.getHandle().getEntity().getType());
     }
+
+    @Override
+    public boolean isValid() {
+        return handle.getEntity() instanceof org.spongepowered.api.entity.projectile.Projectile;
+    }
+
 }

@@ -86,6 +86,7 @@ public class PoreCreatureSpawnEvent extends CreatureSpawnEvent {
 
     @Override
     public SpawnReason getSpawnReason() {
+        //TODO: request that Sponge add a getCause() method
         throw new NotImplementedException("TODO");
     }
 }

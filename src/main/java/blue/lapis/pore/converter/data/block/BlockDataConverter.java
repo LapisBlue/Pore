@@ -33,6 +33,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.data.DataManipulator;
@@ -108,6 +109,10 @@ public class BlockDataConverter implements DataConverter<Location> {
             }
         });
         return converter.of(data);
+    }
+
+    public byte getDataValue(BlockState target) {
+        return getDataValue(target.getManipulators(), target.getType());
     }
 
     @Override

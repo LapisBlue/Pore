@@ -28,6 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.converter.type.entity.EntityConverter;
+import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreLivingEntity;
 
@@ -37,6 +38,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityInteractEvent;
 import org.spongepowered.api.entity.living.Living;
 
+@RegisterEvent
 public class PoreEntityInteractEvent extends EntityInteractEvent {
 
     private final org.spongepowered.api.event.entity.EntityInteractBlockEvent handle;

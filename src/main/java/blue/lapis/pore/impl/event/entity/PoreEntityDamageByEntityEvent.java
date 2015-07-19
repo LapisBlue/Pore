@@ -89,7 +89,7 @@ public class PoreEntityDamageByEntityEvent extends EntityDamageByEntityEvent {
 
     @Override
     public double getFinalDamage() {
-        throw new NotImplementedException("TODO");
+        return getHandle().getOldData().getHealth() - getHandle().getNewData().getHealth();
     }
 
     @Override
@@ -116,4 +116,11 @@ public class PoreEntityDamageByEntityEvent extends EntityDamageByEntityEvent {
     public void setCancelled(boolean cancel) {
         this.getHandle().setCancelled(cancel);
     }
+
+    @Override
+    public boolean isValid() {
+        return handle.getCause().isPresent()
+                && handle.getCause().get().getCause() instanceof org.spongepowered.api.entity.Entity;
+    }
+
 }

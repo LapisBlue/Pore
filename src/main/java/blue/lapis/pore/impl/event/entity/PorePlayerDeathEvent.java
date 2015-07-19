@@ -34,6 +34,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.util.TextMessageException;
 
 import java.util.List;
 
@@ -62,36 +64,41 @@ public class PorePlayerDeathEvent extends PlayerDeathEvent {
 
     @Override
     public String getDeathMessage() {
-        throw new NotImplementedException("TODO");
+        return Texts.legacy().to(getHandle().getNewMessage());
     }
 
     @Override
     public void setDeathMessage(String deathMessage) {
-        throw new NotImplementedException("TODO");
+        try {
+            getHandle().setNewMessage(Texts.legacy().from(deathMessage));
+        } catch (TextMessageException ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
     @Override
     public int getNewExp() {
-        throw new NotImplementedException("TODO");
+        return getHandle().getNewExperience();
     }
 
     @Override
     public void setNewExp(int exp) {
-        throw new NotImplementedException("TODO");
+        getHandle().setNewExperience(exp);
     }
 
     @Override
     public int getNewLevel() {
-        throw new NotImplementedException("TODO");
+        return getHandle().getNewLevel();
     }
 
     @Override
     public void setNewLevel(int level) {
-        throw new NotImplementedException("TODO");
+        getHandle().setNewLevel(level);
     }
 
     @Override
     public int getNewTotalExp() {
+        //TODO: WHAT THE HELL EVEN IS THIS METHOD? DID BUKKIT HAVE LITERALLY NO STANDARDS FOR DOCUMENTATION?
         throw new NotImplementedException("TODO");
     }
 
@@ -102,22 +109,22 @@ public class PorePlayerDeathEvent extends PlayerDeathEvent {
 
     @Override
     public boolean getKeepLevel() {
-        throw new NotImplementedException("TODO");
+        return getHandle().keepsLevel();
     }
 
     @Override
     public void setKeepLevel(boolean keepLevel) {
-        throw new NotImplementedException("TODO");
+        getHandle().setKeepsLevel(keepLevel);
     }
 
     @Override
     public boolean getKeepInventory() {
-        throw new NotImplementedException("TODO");
+        return getHandle().keepsInventory();
     }
 
     @Override
     public void setKeepInventory(boolean keepInventory) {
-        throw new NotImplementedException("TODO");
+        getHandle().setKeepsInventory(keepInventory);
     }
 
     @Override

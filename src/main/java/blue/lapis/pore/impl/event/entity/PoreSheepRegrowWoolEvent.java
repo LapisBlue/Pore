@@ -28,6 +28,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.converter.type.entity.EntityConverter;
+import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.entity.PoreSheep;
 
 import org.bukkit.entity.EntityType;
@@ -35,6 +36,7 @@ import org.bukkit.entity.Sheep;
 import org.bukkit.event.entity.SheepRegrowWoolEvent;
 import org.spongepowered.api.event.entity.EntityChangeBlockEvent;
 
+@RegisterEvent
 public class PoreSheepRegrowWoolEvent extends SheepRegrowWoolEvent {
 
     private final EntityChangeBlockEvent handle;
@@ -68,4 +70,10 @@ public class PoreSheepRegrowWoolEvent extends SheepRegrowWoolEvent {
     public void setCancelled(boolean cancel) {
         this.getHandle().setCancelled(cancel);
     }
+
+    @Override
+    public boolean isValid() {
+        return handle.getEntity() instanceof org.spongepowered.api.entity.living.animal.Sheep;
+    }
+
 }

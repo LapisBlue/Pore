@@ -87,7 +87,7 @@ public class PoreEntityDamageEvent extends EntityDamageEvent {
 
     @Override
     public double getFinalDamage() {
-        throw new NotImplementedException("TODO");
+        return getHandle().getOldData().getHealth() - getHandle().getNewData().getHealth();
     }
 
     @Override

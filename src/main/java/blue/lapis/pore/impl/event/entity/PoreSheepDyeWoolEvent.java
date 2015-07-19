@@ -29,6 +29,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.converter.type.material.DyeColorConverter;
+import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
 import org.bukkit.DyeColor;
@@ -37,6 +38,7 @@ import org.bukkit.entity.Sheep;
 import org.bukkit.event.entity.SheepDyeWoolEvent;
 import org.spongepowered.api.event.entity.EntityInteractEntityEvent;
 
+@RegisterEvent
 public class PoreSheepDyeWoolEvent extends SheepDyeWoolEvent {
 
     private final EntityInteractEntityEvent handle;
@@ -84,4 +86,10 @@ public class PoreSheepDyeWoolEvent extends SheepDyeWoolEvent {
     public void setCancelled(boolean cancel) {
         this.getHandle().setCancelled(cancel);
     }
+
+    @Override
+    public boolean isValid() {
+        return handle.getTargetEntity() instanceof org.spongepowered.api.entity.living.animal.Sheep;
+    }
+
 }
