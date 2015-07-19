@@ -26,8 +26,18 @@ package blue.lapis.pore.util;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.vector.VectorConverter;
+import blue.lapis.pore.impl.entity.PoreArrow;
+import blue.lapis.pore.impl.entity.PoreEgg;
+import blue.lapis.pore.impl.entity.PoreEnderPearl;
 import blue.lapis.pore.impl.entity.PoreFireball;
+import blue.lapis.pore.impl.entity.PoreFish;
+import blue.lapis.pore.impl.entity.PoreLargeFireball;
 import blue.lapis.pore.impl.entity.PoreProjectile;
+import blue.lapis.pore.impl.entity.PoreSmallFireball;
+import blue.lapis.pore.impl.entity.PoreSnowball;
+import blue.lapis.pore.impl.entity.PoreThrownExpBottle;
+import blue.lapis.pore.impl.entity.PoreThrownPotion;
+import blue.lapis.pore.impl.entity.PoreWitherSkull;
 
 import com.google.common.base.Optional;
 import org.bukkit.entity.Arrow;
@@ -62,63 +72,62 @@ public final class ProjectileUtil {
             Class<? extends T> projectile, @Nullable Vector velocity) {
         T entity = null;
         if (projectile.isAssignableFrom(Arrow.class)) {
-            entity = (T) PoreFireball.of(source.launchProjectile(
+            entity = (T) PoreArrow.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.Arrow.class,
                     VectorConverter.create3d(velocity)
-            ));
+            ).get());
         } else if (projectile.isAssignableFrom(Egg.class)) {
-            entity = (T) PoreFireball.of(source.launchProjectile(
+            entity = (T) PoreEgg.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.Egg.class,
                     VectorConverter.create3d(velocity)
-            ));
+            ).get());
         } else if (projectile.isAssignableFrom(EnderPearl.class)) {
-            entity = (T) PoreFireball.of(source.launchProjectile(
+            entity = (T) PoreEnderPearl.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.EnderPearl.class,
                     VectorConverter.create3d(velocity)
-            ));
+            ).get());
         } else if (projectile.isAssignableFrom(Fireball.class)) {
-            // TODO: The same check multiple times...?!
             if (projectile.isAssignableFrom(LargeFireball.class)) {
-                entity = (T) PoreFireball.of(source.launchProjectile(
+                entity = (T) PoreLargeFireball.of(source.launchProjectile(
                         org.spongepowered.api.entity.projectile.explosive.fireball.LargeFireball.class,
                         VectorConverter.create3d(velocity)
-                ));
-            } else if (projectile.isAssignableFrom(LargeFireball.class)) {
-                entity = (T) PoreFireball.of(source.launchProjectile(
+                ).get());
+            } else if (projectile.isAssignableFrom(org.bukkit.entity.SmallFireball.class)) {
+                entity = (T) PoreSmallFireball.of(source.launchProjectile(
                         SmallFireball.class,
                         VectorConverter.create3d(velocity)
-                ));
-            } else if (projectile.isAssignableFrom(LargeFireball.class)) {
-                entity = (T) PoreFireball.of(source.launchProjectile(
+                ).get());
+            } else if (projectile.isAssignableFrom(WitherSkull.class)) {
+                entity = (T) PoreWitherSkull.of(source.launchProjectile(
                         WitherSkull.class,
                         VectorConverter.create3d(velocity)
-                ));
+                ).get());
             } else {
                 entity = (T) PoreFireball.of(source.launchProjectile(
                         org.spongepowered.api.entity.projectile.explosive.fireball.Fireball.class,
                         VectorConverter.create3d(velocity)
-                ));
+                ).get());
             }
         } else if (projectile.isAssignableFrom(Fish.class)) {
-            entity = (T) PoreFireball.of(source.launchProjectile(
+            entity = (T) PoreFish.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.FishHook.class,
                     VectorConverter.create3d(velocity)
-            ));
+            ).get());
         } else if (projectile.isAssignableFrom(Snowball.class)) {
-            entity = (T) PoreFireball.of(source.launchProjectile(
+            entity = (T) PoreSnowball.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.Snowball.class,
                     VectorConverter.create3d(velocity)
-            ));
+            ).get());
         } else if (projectile.isAssignableFrom(ThrownExpBottle.class)) {
-            entity = (T) PoreFireball.of(source.launchProjectile(
+            entity = (T) PoreThrownExpBottle.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.ThrownExpBottle.class,
                     VectorConverter.create3d(velocity)
-            ));
+            ).get());
         } else if (projectile.isAssignableFrom(ThrownPotion.class)) {
-            entity = (T) PoreFireball.of(source.launchProjectile(
+            entity = (T) PoreThrownPotion.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.ThrownPotion.class,
                     VectorConverter.create3d(velocity)
-            ));
+            ).get());
         }
         if (entity == null) {
             throw new UnsupportedOperationException();
