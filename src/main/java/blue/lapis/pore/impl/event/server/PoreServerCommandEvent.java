@@ -26,6 +26,8 @@ package blue.lapis.pore.impl.event.server;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.impl.command.PoreCommandSender;
+
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.server.ServerCommandEvent;
@@ -46,17 +48,25 @@ public class PoreServerCommandEvent extends ServerCommandEvent {
 
     @Override
     public CommandSender getSender() {
-        throw new NotImplementedException("TODO"); // TODO
+        return PoreCommandSender.of(getHandle().getSource());
     }
 
     @Override
     public String getCommand() {
-        throw new NotImplementedException("TODO"); // TODO
+        return getHandle().getCommand();
     }
 
     @Override
     public void setCommand(String message) {
         throw new NotImplementedException("TODO"); // TODO
+    }
+
+    public boolean isCancelled() {
+        return getHandle().isCancelled();
+    }
+
+    public void setCancelled(boolean cancelled) {
+        getHandle().setCancelled(cancelled);
     }
 
 }

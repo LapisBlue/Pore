@@ -136,7 +136,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
             return PoreEgg.of(
                     ((ProjectileSource) getHandle()).launchProjectile(
                             org.spongepowered.api.entity.projectile.Egg.class
-                    )
+                    ).orNull()
             );
         }
         return null; //TODO: should an UnsupportedOperationException be thrown?
@@ -148,7 +148,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
             return PoreSnowball.of(
                     ((ProjectileSource) getHandle()).launchProjectile(
                             org.spongepowered.api.entity.projectile.Snowball.class
-                    )
+                    ).orNull()
             );
         }
         return null; //TODO: should an UnsupportedOperationException be thrown?
@@ -160,7 +160,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
             return PoreArrow.of(
                     ((ProjectileSource) getHandle()).launchProjectile(
                             org.spongepowered.api.entity.projectile.Arrow.class
-                    )
+                    ).orNull()
             );
         }
         return null; //TODO: should an UnsupportedOperationException be thrown?
@@ -430,7 +430,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     public <T extends Projectile> T launchProjectile(Class<? extends T> projectile, Vector velocity) {
         if (getHandle() instanceof ProjectileSource) {
-            return ProjectileUtil.launchProjectile((ProjectileSource) getHandle(), projectile, velocity);
+            return ProjectileUtil.launchProjectile((ProjectileSource) getHandle(), projectile, velocity).orNull();
         }
         throw new UnsupportedOperationException();
     }

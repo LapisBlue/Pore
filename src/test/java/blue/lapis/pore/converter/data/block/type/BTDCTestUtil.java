@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.data.block;
+package blue.lapis.pore.converter.data.block.type;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -33,6 +33,7 @@ import static org.mockito.Mockito.when;
 
 import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataTypeConverter;
+import blue.lapis.pore.converter.data.block.BlockDataConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 
 import com.google.common.base.Function;

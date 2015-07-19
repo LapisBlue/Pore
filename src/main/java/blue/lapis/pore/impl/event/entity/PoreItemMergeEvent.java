@@ -29,6 +29,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.entity.PoreItem;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.event.entity.ItemMergeEvent;
 
@@ -49,6 +50,11 @@ public class PoreItemMergeEvent extends ItemMergeEvent {
     @Override
     public Item getEntity() {
         return PoreItem.of(getHandle().getItem());
+    }
+
+    @Override
+    public EntityType getEntityType() {
+        return getEntity().getType();
     }
 
     @Override

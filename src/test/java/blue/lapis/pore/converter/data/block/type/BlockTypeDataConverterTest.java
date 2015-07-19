@@ -22,17 +22,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.converter.data.block;
-
-import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testConversion;
-import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testDeabstraction;
-import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testSingleAbstraction;
-import static blue.lapis.pore.converter.data.block.BTDCTestUtil.testSingleConversion;
+package blue.lapis.pore.converter.data.block.type;
 
 import blue.lapis.pore.PoreTests;
 import blue.lapis.pore.converter.data.AbstractDataValue;
-import blue.lapis.pore.converter.data.block.type.LeavesDataConverter;
-import blue.lapis.pore.converter.data.block.type.LogDataConverter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -70,23 +63,24 @@ public class BlockTypeDataConverterTest {
     @Test
     public void testBitmasking() throws Exception {
         // 245 = 5 | ((2^4 - 1) << 4), i.e. 0101 -> 11110101
-        testSingleAbstraction(BlockTypes.BROWN_MUSHROOM_BLOCK, BigMushroomData.class, (byte) 245,
+        BTDCTestUtil.testSingleAbstraction(BlockTypes.BROWN_MUSHROOM_BLOCK, BigMushroomData.class, (byte) 245,
                 BigMushroomTypes.CENTER);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testOutOfBoundsByte() throws Exception {
-        testSingleAbstraction(BlockTypes.PLANKS, TreeData.class, (byte) 7, TreeTypes.JUNGLE);
+        BTDCTestUtil.testSingleAbstraction(BlockTypes.PLANKS, TreeData.class, (byte) 7, TreeTypes.JUNGLE);
     }
 
     @Test
     public void testBigMushroomConversion() throws Exception {
-        testSingleConversion(BlockTypes.BROWN_MUSHROOM_BLOCK, BigMushroomData.class, (byte) 5, BigMushroomTypes.CENTER);
+        BTDCTestUtil.testSingleConversion(BlockTypes.BROWN_MUSHROOM_BLOCK, BigMushroomData.class, (byte) 5,
+                BigMushroomTypes.CENTER);
     }
 
     @Test
     public void testBrickConversion() throws Exception {
-        testSingleConversion(BlockTypes.STONEBRICK, BrickData.class, (byte) 3, BrickTypes.CHISELED);
+        BTDCTestUtil.testSingleConversion(BlockTypes.STONEBRICK, BrickData.class, (byte) 3, BrickTypes.CHISELED);
     }
 
     @SuppressWarnings("unchecked")
@@ -96,7 +90,7 @@ public class BlockTypeDataConverterTest {
                 new LogDataConverter.TreeDataValue(TreeTypes.SPRUCE),
                 new LogDataConverter.AxisDataValue(Axis.X)
         );
-        testConversion(BlockTypes.LOG, (byte) 5, expected);
+        BTDCTestUtil.testConversion(BlockTypes.LOG, (byte) 5, expected);
     }
 
     @SuppressWarnings("unchecked")
@@ -106,12 +100,12 @@ public class BlockTypeDataConverterTest {
                 new LogDataConverter.TreeDataValue(TreeTypes.DARK_OAK),
                 new LogDataConverter.AxisDataValue(Axis.X)
         );
-        testConversion(BlockTypes.LOG2, (byte) 5, expected);
+        BTDCTestUtil.testConversion(BlockTypes.LOG2, (byte) 5, expected);
     }
 
     @Test
     public void testPlanksConversion() throws Exception {
-        testSingleAbstraction(BlockTypes.PLANKS, TreeData.class, (byte) 3, TreeTypes.JUNGLE);
+        BTDCTestUtil.testSingleAbstraction(BlockTypes.PLANKS, TreeData.class, (byte) 3, TreeTypes.JUNGLE);
     }
 
     @SuppressWarnings("unchecked")
@@ -121,13 +115,13 @@ public class BlockTypeDataConverterTest {
                 new LogDataConverter.TreeDataValue(TreeTypes.SPRUCE),
                 new LeavesDataConverter.DecayableDataValue(false)
         );
-        testDeabstraction(BlockTypes.LEAVES, (byte) 1, input);
-        testSingleAbstraction(BlockTypes.LEAVES, TreeData.class, (byte) 1, TreeTypes.SPRUCE);
+        BTDCTestUtil.testDeabstraction(BlockTypes.LEAVES, (byte) 1, input);
+        BTDCTestUtil.testSingleAbstraction(BlockTypes.LEAVES, TreeData.class, (byte) 1, TreeTypes.SPRUCE);
         Collection<? extends AbstractDataValue<? extends DataManipulator, ?>> expected = Arrays.asList(
                 new LogDataConverter.TreeDataValue(TreeTypes.SPRUCE),
                 new LeavesDataConverter.DecayableDataValue(true)
         );
-        testConversion(BlockTypes.LEAVES, (byte) 5, expected);
+        BTDCTestUtil.testConversion(BlockTypes.LEAVES, (byte) 5, expected);
     }
 
     @SuppressWarnings("unchecked")
@@ -137,13 +131,13 @@ public class BlockTypeDataConverterTest {
                 new LogDataConverter.TreeDataValue(TreeTypes.DARK_OAK),
                 new LeavesDataConverter.DecayableDataValue(false)
         );
-        testDeabstraction(BlockTypes.LEAVES2, (byte) 1, input);
-        testSingleAbstraction(BlockTypes.LEAVES2, TreeData.class, (byte) 1, TreeTypes.DARK_OAK);
+        BTDCTestUtil.testDeabstraction(BlockTypes.LEAVES2, (byte) 1, input);
+        BTDCTestUtil.testSingleAbstraction(BlockTypes.LEAVES2, TreeData.class, (byte) 1, TreeTypes.DARK_OAK);
         Collection<? extends AbstractDataValue<? extends DataManipulator, ?>> expected = Arrays.asList(
                 new LogDataConverter.TreeDataValue(TreeTypes.DARK_OAK),
                 new LeavesDataConverter.DecayableDataValue(true)
         );
-        testConversion(BlockTypes.LEAVES2, (byte) 5, expected);
+        BTDCTestUtil.testConversion(BlockTypes.LEAVES2, (byte) 5, expected);
     }
 
 }
