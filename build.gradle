@@ -81,7 +81,7 @@ dependencies {
 
     // To update, go to https://repo.spongepowered.org/maven/org/spongepowered/spongeapi/2.1-SNAPSHOT/
     // Then pick latest version (or whatever version you want)
-    compile 'org.spongepowered:spongeapi:2.1-20150708.033636-126'
+    compile 'org.spongepowered:spongeapi:2.1-20150716.174735-128'
     runtime 'blue.lapis.methodremapper:tweaker:0.1'
 
     shadow project('Porekit')
