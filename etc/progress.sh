@@ -5,8 +5,8 @@ OVERRIDE_STR="@Override"
 NOT_IMPLD_STR="throw new NotImplementedException"
 
 # grep matches
-OVERRIDES=`grep -ro "$OVERRIDE_STR" $IMPL_DIR | wc -l | cut -f1 -d ' '`
-NOT_IMPLD=`grep -ro "$NOT_IMPLD_STR" $IMPL_DIR | wc -l | cut -f1 -d ' '`
+OVERRIDES=`grep -r "$OVERRIDE_STR" $IMPL_DIR | wc -l | cut -f1 -d ' '`
+NOT_IMPLD=`grep -r "$NOT_IMPLD_STR" $IMPL_DIR | wc -l | cut -f1 -d ' '`
 
 # math to get a percentage (yay integer math :P)
 IMPLD_FRACTION=$[($OVERRIDES - $NOT_IMPLD) * 10000 / $OVERRIDES]
