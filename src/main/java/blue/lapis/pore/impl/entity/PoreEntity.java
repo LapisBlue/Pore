@@ -148,10 +148,12 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
         if (this.getPassenger() != null || this.isDead()) {
             return false;
         }
-        this.eject();
-        getHandle().setLocation(LocationConverter.of(location));
-        // CraftBukkit apparently does not throw an event when this method is called
-        return true;
+        if (this.eject()) {
+            getHandle().setLocation(LocationConverter.of(location));
+            // CraftBukkit apparently does not throw an event when this method is called
+            return true;
+        }
+        return false;
     }
 
     @Override

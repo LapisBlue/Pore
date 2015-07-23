@@ -29,6 +29,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.Art;
 import org.bukkit.entity.EntityType;
+import org.spongepowered.api.data.DataTransactionResult;
 import org.spongepowered.api.data.manipulator.entity.ArtData;
 import org.spongepowered.api.entity.hanging.Painting;
 
@@ -66,7 +67,6 @@ public class PorePainting extends PoreHanging implements org.bukkit.entity.Paint
     public boolean setArt(Art art, boolean force) {
         ArtData artdata = getOrCreate(ArtData.class);
         artdata.setArt(ArtConverter.of(art));
-        set(artdata);
-        return true; //TODO
+        return set(artdata).getType() == DataTransactionResult.Type.SUCCESS;
     }
 }

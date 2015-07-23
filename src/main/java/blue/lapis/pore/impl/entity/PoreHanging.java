@@ -29,6 +29,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.BlockFace;
+import org.spongepowered.api.data.DataTransactionResult;
 import org.spongepowered.api.data.manipulator.block.DirectionalData;
 import org.spongepowered.api.entity.hanging.Hanging;
 
@@ -51,9 +52,8 @@ public class PoreHanging extends PoreEntity implements org.bukkit.entity.Hanging
     public boolean setFacingDirection(BlockFace face, boolean force) {
         DirectionalData data = getOrCreate(DirectionalData.class);
         data.setValue(DirectionConverter.of(face));//TODO: missing a boolean (DirectionConverter.of(face), force);
-        set(data);
-
-        return true; //TODO
+        DataTransactionResult result = set(data);
+        return result.getType() == DataTransactionResult.Type.SUCCESS;
     }
 
     @Override

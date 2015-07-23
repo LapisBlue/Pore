@@ -160,8 +160,9 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukki
     @Override
     @SuppressWarnings("deprecation")
     public boolean setTypeId(int type) {
-        setType(Material.getMaterial(type));
-        return true;
+        Material mat = Material.getMaterial(type);
+        setType(mat);
+        return getType() == mat;
     }
 
     @Override

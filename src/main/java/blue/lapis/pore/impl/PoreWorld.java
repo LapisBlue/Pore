@@ -805,7 +805,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
             return false;
         }
         getHandle().getProperties().setGameRule(rule, value);
-        return true;
+        return true; // doesn't seem to be capable of failing in Sponge
     }
 
     @Override

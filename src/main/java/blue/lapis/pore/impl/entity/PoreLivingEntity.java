@@ -360,22 +360,23 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void damage(double amount) {
-        get(HealthData.class).damage(amount);
+        damage(amount, null);
     }
 
     @Override
     public void damage(double amount, Entity source) {
-        damage(amount); //TODO
+        get(HealthData.class).damage(amount);
+        //TODO: source
     }
 
     @Override
     public void _INVALID_damage(int amount) {
-        get(HealthData.class).damage(amount);
+        damage((double) amount);
     }
 
     @Override
     public void _INVALID_damage(int amount, Entity source) {
-        damage(amount); //TODO
+        damage((double) amount, source);
     }
 
     @Override
@@ -385,7 +386,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public int _INVALID_getHealth() {
-        return (int) get(HealthData.class).getHealth();
+        return (int) getHealth();
     }
 
     @Override
@@ -395,7 +396,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void _INVALID_setHealth(int health) {
-        getOrCreate(HealthData.class).setHealth(health);
+        setHealth((double) health);
     }
 
     @Override
@@ -415,7 +416,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void _INVALID_setMaxHealth(int health) {
-        setMaxHealth(health);
+        setMaxHealth((double) health);
     }
 
     @Override
