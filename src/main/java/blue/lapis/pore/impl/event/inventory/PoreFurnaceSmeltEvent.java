@@ -51,6 +51,7 @@ public class PoreFurnaceSmeltEvent extends FurnaceSmeltEvent {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public Block getFurnace() {
         return this.getBlock();
     }

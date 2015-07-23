@@ -138,7 +138,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
                 try {
                     getLogger().info(String.format("Loading %s", plugin.getDescription().getFullName()));
                     plugin.onLoad();
-                } catch (Exception ex) {
+                } catch (RuntimeException ex) {
                     getLogger().log(Level.SEVERE,
                             ex.getMessage() + " initializing " + plugin.getDescription().getFullName()
                                     + " (Is it up to date?)", ex);
@@ -693,6 +693,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public String getMotd() {
         return Texts.legacy().to(getHandle().getMotd());
     }
@@ -744,6 +745,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Deprecated
     @Override
+    @SuppressWarnings("deprecation")
     public UnsafeValues getUnsafe() {
         return PoreUnsafeValues.INSTANCE;
     }

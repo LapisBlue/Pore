@@ -32,6 +32,7 @@ import org.spongepowered.api.event.entity.player.PlayerEvent;
 import java.net.InetAddress;
 import java.util.UUID;
 
+@SuppressWarnings("deprecation")
 public class PorePlayerPreLoginEvent extends PlayerPreLoginEvent {
 
     private final PlayerEvent handle;

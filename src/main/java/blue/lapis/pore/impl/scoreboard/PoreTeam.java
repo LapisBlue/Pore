@@ -48,6 +48,8 @@ import java.util.Set;
 
 public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard.Team {
 
+    private static final int MAX_NAME_LENGTH = 32;
+
     public static PoreTeam of(Team handle) {
         return WrapperConverter.of(PoreTeam.class, handle);
     }
@@ -73,7 +75,8 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     @SuppressWarnings("deprecation")
     public void setDisplayName(String displayName) throws IllegalStateException, IllegalArgumentException {
         checkState();
-        checkArgument(displayName.length() > 32, "Display name must not be longer than 32 characters");
+        checkArgument(displayName.length() > MAX_NAME_LENGTH,
+                "Display name must not be longer than " + MAX_NAME_LENGTH + " characters");
         try {
             getHandle().setDisplayName(Texts.legacy().from(displayName));
         } catch (TextMessageException ex) {

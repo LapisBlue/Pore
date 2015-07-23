@@ -315,7 +315,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
     @Override
     public boolean leaveVehicle() {
         Optional<PassengerData> data = getOptional(PassengerData.class);
-        return data.isPresent() && data.get().setVehicle(null); // TODO: ???
+        return data.isPresent() && remove(PassengerData.class);
     }
 
     @Override

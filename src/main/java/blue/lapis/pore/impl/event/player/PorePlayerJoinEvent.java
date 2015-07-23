@@ -54,6 +54,7 @@ public class PorePlayerJoinEvent extends org.bukkit.event.player.PlayerJoinEvent
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public String getJoinMessage() {
         return Texts.legacy().to(handle.getNewMessage());
     }

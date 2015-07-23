@@ -85,7 +85,6 @@ import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.extent.Extent;
-import org.spongepowered.api.world.gen.WorldGeneratorModifier;
 import org.spongepowered.api.world.weather.Weathers;
 
 import java.io.File;
@@ -98,6 +97,13 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 
 public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
+
+    private static final float NATURAL_DROP_SCALAR = 0.85f;
+    private static final float NATURAL_DROP_OFFSET = 0.15f;
+
+    private static final long TICKS_PER_DAY = 24000L;
+
+    private static final int DEFAULT_EFFECT_RADIUS = 64;
 
     public static PoreWorld of(Extent handle) {
         if (handle instanceof World) {
@@ -121,6 +127,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public int getBlockTypeIdAt(int x, int y, int z) {
         return getBlockAt(x, y, z).getTypeId();
     }
@@ -275,8 +282,11 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     public Item dropItemNaturally(Location location, ItemStack item) {
         // this is how it's expected to behave from what I can understand
         return dropItem(
-                location.clone().add(Math.random() * 0.85D, Math.random() * 0.85D, Math.random() * 0.85D),
-                item
+                location.clone().add(
+                        Math.random() * NATURAL_DROP_SCALAR + NATURAL_DROP_OFFSET,
+                        Math.random() * NATURAL_DROP_SCALAR + NATURAL_DROP_OFFSET,
+                        Math.random() * NATURAL_DROP_SCALAR + NATURAL_DROP_OFFSET
+                ), item
         );
     }
 
@@ -428,12 +438,12 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public long getTime() {
-        return getHandle().getProperties().getWorldTime() % 24000L;
+        return getHandle().getProperties().getWorldTime() % TICKS_PER_DAY;
     }
 
     @Override
     public void setTime(long time) {
-        long catchup = 24000L - getHandle().getProperties().getWorldTime() % 24000L;
+        long catchup = TICKS_PER_DAY - getHandle().getProperties().getWorldTime() % TICKS_PER_DAY;
         getHandle().getProperties().setWorldTime(getHandle().getProperties().getWorldTime() + catchup + time);
     }
 
@@ -584,7 +594,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public void playEffect(Location location, Effect effect, int data) {
-        this.playEffect(location, effect, data, 64);
+        this.playEffect(location, effect, data, DEFAULT_EFFECT_RADIUS);
     }
 
     @Override
@@ -603,7 +613,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public <T> void playEffect(Location location, Effect effect, T data) {
-        this.playEffect(location, effect, data, 64);
+        this.playEffect(location, effect, data, DEFAULT_EFFECT_RADIUS);
     }
 
     @Override

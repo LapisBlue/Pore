@@ -24,7 +24,6 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.type.entity.player.GameModeConverter;
 import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
@@ -35,7 +34,6 @@ import blue.lapis.pore.impl.inventory.PorePlayerInventory;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.GameMode;
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -45,9 +43,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.block.BlockTypes;
-import org.spongepowered.api.data.DataHolder;
 import org.spongepowered.api.data.manipulator.entity.ExperienceHolderData;
-import org.spongepowered.api.data.manipulator.entity.GameModeData;
 import org.spongepowered.api.data.manipulator.item.InventoryItemData;
 import org.spongepowered.api.entity.living.Human;
 import org.spongepowered.api.item.inventory.entity.HumanInventory;
@@ -115,11 +111,9 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     public InventoryView openWorkbench(org.bukkit.Location location, boolean force) {
         Location block = LocationConverter.of(location);
         if (force || block.getBlockType() == BlockTypes.CRAFTING_TABLE) {
-            if (block instanceof DataHolder) {
-                return this.openInventory(PoreInventory.of(
-                        block.getData(InventoryItemData.class).get().getInventory() // TODO: is this right?
-                ));
-            }
+            return this.openInventory(PoreInventory.of(
+                    block.getData(InventoryItemData.class).get().getInventory() // TODO: is this right?
+            ));
         }
         return null;
     }
@@ -128,11 +122,9 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     public InventoryView openEnchanting(org.bukkit.Location location, boolean force) {
         Location block = LocationConverter.of(location);
         if (force || block.getBlockType() == BlockTypes.ENCHANTING_TABLE) {
-            if (block instanceof DataHolder) {
-                return this.openInventory(PoreInventory.of(
-                        block.getData(InventoryItemData.class).get().getInventory() //TODO: is this right?
-                ));
-            }
+            return this.openInventory(PoreInventory.of(
+                    block.getData(InventoryItemData.class).get().getInventory() //TODO: is this right?
+            ));
         }
         return null;
     }

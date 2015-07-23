@@ -71,7 +71,6 @@ import org.spongepowered.api.data.manipulator.entity.JoinData;
 import org.spongepowered.api.data.manipulator.entity.RespawnLocationData;
 import org.spongepowered.api.data.manipulator.entity.SneakingData;
 import org.spongepowered.api.data.manipulator.entity.StatisticData;
-import org.spongepowered.api.data.manipulator.entity.VelocityData;
 import org.spongepowered.api.data.manipulator.entity.WhitelistData;
 import org.spongepowered.api.effect.sound.SoundType;
 import org.spongepowered.api.entity.player.Player;
@@ -82,7 +81,6 @@ import org.spongepowered.api.statistic.EntityStatistic;
 import org.spongepowered.api.statistic.StatisticGroup;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
-import org.spongepowered.api.text.title.Title;
 import org.spongepowered.api.text.title.Titles;
 import org.spongepowered.api.util.TextMessageException;
 
@@ -813,6 +811,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void sendTitle(String title, String subtitle) {
         getHandle().sendTitle(Titles.of(Texts.legacy().fromUnchecked(title), Texts.legacy().fromUnchecked(subtitle)));
     }

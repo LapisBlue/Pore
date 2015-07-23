@@ -61,6 +61,7 @@ public class PorePlayerFishEvent extends org.bukkit.event.player.PlayerFishEvent
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public Fish getHook() {
         throw new NotImplementedException("TODO"); // TODO
     }

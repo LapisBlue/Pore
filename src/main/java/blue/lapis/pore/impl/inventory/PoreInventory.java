@@ -230,6 +230,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public boolean contains(int materialId) {
         return this.contains(Material.getMaterial(materialId));
     }
@@ -245,6 +246,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public boolean contains(int materialId, int amount) {
         return this.contains(Material.getMaterial(materialId), amount);
     }
@@ -292,6 +294,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public HashMap<Integer, ? extends ItemStack> all(int materialId) {
         return this.all(Material.getMaterial(materialId));
     }
@@ -319,6 +322,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public int first(int materialId) {
         return this.first(Material.getMaterial(materialId));
     }
@@ -357,6 +361,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void remove(int materialId) {
         this.remove(Material.getMaterial(materialId));
     }

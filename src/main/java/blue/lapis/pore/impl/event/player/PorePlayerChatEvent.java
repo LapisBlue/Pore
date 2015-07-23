@@ -33,6 +33,7 @@ import org.spongepowered.api.event.entity.player.PlayerChatEvent;
 import java.util.Set;
 
 @Deprecated
+@SuppressWarnings("deprecation")
 public class PorePlayerChatEvent extends org.bukkit.event.player.PlayerChatEvent {
 
     private final PlayerChatEvent handle;

@@ -33,6 +33,7 @@ import org.bukkit.inventory.Inventory;
 import org.spongepowered.api.event.entity.player.PlayerEvent;
 
 @Deprecated
+@SuppressWarnings("deprecation")
 public class PorePlayerInventoryEvent extends PlayerInventoryEvent {
 
     private final PlayerEvent handle;

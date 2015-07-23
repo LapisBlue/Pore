@@ -44,6 +44,7 @@ public class PoreCraftItemEvent extends org.bukkit.event.inventory.CraftItemEven
 
     private final CraftItemEvent handle;
 
+    @SuppressWarnings("deprecation")
     public PoreCraftItemEvent(CraftItemEvent handle) {
         super(null, null, null, -1, false, false);
         this.handle = checkNotNull(handle, "handle");
@@ -94,6 +95,7 @@ public class PoreCraftItemEvent extends org.bukkit.event.inventory.CraftItemEven
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setCursor(ItemStack stack) {
         this.getView().setCursor(stack);
     }

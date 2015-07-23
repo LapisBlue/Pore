@@ -267,7 +267,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public Collection<PotionEffect> getActivePotionEffects() {
-        List<PotionEffect> effects = new ArrayList<PotionEffect>();
+        Collection<PotionEffect> effects = new ArrayList<PotionEffect>();
         for (org.spongepowered.api.potion.PotionEffect effect : get(PotionEffectData.class).getPotionEffects()) {
             effects.add(PotionEffectConverter.of(effect));
         }
@@ -338,8 +338,9 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     public Entity getLeashHolder() throws IllegalStateException {
         if (getHandle() instanceof Agent) {
-            return get(LeashData.class).getLeashHolder() != null
-                    ? PoreEntity.of(get(LeashData.class).getLeashHolder()) : null;
+            return getOptional(LeashData.class).isPresent()
+                    ? PoreEntity.of(get(LeashData.class).getLeashHolder())
+                    : null;
         }
         return null;
     }

@@ -159,6 +159,7 @@ public class PorePlayerInventory extends PoreInventory implements PlayerInventor
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public int clear(int id, int data) {
         int removed = 0;
         for (Slot slot : this.getHandle().<Slot>slots()) {

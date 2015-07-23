@@ -44,6 +44,8 @@ import org.spongepowered.api.statistic.achievement.Achievement;
 
 import java.util.List;
 
+@Deprecated
+@SuppressWarnings("deprecation")
 public class PoreUnsafeValues implements UnsafeValues {
 
     @SuppressWarnings("deprecation")

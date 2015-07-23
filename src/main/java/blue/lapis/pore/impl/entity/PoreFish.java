@@ -31,6 +31,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fish;
 import org.spongepowered.api.entity.projectile.FishHook;
 
+@SuppressWarnings("deprecation")
 public class PoreFish extends PoreProjectile implements Fish {
 
     public static PoreFish of(FishHook handle) {

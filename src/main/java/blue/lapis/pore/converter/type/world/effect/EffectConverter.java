@@ -87,10 +87,11 @@ public final class EffectConverter {
         return null;
     }
 
+    @SuppressWarnings("deprecation")
     public static <T> int getDataValue(Effect effect, T data) {
         switch (effect) {
             case POTION_BREAK:
-                return ((Potion) data).toDamageValue() & 0x3F;
+                return ((Potion) data).toDamageValue() & Integer.parseInt("111111", 2);
             case RECORD_PLAY:
                 if (((Material) data).isRecord()) {
                     return ((Material) data).getId();

@@ -33,6 +33,8 @@ import org.spongepowered.api.entity.living.monster.ZombiePigman;
 
 public class PorePigZombie extends PoreZombie implements PigZombie {
 
+    private static final int MAX_ANGER_LEVEL = 400;
+
     public static PorePigZombie of(ZombiePigman handle) {
         return WrapperConverter.of(PorePigZombie.class, handle);
     }
@@ -65,7 +67,7 @@ public class PorePigZombie extends PoreZombie implements PigZombie {
 
     @Override
     public void setAngry(boolean angry) {
-        setAnger(angry ? 400 : 0);
+        setAnger(angry ? MAX_ANGER_LEVEL : 0);
     }
 
     @Override

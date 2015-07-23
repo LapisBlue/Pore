@@ -59,6 +59,7 @@ public class PoreServerListPingEvent extends ServerListPingEvent {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public String getMotd() {
         return Texts.legacy().to(handle.getResponse().getDescription());
     }

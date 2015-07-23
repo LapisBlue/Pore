@@ -36,6 +36,7 @@ public class PoreVehicleDamageEvent extends VehicleDamageEvent {
 
     private final LivingChangeHealthEvent handle;
 
+    @SuppressWarnings("deprecation")
     public PoreVehicleDamageEvent(LivingChangeHealthEvent handle) {
         super(null, null, -1);
         this.handle = checkNotNull(handle, "handle");

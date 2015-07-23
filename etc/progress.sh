@@ -12,6 +12,10 @@ NOT_IMPLD=`grep -r "$NOT_IMPLD_STR" $IMPL_DIR | wc -l | tr -d ' '`
 IMPLD_FRACTION=$[($OVERRIDES - $NOT_IMPLD) * 10000 / $OVERRIDES]
 WHOLE=$[$IMPLD_FRACTION / 100]
 DECIMAL=$[$IMPLD_FRACTION % 100]
+if [ $DECIMAL -lt 10 ]
+then
+    DECIMAL="0"$DECIMAL
+fi
 PERCENT_IMPLD=$WHOLE"."$DECIMAL
 
 echo "Bukkit is roughly "$PERCENT_IMPLD"% implemented."

@@ -63,11 +63,13 @@ public class PoreAsyncPlayerPreLoginEvent extends AsyncPlayerPreLoginEvent {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public PlayerPreLoginEvent.Result getResult() {
         throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setResult(PlayerPreLoginEvent.Result result) {
         throw new NotImplementedException("TODO"); // TODO
     }
@@ -93,6 +95,7 @@ public class PoreAsyncPlayerPreLoginEvent extends AsyncPlayerPreLoginEvent {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void disallow(PlayerPreLoginEvent.Result result, String message) {
         throw new NotImplementedException("TODO"); // TODO
     }

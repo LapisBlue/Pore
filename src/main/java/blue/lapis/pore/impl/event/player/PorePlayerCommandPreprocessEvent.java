@@ -67,16 +67,19 @@ public class PorePlayerCommandPreprocessEvent extends PlayerCommandPreprocessEve
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public String getFormat() {
         throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setFormat(String format) {
         throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public Set<Player> getRecipients() {
         throw new NotImplementedException("TODO"); // TODO
     }

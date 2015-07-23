@@ -46,6 +46,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class PoreBukkitScheduler implements BukkitScheduler {
 
+    private static final int MS_PER_TICK = 50;
+
     private static final AtomicInteger id = new AtomicInteger();
 
     private static SchedulerService getScheduler() {
@@ -66,7 +68,7 @@ public class PoreBukkitScheduler implements BukkitScheduler {
     }
 
     private static long ticksToMillis(long ticks) {
-        return ticks * 50;
+        return ticks * MS_PER_TICK;
     }
 
 

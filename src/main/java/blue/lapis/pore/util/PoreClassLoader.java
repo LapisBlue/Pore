@@ -33,7 +33,7 @@ import java.net.URLClassLoader;
 
 public class PoreClassLoader extends URLClassLoader {
 
-    private static ImmutableSet<String> EXCLUSIONS = ImmutableSet.of(
+    private static final ImmutableSet<String> EXCLUSIONS = ImmutableSet.of(
             "blue.lapis.pore.launch."
     );
 

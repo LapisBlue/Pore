@@ -94,6 +94,7 @@ public class PoreInventoryClickEvent extends org.bukkit.event.inventory.Inventor
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setCursor(ItemStack stack) {
         this.getView().setCursor(stack);
     }

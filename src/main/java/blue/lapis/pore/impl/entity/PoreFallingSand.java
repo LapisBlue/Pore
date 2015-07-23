@@ -34,6 +34,7 @@ import org.bukkit.entity.FallingSand;
 import org.spongepowered.api.data.manipulator.entity.FallingBlockData;
 import org.spongepowered.api.entity.FallingBlock;
 
+@SuppressWarnings("deprecation")
 public class PoreFallingSand extends PoreEntity implements FallingSand {
 
     public static PoreFallingSand of(FallingBlock handle) {
@@ -60,6 +61,7 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public int getBlockId() {
         return getMaterial().getId();
     }

@@ -35,8 +35,8 @@ import blue.lapis.pore.util.constructor.SimpleConstructor;
 
 import com.google.common.collect.MapMaker;
 import com.google.common.collect.Maps;
-import com.google.common.reflect.ClassPath;
 import org.bukkit.event.Event;
+import org.bukkit.event.EventException;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.AuthorNagException;
@@ -45,12 +45,9 @@ import org.bukkit.plugin.RegisteredListener;
 import org.bukkit.plugin.SimplePluginManager;
 import org.spongepowered.api.service.event.EventManager;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.util.EnumMap;
@@ -113,7 +110,7 @@ public final class PoreEventWrapper {
                             ex.getMessage()
                     ));
                 }
-            } catch (Throwable ex) {
+            } catch (EventException ex) {
                 Pore.getServer().getLogger().log(Level.SEVERE, "Could not pass event " + event.getEventName() + " to "
                         + registration.getPlugin().getDescription().getFullName(), ex);
             }

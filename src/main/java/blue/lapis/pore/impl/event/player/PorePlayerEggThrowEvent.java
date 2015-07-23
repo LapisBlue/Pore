@@ -78,11 +78,13 @@ public class PorePlayerEggThrowEvent extends PlayerEggThrowEvent {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public CreatureType getHatchType() {
         throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void setHatchType(CreatureType hatchType) {
         throw new NotImplementedException("TODO"); // TODO
     }

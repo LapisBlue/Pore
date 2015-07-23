@@ -54,7 +54,7 @@ import java.util.Map;
 
 public class BlockDataConverter implements DataConverter<Location> {
 
-    public static BlockDataConverter INSTANCE = new BlockDataConverter();
+    public static final BlockDataConverter INSTANCE = new BlockDataConverter();
 
     private static final Map<Class<?>, DataTypeConverter> CONVERTER_OBJECTS = Maps.newHashMap();
 
@@ -75,10 +75,10 @@ public class BlockDataConverter implements DataConverter<Location> {
     }
 
     private static DataTypeConverter getConverter(Class<?> clazz) {
-        Exception e; // f--- Java 6 yo
         if (CONVERTER_OBJECTS.containsKey(clazz)) {
             return CONVERTER_OBJECTS.get(clazz);
         } else {
+            Exception e; // f--- Java 6 yo
             try {
                 Constructor<?> c = clazz.getDeclaredConstructors()[0];
                 c.setAccessible(true);
