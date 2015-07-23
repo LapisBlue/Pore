@@ -815,7 +815,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public WorldBorder getWorldBorder() {
-        return PoreWorldBorder.of(getHandle().getWorldBorder());
+        return PoreWorldBorder.of(getHandle().getWorldBorder(), this);
     }
 
     @Override

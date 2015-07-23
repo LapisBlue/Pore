@@ -28,14 +28,26 @@ import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Location;
 import org.spongepowered.api.world.WorldBorder;
 
 public class PoreWorldBorder extends PoreWrapper<WorldBorder> implements org.bukkit.WorldBorder {
 
-    public static PoreWorldBorder of(WorldBorder handle) {
-        return WrapperConverter.of(PoreWorldBorder.class, handle);
+    // these are all just magic numbers; they don't have any specific significance
+    private static final double DEFAULT_SIZE = 6e7;
+    private static final double DEFAULT_DAMAGE_AMOUNT = 0.2;
+    private static final double DEFAULT_DAMAGE_BUFFER = 5;
+    private static final int DEFAULT_WARNING_DISTANCE = 5;
+    private static final int DEFAULT_WARNING_TIME = 15;
+
+    private PoreWorld world;
+
+    public static PoreWorldBorder of(WorldBorder handle, PoreWorld world) {
+        PoreWorldBorder wb = WrapperConverter.of(PoreWorldBorder.class, handle);
+        if (wb != null && wb.world == null) { // not very efficient but I'm not sure there's a cleaner solution
+            wb.world = world;
+        }
+        return wb;
     }
 
     protected PoreWorldBorder(WorldBorder handle) {
@@ -44,7 +56,12 @@ public class PoreWorldBorder extends PoreWrapper<WorldBorder> implements org.buk
 
     @Override
     public void reset() {
-        throw new NotImplementedException("TODO"); // TODO
+        setSize(DEFAULT_SIZE);
+        setDamageAmount(DEFAULT_DAMAGE_AMOUNT);
+        setDamageBuffer(DEFAULT_DAMAGE_BUFFER);
+        setWarningDistance(DEFAULT_WARNING_DISTANCE);
+        setWarningTime(DEFAULT_WARNING_TIME);
+        setCenter(0, 0);
     }
 
     @Override
@@ -64,8 +81,10 @@ public class PoreWorldBorder extends PoreWrapper<WorldBorder> implements org.buk
 
     @Override
     public Location getCenter() {
-        // TODO: Add world?
-        return LocationConverter.fromVector3d(null, getHandle().getCenter());
+        // this is more efficient than passing the Sponge world and doing a lookup for it
+        Location l = LocationConverter.fromVector3d(null, getHandle().getCenter());
+        l.setWorld(world);
+        return l;
     }
 
     @Override
