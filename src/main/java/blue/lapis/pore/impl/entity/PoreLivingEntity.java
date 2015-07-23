@@ -102,7 +102,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public List<Block> getLineOfSight(HashSet<Byte> transparent, int maxDistance) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -112,7 +112,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public Block getTargetBlock(HashSet<Byte> transparent, int maxDistance) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -122,7 +122,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public List<Block> getLastTwoTargetBlocks(HashSet<Byte> transparent, int maxDistance) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -228,7 +228,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public Player getKiller() {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -276,32 +276,32 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public boolean hasLineOfSight(Entity other) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean getRemoveWhenFarAway() {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setRemoveWhenFarAway(boolean remove) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public EntityEquipment getEquipment() {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setCanPickupItems(boolean pickup) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean getCanPickupItems() {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override

@@ -72,21 +72,21 @@ public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
 
     @Override
     public void setYield(float yield) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public float getYield() {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setIsIncendiary(boolean isIncendiary) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isIncendiary() {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 }

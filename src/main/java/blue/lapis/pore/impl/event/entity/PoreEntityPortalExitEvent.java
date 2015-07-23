@@ -89,17 +89,17 @@ public class PoreEntityPortalExitEvent extends EntityPortalExitEvent {
 
     @Override
     public Vector getBefore() { // eh, this will be tricky to implement
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Vector getAfter() { // WHY DOES SPONGEAPI HAVE NO VELOCITY METHODS
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setAfter(Vector after) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override

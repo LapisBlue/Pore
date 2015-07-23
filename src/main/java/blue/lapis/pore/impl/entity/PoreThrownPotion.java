@@ -58,7 +58,7 @@ public class PoreThrownPotion extends PoreProjectile implements org.bukkit.entit
 
     @Override
     public Collection<PotionEffect> getEffects() {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override

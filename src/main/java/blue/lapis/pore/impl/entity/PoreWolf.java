@@ -56,12 +56,12 @@ public class PoreWolf extends PoreTameable implements org.bukkit.entity.Wolf {
 
     @Override
     public boolean isAngry() {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setAngry(boolean angry) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override

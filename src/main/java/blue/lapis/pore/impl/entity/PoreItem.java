@@ -60,16 +60,16 @@ public class PoreItem extends PoreEntity implements org.bukkit.entity.Item {
 
     @Override
     public void setItemStack(ItemStack stack) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public int getPickupDelay() {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setPickupDelay(int delay) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 }

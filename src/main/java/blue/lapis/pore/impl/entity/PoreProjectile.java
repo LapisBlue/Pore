@@ -97,11 +97,11 @@ public class PoreProjectile extends PoreEntity implements org.bukkit.entity.Proj
 
     @Override
     public boolean doesBounce() {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setBounce(boolean doesBounce) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 }

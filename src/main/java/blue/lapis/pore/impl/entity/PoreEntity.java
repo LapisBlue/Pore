@@ -183,7 +183,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
     @Override
     public int getEntityId() { // note to self - this is the ID of the entity in the world, and unrelated to
         // its UUID
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -269,12 +269,12 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public float getFallDistance() {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setFallDistance(float distance) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -294,12 +294,12 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public int getTicksLived() {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setTicksLived(int value) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -346,22 +346,22 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public void setMetadata(String s, MetadataValue metadataValue) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public List<MetadataValue> getMetadata(String s) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean hasMetadata(String s) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void removeMetadata(String s, Plugin plugin) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override

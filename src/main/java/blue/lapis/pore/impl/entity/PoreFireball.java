@@ -55,7 +55,7 @@ public class PoreFireball extends PoreProjectile implements org.bukkit.entity.Fi
 
     @Override
     public void setDirection(Vector direction) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override

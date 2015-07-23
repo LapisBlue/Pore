@@ -53,12 +53,12 @@ public class PoreFirework extends PoreEntity implements org.bukkit.entity.Firewo
 
     @Override
     public FireworkMeta getFireworkMeta() {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setFireworkMeta(FireworkMeta meta) {
-        throw new NotImplementedException("TODO"); //TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
