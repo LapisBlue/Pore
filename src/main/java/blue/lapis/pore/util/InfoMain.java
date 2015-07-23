@@ -37,7 +37,7 @@ public final class InfoMain {
     private InfoMain() {
     }
 
-    private static final String ERROR = "You've just attempted to run the Pore jar file.\n\n"
+    private static final String ERROR = "You've just attempted to run the Pore JAR file.\n\n"
             + "Pore is a plugin for platforms implementing SpongeAPI, and must be installed on such in order "
             + "to function properly.\n"
             + "i.e., it cannot be run as a standalone program.\n";

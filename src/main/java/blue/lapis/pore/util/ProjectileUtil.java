@@ -148,7 +148,7 @@ public final class ProjectileUtil {
             ).orNull()));
         }
         if (entity == null) {
-            throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException("Could not match projectile to type (is Pore up-to-date?)"); // lel
         }
         if (entity.isPresent()) {
             final T finalEntity = entity.get();

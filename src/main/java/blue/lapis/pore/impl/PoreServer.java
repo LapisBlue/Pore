@@ -453,7 +453,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public void reload() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("Sponge does not support server reloads");
     }
 
     @Override

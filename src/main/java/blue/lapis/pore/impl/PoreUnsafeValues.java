@@ -32,7 +32,6 @@ import blue.lapis.pore.converter.type.statistic.StatisticConverter;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.collect.Iterables;
-import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.Statistic;
 import org.bukkit.UnsafeValues;
@@ -80,15 +79,19 @@ public class PoreUnsafeValues implements UnsafeValues {
     }
 
     @Override
-    public ItemStack modifyItemStack(ItemStack stack, String arguments) {
+    public ItemStack modifyItemStack(ItemStack stack, String arguments) throws UnsupportedOperationException {
         /*
          * TODO: this is a very evil method which happens to require access to
          * NBT data. I propose we throw an UnsupportedOperationException and
          * modify Porekit to rewrite any calls to it since this class isn't
          * supported anyway.
          * - caseif
+         *
+         * Update: I went ahead and did it. Feel free to yell at me on IRC if
+         * you think this was a bad idea.
+         * - caseif
          */
-        throw new NotImplementedException("TODO");
+        throw new UnsupportedOperationException("Pore does not support direct NBT manipulation at this time");
     }
 
     @Override

@@ -139,7 +139,9 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
                     ).orNull()
             );
         }
-        return null; //TODO: should an UnsupportedOperationException be thrown?
+        // CB never returns null here so we shouldn't either
+        // this will prevent ambiguity if something breaks (as opposed to if we let a plugin throw an NPE)
+        throw new UnsupportedOperationException("Not a ProjectileSource");
     }
 
     @Override
@@ -151,7 +153,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
                     ).orNull()
             );
         }
-        return null; //TODO: should an UnsupportedOperationException be thrown?
+        throw new UnsupportedOperationException("Not a ProjectileSource");
     }
 
     @Override
@@ -163,7 +165,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
                     ).orNull()
             );
         }
-        return null; //TODO: should an UnsupportedOperationException be thrown?
+        throw new UnsupportedOperationException("Not a ProjectileSource");
     }
 
     @Override

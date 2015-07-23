@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
@@ -378,6 +379,8 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     public int getStatistic(Statistic statistic) throws IllegalArgumentException {
         checkNotNull(statistic, "Statistic must not be null");
+        checkArgument(statistic.getType() == Statistic.Type.UNTYPED, "Statistic " + statistic.toString()
+                + " requires an additional parameter");
         return get(StatisticData.class).get(StatisticConverter.asStdStat(statistic)).or(0L).intValue();
     }
 
@@ -394,8 +397,8 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     public int getStatistic(Statistic statistic, Material material) throws IllegalArgumentException {
         checkNotNull(statistic, "Statistic must not be null");
-        checkState(statistic.getType() == Statistic.Type.BLOCK,
-                "Cannot augment non-block statistic " + statistic.name());
+        checkArgument(statistic.getType() == Statistic.Type.BLOCK || statistic.getType() == Statistic.Type.ITEM,
+                "Statistic " + statistic.name() + " cannot accept a Material parameter");
         StatisticGroup group = StatisticConverter.asGroupStat(statistic);
         Optional<BlockStatistic> stat =
                 Pore.getGame().getRegistry().getBlockStatistic(group, MaterialConverter.asBlock(material));
@@ -407,33 +410,11 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     }
 
     @Override
-    public void incrementStatistic(Statistic statistic, Material material, int amount)
-            throws IllegalArgumentException {
-        checkNotNull(statistic, "Statistic must not be null");
-        checkState(statistic.getType() == Statistic.Type.BLOCK,
-                "Cannot augment non-block statistic " + statistic.name());
-        StatisticGroup group = StatisticConverter.asGroupStat(statistic);
-        Optional<BlockStatistic> stat =
-                Pore.getGame().getRegistry().getBlockStatistic(group, MaterialConverter.asBlock(material));
-        if (!stat.isPresent()) {
-            throw new UnsupportedOperationException("Cannot get block statistic " + statistic.name() + " for material "
-                    + material.name());
-        }
-        getOrCreate(StatisticData.class).set(stat.get(), (long) amount);
-    }
-
-    @Override
-    public void decrementStatistic(Statistic statistic, Material material, int amount)
-            throws IllegalArgumentException {
-        incrementStatistic(statistic, material, -amount);
-    }
-
-    @Override
     public void setStatistic(Statistic statistic, Material material, int newValue)
             throws IllegalArgumentException {
         checkNotNull(statistic, "Statistic must not be null");
         checkState(statistic.getType() == Statistic.Type.BLOCK,
-                "Cannot augment non-block statistic " + statistic.name());
+                "Statistic " + statistic.name() + " cannot accept a Material parameter");
         StatisticGroup group = StatisticConverter.asGroupStat(statistic);
         Optional<BlockStatistic> stat =
                 Pore.getGame().getRegistry().getBlockStatistic(group, MaterialConverter.asBlock(material));
@@ -442,6 +423,18 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
                     + material.name());
         }
         getOrCreate(StatisticData.class).set(stat.get(), (long) newValue);
+    }
+
+    @Override
+    public void incrementStatistic(Statistic statistic, Material material, int amount)
+            throws IllegalArgumentException {
+        setStatistic(statistic, material, getStatistic(statistic, material) + amount);
+    }
+
+    @Override
+    public void decrementStatistic(Statistic statistic, Material material, int amount)
+            throws IllegalArgumentException {
+        incrementStatistic(statistic, material, -amount);
     }
 
     @Override
@@ -458,7 +451,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     public int getStatistic(Statistic statistic, EntityType entityType) throws IllegalArgumentException {
         checkNotNull(statistic, "Statistic must not be null");
         checkState(statistic.getType() == Statistic.Type.ENTITY,
-                "Cannot augment non-entity statistic " + statistic.name());
+                "Statistic " + statistic.name() + " cannot accept an Entity parameter");
         StatisticGroup group = StatisticConverter.asGroupStat(statistic);
         Optional<EntityStatistic> stat =
                 Pore.getGame().getRegistry().getEntityStatistic(group, EntityConverter.of(entityType));
@@ -472,17 +465,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     public void incrementStatistic(Statistic statistic, EntityType entityType, int amount)
             throws IllegalArgumentException {
-        checkNotNull(statistic, "Statistic must not be null");
-        checkState(statistic.getType() == Statistic.Type.ENTITY,
-                "Cannot augment non-entity statistic " + statistic.name());
-        StatisticGroup group = StatisticConverter.asGroupStat(statistic);
-        Optional<EntityStatistic> stat =
-                Pore.getGame().getRegistry().getEntityStatistic(group, EntityConverter.of(entityType));
-        if (!stat.isPresent()) {
-            throw new UnsupportedOperationException("Cannot get entity statistic " + statistic.name() + " for entity "
-                    + entityType.name());
-        }
-        getOrCreate(StatisticData.class).set(stat.get(), (long) amount);
+        setStatistic(statistic, entityType, getStatistic(statistic, entityType) + amount);
     }
 
     @Override
@@ -494,7 +477,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     public void setStatistic(Statistic statistic, EntityType entityType, int newValue) {
         checkNotNull(statistic, "Statistic must not be null");
         checkState(statistic.getType() == Statistic.Type.ENTITY,
-                "Cannot augment non-entity statistic " + statistic.name());
+                "Statistic " + statistic.name() + " cannot accept an entity parameter");
         StatisticGroup group = StatisticConverter.asGroupStat(statistic);
         Optional<EntityStatistic> stat =
                 Pore.getGame().getRegistry().getEntityStatistic(group, EntityConverter.of(entityType));
@@ -625,12 +608,12 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public boolean isBanned() {
-        throw new NotImplementedException("TODO");//TODO: Use the BanService
+        throw new NotImplementedException("TODO"); //TODO: Use the BanService
     }
 
     @Override
     public void setBanned(boolean banned) {
-        throw new NotImplementedException("TODO");//TODO: Use the BanService
+        throw new NotImplementedException("TODO"); //TODO: Use the BanService
     }
 
     @Override

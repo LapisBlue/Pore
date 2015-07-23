@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.command;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
@@ -48,31 +49,31 @@ public class PoreConsoleCommandSender extends PoreCommandSender implements Conso
 
     @Override
     public boolean isConversing() {
-        throw new UnsupportedOperationException(); // TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void acceptConversationInput(String input) {
-        throw new UnsupportedOperationException(); // TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean beginConversation(Conversation conversation) {
-        throw new UnsupportedOperationException(); // TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void abandonConversation(Conversation conversation) {
-        throw new UnsupportedOperationException(); // TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void abandonConversation(Conversation conversation, ConversationAbandonedEvent details) {
-        throw new UnsupportedOperationException(); // TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void sendRawMessage(String message) {
-        throw new UnsupportedOperationException(); // TODO
+        throw new NotImplementedException("TODO");
     }
 }

@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
@@ -32,6 +33,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
 import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.entity.living.monster.Enderman;
+import org.spongepowered.api.item.ItemType;
+import org.spongepowered.api.item.inventory.ItemStack;
 
 public class PoreEnderman extends PoreMonster implements org.bukkit.entity.Enderman {
 
@@ -63,12 +66,14 @@ public class PoreEnderman extends PoreMonster implements org.bukkit.entity.Ender
 
     @Override
     public void setCarriedMaterial(MaterialData material) {
-        BlockType type = MaterialConverter.asBlock(material.getItemType());
-        if (type != null) {
-            //getHandle().setCarriedBlock(type); //TODO: not sure of how to create the block state
-            throw new NotImplementedException("TODO");
+        BlockType blockType = MaterialConverter.asBlock(material.getItemType()); // only for assertion purposes
+        ItemType itemType = MaterialConverter.asItem(material.getItemType());
+        if (blockType != null && itemType != null) {
+            getHandle().getInventory().clear();
+            ItemStack stack = Pore.getGame().getRegistry().getItemBuilder().itemType(itemType).quantity(1).build();
+            getHandle().getInventory().offer(stack);
         } else {
-            throw new UnsupportedOperationException();
+            throw new IllegalArgumentException("Invalid enderman carry material");
         }
     }
 }

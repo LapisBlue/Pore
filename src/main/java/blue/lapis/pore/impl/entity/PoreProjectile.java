@@ -55,7 +55,7 @@ public class PoreProjectile extends PoreEntity implements org.bukkit.entity.Proj
         if (shooter instanceof LivingEntity) {
             return PoreLivingEntity.of((Living) shooter);
         }
-        throw new UnsupportedOperationException();
+        return null;
     }
 
     @Override
@@ -65,8 +65,9 @@ public class PoreProjectile extends PoreEntity implements org.bukkit.entity.Proj
             return PoreBlockProjectileSource.of((BlockProjectileSource) source);
         } else if (source instanceof Living) {
             return PoreLivingEntity.of((Living) source);
+        } else {
+            throw new UnsupportedOperationException("Invalid ProjectileSource"); // shouldn't ever happen
         }
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -76,7 +77,7 @@ public class PoreProjectile extends PoreEntity implements org.bukkit.entity.Proj
             getHandle().setShooter(
                     (org.spongepowered.api.entity.projectile.source.ProjectileSource) spongeShooter);
         } else {
-            throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException("Invalid ProjectileSource");
         }
     }
 
@@ -91,7 +92,7 @@ public class PoreProjectile extends PoreEntity implements org.bukkit.entity.Proj
                         (org.spongepowered.api.entity.projectile.source.ProjectileSource) spongeSource);
             }
         } else {
-            throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException("Invalid ProjectileSource");
         }
     }
 
