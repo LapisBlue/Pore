@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.impl.permissions;
 
+import blue.lapis.pore.Pore;
 import blue.lapis.pore.util.PoreWrapper;
 
 import org.apache.commons.lang3.NotImplementedException;
@@ -35,9 +36,14 @@ import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.api.util.Tristate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class PorePermissible extends PoreWrapper<Subject> implements Permissible {
+
+    private List<PermissionAttachment> attachments = new ArrayList<PermissionAttachment>();
+    private List<String> attachedNodes = new ArrayList<String>();
 
     protected PorePermissible(Subject handle) {
         super(handle);
@@ -45,12 +51,22 @@ public class PorePermissible extends PoreWrapper<Subject> implements Permissible
 
     @Override
     public boolean isOp() {
-        throw new NotImplementedException("TODO");
+        // I'm hesitant to throw an UnsupportedOperationException
+        // because that might break a lot of perms plugins
+        return false;
     }
 
     @Override
     public void setOp(boolean value) {
-        throw new NotImplementedException("TODO");
+        /*
+         * In the hundreds of plugins I reviewed while BukkitDev staff, I
+         * literally only saw this method used by force-op plugins. I know
+         * because the first thing I would do when reviewing the source was
+         * CTRL+F -> setOp. Any matches and it was almost sure to be rejected.
+         * That's why I don't think an UOE will be too problemeatic here.
+         * - caseif
+         */
+        throw new UnsupportedOperationException("Sponge does not support server operators");
     }
 
     @Override
@@ -75,27 +91,38 @@ public class PorePermissible extends PoreWrapper<Subject> implements Permissible
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value) {
-        throw new NotImplementedException("TODO");
+        return addAttachment(plugin, name, value, -1);
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin) {
-        throw new NotImplementedException("TODO");
+        return addAttachment(plugin, -1);
     }
 
     @Override
-    public PermissionAttachment addAttachment(Plugin plugin, String name, boolean value, int ticks) {
-        throw new NotImplementedException("TODO");
+    public PermissionAttachment addAttachment(Plugin plugin, final String name, boolean value, int ticks) {
+        return addAttachment(plugin, ticks);
     }
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, int ticks) {
-        throw new NotImplementedException("TODO");
+        final PermissionAttachment attachment = new PermissionAttachment(plugin, this);
+        attachments.add(attachment);
+        if (ticks != -1) {
+            Pore.getGame().getScheduler().getTaskBuilder().delay(ticks).execute(new Runnable() {
+                public void run() {
+                    removeAttachment(attachment);
+                }
+            }).submit(Pore.getPlugin());
+        }
+        recalculatePermissions();
+        return attachment;
     }
 
     @Override
     public void removeAttachment(PermissionAttachment attachment) {
-        throw new NotImplementedException("TODO");
+        attachments.remove(attachment);
+        recalculatePermissions();
     }
 
     @Override
