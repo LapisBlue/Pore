@@ -24,10 +24,11 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.PLAYER_CREATED_DATA;
+
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulator.entity.PlayerCreatedData;
 import org.spongepowered.api.entity.living.golem.IronGolem;
 
 public class PoreIronGolem extends PoreGolem implements org.bukkit.entity.IronGolem {
@@ -52,16 +53,16 @@ public class PoreIronGolem extends PoreGolem implements org.bukkit.entity.IronGo
 
     @Override
     public boolean isPlayerCreated() {
-        return has(PlayerCreatedData.class);
+        return hasData(PLAYER_CREATED_DATA) && getHandle().get(PLAYER_CREATED_DATA).get().playerCreated().get();
     }
 
     @Override
     public void setPlayerCreated(boolean playerCreated) {
         if (playerCreated != isPlayerCreated()) {
             if (playerCreated) {
-                set(getOrCreate(PlayerCreatedData.class));
+                getHandle().offer(getHandle().get(PLAYER_CREATED_DATA).get().playerCreated().set(true));
             } else {
-                remove(PlayerCreatedData.class);
+                getHandle().remove(PLAYER_CREATED_DATA);
             }
         }
     }

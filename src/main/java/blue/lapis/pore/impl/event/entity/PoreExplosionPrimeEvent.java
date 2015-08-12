@@ -29,20 +29,21 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 
 public class PoreExplosionPrimeEvent extends ExplosionPrimeEvent {
 
-    private final org.spongepowered.api.event.entity.ExplosionPrimeEvent handle;
+    private final org.spongepowered.api.event.entity.EntityEvent handle;
 
-    public PoreExplosionPrimeEvent(org.spongepowered.api.event.entity.ExplosionPrimeEvent handle) {
+    public PoreExplosionPrimeEvent(org.spongepowered.api.event.entity.EntityEvent handle) {
         super(null, -1f, false);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public org.spongepowered.api.event.entity.ExplosionPrimeEvent getHandle() {
+    public org.spongepowered.api.event.entity.EntityEvent getHandle() {
         return this.handle;
     }
 
@@ -58,31 +59,31 @@ public class PoreExplosionPrimeEvent extends ExplosionPrimeEvent {
 
     @Override
     public float getRadius() {
-        return (float) this.getHandle().getRadius();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setRadius(float radius) {
-        this.getHandle().setRadius(radius);
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean getFire() {
-        return this.getHandle().isFlammable();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setFire(boolean fire) {
-        getHandle().setFlammable(fire);
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isCancelled() {
-        return this.getHandle().isCancelled();
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        this.getHandle().setCancelled(cancel);
+        throw new NotImplementedException("TODO");
     }
 }

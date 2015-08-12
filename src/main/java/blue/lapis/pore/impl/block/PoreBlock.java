@@ -34,6 +34,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreWrapper;
 
+import com.google.common.base.Optional;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
@@ -48,6 +49,12 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.block.BlockTypes;
+import org.spongepowered.api.data.property.block.GroundLumanceProperty;
+import org.spongepowered.api.data.property.block.IndirectlyPoweredProperty;
+import org.spongepowered.api.data.property.block.LightEmissionProperty;
+import org.spongepowered.api.data.property.block.PoweredProperty;
+import org.spongepowered.api.data.property.block.SkyLuminanceProperty;
+import org.spongepowered.api.data.property.block.TemperatureProperty;
 import org.spongepowered.api.world.Location;
 
 import java.util.Collection;
@@ -117,17 +124,32 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public byte getLightLevel() {
-        return (byte)getHandle().getLuminance();
+        Optional<LightEmissionProperty> prop = getHandle().getProperty(LightEmissionProperty.class);
+        if (prop.isPresent()) {
+            //noinspection ConstantConditions
+            return prop.get().getValue().byteValue();
+        }
+        return 0;
     }
 
     @Override
     public byte getLightFromSky() {
-        return (byte)getHandle().getLuminanceFromSky();
+        Optional<SkyLuminanceProperty> prop = getHandle().getProperty(SkyLuminanceProperty.class);
+        if (prop.isPresent()) {
+            //noinspection ConstantConditions
+            return prop.get().getValue().byteValue();
+        }
+        return 0;
     }
 
     @Override
     public byte getLightFromBlocks() {
-        return (byte)getHandle().getLuminanceFromGround();
+        Optional<GroundLumanceProperty> prop = getHandle().getProperty(GroundLumanceProperty.class);
+        if (prop.isPresent()) {
+            //noinspection ConstantConditions
+            return prop.get().getValue().byteValue();
+        }
+        return 0;
     }
 
     @Override
@@ -226,12 +248,16 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public boolean isBlockPowered() {
-        return getHandle().isBlockPowered();
+        Optional<PoweredProperty> prop = getHandle().getProperty(PoweredProperty.class);
+        //noinspection ConstantConditions
+        return prop.isPresent() && prop.get().getValue();
     }
 
     @Override
     public boolean isBlockIndirectlyPowered() {
-        return getHandle().isBlockIndirectlyPowered();
+        Optional<IndirectlyPoweredProperty> prop = getHandle().getProperty(IndirectlyPoweredProperty.class);
+        //noinspection ConstantConditions
+        return prop.isPresent() && prop.get().getValue();
     }
 
     @Override
@@ -266,7 +292,9 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public double getTemperature() {
-        return getHandle().getTemperature();
+        Optional<TemperatureProperty> prop = getHandle().getProperty(TemperatureProperty.class);
+        //noinspection ConstantConditions
+        return prop.isPresent() ? prop.get().getValue() : 0;
     }
 
     @Override

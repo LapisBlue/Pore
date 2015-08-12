@@ -55,7 +55,7 @@ public class PoreBukkitScheduler implements BukkitScheduler {
     }
 
     private static TaskBuilder newTask() {
-        return getScheduler().getTaskBuilder();
+        return getScheduler().createTaskBuilder();
     }
 
     private static void validate(Plugin plugin, Object task) {

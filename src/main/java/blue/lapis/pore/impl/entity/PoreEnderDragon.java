@@ -27,10 +27,8 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.ComplexEntityPart;
-import org.spongepowered.api.entity.living.complex.ComplexLivingPart;
 import org.spongepowered.api.entity.living.complex.EnderDragon;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class PoreEnderDragon extends PoreComplexLivingEntity implements org.bukkit.entity.EnderDragon {
@@ -50,10 +48,6 @@ public class PoreEnderDragon extends PoreComplexLivingEntity implements org.bukk
 
     @Override
     public Set<ComplexEntityPart> getParts() {
-        Set<ComplexEntityPart> parts = new HashSet<ComplexEntityPart>();
-        for (ComplexLivingPart part : getHandle().getParts()) {
-            parts.add(PoreComplexEntityPart.of(part));
-        }
-        return parts;
+        return super.getParts();
     }
 }

@@ -24,10 +24,11 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.CHARGED_DATA;
+
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulator.block.PoweredData;
 import org.spongepowered.api.entity.living.monster.Creeper;
 
 public class PoreCreeper extends PoreMonster implements org.bukkit.entity.Creeper {
@@ -52,17 +53,16 @@ public class PoreCreeper extends PoreMonster implements org.bukkit.entity.Creepe
 
     @Override
     public boolean isPowered() {
-        return has(PoweredData.class);
+        return hasData(CHARGED_DATA) && getHandle().get(CHARGED_DATA).get().charged().get();
     }
 
     @Override
     public void setPowered(boolean value) {
-        // TODO: ???
         if (value != isPowered()) {
             if (value) {
-                set(getOrCreate(PoweredData.class));
+                getHandle().offer(getHandle().getOrCreate(CHARGED_DATA).get().charged().set(true));
             } else {
-                remove(PoweredData.class);
+                getHandle().remove(CHARGED_DATA);
             }
         }
     }

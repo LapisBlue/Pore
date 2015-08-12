@@ -24,11 +24,11 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.BREEDABLE_DATA;
+
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang3.NotImplementedException;
-import org.spongepowered.api.data.manipulator.entity.AgeableData;
-import org.spongepowered.api.data.manipulator.entity.BreedableData;
 import org.spongepowered.api.entity.living.Ageable;
 
 public class PoreAgeable extends PoreCreature implements org.bukkit.entity.Ageable {
@@ -48,19 +48,12 @@ public class PoreAgeable extends PoreCreature implements org.bukkit.entity.Ageab
 
     @Override
     public int getAge() {
-        return get(AgeableData.class).getAge();
+        return getHandle().getAgeData().age().get();
     }
 
     @Override
     public void setAge(int age) {
-        AgeableData data = getOrCreate(AgeableData.class);
-        data.setAge(age);
-        set(data);
-    }
-
-    @Override
-    public void setAgeLock(boolean lock) {
-        throw new NotImplementedException("TODO");
+        getHandle().offer(getHandle().getAgeData().age().set(age));
     }
 
     @Override
@@ -69,38 +62,39 @@ public class PoreAgeable extends PoreCreature implements org.bukkit.entity.Ageab
     }
 
     @Override
-    public void setBaby() {
-        AgeableData data = get(AgeableData.class);
-        data.setBaby();
-        set(data);
+    public void setAgeLock(boolean lock) {
+        throw new NotImplementedException("TODO");
     }
 
     @Override
-    public void setAdult() {
-        AgeableData data = get(AgeableData.class);
-        data.setAdult();
-        set(data);
+    public void setBaby() {
+        getHandle().getAgeData().baby().set(true);
     }
 
     @Override
     public boolean isAdult() {
-        return !get(AgeableData.class).isBaby(); // erm... okay then...
+        return getHandle().getAgeData().adult().get();
+    }
+
+    @Override
+    public void setAdult() {
+        getHandle().getAgeData().adult().set(true);
     }
 
     @Override
     public boolean canBreed() {
-        return has(BreedableData.class);
+        return hasData(BREEDABLE_DATA) && getHandle().get(BREEDABLE_DATA).get().breedable().get();
     }
 
     @Override
     public void setBreed(boolean breed) {
-        // TODO: ???
         if (breed != canBreed()) {
             if (breed) {
-                set(getOrCreate(BreedableData.class));
+                getHandle().offer(getHandle().getOrCreate(BREEDABLE_DATA).get().breedable().set(true));
             } else {
-                remove(BreedableData.class);
+                getHandle().remove(BREEDABLE_DATA);
             }
         }
     }
+
 }

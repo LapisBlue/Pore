@@ -25,8 +25,8 @@
 package blue.lapis.pore.impl.entity.minecart;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.impl.inventory.PoreInventory;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.inventory.Inventory;
@@ -54,7 +54,7 @@ public class PoreStorageMinecart extends PoreMinecart implements StorageMinecart
 
     @Override
     public Inventory getInventory() {
-        throw new NotImplementedException("TODO");
+        return PoreInventory.of(getHandle().getInventory());
     }
 
 }

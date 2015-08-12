@@ -101,7 +101,8 @@ public class PorePermissible extends PoreWrapper<Subject> implements Permissible
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, final String name, boolean value, int ticks) {
-        return addAttachment(plugin, ticks);
+        final PermissionAttachment attachment = addAttachment(plugin, ticks);
+        return attachment;
     }
 
     @Override
@@ -109,7 +110,7 @@ public class PorePermissible extends PoreWrapper<Subject> implements Permissible
         final PermissionAttachment attachment = new PermissionAttachment(plugin, this);
         attachments.add(attachment);
         if (ticks != -1) {
-            Pore.getGame().getScheduler().getTaskBuilder().delay(ticks).execute(new Runnable() {
+            Pore.getGame().getScheduler().createTaskBuilder().delay(ticks).execute(new Runnable() {
                 public void run() {
                     removeAttachment(attachment);
                 }

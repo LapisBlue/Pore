@@ -86,7 +86,7 @@ public class PoreEntityDamageEvent extends EntityDamageEvent {
 
     @Override
     public double getFinalDamage() {
-        return getHandle().getOldData().getHealth() - getHandle().getNewData().getHealth();
+        return getHandle().getOldData().health().get() - getHandle().getNewData().health().get();
     }
 
     @Override

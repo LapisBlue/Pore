@@ -24,12 +24,13 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.CRITICAL_HIT_DATA;
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.KNOCKBACK_DATA;
+
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulator.entity.CriticalHitData;
-import org.spongepowered.api.data.manipulator.entity.KnockbackData;
 import org.spongepowered.api.entity.projectile.Arrow;
 
 public class PoreArrow extends PoreProjectile implements org.bukkit.entity.Arrow {
@@ -54,28 +55,28 @@ public class PoreArrow extends PoreProjectile implements org.bukkit.entity.Arrow
 
     @Override
     public int getKnockbackStrength() {
-        return get(KnockbackData.class).getKnockbackStrength();
+        return getHandle().get(KNOCKBACK_DATA).isPresent()
+                ? getHandle().get(KNOCKBACK_DATA).get().knockbackStrength().get()
+                : 0;
     }
 
     @Override
     public void setKnockbackStrength(int knockbackStrength) {
-        KnockbackData data = getOrCreate(KnockbackData.class);
-        data.setKnockbackStrength(knockbackStrength);
-        set(data);
+        getHandle().getOrCreate(KNOCKBACK_DATA).get().knockbackStrength().set(knockbackStrength);
     }
 
     @Override
     public boolean isCritical() {
-        return has(CriticalHitData.class);
+        return getHandle().get(CRITICAL_HIT_DATA).isPresent();
     }
 
     @Override
     public void setCritical(boolean critical) {
         if (critical != isCritical()) {
             if (critical) {
-                set(getOrCreate(CriticalHitData.class));
+                getHandle().getOrCreate(CRITICAL_HIT_DATA).get().criticalHit().set(true);
             } else {
-                remove(CriticalHitData.class);
+                getHandle().remove(CRITICAL_HIT_DATA);
             }
         }
     }

@@ -43,8 +43,8 @@ import com.google.common.collect.Maps;
 import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.block.BlockTypes;
-import org.spongepowered.api.data.DataManipulator;
-import org.spongepowered.api.data.manipulator.SingleValueData;
+import org.spongepowered.api.data.manipulator.DataManipulator;
+import org.spongepowered.api.data.manipulator.mutable.VariantData;
 import org.spongepowered.api.world.Location;
 
 import java.lang.reflect.Constructor;
@@ -97,35 +97,39 @@ public class BlockDataConverter implements DataConverter<Location> {
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
-    public byte getDataValue(Collection<DataManipulator<?>> manipulators, BlockType target) {
+    public byte getDataValue(Collection<DataManipulator<?, ?>> manipulators, BlockType target) {
         final DataTypeConverter converter = getConverter(target);
-        Collection<DataManipulator<?>> data = Collections2.filter(manipulators, new Predicate<DataManipulator<?>>() {
-            @Override
-            public boolean apply(DataManipulator<?> input) {
-                if (input == null) {
-                    return false;
+        Collection<DataManipulator<?, ?>> data = Collections2.filter(manipulators,
+                new Predicate<DataManipulator<?, ?>>() {
+                    @Override
+                    public boolean apply(DataManipulator<?, ?> input) {
+                        if (input == null) {
+                            return false;
+                        }
+                        try {
+                            Class<? extends DataManipulator<?, ?>> clazz = (Class<? extends DataManipulator<?, ?>>)
+                                    Class.forName(input.getClass().getName().split("\\$")[0]);
+                            return converter.getApplicableDataTypes().contains(clazz);
+                        } catch (ClassNotFoundException ex) {
+                            ex.printStackTrace();
+                            return false;
+                        }
+                    }
                 }
-                try {
-                    Class<? extends DataManipulator<?>> clazz = (Class<? extends DataManipulator<?>>)
-                            Class.forName(input.getClass().getName().split("\\$")[0]);
-                    return converter.getApplicableDataTypes().contains(clazz);
-                } catch (ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                    return false;
-                }
-            }
-        });
+        );
         return converter.of(data);
     }
 
+    @SuppressWarnings("unchecked")
     public byte getDataValue(BlockState target) {
-        return getDataValue(target.getManipulators(), target.getType());
+        // Not sure why the compiler has an issue with this without the cast. I blame generics for being terrible.
+        return getDataValue((Collection) target.getManipulators(), target.getType());
     }
 
     @Override
     @SuppressWarnings({"rawtypes", "unchecked"})
     public byte getDataValue(Location target) {
-        return getDataValue(target.getManipulators(), target.getBlockType());
+        return getDataValue(target.getContainers(), target.getBlockType());
     }
 
     @Override
@@ -136,8 +140,8 @@ public class BlockDataConverter implements DataConverter<Location> {
         for (AbstractDataValue datum : data) {
             if (datum.getValue() != AbstractDataValue.ABSENT) {
                 DataManipulator dm = (DataManipulator) target.getOrCreate(datum.getDataClass()).get();
-                if (datum instanceof SingleValueData) {
-                    ((SingleValueData) dm).setValue(datum.getValue());
+                if (dm instanceof VariantData) {
+                    ((VariantData) dm).type().set(datum.getValue());
                 }
             }
         }

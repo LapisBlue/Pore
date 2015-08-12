@@ -65,7 +65,7 @@ public class PoreEntityInteractEvent extends EntityInteractEvent {
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(this.getHandle().getBlock());
+        return PoreBlock.of(this.getHandle().getLocation());
     }
 
     @Override

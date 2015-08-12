@@ -511,7 +511,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean createExplosion(double x, double y, double z, float power, boolean setFire,
-            boolean breakBlocks) {
+                                   boolean breakBlocks) {
         throw new NotImplementedException("TODO");
     }
 
@@ -605,7 +605,8 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         } else {
             //noinspection ConstantConditions
             getHandle().spawnParticles(
-                    Pore.getGame().getRegistry().getParticleEffectBuilder(EffectConverter.toParticle(effect)).build(),
+                    Pore.getGame().getRegistry()
+                            .createParticleEffectBuilder(EffectConverter.toParticle(effect)).build(),
                     VectorConverter.create3d(location),
                     radius);
         }
@@ -628,7 +629,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome,
-            boolean includeBiomeTempRain) {
+                                               boolean includeBiomeTempRain) {
         throw new NotImplementedException("TODO");
     }
 

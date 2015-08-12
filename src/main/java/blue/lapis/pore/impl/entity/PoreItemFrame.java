@@ -24,16 +24,19 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.type.world.RotationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
+import com.google.common.base.Optional;
 import org.bukkit.Rotation;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.data.manipulator.RepresentedItemData;
-import org.spongepowered.api.data.manipulator.RotationalData;
+import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.hanging.ItemFrame;
+import org.spongepowered.api.item.inventory.Carrier;
 
 public class PoreItemFrame extends PoreHanging implements org.bukkit.entity.ItemFrame {
 
@@ -57,25 +60,33 @@ public class PoreItemFrame extends PoreHanging implements org.bukkit.entity.Item
 
     @Override
     public ItemStack getItem() {
-        return has(RepresentedItemData.class) ? ItemStackConverter.of(get(RepresentedItemData.class).getValue()) : null;
+        if (getHandle() instanceof Carrier) {
+            Optional<org.spongepowered.api.item.inventory.ItemStack> stack
+                    = ((Carrier) getHandle()).getInventory().peek();
+            if (stack.isPresent()) {
+                return ItemStackConverter.of(stack.get());
+            }
+        }
+        return null;
     }
 
     @Override
     public void setItem(ItemStack item) {
-        RepresentedItemData representeditem = getOrCreate(RepresentedItemData.class);
-        representeditem.setValue(ItemStackConverter.of(item));
-        set(representeditem);
+        if (getHandle() instanceof Carrier) {
+            ((Carrier) getHandle()).getInventory().offer(ItemStackConverter.of(item));
+        } else {
+            throw new UnsupportedOperationException("Item frame is not an inventory carrier"); // should never happen
+        }
     }
 
     @Override
     public Rotation getRotation() {
-        return RotationConverter.of(get(RotationalData.class).getValue());
+        return RotationConverter.of(getHandle().get(Keys.ROTATION).get());
     }
 
     @Override
     public void setRotation(Rotation rotation) throws IllegalArgumentException {
-        RotationalData rotational = getOrCreate(RotationalData.class);
-        rotational.setValue(RotationConverter.of(rotation));
-        set(rotational);
+        checkNotNull(rotation, "Rotation must not be null");
+        getHandle().offer(Keys.ROTATION, RotationConverter.of(rotation));
     }
 }

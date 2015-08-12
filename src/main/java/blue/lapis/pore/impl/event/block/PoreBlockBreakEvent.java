@@ -56,7 +56,7 @@ public class PoreBlockBreakEvent extends BlockBreakEvent {
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(getHandle().getBlock());
+        return PoreBlock.of(getHandle().getLocation());
     }
 
     @Override

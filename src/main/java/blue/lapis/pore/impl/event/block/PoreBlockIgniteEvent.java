@@ -50,7 +50,7 @@ public class PoreBlockIgniteEvent extends org.bukkit.event.block.BlockIgniteEven
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(getHandle().getBlock());
+        return PoreBlock.of(getHandle().getLocation());
     }
 
     @Override

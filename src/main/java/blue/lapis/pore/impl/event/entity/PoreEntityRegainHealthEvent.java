@@ -33,7 +33,7 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
-import org.spongepowered.api.data.manipulator.entity.HealthData;
+import org.spongepowered.api.data.manipulator.mutable.entity.HealthData;
 import org.spongepowered.api.event.entity.living.LivingChangeHealthEvent;
 
 public class PoreEntityRegainHealthEvent extends EntityRegainHealthEvent {
@@ -61,13 +61,14 @@ public class PoreEntityRegainHealthEvent extends EntityRegainHealthEvent {
 
     @Override
     public double getAmount() {
-        return this.getHandle().getNewData().getHealth() - getHandle().getOldData().getHealth();
+        return this.getHandle().getNewData().health().get() - getHandle().getOldData().health().get();
     }
 
     @Override
     public void setAmount(double amount) {
         HealthData data = this.getHandle().getOldData();
-        getHandle().setNewData(data.setHealth(data.getHealth() + amount));
+        data.health().set(getHandle().getOldData().health().get() + amount);
+        getHandle().setNewData(data);
     }
 
     @Override

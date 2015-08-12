@@ -25,16 +25,21 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.type.material.ItemStackConverter;
+import blue.lapis.pore.converter.type.material.PotionEffectConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang3.NotImplementedException;
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.collect.Collections2;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
-import org.spongepowered.api.data.manipulator.RepresentedItemData;
+import org.spongepowered.api.data.manipulator.catalog.CatalogEntityData;
+import org.spongepowered.api.data.manipulator.mutable.PotionEffectData;
 import org.spongepowered.api.entity.projectile.ThrownPotion;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class PoreThrownPotion extends PoreProjectile implements org.bukkit.entity.ThrownPotion {
 
@@ -58,18 +63,27 @@ public class PoreThrownPotion extends PoreProjectile implements org.bukkit.entit
 
     @Override
     public Collection<PotionEffect> getEffects() {
-        throw new NotImplementedException("TODO");
+        Optional<PotionEffectData> data = getHandle().get(CatalogEntityData.POTION_EFFECT_DATA);
+        if (data.isPresent()) {
+            return Collections2.transform(data.get().effects().get(),
+                    new Function<org.spongepowered.api.potion.PotionEffect, PotionEffect>() {
+                        @Override
+                        public PotionEffect apply(org.spongepowered.api.potion.PotionEffect input) {
+                            return PotionEffectConverter.of(input);
+                        }
+                    }
+            );
+        }
+        return Collections.emptyList();
     }
 
     @Override
     public ItemStack getItem() {
-        return ItemStackConverter.of(get(RepresentedItemData.class).getValue());
+        return ItemStackConverter.of(getHandle().getPotionItemData().item().get());
     }
 
     @Override
     public void setItem(ItemStack item) {
-        RepresentedItemData potion = getOrCreate(RepresentedItemData.class);
-        potion.setValue(ItemStackConverter.of(item));
-        set(potion);
+        getHandle().offer(getHandle().getPotionItemData().item().set(ItemStackConverter.of(item)));
     }
 }

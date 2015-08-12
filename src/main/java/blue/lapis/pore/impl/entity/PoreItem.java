@@ -30,7 +30,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.data.manipulator.RepresentedItemData;
+import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.Item;
 
 public class PoreItem extends PoreEntity implements org.bukkit.entity.Item {
@@ -55,12 +55,12 @@ public class PoreItem extends PoreEntity implements org.bukkit.entity.Item {
 
     @Override
     public ItemStack getItemStack() {
-        return ItemStackConverter.of(get(RepresentedItemData.class).getValue());
+        return ItemStackConverter.of(getHandle().get(Keys.REPRESENTED_ITEM).get());
     }
 
     @Override
     public void setItemStack(ItemStack stack) {
-        throw new NotImplementedException("TODO");
+        getHandle().offer(Keys.REPRESENTED_ITEM, ItemStackConverter.of(stack));
     }
 
     @Override

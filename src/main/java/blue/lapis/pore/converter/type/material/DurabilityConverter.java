@@ -24,6 +24,13 @@
  */
 package blue.lapis.pore.converter.type.material;
 
+import static org.spongepowered.api.data.manipulator.catalog.CatalogItemData.COAL_ITEM_DATA;
+import static org.spongepowered.api.data.manipulator.catalog.CatalogItemData.COOKED_FISH_ITEM_DATA;
+import static org.spongepowered.api.data.manipulator.catalog.CatalogItemData.DURABILITY_DATA;
+import static org.spongepowered.api.data.manipulator.catalog.CatalogItemData.DYEABLE_DATA;
+import static org.spongepowered.api.data.manipulator.catalog.CatalogItemData.FISH_DATA;
+import static org.spongepowered.api.data.manipulator.catalog.CatalogItemData.GOLDEN_APPLE_ITEM_DATA;
+
 import blue.lapis.pore.Pore;
 
 import com.google.common.base.Optional;
@@ -31,15 +38,16 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.data.DataManipulator;
-import org.spongepowered.api.data.manipulator.DyeableData;
-import org.spongepowered.api.data.manipulator.SingleValueData;
-import org.spongepowered.api.data.manipulator.item.CoalItemData;
-import org.spongepowered.api.data.manipulator.item.CookedFishItemData;
-import org.spongepowered.api.data.manipulator.item.DurabilityData;
-import org.spongepowered.api.data.manipulator.item.FishData;
-import org.spongepowered.api.data.manipulator.item.GoldenAppleItemData;
-import org.spongepowered.api.data.manipulator.item.SpawnableData;
+import org.spongepowered.api.CatalogType;
+import org.spongepowered.api.data.manipulator.DataManipulator;
+import org.spongepowered.api.data.manipulator.mutable.DyeableData;
+import org.spongepowered.api.data.manipulator.mutable.VariantData;
+import org.spongepowered.api.data.manipulator.mutable.item.CoalData;
+import org.spongepowered.api.data.manipulator.mutable.item.CookedFishData;
+import org.spongepowered.api.data.manipulator.mutable.item.DurabilityData;
+import org.spongepowered.api.data.manipulator.mutable.item.FishData;
+import org.spongepowered.api.data.manipulator.mutable.item.GoldenAppleData;
+import org.spongepowered.api.data.manipulator.mutable.item.SpawnableData;
 import org.spongepowered.api.data.type.CoalType;
 import org.spongepowered.api.data.type.CoalTypes;
 import org.spongepowered.api.data.type.CookedFish;
@@ -117,8 +125,8 @@ public final class DurabilityConverter {
      * {@code 0} if one cannot be obtained.
      */
 
-    public static int getDamageValue(Collection<? extends DataManipulator<?>> data) {
-        for (DataManipulator<?> itemData : data) {
+    public static int getDamageValue(Collection<? extends DataManipulator<?, ?>> data) {
+        for (DataManipulator<?, ?> itemData : data) {
             int damage = getDamageValue(itemData);
             if (damage != 0) {
                 return damage;
@@ -130,42 +138,45 @@ public final class DurabilityConverter {
 
     /**
      * Converts a given {@link DataManipulator} value to a raw damage value.
+     *
      * @param data The {@link DataManipulator} value to convert
      * @return The raw damage value corresponding to {@code data}, or
      * {@code 0} if one cannot be obtained.
      */
-    public static int getDamageValue(DataManipulator<?> data) {
-        if (data instanceof SingleValueData) {
-            return getDamageValueFromEnum((SingleValueData) data);
+    public static int getDamageValue(DataManipulator<?, ?> data) {
+        if (data instanceof VariantData) {
+            return getDamageValueFromEnum((VariantData) data);
         } else if (data instanceof DurabilityData) {
-            return ((DurabilityData)data).getDurability();
+            return ((DurabilityData) data).durability().get();
         }
         return 0;
     }
 
     /**
-     * Converts a given {@link SingleValueData} value to a raw damage value.
-     * @param data The {@link SingleValueData} value to convert
+     * Converts a given {@link VariantData} value to a raw damage value.
+     *
+     * @param data The {@link VariantData} value to convert
      * @return The raw damage value corresponding to {@code data}, or
      * {@code 0} if one cannot be obtained.
      */
-    public static int getDamageValueFromEnum(SingleValueData<?, ?> data) {
-        if (data instanceof CoalItemData) {
-            CoalType type = ((CoalItemData)data).getValue();
+    @SuppressWarnings("rawtypes")
+    public static int getDamageValueFromEnum(VariantData data) {
+        if (data instanceof CoalData) {
+            CoalType type = ((CoalData) data).type().get();
             return COAL_MAP.containsKey(type) ? COAL_MAP.get(type) : -1;
-        } else if (data instanceof CookedFishItemData) {
-            CookedFish type = ((CookedFishItemData)data).getValue();
+        } else if (data instanceof CookedFishData) {
+            CookedFish type = ((CookedFishData) data).type().get();
             return COOKED_FISH_MAP.containsKey(type) ? COOKED_FISH_MAP.get(type) : -1;
         } else if (data instanceof DyeableData) {
-            DyeColor type = ((DyeableData)data).getValue();
+            DyeColor type = ((DyeableData) data).type().get();
             return DYE_MAP.containsKey(type) ? DYE_MAP.get(type) : -1;
         } else if (data instanceof SpawnableData) {
             throw new NotImplementedException("TODO");
         } else if (data instanceof FishData) {
-            Fish type = ((FishData)data).getValue();
+            Fish type = ((FishData) data).type().get();
             return FISH_MAP.containsKey(type) ? FISH_MAP.get(type) : -1;
-        } else if (data instanceof GoldenAppleItemData) {
-            GoldenApple type = ((GoldenAppleItemData)data).getValue();
+        } else if (data instanceof GoldenAppleData) {
+            GoldenApple type = ((GoldenAppleData) data).type().get();
             return GOLDEN_APPLE_MAP.containsKey(type) ? GOLDEN_APPLE_MAP.get(type) : -1;
         } else {
             return 0;
@@ -182,41 +193,50 @@ public final class DurabilityConverter {
     public static DataManipulator getItemData(ItemStack item) {
         switch (item.getType()) {
             case COAL:
-                return getItemData(item, CoalItemData.class, COAL_MAP);
+                return getItemData(item, COAL_ITEM_DATA, COAL_MAP);
             case COOKED_FISH:
-                return getItemData(item, CookedFishItemData.class, COOKED_FISH_MAP);
+                return getItemData(item, COOKED_FISH_ITEM_DATA, COOKED_FISH_MAP);
             case WOOL:
+                break;
             case INK_SACK:
+                break;
             case STAINED_CLAY:
+                break;
             case STAINED_GLASS:
+                break;
             case STAINED_GLASS_PANE:
-                return getItemData(item, DyeableData.class, DYE_MAP);
+                return getItemData(item, DYEABLE_DATA, DYE_MAP);
             case RAW_FISH:
-                return getItemData(item, FishData.class, FISH_MAP);
+                return getItemData(item, FISH_DATA, FISH_MAP);
             case GOLDEN_APPLE:
-                return getItemData(item, GoldenAppleItemData.class, GOLDEN_APPLE_MAP);
+                return getItemData(item, GOLDEN_APPLE_ITEM_DATA, GOLDEN_APPLE_MAP);
             default:
                 Optional<DurabilityData> data =
-                        Pore.getGame().getRegistry().getItemBuilder().itemType(MaterialConverter.asItem(item.getType()))
-                                .quantity(1).build().getData(DurabilityData.class);
+                        Pore.getGame().getRegistry().createItemBuilder()
+                                .itemType(MaterialConverter.asItem(item.getType()))
+                                .quantity(1).build().get(DURABILITY_DATA);
                 if (data.isPresent()) {
                     return data.get();
                 } else {
                     throw new UnsupportedOperationException();
                 }
         }
+        return null;
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"}) // I can't parameterize this either; it scares the compiler
-    private static <T extends SingleValueData> T getItemData(ItemStack item, Class<T> type, BiMap<?, Integer> map) {
+    private static <T extends VariantData<U, T, ?>, U extends CatalogType> T
+        getItemData(ItemStack item, Class<T> type, BiMap<U, Integer> map) {
         int damage = item.getDurability();
         if (!map.containsValue(damage)) {
             throw new UnsupportedOperationException();
         }
         // no idea why a typecast is necessary here but excluding it makes javac angry
-        T data = (T)Pore.getGame().getRegistry().getItemBuilder().itemType(MaterialConverter.asItem(item.getType()))
+        @SuppressWarnings("RedundantCast")
+        T data = (T)Pore.getGame().getRegistry().createItemBuilder()
+                .itemType(MaterialConverter.asItem(item.getType()))
                 .quantity(1).build().getOrCreate(type).get();
-        data.setValue(map.inverse().get(damage));
+        data.type().set(map.inverse().get(damage));
         return data;
     }
 

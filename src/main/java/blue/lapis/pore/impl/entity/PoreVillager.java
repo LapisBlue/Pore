@@ -30,7 +30,8 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import com.google.common.collect.Iterables;
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulator.entity.CareerData;
+import org.spongepowered.api.data.type.Career;
+import org.spongepowered.api.data.type.Careers;
 import org.spongepowered.api.entity.living.Villager;
 
 public class PoreVillager extends PoreAgeable implements org.bukkit.entity.Villager {
@@ -55,15 +56,14 @@ public class PoreVillager extends PoreAgeable implements org.bukkit.entity.Villa
 
     @Override
     public Profession getProfession() {
-        return ProfessionConverter.of(get(CareerData.class).getValue().getProfession());
+        return ProfessionConverter.of(getHandle().getCareerData().type().get().getProfession());
     }
 
     @Override
     public void setProfession(Profession profession) {
-        //TODO: not really sure what to do here
-        CareerData career = getOrCreate(CareerData.class);
-        career.setValue(Iterables.getFirst(
-                Pore.getGame().getRegistry().getCareers(ProfessionConverter.of(profession)), null));
-        set(career);
+        Career career = Iterables.getFirst(Pore.getGame().getRegistry().getCareers(ProfessionConverter.of(profession)),
+                Careers.FARMER);
+        assert career != null;
+        getHandle().getCareerData().type().set(career);
     }
 }

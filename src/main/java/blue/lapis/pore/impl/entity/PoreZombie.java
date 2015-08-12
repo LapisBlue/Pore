@@ -24,11 +24,11 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.VILLAGER_ZOMBIE_DATA;
+
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulator.entity.AgeableData;
-import org.spongepowered.api.data.manipulator.entity.VillagerZombieData;
 import org.spongepowered.api.entity.living.monster.Zombie;
 
 public class PoreZombie extends PoreMonster implements org.bukkit.entity.Zombie {
@@ -53,30 +53,26 @@ public class PoreZombie extends PoreMonster implements org.bukkit.entity.Zombie 
 
     @Override
     public boolean isBaby() {
-        return get(AgeableData.class).isBaby();
+        return getHandle().getAgeData().baby().get();
     }
 
     @Override
-    public void setBaby(boolean flag) {
-        if (flag) {
-            get(AgeableData.class).setBaby();
-        } else {
-            get(AgeableData.class).setAdult();
-        }
+    public void setBaby(boolean isBaby) {
+        getHandle().getAgeData().baby().set(isBaby);
     }
 
     @Override
     public boolean isVillager() {
-        return !has(VillagerZombieData.class);
+        return !hasData(VILLAGER_ZOMBIE_DATA) || !getHandle().get(VILLAGER_ZOMBIE_DATA).get().villagerZombie().get();
     }
 
     @Override
-    public void setVillager(boolean flag) {
-        if (flag != isVillager()) {
-            if (flag) {
-                remove(VillagerZombieData.class);
+    public void setVillager(boolean isVillager) {
+        if (isVillager != isVillager()) {
+            if (isVillager) {
+                getHandle().getOrCreate(VILLAGER_ZOMBIE_DATA).get().villagerZombie().set(true);
             } else {
-                set(getOrCreate(VillagerZombieData.class));
+                getHandle().remove(VILLAGER_ZOMBIE_DATA);
             }
         }
     }

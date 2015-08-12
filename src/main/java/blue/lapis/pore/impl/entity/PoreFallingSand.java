@@ -31,7 +31,6 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingSand;
-import org.spongepowered.api.data.manipulator.entity.FallingBlockData;
 import org.spongepowered.api.entity.FallingBlock;
 
 @SuppressWarnings("deprecation")
@@ -57,7 +56,7 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
 
     @Override
     public Material getMaterial() {
-        return MaterialConverter.of(get(FallingBlockData.class).getBlockState().getType());
+        return MaterialConverter.of(getHandle().getFallingBlockData().blockState().get().getType());
     }
 
     @Override
@@ -68,19 +67,16 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
 
     @Override
     public byte getBlockData() {
-        // TODO
         throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean getDropItem() {
-        return get(FallingBlockData.class).getCanDropAsItem();
+        return getHandle().getFallingBlockData().canDropAsItem().get();
     }
 
     @Override
     public void setDropItem(boolean drop) {
-        FallingBlockData data = getOrCreate(FallingBlockData.class);
-        data.setCanDropAsItem(drop);
-        set(data);
+        getHandle().offer(getHandle().getFallingBlockData().canDropAsItem().set(drop));
     }
 }

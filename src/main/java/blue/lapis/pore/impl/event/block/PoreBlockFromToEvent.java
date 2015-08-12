@@ -49,7 +49,7 @@ public class PoreBlockFromToEvent extends BlockFromToEvent {
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(getHandle().getBlock());
+        return PoreBlock.of(getHandle().getLocation());
     }
 
     @Override

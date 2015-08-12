@@ -32,7 +32,7 @@ public final class PotionEffectConverter {
     }
 
     public static org.spongepowered.api.potion.PotionEffect of(org.bukkit.potion.PotionEffect effect) {
-        return Pore.getGame().getRegistry().getPotionEffectBuilder()
+        return Pore.getGame().getRegistry().createPotionEffectBuilder()
                 .potionType(PotionEffectTypeConverter.of(effect.getType()))
                 .ambience(effect.isAmbient())
                 .amplifier(effect.getAmplifier())

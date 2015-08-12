@@ -49,7 +49,7 @@ public class PoreBlockPhysicsEvent extends BlockPhysicsEvent {
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(getHandle().getBlock());
+        return PoreBlock.of(getHandle().getLocation());
     }
 
     @Override

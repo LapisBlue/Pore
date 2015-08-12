@@ -28,7 +28,6 @@ import blue.lapis.pore.converter.type.entity.SkeletonConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulator.entity.SkeletonData;
 import org.spongepowered.api.entity.living.monster.Skeleton;
 
 public class PoreSkeleton extends PoreMonster implements org.bukkit.entity.Skeleton {
@@ -53,13 +52,11 @@ public class PoreSkeleton extends PoreMonster implements org.bukkit.entity.Skele
 
     @Override
     public SkeletonType getSkeletonType() {
-        return SkeletonConverter.of(get(SkeletonData.class).getValue());
+        return SkeletonConverter.of(getHandle().getSkeletonData().type().get());
     }
 
     @Override
     public void setSkeletonType(SkeletonType type) {
-        SkeletonData skeleton = getOrCreate(SkeletonData.class);
-        skeleton.setValue(SkeletonConverter.of(type));
-        set(skeleton);
+        getHandle().offer(getHandle().getSkeletonData().type().set(SkeletonConverter.of(type)));
     }
 }

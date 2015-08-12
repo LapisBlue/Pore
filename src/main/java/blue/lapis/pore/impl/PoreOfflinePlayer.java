@@ -24,7 +24,9 @@
  */
 package blue.lapis.pore.impl;
 
-import blue.lapis.pore.converter.vector.LocationConverter;
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.JOIN_DATA;
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.WHITELIST_DATA;
+
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreWrapper;
@@ -34,9 +36,6 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
-import org.spongepowered.api.data.manipulator.entity.JoinData;
-import org.spongepowered.api.data.manipulator.entity.RespawnLocationData;
-import org.spongepowered.api.data.manipulator.entity.WhitelistData;
 import org.spongepowered.api.entity.player.User;
 
 import java.util.Map;
@@ -79,16 +78,16 @@ public class PoreOfflinePlayer extends PoreWrapper<User> implements OfflinePlaye
 
     @Override
     public boolean isWhitelisted() {
-        return getHandle().getData(WhitelistData.class).isPresent();
+        return getHandle().get(WHITELIST_DATA).isPresent() && getHandle().get(WHITELIST_DATA).get().whitelisted().get();
     }
 
     @Override
     public void setWhitelisted(boolean value) {
         if (value != isWhitelisted()) {
             if (value) {
-                getHandle().offer(getHandle().getOrCreate(WhitelistData.class).get());
+                getHandle().offer(getHandle().getOrCreate(WHITELIST_DATA).get().whitelisted().set(true));
             } else {
-                getHandle().remove(WhitelistData.class);
+                getHandle().remove(WHITELIST_DATA);
             }
         }
     }
@@ -105,12 +104,12 @@ public class PoreOfflinePlayer extends PoreWrapper<User> implements OfflinePlaye
 
     @Override
     public long getFirstPlayed() {
-        return getHandle().getData(JoinData.class).get().getFirstPlayed().getTime();
+        return getHandle().get(JOIN_DATA).get().firstPlayed().get().getTime();
     }
 
     @Override
     public long getLastPlayed() {
-        return getHandle().getData(JoinData.class).get().getLastPlayed().getTime();
+        return getHandle().get(JOIN_DATA).get().lastPlayed().get().getTime();
     }
 
     @Override
@@ -120,7 +119,7 @@ public class PoreOfflinePlayer extends PoreWrapper<User> implements OfflinePlaye
 
     @Override
     public Location getBedSpawnLocation() {
-        return LocationConverter.of(getHandle().getData(RespawnLocationData.class).get().getRespawnLocation());
+        throw new NotImplementedException("TODO"); // can't determine the world
     }
 
     @Override

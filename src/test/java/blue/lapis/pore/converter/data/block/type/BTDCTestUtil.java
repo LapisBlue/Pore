@@ -41,8 +41,9 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
 import org.bukkit.block.Block;
 import org.spongepowered.api.block.BlockType;
-import org.spongepowered.api.data.DataManipulator;
-import org.spongepowered.api.data.manipulator.SingleValueData;
+import org.spongepowered.api.data.manipulator.DataManipulator;
+import org.spongepowered.api.data.manipulator.mutable.VariantData;
+import org.spongepowered.api.data.value.mutable.Value;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.extent.Extent;
 
@@ -55,7 +56,7 @@ import java.util.Collections;
 @SuppressWarnings("rawtypes")
 public class BTDCTestUtil {
 
-    public static <T extends DataManipulator<T>, V> void testSingleAbstraction(BlockType blockType,
+    public static <T extends DataManipulator<T, ?>, V> void testSingleAbstraction(BlockType blockType,
                                                                                Class<T> dataClass, byte inputByte,
                                                                                V expectedValue, boolean invert)
             throws Exception {
@@ -64,13 +65,13 @@ public class BTDCTestUtil {
         testAbstraction(blockType, inputByte, outputColl, invert);
     }
 
-    public static <T extends DataManipulator<T>, V> void testSingleAbstraction(BlockType blockType,
+    public static <T extends DataManipulator<T, ?>, V> void testSingleAbstraction(BlockType blockType,
                                                                                Class<T> dataClass, byte rawData,
                                                                                V abstractedData) throws Exception {
         testSingleAbstraction(blockType, dataClass, rawData, abstractedData, false);
     }
 
-    public static <T extends DataManipulator<T>, V> void testSingleDeabstraction(BlockType blockType,
+    public static <T extends DataManipulator<T, ?>, V> void testSingleDeabstraction(BlockType blockType,
                                                                                  Class<T> dataClass, byte rawData,
                                                                                  V abstractedData, boolean invert)
             throws Exception {
@@ -79,7 +80,7 @@ public class BTDCTestUtil {
         testDeabstraction(blockType, rawData, inputColl, invert);
     }
 
-    public static <T extends DataManipulator<T>, V> void testSingleDeabstraction(BlockType blockType,
+    public static <T extends DataManipulator<T, ?>, V> void testSingleDeabstraction(BlockType blockType,
                                                                                  Class<T> dataClass, byte rawData,
                                                                                  V abstractedData) throws Exception {
         testSingleDeabstraction(blockType, dataClass, rawData, abstractedData, false);
@@ -125,22 +126,24 @@ public class BTDCTestUtil {
             when(loc.getData((Class<DataManipulator>) datum.getDataClass()))
                     .thenReturn(Optional.<DataManipulator>fromNullable(spongeDatum));
         }*/
-        Collection<DataManipulator<?>> manipulators = FluentIterable.from(abstractedData)
-                .transform(new Function<AbstractDataValue<? extends DataManipulator, ?>, DataManipulator<?>>() {
-                    public DataManipulator<?> apply(AbstractDataValue datum) {
+        Collection<DataManipulator<?, ?>> manipulators = FluentIterable.from(abstractedData)
+                .transform(new Function<AbstractDataValue<? extends DataManipulator, ?>, DataManipulator<?, ?>>() {
+                    public DataManipulator<?, ?> apply(AbstractDataValue datum) {
                         if (datum.getValue() == AbstractDataValue.ABSENT) {
                             return null;
                         }
-                        DataManipulator<?> dm = (DataManipulator<?>) mock(datum.getDataClass());
-                        if (dm instanceof SingleValueData) {
-                            when(((SingleValueData) dm).getValue()).thenReturn(datum.getValue());
+                        DataManipulator<?, ?> dm = (DataManipulator<?, ?>) mock(datum.getDataClass());
+                        if (dm instanceof VariantData) {
+                            Value value = mock(Value.class);
+                            when(value.get()).thenReturn(datum.getValue());
+                            when(((VariantData) dm).type()).thenReturn(value);
                         }
                         return dm;
                     }
                 })
                 .filter(Predicates.notNull())
                 .toList();
-        when(loc.getManipulators()).thenReturn(manipulators);
+        when(loc.getContainers()).thenReturn(manipulators);
         Block block = PoreBlock.of(loc);
         if (invert) {
             assertNotEquals((long) rawData, (long) block.getData());
@@ -172,7 +175,7 @@ public class BTDCTestUtil {
         testConversion(blockType, rawData, abstractedData, false);
     }
 
-    public static <T extends DataManipulator<T>, V> void testSingleConversion(BlockType blockType,
+    public static <T extends DataManipulator<T, ?>, V> void testSingleConversion(BlockType blockType,
                                                                               Class<T> dataClass, byte rawData,
                                                                               V abstractedData, boolean invert)
             throws Exception {
@@ -181,7 +184,7 @@ public class BTDCTestUtil {
     }
 
 
-    public static <T extends DataManipulator<T>, V> void testSingleConversion(BlockType blockType,
+    public static <T extends DataManipulator<T, ?>, V> void testSingleConversion(BlockType blockType,
                                                                               Class<T> dataClass, byte rawData,
                                                                               V abstractedData) throws Exception {
         testSingleConversion(blockType, dataClass, rawData, abstractedData, false);

@@ -27,7 +27,7 @@ package blue.lapis.pore.converter.data;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.spongepowered.api.data.DataManipulator;
+import org.spongepowered.api.data.manipulator.DataManipulator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,14 +41,14 @@ public abstract class DataTypeConverter {
     protected final LinkedHashMap<BiMap<AbstractDataValue, Byte>, Byte> converters
             = new LinkedHashMap<BiMap<AbstractDataValue, Byte>, Byte>();
 
-    protected final ArrayList<Class<? extends DataManipulator<?>>> applicableTypes = Lists.newArrayList();
+    protected final ArrayList<Class<? extends DataManipulator<?, ?>>> applicableTypes = Lists.newArrayList();
 
-    public Collection<Class<? extends DataManipulator<?>>> getApplicableDataTypes() {
+    public Collection<Class<? extends DataManipulator<?, ?>>> getApplicableDataTypes() {
         return applicableTypes;
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
-    public byte of(Collection<DataManipulator<?>> data) {
+    public byte of(Collection<DataManipulator<?, ?>> data) {
         HashMap<String, DataManipulator> dataMap = Maps.newHashMap();
         for (DataManipulator datum : data) {
             dataMap.put(datum.getClass().getName().split("\\$")[0], datum);

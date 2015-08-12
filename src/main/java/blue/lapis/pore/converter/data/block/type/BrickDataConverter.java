@@ -28,7 +28,7 @@ import blue.lapis.pore.converter.data.AbstractDataValue;
 import blue.lapis.pore.converter.data.DataTypeConverter;
 
 import com.google.common.collect.ImmutableBiMap;
-import org.spongepowered.api.data.manipulator.block.BrickData;
+import org.spongepowered.api.data.manipulator.mutable.block.BrickData;
 import org.spongepowered.api.data.type.BrickType;
 import org.spongepowered.api.data.type.BrickTypes;
 

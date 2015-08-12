@@ -30,7 +30,6 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.data.manipulator.entity.ExplosiveRadiusData;
 import org.spongepowered.api.entity.projectile.explosive.ExplosiveProjectile;
 
 public class PoreFireball extends PoreProjectile implements org.bukkit.entity.Fireball {
@@ -54,26 +53,29 @@ public class PoreFireball extends PoreProjectile implements org.bukkit.entity.Fi
     }
 
     @Override
-    public void setDirection(Vector direction) {
-        throw new NotImplementedException("TODO");
-    }
-
-    @Override
     public Vector getDirection() {
         //TODO: I'm not entirely sure how this method is supposed to behave, so this impl might change
         return VectorConverter.getUnitVector(this.getVelocity()).multiply(0.1);
     }
 
     @Override
+    public void setDirection(Vector direction) {
+        throw new NotImplementedException("TODO");
+    }
+
+    @Override
     public float getYield() { // TODO: ???
-        return get(ExplosiveRadiusData.class).getExplosionRadius();
+        return getHandle().getExplosiveRadiusData().explosiveRadius().get();
     }
 
     @Override
     public void setYield(float yield) {
-        ExplosiveRadiusData data = getOrCreate(ExplosiveRadiusData.class);
-        data.setExplosionRadius((int) yield);
-        set(data);
+        getHandle().offer(getHandle().getExplosiveRadiusData().explosiveRadius().set((int) yield));
+    }
+
+    @Override
+    public boolean isIncendiary() {
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -81,8 +83,4 @@ public class PoreFireball extends PoreProjectile implements org.bukkit.entity.Fi
         throw new NotImplementedException("TODO");
     }
 
-    @Override
-    public boolean isIncendiary() {
-        throw new NotImplementedException("TODO");
-    }
 }

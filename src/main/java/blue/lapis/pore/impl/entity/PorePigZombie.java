@@ -24,16 +24,17 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.ANGERABLE_DATA;
+
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
+import com.google.common.base.Preconditions;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.PigZombie;
-import org.spongepowered.api.data.manipulator.entity.AngerableData;
+import org.spongepowered.api.data.value.BoundedValue;
 import org.spongepowered.api.entity.living.monster.ZombiePigman;
 
 public class PorePigZombie extends PoreZombie implements PigZombie {
-
-    private static final int MAX_ANGER_LEVEL = 400;
 
     public static PorePigZombie of(ZombiePigman handle) {
         return WrapperConverter.of(PorePigZombie.class, handle);
@@ -55,23 +56,26 @@ public class PorePigZombie extends PoreZombie implements PigZombie {
 
     @Override
     public int getAnger() {
-        return get(AngerableData.class).getAngerLevel();
+        return getHandle().get(ANGERABLE_DATA).get().angerLevel().get();
     }
 
     @Override
     public void setAnger(int level) {
-        AngerableData angerable = getOrCreate(AngerableData.class);
-        angerable.setAngerLevel(level);
-        set(angerable);
+        BoundedValue<Integer> value = getHandle().get(ANGERABLE_DATA).get().angerLevel();
+        Preconditions.checkArgument(level <= value.getMaxValue() && level >= value.getMinValue(),
+                "Anger level value " + level + " is outside bounds (" + value.getMinValue() + ", " + value.getMaxValue()
+                        + ")");
+        getHandle().get(ANGERABLE_DATA).get().angerLevel().set(level);
     }
 
     @Override
     public void setAngry(boolean angry) {
-        setAnger(angry ? MAX_ANGER_LEVEL : 0);
+        BoundedValue<Integer> value = getHandle().get(ANGERABLE_DATA).get().angerLevel();
+        setAnger(angry ? value.getMaxValue() : value.getMinValue());
     }
 
     @Override
     public boolean isAngry() {
-        return getAnger() > 0;
+        return getAnger() > getHandle().get(ANGERABLE_DATA).get().angerLevel().getMinValue();
     }
 }

@@ -25,10 +25,11 @@
 package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.Pore;
+import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang3.NotImplementedException;
+import com.google.common.base.Optional;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
 import org.spongepowered.api.block.BlockType;
@@ -58,10 +59,8 @@ public class PoreEnderman extends PoreMonster implements org.bukkit.entity.Ender
 
     @Override
     public MaterialData getCarriedMaterial() {
-        throw new NotImplementedException("TODO");
-        /*return getHandle().getCarriedBlock().isPresent() ?
-                PoreBlockState.of(getHandle().getCarriedBlock().get()).getData() :
-                null;*/
+        Optional<ItemStack> stack = getHandle().getInventory().peek();
+        return stack.isPresent() ? ItemStackConverter.of(stack.get()).getData() : null;
     }
 
     @Override
@@ -70,10 +69,10 @@ public class PoreEnderman extends PoreMonster implements org.bukkit.entity.Ender
         ItemType itemType = MaterialConverter.asItem(material.getItemType());
         if (blockType != null && itemType != null) {
             getHandle().getInventory().clear();
-            ItemStack stack = Pore.getGame().getRegistry().getItemBuilder().itemType(itemType).quantity(1).build();
+            ItemStack stack = Pore.getGame().getRegistry().createItemBuilder().itemType(itemType).quantity(1).build();
             getHandle().getInventory().offer(stack);
         } else {
-            throw new IllegalArgumentException("Invalid enderman carry material");
+            throw new IllegalArgumentException("Invalid enderman carry material: " + material.getItemType().name());
         }
     }
 }

@@ -53,7 +53,7 @@ public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent 
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(getHandle().getTile().getBlock());
+        return PoreBlock.of(getHandle().getTile().getLocation());
     }
 
     @Override
@@ -66,7 +66,7 @@ public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent 
     @Override
     @SuppressWarnings("deprecation")
     public String[] getLines() {
-        List<Text> lines = getHandle().getNewData().getLines();
+        List<Text> lines = getHandle().getNewData().lines().get();
         String[] result = new String[lines.size()];
         for (int i = 0; i < lines.size(); i++) {
             result[i] = Texts.legacy().to(lines.get(i));
@@ -77,14 +77,14 @@ public class PoreSignChangeEvent extends org.bukkit.event.block.SignChangeEvent 
     @Override
     @SuppressWarnings("deprecation")
     public String getLine(int index) throws IndexOutOfBoundsException {
-        return Texts.legacy().to(getHandle().getNewData().getLine(index));
+        return Texts.legacy().to(getHandle().getNewData().lines().get(index));
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setLine(int index, String line) throws IndexOutOfBoundsException {
         try {
-            getHandle().setNewData(getHandle().getNewData().setLine(index, Texts.legacy().from(line)));
+            getHandle().getNewData().lines().set(index, Texts.legacy().from(line));
         } catch (TextMessageException ex) {
             throw new IllegalArgumentException(ex);
         }

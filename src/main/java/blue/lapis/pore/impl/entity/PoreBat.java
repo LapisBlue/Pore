@@ -24,10 +24,11 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.SLEEPING_DATA;
+
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulator.entity.SleepingData;
 import org.spongepowered.api.entity.living.Bat;
 
 public class PoreBat extends PoreAmbient implements org.bukkit.entity.Bat {
@@ -52,17 +53,16 @@ public class PoreBat extends PoreAmbient implements org.bukkit.entity.Bat {
 
     @Override
     public boolean isAwake() {
-        return !has(SleepingData.class); // TODO: ???
+        return hasData(SLEEPING_DATA) && !getHandle().get(SLEEPING_DATA).get().sleeping().get();
     }
 
     @Override
     public void setAwake(boolean state) {
-        // TODO: ???
         if (state != isAwake()) {
             if (state) {
-                remove(SleepingData.class);
+                getHandle().remove(SLEEPING_DATA);
             } else {
-                set(getOrCreate(SleepingData.class));
+                getHandle().offer(getHandle().getOrCreate(SLEEPING_DATA).get().sleeping().set(true));
             }
         }
     }

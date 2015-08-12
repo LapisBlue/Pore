@@ -27,10 +27,9 @@ package blue.lapis.pore.impl.entity;
 import blue.lapis.pore.converter.type.world.DirectionConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.BlockFace;
 import org.spongepowered.api.data.DataTransactionResult;
-import org.spongepowered.api.data.manipulator.block.DirectionalData;
+import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.hanging.Hanging;
 
 public class PoreHanging extends PoreEntity implements org.bukkit.entity.Hanging {
@@ -49,11 +48,14 @@ public class PoreHanging extends PoreEntity implements org.bukkit.entity.Hanging
     }
 
     @Override
+    public BlockFace getFacing() {
+        return DirectionConverter.of(getHandle().get(Keys.DIRECTION).get());
+    }
+
+    @Override
     public boolean setFacingDirection(BlockFace face, boolean force) {
-        DirectionalData data = getOrCreate(DirectionalData.class);
-        data.setValue(DirectionConverter.of(face));//TODO: missing a boolean (DirectionConverter.of(face), force);
-        DataTransactionResult result = set(data);
-        return result.getType() == DataTransactionResult.Type.SUCCESS;
+        return getHandle().offer(Keys.DIRECTION, DirectionConverter.of(face))
+                .getType() == DataTransactionResult.Type.SUCCESS;
     }
 
     @Override
@@ -63,11 +65,7 @@ public class PoreHanging extends PoreEntity implements org.bukkit.entity.Hanging
 
     @Override
     public BlockFace getAttachedFace() {
-        throw new NotImplementedException("TODO");
+        return getFacing().getOppositeFace();
     }
 
-    @Override
-    public BlockFace getFacing() {
-        return DirectionConverter.of(get(DirectionalData.class).getValue());
-    }
 }

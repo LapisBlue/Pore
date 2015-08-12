@@ -51,7 +51,7 @@ public class PoreScoreboardManager extends PoreWrapper<ScoreboardBuilder> implem
 
     @Override
     public Scoreboard getNewScoreboard() {
-        return PoreScoreboard.of(Pore.getGame().getRegistry().getScoreboardBuilder().build());
+        return PoreScoreboard.of(Pore.getGame().getRegistry().createScoreboardBuilder().build());
     }
 
 }

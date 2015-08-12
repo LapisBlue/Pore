@@ -32,6 +32,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;
@@ -127,7 +128,7 @@ public class PoreCommandMap extends SimpleCommandMap {
 
     @Override
     public boolean dispatch(CommandSender sender, String commandLine) throws CommandException {
-        return handle.process(((PoreCommandSender) sender).getHandle(), commandLine).isPresent();
+        return handle.process(((PoreCommandSender) sender).getHandle(), commandLine).getSuccessCount().get() > 0;
     }
 
     @Override
@@ -137,7 +138,7 @@ public class PoreCommandMap extends SimpleCommandMap {
 
     @Override
     public void registerServerAliases() {
-        // TODO
+        throw new NotImplementedException("TODO");
     }
 
 }

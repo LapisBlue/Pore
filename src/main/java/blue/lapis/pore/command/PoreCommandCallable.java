@@ -49,13 +49,13 @@ public class PoreCommandCallable extends PoreWrapper<Command> implements Command
     }
 
     @Override
-    public Optional<CommandResult> process(CommandSource source, String arguments) throws CommandException {
+    public CommandResult process(CommandSource source, String arguments) throws CommandException {
         // TODO: Label
         if (getHandle().execute(PoreCommandSender.of(source), getHandle().getLabel(),
                 StringUtils.split(arguments))) {
-            return Optional.of(CommandResult.success());
+            return CommandResult.success();
         } else {
-            return Optional.of(CommandResult.empty());
+            return CommandResult.empty();
         }
     }
 

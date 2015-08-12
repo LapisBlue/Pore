@@ -42,6 +42,7 @@ import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.block.tileentity.TileEntity;
 
+import java.util.Collection;
 import java.util.List;
 
 public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukkit.block.BlockState {
@@ -66,8 +67,8 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukki
     }
 
     protected PoreBlockState(TileEntity handle) {
-        super(handle.getBlock().getBlock());
-        this.block = handle.getBlock();
+        super(handle.getBlock());
+        this.block = handle.getLocation();
         this.tileEntity = handle;
     }
 
@@ -181,8 +182,10 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukki
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public byte getRawData() {
-        return BlockDataConverter.INSTANCE.getDataValue(getHandle().getManipulators(), getHandle().getType());
+        return BlockDataConverter.INSTANCE.getDataValue((Collection) getHandle().getManipulators(),
+                getHandle().getType());
     }
 
     @Override
@@ -192,7 +195,7 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukki
 
     @Override
     public boolean isPlaced() {
-        return isPlaced();
+        return block != null;
     }
 
     @Override

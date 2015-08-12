@@ -25,12 +25,13 @@
 package blue.lapis.pore.converter.data;
 
 import com.google.common.base.Objects;
-import org.spongepowered.api.data.DataManipulator;
-import org.spongepowered.api.data.manipulator.SingleValueData;
+import org.spongepowered.api.data.manipulator.DataManipulator;
+import org.spongepowered.api.data.manipulator.ImmutableDataManipulator;
+import org.spongepowered.api.data.manipulator.mutable.VariantData;
 
 import java.util.UUID;
 
-public class AbstractDataValue<T extends DataManipulator<T>, V> {
+public class AbstractDataValue<T extends DataManipulator<T, ?>, V> {
 
     // yeah, this is... less than elegant
     public static final Object FLAG = UUID.randomUUID();
@@ -59,11 +60,12 @@ public class AbstractDataValue<T extends DataManipulator<T>, V> {
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
-    public static <T extends DataManipulator<T>> AbstractDataValue of(DataManipulator<T> data) {
+    public static <T extends DataManipulator<T, U>, U extends ImmutableDataManipulator<U, T>> AbstractDataValue
+        of(DataManipulator<T, U> data) {
         try {
             Class<?> clazz = Class.forName(data.getClass().getName().split("\\$")[0]);
             return new AbstractDataValue(clazz,
-                    data instanceof SingleValueData ? ((SingleValueData)data).getValue() : FLAG);
+                    data instanceof VariantData ? ((VariantData) data).type().get() : FLAG);
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
             return null;

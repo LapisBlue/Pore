@@ -51,7 +51,7 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
     @Override
     public org.bukkit.Note getNote() {
         return NoteConverter.of(getTileEntity().getData().isPresent()
-                ? getTileEntity().getData().get().getNote() : null);
+                ? getTileEntity().getData().get().note().get() : null);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
     @Override
     public boolean play() {
         getTileEntity().playNote();
-        return getTileEntity().getBlock().getBlockType() == BlockTypes.NOTEBLOCK;
+        return getTileEntity().getBlock().getType() == BlockTypes.NOTEBLOCK;
     }
 
     @Override

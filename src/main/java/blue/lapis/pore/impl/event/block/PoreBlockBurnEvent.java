@@ -46,7 +46,7 @@ public class PoreBlockBurnEvent extends org.bukkit.event.block.BlockBurnEvent {
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(getHandle().getBlock());
+        return PoreBlock.of(getHandle().getLocation());
     }
 
     @Override

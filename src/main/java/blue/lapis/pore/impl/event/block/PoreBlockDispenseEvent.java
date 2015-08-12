@@ -51,7 +51,7 @@ public class PoreBlockDispenseEvent extends org.bukkit.event.block.BlockDispense
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(getHandle().getBlock());
+        return PoreBlock.of(getHandle().getLocation());
     }
 
     @Override

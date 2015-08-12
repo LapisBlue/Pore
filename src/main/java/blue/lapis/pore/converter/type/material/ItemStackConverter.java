@@ -37,7 +37,7 @@ public final class ItemStackConverter {
         return new org.bukkit.inventory.ItemStack(
                 MaterialConverter.of(stack.getItem()),
                 stack.getQuantity(),
-                (short) DurabilityConverter.getDamageValue(stack.getManipulators())
+                (short) DurabilityConverter.getDamageValue(stack.getContainers())
         );
     }
 
@@ -49,11 +49,11 @@ public final class ItemStackConverter {
         }
         // IntelliJ doesn't recognize the above check and thinks withItemType() may throw an NPE
         //noinspection ConstantConditions
-        return Pore.getGame().getRegistry().getItemBuilder() // Eh, this shouldn't be in the registry
+        return Pore.getGame().getRegistry().createItemBuilder()
                 .itemType(type)
                 .quantity(stack.getAmount())
                 .itemData(DurabilityConverter.getItemData(stack))
-                //.maxQuantity(stack.getType().getMaxStackSize()) TODO
+                //.maxQuantity(stack.getType().getMaxStackSize()) //TODO
                 .build();
     }
 

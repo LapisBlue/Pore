@@ -69,7 +69,7 @@ public class PoreEntityBreakDoorEvent extends EntityBreakDoorEvent {
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(this.getHandle().getBlock());
+        return PoreBlock.of(this.getHandle().getLocation());
     }
 
     @Override

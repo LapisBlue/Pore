@@ -24,6 +24,12 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.DISPLAY_NAME_DATA;
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.IGNITEABLE_DATA;
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.PASSENGER_DATA;
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.VEHICLE_DATA;
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.VELOCITY_DATA;
+
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
@@ -47,13 +53,14 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.data.DataManipulator;
-import org.spongepowered.api.data.DataTransactionResult;
-import org.spongepowered.api.data.manipulator.entity.IgniteableData;
-import org.spongepowered.api.data.manipulator.entity.PassengerData;
-import org.spongepowered.api.data.manipulator.entity.VehicleData;
-import org.spongepowered.api.data.manipulator.entity.VelocityData;
+import org.spongepowered.api.data.manipulator.DataManipulator;
+import org.spongepowered.api.data.manipulator.mutable.DisplayNameData;
+import org.spongepowered.api.data.manipulator.mutable.entity.IgniteableData;
+import org.spongepowered.api.data.manipulator.mutable.entity.VehicleData;
+import org.spongepowered.api.data.manipulator.mutable.entity.VelocityData;
 import org.spongepowered.api.entity.Entity;
+import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.util.TextMessageException;
 
 import java.util.List;
 import java.util.Set;
@@ -70,29 +77,8 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
         super(handle);
     }
 
-    protected <T extends DataManipulator<T>> T get(Class<T> dataClass) {
-        Optional<T> optional = getOptional(dataClass);
-        return optional.isPresent() ? optional.get() : null;
-    }
-
-    protected <T extends DataManipulator<T>> Optional<T> getOptional(Class<T> dataClass) {
-        return getHandle().getData(dataClass);
-    }
-
-    protected <T extends DataManipulator<T>> boolean has(Class<T> dataClass) {
-        return getOptional(dataClass).isPresent();
-    }
-
-    protected <T extends DataManipulator<T>> T getOrCreate(Class<T> dataClass) {
-        return getHandle().getOrCreate(dataClass).get();
-    }
-
-    protected <T extends DataManipulator<T>> DataTransactionResult set(T data) {
-        return getHandle().offer(data);
-    }
-
-    protected <T extends DataManipulator<T>> boolean remove(Class<T> dataClass) {
-        return getHandle().remove(dataClass);
+    protected <T extends DataManipulator<T, ?>> boolean hasData(Class<T> key) {
+        return getHandle().get(key).isPresent();
     }
 
     @Override
@@ -118,14 +104,20 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public Vector getVelocity() {
-        return VectorConverter.createBukkitVector(get(VelocityData.class).getVelocity());
+        return hasData(VELOCITY_DATA)
+                ? VectorConverter.createBukkitVector(getHandle().get(VELOCITY_DATA).get().velocity().get())
+                : new Vector(0, 0, 0);
     }
 
     @Override
     public void setVelocity(Vector velocity) {
-        VelocityData data = getOrCreate(VelocityData.class);
-        data.setVelocity(VectorConverter.create3d(velocity));
-        set(data);
+        Optional<VelocityData> data = getHandle().getOrCreate(VELOCITY_DATA);
+        if (data.isPresent()) {
+            getHandle().offer(data.get().velocity().set(VectorConverter.create3d(velocity)));
+        } else {
+            throw new UnsupportedOperationException("Cannot apply velocity to entity with ID " + getEntityId()
+                    + " and type " + getType().name());
+        }
     }
 
     @Override
@@ -190,19 +182,23 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public int getFireTicks() {
-        return get(IgniteableData.class).getFireTicks();
-    }
-
-    @Override
-    public int getMaxFireTicks() {
-        return get(IgniteableData.class).getFireDelay();
+        return hasData(IGNITEABLE_DATA) ? getHandle().get(IGNITEABLE_DATA).get().fireTicks().get() : 0;
     }
 
     @Override
     public void setFireTicks(int ticks) {
-        IgniteableData igniteable = getOrCreate(IgniteableData.class);
-        igniteable.setFireTicks(ticks);
-        set(igniteable);
+        Optional<IgniteableData> data = getHandle().getOrCreate(IGNITEABLE_DATA);
+        if (data.isPresent()) {
+            getHandle().offer(data.get().fireTicks().set(ticks));
+        } else {
+            throw new UnsupportedOperationException("Cannot apply fire ticks to entity with ID " + getEntityId()
+                    + " and type " + getType().name());
+        }
+    }
+
+    @Override
+    public int getMaxFireTicks() {
+        return hasData(IGNITEABLE_DATA) ? getHandle().get(IGNITEABLE_DATA).get().fireTicks().get() : 0;
     }
 
     @Override
@@ -222,7 +218,8 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public void sendMessage(String message) {
-        //TODO: this isn't implemented in CB for the base entity class. Should we just let it silently fail?
+        //TODO: This isn't implemented in CB for the base entity class. Should we just let it silently fail?
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -242,18 +239,21 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public org.bukkit.entity.Entity getPassenger() {
-        Optional<VehicleData> data = getOptional(VehicleData.class);
-        return data.isPresent() ? PoreEntity.of(data.get().getPassenger()) : null;
+        return hasData(VEHICLE_DATA) ? PoreEntity.of(getHandle().get(VEHICLE_DATA).get().passenger().get()) : null;
     }
 
     @Override
     public boolean setPassenger(final org.bukkit.entity.Entity passenger) {
         if (passenger != null) {
-            VehicleData data = getOrCreate(VehicleData.class);
-            data.setPassenger(((PoreEntity) passenger).getHandle());
-            set(data);
+            Optional<VehicleData> data = getHandle().getOrCreate(VEHICLE_DATA);
+            if (data.isPresent()) {
+                getHandle().offer(data.get().passenger().set(((PoreEntity) passenger).getHandle()));
+            } else {
+                throw new UnsupportedOperationException("Cannot apply passenger to entity with ID " + getEntityId()
+                        + " and type " + getType().name());
+            }
         } else {
-            remove(VehicleData.class);
+            getHandle().remove(VEHICLE_DATA);
         }
 
         return true;
@@ -261,7 +261,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public boolean isEmpty() {
-        return !getOptional(VehicleData.class).isPresent();
+        return hasData(VEHICLE_DATA);
     }
 
     @Override
@@ -311,39 +311,58 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public boolean isInsideVehicle() {
-        return getHandle().getData(PassengerData.class).isPresent();
+        return hasData(PASSENGER_DATA);
     }
 
     @Override
     public boolean leaveVehicle() {
-        Optional<PassengerData> data = getOptional(PassengerData.class);
-        return data.isPresent() && remove(PassengerData.class);
+        boolean inVehicle = hasData(PASSENGER_DATA);
+        getHandle().remove(PASSENGER_DATA);
+        return inVehicle;
     }
 
     @Override
     public org.bukkit.entity.Entity getVehicle() {
-        Optional<PassengerData> data = getOptional(PassengerData.class);
-        return data.isPresent() ? PoreEntity.of(data.get().getVehicle()) : null;
+        return isInsideVehicle() ? PoreEntity.of(getHandle().get(PASSENGER_DATA).get().vehicle().get()) : null;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public String getCustomName() {
+        return hasData(DISPLAY_NAME_DATA)
+                ? Texts.legacy().to(getHandle().get(DISPLAY_NAME_DATA).get().displayName().get())
+                : null;
     }
 
     @Override
     public void setCustomName(String name) {
-        throw new NotImplementedException("TODO"); // TODO
-    }
-
-    @Override
-    public String getCustomName() {
-        throw new NotImplementedException("TODO"); // TODO
-    }
-
-    @Override
-    public void setCustomNameVisible(boolean flag) {
-        throw new NotImplementedException("TODO"); // TODO
+        Optional<DisplayNameData> data = getHandle().getOrCreate(DISPLAY_NAME_DATA);
+        if (data.isPresent()) {
+            try {
+                getHandle().offer(data.get().displayName().set(Texts.legacy().from(name)));
+            } catch (TextMessageException ex) {
+                throw new IllegalArgumentException(ex);
+            }
+        } else {
+            throw new UnsupportedOperationException("Cannot apply display name data to entity with ID " + getEntityId()
+                    + " and type " + getType().name());
+        }
     }
 
     @Override
     public boolean isCustomNameVisible() {
-        throw new NotImplementedException("TODO"); // TODO
+        return hasData(DISPLAY_NAME_DATA) && getHandle().get(DISPLAY_NAME_DATA).get().customNameVisible().get();
+    }
+
+    @Override
+    public void setCustomNameVisible(boolean flag) {
+        Optional<DisplayNameData> data = getHandle().getOrCreate(DISPLAY_NAME_DATA);
+        if (data.isPresent()) {
+            getHandle().offer(data.get().customNameVisible().set(flag));
+        } else {
+            throw new UnsupportedOperationException("Cannot apply display name data to entity with ID " + getEntityId()
+                    + " and type " + getType().name());
+        }
     }
 
     @Override

@@ -26,11 +26,12 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
+import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.TNTPrimed;
-import org.spongepowered.api.data.manipulator.entity.FuseData;
+import org.spongepowered.api.data.value.mutable.MutableBoundedValue;
 import org.spongepowered.api.entity.explosive.PrimedTNT;
 
 public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
@@ -54,20 +55,22 @@ public class PoreTNTPrimed extends PoreEntity implements TNTPrimed {
     }
 
     @Override
-    public void setFuseTicks(int fuseTicks) {
-        FuseData fuse = getOrCreate(FuseData.class);
-        fuse.setFuseDuration(fuseTicks);
-        set(fuse);
+    public int getFuseTicks() {
+        return getHandle().getFuseData().getFuseDuration().get();
     }
 
     @Override
-    public int getFuseTicks() {
-        return get(FuseData.class).getFuseDuration();
+    public void setFuseTicks(int fuseTicks) {
+        MutableBoundedValue<Integer> value = getHandle().getFuseData().getFuseDuration();
+        Preconditions.checkArgument(fuseTicks >= value.getMinValue() && fuseTicks <= value.getMaxValue(),
+                "Value for fuse duration is outside acceptable range (" + value.getMinValue() + ", "
+                        + value.getMaxValue() + ")");
+        getHandle().offer(value.set(fuseTicks));
     }
 
     @Override
     public Entity getSource() {
-        return getHandle().getDetonator().isPresent() ? of(getHandle().getDetonator().get()) : null;
+        return getHandle().getDetonator().isPresent() ? PoreEntity.of(getHandle().getDetonator().get()) : null;
     }
 
     @Override

@@ -26,67 +26,62 @@ package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
-import blue.lapis.pore.converter.wrapper.WrapperConverter;
-import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PoreEntity;
-import blue.lapis.pore.util.PoreCollections;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.spongepowered.api.event.entity.EntityExplosionEvent;
-import org.spongepowered.api.world.Location;
+import org.spongepowered.api.event.world.WorldExplosionEvent;
 
 import java.util.List;
 
 public class PoreEntityExplodeEvent extends EntityExplodeEvent {
 
-    private final EntityExplosionEvent handle;
+    private final WorldExplosionEvent handle;
 
-    public PoreEntityExplodeEvent(EntityExplosionEvent handle) {
+    public PoreEntityExplodeEvent(WorldExplosionEvent handle) {
         super(null, null, null, -1);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public EntityExplosionEvent getHandle() {
+    public WorldExplosionEvent getHandle() {
         return this.handle;
     }
 
     @Override
     public Entity getEntity() {
-        return PoreEntity.of(this.getHandle().getEntity());
+        return getHandle().getExplosion().getSourceExplosive().isPresent()
+                ? PoreEntity.of(getHandle().getExplosion().getSourceExplosive().get())
+                : null;
     }
 
     @Override
     public EntityType getEntityType() {
-        return EntityConverter.of(this.getHandle().getEntity().getType());
+        return getEntity() != null ? getEntity().getType() : null;
     }
 
     @Override
     public List<Block> blockList() {
-        return PoreCollections.<Location, Block>transformToList(
-                this.getHandle().getBlocks(),
-                WrapperConverter.<Location, PoreBlock>getConverter()
-        );
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public org.bukkit.Location getLocation() {
-        return LocationConverter.of(this.getHandle().getExplosionLocation());
+        return LocationConverter.fromVector3d(getHandle().getExplosion().getWorld(),
+                getHandle().getExplosion().getOrigin());
     }
 
     @Override
     public float getYield() {
-        return (float) this.getHandle().getYield();
+        return this.getHandle().getExplosion().getRadius();
     }
 
     @Override
     public void setYield(float yield) {
-        this.getHandle().setYield(yield);
+        this.getHandle().getExplosion().setRadius(yield);
     }
 
     @Override

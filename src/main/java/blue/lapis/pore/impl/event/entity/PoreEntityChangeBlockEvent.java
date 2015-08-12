@@ -65,7 +65,7 @@ public class PoreEntityChangeBlockEvent extends EntityChangeBlockEvent {
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(this.getHandle().getBlock());
+        return PoreBlock.of(this.getHandle().getLocation());
     }
 
     @Override

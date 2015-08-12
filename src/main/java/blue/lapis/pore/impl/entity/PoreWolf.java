@@ -24,14 +24,15 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.DYEABLE_DATA;
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.SITTING_DATA;
+
 import blue.lapis.pore.converter.type.material.DyeColorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulator.DyeableData;
-import org.spongepowered.api.data.manipulator.entity.SittingData;
 import org.spongepowered.api.entity.living.animal.Wolf;
 
 public class PoreWolf extends PoreTameable implements org.bukkit.entity.Wolf {
@@ -66,29 +67,27 @@ public class PoreWolf extends PoreTameable implements org.bukkit.entity.Wolf {
 
     @Override
     public boolean isSitting() {
-        return has(SittingData.class);
+        return hasData(SITTING_DATA) && getHandle().get(SITTING_DATA).get().sitting().get();
     }
 
     @Override
     public void setSitting(boolean sitting) {
         if (sitting != isSitting()) {
             if (sitting) {
-                set(getOrCreate(SittingData.class));
+                getHandle().get(SITTING_DATA).get().sitting().set(true);
             } else {
-                remove(SittingData.class);
+                getHandle().remove(SITTING_DATA);
             }
         }
     }
 
     @Override
     public DyeColor getCollarColor() {
-        return DyeColorConverter.of(get(DyeableData.class).getValue());
+        return DyeColorConverter.of(getHandle().get(DYEABLE_DATA).get().type().get());
     }
 
     @Override
     public void setCollarColor(DyeColor color) {
-        DyeableData dyeable = getOrCreate(DyeableData.class);
-        dyeable.setValue(DyeColorConverter.of(color));
-        set(dyeable);
+        getHandle().getOrCreate(DYEABLE_DATA).get().type().set(DyeColorConverter.of(color));
     }
 }

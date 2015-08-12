@@ -52,7 +52,7 @@ public class PoreBlockPlaceEvent extends org.bukkit.event.block.BlockPlaceEvent 
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(getHandle().getBlock());
+        return PoreBlock.of(getHandle().getLocation());
     }
 
     @Override

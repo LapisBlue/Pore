@@ -24,13 +24,14 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.DYEABLE_DATA;
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.SHEARED_DATA;
+
 import blue.lapis.pore.converter.type.material.DyeColorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulator.DyeableData;
-import org.spongepowered.api.data.manipulator.entity.ShearedData;
 import org.spongepowered.api.entity.living.animal.Sheep;
 
 public class PoreSheep extends PoreAnimals implements org.bukkit.entity.Sheep {
@@ -55,29 +56,27 @@ public class PoreSheep extends PoreAnimals implements org.bukkit.entity.Sheep {
 
     @Override
     public boolean isSheared() {
-        return has(ShearedData.class);
+        return hasData(SHEARED_DATA) && getHandle().get(SHEARED_DATA).get().sheared().get();
     }
 
     @Override
     public void setSheared(boolean flag) {
         if (flag != isSheared()) {
             if (flag) {
-                set(getOrCreate(ShearedData.class));
+                getHandle().offer(getHandle().getOrCreate(SHEARED_DATA).get().sheared().set(true));
             } else {
-                remove(ShearedData.class);
+                getHandle().remove(SHEARED_DATA);
             }
         }
     }
 
     @Override
     public DyeColor getColor() {
-        return DyeColorConverter.of(get(DyeableData.class).getValue());
+        return DyeColorConverter.of(getHandle().get(DYEABLE_DATA).get().type().get());
     }
 
     @Override
     public void setColor(DyeColor color) {
-        DyeableData dyeable = getOrCreate(DyeableData.class);
-        dyeable.setValue(DyeColorConverter.of(color));
-        set(dyeable);
+        getHandle().get(DYEABLE_DATA).get().type().set(DyeColorConverter.of(color));
     }
 }

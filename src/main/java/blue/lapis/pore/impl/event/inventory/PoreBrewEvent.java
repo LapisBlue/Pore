@@ -48,7 +48,7 @@ public class PoreBrewEvent extends org.bukkit.event.inventory.BrewEvent {
 
     @Override
     public Block getBlock() {
-        return PoreBlock.of(this.getHandle().getBlock());
+        return PoreBlock.of(this.getHandle().getLocation());
     }
 
     @Override

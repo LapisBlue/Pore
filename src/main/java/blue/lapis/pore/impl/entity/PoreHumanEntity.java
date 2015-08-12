@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.EXPERIENCE_HOLDER_DATA;
+
 import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
@@ -43,9 +45,8 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.block.BlockTypes;
-import org.spongepowered.api.data.manipulator.entity.ExperienceHolderData;
-import org.spongepowered.api.data.manipulator.item.InventoryItemData;
 import org.spongepowered.api.entity.living.Human;
+import org.spongepowered.api.item.inventory.Carrier;
 import org.spongepowered.api.item.inventory.entity.HumanInventory;
 import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.api.util.Tristate;
@@ -75,7 +76,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public PlayerInventory getInventory() {
-        return PorePlayerInventory.of((HumanInventory)this.getHandle().getInventory());
+        return PorePlayerInventory.of((HumanInventory) this.getHandle().getInventory());
     }
 
     @Override
@@ -111,9 +112,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     public InventoryView openWorkbench(org.bukkit.Location location, boolean force) {
         Location block = LocationConverter.of(location);
         if (force || block.getBlockType() == BlockTypes.CRAFTING_TABLE) {
-            return this.openInventory(PoreInventory.of(
-                    block.getData(InventoryItemData.class).get().getInventory() // TODO: is this right?
-            ));
+            return openBlockInventory(block, force);
         }
         return null;
     }
@@ -122,11 +121,19 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     public InventoryView openEnchanting(org.bukkit.Location location, boolean force) {
         Location block = LocationConverter.of(location);
         if (force || block.getBlockType() == BlockTypes.ENCHANTING_TABLE) {
-            return this.openInventory(PoreInventory.of(
-                    block.getData(InventoryItemData.class).get().getInventory() //TODO: is this right?
-            ));
+            return openBlockInventory(block, force);
         }
         return null;
+    }
+
+    private InventoryView openBlockInventory(Location location, boolean force) {
+        if (location.getTileEntity().isPresent() && location.getTileEntity().get() instanceof Carrier) {
+            return this.openInventory(PoreInventory.of(
+                    ((Carrier) location.getTileEntity().get()).getInventory()
+            ));
+        } else {
+            throw new UnsupportedOperationException("Block is not an inventory carrier");
+        }
     }
 
     @Override
@@ -181,8 +188,8 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public int getExpToLevel() {
-        return this.get(ExperienceHolderData.class).getExperienceBetweenLevels()
-                - this.get(ExperienceHolderData.class).getExperienceSinceLevel();
+        return getHandle().get(EXPERIENCE_HOLDER_DATA).get().getExperienceBetweenLevels().get()
+                - getHandle().get(EXPERIENCE_HOLDER_DATA).get().experienceSinceLevel().get();
     }
 
     @Override

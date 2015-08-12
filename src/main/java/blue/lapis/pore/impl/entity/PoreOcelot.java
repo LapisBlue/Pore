@@ -24,12 +24,12 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.SITTING_DATA;
+
 import blue.lapis.pore.converter.type.entity.OcelotConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulator.entity.OcelotData;
-import org.spongepowered.api.data.manipulator.entity.SittingData;
 import org.spongepowered.api.entity.living.animal.Ocelot;
 
 public class PoreOcelot extends PoreTameable implements org.bukkit.entity.Ocelot {
@@ -54,28 +54,26 @@ public class PoreOcelot extends PoreTameable implements org.bukkit.entity.Ocelot
 
     @Override
     public Type getCatType() {
-        return OcelotConverter.of(get(OcelotData.class).getValue());
+        return OcelotConverter.of(getHandle().getOcelotData().type().get());
     }
 
     @Override
     public void setCatType(Type type) {
-        OcelotData ocelot = getOrCreate(OcelotData.class);
-        ocelot.setValue(OcelotConverter.of(type));
-        set(ocelot);
+        getHandle().getOcelotData().type().set(OcelotConverter.of(type));
     }
 
     @Override
     public boolean isSitting() {
-        return has(SittingData.class);
+        return hasData(SITTING_DATA);
     }
 
     @Override
     public void setSitting(boolean sitting) {
         if (sitting != isSitting()) {
             if (sitting) {
-                set(getOrCreate(SittingData.class));
+                getHandle().offer(getHandle().getOrCreate(SITTING_DATA).get().sitting().set(true));
             } else {
-                remove(SittingData.class);
+                getHandle().remove(SITTING_DATA);
             }
         }
     }

@@ -24,10 +24,12 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.EXPERIENCE_HOLDER_DATA;
+
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
-import org.spongepowered.api.data.manipulator.entity.ExperienceHolderData;
 import org.spongepowered.api.entity.ExperienceOrb;
 
 public class PoreExperienceOrb extends PoreEntity implements org.bukkit.entity.ExperienceOrb {
@@ -52,13 +54,13 @@ public class PoreExperienceOrb extends PoreEntity implements org.bukkit.entity.E
 
     @Override
     public int getExperience() {
-        return get(ExperienceHolderData.class).getTotalExperience();
+        return hasData(EXPERIENCE_HOLDER_DATA)
+                ? getHandle().get(EXPERIENCE_HOLDER_DATA).get().totalExperience().get()
+                : 0;
     }
 
     @Override
     public void setExperience(int value) {
-        ExperienceHolderData data = getOrCreate(ExperienceHolderData.class);
-        data.setTotalExperience(value);
-        set(data);
+        throw new NotImplementedException("TODO");
     }
 }

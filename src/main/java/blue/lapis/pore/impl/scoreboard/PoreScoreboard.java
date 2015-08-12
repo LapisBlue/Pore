@@ -66,7 +66,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     @Override
     public Objective registerNewObjective(String name, String criteria) throws IllegalArgumentException {
         checkArgument(name != null, "Name must not be null");
-        ObjectiveBuilder builder = Pore.getGame().getRegistry().getObjectiveBuilder();
+        ObjectiveBuilder builder = Pore.getGame().getRegistry().createObjectiveBuilder();
         //noinspection ConstantConditions
         builder.name(name);
         if (criteria != null) {
@@ -207,7 +207,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     @Override
     public Team registerNewTeam(String name) throws IllegalArgumentException {
         checkArgument(name != null, "Team name must not be null");
-        TeamBuilder builder = Pore.getGame().getRegistry().getTeamBuilder();
+        TeamBuilder builder = Pore.getGame().getRegistry().createTeamBuilder();
         //noinspection ConstantConditions
         builder.name(name);
         return PoreTeam.of(builder.build());

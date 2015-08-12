@@ -26,11 +26,11 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.type.entity.HorseConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.impl.inventory.PoreHorseInventory;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.HorseInventory;
-import org.spongepowered.api.data.manipulator.entity.HorseData;
 import org.spongepowered.api.entity.living.animal.Horse;
 
 public class PoreHorse extends PoreTameable implements org.bukkit.entity.Horse {
@@ -55,32 +55,32 @@ public class PoreHorse extends PoreTameable implements org.bukkit.entity.Horse {
 
     @Override
     public Variant getVariant() {
-        return HorseConverter.of(get(HorseData.class).getVariant());
+        return HorseConverter.of(getHandle().getHorseData().variant().get());
     }
 
     @Override
     public void setVariant(Variant variant) {
-        get(HorseData.class).setVariant(HorseConverter.of(variant));
+        getHandle().getHorseData().variant().set(HorseConverter.of(variant));
     }
 
     @Override
     public Color getColor() {
-        return HorseConverter.of(get(HorseData.class).getColor());
+        return HorseConverter.of(getHandle().getHorseData().color().get());
     }
 
     @Override
     public void setColor(Color color) {
-        get(HorseData.class).setColor(HorseConverter.of(color));
+        getHandle().getHorseData().color().set(HorseConverter.of(color));
     }
 
     @Override
     public Style getStyle() {
-        return HorseConverter.of(get(HorseData.class).getStyle());
+        return HorseConverter.of(getHandle().getHorseData().style().get());
     }
 
     @Override
     public void setStyle(Style style) {
-        get(HorseData.class).setStyle(HorseConverter.of(style));
+        getHandle().getHorseData().style().set(HorseConverter.of(style));
     }
 
     @Override
@@ -125,7 +125,7 @@ public class PoreHorse extends PoreTameable implements org.bukkit.entity.Horse {
 
     @Override
     public HorseInventory getInventory() {
-        throw new NotImplementedException("TODO");
+        return PoreHorseInventory.of(getHandle().getInventory());
     }
 
 }

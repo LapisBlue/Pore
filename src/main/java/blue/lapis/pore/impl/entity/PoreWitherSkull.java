@@ -51,12 +51,13 @@ public class PoreWitherSkull extends PoreFireball implements org.bukkit.entity.W
     }
 
     @Override
-    public void setCharged(boolean charged) {
+    public boolean isCharged() {
         throw new NotImplementedException("TODO");
     }
 
     @Override
-    public boolean isCharged() {
+    public void setCharged(boolean charged) {
         throw new NotImplementedException("TODO");
     }
+
 }
