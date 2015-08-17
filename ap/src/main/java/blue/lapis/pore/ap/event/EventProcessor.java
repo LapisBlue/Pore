@@ -22,11 +22,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.event;
+package blue.lapis.pore.ap.event;
+
+import static javax.tools.Diagnostic.Kind.ERROR;
+import static javax.tools.Diagnostic.Kind.NOTE;
+
+import com.google.common.collect.Sets;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -37,7 +41,6 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
-import javax.tools.Diagnostic;
 import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 
@@ -45,11 +48,7 @@ import javax.tools.StandardLocation;
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
 public class EventProcessor extends AbstractProcessor {
 
-    private Set<String> events = new HashSet<String>();
-
-    public EventProcessor() {
-        super();
-    }
+    private final Set<String> events = Sets.newHashSet();
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
@@ -57,18 +56,17 @@ public class EventProcessor extends AbstractProcessor {
             Writer w = null;
             try {
                 FileObject file = processingEnv.getFiler()
-                        .createResource(StandardLocation.CLASS_OUTPUT, "", "events.txt");
+                        .createResource(StandardLocation.CLASS_OUTPUT, "blue.lapis.pore.event", "events.txt");
+                processingEnv.getMessager().printMessage(NOTE,
+                        "Writing " + events.size() + " events to " + file.getName());
+
                 w = file.openWriter();
-                String[] eventsArray = new String[events.size()];
-                events.toArray(eventsArray);
-                for (int i = 0; i < eventsArray.length; i++) {
-                    w.append(eventsArray[i]);
-                    if (i < eventsArray.length - 1) {
-                        w.append('\n');
-                    }
+                for (String event : events) {
+                    w.write(event);
+                    w.write('\n');
                 }
-                w.flush();
             } catch (IOException ex) {
+                processingEnv.getMessager().printMessage(ERROR, "Failed to write events to events.txt");
                 ex.printStackTrace();
             } finally {
                 try {
@@ -79,22 +77,18 @@ public class EventProcessor extends AbstractProcessor {
                     // meh
                 }
             }
+
             return false;
         }
+
         for (TypeElement anno : annotations) {
             for (Element e : roundEnv.getElementsAnnotatedWith(anno)) {
-                if (!(e instanceof TypeElement)) {
-                    throw new IllegalStateException("@" + anno.getSimpleName() + " element has unexpected type "
-                            + e.getClass().getSimpleName());
-                }
                 if (e.getKind() == ElementKind.CLASS) {
                     events.add(((TypeElement) e).getQualifiedName().toString());
-                } else {
-                    processingEnv.getMessager().printMessage(Diagnostic.Kind.WARNING, "Found @" + anno.getSimpleName()
-                            + " annotation on a non-class element");
                 }
             }
         }
+
         return true;
     }
 }

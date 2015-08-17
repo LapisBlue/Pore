@@ -1,0 +1,11 @@
+// We end up with a format like 1.0.0-SNAPSHOT-git(master-f874a8b)-jnks174
+// the Git commit or the build number will be excluded if they can't be determined, respectively
+ext.versionSuffix = version.contains('SNAPSHOT') ? (
+        (
+                System.getenv('GIT_COMMIT') ? ('-git('
+                        + System.getenv('GIT_BRANCH')
+                        .substring(System.getenv('GIT_BRANCH').split('/')[0].length() + 1) + '-'
+                        + System.getenv('GIT_COMMIT').substring(0, 7) + ')') : ''
+        )
+                + (System.getenv('BUILD_NUMBER') ? '-jnks' + System.getenv('BUILD_NUMBER') : '')
+) : ''

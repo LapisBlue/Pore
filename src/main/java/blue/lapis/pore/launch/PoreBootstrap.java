@@ -72,22 +72,22 @@ public class PoreBootstrap {
     }
 
     @Subscribe
-    public void onPreInit(PreInitializationEvent event) {
+    public void onPreInit(PreInitializationEvent event) throws Exception {
         pore.onPreInit(event);
     }
 
     @Subscribe
-    public void onAboutToStart(ServerAboutToStartEvent event) {
+    public void onAboutToStart(ServerAboutToStartEvent event) throws Exception {
         pore.onAboutToStart(event);
     }
 
     @Subscribe
-    public void onStarting(ServerStartingEvent event) {
+    public void onStarting(ServerStartingEvent event) throws Exception {
         pore.onStarting(event);
     }
 
     @Subscribe
-    public void onShutdown(ServerStoppingEvent event) {
+    public void onShutdown(ServerStoppingEvent event) throws Exception {
         pore.onShutdown(event);
     }
 

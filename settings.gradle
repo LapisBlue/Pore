@@ -1,3 +1,2 @@
 rootProject.name = 'Pore'
-include 'Porekit'
-include 'ap'
+include 'Porekit', 'ap'

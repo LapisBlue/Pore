@@ -15,27 +15,23 @@ plugins {
 defaultTasks 'clean', 'licenseFormat', 'build'
 
 // Project information
-group = 'blue.lapis.pore'
 version = '1.0.0-SNAPSHOT'
 
-// we end up with a format like 1.0.0-SNAPSHOT-git(master-f874a8b)-jnks174
-// the Git commit or the build number will be excluded if they can't be determined, respectively
-ext.versionSuffix = version.contains('SNAPSHOT') ? (
-        (
-        System.getenv('GIT_COMMIT') ? ('-git('
-                + System.getenv('GIT_BRANCH')
-                .substring(System.getenv('GIT_BRANCH').split('/')[0].length() + 1) + '-'
-                + System.getenv('GIT_COMMIT').substring(0, 7) + ')') : ''
-        )
-        + (System.getenv('BUILD_NUMBER') ? '-jnks' + System.getenv('BUILD_NUMBER') : '')
-) : ''
+apply from: 'gradle/deploy.gradle'
 
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
+allprojects {
+    group = 'blue.lapis.pore'
+
+    sourceCompatibility = 1.6
+    targetCompatibility = 1.6
+
+    repositories {
+        mavenCentral()
+    }
+}
 
 // Project repositories
 repositories {
-    mavenCentral()
     jcenter()
     maven {
         name = 'sponge'
@@ -53,9 +49,14 @@ patches {
     patches = file('patches')
 }
 
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+}
+
 project('Porekit') {
     apply from: rootProject.file('bukkit.gradle')
-
     compileJava.dependsOn rootProject.tasks.applyPatches
 }
 
@@ -74,7 +75,7 @@ configurations {
 
 // Project dependencies
 dependencies {
-    compile project('ap')
+    compile project(':ap')
 
     // To update, go to https://repo.spongepowered.org/maven/org/spongepowered/spongeapi/2.1-SNAPSHOT/
     // Then pick latest version (or whatever version you want)
@@ -92,17 +93,18 @@ dependencies {
     checkstyle 'org.spongepowered:checkstyle:6.1.1-sponge1'
 }
 
-// Read source files using UTF-8
+allprojects {
+    // Read source files using UTF-8
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+}
+
 tasks.withType(JavaCompile) {
     options.compilerArgs += [
             '-Xlint:all',
             '-Xlint:-deprecation'
     ]
-    options.encoding = 'UTF-8'
-}
-
-compileJava {
-    options.compilerArgs += ['-processor', 'blue.lapis.pore.event.EventProcessor']
 }
 
 test {
@@ -148,17 +150,19 @@ shadowJar {
     }
 }
 
-// License header formatting
-license {
-    header file('LICENSE')
-    exclude 'LICENSE'
-    exclude '*.txt'
-    exclude '**/lib/**'
-    sourceSets = project.sourceSets
-    ignoreFailures false
-    strictCheck true
-    mapping {
-        java = 'SLASHSTAR_STYLE'
+configure([project, project(':ap')]) {
+    apply plugin: 'license'
+
+    // License header formatting
+    license {
+        header rootProject.file('LICENSE')
+        include '**/*.java'
+        sourceSets = project.sourceSets
+        ignoreFailures false
+        strictCheck true
+        mapping {
+            java = 'SLASHSTAR_STYLE'
+        }
     }
 }
 

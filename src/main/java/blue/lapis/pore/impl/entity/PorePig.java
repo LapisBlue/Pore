@@ -24,12 +24,13 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.converter.wrapper.WrapperConverter;
-import org.bukkit.entity.EntityType;
-import org.spongepowered.api.entity.living.animal.Pig;
-
 import static org.spongepowered.api.data.key.Keys.PIG_SADDLE;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.PIG_SADDLE_DATA;
+
+import blue.lapis.pore.converter.wrapper.WrapperConverter;
+
+import org.bukkit.entity.EntityType;
+import org.spongepowered.api.entity.living.animal.Pig;
 
 public class PorePig extends PoreAnimals implements org.bukkit.entity.Pig {
 

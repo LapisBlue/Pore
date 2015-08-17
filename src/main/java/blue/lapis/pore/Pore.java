@@ -95,7 +95,7 @@ public final class Pore implements PoreEventManager {
     }
 
     @Override
-    public void onPreInit(PreInitializationEvent event) {
+    public void onPreInit(PreInitializationEvent event) throws Exception {
         // Initialize logging
         SLF4JBridgeHandler.removeHandlersForRootLogger();
         SLF4JBridgeHandler.install();
@@ -110,17 +110,17 @@ public final class Pore implements PoreEventManager {
     }
 
     @Override
-    public void onAboutToStart(ServerAboutToStartEvent event) {
+    public void onAboutToStart(ServerAboutToStartEvent event) throws Exception {
         server.enablePlugins(PluginLoadOrder.STARTUP);
     }
 
     @Override
-    public void onStarting(ServerStartingEvent event) {
+    public void onStarting(ServerStartingEvent event) throws Exception {
         server.enablePlugins(PluginLoadOrder.POSTWORLD);
     }
 
     @Override
-    public void onShutdown(ServerStoppingEvent event) {
+    public void onShutdown(ServerStoppingEvent event) throws Exception {
         logger.info("Disabling Bukkit plugins, please wait...");
         server.disablePlugins();
         logger.info("Finished disabling Bukkit plugins!");

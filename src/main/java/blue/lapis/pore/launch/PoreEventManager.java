@@ -31,12 +31,12 @@ import org.spongepowered.api.event.state.ServerStoppingEvent;
 
 public interface PoreEventManager {
 
-    void onPreInit(PreInitializationEvent event);
+    void onPreInit(PreInitializationEvent event) throws Exception;
 
-    void onAboutToStart(ServerAboutToStartEvent event);
+    void onAboutToStart(ServerAboutToStartEvent event) throws Exception;
 
-    void onStarting(ServerStartingEvent event);
+    void onStarting(ServerStartingEvent event) throws Exception;
 
-    void onShutdown(ServerStoppingEvent event);
+    void onShutdown(ServerStoppingEvent event) throws Exception;
 
 }

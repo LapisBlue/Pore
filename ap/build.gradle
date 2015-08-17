@@ -1,18 +1,8 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-
-defaultTasks 'clean', 'compileJava'
-
 // Project information
-group = 'blue.lapis.pore'
 version = '1.0.0-SNAPSHOT'
 
-// Read source files using UTF-8
-tasks.withType(JavaCompile) {
-    options.compilerArgs += [
-            '-Xlint:all',
-            '-Xlint:-deprecation'
-    ]
-    options.encoding = 'UTF-8'
+dependencies {
+    compile 'com.google.guava:guava:17.0'
+    compile 'org.apache.commons:commons-lang3:3.3.2'
 }
+

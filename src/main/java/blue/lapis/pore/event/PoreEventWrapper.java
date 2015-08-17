@@ -33,6 +33,7 @@ import blue.lapis.pore.converter.type.plugin.EventPriorityConverter;
 import blue.lapis.pore.util.constructor.PoreConstructors;
 import blue.lapis.pore.util.constructor.SimpleConstructor;
 
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.MapMaker;
 import com.google.common.collect.Maps;
 import org.bukkit.event.Event;
@@ -62,31 +63,27 @@ public final class PoreEventWrapper {
     }
 
     @SuppressWarnings("unchecked")
-    public static void register() {
-        try {
-            long time = System.currentTimeMillis();
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(PoreEventWrapper.class.getResourceAsStream("/events.txt"))
-            );
-            String line;
-            while ((line = reader.readLine()) != null) {
-                try {
-                    Class<?> eventClass = Class.forName(line);
-                    if (Event.class.isAssignableFrom(eventClass)) {
-                        register((Class<? extends Event>)eventClass);
-                    } else {
-                        Pore.getLogger().warn("Class " + line + " is marked to be registered but does not implement "
-                                + "Event");
-                    }
-                } catch (ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                    Pore.getLogger().warn("Failed to register class " + line + " as an event");
-                }
+    public static void register() throws IOException {
+        Stopwatch watch = Stopwatch.createStarted();
+
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(PoreEventWrapper.class.getResourceAsStream("events.txt")));
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            line = line.trim();
+            if (line.isEmpty() || line.charAt(0) == '#') {
+                continue;
             }
-            Pore.getLogger().debug("Registered events in " + (System.currentTimeMillis() - time) + "ms");
-        } catch (IOException ex) {
-            ex.printStackTrace();
+
+            try {
+                register((Class<? extends Event>) Class.forName(line));
+            } catch (ClassNotFoundException e) {
+                Pore.getLogger().warn("Failed to register class {} as an event", line, e);
+            }
         }
+
+        Pore.getLogger().debug("Registered events in {}", watch.stop());
     }
 
     public static void call(Event event, EventPriority priority) {
