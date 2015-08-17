@@ -58,6 +58,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.help.HelpMap;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
@@ -740,6 +741,11 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public int getIdleTimeout() {
+        throw new NotImplementedException("TODO");
+    }
+
+    @Override
+    public ChunkGenerator.ChunkData createChunkData(World world) {
         throw new NotImplementedException("TODO");
     }
 
