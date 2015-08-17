@@ -24,15 +24,12 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.SADDLE_DATA;
-
-import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
-
-import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-import org.bukkit.inventory.ItemStack;
 import org.spongepowered.api.entity.living.animal.Pig;
+
+import static org.spongepowered.api.data.key.Keys.PIG_SADDLE;
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.PIG_SADDLE_DATA;
 
 public class PorePig extends PoreAnimals implements org.bukkit.entity.Pig {
 
@@ -56,17 +53,16 @@ public class PorePig extends PoreAnimals implements org.bukkit.entity.Pig {
 
     @Override
     public boolean hasSaddle() {
-        return hasData(SADDLE_DATA);
+        return hasData(PIG_SADDLE_DATA);
     }
 
     @Override
     public void setSaddle(boolean saddled) {
         if (saddled != hasSaddle()) {
             if (saddled) {
-                getHandle().offer(getHandle().getOrCreate(SADDLE_DATA).get().saddle()
-                        .set(ItemStackConverter.of(new ItemStack(Material.SADDLE, 1)))); // you'd think this was Lisp
+                getHandle().offer(PIG_SADDLE, true);
             } else {
-                getHandle().remove(SADDLE_DATA);
+                getHandle().remove(PIG_SADDLE_DATA);
             }
         }
     }
