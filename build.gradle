@@ -156,7 +156,10 @@ configure([project, project(':ap')]) {
     // License header formatting
     license {
         header rootProject.file('LICENSE')
+
         include '**/*.java'
+        exclude '**/lib/**'
+
         sourceSets = project.sourceSets
         ignoreFailures false
         strictCheck true
