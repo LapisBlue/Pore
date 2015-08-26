@@ -35,7 +35,8 @@ public class PoreClassLoader extends URLClassLoader implements LocalClassLoader 
 
     private static final ImmutableSet<String> EXCLUSIONS = ImmutableSet.of(
             "blue.lapis.pore.launch.",
-            "blue.lapis.pore.util.classloader."
+            "blue.lapis.pore.util.classloader.",
+            "blue.lapis.pore.PoreVersion"
     );
 
     private final ClassLoader parent;
