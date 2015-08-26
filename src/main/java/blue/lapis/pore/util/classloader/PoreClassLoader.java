@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.util;
+package blue.lapis.pore.util.classloader;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -31,10 +31,11 @@ import com.google.common.collect.ImmutableSet;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-public class PoreClassLoader extends URLClassLoader {
+public class PoreClassLoader extends URLClassLoader implements LocalClassLoader {
 
     private static final ImmutableSet<String> EXCLUSIONS = ImmutableSet.of(
-            "blue.lapis.pore.launch."
+            "blue.lapis.pore.launch.",
+            "blue.lapis.pore.util.classloader."
     );
 
     private final ClassLoader parent;
@@ -62,6 +63,12 @@ public class PoreClassLoader extends URLClassLoader {
         }
 
         return this.parent.loadClass(name);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> Class<T> defineClass(String name, byte[] b) {
+        return (Class<T>) super.defineClass(name, b, 0, b.length);
     }
 
 }

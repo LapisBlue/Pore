@@ -24,7 +24,7 @@
  */
 package blue.lapis.pore.launch;
 
-import blue.lapis.pore.util.PoreClassLoader;
+import blue.lapis.pore.util.classloader.PoreClassLoader;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;

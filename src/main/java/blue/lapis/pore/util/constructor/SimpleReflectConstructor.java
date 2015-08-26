@@ -29,16 +29,16 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public final class SimpleReflectionConstructor<T, P> implements SimpleConstructor<T, P> {
+public final class SimpleReflectConstructor<T, P> implements SimpleConstructor<T, P> {
 
     private final Constructor<T> handle;
 
-    public SimpleReflectionConstructor(Constructor<T> handle) {
+    public SimpleReflectConstructor(Constructor<T> handle) {
         this.handle = checkNotNull(handle, "handle");
         this.handle.setAccessible(true);
     }
 
-    public SimpleReflectionConstructor(Class<T> type, Class<P> parameter) throws NoSuchMethodException {
+    public SimpleReflectConstructor(Class<T> type, Class<P> parameter) throws NoSuchMethodException {
         this(type.getDeclaredConstructor(parameter));
     }
 
@@ -64,7 +64,7 @@ public final class SimpleReflectionConstructor<T, P> implements SimpleConstructo
 
         @Override
         public <T, P> SimpleConstructor<T, P> create(Class<T> type, Class<P> parameter) throws Exception {
-            return new SimpleReflectionConstructor<T, P>(type, parameter);
+            return new SimpleReflectConstructor<T, P>(type, parameter);
         }
 
     }

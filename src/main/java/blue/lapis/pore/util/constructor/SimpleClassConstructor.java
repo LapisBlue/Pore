@@ -40,13 +40,11 @@ import static org.objectweb.asm.Opcodes.NEW;
 import static org.objectweb.asm.Opcodes.RETURN;
 import static org.objectweb.asm.Opcodes.V1_6;
 
-import com.google.common.base.Throwables;
+import blue.lapis.pore.util.classloader.LocalClassLoaders;
+
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 public abstract class SimpleClassConstructor<T, P> implements SimpleConstructor<T, P> {
 
@@ -74,7 +72,7 @@ public abstract class SimpleClassConstructor<T, P> implements SimpleConstructor<
                 throws NoSuchMethodException {
             type.getDeclaredConstructor(parameter);
             String name = type.getName() + "Constructor";
-            return defineClass(type.getClassLoader(), name, generate(name, type, parameter));
+            return LocalClassLoaders.of(type).defineClass(name, generate(name, type, parameter));
         }
 
         private static byte[] generate(String name, Class<?> type, Class<?> parameter) {
@@ -128,33 +126,6 @@ public abstract class SimpleClassConstructor<T, P> implements SimpleConstructor<
             cw.visitEnd();
 
             return cw.toByteArray();
-        }
-
-        private static <T> Class<T> defineClass(ClassLoader loader, String name, byte[] b) {
-            return defineClass(loader, name, b, 0, b.length);
-        }
-
-        @SuppressWarnings("unchecked")
-        private static <T> Class<T> defineClass(ClassLoader loader, String name, byte[] b, int off, int len) {
-            try {
-                return (Class<T>) defineClass.invoke(loader, name, b, off, len);
-            } catch (IllegalAccessException e) {
-                throw Throwables.propagate(e);
-            } catch (InvocationTargetException e) {
-                throw Throwables.propagate(e);
-            }
-        }
-
-        private static final Method defineClass;
-
-        static {
-            try {
-                defineClass = ClassLoader.class.getDeclaredMethod("defineClass",
-                        String.class, byte[].class, int.class, int.class);
-                defineClass.setAccessible(true);
-            } catch (NoSuchMethodException e) {
-                throw new AssertionError(e);
-            }
         }
 
     }
