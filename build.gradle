@@ -22,8 +22,8 @@ apply from: 'gradle/deploy.gradle'
 allprojects {
     group = 'blue.lapis.pore'
 
-    sourceCompatibility = 1.6
-    targetCompatibility = 1.6
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
 
     repositories {
         mavenCentral()
