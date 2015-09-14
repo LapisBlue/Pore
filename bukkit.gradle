@@ -13,7 +13,7 @@ dependencies {
     compile 'com.google.guava:guava:17.0'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'org.avaje:ebean:2.8.1'
-    compile 'org.yaml:snakeyaml:1.15'
+    compile 'org.yaml:snakeyaml:1.16'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
