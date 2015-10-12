@@ -39,6 +39,7 @@ import com.google.common.reflect.ClassPath;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.event.Event;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -51,6 +52,7 @@ import java.lang.reflect.Modifier;
 import java.util.Set;
 
 @RunWith(Parameterized.class)
+@Ignore
 public class PoreEventImplTest {
 
     private static final String BUKKIT_PREFIX = BUKKIT_PACKAGE + '.';

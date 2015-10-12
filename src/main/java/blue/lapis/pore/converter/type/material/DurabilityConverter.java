@@ -33,7 +33,6 @@ import static org.spongepowered.api.data.manipulator.catalog.CatalogItemData.GOL
 
 import blue.lapis.pore.Pore;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import org.apache.commons.lang3.NotImplementedException;
@@ -60,6 +59,7 @@ import org.spongepowered.api.data.type.GoldenApple;
 import org.spongepowered.api.data.type.GoldenApples;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public final class DurabilityConverter {
 
