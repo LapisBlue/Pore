@@ -125,7 +125,7 @@ public class BTDCTestUtil {
             when(loc.getData((Class<DataManipulator>) datum.getDataClass()))
                     .thenReturn(Optional.<DataManipulator>fromNullable(spongeDatum));
         }*/
-        Collection<DataManipulator<?, ?>> manipulators = FluentIterable.from(abstractedData)
+        Collection<?> manipulators = FluentIterable.from(abstractedData)
                 .transform(datum -> {
                     if (datum.getValue() == AbstractDataValue.ABSENT) {
                         return null;
