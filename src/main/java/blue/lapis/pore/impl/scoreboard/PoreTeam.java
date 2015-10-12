@@ -29,18 +29,15 @@ import static com.google.common.base.Preconditions.checkArgument;
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.scoreboard.NameTagVisibilityConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
-import blue.lapis.pore.impl.PoreOfflinePlayer;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
-import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
-import org.spongepowered.api.entity.living.player.User;
 import org.spongepowered.api.scoreboard.Team;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;

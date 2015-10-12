@@ -24,7 +24,6 @@
  */
 package blue.lapis.pore.util;
 
-import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.impl.entity.PoreArrow;
 import blue.lapis.pore.impl.entity.PoreEgg;
@@ -32,7 +31,6 @@ import blue.lapis.pore.impl.entity.PoreEnderPearl;
 import blue.lapis.pore.impl.entity.PoreFireball;
 import blue.lapis.pore.impl.entity.PoreFish;
 import blue.lapis.pore.impl.entity.PoreLargeFireball;
-import blue.lapis.pore.impl.entity.PoreProjectile;
 import blue.lapis.pore.impl.entity.PoreSmallFireball;
 import blue.lapis.pore.impl.entity.PoreSnowball;
 import blue.lapis.pore.impl.entity.PoreThrownExpBottle;
@@ -51,15 +49,10 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.entity.ThrownExpBottle;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.util.Vector;
-import org.spongepowered.api.Game;
-import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.projectile.explosive.WitherSkull;
 import org.spongepowered.api.entity.projectile.explosive.fireball.SmallFireball;
 import org.spongepowered.api.entity.projectile.source.ProjectileSource;
-import org.spongepowered.api.event.cause.Cause;
-import org.spongepowered.api.util.event.callback.CallbackList;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public final class ProjectileUtil {

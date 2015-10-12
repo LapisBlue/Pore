@@ -26,6 +26,7 @@ package blue.lapis.pore.command;
 
 import blue.lapis.pore.impl.command.PoreCommandSender;
 import blue.lapis.pore.util.PoreWrapper;
+
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.command.Command;
 import org.spongepowered.api.text.Text;

@@ -84,10 +84,8 @@ import org.spongepowered.api.util.TextMessageException;
 
 import java.io.FileNotFoundException;
 import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
