@@ -45,7 +45,7 @@ import javax.tools.FileObject;
 import javax.tools.StandardLocation;
 
 @SupportedAnnotationTypes("blue.lapis.pore.event.RegisterEvent")
-@SupportedSourceVersion(SourceVersion.RELEASE_6)
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class EventProcessor extends AbstractProcessor {
 
     private final Set<String> events = Sets.newHashSet();

@@ -48,7 +48,7 @@ import javax.lang.model.type.TypeMirror;
 import javax.tools.Diagnostic;
 
 @SupportedAnnotationTypes("blue.lapis.pore.event.RegisterEvent")
-@SupportedSourceVersion(SourceVersion.RELEASE_6)
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class EventVerifierProcessor extends AbstractProcessor {
 
     private static final Diagnostic.Kind SEVERITY = ERROR;
