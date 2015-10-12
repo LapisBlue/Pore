@@ -79,4 +79,15 @@ public class PoreFallingSand extends PoreEntity implements FallingSand {
     public void setDropItem(boolean drop) {
         getHandle().offer(getHandle().getFallingBlockData().canDropAsItem().set(drop));
     }
+
+    @Override
+    public boolean canHurtEntities() {
+        throw new NotImplementedException("TODO");
+    }
+
+    @Override
+    public void setHurtEntities(boolean hurtEntities) {
+        throw new NotImplementedException("TODO");
+    }
+
 }
