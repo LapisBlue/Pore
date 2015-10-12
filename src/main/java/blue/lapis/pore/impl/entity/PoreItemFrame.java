@@ -30,13 +30,14 @@ import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.type.world.RotationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import com.google.common.base.Optional;
 import org.bukkit.Rotation;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.hanging.ItemFrame;
 import org.spongepowered.api.item.inventory.Carrier;
+
+import java.util.Optional;
 
 public class PoreItemFrame extends PoreHanging implements org.bukkit.entity.ItemFrame {
 

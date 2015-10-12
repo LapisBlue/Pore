@@ -172,7 +172,7 @@ public final class PoreEventWrapper {
                 listeners.put(priority, listener);
             }
 
-            Pore.getGame().getEventManager().register(Pore.getPlugin(), sponge,
+            Pore.getGame().getEventManager().registerListener(Pore.getPlugin(), sponge,
                     EventPriorityConverter.of(priority), listener);
         }
 
@@ -181,7 +181,7 @@ public final class PoreEventWrapper {
             EventManager manager = Pore.getGame().getEventManager();
 
             for (Object listener : listeners.values()) {
-                manager.unregister(listener);
+                manager.unregisterListeners(listener);
             }
         }
 
@@ -189,7 +189,7 @@ public final class PoreEventWrapper {
         public void unregister(EventPriority priority) {
             Object listener = listeners.get(priority);
             if (listener != null) {
-                Pore.getGame().getEventManager().unregister(listener);
+                Pore.getGame().getEventManager().unregisterListeners(listener);
             }
         }
     }

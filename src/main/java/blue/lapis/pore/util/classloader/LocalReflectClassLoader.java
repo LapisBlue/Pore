@@ -60,9 +60,7 @@ public class LocalReflectClassLoader implements LocalClassLoader {
     private <T> Class<T> defineClass(String name, byte[] b, int off, int len) {
         try {
             return (Class<T>) defineClass.invoke(loader, name, b, off, len);
-        } catch (IllegalAccessException e) {
-            throw Throwables.propagate(e);
-        } catch (InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             throw Throwables.propagate(e);
         }
     }

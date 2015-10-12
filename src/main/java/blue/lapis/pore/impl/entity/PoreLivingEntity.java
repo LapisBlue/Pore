@@ -25,7 +25,6 @@
 package blue.lapis.pore.impl.entity;
 
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.BREATHING_DATA;
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.EYE_LOCATION_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.LEASH_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.POTION_EFFECT_DATA;
 
@@ -55,6 +54,8 @@ import org.bukkit.util.Vector;
 import org.spongepowered.api.data.DataTransactionResult;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.manipulator.catalog.CatalogEntityData;
+import org.spongepowered.api.data.property.entity.EyeHeightProperty;
+import org.spongepowered.api.data.property.entity.EyeLocationProperty;
 import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.entity.projectile.source.ProjectileSource;
 
@@ -82,7 +83,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public double getEyeHeight() {
-        return getHandle().get(EYE_LOCATION_DATA).get().eyeHeight().get();
+        return getHandle().getProperty(EyeHeightProperty.class).get().getValue();
     }
 
     @Override
@@ -93,7 +94,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     public Location getEyeLocation() {
         return LocationConverter.fromVector3d(getHandle().getWorld(),
-                getHandle().get(EYE_LOCATION_DATA).get().eyeLocation().get());
+                getHandle().getProperty(EyeLocationProperty.class).get().getValue());
     }
 
     @Override
@@ -132,7 +133,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
             return PoreEgg.of(
                     ((ProjectileSource) getHandle()).launchProjectile(
                             org.spongepowered.api.entity.projectile.Egg.class
-                    ).orNull()
+                    ).orElse(null)
             );
         }
         // CB never returns null here so we shouldn't either
@@ -146,7 +147,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
             return PoreSnowball.of(
                     ((ProjectileSource) getHandle()).launchProjectile(
                             org.spongepowered.api.entity.projectile.Snowball.class
-                    ).orNull()
+                    ).orElse(null)
             );
         }
         throw new UnsupportedOperationException("Not a ProjectileSource");
@@ -158,7 +159,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
             return PoreArrow.of(
                     ((ProjectileSource) getHandle()).launchProjectile(
                             org.spongepowered.api.entity.projectile.Arrow.class
-                    ).orNull()
+                    ).orElse(null)
             );
         }
         throw new UnsupportedOperationException("Not a ProjectileSource");
@@ -258,7 +259,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     public boolean hasPotionEffect(PotionEffectType type) {
         org.spongepowered.api.potion.PotionEffectType spongeType = PotionEffectTypeConverter.of(type);
-        List<org.spongepowered.api.potion.PotionEffect> effects = getHandle().get(Keys.POTION_EFFECTS).orNull();
+        List<org.spongepowered.api.potion.PotionEffect> effects = getHandle().get(Keys.POTION_EFFECTS).orElse(null);
         if (effects != null) {
             for (org.spongepowered.api.potion.PotionEffect potionEffect : effects) {
                 if (potionEffect.getType() == spongeType) {
@@ -271,7 +272,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void removePotionEffect(PotionEffectType type) {
-        List<org.spongepowered.api.potion.PotionEffect> effects = getHandle().get(Keys.POTION_EFFECTS).orNull();
+        List<org.spongepowered.api.potion.PotionEffect> effects = getHandle().get(Keys.POTION_EFFECTS).orElse(null);
         org.spongepowered.api.potion.PotionEffectType spongeType = PotionEffectTypeConverter.of(type);
         if (effects != null) {
             Iterator<org.spongepowered.api.potion.PotionEffect> it = effects.iterator();
@@ -369,7 +370,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public double getHealth() {
-        return getHandle().get(Keys.HEALTH).or(0.0);
+        return getHandle().get(Keys.HEALTH).orElse(0.0);
     }
 
     @Override
@@ -389,7 +390,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public double getMaxHealth() {
-        return getHandle().get(Keys.MAX_HEALTH).or(0.0);
+        return getHandle().get(Keys.MAX_HEALTH).orElse(0.0);
     }
 
     @Override

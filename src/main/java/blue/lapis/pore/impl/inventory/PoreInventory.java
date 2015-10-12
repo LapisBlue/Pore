@@ -29,7 +29,6 @@ import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Material;
@@ -52,6 +51,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.inventory.Inventory {

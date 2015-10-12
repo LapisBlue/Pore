@@ -46,7 +46,6 @@ import blue.lapis.pore.util.PoreCollections;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.flowpowered.math.vector.Vector3i;
-import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
@@ -91,6 +90,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -267,12 +267,12 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     public Item dropItem(Location location, ItemStack item) {
         //noinspection ConstantConditions
         Optional<org.spongepowered.api.entity.Entity> created =
-                getHandle().createEntity(EntityTypes.DROPPED_ITEM, VectorConverter.create3d(location));
+                getHandle().createEntity(EntityTypes.ITEM, VectorConverter.create3d(location));
         if (!created.isPresent()) {
             return null;
         }
-        assert created instanceof Item;
-        org.spongepowered.api.entity.Item drop = (org.spongepowered.api.entity.Item)created;
+
+        org.spongepowered.api.entity.Item drop = (org.spongepowered.api.entity.Item) created.get();
         //TODO: drop.setPickupDelay(10);
         //TODO: set ItemStack
         throw new NotImplementedException("TODO");
@@ -315,7 +315,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     @Override
     public Entity spawnEntity(Location loc, EntityType type) {
         return PoreEntity.of(
-                getHandle().createEntity(EntityConverter.of(type), VectorConverter.create3d(loc)).orNull()
+                getHandle().createEntity(EntityConverter.of(type), VectorConverter.create3d(loc)).orElse(null)
         );
     }
 
@@ -402,8 +402,8 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         // see getLivingEntities() for explanation
         List<Player> players = Lists.newArrayList();
         for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()) {
-            if (e instanceof org.spongepowered.api.entity.player.Player) {
-                players.add(PorePlayer.of((org.spongepowered.api.entity.player.Player) e));
+            if (e instanceof org.spongepowered.api.entity.living.player.Player) {
+                players.add(PorePlayer.of((org.spongepowered.api.entity.living.player.Player) e));
             }
         }
         return players;
@@ -797,7 +797,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public String getGameRuleValue(String rule) {
-        return getHandle().getGameRule(rule).orNull();
+        return getHandle().getGameRule(rule).orElse(null);
     }
 
     @Override

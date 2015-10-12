@@ -47,7 +47,7 @@ public final class EntityConverter {
                     .add(EntityType.COMPLEX_PART, EntityTypes.COMPLEX_PART)
                     .add(EntityType.COW, EntityTypes.COW)
                     .add(EntityType.CREEPER, EntityTypes.CREEPER)
-                    .add(EntityType.DROPPED_ITEM, EntityTypes.DROPPED_ITEM)
+                    .add(EntityType.DROPPED_ITEM, EntityTypes.ITEM)
                     .add(EntityType.EGG, EntityTypes.EGG)
                     .add(EntityType.ENDER_CRYSTAL, EntityTypes.ENDER_CRYSTAL)
                     .add(EntityType.ENDER_DRAGON, EntityTypes.ENDER_DRAGON)

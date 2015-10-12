@@ -39,10 +39,10 @@ import org.bukkit.plugin.PluginLoadOrder;
 import org.slf4j.Logger;
 import org.slf4j.helpers.NOPLogger;
 import org.spongepowered.api.Game;
-import org.spongepowered.api.event.state.PreInitializationEvent;
-import org.spongepowered.api.event.state.ServerAboutToStartEvent;
-import org.spongepowered.api.event.state.ServerStartingEvent;
-import org.spongepowered.api.event.state.ServerStoppingEvent;
+import org.spongepowered.api.event.game.state.GameAboutToStartServerEvent;
+import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
+import org.spongepowered.api.event.game.state.GameStartingServerEvent;
+import org.spongepowered.api.event.game.state.GameStoppingServerEvent;
 import org.spongepowered.api.plugin.PluginContainer;
 
 /**
@@ -95,7 +95,7 @@ public final class Pore implements PoreEventManager {
     }
 
     @Override
-    public void onPreInit(PreInitializationEvent event) throws Exception {
+    public void onPreInit(GamePreInitializationEvent event) throws Exception {
         // Initialize logging
         SLF4JBridgeHandler.removeHandlersForRootLogger();
         SLF4JBridgeHandler.install();
@@ -110,17 +110,17 @@ public final class Pore implements PoreEventManager {
     }
 
     @Override
-    public void onAboutToStart(ServerAboutToStartEvent event) throws Exception {
+    public void onAboutToStart(GameAboutToStartServerEvent event) throws Exception {
         server.enablePlugins(PluginLoadOrder.STARTUP);
     }
 
     @Override
-    public void onStarting(ServerStartingEvent event) throws Exception {
+    public void onStarting(GameStartingServerEvent event) throws Exception {
         server.enablePlugins(PluginLoadOrder.POSTWORLD);
     }
 
     @Override
-    public void onShutdown(ServerStoppingEvent event) throws Exception {
+    public void onShutdown(GameStoppingServerEvent event) throws Exception {
         logger.info("Disabling Bukkit plugins, please wait...");
         server.disablePlugins();
         logger.info("Finished disabling Bukkit plugins!");

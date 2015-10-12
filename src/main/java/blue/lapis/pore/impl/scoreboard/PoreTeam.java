@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.scoreboard;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
+import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.scoreboard.NameTagVisibilityConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreOfflinePlayer;
@@ -39,8 +40,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.NameTagVisibility;
 import org.bukkit.scoreboard.Scoreboard;
-import org.spongepowered.api.entity.player.User;
+import org.spongepowered.api.entity.living.player.User;
 import org.spongepowered.api.scoreboard.Team;
+import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
 import org.spongepowered.api.util.TextMessageException;
 
@@ -164,11 +166,11 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     @Override
     public Set<OfflinePlayer> getPlayers() throws IllegalStateException {
         checkState();
-        return Sets.newHashSet(Collections2.transform(getHandle().getUsers(),
-                new Function<User, OfflinePlayer>() {
+        return Sets.newHashSet(Collections2.transform(getHandle().getMembers(),
+                new Function<Text, OfflinePlayer>() {
                     @Override
-                    public OfflinePlayer apply(User user) {
-                        return PoreOfflinePlayer.of(user);
+                    public OfflinePlayer apply(Text user) {
+                        return Pore.getServer().getOfflinePlayer(Texts.toPlain(user));
                     }
                 }
         ));
@@ -177,11 +179,11 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     @Override
     public Set<String> getEntries() throws IllegalStateException {
         checkState();
-        return Sets.newHashSet(Collections2.transform(getHandle().getUsers(),
-                new Function<User, String>() {
+        return Sets.newHashSet(Collections2.transform(getHandle().getMembers(),
+                new Function<Text, String>() {
                     @Override
-                    public String apply(User user) {
-                        return user.getName();
+                    public String apply(Text user) {
+                        return Texts.toPlain(user);
                     }
                 }
         ));
@@ -190,7 +192,7 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     @Override
     public int getSize() throws IllegalStateException {
         checkState();
-        return getHandle().getUsers().size();
+        return getHandle().getMembers().size();
     }
 
     @Override
@@ -203,17 +205,16 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
 
     @Override
     public void addPlayer(OfflinePlayer player) throws IllegalStateException, IllegalArgumentException {
-        checkState();
         checkArgument(player != null, "Player cannot be null");
-        //noinspection ConstantConditions
-        getHandle().addUser(((PoreOfflinePlayer) player).getHandle());
+        addEntry(player.getName());
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void addEntry(String entry) throws IllegalStateException, IllegalArgumentException {
         checkArgument(entry != null, "Entry cannot be null");
-        addPlayer(Bukkit.getOfflinePlayer(entry));
+        checkState();
+        getHandle().addMember(Texts.of(entry));
     }
 
     @Override
@@ -228,9 +229,9 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     public boolean removeEntry(String entry) throws IllegalStateException, IllegalArgumentException {
         checkState();
         checkArgument(entry != null, "Entry cannot be null");
-        for (User user : getHandle().getUsers()) {
-            if (user.getName().equals(entry)) {
-                return getHandle().removeUser(user);
+        for (Text user : getHandle().getMembers()) {
+            if (Texts.toPlain(user).equals(entry)) {
+                return getHandle().removeMember(user);
             }
         }
         return false;
@@ -255,8 +256,8 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     public boolean hasEntry(String entry) throws IllegalArgumentException, IllegalStateException {
         checkState();
         checkArgument(entry != null, "Entry cannot be null");
-        for (User user : getHandle().getUsers()) {
-            if (user.getName().equals(entry)) {
+        for (Text user : getHandle().getMembers()) {
+            if (Texts.toPlain(user).equals(entry)) {
                 return true;
             }
         }

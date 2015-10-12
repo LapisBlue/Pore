@@ -58,7 +58,7 @@ public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entit
 
     @Override
     public ItemStack getItemInHand() {
-        return ItemStackConverter.of(getHandle().getItemInHand().orNull());
+        return ItemStackConverter.of(getHandle().getItemInHand().orElse(null));
     }
 
     @Override
@@ -68,7 +68,7 @@ public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entit
 
     @Override
     public ItemStack getHelmet() {
-        return ItemStackConverter.of(getHandle().getHelmet().orNull());
+        return ItemStackConverter.of(getHandle().getHelmet().orElse(null));
     }
 
     @Override
@@ -78,7 +78,7 @@ public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entit
 
     @Override
     public ItemStack getChestplate() {
-        return ItemStackConverter.of(getHandle().getChestplate().orNull());
+        return ItemStackConverter.of(getHandle().getChestplate().orElse(null));
     }
 
     @Override
@@ -88,7 +88,7 @@ public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entit
 
     @Override
     public ItemStack getLeggings() {
-        return ItemStackConverter.of(getHandle().getLeggings().orNull());
+        return ItemStackConverter.of(getHandle().getLeggings().orElse(null));
     }
 
     @Override
@@ -98,7 +98,7 @@ public class PoreArmorStand extends PoreLivingEntity implements org.bukkit.entit
 
     @Override
     public ItemStack getBoots() {
-        return ItemStackConverter.of(getHandle().getBoots().orNull());
+        return ItemStackConverter.of(getHandle().getBoots().orElse(null));
     }
 
     @Override

@@ -30,7 +30,6 @@ import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.Iterables;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Material;
@@ -42,6 +41,8 @@ import org.spongepowered.api.item.inventory.entity.Hotbar;
 import org.spongepowered.api.item.inventory.entity.HumanInventory;
 import org.spongepowered.api.item.inventory.equipment.EquipmentTypes;
 import org.spongepowered.api.item.inventory.property.SlotIndex;
+
+import java.util.Optional;
 
 public class PorePlayerInventory extends PoreInventory implements PlayerInventory {
 
@@ -181,8 +182,9 @@ public class PorePlayerInventory extends PoreInventory implements PlayerInventor
     @Override
     public Player getHolder() {
         if (this.getHandle().getCarrier().isPresent()) {
-            if (this.getHandle().getCarrier().get() instanceof org.spongepowered.api.entity.player.Player) {
-                return PorePlayer.of((org.spongepowered.api.entity.player.Player)this.getHandle().getCarrier());
+            if (this.getHandle().getCarrier().get() instanceof org.spongepowered.api.entity.living.player.Player) {
+                return PorePlayer.of((org.spongepowered.api.entity.living.player.Player)
+                        this.getHandle().getCarrier().get());
             }
         }
         return null;

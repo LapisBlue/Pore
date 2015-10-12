@@ -24,30 +24,35 @@
  */
 package blue.lapis.pore.converter.type.entity.player;
 
+import static org.bukkit.GameMode.ADVENTURE;
+import static org.bukkit.GameMode.CREATIVE;
+import static org.bukkit.GameMode.SPECTATOR;
+import static org.bukkit.GameMode.SURVIVAL;
+
 import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
-import org.bukkit.GameMode;
-import org.spongepowered.api.entity.player.gamemode.GameModes;
+import org.spongepowered.api.entity.living.player.gamemode.GameMode;
+import org.spongepowered.api.entity.living.player.gamemode.GameModes;
 
 public final class GameModeConverter {
 
     private GameModeConverter() {
     }
 
-    private static final Converter<GameMode, org.spongepowered.api.entity.player.gamemode.GameMode> CONVERTER =
-            TypeConverter.builder(GameMode.class, org.spongepowered.api.entity.player.gamemode.GameMode.class)
-                    .add(GameMode.SURVIVAL, GameModes.SURVIVAL)
-                    .add(GameMode.CREATIVE, GameModes.CREATIVE)
-                    .add(GameMode.ADVENTURE, GameModes.ADVENTURE)
-                    .add(GameMode.SPECTATOR, GameModes.SPECTATOR)
+    private static final Converter<org.bukkit.GameMode, GameMode> CONVERTER =
+            TypeConverter.builder(org.bukkit.GameMode.class, GameMode.class)
+                    .add(SURVIVAL, GameModes.SURVIVAL)
+                    .add(CREATIVE, GameModes.CREATIVE)
+                    .add(ADVENTURE, GameModes.ADVENTURE)
+                    .add(SPECTATOR, GameModes.SPECTATOR)
                     .build();
 
-    public static org.spongepowered.api.entity.player.gamemode.GameMode of(GameMode gameMode) {
+    public static GameMode of(org.bukkit.GameMode gameMode) {
         return CONVERTER.convert(gameMode);
     }
 
-    public static GameMode of(org.spongepowered.api.entity.player.gamemode.GameMode gameMode) {
+    public static org.bukkit.GameMode of(GameMode gameMode) {
         return CONVERTER.reverse().convert(gameMode);
     }
 

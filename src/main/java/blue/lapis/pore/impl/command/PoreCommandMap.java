@@ -28,7 +28,6 @@ import blue.lapis.pore.Pore;
 import blue.lapis.pore.command.PoreCommandCallable;
 
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
@@ -45,6 +44,7 @@ import org.spongepowered.api.util.command.CommandMapping;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public class PoreCommandMap extends SimpleCommandMap {
 

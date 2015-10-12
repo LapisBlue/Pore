@@ -93,7 +93,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
     public InventoryView getOpenInventory() {
         return PoreInventoryView.builder()
                 .setPlayer(this)
-                .setTopInventory(this.getHandle().getOpenInventory().orNull())
+                .setTopInventory(this.getHandle().getOpenInventory().orElse(null))
                 .setBottomInventory(this.getHandle().getInventory())
                 .build();
     }
@@ -143,7 +143,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public ItemStack getItemInHand() {
-        return ItemStackConverter.of(this.getHandle().getItemInHand().orNull());
+        return ItemStackConverter.of(this.getHandle().getItemInHand().orElse(null));
     }
 
     @Override

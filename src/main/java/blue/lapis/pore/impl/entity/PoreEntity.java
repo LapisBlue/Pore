@@ -36,7 +36,6 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreWrapper;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Bukkit;
@@ -56,13 +55,14 @@ import org.bukkit.util.Vector;
 import org.spongepowered.api.data.manipulator.DataManipulator;
 import org.spongepowered.api.data.manipulator.mutable.DisplayNameData;
 import org.spongepowered.api.data.manipulator.mutable.entity.IgniteableData;
-import org.spongepowered.api.data.manipulator.mutable.entity.VehicleData;
+import org.spongepowered.api.data.manipulator.mutable.entity.PassengerData;
 import org.spongepowered.api.data.manipulator.mutable.entity.VelocityData;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.text.Texts;
 import org.spongepowered.api.util.TextMessageException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -239,13 +239,13 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public org.bukkit.entity.Entity getPassenger() {
-        return hasData(VEHICLE_DATA) ? PoreEntity.of(getHandle().get(VEHICLE_DATA).get().passenger().get()) : null;
+        return hasData(VEHICLE_DATA) ? PoreEntity.of(getHandle().get(PASSENGER_DATA).get().passenger().get()) : null;
     }
 
     @Override
     public boolean setPassenger(final org.bukkit.entity.Entity passenger) {
         if (passenger != null) {
-            Optional<VehicleData> data = getHandle().getOrCreate(VEHICLE_DATA);
+            Optional<PassengerData> data = getHandle().getOrCreate(PASSENGER_DATA);
             if (data.isPresent()) {
                 getHandle().offer(data.get().passenger().set(((PoreEntity) passenger).getHandle()));
             } else {
@@ -253,7 +253,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
                         + " and type " + getType().name());
             }
         } else {
-            getHandle().remove(VEHICLE_DATA);
+            getHandle().remove(PASSENGER_DATA);
         }
 
         return true;
@@ -311,19 +311,19 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public boolean isInsideVehicle() {
-        return hasData(PASSENGER_DATA);
+        return hasData(VEHICLE_DATA);
     }
 
     @Override
     public boolean leaveVehicle() {
-        boolean inVehicle = hasData(PASSENGER_DATA);
-        getHandle().remove(PASSENGER_DATA);
+        boolean inVehicle = hasData(VEHICLE_DATA);
+        getHandle().remove(VEHICLE_DATA);
         return inVehicle;
     }
 
     @Override
     public org.bukkit.entity.Entity getVehicle() {
-        return isInsideVehicle() ? PoreEntity.of(getHandle().get(PASSENGER_DATA).get().vehicle().get()) : null;
+        return isInsideVehicle() ? PoreEntity.of(getHandle().get(VEHICLE_DATA).get().vehicle().get()) : null;
     }
 
     @Override

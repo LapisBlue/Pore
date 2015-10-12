@@ -55,12 +55,14 @@ public class PoreItem extends PoreEntity implements org.bukkit.entity.Item {
 
     @Override
     public ItemStack getItemStack() {
-        return ItemStackConverter.of(getHandle().get(Keys.REPRESENTED_ITEM).get());
+        // No idea what I'm doing here...
+        return ItemStackConverter.of(getHandle().get(Keys.REPRESENTED_ITEM).get().createStack());
     }
 
     @Override
     public void setItemStack(ItemStack stack) {
-        getHandle().offer(Keys.REPRESENTED_ITEM, ItemStackConverter.of(stack));
+        // No idea what I'm doing here...
+        getHandle().offer(Keys.REPRESENTED_ITEM, ItemStackConverter.of(stack).createSnapshot());
     }
 
     @Override

@@ -33,7 +33,6 @@ import blue.lapis.pore.impl.PoreOfflinePlayer;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.NotImplementedException;
@@ -43,14 +42,16 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Team;
-import org.spongepowered.api.entity.player.User;
+import org.spongepowered.api.entity.living.player.User;
 import org.spongepowered.api.scoreboard.Scoreboard;
 import org.spongepowered.api.scoreboard.TeamBuilder;
 import org.spongepowered.api.scoreboard.critieria.Criterion;
 import org.spongepowered.api.scoreboard.objective.ObjectiveBuilder;
+import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.Texts;
 import org.spongepowered.api.util.TextMessageException;
 
+import java.util.Optional;
 import java.util.Set;
 
 public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukkit.scoreboard.Scoreboard {
@@ -83,7 +84,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     public Objective getObjective(String name) throws IllegalArgumentException {
         checkArgument(name != null, "Name must not be null");
         //noinspection ConstantConditions
-        return PoreObjective.of(getHandle().getObjective(name).orNull());
+        return PoreObjective.of(getHandle().getObjective(name).orElse(null));
     }
 
     @Override
@@ -118,7 +119,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     @Override
     public Objective getObjective(DisplaySlot slot) throws IllegalArgumentException {
         checkArgument(slot != null, "Display slot must not be null");
-        return PoreObjective.of(getHandle().getObjective(DisplaySlotConverter.of(slot)).orNull());
+        return PoreObjective.of(getHandle().getObjective(DisplaySlotConverter.of(slot)).orElse(null));
     }
 
     @Override
@@ -170,14 +171,15 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     public Team getPlayerTeam(OfflinePlayer player) throws IllegalArgumentException {
         checkArgument(player != null, "Offline player must not be null");
         //noinspection ConstantConditions
-        return PoreTeam.of(getHandle().getUserTeam(((PoreOfflinePlayer) player).getHandle()).orNull());
+        return PoreTeam.of(getHandle().getMemberTeam(
+                Texts.of(((PoreOfflinePlayer) player).getHandle().getName())).orElse(null));
     }
 
     @Override
     public Team getEntryTeam(String entry) throws IllegalArgumentException {
         for (org.spongepowered.api.scoreboard.Team team : getHandle().getTeams()) {
-            for (User user : team.getUsers()) {
-                if (user.getName().equals(entry)) {
+            for (Text text : team.getMembers()) {
+                if (Texts.toPlain(text).equals(entry)) {
                     return PoreTeam.of(team);
                 }
             }
@@ -189,7 +191,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     public Team getTeam(String teamName) throws IllegalArgumentException {
         checkArgument(teamName != null, "Team name must not be null");
         //noinspection ConstantConditions
-        return PoreTeam.of(getHandle().getTeam(teamName).orNull());
+        return PoreTeam.of(getHandle().getTeam(teamName).orElse(null));
     }
 
     @Override

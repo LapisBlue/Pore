@@ -29,13 +29,14 @@ import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import com.google.common.base.Optional;
 import org.bukkit.entity.EntityType;
 import org.bukkit.material.MaterialData;
 import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.entity.living.monster.Enderman;
 import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.item.inventory.ItemStack;
+
+import java.util.Optional;
 
 public class PoreEnderman extends PoreMonster implements org.bukkit.entity.Enderman {
 

@@ -24,19 +24,19 @@
  */
 package blue.lapis.pore.launch;
 
-import org.spongepowered.api.event.state.PreInitializationEvent;
-import org.spongepowered.api.event.state.ServerAboutToStartEvent;
-import org.spongepowered.api.event.state.ServerStartingEvent;
-import org.spongepowered.api.event.state.ServerStoppingEvent;
+import org.spongepowered.api.event.game.state.GameAboutToStartServerEvent;
+import org.spongepowered.api.event.game.state.GamePreInitializationEvent;
+import org.spongepowered.api.event.game.state.GameStartingServerEvent;
+import org.spongepowered.api.event.game.state.GameStoppingServerEvent;
 
 public interface PoreEventManager {
 
-    void onPreInit(PreInitializationEvent event) throws Exception;
+    void onPreInit(GamePreInitializationEvent event) throws Exception;
 
-    void onAboutToStart(ServerAboutToStartEvent event) throws Exception;
+    void onAboutToStart(GameAboutToStartServerEvent event) throws Exception;
 
-    void onStarting(ServerStartingEvent event) throws Exception;
+    void onStarting(GameStartingServerEvent event) throws Exception;
 
-    void onShutdown(ServerStoppingEvent event) throws Exception;
+    void onShutdown(GameStoppingServerEvent event) throws Exception;
 
 }

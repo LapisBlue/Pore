@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.impl.block;
 
+import static org.spongepowered.api.data.property.block.MatterProperty.Matter.LIQUID;
+
 import blue.lapis.pore.converter.data.block.BlockDataConverter;
 import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.type.material.MaterialConverter;
@@ -34,7 +36,6 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreWrapper;
 
-import com.google.common.base.Optional;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
@@ -49,9 +50,10 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.block.BlockTypes;
-import org.spongepowered.api.data.property.block.GroundLumanceProperty;
+import org.spongepowered.api.data.property.block.GroundLuminanceProperty;
 import org.spongepowered.api.data.property.block.IndirectlyPoweredProperty;
 import org.spongepowered.api.data.property.block.LightEmissionProperty;
+import org.spongepowered.api.data.property.block.MatterProperty;
 import org.spongepowered.api.data.property.block.PoweredProperty;
 import org.spongepowered.api.data.property.block.SkyLuminanceProperty;
 import org.spongepowered.api.data.property.block.TemperatureProperty;
@@ -59,6 +61,7 @@ import org.spongepowered.api.world.Location;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public class PoreBlock extends PoreWrapper<Location> implements Block {
 
@@ -144,7 +147,7 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public byte getLightFromBlocks() {
-        Optional<GroundLumanceProperty> prop = getHandle().getProperty(GroundLumanceProperty.class);
+        Optional<GroundLuminanceProperty> prop = getHandle().getProperty(GroundLuminanceProperty.class);
         if (prop.isPresent()) {
             //noinspection ConstantConditions
             return prop.get().getValue().byteValue();
@@ -262,12 +265,14 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public boolean isBlockFacePowered(BlockFace face) {
-        return getHandle().isBlockFacePowered(DirectionConverter.of(face));
+        throw new NotImplementedException("TODO");
+        //return getHandle().isBlockFacePowered(DirectionConverter.of(face));
     }
 
     @Override
     public boolean isBlockFaceIndirectlyPowered(BlockFace face) {
-        return getHandle().isBlockFaceIndirectlyPowered(DirectionConverter.of(face));
+        throw new NotImplementedException("TODO");
+        //return getHandle().isBlockFaceIndirectlyPowered(DirectionConverter.of(face));
     }
 
     @Override
@@ -287,7 +292,7 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public boolean isLiquid() {
-        return getHandle().getBlockType().isLiquid();
+        return getHandle().getBlockType().getProperty(MatterProperty.class).get().getValue() == LIQUID;
     }
 
     @Override
@@ -309,12 +314,14 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public boolean breakNaturally() {
-        return getHandle().digBlock();
+        throw new NotImplementedException("TODO");
+        //return getHandle().digBlock();
     }
 
     @Override
     public boolean breakNaturally(ItemStack tool) {
-        return getHandle().digBlockWith(ItemStackConverter.of(tool));
+        throw new NotImplementedException("TODO");
+        //return getHandle().digBlockWith(ItemStackConverter.of(tool));
     }
 
     @Override

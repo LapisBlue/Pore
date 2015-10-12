@@ -36,7 +36,6 @@ import blue.lapis.pore.util.PoreCollections;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.avaje.ebean.config.ServerConfig;
-import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
@@ -94,6 +93,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -222,7 +222,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     @Override
     public Collection<? extends Player> getOnlinePlayers() {
         return PoreCollections.transform(getHandle().getOnlinePlayers(),
-                WrapperConverter.<org.spongepowered.api.entity.player.Player, PorePlayer>getConverter());
+                WrapperConverter.<org.spongepowered.api.entity.living.player.Player, PorePlayer>getConverter());
     }
 
     @Override
@@ -339,9 +339,9 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     public Player getPlayer(String name) {
         Preconditions.checkNotNull(name, "name");
 
-        org.spongepowered.api.entity.player.Player result = null;
+        org.spongepowered.api.entity.living.player.Player result = null;
         int delta = Integer.MAX_VALUE;
-        for (org.spongepowered.api.entity.player.Player player : getHandle().getOnlinePlayers()) {
+        for (org.spongepowered.api.entity.living.player.Player player : getHandle().getOnlinePlayers()) {
             if (StringUtil.startsWithIgnoreCase(player.getName(), name)) {
                 int newDelta = player.getName().length() - name.length();
                 if (newDelta < delta) {
@@ -360,7 +360,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public Player getPlayerExact(String name) {
-        Optional<org.spongepowered.api.entity.player.Player> player = getHandle().getPlayer(name);
+        Optional<org.spongepowered.api.entity.living.player.Player> player = getHandle().getPlayer(name);
         return player.isPresent() ? PorePlayer.of(player.get()) : null;
     }
 
@@ -370,7 +370,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
         name = name.toLowerCase();
 
         List<Player> result = Lists.newArrayList();
-        for (org.spongepowered.api.entity.player.Player player : getHandle().getOnlinePlayers()) {
+        for (org.spongepowered.api.entity.living.player.Player player : getHandle().getOnlinePlayers()) {
             String playerName = player.getName().toLowerCase();
 
             if (name.equals(playerName)) {
@@ -389,7 +389,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public Player getPlayer(UUID id) {
-        Optional<org.spongepowered.api.entity.player.Player> player = getHandle().getPlayer(id);
+        Optional<org.spongepowered.api.entity.living.player.Player> player = getHandle().getPlayer(id);
         return player.isPresent() ? PorePlayer.of(player.get()) : null;
     }
 

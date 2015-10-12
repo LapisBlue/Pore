@@ -31,7 +31,7 @@ import blue.lapis.pore.impl.entity.PorePlayer;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.InventoryView;
-import org.spongepowered.api.entity.player.Player;
+import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.item.inventory.Inventory;
 
 //TODO: this wrapper may need to optimized but I'm not sure how we would do that at the moment

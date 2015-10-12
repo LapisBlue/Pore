@@ -26,8 +26,6 @@ package blue.lapis.pore.command;
 
 import blue.lapis.pore.impl.command.PoreCommandSender;
 import blue.lapis.pore.util.PoreWrapper;
-
-import com.google.common.base.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.command.Command;
 import org.spongepowered.api.text.Text;
@@ -40,6 +38,7 @@ import org.spongepowered.api.util.command.CommandResult;
 import org.spongepowered.api.util.command.CommandSource;
 
 import java.util.List;
+import java.util.Optional;
 
 @NonnullByDefault
 public class PoreCommandCallable extends PoreWrapper<Command> implements CommandCallable {

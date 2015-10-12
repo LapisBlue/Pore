@@ -50,7 +50,6 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.scoreboard.PoreScoreboard;
 
 import com.flowpowered.math.vector.Vector3d;
-import com.google.common.base.Optional;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Achievement;
@@ -72,8 +71,8 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
 import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.effect.sound.SoundType;
-import org.spongepowered.api.entity.player.Player;
-import org.spongepowered.api.entity.player.tab.PlayerTabInfo;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.entity.living.player.tab.PlayerTabInfo;
 import org.spongepowered.api.resourcepack.ResourcePacks;
 import org.spongepowered.api.statistic.BlockStatistic;
 import org.spongepowered.api.statistic.EntityStatistic;
@@ -86,8 +85,11 @@ import org.spongepowered.api.util.TextMessageException;
 import java.io.FileNotFoundException;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -751,10 +753,8 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     public void setResourcePack(String url) {
         try {
-            getHandle().sendResourcePack(ResourcePacks.fromUrl(new URL(url)));
-        } catch (FileNotFoundException swallow) {
-            //TODO: okay to swallow?
-        } catch (MalformedURLException swallow) {
+            getHandle().sendResourcePack(ResourcePacks.fromUri(new URI(url)));
+        } catch (URISyntaxException | FileNotFoundException swallow) {
             //TODO: okay to swallow?
         }
     }

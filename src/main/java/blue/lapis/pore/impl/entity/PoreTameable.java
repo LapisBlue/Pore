@@ -28,6 +28,7 @@ import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.T
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Creature;
 import org.spongepowered.api.entity.living.animal.Animal;
@@ -60,12 +61,14 @@ public class PoreTameable extends PoreAnimals implements org.bukkit.entity.Tamea
 
     @Override
     public AnimalTamer getOwner() {
-        return isTamed() ? PoreAnimalTamer.of(getHandle().get(TAMEABLE_DATA).get().owner().get().get()) : null;
+        throw new NotImplementedException("TODO");
+        //return isTamed() ? PoreAnimalTamer.of(getHandle().get(TAMEABLE_DATA).get().owner().get().get()) : null;
     }
 
     @Override
     public void setOwner(AnimalTamer tamer) {
-        getHandle().offer(getHandle().getOrCreate(TAMEABLE_DATA).get()
-                .owner().setTo(((PoreAnimalTamer) tamer).getHandle()));
+        throw new NotImplementedException("TODO");
+        /*getHandle().offer(getHandle().getOrCreate(TAMEABLE_DATA).get()
+                .owner().setTo(((PoreAnimalTamer) tamer).getHandle()));*/
     }
 }

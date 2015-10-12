@@ -28,9 +28,9 @@ import blue.lapis.pore.util.constructor.SimpleConstructor;
 
 import org.bukkit.event.EventPriority;
 import org.spongepowered.api.event.Event;
-import org.spongepowered.api.event.EventHandler;
+import org.spongepowered.api.event.EventListener;
 
-final class PoreEventHandler<T extends Event> implements EventHandler<T> {
+final class PoreEventHandler<T extends Event> implements EventListener<T> {
 
     private final EventPriority priority;
     private final SimpleConstructor<? extends org.bukkit.event.Event, T> constructor;

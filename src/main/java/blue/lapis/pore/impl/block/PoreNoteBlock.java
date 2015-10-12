@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.impl.block;
 
+import static org.spongepowered.api.data.key.Keys.NOTE_PITCH;
+
 import blue.lapis.pore.converter.type.world.effect.NoteConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
@@ -50,8 +52,7 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
 
     @Override
     public org.bukkit.Note getNote() {
-        return NoteConverter.of(getTileEntity().getData().isPresent()
-                ? getTileEntity().getData().get().note().get() : null);
+        return NoteConverter.of(getTileEntity().isValid() ? getTileEntity().get(NOTE_PITCH).get() : null);
     }
 
     @Override

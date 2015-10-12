@@ -57,7 +57,6 @@ import org.spongepowered.api.entity.projectile.explosive.WitherSkull;
 import org.spongepowered.api.entity.projectile.explosive.fireball.SmallFireball;
 import org.spongepowered.api.entity.projectile.source.ProjectileSource;
 import org.spongepowered.api.event.cause.Cause;
-import org.spongepowered.api.event.entity.ProjectileLaunchEvent;
 import org.spongepowered.api.util.event.callback.CallbackList;
 
 import javax.annotation.Nonnull;
@@ -93,66 +92,67 @@ public final class ProjectileUtil {
             entity = Optional.fromNullable((T) PoreArrow.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.Arrow.class,
                     VectorConverter.create3d(velocity)
-            ).orNull()));
+            ).orElse(null)));
         } else if (projectile.isAssignableFrom(Egg.class)) {
             entity = Optional.fromNullable((T) PoreEgg.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.Egg.class,
                     VectorConverter.create3d(velocity)
-            ).orNull()));
+            ).orElse(null)));
         } else if (projectile.isAssignableFrom(EnderPearl.class)) {
             entity = Optional.fromNullable((T) PoreEnderPearl.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.EnderPearl.class,
                     VectorConverter.create3d(velocity)
-            ).orNull()));
+            ).orElse(null)));
         } else if (projectile.isAssignableFrom(Fireball.class)) {
             if (projectile.isAssignableFrom(LargeFireball.class)) {
                 entity = Optional.fromNullable((T) PoreLargeFireball.of(source.launchProjectile(
                         org.spongepowered.api.entity.projectile.explosive.fireball.LargeFireball.class,
                         VectorConverter.create3d(velocity)
-                ).orNull()));
+                ).orElse(null)));
             } else if (projectile.isAssignableFrom(org.bukkit.entity.SmallFireball.class)) {
                 entity = Optional.fromNullable((T) PoreSmallFireball.of(source.launchProjectile(
                         SmallFireball.class,
                         VectorConverter.create3d(velocity)
-                ).orNull()));
+                ).orElse(null)));
             } else if (projectile.isAssignableFrom(WitherSkull.class)) {
                 entity = Optional.fromNullable((T) PoreWitherSkull.of(source.launchProjectile(
                         WitherSkull.class,
                         VectorConverter.create3d(velocity)
-                ).orNull()));
+                ).orElse(null)));
             } else {
                 entity = Optional.fromNullable((T) PoreFireball.of(source.launchProjectile(
                         org.spongepowered.api.entity.projectile.explosive.fireball.Fireball.class,
                         VectorConverter.create3d(velocity)
-                ).orNull()));
+                ).orElse(null)));
             }
         } else if (projectile.isAssignableFrom(Fish.class)) {
             entity = Optional.fromNullable((T) PoreFish.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.FishHook.class,
                     VectorConverter.create3d(velocity)
-            ).orNull()));
+            ).orElse(null)));
         } else if (projectile.isAssignableFrom(Snowball.class)) {
             entity = Optional.fromNullable((T) PoreSnowball.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.Snowball.class,
                     VectorConverter.create3d(velocity)
-            ).orNull()));
+            ).orElse(null)));
         } else if (projectile.isAssignableFrom(ThrownExpBottle.class)) {
             entity = Optional.fromNullable((T) PoreThrownExpBottle.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.ThrownExpBottle.class,
                     VectorConverter.create3d(velocity)
-            ).orNull()));
+            ).orElse(null)));
         } else if (projectile.isAssignableFrom(ThrownPotion.class)) {
             entity = Optional.fromNullable((T) PoreThrownPotion.of(source.launchProjectile(
                     org.spongepowered.api.entity.projectile.ThrownPotion.class,
                     VectorConverter.create3d(velocity)
-            ).orNull()));
+            ).orElse(null)));
         }
         if (entity == null) {
             throw new UnsupportedOperationException("Could not match projectile to type (is Pore up-to-date?)"); // lel
         }
         if (entity.isPresent()) {
             final T finalEntity = entity.get();
-            Pore.getGame().getEventManager().post(new ProjectileLaunchEvent() {
+            // TODO
+            /*Pore.getGame().getEventManager().post(new ProjectileLaunchEvent() {
                 @Nonnull
                 @Override
                 public org.spongepowered.api.entity.projectile.Projectile getLaunchedProjectile() {
@@ -188,7 +188,7 @@ public final class ProjectileUtil {
                 public CallbackList getCallbacks() {
                     return null; //TODO: not sure exactly of what to return here
                 }
-            });
+            });*/
             return entity;
         }
         return Optional.absent();

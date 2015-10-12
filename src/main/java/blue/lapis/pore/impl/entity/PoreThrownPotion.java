@@ -29,7 +29,6 @@ import blue.lapis.pore.converter.type.material.PotionEffectConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
 import com.google.common.collect.Collections2;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -40,6 +39,7 @@ import org.spongepowered.api.entity.projectile.ThrownPotion;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Optional;
 
 public class PoreThrownPotion extends PoreProjectile implements org.bukkit.entity.ThrownPotion {
 
@@ -79,11 +79,13 @@ public class PoreThrownPotion extends PoreProjectile implements org.bukkit.entit
 
     @Override
     public ItemStack getItem() {
-        return ItemStackConverter.of(getHandle().getPotionItemData().item().get());
+        // TODO: I have no idea what I'm doing here...
+        return ItemStackConverter.of(getHandle().getPotionItemData().item().get().createStack());
     }
 
     @Override
     public void setItem(ItemStack item) {
-        getHandle().offer(getHandle().getPotionItemData().item().set(ItemStackConverter.of(item)));
+        // TODO: I have no idea what I'm doing here...
+        getHandle().offer(getHandle().getPotionItemData().item().set(ItemStackConverter.of(item).createSnapshot()));
     }
 }

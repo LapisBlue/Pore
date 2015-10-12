@@ -30,7 +30,6 @@ import blue.lapis.pore.converter.type.statistic.AchievementConverter;
 import blue.lapis.pore.converter.type.statistic.StatisticConverter;
 
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
 import com.google.common.collect.Iterables;
 import org.bukkit.Material;
 import org.bukkit.Statistic;
@@ -42,6 +41,7 @@ import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.statistic.achievement.Achievement;
 
 import java.util.List;
+import java.util.Optional;
 
 @Deprecated
 @SuppressWarnings("deprecation")
