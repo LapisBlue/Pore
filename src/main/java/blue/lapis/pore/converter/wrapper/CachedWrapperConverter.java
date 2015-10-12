@@ -116,7 +116,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
                     build(childrenRegistry, childSponge, (Class<? extends P>) child.getKey()));
         }
 
-        return new Converter<S, P>(sponge, pore, converterRegistry.build());
+        return new Converter<>(sponge, pore, converterRegistry.build());
     }
 
     @Nullable
@@ -197,7 +197,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
     }
 
     static <B> Builder<B> builder(Class<B> base) {
-        return new Builder<B>(base);
+        return new Builder<>(base);
     }
 
     static final class Builder<B> {
@@ -234,7 +234,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
         }
 
         public CachedWrapperConverter<B> build() {
-            return new CachedWrapperConverter<B>(base, registry);
+            return new CachedWrapperConverter<>(base, registry);
         }
     }
 }

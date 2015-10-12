@@ -28,7 +28,6 @@ import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.type.material.PotionEffectConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
@@ -66,12 +65,7 @@ public class PoreThrownPotion extends PoreProjectile implements org.bukkit.entit
         Optional<PotionEffectData> data = getHandle().get(CatalogEntityData.POTION_EFFECT_DATA);
         if (data.isPresent()) {
             return Collections2.transform(data.get().effects().get(),
-                    new Function<org.spongepowered.api.potion.PotionEffect, PotionEffect>() {
-                        @Override
-                        public PotionEffect apply(org.spongepowered.api.potion.PotionEffect input) {
-                            return PotionEffectConverter.of(input);
-                        }
-                    }
+                    PotionEffectConverter::of
             );
         }
         return Collections.emptyList();

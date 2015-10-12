@@ -29,13 +29,13 @@ import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.type.statistic.AchievementConverter;
 import blue.lapis.pore.converter.type.statistic.StatisticConverter;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import org.bukkit.Material;
 import org.bukkit.Statistic;
 import org.bukkit.UnsafeValues;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.StringUtil;
+import org.spongepowered.api.CatalogType;
 import org.spongepowered.api.block.BlockType;
 import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.statistic.achievement.Achievement;
@@ -68,12 +68,7 @@ public class PoreUnsafeValues implements UnsafeValues {
         return StringUtil.copyPartialMatches(
                 token,
                 Iterables.transform(Pore.getGame().getRegistry().getAllOf(ItemType.class), //TODO is this right?
-                        new Function<ItemType, String>() {
-                            @Override
-                            public String apply(final ItemType input) {
-                                return input.getId();
-                            }
-                        }),
+                        CatalogType::getId),
                 completions
         );
     }
@@ -122,24 +117,14 @@ public class PoreUnsafeValues implements UnsafeValues {
         List<String> found = StringUtil.copyPartialMatches(
                 token,
                 Iterables.transform(Pore.getGame().getRegistry().getAllOf(Achievement.class), //TODO is this right?
-                        new Function<Achievement, String>() {
-                            @Override
-                            public String apply(final Achievement input) {
-                                return input.getName();
-                            }
-                        }),
+                        CatalogType::getName),
                 completions
         );
         found.addAll(StringUtil.copyPartialMatches(
                 token,
                 Iterables.transform(
                         Pore.getGame().getRegistry().getAllOf(org.spongepowered.api.statistic.Statistic.class),
-                        new Function<org.spongepowered.api.statistic.Statistic, String>() {
-                            @Override
-                            public String apply(final org.spongepowered.api.statistic.Statistic input) {
-                                return input.getName();
-                            }
-                        }), //TODO is this right?
+                        CatalogType::getName), //TODO is this right?
                 completions
         ));
         return found;

@@ -51,11 +51,7 @@ public final class SimpleReflectConstructor<T, P> implements SimpleConstructor<T
     public T construct(P parameter) {
         try {
             return this.handle.newInstance(parameter);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException("Failed to construct " + getType(), e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException("Failed to construct " + getType(), e);
-        } catch (IllegalAccessException e) {
+        } catch (InvocationTargetException | IllegalAccessException | InstantiationException e) {
             throw new RuntimeException("Failed to construct " + getType(), e);
         }
     }
@@ -64,7 +60,7 @@ public final class SimpleReflectConstructor<T, P> implements SimpleConstructor<T
 
         @Override
         public <T, P> SimpleConstructor<T, P> create(Class<T> type, Class<P> parameter) throws Exception {
-            return new SimpleReflectConstructor<T, P>(type, parameter);
+            return new SimpleReflectConstructor<>(type, parameter);
         }
 
     }

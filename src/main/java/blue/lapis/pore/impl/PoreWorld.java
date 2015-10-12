@@ -46,7 +46,6 @@ import blue.lapis.pore.util.PoreCollections;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.flowpowered.math.vector.Vector3i;
-import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
@@ -93,8 +92,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-
-import javax.annotation.Nullable;
 
 public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
@@ -184,7 +181,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public Chunk[] getLoadedChunks() {
-        List<Chunk> chunks = new ArrayList<Chunk>();
+        List<Chunk> chunks = new ArrayList<>();
         for (org.spongepowered.api.world.Chunk chunk : getHandle().getLoadedChunks()) {
             chunks.add(PoreChunk.of(chunk));
         }
@@ -381,17 +378,14 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
     @Override
     @SuppressWarnings("unchecked")
     public Collection<Entity> getEntitiesByClasses(final Class<?>... classes) {
-        return Collections2.filter(getEntities(), new Predicate<Entity>() {
-            @Override
-            public boolean apply(@Nullable Entity entity) {
-                for (Class<?> clazz : classes) {
-                    if (clazz.isInstance(entity)) {
-                        return true;
-                    }
+        return Collections2.filter(getEntities(), entity -> {
+            for (Class<?> clazz : classes) {
+                if (clazz.isInstance(entity)) {
+                    return true;
                 }
-
-                return false;
             }
+
+            return false;
         });
     }
 

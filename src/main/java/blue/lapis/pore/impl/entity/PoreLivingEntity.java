@@ -34,7 +34,6 @@ import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.ProjectileUtil;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Location;
@@ -245,12 +244,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
         List<org.spongepowered.api.potion.PotionEffect> effectList
                 = getHandle().getOrCreate(POTION_EFFECT_DATA).get().effects().get();
         effectList.addAll(Collections2.transform(effects,
-                new Function<PotionEffect, org.spongepowered.api.potion.PotionEffect>() {
-                    @Override
-                    public org.spongepowered.api.potion.PotionEffect apply(PotionEffect input) {
-                        return PotionEffectConverter.of(input);
-                    }
-                }
+                PotionEffectConverter::of
         ));
         return getHandle().offer(Keys.POTION_EFFECTS, effectList).getType()
                 == DataTransactionResult.Type.SUCCESS;
@@ -287,12 +281,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     public Collection<PotionEffect> getActivePotionEffects() {
         return Collections2.transform(getHandle().get(Keys.POTION_EFFECTS).get(),
-                new Function<org.spongepowered.api.potion.PotionEffect, PotionEffect>() {
-                    @Override
-                    public PotionEffect apply(org.spongepowered.api.potion.PotionEffect input) {
-                        return PotionEffectConverter.of(input);
-                    }
-                }
+                PotionEffectConverter::of
         );
     }
 

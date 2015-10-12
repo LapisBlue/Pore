@@ -26,13 +26,11 @@ package blue.lapis.pore.impl.entity;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
 import org.bukkit.entity.ComplexEntityPart;
 import org.bukkit.entity.ComplexLivingEntity;
 import org.spongepowered.api.entity.living.complex.ComplexLiving;
-import org.spongepowered.api.entity.living.complex.ComplexLivingPart;
 
 import java.util.Set;
 
@@ -54,12 +52,7 @@ public class PoreComplexLivingEntity extends PoreLivingEntity implements Complex
     @Override
     public Set<ComplexEntityPart> getParts() {
         return Sets.newHashSet(Collections2.transform(getHandle().getParts(),
-                new Function<ComplexLivingPart, ComplexEntityPart>() {
-                    @Override
-                    public PoreComplexEntityPart apply(ComplexLivingPart input) {
-                        return PoreComplexEntityPart.of(input);
-                    }
-                }
+                PoreComplexEntityPart::of
         ));
     }
 }

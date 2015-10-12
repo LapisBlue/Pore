@@ -31,7 +31,6 @@ import blue.lapis.pore.converter.type.scoreboard.NameTagVisibilityConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
-import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
@@ -164,12 +163,7 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     public Set<OfflinePlayer> getPlayers() throws IllegalStateException {
         checkState();
         return Sets.newHashSet(Collections2.transform(getHandle().getMembers(),
-                new Function<Text, OfflinePlayer>() {
-                    @Override
-                    public OfflinePlayer apply(Text user) {
-                        return Pore.getServer().getOfflinePlayer(Texts.toPlain(user));
-                    }
-                }
+                user -> Pore.getServer().getOfflinePlayer(Texts.toPlain(user))
         ));
     }
 
@@ -177,12 +171,7 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     public Set<String> getEntries() throws IllegalStateException {
         checkState();
         return Sets.newHashSet(Collections2.transform(getHandle().getMembers(),
-                new Function<Text, String>() {
-                    @Override
-                    public String apply(Text user) {
-                        return Texts.toPlain(user);
-                    }
-                }
+                Texts::toPlain
         ));
     }
 

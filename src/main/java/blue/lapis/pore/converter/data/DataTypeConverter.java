@@ -39,7 +39,7 @@ public abstract class DataTypeConverter {
 
     @SuppressWarnings("rawtypes")
     protected final LinkedHashMap<BiMap<AbstractDataValue, Byte>, Byte> converters
-            = new LinkedHashMap<BiMap<AbstractDataValue, Byte>, Byte>();
+            = new LinkedHashMap<>();
 
     protected final ArrayList<Class<? extends DataManipulator<?, ?>>> applicableTypes = Lists.newArrayList();
 
@@ -75,7 +75,7 @@ public abstract class DataTypeConverter {
 
     @SuppressWarnings("rawtypes") // I am very tired and do not feel like dealing with generics anymore
     public Collection<AbstractDataValue> of(byte data) throws IllegalArgumentException {
-        ArrayList<AbstractDataValue> converted = new ArrayList<AbstractDataValue>();
+        ArrayList<AbstractDataValue> converted = new ArrayList<>();
         int i = 0;
         for (Map.Entry<BiMap<AbstractDataValue, Byte>, Byte> e : converters.entrySet()) {
             BiMap<AbstractDataValue, Byte> c = e.getKey();

@@ -32,7 +32,6 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreOfflinePlayer;
 import blue.lapis.pore.util.PoreWrapper;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
 import org.apache.commons.lang3.NotImplementedException;
@@ -94,24 +93,14 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
                 .getType(Criterion.class, criteria); //TODO: no idea whether this is right
         checkArgument(c.isPresent(), "Invalid criterion");
         return Sets.newHashSet(Collections2.transform(getHandle().getObjectivesByCriteria(c.get()),
-                new Function<org.spongepowered.api.scoreboard.objective.Objective, Objective>() {
-                    @Override
-                    public Objective apply(org.spongepowered.api.scoreboard.objective.Objective obj) {
-                        return PoreObjective.of(obj);
-                    }
-                }
+                PoreObjective::of
         ));
     }
 
     @Override
     public Set<Objective> getObjectives() {
         return Sets.newHashSet(Collections2.transform(getHandle().getObjectives(),
-                new Function<org.spongepowered.api.scoreboard.objective.Objective, Objective>() {
-                    @Override
-                    public Objective apply(org.spongepowered.api.scoreboard.objective.Objective obj) {
-                        return PoreObjective.of(obj);
-                    }
-                }
+                PoreObjective::of
         ));
     }
 
@@ -135,12 +124,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
         try {
             //noinspection ConstantConditions
             return Sets.newHashSet(Collections2.transform(getHandle().getScores(Texts.legacy().from(entry)),
-                    new Function<org.spongepowered.api.scoreboard.Score, Score>() {
-                        @Override
-                        public Score apply(org.spongepowered.api.scoreboard.Score score) {
-                            return PoreScore.of(score);
-                        }
-                    }
+                    PoreScore::of
             ));
         } catch (TextMessageException ex) {
             throw new IllegalArgumentException(ex);
@@ -196,12 +180,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     @Override
     public Set<Team> getTeams() {
         return Sets.newHashSet(Collections2.transform(getHandle().getTeams(),
-                new Function<org.spongepowered.api.scoreboard.Team, Team>() {
-                    @Override
-                    public Team apply(org.spongepowered.api.scoreboard.Team team) {
-                        return PoreTeam.of(team);
-                    }
-                }
+                PoreTeam::of
         ));
     }
 
@@ -218,11 +197,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     @SuppressWarnings("deprecation")
     public Set<OfflinePlayer> getPlayers() {
         return Sets.newHashSet(Collections2.transform(getEntries(),
-                new Function<String, OfflinePlayer>() {
-                    public OfflinePlayer apply(String entry) {
-                        return Bukkit.getOfflinePlayer(entry);
-                    }
-                }
+                Bukkit::getOfflinePlayer
         ));
     }
 

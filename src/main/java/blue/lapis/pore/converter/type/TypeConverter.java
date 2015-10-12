@@ -69,7 +69,7 @@ public final class TypeConverter<B, S> extends Converter<B, S> {
     }
 
     public static <B, S> Builder<B, S> builder(Class<B> bukkit, Class<S> sponge) {
-        return new Builder<B, S>(bukkit, sponge);
+        return new Builder<>(bukkit, sponge);
     }
 
     public static class Builder<B, S> {
@@ -90,7 +90,7 @@ public final class TypeConverter<B, S> extends Converter<B, S> {
         }
 
         public TypeConverter<B, S> build() {
-            return new TypeConverter<B, S>(create(bukkit, registry), create(sponge, registry.inverse()));
+            return new TypeConverter<>(create(bukkit, registry), create(sponge, registry.inverse()));
         }
 
         @SuppressWarnings({"unchecked", "rawtypes"})

@@ -75,7 +75,7 @@ public class PoreBukkitScheduler implements BukkitScheduler {
     @Override
     public <T> Future<T> callSyncMethod(Plugin plugin, Callable<T> task) {
         validate(plugin, task);
-        PoreFuture<T> future = new PoreFuture<T>(task);
+        PoreFuture<T> future = new PoreFuture<>(task);
         future.handle = newTask().execute(future).submit(Pore.getPlugin(plugin));
         return future;
     }

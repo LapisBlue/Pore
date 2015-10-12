@@ -105,21 +105,11 @@ public class PoreCommandMap extends SimpleCommandMap {
                 PORE_COMMAND_CALLABLE), GET_PORE_COMMAND);
     }
 
-    private static final Predicate<CommandMapping> PORE_COMMAND_CALLABLE = new Predicate<CommandMapping>() {
+    private static final Predicate<CommandMapping> PORE_COMMAND_CALLABLE =
+            input -> input.getCallable() instanceof PoreCommandCallable;
 
-        @Override
-        public boolean apply(CommandMapping input) {
-            return input.getCallable() instanceof PoreCommandCallable;
-        }
-    };
-
-    private static final Function<CommandMapping, Command> GET_PORE_COMMAND = new Function<CommandMapping, Command>() {
-
-        @Override
-        public Command apply(CommandMapping input) {
-            return ((PoreCommandCallable) input).getHandle();
-        }
-    };
+    private static final Function<CommandMapping, Command> GET_PORE_COMMAND =
+            input -> ((PoreCommandCallable) input).getHandle();
 
     @Override
     public synchronized void clearCommands() {

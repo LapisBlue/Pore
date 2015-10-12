@@ -36,7 +36,6 @@ import blue.lapis.pore.converter.data.DataTypeConverter;
 import blue.lapis.pore.converter.data.block.BlockDataConverter;
 import blue.lapis.pore.impl.block.PoreBlock;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.FluentIterable;
 import org.bukkit.block.Block;
@@ -60,7 +59,7 @@ public class BTDCTestUtil {
                                                                                Class<T> dataClass, byte inputByte,
                                                                                V expectedValue, boolean invert)
             throws Exception {
-        AbstractDataValue<T, V> output = new AbstractDataValue<T, V>(dataClass, expectedValue);
+        AbstractDataValue<T, V> output = new AbstractDataValue<>(dataClass, expectedValue);
         Collection<AbstractDataValue<T, V>> outputColl = Collections.singletonList(output);
         testAbstraction(blockType, inputByte, outputColl, invert);
     }
@@ -75,7 +74,7 @@ public class BTDCTestUtil {
                                                                                  Class<T> dataClass, byte rawData,
                                                                                  V abstractedData, boolean invert)
             throws Exception {
-        AbstractDataValue<T, V> input = new AbstractDataValue<T, V>(dataClass, abstractedData);
+        AbstractDataValue<T, V> input = new AbstractDataValue<>(dataClass, abstractedData);
         Collection<AbstractDataValue<T, V>> inputColl = Collections.singletonList(input);
         testDeabstraction(blockType, rawData, inputColl, invert);
     }
@@ -127,19 +126,17 @@ public class BTDCTestUtil {
                     .thenReturn(Optional.<DataManipulator>fromNullable(spongeDatum));
         }*/
         Collection<DataManipulator<?, ?>> manipulators = FluentIterable.from(abstractedData)
-                .transform(new Function<AbstractDataValue<? extends DataManipulator, ?>, DataManipulator<?, ?>>() {
-                    public DataManipulator<?, ?> apply(AbstractDataValue datum) {
-                        if (datum.getValue() == AbstractDataValue.ABSENT) {
-                            return null;
-                        }
-                        DataManipulator<?, ?> dm = (DataManipulator<?, ?>) mock(datum.getDataClass());
-                        if (dm instanceof VariantData) {
-                            Value value = mock(Value.class);
-                            when(value.get()).thenReturn(datum.getValue());
-                            when(((VariantData) dm).type()).thenReturn(value);
-                        }
-                        return dm;
+                .transform(datum -> {
+                    if (datum.getValue() == AbstractDataValue.ABSENT) {
+                        return null;
                     }
+                    DataManipulator<?, ?> dm = (DataManipulator<?, ?>) mock(datum.getDataClass());
+                    if (dm instanceof VariantData) {
+                        Value value = mock(Value.class);
+                        when(value.get()).thenReturn(datum.getValue());
+                        when(((VariantData) dm).type()).thenReturn(value);
+                    }
+                    return dm;
                 })
                 .filter(Predicates.notNull())
                 .toList();

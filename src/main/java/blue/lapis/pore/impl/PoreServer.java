@@ -767,7 +767,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public Set<String> getListeningPluginChannels() {
-        Set<String> result = new HashSet<String>();
+        Set<String> result = new HashSet<>();
 
         for (Player player : getOnlinePlayers()) {
             result.addAll(player.getListeningPluginChannels());

@@ -30,7 +30,6 @@ import blue.lapis.pore.impl.block.PoreBlockState;
 import blue.lapis.pore.impl.entity.PoreEntity;
 import blue.lapis.pore.util.PoreWrapper;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.ChunkSnapshot;
@@ -88,12 +87,7 @@ public class PoreChunk extends PoreWrapper<Chunk> implements org.bukkit.Chunk {
     public Entity[] getEntities() {
         Collection<org.spongepowered.api.entity.Entity> entities = getHandle().getEntities();
         Entity[] bukkitEntities = new Entity[entities.size()];
-        Collections2.transform(entities, new Function<org.spongepowered.api.entity.Entity, Entity>() {
-            @Override
-            public Entity apply(org.spongepowered.api.entity.Entity input) {
-                return PoreEntity.of(input);
-            }
-        }).toArray(bukkitEntities);
+        Collections2.transform(entities, PoreEntity::of).toArray(bukkitEntities);
         return bukkitEntities;
     }
 
@@ -101,12 +95,7 @@ public class PoreChunk extends PoreWrapper<Chunk> implements org.bukkit.Chunk {
     public BlockState[] getTileEntities() {
         Collection<TileEntity> entities = getHandle().getTileEntities();
         BlockState[] blockStates = new BlockState[entities.size()];
-        Collections2.transform(entities, new Function<TileEntity, BlockState>() {
-            @Override
-            public BlockState apply(TileEntity input) {
-                return PoreBlockState.of(input.getBlock());
-            }
-        }).toArray(blockStates);
+        Collections2.transform(entities, input -> PoreBlockState.of(input.getBlock())).toArray(blockStates);
         return blockStates;
     }
 

@@ -42,8 +42,8 @@ import java.util.Set;
 
 public class PorePermissible extends PoreWrapper<Subject> implements Permissible {
 
-    private List<PermissionAttachment> attachments = new ArrayList<PermissionAttachment>();
-    private List<String> attachedNodes = new ArrayList<String>();
+    private List<PermissionAttachment> attachments = new ArrayList<>();
+    private List<String> attachedNodes = new ArrayList<>();
 
     protected PorePermissible(Subject handle) {
         super(handle);
@@ -110,11 +110,7 @@ public class PorePermissible extends PoreWrapper<Subject> implements Permissible
         final PermissionAttachment attachment = new PermissionAttachment(plugin, this);
         attachments.add(attachment);
         if (ticks != -1) {
-            Pore.getGame().getScheduler().createTaskBuilder().delay(ticks).execute(new Runnable() {
-                public void run() {
-                    removeAttachment(attachment);
-                }
-            }).submit(Pore.getPlugin());
+            Pore.getGame().getScheduler().createTaskBuilder().delay(ticks).execute(() -> removeAttachment(attachment)).submit(Pore.getPlugin());
         }
         recalculatePermissions();
         return attachment;
