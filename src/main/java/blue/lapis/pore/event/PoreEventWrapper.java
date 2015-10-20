@@ -48,6 +48,7 @@ import org.spongepowered.api.service.event.EventManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
@@ -66,20 +67,25 @@ public final class PoreEventWrapper {
     public static void register() throws IOException {
         Stopwatch watch = Stopwatch.createStarted();
 
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(PoreEventWrapper.class.getResourceAsStream("events.txt")));
+        InputStream in = PoreEventWrapper.class.getResourceAsStream("events.txt");
+        if (in == null) {
+            Pore.getLogger().warn("No registered events found, Bukkit events will not be called.");
+            return;
+        }
 
-        String line;
-        while ((line = reader.readLine()) != null) {
-            line = line.trim();
-            if (line.isEmpty() || line.charAt(0) == '#') {
-                continue;
-            }
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty() || line.charAt(0) == '#') {
+                    continue;
+                }
 
-            try {
-                register((Class<? extends Event>) Class.forName(line));
-            } catch (ClassNotFoundException e) {
-                Pore.getLogger().warn("Failed to register class {} as an event", line, e);
+                try {
+                    register((Class<? extends Event>) Class.forName(line));
+                } catch (ClassNotFoundException e) {
+                    Pore.getLogger().warn("Failed to register class {} as an event", line, e);
+                }
             }
         }
 
