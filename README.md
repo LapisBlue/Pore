@@ -17,7 +17,7 @@ Gradle is used to handle dependencies.
 You can run and debug Pore directly in your IDE if you setup your workspace like described in the following steps:
 
 1. Setup the Pore project as described in
-[Plugin Debugging and Hotswapping (SpongeDocs)](https://docs.spongepowered.org/en/plugin/advanced/debugging.html)
+[Plugin Debugging and Hotswapping (SpongeDocs)](https://docs.spongepowered.org/en/plugin/debugging.html)
 2. Create a **new** run configuration with the same settings as described in the link above, but add this as a program
 argument: `--tweakClass blue.lapis.pore.tweaker.RemapTweaker`
 3. Run the server as usual. Pore should load and you should be able to debug in your IDE.
