@@ -28,7 +28,8 @@ import com.google.common.base.Objects;
 
 public final class PoreVersion {
 
-    private PoreVersion() {}
+    private PoreVersion() {
+    }
 
     public static final String API_NAME = nullToUnknown(getPackage().getSpecificationTitle());
     public static final String API_VERSION = nullToUnknown(getPackage().getSpecificationVersion());

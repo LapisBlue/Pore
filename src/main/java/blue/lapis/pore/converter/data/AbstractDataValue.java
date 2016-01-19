@@ -61,7 +61,7 @@ public class AbstractDataValue<T extends DataManipulator<T, ?>, V> {
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static <T extends DataManipulator<T, U>, U extends ImmutableDataManipulator<U, T>> AbstractDataValue
-        of(DataManipulator<T, U> data) {
+    of(DataManipulator<T, U> data) {
         try {
             Class<?> clazz = Class.forName(data.getClass().getName().split("\\$")[0]);
             return new AbstractDataValue(clazz,
@@ -79,8 +79,8 @@ public class AbstractDataValue<T extends DataManipulator<T, ?>, V> {
     @Override
     public boolean equals(Object otherDataValue) {
         return otherDataValue instanceof AbstractDataValue
-                && nullSafeEquals(getDataClass(), ((AbstractDataValue)otherDataValue).getDataClass())
-                && nullSafeEquals(getValue(), ((AbstractDataValue)otherDataValue).getValue());
+                && nullSafeEquals(getDataClass(), ((AbstractDataValue) otherDataValue).getDataClass())
+                && nullSafeEquals(getValue(), ((AbstractDataValue) otherDataValue).getValue());
     }
 
     @Override

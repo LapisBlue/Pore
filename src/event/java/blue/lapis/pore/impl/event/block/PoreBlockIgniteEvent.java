@@ -55,7 +55,7 @@ public class PoreBlockIgniteEvent extends org.bukkit.event.block.BlockIgniteEven
 
     @Override
     public Player getPlayer() {
-        return getIgnitingEntity() instanceof Player ? (Player)getIgnitingEntity() : null;
+        return getIgnitingEntity() instanceof Player ? (Player) getIgnitingEntity() : null;
     }
 
     @Override

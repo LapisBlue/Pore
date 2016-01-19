@@ -38,8 +38,8 @@ import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.SimpleCommandMap;
-import org.spongepowered.api.command.CommandManager;
 import org.spongepowered.api.command.CommandCallable;
+import org.spongepowered.api.command.CommandManager;
 import org.spongepowered.api.command.CommandMapping;
 
 import java.util.Collection;

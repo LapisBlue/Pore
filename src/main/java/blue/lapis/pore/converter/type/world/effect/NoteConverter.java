@@ -48,7 +48,7 @@ public class NoteConverter {
         for (Field f : NotePitches.class.getDeclaredFields()) {
             try {
                 if (f.getType() == NotePitch.class) {
-                    NOTES.add((NotePitch)f.get(null));
+                    NOTES.add((NotePitch) f.get(null));
                 }
             } catch (IllegalAccessException ex) {
                 ex.printStackTrace();

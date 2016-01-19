@@ -50,13 +50,14 @@ public class BigMushroomDataConverter extends DataTypeConverter {
                         .put(new BigMushroomDataValue(BigMushroomTypes.SOUTH_EAST), (byte) 9)
                         .put(new BigMushroomDataValue(BigMushroomTypes.STEM), (byte) 10)
                         .put(new BigMushroomDataValue(BigMushroomTypes.ALL_OUTSIDE), (byte) 14)
-                        .put(new BigMushroomDataValue(BigMushroomTypes.ALL_STEM), (byte)15)
+                        .put(new BigMushroomDataValue(BigMushroomTypes.ALL_STEM), (byte) 15)
                         .build(),
-                (byte)4);
+                (byte) 4);
         applicableTypes.add(BigMushroomData.class);
     }
 
     static class BigMushroomDataValue extends AbstractDataValue<BigMushroomData, BigMushroomType> {
+
         public BigMushroomDataValue(BigMushroomType value) {
             super(BigMushroomData.class, value);
         }

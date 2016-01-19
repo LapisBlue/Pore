@@ -38,7 +38,6 @@ import org.bukkit.entity.Player;
 import org.spongepowered.api.entity.living.player.User;
 import org.spongepowered.api.service.ban.BanService;
 import org.spongepowered.api.service.whitelist.WhitelistService;
-import org.spongepowered.api.util.ban.Ban;
 
 import java.util.Map;
 import java.util.Optional;

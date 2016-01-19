@@ -75,7 +75,7 @@ public class PorePrepareItemEnchantEvent extends PrepareItemEnchantEvent {
 
     @Override
     public Block getEnchantBlock() {
-        return (Block)getInventory().getHolder();
+        return (Block) getInventory().getHolder();
     }
 
     @Override

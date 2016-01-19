@@ -80,7 +80,8 @@ import java.util.logging.LogRecord;
  * statements (60 fold or 6000% increase) and measurably impact the performance of enabled log
  * statements (20% overall increase).</b> Please note that as of logback-version 0.9.25,
  * it is possible to completely eliminate the 60 fold translation overhead for disabled
- * log statements with the help of <a href="http://logback.qos.ch/manual/configuration.html#LevelChangePropagator">LevelChangePropagator</a>.
+ * log statements with the help of
+ * <a href="http://logback.qos.ch/manual/configuration.html#LevelChangePropagator">LevelChangePropagator</a>.
  * </p>
  *
  * <p>If you are concerned about application performance, then use of <code>SLF4JBridgeHandler</code>

@@ -31,8 +31,6 @@ import static org.spongepowered.api.data.manipulator.catalog.CatalogItemData.DYE
 import static org.spongepowered.api.data.manipulator.catalog.CatalogItemData.FISH_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogItemData.GOLDEN_APPLE_ITEM_DATA;
 
-import blue.lapis.pore.Pore;
-
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
 import org.apache.commons.lang3.NotImplementedException;
@@ -87,22 +85,22 @@ public final class DurabilityConverter {
                 .build();
         //noinspection deprecation, ConstantConditions
         DYE_MAP = ImmutableBiMap.<DyeColor, Integer>builder()
-                .put(DyeColors.BLACK, (int)org.bukkit.DyeColor.BLACK.getDyeData())
-                .put(DyeColors.RED, (int)org.bukkit.DyeColor.RED.getDyeData())
-                .put(DyeColors.GREEN, (int)org.bukkit.DyeColor.GREEN.getDyeData())
-                .put(DyeColors.BROWN, (int)org.bukkit.DyeColor.BROWN.getDyeData())
-                .put(DyeColors.BLUE, (int)org.bukkit.DyeColor.BLUE.getDyeData())
-                .put(DyeColors.PURPLE, (int)org.bukkit.DyeColor.PURPLE.getDyeData())
-                .put(DyeColors.CYAN, (int)org.bukkit.DyeColor.CYAN.getDyeData())
-                .put(DyeColors.SILVER, (int)org.bukkit.DyeColor.SILVER.getDyeData())
-                .put(DyeColors.GRAY, (int)org.bukkit.DyeColor.GRAY.getDyeData())
-                .put(DyeColors.PINK, (int)org.bukkit.DyeColor.PINK.getDyeData())
-                .put(DyeColors.LIME, (int)org.bukkit.DyeColor.LIME.getDyeData())
-                .put(DyeColors.YELLOW, (int)org.bukkit.DyeColor.YELLOW.getDyeData())
-                .put(DyeColors.LIGHT_BLUE, (int)org.bukkit.DyeColor.LIGHT_BLUE.getDyeData())
-                .put(DyeColors.MAGENTA, (int)org.bukkit.DyeColor.MAGENTA.getDyeData())
-                .put(DyeColors.ORANGE, (int)org.bukkit.DyeColor.ORANGE.getDyeData())
-                .put(DyeColors.WHITE, (int)org.bukkit.DyeColor.WHITE.getDyeData())
+                .put(DyeColors.BLACK, (int) org.bukkit.DyeColor.BLACK.getDyeData())
+                .put(DyeColors.RED, (int) org.bukkit.DyeColor.RED.getDyeData())
+                .put(DyeColors.GREEN, (int) org.bukkit.DyeColor.GREEN.getDyeData())
+                .put(DyeColors.BROWN, (int) org.bukkit.DyeColor.BROWN.getDyeData())
+                .put(DyeColors.BLUE, (int) org.bukkit.DyeColor.BLUE.getDyeData())
+                .put(DyeColors.PURPLE, (int) org.bukkit.DyeColor.PURPLE.getDyeData())
+                .put(DyeColors.CYAN, (int) org.bukkit.DyeColor.CYAN.getDyeData())
+                .put(DyeColors.SILVER, (int) org.bukkit.DyeColor.SILVER.getDyeData())
+                .put(DyeColors.GRAY, (int) org.bukkit.DyeColor.GRAY.getDyeData())
+                .put(DyeColors.PINK, (int) org.bukkit.DyeColor.PINK.getDyeData())
+                .put(DyeColors.LIME, (int) org.bukkit.DyeColor.LIME.getDyeData())
+                .put(DyeColors.YELLOW, (int) org.bukkit.DyeColor.YELLOW.getDyeData())
+                .put(DyeColors.LIGHT_BLUE, (int) org.bukkit.DyeColor.LIGHT_BLUE.getDyeData())
+                .put(DyeColors.MAGENTA, (int) org.bukkit.DyeColor.MAGENTA.getDyeData())
+                .put(DyeColors.ORANGE, (int) org.bukkit.DyeColor.ORANGE.getDyeData())
+                .put(DyeColors.WHITE, (int) org.bukkit.DyeColor.WHITE.getDyeData())
                 .build();
         //noinspection ConstantConditions
         FISH_MAP = ImmutableBiMap.<Fish, Integer>builder()
@@ -226,7 +224,7 @@ public final class DurabilityConverter {
 
     @SuppressWarnings({"rawtypes", "unchecked"}) // I can't parameterize this either; it scares the compiler
     private static <T extends VariantData<U, T, ?>, U extends CatalogType> T
-        getItemData(ItemStack item, Class<T> type, BiMap<U, Integer> map) {
+    getItemData(ItemStack item, Class<T> type, BiMap<U, Integer> map) {
         int damage = item.getDurability();
         if (!map.containsValue(damage)) {
             throw new UnsupportedOperationException();

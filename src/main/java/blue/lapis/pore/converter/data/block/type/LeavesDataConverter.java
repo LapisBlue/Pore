@@ -58,6 +58,7 @@ public class LeavesDataConverter extends DataTypeConverter {
 
     // ew ew ew ew ew ew ew ew ew ew ew ew ew
     static class DecayableDataValue extends AbstractDataValue<DecayableData, Object> {
+
         public DecayableDataValue(boolean flag) {
             super(DecayableData.class, flag ? FLAG : ABSENT);
         }

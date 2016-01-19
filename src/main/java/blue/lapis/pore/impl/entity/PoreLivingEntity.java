@@ -261,7 +261,8 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     public boolean hasPotionEffect(PotionEffectType type) {
         org.spongepowered.api.effect.potion.PotionEffectType spongeType = PotionEffectTypeConverter.of(type);
-        List<org.spongepowered.api.effect.potion.PotionEffect> effects = getHandle().get(Keys.POTION_EFFECTS).orElse(null);
+        List<org.spongepowered.api.effect.potion.PotionEffect> effects =
+                getHandle().get(Keys.POTION_EFFECTS).orElse(null);
         if (effects != null) {
             for (org.spongepowered.api.effect.potion.PotionEffect potionEffect : effects) {
                 if (potionEffect.getType() == spongeType) {
@@ -274,7 +275,8 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void removePotionEffect(PotionEffectType type) {
-        List<org.spongepowered.api.effect.potion.PotionEffect> effects = getHandle().get(Keys.POTION_EFFECTS).orElse(null);
+        List<org.spongepowered.api.effect.potion.PotionEffect> effects =
+                getHandle().get(Keys.POTION_EFFECTS).orElse(null);
         org.spongepowered.api.effect.potion.PotionEffectType spongeType = PotionEffectTypeConverter.of(type);
         if (effects != null) {
             Iterator<org.spongepowered.api.effect.potion.PotionEffect> it = effects.iterator();

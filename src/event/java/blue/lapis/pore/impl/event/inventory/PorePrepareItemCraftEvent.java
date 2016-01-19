@@ -55,7 +55,7 @@ public class PorePrepareItemCraftEvent extends PrepareItemCraftEvent {
 
     @Override
     public org.bukkit.inventory.CraftingInventory getInventory() {
-        return PoreCraftingInventory.of((CraftingInventory)this.getHandle().getInventory());
+        return PoreCraftingInventory.of((CraftingInventory) this.getHandle().getInventory());
     }
 
     @Override

@@ -52,7 +52,7 @@ public class PoreHangingBreakByEntityEvent extends HangingBreakByEntityEvent {
 
     @Override
     public Hanging getEntity() {
-        return PoreHanging.of((org.spongepowered.api.entity.hanging.Hanging)this.getHandle().getEntity());
+        return PoreHanging.of((org.spongepowered.api.entity.hanging.Hanging) this.getHandle().getEntity());
     }
 
     @Override

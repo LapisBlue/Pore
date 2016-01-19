@@ -43,7 +43,7 @@ public final class GeneratorTypeConverter {
                     /*.add(WorldType.LARGE_BIOMES, GeneratorTypes.LARGE_BIOME)
                     .add(WorldType.AMPLIFIED, GeneratorTypes.AMPLIFIED) TODO */
                     .add(WorldType.CUSTOMIZED, GeneratorTypes.DEBUG) //TODO: no idea whether this is right
-            .build();
+                    .build();
 
     public static GeneratorType of(WorldType worldType) {
         return CONVERTER.convert(worldType);

@@ -55,6 +55,6 @@ public class PoreCreature extends PoreLivingEntity implements Creature {
 
     @Override
     public void setTarget(LivingEntity target) {
-        getHandle().setTarget(((PoreLivingEntity)target).getHandle());
+        getHandle().setTarget(((PoreLivingEntity) target).getHandle());
     }
 }

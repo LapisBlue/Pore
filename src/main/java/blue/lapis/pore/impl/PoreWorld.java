@@ -26,7 +26,6 @@ package blue.lapis.pore.impl;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.converter.type.world.BiomeConverter;
 import blue.lapis.pore.converter.type.world.DifficultyConverter;
@@ -296,7 +295,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         checkNotNull(direction, "Direction cannot be null");
         Entity spawned = spawnEntity(location, EntityType.ARROW);
         assert spawned instanceof Arrow; // basic sanity check
-        Arrow arrow = (Arrow)spawned;
+        Arrow arrow = (Arrow) spawned;
         arrow.setVelocity(VectorConverter.getUnitVector(direction).multiply(speed)); // I know, it's weird
         //TODO: spread
         return arrow;
@@ -326,7 +325,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         if (!(spawned instanceof LivingEntity)) {
             throw new IllegalArgumentException("Call to spawnCreature non-living entity type");
         }
-        return (LivingEntity)spawned;
+        return (LivingEntity) spawned;
     }
 
     @Override
@@ -337,7 +336,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public LightningStrike strikeLightning(Location loc) {
-        return (LightningStrike)spawnEntity(loc, EntityType.LIGHTNING);
+        return (LightningStrike) spawnEntity(loc, EntityType.LIGHTNING);
     }
 
     @Override
@@ -457,7 +456,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean hasStorm() {
-        return     getHandle().getWeather().equals(Weathers.RAIN)
+        return getHandle().getWeather().equals(Weathers.RAIN)
                 || getHandle().getWeather().equals(Weathers.THUNDER_STORM);
     }
 
@@ -509,7 +508,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean createExplosion(double x, double y, double z, float power, boolean setFire,
-                                   boolean breakBlocks) {
+            boolean breakBlocks) {
         throw new NotImplementedException("TODO");
     }
 
@@ -579,7 +578,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         if (!(spawned instanceof org.spongepowered.api.entity.FallingBlock)) {
             throw new IllegalStateException("Spawned entity was not falling block!"); //TODO: exception type?
         }
-        org.spongepowered.api.entity.FallingBlock fb = (org.spongepowered.api.entity.FallingBlock)spawned;
+        org.spongepowered.api.entity.FallingBlock fb = (org.spongepowered.api.entity.FallingBlock) spawned;
         //TODO: set type and such
         return PoreFallingSand.of(fb);
     }
@@ -628,7 +627,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public ChunkSnapshot getEmptyChunkSnapshot(int x, int z, boolean includeBiome,
-                                               boolean includeBiomeTempRain) {
+            boolean includeBiomeTempRain) {
         throw new NotImplementedException("TODO");
     }
 

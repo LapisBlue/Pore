@@ -41,7 +41,7 @@ public class BrickDataConverter extends DataTypeConverter {
                         .put(new BrickDataValue(BrickTypes.DEFAULT), (byte) 0)
                         .put(new BrickDataValue(BrickTypes.MOSSY), (byte) 1)
                         .put(new BrickDataValue(BrickTypes.CRACKED), (byte) 2)
-                        .put(new BrickDataValue(BrickTypes.CHISELED), (byte)3)
+                        .put(new BrickDataValue(BrickTypes.CHISELED), (byte) 3)
                         .build(),
                 (byte) 2
         );
@@ -49,6 +49,7 @@ public class BrickDataConverter extends DataTypeConverter {
     }
 
     static class BrickDataValue extends AbstractDataValue<BrickData, BrickType> {
+
         public BrickDataValue(BrickType value) {
             super(BrickData.class, value);
         }

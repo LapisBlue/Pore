@@ -90,7 +90,7 @@ public final class BiomeConverter {
             .add(Biome.SAVANNA_PLATEAU, BiomeTypes.SAVANNA_PLATEAU)
             .add(Biome.SAVANNA_PLATEAU_MOUNTAINS, BiomeTypes.SAVANNA_PLATEAU_MOUNTAINS)
             .add(Biome.SKY, BiomeTypes.SKY)
-                    //.add(Biome.SMALL_MOUNTAINS, BiomeTypes.SMALL_MOUNTAINS) // TODO: Missing in Sponge
+            //.add(Biome.SMALL_MOUNTAINS, BiomeTypes.SMALL_MOUNTAINS) // TODO: Missing in Sponge
             .add(Biome.STONE_BEACH, BiomeTypes.STONE_BEACH)
             .add(Biome.SUNFLOWER_PLAINS, BiomeTypes.SUNFLOWER_PLAINS)
             .add(Biome.SWAMPLAND, BiomeTypes.SWAMPLAND)

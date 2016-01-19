@@ -40,9 +40,9 @@ public class PlanksDataConverter extends DataTypeConverter {
                         .put(new LogDataConverter.TreeDataValue(TreeTypes.OAK), (byte) 0)
                         .put(new LogDataConverter.TreeDataValue(TreeTypes.SPRUCE), (byte) 1)
                         .put(new LogDataConverter.TreeDataValue(TreeTypes.BIRCH), (byte) 2)
-                        .put(new LogDataConverter.TreeDataValue(TreeTypes.JUNGLE), (byte)3)
-                        .put(new LogDataConverter.TreeDataValue(TreeTypes.ACACIA), (byte)4)
-                        .put(new LogDataConverter.TreeDataValue(TreeTypes.DARK_OAK), (byte)5)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.JUNGLE), (byte) 3)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.ACACIA), (byte) 4)
+                        .put(new LogDataConverter.TreeDataValue(TreeTypes.DARK_OAK), (byte) 5)
                         .build(),
                 (byte) 4
         );

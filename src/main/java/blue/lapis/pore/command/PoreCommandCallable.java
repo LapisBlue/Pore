@@ -31,12 +31,12 @@ import blue.lapis.pore.util.PoreWrapper;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.command.Command;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.util.annotation.NonnullByDefault;
 import org.spongepowered.api.command.CommandCallable;
 import org.spongepowered.api.command.CommandException;
 import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.util.annotation.NonnullByDefault;
 
 import java.util.List;
 import java.util.Optional;

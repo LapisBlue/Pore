@@ -45,8 +45,6 @@ import org.spongepowered.api.scoreboard.Scoreboard;
 import org.spongepowered.api.scoreboard.critieria.Criterion;
 import org.spongepowered.api.scoreboard.objective.Objective;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.serializer.TextSerializers;
-import org.spongepowered.api.util.TextMessageException;
 
 import java.util.Optional;
 import java.util.Set;
@@ -62,7 +60,8 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     }
 
     @Override
-    public org.bukkit.scoreboard.Objective registerNewObjective(String name, String criteria) throws IllegalArgumentException {
+    public org.bukkit.scoreboard.Objective registerNewObjective(String name, String criteria)
+            throws IllegalArgumentException {
         checkArgument(name != null, "Name must not be null");
         Objective.Builder builder = Objective.builder();
         //noinspection ConstantConditions
@@ -84,7 +83,8 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     }
 
     @Override
-    public Set<org.bukkit.scoreboard.Objective> getObjectivesByCriteria(String criteria) throws IllegalArgumentException {
+    public Set<org.bukkit.scoreboard.Objective> getObjectivesByCriteria(String criteria)
+            throws IllegalArgumentException {
         checkArgument(criteria != null, "Criterion must not be null");
         //TODO: no idea whether this is right
         Optional<Criterion> c = Pore.getGame().getRegistry().getType(Criterion.class, criteria);

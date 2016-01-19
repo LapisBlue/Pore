@@ -31,7 +31,6 @@ import blue.lapis.pore.util.PoreWrapper;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.BanEntry;
-import org.spongepowered.api.text.serializer.TextSerializers;
 import org.spongepowered.api.util.ban.Ban;
 
 import java.util.Date;

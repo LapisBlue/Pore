@@ -42,7 +42,7 @@ public class PoreInventoryView extends InventoryView {
     private final org.bukkit.inventory.Inventory bottom;
 
     protected PoreInventoryView(org.bukkit.entity.HumanEntity player, org.bukkit.inventory.Inventory top,
-                                org.bukkit.inventory.Inventory bottom) {
+            org.bukkit.inventory.Inventory bottom) {
         this.player = player;
         this.top = top;
         this.bottom = bottom;

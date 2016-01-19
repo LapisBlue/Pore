@@ -24,7 +24,6 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;

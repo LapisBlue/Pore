@@ -38,8 +38,6 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.spongepowered.api.scoreboard.critieria.Criteria;
 import org.spongepowered.api.scoreboard.objective.Objective;
-import org.spongepowered.api.text.serializer.TextSerializers;
-import org.spongepowered.api.util.TextMessageException;
 
 public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.scoreboard.Objective {
 
@@ -89,7 +87,7 @@ public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.
     public Scoreboard getScoreboard() {
         //TODO: eh, this might be screwy because Bukkit doesn't account for multiple parents
         return PoreScoreboard.of(
-                (org.spongepowered.api.scoreboard.Scoreboard)getHandle().getScoreboards().toArray()[0]
+                (org.spongepowered.api.scoreboard.Scoreboard) getHandle().getScoreboards().toArray()[0]
         );
     }
 

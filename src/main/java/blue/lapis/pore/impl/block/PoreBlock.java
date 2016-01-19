@@ -164,17 +164,17 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
 
     @Override
     public int getX() {
-        return (int)getHandle().getX();
+        return (int) getHandle().getX();
     }
 
     @Override
     public int getY() {
-        return (int)getHandle().getY();
+        return (int) getHandle().getY();
     }
 
     @Override
     public int getZ() {
-        return (int)getHandle().getZ();
+        return (int) getHandle().getZ();
     }
 
     @Override

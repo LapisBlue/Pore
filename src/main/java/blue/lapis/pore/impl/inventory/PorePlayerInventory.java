@@ -56,7 +56,7 @@ public class PorePlayerInventory extends PoreInventory implements PlayerInventor
 
     @Override
     public HumanInventory getHandle() {
-        return (HumanInventory)super.getHandle();
+        return (HumanInventory) super.getHandle();
     }
 
     @Override

@@ -83,11 +83,11 @@ public abstract class DataTypeConverter {
             assert i + bitsToConsider <= 8; // we can't consider more than 8 bits within a single byte
             byte masked = data;
             masked >>= i; // right-shift to discard bits considered in previous iterations
-            byte mask = (byte)(Math.pow(2, bitsToConsider) - 1); // calculate the bitmask based on the size
+            byte mask = (byte) (Math.pow(2, bitsToConsider) - 1); // calculate the bitmask based on the size
             masked &= mask; // apply the mask
             if (!c.containsValue(masked)) {
                 throw new IllegalArgumentException("Out of bounds data byte for " + this.getClass().getSimpleName()
-                + ": " + data);
+                        + ": " + data);
             }
             AbstractDataValue adv = c.inverse().get(masked);
             if (adv.getValue() != AbstractDataValue.ABSENT) {

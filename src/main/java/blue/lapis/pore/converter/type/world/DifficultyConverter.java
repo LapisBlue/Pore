@@ -41,7 +41,7 @@ public final class DifficultyConverter {
                     .add(org.bukkit.Difficulty.EASY, Difficulties.EASY)
                     .add(org.bukkit.Difficulty.NORMAL, Difficulties.NORMAL)
                     .add(org.bukkit.Difficulty.HARD, Difficulties.HARD)
-            .build();
+                    .build();
 
     public static Difficulty of(org.bukkit.Difficulty biome) {
         return CONVERTER.convert(biome);

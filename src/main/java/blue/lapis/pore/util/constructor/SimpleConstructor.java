@@ -27,7 +27,7 @@ package blue.lapis.pore.util.constructor;
 public interface SimpleConstructor<T, P> {
 
     Class<T> getType();
-    
+
     T construct(P parameter);
 
     interface Provider {

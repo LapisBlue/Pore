@@ -69,22 +69,26 @@ public class PoreBootstrap implements PoreEventManager {
         }
     }
 
-    @Listener @Override
+    @Listener
+    @Override
     public void onPreInit(GamePreInitializationEvent event) throws Exception {
         pore.onPreInit(event);
     }
 
-    @Listener @Override
+    @Listener
+    @Override
     public void onAboutToStart(GameAboutToStartServerEvent event) throws Exception {
         pore.onAboutToStart(event);
     }
 
-    @Listener @Override
+    @Listener
+    @Override
     public void onStarting(GameStartingServerEvent event) throws Exception {
         pore.onStarting(event);
     }
 
-    @Listener @Override
+    @Listener
+    @Override
     public void onShutdown(GameStoppingServerEvent event) throws Exception {
         pore.onShutdown(event);
     }

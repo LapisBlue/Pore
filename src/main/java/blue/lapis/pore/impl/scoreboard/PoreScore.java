@@ -33,11 +33,10 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.spongepowered.api.scoreboard.Score;
-import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.serializer.TextSerializers;
 
 public class PoreScore extends PoreWrapper<Score> implements org.bukkit.scoreboard.Score {
-          // and seven years ago
+    // and seven years ago
 
     public static PoreScore of(Score handle) {
         return WrapperConverter.of(PoreScore.class, handle);
@@ -61,7 +60,7 @@ public class PoreScore extends PoreWrapper<Score> implements org.bukkit.scoreboa
 
     @Override
     public Objective getObjective() {
-        return (Objective)getHandle().getObjectives().toArray()[0];
+        return (Objective) getHandle().getObjectives().toArray()[0];
     }
 
     @Override

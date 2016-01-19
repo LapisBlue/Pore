@@ -35,7 +35,6 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
-import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.vehicle.minecart.MinecartCommandBlock;
 import org.spongepowered.api.text.Text;
 

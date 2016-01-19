@@ -43,7 +43,7 @@ public class LogDataConverter extends DataTypeConverter {
                         .put(new TreeDataValue(TreeTypes.OAK), (byte) 0)
                         .put(new TreeDataValue(TreeTypes.SPRUCE), (byte) 1)
                         .put(new TreeDataValue(TreeTypes.BIRCH), (byte) 2)
-                        .put(new TreeDataValue(TreeTypes.JUNGLE), (byte)3)
+                        .put(new TreeDataValue(TreeTypes.JUNGLE), (byte) 3)
                         .build(),
                 (byte) 2
         );
@@ -61,12 +61,14 @@ public class LogDataConverter extends DataTypeConverter {
     }
 
     static class TreeDataValue extends AbstractDataValue<TreeData, TreeType> {
+
         public TreeDataValue(TreeType value) {
             super(TreeData.class, value);
         }
     }
 
     static class AxisDataValue extends AbstractDataValue<AxisData, Axis> {
+
         public AxisDataValue(Axis value) {
             super(AxisData.class, value);
         }

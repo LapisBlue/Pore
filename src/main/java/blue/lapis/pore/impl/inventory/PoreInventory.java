@@ -88,7 +88,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
     public ItemStack getItem(int index) {
         if (this.getHandle() instanceof OrderedInventory) {
             Optional<org.spongepowered.api.item.inventory.ItemStack> stack =
-                    ((OrderedInventory)this.getHandle()).peek(new SlotIndex(index));
+                    ((OrderedInventory) this.getHandle()).peek(new SlotIndex(index));
             if (stack.isPresent()) {
                 return ItemStackConverter.of(stack.get());
             } else {
@@ -103,7 +103,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
     public void setItem(int index, ItemStack item) {
         if (this.getHandle() instanceof OrderedInventory) {
             Optional<Slot> slot =
-                    ((OrderedInventory)this.getHandle()).getSlot(new SlotIndex(index));
+                    ((OrderedInventory) this.getHandle()).getSlot(new SlotIndex(index));
             if (slot.isPresent()) {
                 slot.get().set(ItemStackConverter.of(item));
             } else {
@@ -158,7 +158,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
     private HashMap<Integer, ItemStack> getOrderedContents() {
         HashMap<Integer, ItemStack> matches = Maps.newHashMap();
         if (this.getHandle() instanceof OrderedInventory) {
-            OrderedInventory ordered = (OrderedInventory)this.getHandle();
+            OrderedInventory ordered = (OrderedInventory) this.getHandle();
             for (int i = 0; i < ordered.size(); i++) {
                 Optional<Slot> slot = ordered.getSlot(new SlotIndex(i));
                 if (slot.isPresent()) {
@@ -184,7 +184,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
     public ItemStack[] getContents() {
         ItemStack[] contents = new ItemStack[this.getHandle().size()];
         if (this.getHandle() instanceof OrderedInventory) {
-            OrderedInventory ordered = (OrderedInventory)this.getHandle();
+            OrderedInventory ordered = (OrderedInventory) this.getHandle();
             for (int i = 0; i < this.getHandle().capacity(); i++) {
                 Optional<Slot> slot = ordered.getSlot(new SlotIndex(i));
                 if (slot.isPresent()) {
@@ -211,7 +211,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
             throw new IllegalArgumentException("Contents array is greater than inventory capacity");
         }
         if (this.getHandle() instanceof OrderedInventory) {
-            OrderedInventory ordered = (OrderedInventory)this.getHandle();
+            OrderedInventory ordered = (OrderedInventory) this.getHandle();
             int i = 0;
             for (ItemStack stack : items) {
                 Optional<Slot> slot = ordered.getSlot(new SlotIndex(i));
@@ -396,7 +396,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
     @Override
     public void clear(int index) {
         if (this.getHandle() instanceof OrderedInventory) {
-            Optional<Slot> slot = ((OrderedInventory)this.getHandle()).getSlot(new SlotIndex(index));
+            Optional<Slot> slot = ((OrderedInventory) this.getHandle()).getSlot(new SlotIndex(index));
             if (slot.isPresent()) {
                 slot.get().clear();
             }
@@ -431,7 +431,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
         // dropper
         // furnace
         if (this.getHandle() instanceof CraftingInventory) {
-            GridInventory craftingGrid = ((CraftingInventory)this.getHandle()).getCraftingGrid();
+            GridInventory craftingGrid = ((CraftingInventory) this.getHandle()).getCraftingGrid();
             if (craftingGrid.getRows() == 2) {
                 return InventoryType.CRAFTING;
             } else {
@@ -454,16 +454,16 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
     @Override
     public InventoryHolder getHolder() {
         if (this.getHandle() instanceof CarriedInventory) {
-            Optional<?> carrier = ((CarriedInventory)this.getHandle()).getCarrier();
+            Optional<?> carrier = ((CarriedInventory) this.getHandle()).getCarrier();
             if (carrier.isPresent()) {
-                return PoreInventoryHolder.of((Carrier)carrier.get());
+                return PoreInventoryHolder.of((Carrier) carrier.get());
             }
         }
         return null;
     }
 
-     // I've worked with Bukkit for more than two years and this method is by far
-     // one of the worst ideas I've seen in it.
+    // I've worked with Bukkit for more than two years and this method is by far
+    // one of the worst ideas I've seen in it.
     @Override
     public ListIterator<ItemStack> iterator() {
         return this.iterator(0);

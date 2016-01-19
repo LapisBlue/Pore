@@ -24,8 +24,6 @@
  */
 package blue.lapis.pore.converter.type.material;
 
-import blue.lapis.pore.Pore;
-
 import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.item.inventory.ItemStack;
 

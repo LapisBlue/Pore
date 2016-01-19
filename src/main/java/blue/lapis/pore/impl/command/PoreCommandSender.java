@@ -32,10 +32,8 @@ import blue.lapis.pore.impl.permissions.PorePermissible;
 
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.serializer.TextSerializers;
-import org.spongepowered.api.util.TextMessageException;
 import org.spongepowered.api.command.CommandSource;
+import org.spongepowered.api.text.Text;
 
 public class PoreCommandSender extends PorePermissible implements CommandSender {
 
