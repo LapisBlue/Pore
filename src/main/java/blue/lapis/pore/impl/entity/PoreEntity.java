@@ -29,6 +29,7 @@ import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.I
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.PASSENGER_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.VEHICLE_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.VELOCITY_DATA;
+import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
 
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
@@ -58,8 +59,7 @@ import org.spongepowered.api.data.manipulator.mutable.entity.IgniteableData;
 import org.spongepowered.api.data.manipulator.mutable.entity.PassengerData;
 import org.spongepowered.api.data.manipulator.mutable.entity.VelocityData;
 import org.spongepowered.api.entity.Entity;
-import org.spongepowered.api.text.Texts;
-import org.spongepowered.api.util.TextMessageException;
+import org.spongepowered.api.entity.EntitySnapshot;
 
 import java.util.List;
 import java.util.Optional;
@@ -71,6 +71,16 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     public static PoreEntity of(Entity handle) {
         return WrapperConverter.of(PoreEntity.class, handle);
+    }
+
+    public static PoreEntity of(EntitySnapshot snapshot) {
+        Optional<UUID> uuid = snapshot.getUniqueId();
+        assert uuid.isPresent(); //TODO: not sure if this is right
+        Optional<Entity> entity = snapshot.getTransform().get().getExtent().getEntity(uuid.get());
+        if (!entity.isPresent()) {
+            return null;
+        }
+        return PoreEntity.of(entity.get());
     }
 
     protected PoreEntity(Entity handle) {
@@ -247,7 +257,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
         if (passenger != null) {
             Optional<PassengerData> data = getHandle().getOrCreate(PASSENGER_DATA);
             if (data.isPresent()) {
-                getHandle().offer(data.get().passenger().set(((PoreEntity) passenger).getHandle()));
+                getHandle().offer(data.get().passenger().set(((PoreEntity) passenger).getHandle().createSnapshot()));
             } else {
                 throw new UnsupportedOperationException("Cannot apply passenger to entity with ID " + getEntityId()
                         + " and type " + getType().name());
@@ -330,19 +340,16 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
     @SuppressWarnings("deprecation")
     public String getCustomName() {
         return hasData(DISPLAY_NAME_DATA)
-                ? Texts.legacy().to(getHandle().get(DISPLAY_NAME_DATA).get().displayName().get())
+                ? LEGACY_FORMATTING_CODE.serialize(getHandle().get(DISPLAY_NAME_DATA).get().displayName().get())
                 : null;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void setCustomName(String name) {
         Optional<DisplayNameData> data = getHandle().getOrCreate(DISPLAY_NAME_DATA);
         if (data.isPresent()) {
-            try {
-                getHandle().offer(data.get().displayName().set(Texts.legacy().from(name)));
-            } catch (TextMessageException ex) {
-                throw new IllegalArgumentException(ex);
-            }
+            getHandle().offer(data.get().displayName().set(LEGACY_FORMATTING_CODE.deserialize(name)));
         } else {
             throw new UnsupportedOperationException("Cannot apply display name data to entity with ID " + getEntityId()
                     + " and type " + getType().name());

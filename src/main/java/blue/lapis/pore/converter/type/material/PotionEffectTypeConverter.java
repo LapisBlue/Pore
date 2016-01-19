@@ -28,15 +28,15 @@ import blue.lapis.pore.converter.type.TypeConverter;
 
 import com.google.common.base.Converter;
 import org.bukkit.potion.PotionEffectType;
-import org.spongepowered.api.potion.PotionEffectTypes;
+import org.spongepowered.api.effect.potion.PotionEffectTypes;
 
 public final class PotionEffectTypeConverter {
 
     private PotionEffectTypeConverter() {
     }
 
-    public static final Converter<PotionEffectType, org.spongepowered.api.potion.PotionEffectType> CONVERTER =
-            TypeConverter.builder(PotionEffectType.class, org.spongepowered.api.potion.PotionEffectType.class)
+    public static final Converter<PotionEffectType, org.spongepowered.api.effect.potion.PotionEffectType> CONVERTER =
+            TypeConverter.builder(PotionEffectType.class, org.spongepowered.api.effect.potion.PotionEffectType.class)
                     .add(PotionEffectType.SPEED, PotionEffectTypes.SPEED)
                     .add(PotionEffectType.SLOW, PotionEffectTypes.SLOWNESS)
                     .add(PotionEffectType.FAST_DIGGING, PotionEffectTypes.HASTE)
@@ -62,11 +62,11 @@ public final class PotionEffectTypeConverter {
                     .add(PotionEffectType.SATURATION, PotionEffectTypes.SATURATION)
                     .build();
 
-    public static org.spongepowered.api.potion.PotionEffectType of(PotionEffectType potionEffectType) {
+    public static org.spongepowered.api.effect.potion.PotionEffectType of(PotionEffectType potionEffectType) {
         return CONVERTER.convert(potionEffectType);
     }
 
-    public static PotionEffectType of(org.spongepowered.api.potion.PotionEffectType potionEffectType) {
+    public static PotionEffectType of(org.spongepowered.api.effect.potion.PotionEffectType potionEffectType) {
         return CONVERTER.reverse().convert(potionEffectType);
     }
 

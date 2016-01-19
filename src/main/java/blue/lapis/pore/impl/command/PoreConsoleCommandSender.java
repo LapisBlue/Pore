@@ -30,7 +30,7 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
-import org.spongepowered.api.util.command.source.ConsoleSource;
+import org.spongepowered.api.command.source.ConsoleSource;
 
 public class PoreConsoleCommandSender extends PoreCommandSender implements ConsoleCommandSender {
 

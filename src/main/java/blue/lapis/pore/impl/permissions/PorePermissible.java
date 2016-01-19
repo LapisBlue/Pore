@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.permissions;
 
 import blue.lapis.pore.Pore;
+import blue.lapis.pore.impl.scheduler.PoreBukkitScheduler;
 import blue.lapis.pore.util.PoreWrapper;
 
 import org.apache.commons.lang3.NotImplementedException;
@@ -39,6 +40,7 @@ import org.spongepowered.api.util.Tristate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class PorePermissible extends PoreWrapper<Subject> implements Permissible {
 
@@ -101,8 +103,7 @@ public class PorePermissible extends PoreWrapper<Subject> implements Permissible
 
     @Override
     public PermissionAttachment addAttachment(Plugin plugin, final String name, boolean value, int ticks) {
-        final PermissionAttachment attachment = addAttachment(plugin, ticks);
-        return attachment;
+        return addAttachment(plugin, ticks);
     }
 
     @Override
@@ -110,7 +111,9 @@ public class PorePermissible extends PoreWrapper<Subject> implements Permissible
         final PermissionAttachment attachment = new PermissionAttachment(plugin, this);
         attachments.add(attachment);
         if (ticks != -1) {
-            Pore.getGame().getScheduler().createTaskBuilder().delay(ticks).execute(() -> removeAttachment(attachment)).submit(Pore.getPlugin());
+            Pore.getGame().getScheduler().createTaskBuilder()
+                    .delay(PoreBukkitScheduler.ticksToMillis(ticks), TimeUnit.MILLISECONDS)
+                    .execute(() -> removeAttachment(attachment)).submit(Pore.getPlugin());
         }
         recalculatePermissions();
         return attachment;

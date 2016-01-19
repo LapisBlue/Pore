@@ -29,7 +29,7 @@ import blue.lapis.pore.impl.block.PoreBlock;
 
 import org.bukkit.block.Block;
 import org.bukkit.command.BlockCommandSender;
-import org.spongepowered.api.util.command.source.CommandBlockSource;
+import org.spongepowered.api.command.source.CommandBlockSource;
 
 public class PoreBlockCommandSender extends PoreCommandSender implements BlockCommandSender {
 

@@ -38,9 +38,9 @@ import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.SimpleCommandMap;
-import org.spongepowered.api.service.command.CommandService;
-import org.spongepowered.api.util.command.CommandCallable;
-import org.spongepowered.api.util.command.CommandMapping;
+import org.spongepowered.api.command.CommandManager;
+import org.spongepowered.api.command.CommandCallable;
+import org.spongepowered.api.command.CommandMapping;
 
 import java.util.Collection;
 import java.util.List;
@@ -48,7 +48,7 @@ import java.util.Optional;
 
 public class PoreCommandMap extends SimpleCommandMap {
 
-    private static final CommandService handle = Pore.getGame().getCommandDispatcher();
+    private static final CommandManager handle = Pore.getGame().getCommandManager();
 
     public PoreCommandMap(Server server) {
         super(server);

@@ -80,6 +80,7 @@ import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.block.BlockTypes;
+import org.spongepowered.api.effect.particle.ParticleEffect;
 import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.extent.Extent;
@@ -129,6 +130,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         return getBlockAt(x, y, z).getTypeId();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int getBlockTypeIdAt(Location location) {
         return getBlockTypeIdAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
@@ -255,6 +257,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean refreshChunk(int x, int z) {
         throw new NotImplementedException("TODO");
@@ -316,6 +319,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         );
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public LivingEntity spawnCreature(Location loc, EntityType type) {
         Entity spawned = spawnEntity(loc, type);
@@ -567,6 +571,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public FallingBlock spawnFallingBlock(Location location, Material material, byte data)
             throws IllegalArgumentException {
@@ -579,8 +584,8 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         return PoreFallingSand.of(fb);
     }
 
-    @Override
     @SuppressWarnings("deprecation")
+    @Override
     public FallingBlock spawnFallingBlock(Location location, int blockId, byte blockData)
             throws IllegalArgumentException {
         return spawnFallingBlock(location, Material.getMaterial(blockId), blockData);
@@ -598,9 +603,9 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
             getHandle().playSound(EffectConverter.toSound(effect, data), VectorConverter.create3d(location), radius);
         } else {
             //noinspection ConstantConditions
+            //TODO: define a quantity
             getHandle().spawnParticles(
-                    Pore.getGame().getRegistry()
-                            .createParticleEffectBuilder(EffectConverter.toParticle(effect)).build(),
+                    ParticleEffect.builder().type(EffectConverter.toParticle(effect)).build(),
                     VectorConverter.create3d(location),
                     radius);
         }

@@ -70,7 +70,7 @@ public class PoreEnderman extends PoreMonster implements org.bukkit.entity.Ender
         ItemType itemType = MaterialConverter.asItem(material.getItemType());
         if (blockType != null && itemType != null) {
             getHandle().getInventory().clear();
-            ItemStack stack = Pore.getGame().getRegistry().createItemBuilder().itemType(itemType).quantity(1).build();
+            ItemStack stack = ItemStack.builder().itemType(itemType).quantity(1).build();
             getHandle().getInventory().offer(stack);
         } else {
             throw new IllegalArgumentException("Invalid enderman carry material: " + material.getItemType().name());

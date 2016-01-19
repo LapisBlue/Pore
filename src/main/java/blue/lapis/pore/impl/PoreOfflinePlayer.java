@@ -25,8 +25,8 @@
 package blue.lapis.pore.impl;
 
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.JOIN_DATA;
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.WHITELIST_DATA;
 
+import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreWrapper;
@@ -36,6 +36,9 @@ import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.spongepowered.api.entity.living.player.User;
+import org.spongepowered.api.service.ban.BanService;
+import org.spongepowered.api.service.whitelist.WhitelistService;
+import org.spongepowered.api.util.ban.Ban;
 
 import java.util.Map;
 import java.util.Optional;
@@ -68,28 +71,25 @@ public class PoreOfflinePlayer extends PoreWrapper<User> implements OfflinePlaye
 
     @Override
     public boolean isBanned() {
-        throw new NotImplementedException("TODO");//TODO: Use the BanService
+        Optional<BanService> bs = Pore.getGame().getServiceManager().provide(BanService.class);
+        return bs.isPresent() && bs.get().isBanned(getHandle().getProfile());
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public void setBanned(boolean banned) {       
-        throw new NotImplementedException("TODO");//TODO: Use the BanService
+    public void setBanned(boolean banned) {
+        PorePlayer.applyBan(getHandle().getProfile(), banned);
     }
 
     @Override
     public boolean isWhitelisted() {
-        return getHandle().get(WHITELIST_DATA).isPresent() && getHandle().get(WHITELIST_DATA).get().whitelisted().get();
+        Optional<WhitelistService> ws = Pore.getGame().getServiceManager().provide(WhitelistService.class);
+        return ws.isPresent() && ws.get().isWhitelisted(getHandle().getProfile());
     }
 
     @Override
     public void setWhitelisted(boolean value) {
-        if (value != isWhitelisted()) {
-            if (value) {
-                getHandle().offer(getHandle().getOrCreate(WHITELIST_DATA).get().whitelisted().set(true));
-            } else {
-                getHandle().remove(WHITELIST_DATA);
-            }
-        }
+        PorePlayer.applyBan(getHandle().getProfile(), value);
     }
 
     @Override
@@ -104,12 +104,12 @@ public class PoreOfflinePlayer extends PoreWrapper<User> implements OfflinePlaye
 
     @Override
     public long getFirstPlayed() {
-        return getHandle().get(JOIN_DATA).get().firstPlayed().get().getTime();
+        return getHandle().get(JOIN_DATA).get().firstPlayed().get().getEpochSecond();
     }
 
     @Override
     public long getLastPlayed() {
-        return getHandle().get(JOIN_DATA).get().lastPlayed().get().getTime();
+        return getHandle().get(JOIN_DATA).get().lastPlayed().get().getEpochSecond();
     }
 
     @Override

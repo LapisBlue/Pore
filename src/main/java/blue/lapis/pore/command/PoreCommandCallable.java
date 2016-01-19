@@ -24,19 +24,19 @@
  */
 package blue.lapis.pore.command;
 
+import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
+
 import blue.lapis.pore.impl.command.PoreCommandSender;
 import blue.lapis.pore.util.PoreWrapper;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.command.Command;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.Texts;
-import org.spongepowered.api.util.TextMessageException;
 import org.spongepowered.api.util.annotation.NonnullByDefault;
-import org.spongepowered.api.util.command.CommandCallable;
-import org.spongepowered.api.util.command.CommandException;
-import org.spongepowered.api.util.command.CommandResult;
-import org.spongepowered.api.util.command.CommandSource;
+import org.spongepowered.api.command.CommandCallable;
+import org.spongepowered.api.command.CommandException;
+import org.spongepowered.api.command.CommandResult;
+import org.spongepowered.api.command.CommandSource;
 
 import java.util.List;
 import java.util.Optional;
@@ -79,21 +79,13 @@ public class PoreCommandCallable extends PoreWrapper<Command> implements Command
     @Override
     @SuppressWarnings("deprecation")
     public Optional<? extends Text> getHelp(CommandSource source) {
-        try {
-            return Optional.of(Texts.legacy().from(getHandle().getDescription()));
-        } catch (TextMessageException ex) {
-            throw new IllegalArgumentException(ex);
-        }
+        return Optional.of(LEGACY_FORMATTING_CODE.deserialize(getHandle().getDescription()));
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public Text getUsage(CommandSource source) {
-        try {
-            return Texts.legacy().from(getHandle().getUsage());
-        } catch (TextMessageException ex) {
-            throw new IllegalArgumentException(ex);
-        }
+        return LEGACY_FORMATTING_CODE.deserialize(getHandle().getUsage());
     }
 
 }

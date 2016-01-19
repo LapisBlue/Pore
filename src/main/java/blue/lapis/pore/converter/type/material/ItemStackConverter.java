@@ -27,6 +27,7 @@ package blue.lapis.pore.converter.type.material;
 import blue.lapis.pore.Pore;
 
 import org.spongepowered.api.item.ItemType;
+import org.spongepowered.api.item.inventory.ItemStack;
 
 public final class ItemStackConverter {
 
@@ -49,7 +50,7 @@ public final class ItemStackConverter {
         }
         // IntelliJ doesn't recognize the above check and thinks withItemType() may throw an NPE
         //noinspection ConstantConditions
-        return Pore.getGame().getRegistry().createItemBuilder()
+        return ItemStack.builder()
                 .itemType(type)
                 .quantity(stack.getAmount())
                 .itemData(DurabilityConverter.getItemData(stack))

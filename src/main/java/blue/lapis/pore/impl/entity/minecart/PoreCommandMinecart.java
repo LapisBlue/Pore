@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.impl.entity.minecart;
 
+import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
+
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang3.NotImplementedException;
@@ -33,12 +35,13 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
+import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.vehicle.minecart.MinecartCommandBlock;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.Texts;
-import org.spongepowered.api.util.TextMessageException;
 
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart {
 
@@ -77,32 +80,21 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
 
     @Override
     public void setName(String name) {
-        // getHandle().setCommandName(name); TODO ??
         throw new NotImplementedException("TODO");
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void sendMessage(String message) {
-        try {
-            getHandle().sendMessage(Texts.legacy().from(message));
-        } catch (TextMessageException ex) {
-            throw new IllegalArgumentException(ex);
-        }
+        getHandle().sendMessage(LEGACY_FORMATTING_CODE.deserialize(message));
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void sendMessage(String[] messages) {
         Text[] texts = new Text[messages.length];
-        for (int i = 0; i < messages.length; i++) {
-            try {
-                texts[i] = Texts.legacy().from(messages[i]);
-            } catch (TextMessageException ex) {
-                throw new IllegalArgumentException(ex);
-            }
-        }
-        this.getHandle().sendMessage(texts);
+        Arrays.stream(messages).map(LEGACY_FORMATTING_CODE::deserialize).collect(Collectors.toList()).toArray(texts);
+        this.getHandle().sendMessages(texts);
     }
 
     @Override

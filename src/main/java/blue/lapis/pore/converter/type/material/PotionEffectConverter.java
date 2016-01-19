@@ -24,15 +24,15 @@
  */
 package blue.lapis.pore.converter.type.material;
 
-import blue.lapis.pore.Pore;
+import org.spongepowered.api.effect.potion.PotionEffect;
 
 public final class PotionEffectConverter {
 
     private PotionEffectConverter() {
     }
 
-    public static org.spongepowered.api.potion.PotionEffect of(org.bukkit.potion.PotionEffect effect) {
-        return Pore.getGame().getRegistry().createPotionEffectBuilder()
+    public static org.spongepowered.api.effect.potion.PotionEffect of(org.bukkit.potion.PotionEffect effect) {
+        return PotionEffect.builder()
                 .potionType(PotionEffectTypeConverter.of(effect.getType()))
                 .ambience(effect.isAmbient())
                 .amplifier(effect.getAmplifier())
@@ -41,7 +41,7 @@ public final class PotionEffectConverter {
                 .build();
     }
 
-    public static org.bukkit.potion.PotionEffect of(org.spongepowered.api.potion.PotionEffect effect) {
+    public static org.bukkit.potion.PotionEffect of(org.spongepowered.api.effect.potion.PotionEffect effect) {
         return new org.bukkit.potion.PotionEffect(
                 PotionEffectTypeConverter.of(effect.getType()),
                 effect.getDuration(),

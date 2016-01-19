@@ -50,8 +50,8 @@ public final class LocationConverter {
                 location.getPosition().getY(), location.getPosition().getZ());
     }
 
-    public static org.spongepowered.api.world.Location of(Location location) {
-        return new org.spongepowered.api.world.Location(((PoreWorld) location.getWorld()).getHandle(),
+    public static org.spongepowered.api.world.Location<World> of(Location location) {
+        return new org.spongepowered.api.world.Location<>(((PoreWorld) location.getWorld()).getHandle(),
                 VectorConverter.create3d(location));
     }
 

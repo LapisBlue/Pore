@@ -29,6 +29,8 @@ import blue.lapis.pore.util.PoreWrapper;
 import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
 
+import java.util.Optional;
+
 public class PorePluginContainer extends PoreWrapper<Plugin> implements PluginContainer {
 
     public PorePluginContainer(Plugin handle) {
@@ -51,7 +53,7 @@ public class PorePluginContainer extends PoreWrapper<Plugin> implements PluginCo
     }
 
     @Override
-    public Object getInstance() {
-        return getHandle();
+    public Optional<Object> getInstance() {
+        return Optional.of(getHandle());
     }
 }

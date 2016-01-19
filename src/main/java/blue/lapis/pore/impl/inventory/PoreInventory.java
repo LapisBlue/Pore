@@ -81,7 +81,7 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
 
     @Override
     public String getName() {
-        return this.getHandle().getName().getTranslation().get(Locale.ENGLISH);
+        return this.getHandle().getName().get(Locale.ENGLISH);
     }
 
     @Override

@@ -82,11 +82,12 @@ import org.bukkit.util.CachedServerIcon;
 import org.bukkit.util.StringUtil;
 import org.bukkit.util.permissions.DefaultPermissions;
 import org.spongepowered.api.Game;
-import org.spongepowered.api.text.Texts;
-import org.spongepowered.api.util.command.source.ConsoleSource;
+import org.spongepowered.api.command.source.ConsoleSource;
+import org.spongepowered.api.text.serializer.TextSerializers;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.net.InetSocketAddress;
 import java.util.Collection;
 import java.util.HashSet;
@@ -205,14 +206,15 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public String getVersion() {
-        return PoreVersion.VERSION + '@' + game.getPlatform().getVersion();
+        return PoreVersion.VERSION + '@' + game.getPlatform().getImplementation().getVersion();
     }
 
     @Override
     public String getBukkitVersion() {
-        return PoreVersion.API_VERSION + '@' + game.getPlatform().getApiVersion();
+        return PoreVersion.API_VERSION + '@' + game.getPlatform().getApi().getVersion();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Player[] _INVALID_getOnlinePlayers() {
         Collection<? extends Player> online = getOnlinePlayers();
@@ -335,6 +337,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Player getPlayer(String name) {
         Preconditions.checkNotNull(name, "name");
@@ -358,12 +361,14 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
         return result != null ? PorePlayer.of(result) : null;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Player getPlayerExact(String name) {
         Optional<org.spongepowered.api.entity.living.player.Player> player = getHandle().getPlayer(name);
         return player.isPresent() ? PorePlayer.of(player.get()) : null;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public List<Player> matchPlayer(String name) {
         Preconditions.checkNotNull(name, "name");
@@ -442,6 +447,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
         return world.isPresent() ? PoreWorld.of(world.get()) : null;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public MapView getMap(short id) {
         throw new NotImplementedException("TODO");
@@ -546,6 +552,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean useExactLoginLocation() {
         throw new NotImplementedException("TODO");
@@ -572,6 +579,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
         return count;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public OfflinePlayer getOfflinePlayer(String name) {
         throw new NotImplementedException("TODO");
@@ -696,7 +704,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     @Override
     @SuppressWarnings("deprecation")
     public String getMotd() {
-        return Texts.legacy().to(getHandle().getMotd());
+        return TextSerializers.LEGACY_FORMATTING_CODE.serialize(getHandle().getMotd());
     }
 
     @Override
@@ -726,7 +734,7 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public CachedServerIcon loadServerIcon(File file) throws Exception {
-        return PoreCachedServerIcon.of(game.getRegistry().loadFavicon(file));
+        return PoreCachedServerIcon.of(game.getRegistry().loadFavicon(new FileInputStream(file)));
     }
 
     @Override

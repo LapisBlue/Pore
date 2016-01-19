@@ -39,6 +39,7 @@ public class PorePotionBrewer implements PotionBrewer {
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Collection<PotionEffect> getEffectsFromDamage(int damage) {
         throw new NotImplementedException("TODO");

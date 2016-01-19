@@ -40,7 +40,7 @@ public final class EnvironmentConverter {
             TypeConverter.builder(World.Environment.class, DimensionType.class)
                     .add(World.Environment.NORMAL, DimensionTypes.OVERWORLD)
                     .add(World.Environment.NETHER, DimensionTypes.NETHER)
-                    .add(World.Environment.THE_END, DimensionTypes.END)
+                    .add(World.Environment.THE_END, DimensionTypes.THE_END)
                     .build();
 
     public static DimensionType of(World.Environment environment) {

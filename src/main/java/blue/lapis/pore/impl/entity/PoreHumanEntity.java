@@ -46,6 +46,7 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.entity.living.Human;
+import org.spongepowered.api.entity.living.Humanoid;
 import org.spongepowered.api.item.inventory.Carrier;
 import org.spongepowered.api.item.inventory.entity.HumanInventory;
 import org.spongepowered.api.service.permission.Subject;
@@ -60,13 +61,13 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
         return WrapperConverter.of(PoreHumanEntity.class, handle);
     }
 
-    protected PoreHumanEntity(Human handle) {
+    protected PoreHumanEntity(Humanoid handle) {
         super(handle);
     }
 
     @Override
-    public Human getHandle() {
-        return (Human) super.getHandle();
+    public Humanoid getHandle() {
+        return (Humanoid) super.getHandle();
     }
 
     @Override

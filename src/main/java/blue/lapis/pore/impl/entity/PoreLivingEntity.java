@@ -96,6 +96,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
                 getHandle().getProperty(EyeLocationProperty.class).get().getValue());
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public List<Block> getLineOfSight(HashSet<Byte> transparent, int maxDistance) {
         throw new NotImplementedException("TODO");
@@ -106,6 +107,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
         throw new NotImplementedException("TODO"); // TODO
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Block getTargetBlock(HashSet<Byte> transparent, int maxDistance) {
         throw new NotImplementedException("TODO");
@@ -116,6 +118,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
         throw new NotImplementedException("TODO"); // TODO
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public List<Block> getLastTwoTargetBlocks(HashSet<Byte> transparent, int maxDistance) {
         throw new NotImplementedException("TODO");
@@ -126,6 +129,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
         throw new NotImplementedException("TODO"); // TODO
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Egg throwEgg() {
         if (getHandle() instanceof ProjectileSource) {
@@ -140,6 +144,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
         throw new UnsupportedOperationException("Not a ProjectileSource");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Snowball throwSnowball() {
         if (getHandle() instanceof ProjectileSource) {
@@ -152,6 +157,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
         throw new UnsupportedOperationException("Not a ProjectileSource");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Arrow shootArrow() {
         if (getHandle() instanceof ProjectileSource) {
@@ -199,6 +205,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
         return getHandle().getMortalData().lastDamage().or(0.0).get();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int _INVALID_getLastDamage() {
         return (int) this.getLastDamage();
@@ -209,6 +216,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
         getHandle().getMortalData().lastDamage().setTo(damage);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void _INVALID_setLastDamage(int damage) {
         this.setLastDamage(damage);
@@ -241,7 +249,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public boolean addPotionEffects(Collection<PotionEffect> effects) {
-        List<org.spongepowered.api.potion.PotionEffect> effectList
+        List<org.spongepowered.api.effect.potion.PotionEffect> effectList
                 = getHandle().getOrCreate(POTION_EFFECT_DATA).get().effects().get();
         effectList.addAll(Collections2.transform(effects,
                 PotionEffectConverter::of
@@ -252,10 +260,10 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public boolean hasPotionEffect(PotionEffectType type) {
-        org.spongepowered.api.potion.PotionEffectType spongeType = PotionEffectTypeConverter.of(type);
-        List<org.spongepowered.api.potion.PotionEffect> effects = getHandle().get(Keys.POTION_EFFECTS).orElse(null);
+        org.spongepowered.api.effect.potion.PotionEffectType spongeType = PotionEffectTypeConverter.of(type);
+        List<org.spongepowered.api.effect.potion.PotionEffect> effects = getHandle().get(Keys.POTION_EFFECTS).orElse(null);
         if (effects != null) {
-            for (org.spongepowered.api.potion.PotionEffect potionEffect : effects) {
+            for (org.spongepowered.api.effect.potion.PotionEffect potionEffect : effects) {
                 if (potionEffect.getType() == spongeType) {
                     return true;
                 }
@@ -266,10 +274,10 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void removePotionEffect(PotionEffectType type) {
-        List<org.spongepowered.api.potion.PotionEffect> effects = getHandle().get(Keys.POTION_EFFECTS).orElse(null);
-        org.spongepowered.api.potion.PotionEffectType spongeType = PotionEffectTypeConverter.of(type);
+        List<org.spongepowered.api.effect.potion.PotionEffect> effects = getHandle().get(Keys.POTION_EFFECTS).orElse(null);
+        org.spongepowered.api.effect.potion.PotionEffectType spongeType = PotionEffectTypeConverter.of(type);
         if (effects != null) {
-            Iterator<org.spongepowered.api.potion.PotionEffect> it = effects.iterator();
+            Iterator<org.spongepowered.api.effect.potion.PotionEffect> it = effects.iterator();
             while (it.hasNext()) {
                 if (it.next().getType() == spongeType) {
                     it.remove();
@@ -347,11 +355,13 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
         //TODO: source
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void _INVALID_damage(int amount) {
         damage((double) amount);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void _INVALID_damage(int amount, Entity source) {
         damage((double) amount, source);
@@ -362,6 +372,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
         return getHandle().get(Keys.HEALTH).orElse(0.0);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int _INVALID_getHealth() {
         return (int) getHealth();
@@ -372,6 +383,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
         getHandle().offer(Keys.HEALTH, health);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void _INVALID_setHealth(int health) {
         setHealth((double) health);
@@ -382,6 +394,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
         return getHandle().get(Keys.MAX_HEALTH).orElse(0.0);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int _INVALID_getMaxHealth() {
         return (int) getMaxHealth();
@@ -392,6 +405,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
         getHandle().offer(Keys.MAX_HEALTH, health);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void _INVALID_setMaxHealth(int health) {
         setMaxHealth((double) health);

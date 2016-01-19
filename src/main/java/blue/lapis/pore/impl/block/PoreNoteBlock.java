@@ -66,6 +66,7 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void setRawNote(byte note) {
         setNote(new org.bukkit.Note(note));
@@ -77,6 +78,7 @@ public class PoreNoteBlock extends PoreBlockState implements NoteBlock {
         return getTileEntity().getBlock().getType() == BlockTypes.NOTEBLOCK;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean play(byte instrument, byte note) {
         throw new NotImplementedException("TODO");

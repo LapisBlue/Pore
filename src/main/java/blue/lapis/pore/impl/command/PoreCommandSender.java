@@ -24,6 +24,8 @@
  */
 package blue.lapis.pore.impl.command;
 
+import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
+
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.permissions.PorePermissible;
@@ -31,9 +33,9 @@ import blue.lapis.pore.impl.permissions.PorePermissible;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.text.serializer.TextSerializers;
 import org.spongepowered.api.util.TextMessageException;
-import org.spongepowered.api.util.command.CommandSource;
+import org.spongepowered.api.command.CommandSource;
 
 public class PoreCommandSender extends PorePermissible implements CommandSender {
 
@@ -63,11 +65,7 @@ public class PoreCommandSender extends PorePermissible implements CommandSender 
     @Override
     @SuppressWarnings("deprecation")
     public void sendMessage(String message) {
-        try {
-            getHandle().sendMessage(Texts.legacy().from(message));
-        } catch (TextMessageException ex) {
-            throw new IllegalArgumentException(ex);
-        }
+        getHandle().sendMessage(LEGACY_FORMATTING_CODE.deserialize(message));
     }
 
     @Override
@@ -75,13 +73,9 @@ public class PoreCommandSender extends PorePermissible implements CommandSender 
     public void sendMessage(String[] messages) {
         Text[] texts = new Text[messages.length];
         for (int i = 0; i < messages.length; i++) {
-            try {
-                texts[i] = Texts.legacy().from(messages[i]);
-            } catch (TextMessageException ex) {
-                throw new IllegalArgumentException(ex);
-            }
+            texts[i] = LEGACY_FORMATTING_CODE.deserialize(messages[i]);
         }
-        this.getHandle().sendMessage(texts);
+        this.getHandle().sendMessages(texts);
     }
 
 }

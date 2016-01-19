@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.scoreboard;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.scoreboard.DisplaySlotConverter;
@@ -38,15 +39,13 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Team;
 import org.spongepowered.api.scoreboard.Scoreboard;
-import org.spongepowered.api.scoreboard.TeamBuilder;
 import org.spongepowered.api.scoreboard.critieria.Criterion;
-import org.spongepowered.api.scoreboard.objective.ObjectiveBuilder;
+import org.spongepowered.api.scoreboard.objective.Objective;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.text.serializer.TextSerializers;
 import org.spongepowered.api.util.TextMessageException;
 
 import java.util.Optional;
@@ -63,14 +62,14 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     }
 
     @Override
-    public Objective registerNewObjective(String name, String criteria) throws IllegalArgumentException {
+    public org.bukkit.scoreboard.Objective registerNewObjective(String name, String criteria) throws IllegalArgumentException {
         checkArgument(name != null, "Name must not be null");
-        ObjectiveBuilder builder = Pore.getGame().getRegistry().createObjectiveBuilder();
+        Objective.Builder builder = Objective.builder();
         //noinspection ConstantConditions
         builder.name(name);
         if (criteria != null) {
-            Optional<Criterion> criterion = Pore.getGame().getRegistry()
-                    .getType(Criterion.class, criteria); //TODO: no idea whether this is right
+            //TODO: no idea whether this is right
+            Optional<Criterion> criterion = Pore.getGame().getRegistry().getType(Criterion.class, criteria);
             if (criterion.isPresent()) {
                 builder.criterion(criterion.get());
             }
@@ -79,18 +78,16 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     }
 
     @Override
-    public Objective getObjective(String name) throws IllegalArgumentException {
+    public org.bukkit.scoreboard.Objective getObjective(String name) throws IllegalArgumentException {
         checkArgument(name != null, "Name must not be null");
-        //noinspection ConstantConditions
         return PoreObjective.of(getHandle().getObjective(name).orElse(null));
     }
 
     @Override
-    public Set<Objective> getObjectivesByCriteria(String criteria) throws IllegalArgumentException {
+    public Set<org.bukkit.scoreboard.Objective> getObjectivesByCriteria(String criteria) throws IllegalArgumentException {
         checkArgument(criteria != null, "Criterion must not be null");
-        //noinspection ConstantConditions
-        Optional<Criterion> c = Pore.getGame().getRegistry()
-                .getType(Criterion.class, criteria); //TODO: no idea whether this is right
+        //TODO: no idea whether this is right
+        Optional<Criterion> c = Pore.getGame().getRegistry().getType(Criterion.class, criteria);
         checkArgument(c.isPresent(), "Invalid criterion");
         return Sets.newHashSet(Collections2.transform(getHandle().getObjectivesByCriteria(c.get()),
                 PoreObjective::of
@@ -98,22 +95,20 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     }
 
     @Override
-    public Set<Objective> getObjectives() {
-        return Sets.newHashSet(Collections2.transform(getHandle().getObjectives(),
-                PoreObjective::of
-        ));
+    public Set<org.bukkit.scoreboard.Objective> getObjectives() {
+        return Sets.newHashSet(Collections2.transform(getHandle().getObjectives(), PoreObjective::of));
     }
 
     @Override
-    public Objective getObjective(DisplaySlot slot) throws IllegalArgumentException {
+    public org.bukkit.scoreboard.Objective getObjective(DisplaySlot slot) throws IllegalArgumentException {
         checkArgument(slot != null, "Display slot must not be null");
         return PoreObjective.of(getHandle().getObjective(DisplaySlotConverter.of(slot)).orElse(null));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Set<Score> getScores(OfflinePlayer player) throws IllegalArgumentException {
         checkArgument(player != null, "Offline player must not be null");
-        //noinspection ConstantConditions
         return getScores(player.getName());
     }
 
@@ -121,20 +116,16 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     @SuppressWarnings("deprecation")
     public Set<Score> getScores(String entry) throws IllegalArgumentException {
         checkArgument(entry != null, "Entry must not be null");
-        try {
-            //noinspection ConstantConditions
-            return Sets.newHashSet(Collections2.transform(getHandle().getScores(Texts.legacy().from(entry)),
-                    PoreScore::of
-            ));
-        } catch (TextMessageException ex) {
-            throw new IllegalArgumentException(ex);
-        }
+        return Sets.newHashSet(Collections2.transform(
+                getHandle().getScores(LEGACY_FORMATTING_CODE.deserialize(entry)),
+                PoreScore::of
+        ));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void resetScores(OfflinePlayer player) throws IllegalArgumentException {
         checkArgument(player != null, "Offline player must not be null");
-        //noinspection ConstantConditions
         resetScores(player.getName());
     }
 
@@ -142,27 +133,23 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     @SuppressWarnings("deprecation")
     public void resetScores(String entry) throws IllegalArgumentException {
         checkArgument(entry != null, "Entry must not be null");
-        try {
-            //noinspection ConstantConditions
-            getHandle().removeScores(Texts.legacy().from(entry));
-        } catch (TextMessageException ex) {
-            throw new IllegalArgumentException(ex);
-        }
+        getHandle().removeScores(LEGACY_FORMATTING_CODE.deserialize(entry));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Team getPlayerTeam(OfflinePlayer player) throws IllegalArgumentException {
         checkArgument(player != null, "Offline player must not be null");
-        //noinspection ConstantConditions
         return PoreTeam.of(getHandle().getMemberTeam(
-                Texts.of(((PoreOfflinePlayer) player).getHandle().getName())).orElse(null));
+                LEGACY_FORMATTING_CODE.deserialize(((PoreOfflinePlayer) player).getHandle().getName())).orElse(null));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Team getEntryTeam(String entry) throws IllegalArgumentException {
         for (org.spongepowered.api.scoreboard.Team team : getHandle().getTeams()) {
             for (Text text : team.getMembers()) {
-                if (Texts.toPlain(text).equals(entry)) {
+                if (LEGACY_FORMATTING_CODE.serialize(text).equals(entry)) {
                     return PoreTeam.of(team);
                 }
             }
@@ -173,7 +160,6 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     @Override
     public Team getTeam(String teamName) throws IllegalArgumentException {
         checkArgument(teamName != null, "Team name must not be null");
-        //noinspection ConstantConditions
         return PoreTeam.of(getHandle().getTeam(teamName).orElse(null));
     }
 
@@ -187,8 +173,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     @Override
     public Team registerNewTeam(String name) throws IllegalArgumentException {
         checkArgument(name != null, "Team name must not be null");
-        TeamBuilder builder = Pore.getGame().getRegistry().createTeamBuilder();
-        //noinspection ConstantConditions
+        org.spongepowered.api.scoreboard.Team.Builder builder = org.spongepowered.api.scoreboard.Team.builder();
         builder.name(name);
         return PoreTeam.of(builder.build());
     }

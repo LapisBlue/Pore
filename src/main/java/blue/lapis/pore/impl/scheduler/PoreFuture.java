@@ -25,7 +25,7 @@
 package blue.lapis.pore.impl.scheduler;
 
 import com.google.common.util.concurrent.AbstractFuture;
-import org.spongepowered.api.service.scheduler.Task;
+import org.spongepowered.api.scheduler.Task;
 
 import java.util.concurrent.Callable;
 

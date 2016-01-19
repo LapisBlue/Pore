@@ -212,7 +212,7 @@ public final class DurabilityConverter {
                 return getItemData(item, GOLDEN_APPLE_ITEM_DATA, GOLDEN_APPLE_MAP);
             default:
                 Optional<DurabilityData> data =
-                        Pore.getGame().getRegistry().createItemBuilder()
+                        org.spongepowered.api.item.inventory.ItemStack.builder()
                                 .itemType(MaterialConverter.asItem(item.getType()))
                                 .quantity(1).build().get(DURABILITY_DATA);
                 if (data.isPresent()) {
@@ -233,7 +233,7 @@ public final class DurabilityConverter {
         }
         // no idea why a typecast is necessary here but excluding it makes javac angry
         @SuppressWarnings("RedundantCast")
-        T data = (T)Pore.getGame().getRegistry().createItemBuilder()
+        T data = (T) org.spongepowered.api.item.inventory.ItemStack.builder()
                 .itemType(MaterialConverter.asItem(item.getType()))
                 .quantity(1).build().getOrCreate(type).get();
         data.type().set(map.inverse().get(damage));

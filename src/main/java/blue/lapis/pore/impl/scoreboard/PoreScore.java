@@ -33,7 +33,8 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.spongepowered.api.scoreboard.Score;
-import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.text.Text;
+import org.spongepowered.api.text.serializer.TextSerializers;
 
 public class PoreScore extends PoreWrapper<Score> implements org.bukkit.scoreboard.Score {
           // and seven years ago
@@ -55,7 +56,7 @@ public class PoreScore extends PoreWrapper<Score> implements org.bukkit.scoreboa
     @Override
     @SuppressWarnings("deprecation")
     public String getEntry() {
-        return Texts.legacy().to(getHandle().getName());
+        return TextSerializers.LEGACY_FORMATTING_CODE.serialize(getHandle().getName());
     }
 
     @Override

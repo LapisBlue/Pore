@@ -28,7 +28,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
 import org.bukkit.util.CachedServerIcon;
-import org.spongepowered.api.status.Favicon;
+import org.spongepowered.api.network.status.Favicon;
 
 public class PoreCachedServerIcon extends PoreWrapper<Favicon> implements CachedServerIcon {
 

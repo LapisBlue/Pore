@@ -35,6 +35,7 @@ public class PoreMapView implements MapView {
 
     // TODO: Bridge
 
+    @SuppressWarnings("deprecation")
     @Override
     public short getId() {
         throw new NotImplementedException("TODO");

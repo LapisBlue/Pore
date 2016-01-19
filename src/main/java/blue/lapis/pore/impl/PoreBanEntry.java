@@ -24,11 +24,14 @@
  */
 package blue.lapis.pore.impl;
 
+import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
+
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.BanEntry;
+import org.spongepowered.api.text.serializer.TextSerializers;
 import org.spongepowered.api.util.ban.Ban;
 
 import java.util.Date;
@@ -50,7 +53,7 @@ public class PoreBanEntry extends PoreWrapper<Ban> implements BanEntry {
 
     @Override
     public Date getCreated() {
-        return getHandle().getStartDate();
+        return Date.from(getHandle().getCreationDate());
     }
 
     @Override
@@ -58,12 +61,13 @@ public class PoreBanEntry extends PoreWrapper<Ban> implements BanEntry {
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public String getSource() {
-        if (!getHandle().getSource().isPresent()) {
+        if (!getHandle().getBanSource().isPresent()) {
             return null;
         }
-        return getHandle().getSource().get().getName();
+        return LEGACY_FORMATTING_CODE.serialize(getHandle().getBanSource().get());
     }
 
     @Override
@@ -76,7 +80,7 @@ public class PoreBanEntry extends PoreWrapper<Ban> implements BanEntry {
         if (!getHandle().getExpirationDate().isPresent()) {
             return null;
         }
-        return getHandle().getExpirationDate().get();
+        return Date.from(getHandle().getExpirationDate().get());
     }
 
     @Override

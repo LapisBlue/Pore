@@ -61,11 +61,13 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
         getParent().damage(amount, source);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void _INVALID_damage(int amount) {
         this.damage(amount);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void _INVALID_damage(int amount, Entity source) {
         this.damage(amount, source);
@@ -76,6 +78,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
         return getParent().getHealth();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int _INVALID_getHealth() {
         return (int) getHealth();
@@ -86,6 +89,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
         getParent().setHealth(health);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void _INVALID_setHealth(int health) {
         this.setHealth(health);
@@ -96,6 +100,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int _INVALID_getMaxHealth() {
         return (int) this.getMaxHealth();
@@ -106,6 +111,7 @@ public class PoreEnderDragonPart extends PoreComplexEntityPart implements org.bu
         getParent().setMaxHealth(health);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void _INVALID_setMaxHealth(int health) {
         this.setMaxHealth(health);

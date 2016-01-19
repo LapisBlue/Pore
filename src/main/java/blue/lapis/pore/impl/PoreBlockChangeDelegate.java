@@ -30,26 +30,31 @@ import org.bukkit.BlockChangeDelegate;
 //TODO: skeleton implementation
 public class PoreBlockChangeDelegate implements BlockChangeDelegate {
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean setRawTypeId(int x, int y, int z, int typeId) {
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean setRawTypeIdAndData(int x, int y, int z, int typeId, int data) {
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean setTypeId(int x, int y, int z, int typeId) {
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean setTypeIdAndData(int x, int y, int z, int typeId, int data) {
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int getTypeId(int x, int y, int z) {
         throw new NotImplementedException("TODO");

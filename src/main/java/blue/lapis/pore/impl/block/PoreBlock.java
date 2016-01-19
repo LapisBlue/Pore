@@ -71,16 +71,19 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
         super(handle);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public byte getData() {
         return BlockDataConverter.INSTANCE.getDataValue(getHandle());
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void setData(byte data) {
         setData(data, true);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void setData(byte data, boolean applyPhysics) {
         BlockDataConverter.INSTANCE.setDataValue(getHandle(), data);
@@ -118,6 +121,7 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
         this.setType(type);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int getTypeId() {
         return getType().getId();
@@ -188,11 +192,13 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean setTypeId(int type) {
         return this.setTypeId(type, true);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean setTypeId(int type, boolean applyPhysics) {
         //TODO: applyPhysics
@@ -201,6 +207,7 @@ public class PoreBlock extends PoreWrapper<Location> implements Block {
         return getHandle().getBlockType().equals(blockType);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean setTypeIdAndData(int type, byte data, boolean applyPhysics) {
         this.setData(data, applyPhysics);

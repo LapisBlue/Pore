@@ -47,6 +47,7 @@ public class PoreCreatureSpawner extends PoreBlockState implements CreatureSpawn
         return (MobSpawner) super.getTileEntity();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public CreatureType getCreatureType() {
         throw new NotImplementedException("TODO");
@@ -62,11 +63,13 @@ public class PoreCreatureSpawner extends PoreBlockState implements CreatureSpawn
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void setCreatureType(CreatureType creatureType) {
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public String getCreatureTypeId() {
         throw new NotImplementedException("TODO");
@@ -82,6 +85,7 @@ public class PoreCreatureSpawner extends PoreBlockState implements CreatureSpawn
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void setCreatureTypeId(String creatureType) {
         throw new NotImplementedException("TODO");

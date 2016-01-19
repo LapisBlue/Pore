@@ -61,8 +61,7 @@ public class PoreVillager extends PoreAgeable implements org.bukkit.entity.Villa
 
     @Override
     public void setProfession(Profession profession) {
-        Career career = Iterables.getFirst(Pore.getGame().getRegistry().getCareers(ProfessionConverter.of(profession)),
-                Careers.FARMER);
+        Career career = Iterables.getFirst(ProfessionConverter.of(profession).getCareers(), Careers.FARMER);
         assert career != null;
         getHandle().getCareerData().type().set(career);
     }

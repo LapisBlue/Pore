@@ -44,7 +44,7 @@ import org.bukkit.plugin.AuthorNagException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredListener;
 import org.bukkit.plugin.SimplePluginManager;
-import org.spongepowered.api.service.event.EventManager;
+import org.spongepowered.api.event.EventManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;

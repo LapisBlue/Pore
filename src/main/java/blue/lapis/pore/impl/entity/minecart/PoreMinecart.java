@@ -54,6 +54,7 @@ public class PoreMinecart extends PoreVehicle implements org.bukkit.entity.Minec
         return EntityType.MINECART;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void _INVALID_setDamage(int damage) {
         this.setDamage((double) damage);
@@ -64,6 +65,7 @@ public class PoreMinecart extends PoreVehicle implements org.bukkit.entity.Minec
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int _INVALID_getDamage() {
         return (int) this.getDamage();

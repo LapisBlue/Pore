@@ -28,6 +28,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.spongepowered.api.block.tileentity.CommandBlock;
+import org.spongepowered.api.data.key.Keys;
 
 public class PoreCommandBlock extends PoreBlockState implements org.bukkit.block.CommandBlock {
 
@@ -47,12 +48,12 @@ public class PoreCommandBlock extends PoreBlockState implements org.bukkit.block
 
     @Override
     public String getCommand() {
-        throw new NotImplementedException("TODO"); // TODO
+        return getHandle().get(Keys.COMMAND).get();
     }
 
     @Override
     public void setCommand(String command) {
-        throw new NotImplementedException("TODO"); // TODO
+        getHandle().with(Keys.COMMAND, command);
     }
 
     @Override
@@ -62,7 +63,7 @@ public class PoreCommandBlock extends PoreBlockState implements org.bukkit.block
 
     @Override
     public void setName(String name) {
-        throw new NotImplementedException("TODO"); // TODO
+        throw new NotImplementedException("TODO");
     }
 
 }

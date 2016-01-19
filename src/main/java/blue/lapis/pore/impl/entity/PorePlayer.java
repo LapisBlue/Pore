@@ -31,11 +31,10 @@ import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.E
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.FLYING_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.FOOD_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.GAME_MODE_DATA;
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.INVISIBILITY_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.JOIN_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.RESPAWN_LOCATION_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.SNEAKING_DATA;
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.WHITELIST_DATA;
+import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
@@ -73,14 +72,17 @@ import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.effect.sound.SoundType;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.entity.living.player.tab.PlayerTabInfo;
+import org.spongepowered.api.profile.GameProfile;
 import org.spongepowered.api.resourcepack.ResourcePacks;
+import org.spongepowered.api.service.ban.BanService;
+import org.spongepowered.api.service.whitelist.WhitelistService;
 import org.spongepowered.api.statistic.BlockStatistic;
 import org.spongepowered.api.statistic.EntityStatistic;
 import org.spongepowered.api.statistic.StatisticGroup;
 import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.Texts;
-import org.spongepowered.api.text.title.Titles;
-import org.spongepowered.api.util.TextMessageException;
+import org.spongepowered.api.text.title.Title;
+import org.spongepowered.api.util.ban.Ban;
+import org.spongepowered.api.world.World;
 
 import java.io.FileNotFoundException;
 import java.net.InetSocketAddress;
@@ -125,7 +127,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @SuppressWarnings("deprecation")
     public String getPlayerListName() {
         Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
-        return info.isPresent() ? Texts.legacy().to(info.get().getDisplayName()) : this.getDisplayName();
+        return info.isPresent() ? LEGACY_FORMATTING_CODE.serialize(info.get().getDisplayName()) : this.getDisplayName();
     }
 
     @Override
@@ -133,11 +135,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     public void setPlayerListName(String name) {
         Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
         if (info.isPresent()) {
-            try {
-                info.get().setDisplayName(Texts.legacy().from(name));
-            } catch (TextMessageException ex) {
-                throw new IllegalArgumentException(ex);
-            }
+            info.get().setDisplayName(LEGACY_FORMATTING_CODE.deserialize(name));
         }
     }
 
@@ -606,26 +604,48 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public boolean isBanned() {
-        throw new NotImplementedException("TODO"); //TODO: Use the BanService
+        Optional<BanService> bs = Pore.getGame().getServiceManager().provide(BanService.class);
+        return bs.isPresent() && bs.get().isBanned(getHandle().getProfile());
     }
 
     @Override
     public void setBanned(boolean banned) {
-        throw new NotImplementedException("TODO"); //TODO: Use the BanService
+        applyBan(getHandle().getProfile(), banned);
     }
 
     @Override
     public boolean isWhitelisted() {
-        return hasData(WHITELIST_DATA) && getHandle().get(WHITELIST_DATA).get().whitelisted().get();
+        Optional<WhitelistService> ws = Pore.getGame().getServiceManager().provide(WhitelistService.class);
+        return ws.isPresent() && ws.get().isWhitelisted(getHandle().getProfile());
     }
 
     @Override
     public void setWhitelisted(boolean value) {
-        if (value != isWhitelisted()) {
-            if (value) {
-                getHandle().offer(getHandle().getOrCreate(WHITELIST_DATA).get().whitelisted().set(true));
-            } else {
-                getHandle().remove(WHITELIST_DATA);
+        applyWhitelisting(getHandle().getProfile(), value);
+    }
+
+    public static void applyBan(GameProfile profile, boolean banned) {
+        Optional<BanService> bs = Pore.getGame().getServiceManager().provide(BanService.class);
+        if (bs.isPresent()) {
+            if (bs.get().isBanned(profile) != banned) {
+                if (banned) {
+                    bs.get().addBan(Ban.of(profile));
+                } else {
+                    bs.get().removeBan(bs.get().getBanFor(profile).get());
+                }
+            }
+        }
+    }
+
+    public static void applyWhitelisting(GameProfile profile, boolean value) {
+        Optional<WhitelistService> ws = Pore.getGame().getServiceManager().provide(WhitelistService.class);
+        if (ws.isPresent()) {
+            if (ws.get().isWhitelisted(profile) != value) {
+                if (value) {
+                    ws.get().addProfile(profile);
+                } else {
+                    ws.get().removeProfile(profile);
+                }
             }
         }
     }
@@ -637,12 +657,12 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public long getFirstPlayed() {
-        return getHandle().get(JOIN_DATA).get().firstPlayed().get().getTime();
+        return getHandle().get(JOIN_DATA).get().firstPlayed().get().getEpochSecond();
     }
 
     @Override
     public long getLastPlayed() {
-        return getHandle().get(JOIN_DATA).get().lastPlayed().get().getTime();
+        return getHandle().get(JOIN_DATA).get().lastPlayed().get().getEpochSecond();
     }
 
     @Override
@@ -665,7 +685,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void setBedSpawnLocation(Location location, boolean force) {
-        org.spongepowered.api.world.Location spongeLoc = LocationConverter.of(location);
+        org.spongepowered.api.world.Location<World> spongeLoc = LocationConverter.of(location);
         //noinspection ConstantConditions
         if (force || spongeLoc.getBlockType() == BlockTypes.BED) {
             getHandle().offer(getHandle().get(RESPAWN_LOCATION_DATA).get().respawnLocation().put(
@@ -677,23 +697,18 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void hidePlayer(org.bukkit.entity.Player player) {
-        PorePlayer porePlayer = (PorePlayer) player;
-        porePlayer.getHandle().offer(porePlayer.getHandle().getOrCreate(INVISIBILITY_DATA).get()
-                        .invisibleToPlayerIds().add(getUniqueId()));
+        //TODO: implement this once contextual data is merged into master
     }
 
     @Override
     public void showPlayer(org.bukkit.entity.Player player) {
-        PorePlayer porePlayer = (PorePlayer) player;
-        porePlayer.getHandle().offer(porePlayer.getHandle().getOrCreate(INVISIBILITY_DATA).get()
-                        .invisibleToPlayerIds().remove(getUniqueId()));
+        //TODO: implement this once contextual data is merged into master
     }
 
     @Override
     public boolean canSee(org.bukkit.entity.Player player) {
-        return hasData(INVISIBILITY_DATA)
-                && ((PorePlayer) player).getHandle().get(INVISIBILITY_DATA).get()
-                        .invisibleToPlayerIds().contains(getUniqueId());
+        //TODO: implement this once contextual data is merged into master
+        return true;
     }
 
     @Override
@@ -791,7 +806,8 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     @SuppressWarnings("deprecation")
     public void sendTitle(String title, String subtitle) {
-        getHandle().sendTitle(Titles.of(Texts.legacy().fromUnchecked(title), Texts.legacy().fromUnchecked(subtitle)));
+        getHandle().sendTitle(Title.of(LEGACY_FORMATTING_CODE.deserialize(title),
+                LEGACY_FORMATTING_CODE.deserialize(subtitle)));
     }
 
     @Override
@@ -812,11 +828,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     @SuppressWarnings("deprecation")
     public void sendMessage(String message) {
-        try {
-            getHandle().sendMessage(Texts.legacy().from(message));
-        } catch (TextMessageException ex) {
-            throw new IllegalArgumentException(ex);
-        }
+        getHandle().sendMessage(LEGACY_FORMATTING_CODE.deserialize(message));
     }
 
     @Override
@@ -824,13 +836,9 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     public void sendMessage(String[] messages) {
         Text[] texts = new Text[messages.length];
         for (int i = 0; i < messages.length; i++) {
-            try {
-                texts[i] = Texts.legacy().from(messages[i]);
-            } catch (TextMessageException ex) {
-                throw new IllegalArgumentException(ex);
-            }
+            texts[i] = LEGACY_FORMATTING_CODE.deserialize(messages[i]);
         }
-        this.getHandle().sendMessage(texts);
+        this.getHandle().sendMessages(texts);
     }
 
     @Override
@@ -842,7 +850,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void sendPluginMessage(Plugin source, String channel, byte[] message) {
-        getHandle().getConnection().sendCustomPayload(source, channel, message);
+        throw new NotImplementedException("TODO");
     }
 
     @Override

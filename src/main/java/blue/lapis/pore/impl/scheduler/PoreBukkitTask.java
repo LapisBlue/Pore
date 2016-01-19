@@ -29,7 +29,7 @@ import blue.lapis.pore.util.PoreWrapper;
 
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
-import org.spongepowered.api.service.scheduler.Task;
+import org.spongepowered.api.scheduler.Task;
 
 public class PoreBukkitTask extends PoreWrapper<Task> implements BukkitTask {
 

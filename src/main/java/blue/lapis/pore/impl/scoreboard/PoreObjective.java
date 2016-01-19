@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.scoreboard;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
@@ -37,7 +38,7 @@ import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.spongepowered.api.scoreboard.critieria.Criteria;
 import org.spongepowered.api.scoreboard.objective.Objective;
-import org.spongepowered.api.text.Texts;
+import org.spongepowered.api.text.serializer.TextSerializers;
 import org.spongepowered.api.util.TextMessageException;
 
 public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.scoreboard.Objective {
@@ -60,7 +61,7 @@ public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.
     @SuppressWarnings("deprecation")
     public String getDisplayName() throws IllegalStateException {
         checkState();
-        return Texts.legacy().to(getHandle().getDisplayName());
+        return LEGACY_FORMATTING_CODE.serialize(getHandle().getDisplayName());
     }
 
     @Override
@@ -68,12 +69,7 @@ public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.
     public void setDisplayName(String displayName) throws IllegalStateException, IllegalArgumentException {
         checkState();
         checkArgument(displayName != null, "Display name must not be null");
-        try {
-            //noinspection ConstantConditions
-            getHandle().setDisplayName(Texts.legacy().from(displayName));
-        } catch (TextMessageException ex) {
-            throw new IllegalArgumentException(ex);
-        }
+        getHandle().setDisplayName(LEGACY_FORMATTING_CODE.deserialize(displayName));
     }
 
     @Override
@@ -119,6 +115,7 @@ public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Score getScore(OfflinePlayer player) throws IllegalArgumentException, IllegalStateException {
         checkState();
@@ -127,12 +124,13 @@ public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.
         return getScore(player.getName());
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public Score getScore(String entry) throws IllegalArgumentException, IllegalStateException {
         checkState();
         checkArgument(entry != null, "Entry cannot be null");
         //noinspection ConstantConditions
-        return PoreScore.of(getHandle().getScore(Texts.of(entry)));
+        return PoreScore.of(getHandle().getOrCreateScore(LEGACY_FORMATTING_CODE.deserialize(entry)));
     }
 
     private void checkState() throws IllegalStateException {

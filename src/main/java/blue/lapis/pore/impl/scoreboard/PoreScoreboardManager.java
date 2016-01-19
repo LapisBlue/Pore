@@ -24,34 +24,33 @@
  */
 package blue.lapis.pore.impl.scoreboard;
 
-import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
 import org.apache.commons.lang3.NotImplementedException;
-import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
-import org.spongepowered.api.scoreboard.ScoreboardBuilder;
+import org.spongepowered.api.scoreboard.Scoreboard;
 
-public class PoreScoreboardManager extends PoreWrapper<ScoreboardBuilder> implements ScoreboardManager {
+public class PoreScoreboardManager extends PoreWrapper<Scoreboard.Builder>
+        implements ScoreboardManager {
 
-    public static PoreScoreboardManager of(ScoreboardBuilder handle) {
+    public static PoreScoreboardManager of(Scoreboard.Builder handle) {
         return WrapperConverter.of(PoreScoreboardManager.class, handle);
     }
 
-    protected PoreScoreboardManager(ScoreboardBuilder handle) {
+    protected PoreScoreboardManager(Scoreboard.Builder handle) {
         super(handle);
     }
 
     @Override
-    public Scoreboard getMainScoreboard() {
+    public org.bukkit.scoreboard.Scoreboard getMainScoreboard() {
         //TODO: scoreboard are per-world
         throw new NotImplementedException("TODO");
     }
 
     @Override
-    public Scoreboard getNewScoreboard() {
-        return PoreScoreboard.of(Pore.getGame().getRegistry().createScoreboardBuilder().build());
+    public org.bukkit.scoreboard.Scoreboard getNewScoreboard() {
+        return PoreScoreboard.of(Scoreboard.builder().build());
     }
 
 }

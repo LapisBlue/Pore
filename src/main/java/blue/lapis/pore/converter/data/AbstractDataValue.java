@@ -48,7 +48,7 @@ public class AbstractDataValue<T extends DataManipulator<T, ?>, V> {
     @SuppressWarnings("unchecked")
     public AbstractDataValue(Class<T> dataClass) {
         this.clazz = dataClass;
-        this.value = (V)FLAG;
+        this.value = (V) FLAG;
     }
 
     public Class<T> getDataClass() {

@@ -182,12 +182,13 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukki
     }
 
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "deprecation"})
     public byte getRawData() {
         return BlockDataConverter.INSTANCE.getDataValue((Collection) getHandle().getManipulators(),
                 getHandle().getType());
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void setRawData(byte data) {
         throw new NotImplementedException("TODO");

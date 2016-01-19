@@ -46,11 +46,13 @@ public class PoreChunkSnapshot implements ChunkSnapshot {
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int getBlockTypeId(int x, int y, int z) {
         throw new NotImplementedException("TODO");
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public int getBlockData(int x, int y, int z) {
         throw new NotImplementedException("TODO");
