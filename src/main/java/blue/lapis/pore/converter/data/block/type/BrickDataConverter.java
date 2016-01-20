@@ -32,7 +32,7 @@ import org.spongepowered.api.data.manipulator.mutable.block.BrickData;
 import org.spongepowered.api.data.type.BrickType;
 import org.spongepowered.api.data.type.BrickTypes;
 
-public class BrickDataConverter extends DataTypeConverter {
+public final class BrickDataConverter extends DataTypeConverter {
 
     @SuppressWarnings("rawtypes")
     private BrickDataConverter() {

@@ -34,7 +34,7 @@ import org.spongepowered.api.data.type.TreeType;
 import org.spongepowered.api.data.type.TreeTypes;
 import org.spongepowered.api.util.Axis;
 
-public class LogDataConverter extends DataTypeConverter {
+public final class LogDataConverter extends DataTypeConverter {
 
     @SuppressWarnings("rawtypes")
     private LogDataConverter() {

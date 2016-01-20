@@ -33,7 +33,7 @@ import org.spongepowered.api.data.manipulator.mutable.block.TreeData;
 import org.spongepowered.api.data.type.TreeTypes;
 import org.spongepowered.api.util.Axis;
 
-public class Log2DataConverter extends DataTypeConverter {
+public final class Log2DataConverter extends DataTypeConverter {
 
     @SuppressWarnings("rawtypes")
     private Log2DataConverter() {

@@ -32,7 +32,7 @@ import org.spongepowered.api.data.manipulator.mutable.block.DecayableData;
 import org.spongepowered.api.data.manipulator.mutable.block.TreeData;
 import org.spongepowered.api.data.type.TreeTypes;
 
-public class LeavesDataConverter extends DataTypeConverter {
+public final class LeavesDataConverter extends DataTypeConverter {
 
     @SuppressWarnings("rawtypes")
     private LeavesDataConverter() {

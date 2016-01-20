@@ -55,10 +55,13 @@ import java.util.List;
 // This is kind of a behemoth of a class. Lots and lots of overloading.
 // Sorry for not documenting it, but honestly I don't have the patience for that right now.
 @SuppressWarnings("rawtypes")
-public class BTDCTestUtil {
+public final class BTDCTestUtil {
 
     // list of crap we need to manually keep in memory due to weak references in SpongeAPI
     private static final List<Object> PERSISTENCE_LIST = new ArrayList<>();
+
+    private BTDCTestUtil() {
+    }
 
     public static <T extends DataManipulator<T, ?>, V> void testSingleAbstraction(BlockType blockType,
             Class<T> dataClass, byte inputByte,

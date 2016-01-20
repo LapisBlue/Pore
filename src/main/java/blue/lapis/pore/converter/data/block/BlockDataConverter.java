@@ -51,7 +51,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Map;
 
-public class BlockDataConverter implements DataConverter<Location<?>> {
+public final class BlockDataConverter implements DataConverter<Location<?>> {
 
     public static final BlockDataConverter INSTANCE = new BlockDataConverter();
 

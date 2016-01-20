@@ -31,7 +31,7 @@ import com.google.common.collect.ImmutableBiMap;
 import org.spongepowered.api.data.manipulator.mutable.block.TreeData;
 import org.spongepowered.api.data.type.TreeTypes;
 
-public class PlanksDataConverter extends DataTypeConverter {
+public final class PlanksDataConverter extends DataTypeConverter {
 
     @SuppressWarnings("rawtypes")
     private PlanksDataConverter() {

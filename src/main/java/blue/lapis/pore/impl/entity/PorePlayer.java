@@ -82,7 +82,6 @@ import org.spongepowered.api.statistic.StatisticGroup;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.title.Title;
 import org.spongepowered.api.util.ban.Ban;
-import org.spongepowered.api.world.World;
 
 import java.io.FileNotFoundException;
 import java.net.InetSocketAddress;

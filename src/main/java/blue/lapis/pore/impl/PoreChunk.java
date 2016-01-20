@@ -39,7 +39,6 @@ import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 import org.spongepowered.api.block.tileentity.TileEntity;
 import org.spongepowered.api.world.Chunk;
-import org.spongepowered.api.world.Location;
 
 import java.util.Collection;
 

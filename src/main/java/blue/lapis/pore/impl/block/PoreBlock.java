@@ -56,7 +56,6 @@ import org.spongepowered.api.data.property.block.PoweredProperty;
 import org.spongepowered.api.data.property.block.SkyLuminanceProperty;
 import org.spongepowered.api.data.property.block.TemperatureProperty;
 import org.spongepowered.api.world.Location;
-import org.spongepowered.api.world.extent.Extent;
 
 import java.util.Collection;
 import java.util.List;

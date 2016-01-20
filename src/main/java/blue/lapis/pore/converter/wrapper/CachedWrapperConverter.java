@@ -70,7 +70,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
     final ImmutableMap<Class<?>, Converter<?, ? extends B>> registry;
 
     @SuppressWarnings("unchecked")
-    protected CachedWrapperConverter(Class<B> base, Map<Class<? extends B>, Class<?>> registrations) {
+    private CachedWrapperConverter(Class<B> base, Map<Class<? extends B>, Class<?>> registrations) {
         Set<Class<? extends B>> registered = Sets.newHashSet();
         Set<Map.Entry<Class<? extends B>, Class<?>>> parents = Sets.newLinkedHashSet();
         Multimap<Class<? extends B>, Map.Entry<Class<? extends B>, Class<?>>> children = LinkedHashMultimap.create();
@@ -140,12 +140,12 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
         return get(input);
     }
 
-    protected Object create(Object handle) {
+    private Object create(Object handle) {
         Converter<?, ? extends B> converter = classCache.getUnchecked(handle.getClass());
         return converter.applyUnchecked(handle);
     }
 
-    protected Converter<?, ? extends B> find(Class<?> sponge) {
+    private Converter<?, ? extends B> find(Class<?> sponge) {
         // Find a matching class
         for (Map.Entry<Class<?>, Converter<?, ? extends B>> entry : registry.entrySet()) {
             if (entry.getKey().isAssignableFrom(sponge)) {

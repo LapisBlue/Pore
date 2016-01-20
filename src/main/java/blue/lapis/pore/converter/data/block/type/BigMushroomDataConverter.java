@@ -32,7 +32,7 @@ import org.spongepowered.api.data.manipulator.mutable.block.BigMushroomData;
 import org.spongepowered.api.data.type.BigMushroomType;
 import org.spongepowered.api.data.type.BigMushroomTypes;
 
-public class BigMushroomDataConverter extends DataTypeConverter {
+public final class BigMushroomDataConverter extends DataTypeConverter {
 
     @SuppressWarnings("rawtypes")
     private BigMushroomDataConverter() {

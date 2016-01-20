@@ -32,7 +32,7 @@ import org.spongepowered.api.data.type.NotePitches;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-public class NoteConverter {
+public final class NoteConverter {
 
     private NoteConverter() {
     }
