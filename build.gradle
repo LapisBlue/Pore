@@ -83,14 +83,12 @@ dependencies {
     runtime 'blue.lapis.methodremapper:tweaker:0.1'
 
     shadow project('Porekit')
-    shadowRuntime 'mysql:mysql-connector-java:5.1.36'
+    shadowRuntime 'mysql:mysql-connector-java:5.1.38'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
     testCompile 'org.mockito:mockito-core:1.10.19'
-    testRuntime 'org.slf4j:slf4j-simple:1.7.12'
-
-    checkstyle 'org.spongepowered:checkstyle:6.1.1-sponge1'
+    testRuntime 'org.slf4j:slf4j-simple:1.7.13'
 }
 
 allprojects {
@@ -170,6 +168,7 @@ configure([project, project(':ap')]) {
 }
 
 checkstyle {
+    toolVersion = '6.14.1'
     configProperties = [
             'basedir': project.projectDir,
             'severity': 'warning'
