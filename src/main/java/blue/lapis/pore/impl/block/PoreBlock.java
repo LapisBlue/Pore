@@ -62,13 +62,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public class PoreBlock extends PoreWrapper<Location<?>> implements Block {
+public class PoreBlock extends PoreWrapper<Location<org.spongepowered.api.world.World>> implements Block {
 
-    public static PoreBlock of(Location<?> handle) {
+    public static PoreBlock of(Location<org.spongepowered.api.world.World> handle) {
         return WrapperConverter.of(PoreBlock.class, handle);
     }
 
-    protected PoreBlock(Location<?> handle) {
+    protected PoreBlock(Location<org.spongepowered.api.world.World> handle) {
         super(handle);
     }
 

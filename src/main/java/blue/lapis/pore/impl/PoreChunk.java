@@ -39,6 +39,7 @@ import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 import org.spongepowered.api.block.tileentity.TileEntity;
 import org.spongepowered.api.world.Chunk;
+import org.spongepowered.api.world.Location;
 
 import java.util.Collection;
 
@@ -69,7 +70,7 @@ public class PoreChunk extends PoreWrapper<Chunk> implements org.bukkit.Chunk {
 
     @Override
     public Block getBlock(int x, int y, int z) {
-        return PoreBlock.of(getHandle().getLocation(x, y, z));
+        return PoreBlock.of(getHandle().getLocation(x, y, z).createSnapshot().getLocation().get());
     }
 
     @Override

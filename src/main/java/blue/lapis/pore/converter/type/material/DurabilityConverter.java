@@ -224,7 +224,7 @@ public final class DurabilityConverter {
 
     @SuppressWarnings({"rawtypes", "unchecked"}) // I can't parameterize this either; it scares the compiler
     private static <T extends VariantData<U, T, ?>, U extends CatalogType> T
-    getItemData(ItemStack item, Class<T> type, BiMap<U, Integer> map) {
+        getItemData(ItemStack item, Class<T> type, BiMap<U, Integer> map) {
         int damage = item.getDurability();
         if (!map.containsValue(damage)) {
             throw new UnsupportedOperationException();

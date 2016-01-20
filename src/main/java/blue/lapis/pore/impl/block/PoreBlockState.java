@@ -47,10 +47,10 @@ import java.util.List;
 
 public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukkit.block.BlockState {
 
-    private org.spongepowered.api.world.Location block;
+    private org.spongepowered.api.world.Location<org.spongepowered.api.world.World> block;
     private TileEntity tileEntity;
 
-    public static PoreBlockState of(org.spongepowered.api.world.Location block) {
+    public static PoreBlockState of(org.spongepowered.api.world.Location<org.spongepowered.api.world.World> block) {
         PoreBlockState state = WrapperConverter.of(PoreBlockState.class, block.getBlock());
         if (state != null) {
             state.setBlock(block);
@@ -76,7 +76,7 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukki
         return tileEntity;
     }
 
-    protected void setBlock(org.spongepowered.api.world.Location block) {
+    protected void setBlock(org.spongepowered.api.world.Location<org.spongepowered.api.world.World> block) {
         this.block = block;
     }
 

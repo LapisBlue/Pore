@@ -45,6 +45,7 @@ import org.junit.runners.Parameterized;
 import org.spongepowered.api.block.BlockState;
 import org.spongepowered.api.block.tileentity.TileEntity;
 import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.extent.Extent;
 
 import java.lang.reflect.Modifier;
@@ -122,7 +123,7 @@ public class WrapperConverterTest {
 
         if (!base.isInterface() && Modifier.isFinal(base.getModifiers())) {
             if (base == Location.class) {
-                return new Location(mock(Extent.class), 0, 0, 0);
+                return new Location<>(mock(Extent.class), 0, 0, 0);
             }
         }
 
@@ -136,7 +137,7 @@ public class WrapperConverterTest {
         // o.b.BlockState's subclasses break this test because of incongruencies between SpongeAPI and Bukkit
         // this code basically assures that a NullPointerException won't be thrown while converting
         if (base.getPackage().getName().startsWith("org.spongepowered.api.block.tileentity")) {
-            Location loc = new Location(mock(Extent.class), 0, 0, 0);
+            Location<World> loc = new Location<>(mock(World.class), 0, 0, 0);
             BlockState state = mock(BlockState.class);
             when(loc.getBlock()).thenReturn(state);
             when(((TileEntity) mock).getLocation()).thenReturn(loc);

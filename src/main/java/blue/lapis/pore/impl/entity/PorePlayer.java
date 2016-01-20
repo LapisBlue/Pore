@@ -685,7 +685,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void setBedSpawnLocation(Location location, boolean force) {
-        org.spongepowered.api.world.Location<World> spongeLoc = LocationConverter.of(location);
+        org.spongepowered.api.world.Location<?> spongeLoc = LocationConverter.of(location);
         //noinspection ConstantConditions
         if (force || spongeLoc.getBlockType() == BlockTypes.BED) {
             getHandle().offer(getHandle().get(RESPAWN_LOCATION_DATA).get().respawnLocation().put(

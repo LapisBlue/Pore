@@ -52,6 +52,7 @@ import org.spongepowered.api.item.inventory.entity.HumanInventory;
 import org.spongepowered.api.service.permission.Subject;
 import org.spongepowered.api.util.Tristate;
 import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
 
 import java.util.Set;
 
@@ -111,7 +112,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public InventoryView openWorkbench(org.bukkit.Location location, boolean force) {
-        Location block = LocationConverter.of(location);
+        Location<?> block = LocationConverter.of(location);
         if (force || block.getBlockType() == BlockTypes.CRAFTING_TABLE) {
             return openBlockInventory(block, force);
         }
@@ -120,14 +121,14 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public InventoryView openEnchanting(org.bukkit.Location location, boolean force) {
-        Location block = LocationConverter.of(location);
+        Location<?> block = LocationConverter.of(location);
         if (force || block.getBlockType() == BlockTypes.ENCHANTING_TABLE) {
             return openBlockInventory(block, force);
         }
         return null;
     }
 
-    private InventoryView openBlockInventory(Location location, boolean force) {
+    private InventoryView openBlockInventory(Location<?> location, boolean force) {
         if (location.getTileEntity().isPresent() && location.getTileEntity().get() instanceof Carrier) {
             return this.openInventory(PoreInventory.of(
                     ((Carrier) location.getTileEntity().get()).getInventory()

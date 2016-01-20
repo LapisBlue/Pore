@@ -37,7 +37,7 @@ public final class LocationConverter {
     private LocationConverter() {
     }
 
-    public static Location apply(Location loc, org.spongepowered.api.world.Location spongeLocation) {
+    public static Location apply(Location loc, org.spongepowered.api.world.Location<?> spongeLocation) {
         loc.setWorld(PoreWorld.of(spongeLocation.getExtent()));
         loc.setX(spongeLocation.getPosition().getX());
         loc.setY(spongeLocation.getPosition().getY());
@@ -45,7 +45,7 @@ public final class LocationConverter {
         return loc;
     }
 
-    public static Location of(org.spongepowered.api.world.Location location) {
+    public static Location of(org.spongepowered.api.world.Location<World> location) {
         return new Location(PoreWorld.of(location.getExtent()), location.getPosition().getX(),
                 location.getPosition().getY(), location.getPosition().getZ());
     }

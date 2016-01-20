@@ -51,7 +51,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Map;
 
-public class BlockDataConverter implements DataConverter<Location> {
+public class BlockDataConverter implements DataConverter<Location<?>> {
 
     public static final BlockDataConverter INSTANCE = new BlockDataConverter();
 
@@ -94,21 +94,19 @@ public class BlockDataConverter implements DataConverter<Location> {
     @SuppressWarnings({"rawtypes", "unchecked"})
     public byte getDataValue(Collection<DataManipulator<?, ?>> manipulators, BlockType target) {
         final DataTypeConverter converter = getConverter(target);
-        Collection<DataManipulator<?, ?>> data = Collections2.filter(manipulators,
-                input -> {
-                    if (input == null) {
-                        return false;
-                    }
-                    try {
-                        Class<? extends DataManipulator<?, ?>> clazz = (Class<? extends DataManipulator<?, ?>>)
-                                Class.forName(input.getClass().getName().split("\\$")[0]);
-                        return converter.getApplicableDataTypes().contains(clazz);
-                    } catch (ClassNotFoundException ex) {
-                        ex.printStackTrace();
-                        return false;
-                    }
-                }
-        );
+        Collection<DataManipulator<?, ?>> data = Collections2.filter(manipulators, input -> {
+            if (input == null) {
+                return false;
+            }
+            try {
+                Class<? extends DataManipulator<?, ?>> clazz = (Class<? extends DataManipulator<?, ?>>)
+                        Class.forName(input.getClass().getName().split("\\$")[0]);
+                return converter.getApplicableDataTypes().contains(clazz);
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+                return false;
+            }
+        });
         return converter.of(data);
     }
 
