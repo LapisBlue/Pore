@@ -186,9 +186,7 @@ public final class PoreEventWrapper {
         public void unregister() {
             EventManager manager = Pore.getGame().getEventManager();
 
-            for (Object listener : listeners.values()) {
-                manager.unregisterListeners(listener);
-            }
+            listeners.values().forEach(manager::unregisterListeners);
         }
 
         @Override

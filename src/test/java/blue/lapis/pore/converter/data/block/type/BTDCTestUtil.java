@@ -47,13 +47,18 @@ import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.extent.Extent;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 // This is kind of a behemoth of a class. Lots and lots of overloading.
 // Sorry for not documenting it, but honestly I don't have the patience for that right now.
 @SuppressWarnings("rawtypes")
 public class BTDCTestUtil {
+
+    // list of crap we need to manually keep in memory due to weak references in SpongeAPI
+    private static final List<Object> PERSISTENCE_LIST = new ArrayList<>();
 
     public static <T extends DataManipulator<T, ?>, V> void testSingleAbstraction(BlockType blockType,
             Class<T> dataClass, byte inputByte,
@@ -114,7 +119,9 @@ public class BTDCTestUtil {
             Collection<? extends AbstractDataValue<? extends DataManipulator, ?>>
                     abstractedData,
             boolean invert) throws Exception {
-        Location loc = new Location(mock(Extent.class), 0, 0, 0);
+        Extent extent = mock(Extent.class);
+        PERSISTENCE_LIST.add(extent); // this keeps getting GCed prematurely
+        Location loc = new Location(extent, 0, 0, 0);
         when(loc.getBlockType()).thenReturn(blockType);
         /*for (AbstractDataValue datum : abstractedData) {
             DataManipulator<?> spongeDatum = datum.getValue() != AbstractDataValue.ABSENT
@@ -147,6 +154,7 @@ public class BTDCTestUtil {
         } else {
             assertEquals(rawData, block.getData());
         }
+        PERSISTENCE_LIST.remove(loc);
     }
 
     @SuppressWarnings("unchecked")

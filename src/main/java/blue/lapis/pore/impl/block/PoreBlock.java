@@ -56,18 +56,19 @@ import org.spongepowered.api.data.property.block.PoweredProperty;
 import org.spongepowered.api.data.property.block.SkyLuminanceProperty;
 import org.spongepowered.api.data.property.block.TemperatureProperty;
 import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.extent.Extent;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public class PoreBlock extends PoreWrapper<Location> implements Block {
+public class PoreBlock extends PoreWrapper<Location<?>> implements Block {
 
-    public static PoreBlock of(Location handle) {
+    public static PoreBlock of(Location<?> handle) {
         return WrapperConverter.of(PoreBlock.class, handle);
     }
 
-    protected PoreBlock(Location handle) {
+    protected PoreBlock(Location<?> handle) {
         super(handle);
     }
 

@@ -302,22 +302,18 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
     @Override
     public HashMap<Integer, ? extends ItemStack> all(Material material) throws IllegalArgumentException {
         HashMap<Integer, ItemStack> matches = Maps.newHashMap();
-        for (Map.Entry<Integer, ItemStack> e : this.getOrderedContents().entrySet()) {
-            if (e.getValue().getType() == material) {
-                matches.put(e.getKey(), e.getValue());
-            }
-        }
+        this.getOrderedContents().entrySet().stream().filter(e -> e.getValue().getType() == material).forEach(e -> {
+            matches.put(e.getKey(), e.getValue());
+        });
         return matches;
     }
 
     @Override
     public HashMap<Integer, ? extends ItemStack> all(ItemStack item) {
         HashMap<Integer, ItemStack> matches = Maps.newHashMap();
-        for (Map.Entry<Integer, ItemStack> e : this.getOrderedContents().entrySet()) {
-            if (e.getValue().equals(item)) {
-                matches.put(e.getKey(), e.getValue());
-            }
-        }
+        this.getOrderedContents().entrySet().stream().filter(e -> e.getValue().equals(item)).forEach(e -> {
+            matches.put(e.getKey(), e.getValue());
+        });
         return matches;
     }
 

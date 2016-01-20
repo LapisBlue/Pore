@@ -172,7 +172,7 @@ import org.spongepowered.api.entity.living.Ambient;
 import org.spongepowered.api.entity.living.Aquatic;
 import org.spongepowered.api.entity.living.ArmorStand;
 import org.spongepowered.api.entity.living.Bat;
-import org.spongepowered.api.entity.living.Human;
+import org.spongepowered.api.entity.living.Humanoid;
 import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.entity.living.Squid;
 import org.spongepowered.api.entity.living.Villager;
@@ -261,7 +261,7 @@ public final class WrapperConverter {
                 .register(Living.class, PoreLivingEntity.class)
                     .register(Ambient.class, PoreAmbient.class)
                         .register(Bat.class, PoreBat.class)
-                    .register(Human.class, PoreHumanEntity.class)
+                    .register(Humanoid.class, PoreHumanEntity.class)
                         .register(Player.class, PorePlayer.class)
                     .register(ComplexLiving.class, PoreComplexLivingEntity.class)
                         .register(EnderDragon.class, PoreEnderDragon.class)

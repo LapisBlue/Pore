@@ -57,7 +57,7 @@ import java.util.Set;
 
 public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
-    public static PoreHumanEntity of(Human handle) {
+    public static PoreHumanEntity of(Humanoid handle) {
         return WrapperConverter.of(PoreHumanEntity.class, handle);
     }
 

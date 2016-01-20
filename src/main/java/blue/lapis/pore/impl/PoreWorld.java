@@ -81,6 +81,7 @@ import org.bukkit.util.Vector;
 import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.effect.particle.ParticleEffect;
 import org.spongepowered.api.entity.EntityTypes;
+import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.extent.Extent;
 import org.spongepowered.api.world.weather.Weathers;
@@ -92,6 +93,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
@@ -357,11 +359,8 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         // This is basically copying every time, unfortunately there is no real better way because we can't
         // filter lists using Guava
         List<LivingEntity> living = Lists.newArrayList();
-        for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()) {
-            if (e instanceof org.spongepowered.api.entity.living.Living) {
-                living.add(PoreLivingEntity.of((org.spongepowered.api.entity.living.Living) e));
-            }
-        }
+        living.addAll(getHandle().getEntities().stream().filter(e -> e instanceof Living)
+                .map(e -> PoreLivingEntity.of((Living) e)).collect(Collectors.toList()));
         return living;
     }
 
@@ -398,11 +397,10 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
         // with that)
         // see getLivingEntities() for explanation
         List<Player> players = Lists.newArrayList();
-        for (org.spongepowered.api.entity.Entity e : getHandle().getEntities()) {
-            if (e instanceof org.spongepowered.api.entity.living.player.Player) {
-                players.add(PorePlayer.of((org.spongepowered.api.entity.living.player.Player) e));
-            }
-        }
+        players.addAll(getHandle().getEntities().stream()
+                .filter(e -> e instanceof org.spongepowered.api.entity.living.player.Player)
+                .map(e -> PorePlayer.of((org.spongepowered.api.entity.living.player.Player) e))
+                .collect(Collectors.toList()));
         return players;
     }
 

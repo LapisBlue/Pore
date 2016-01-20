@@ -30,6 +30,7 @@ import com.google.common.collect.Lists;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class PoreCollections {
 
@@ -52,9 +53,9 @@ public final class PoreCollections {
 
         // There is no other good way than copying everything, meh
         List<T> result = Lists.newArrayListWithCapacity(from.size());
-        for (F element : from) {
-            result.add(function.apply(element));
-        }
+        result.addAll(
+                from.stream().map((java.util.function.Function<F, T>) function::apply).collect(Collectors.toList())
+        );
         return result;
     }
 }

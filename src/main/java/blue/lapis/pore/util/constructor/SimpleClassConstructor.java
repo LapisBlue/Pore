@@ -40,6 +40,7 @@ import static org.objectweb.asm.Opcodes.NEW;
 import static org.objectweb.asm.Opcodes.RETURN;
 import static org.objectweb.asm.Opcodes.V1_6;
 
+import blue.lapis.pore.Pore;
 import blue.lapis.pore.util.classloader.LocalClassLoaders;
 
 import org.objectweb.asm.ClassWriter;
@@ -70,9 +71,16 @@ public abstract class SimpleClassConstructor<T, P> implements SimpleConstructor<
 
         private static <T, P> Class<? extends SimpleClassConstructor<T, P>> load(Class<T> type, Class<P> parameter)
                 throws NoSuchMethodException {
-            type.getDeclaredConstructor(parameter);
-            String name = type.getName() + "Constructor";
-            return LocalClassLoaders.of(type).defineClass(name, generate(name, type, parameter));
+            try {
+                type.getDeclaredConstructor(parameter);
+                String name = type.getName() + "Constructor";
+                return LocalClassLoaders.of(type).defineClass(name, generate(name, type, parameter));
+            } catch (NoSuchMethodException ex) {
+                // for future reference (and to combat my future stupidity)
+                Pore.getLogger().error("Cannot initialize wrapper class " + type.getName()
+                        + " (maybe registered type and ctor/of() parameters mismatch?)");
+                throw ex;
+            }
         }
 
         private static byte[] generate(String name, Class<?> type, Class<?> parameter) {
