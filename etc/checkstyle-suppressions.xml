@@ -6,4 +6,5 @@
     <suppress checks="JavadocMethod" files="^src[\\/](main|test)[\\/]java"/>
     <suppress checks="Indentation" files="package-info\.java"/>
     <suppress checks="AbbreviationAsWordInName" files="TNT"/>
+    <suppress checks="Indentation" files=".*"/> <!-- TODO: this check doesn't like lambdas -->
 </suppressions>

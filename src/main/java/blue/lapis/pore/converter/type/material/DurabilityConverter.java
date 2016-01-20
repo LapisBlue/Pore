@@ -133,7 +133,6 @@ public final class DurabilityConverter {
         return 0;
     }
 
-
     /**
      * Converts a given {@link DataManipulator} value to a raw damage value.
      *
@@ -229,9 +228,7 @@ public final class DurabilityConverter {
         if (!map.containsValue(damage)) {
             throw new UnsupportedOperationException();
         }
-        // no idea why a typecast is necessary here but excluding it makes javac angry
-        @SuppressWarnings("RedundantCast")
-        T data = (T) org.spongepowered.api.item.inventory.ItemStack.builder()
+        T data = org.spongepowered.api.item.inventory.ItemStack.builder()
                 .itemType(MaterialConverter.asItem(item.getType()))
                 .quantity(1).build().getOrCreate(type).get();
         data.type().set(map.inverse().get(damage));
