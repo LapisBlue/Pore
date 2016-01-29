@@ -28,45 +28,39 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.entity.PorePlayer;
+import blue.lapis.pore.util.PoreText;
 
 import org.bukkit.entity.Player;
-import org.spongepowered.api.event.entity.player.PlayerQuitEvent;
-import org.spongepowered.api.text.Texts;
-import org.spongepowered.api.util.TextMessageException;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.spongepowered.api.event.network.ClientConnectionEvent;
 
 @RegisterEvent
-public class PorePlayerQuitEvent extends org.bukkit.event.player.PlayerQuitEvent {
+public class PorePlayerJoinEvent extends PlayerJoinEvent {
 
-    private final PlayerQuitEvent handle;
+    private final ClientConnectionEvent.Join handle;
 
-    public PorePlayerQuitEvent(PlayerQuitEvent handle) {
+    public PorePlayerJoinEvent(ClientConnectionEvent.Join handle) {
         super(null, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public PlayerQuitEvent getHandle() {
+    public ClientConnectionEvent.Join getHandle() {
         return handle;
     }
 
     @Override
     public Player getPlayer() {
-        return PorePlayer.of(handle.getUser());
+        return PorePlayer.of(handle.getTargetEntity());
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public String getQuitMessage() {
-        return Texts.legacy().to(handle.getNewMessage());
+    public String getJoinMessage() {
+        return PoreText.convert(handle.getMessage().orElse(null));
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public void setQuitMessage(String quitMessage) {
-        try {
-            handle.setNewMessage(Texts.legacy().from(quitMessage));
-        } catch (TextMessageException ex) {
-            throw new IllegalArgumentException(ex);
-        }
+    public void setJoinMessage(String joinMessage) {
+        handle.setMessage(PoreText.convert(joinMessage));
     }
 
 }

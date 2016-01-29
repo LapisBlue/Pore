@@ -22,75 +22,74 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.impl.event.player;
+package blue.lapis.pore.impl.event.server;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.event.RegisterEvent;
-import blue.lapis.pore.impl.entity.PorePlayer;
+import blue.lapis.pore.impl.util.PoreCachedServerIcon;
+import blue.lapis.pore.util.PoreText;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.spongepowered.api.event.entity.player.PlayerChatEvent;
-import org.spongepowered.api.text.Texts;
+import org.bukkit.event.server.ServerListPingEvent;
+import org.bukkit.util.CachedServerIcon;
+import org.spongepowered.api.event.server.ClientPingServerEvent;
 
-import java.util.IllegalFormatException;
-import java.util.Set;
+import java.net.InetAddress;
+import java.util.Iterator;
 
 @RegisterEvent
-public class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent {
+public class PoreServerListPingEvent extends ServerListPingEvent {
 
-    private final PlayerChatEvent handle;
+    private final ClientPingServerEvent handle;
 
-    public PoreAsyncPlayerChatEvent(PlayerChatEvent handle) {
-        super(true, null, null, null);
+    public PoreServerListPingEvent(ClientPingServerEvent handle) {
+        super(null, null, 0, -1);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public PlayerChatEvent getHandle() {
+    public ClientPingServerEvent getHandle() {
         return handle;
     }
 
     @Override
-    public Player getPlayer() {
-        return PorePlayer.of(handle.getUser());
+    public InetAddress getAddress() {
+        return handle.getClient().getAddress().getAddress();
     }
 
     @Override
-    @SuppressWarnings("deprecation") // no sense in throwing warnings when we can't fix them
-    public String getMessage() {
-        return Texts.legacy().to(handle.getMessage());
+    public String getMotd() {
+        return PoreText.convert(handle.getResponse().getDescription());
     }
 
     @Override
-    public void setMessage(String message) {
-        throw new NotImplementedException("TODO"); // TODO
+    public void setMotd(String motd) {
+        handle.getResponse().setDescription(PoreText.convert(motd));
     }
 
     @Override
-    public String getFormat() {
-        throw new NotImplementedException("TODO"); // TODO
+    public int getNumPlayers() {
+        return handle.getResponse().getPlayers().get().getOnline();
     }
 
     @Override
-    public void setFormat(String format) throws IllegalFormatException, NullPointerException {
-        throw new NotImplementedException("TODO"); // TODO
+    public int getMaxPlayers() {
+        return handle.getResponse().getPlayers().get().getMax();
     }
 
     @Override
-    public Set<Player> getRecipients() {
-        throw new NotImplementedException("TODO"); // TODO
+    public void setMaxPlayers(int maxPlayers) {
+        handle.getResponse().getPlayers().get().setMax(maxPlayers);
     }
 
     @Override
-    public boolean isCancelled() {
-        return false;
+    public void setServerIcon(CachedServerIcon icon) throws IllegalArgumentException {
+        handle.getResponse().setFavicon(((PoreCachedServerIcon) icon).getHandle());
     }
 
     @Override
-    public void setCancelled(boolean cancel) {
-        throw new NotImplementedException("TODO"); // TODO
+    public Iterator<Player> iterator() throws UnsupportedOperationException {
+        throw new UnsupportedOperationException(); // Unsupported for now
     }
 
 }

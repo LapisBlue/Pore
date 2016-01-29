@@ -22,22 +22,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.util;
+package blue.lapis.pore.impl.event.player;
 
-import org.spongepowered.api.text.Text;
-import org.spongepowered.api.text.serializer.TextSerializers;
+import static com.google.common.base.Preconditions.checkNotNull;
 
-public final class PoreText {
+import blue.lapis.pore.event.RegisterEvent;
+import blue.lapis.pore.impl.entity.PorePlayer;
+import blue.lapis.pore.util.PoreText;
 
-    private PoreText() {
+import org.bukkit.entity.Player;
+import org.spongepowered.api.event.network.ClientConnectionEvent;
+
+@RegisterEvent
+public class PorePlayerQuitEvent extends org.bukkit.event.player.PlayerQuitEvent {
+
+    private final ClientConnectionEvent.Disconnect handle;
+
+    public PorePlayerQuitEvent(ClientConnectionEvent.Disconnect handle) {
+        super(null, null);
+        this.handle = checkNotNull(handle, "handle");
     }
 
-    public static String convert(Text text) {
-        return text != null ? TextSerializers.LEGACY_FORMATTING_CODE.serialize(text) : null;
+    public ClientConnectionEvent.Disconnect getHandle() {
+        return handle;
     }
 
-    public static Text convert(String text) {
-        return text != null ? TextSerializers.LEGACY_FORMATTING_CODE.deserialize(text) : null;
+    @Override
+    public Player getPlayer() {
+        return PorePlayer.of(handle.getTargetEntity());
+    }
+
+    @Override
+    public String getQuitMessage() {
+        return PoreText.convert(getHandle().getMessage().orElse(null));
+    }
+
+    @Override
+    public void setQuitMessage(String quitMessage) {
+        handle.setMessage(PoreText.convert(quitMessage));
     }
 
 }

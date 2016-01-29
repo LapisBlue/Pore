@@ -28,45 +28,69 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.entity.PorePlayer;
+import blue.lapis.pore.util.PoreText;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.Player;
-import org.spongepowered.api.event.entity.player.PlayerJoinEvent;
-import org.spongepowered.api.text.Texts;
-import org.spongepowered.api.util.TextMessageException;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.spongepowered.api.event.message.MessageChannelEvent;
+
+import java.util.IllegalFormatException;
+import java.util.Set;
 
 @RegisterEvent
-public class PorePlayerJoinEvent extends org.bukkit.event.player.PlayerJoinEvent {
+public class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent {
 
-    private final PlayerJoinEvent handle;
+    private final MessageChannelEvent.Chat handle;
 
-    public PorePlayerJoinEvent(PlayerJoinEvent handle) {
-        super(null, null);
+    public PoreAsyncPlayerChatEvent(MessageChannelEvent.Chat handle) {
+        super(true, null, null, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public PlayerJoinEvent getHandle() {
+    public MessageChannelEvent.Chat getHandle() {
         return handle;
     }
 
     @Override
     public Player getPlayer() {
-        return PorePlayer.of(handle.getUser());
+        return PorePlayer.of(handle.getCause()
+                .first(org.spongepowered.api.entity.living.player.Player.class).get());
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public String getJoinMessage() {
-        return Texts.legacy().to(handle.getNewMessage());
+    public String getMessage() {
+        return PoreText.convert(handle.getRawMessage());
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public void setJoinMessage(String joinMessage) {
-        try {
-            handle.setNewMessage(Texts.legacy().from(joinMessage));
-        } catch (TextMessageException ex) {
-            throw new IllegalArgumentException(ex);
-        }
+    public void setMessage(String message) {
+        throw new NotImplementedException("TODO"); // TODO
+    }
+
+    @Override
+    public String getFormat() {
+        throw new NotImplementedException("TODO"); // TODO
+    }
+
+    @Override
+    public void setFormat(String format) throws IllegalFormatException, NullPointerException {
+        throw new NotImplementedException("TODO"); // TODO
+    }
+
+    @Override
+    public Set<Player> getRecipients() {
+        throw new NotImplementedException("TODO"); // TODO
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return handle.isCancelled();
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        handle.setCancelled(cancel);
     }
 
 }
