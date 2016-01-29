@@ -34,7 +34,6 @@ import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.G
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.JOIN_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.RESPAWN_LOCATION_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.SNEAKING_DATA;
-import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
@@ -47,6 +46,7 @@ import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.scoreboard.PoreScoreboard;
+import blue.lapis.pore.util.PoreText;
 
 import com.flowpowered.math.vector.Vector3d;
 import com.google.common.collect.Maps;
@@ -126,7 +126,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @SuppressWarnings("deprecation")
     public String getPlayerListName() {
         Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
-        return info.isPresent() ? LEGACY_FORMATTING_CODE.serialize(info.get().getDisplayName()) : this.getDisplayName();
+        return info.isPresent() ? PoreText.convert(info.get().getDisplayName()) : this.getDisplayName();
     }
 
     @Override
@@ -134,7 +134,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     public void setPlayerListName(String name) {
         Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
         if (info.isPresent()) {
-            info.get().setDisplayName(LEGACY_FORMATTING_CODE.deserialize(name));
+            info.get().setDisplayName(PoreText.convert(name));
         }
     }
 
@@ -805,8 +805,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     @SuppressWarnings("deprecation")
     public void sendTitle(String title, String subtitle) {
-        getHandle().sendTitle(Title.of(LEGACY_FORMATTING_CODE.deserialize(title),
-                LEGACY_FORMATTING_CODE.deserialize(subtitle)));
+        getHandle().sendTitle(Title.of(PoreText.convert(title), PoreText.convert(subtitle)));
     }
 
     @Override
@@ -827,7 +826,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     @SuppressWarnings("deprecation")
     public void sendMessage(String message) {
-        getHandle().sendMessage(LEGACY_FORMATTING_CODE.deserialize(message));
+        getHandle().sendMessage(PoreText.convert(message));
     }
 
     @Override
@@ -835,7 +834,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     public void sendMessage(String[] messages) {
         Text[] texts = new Text[messages.length];
         for (int i = 0; i < messages.length; i++) {
-            texts[i] = LEGACY_FORMATTING_CODE.deserialize(messages[i]);
+            texts[i] = PoreText.convert(messages[i]);
         }
         this.getHandle().sendMessages(texts);
     }

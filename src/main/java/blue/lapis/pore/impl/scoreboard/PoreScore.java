@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl.scoreboard;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.util.PoreText;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.base.Preconditions;
@@ -33,7 +34,6 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.spongepowered.api.scoreboard.Score;
-import org.spongepowered.api.text.serializer.TextSerializers;
 
 public class PoreScore extends PoreWrapper<Score> implements org.bukkit.scoreboard.Score {
     // and seven years ago
@@ -55,7 +55,7 @@ public class PoreScore extends PoreWrapper<Score> implements org.bukkit.scoreboa
     @Override
     @SuppressWarnings("deprecation")
     public String getEntry() {
-        return TextSerializers.LEGACY_FORMATTING_CODE.serialize(getHandle().getName());
+        return PoreText.convert(getHandle().getName());
     }
 
     @Override

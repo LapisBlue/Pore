@@ -29,12 +29,12 @@ import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.I
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.PASSENGER_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.VEHICLE_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.VELOCITY_DATA;
-import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
 
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreWorld;
+import blue.lapis.pore.util.PoreText;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.collect.Lists;
@@ -340,7 +340,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
     @SuppressWarnings("deprecation")
     public String getCustomName() {
         return hasData(DISPLAY_NAME_DATA)
-                ? LEGACY_FORMATTING_CODE.serialize(getHandle().get(DISPLAY_NAME_DATA).get().displayName().get())
+                ? PoreText.convert(getHandle().get(DISPLAY_NAME_DATA).get().displayName().get())
                 : null;
     }
 
@@ -349,7 +349,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
     public void setCustomName(String name) {
         Optional<DisplayNameData> data = getHandle().getOrCreate(DISPLAY_NAME_DATA);
         if (data.isPresent()) {
-            getHandle().offer(data.get().displayName().set(LEGACY_FORMATTING_CODE.deserialize(name)));
+            getHandle().offer(data.get().displayName().set(PoreText.convert(name)));
         } else {
             throw new UnsupportedOperationException("Cannot apply display name data to entity with ID " + getEntityId()
                     + " and type " + getType().name());

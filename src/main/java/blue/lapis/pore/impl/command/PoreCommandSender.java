@@ -24,11 +24,10 @@
  */
 package blue.lapis.pore.impl.command;
 
-import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
-
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.permissions.PorePermissible;
+import blue.lapis.pore.util.PoreText;
 
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
@@ -63,7 +62,7 @@ public class PoreCommandSender extends PorePermissible implements CommandSender 
     @Override
     @SuppressWarnings("deprecation")
     public void sendMessage(String message) {
-        getHandle().sendMessage(LEGACY_FORMATTING_CODE.deserialize(message));
+        getHandle().sendMessage(PoreText.convert(message));
     }
 
     @Override
@@ -71,7 +70,7 @@ public class PoreCommandSender extends PorePermissible implements CommandSender 
     public void sendMessage(String[] messages) {
         Text[] texts = new Text[messages.length];
         for (int i = 0; i < messages.length; i++) {
-            texts[i] = LEGACY_FORMATTING_CODE.deserialize(messages[i]);
+            texts[i] = PoreText.convert(messages[i]);
         }
         this.getHandle().sendMessages(texts);
     }

@@ -24,9 +24,8 @@
  */
 package blue.lapis.pore.command;
 
-import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
-
 import blue.lapis.pore.impl.command.PoreCommandSender;
+import blue.lapis.pore.util.PoreText;
 import blue.lapis.pore.util.PoreWrapper;
 
 import org.apache.commons.lang3.StringUtils;
@@ -79,13 +78,13 @@ public class PoreCommandCallable extends PoreWrapper<Command> implements Command
     @Override
     @SuppressWarnings("deprecation")
     public Optional<? extends Text> getHelp(CommandSource source) {
-        return Optional.of(LEGACY_FORMATTING_CODE.deserialize(getHandle().getDescription()));
+        return Optional.of(PoreText.convert(getHandle().getDescription()));
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public Text getUsage(CommandSource source) {
-        return LEGACY_FORMATTING_CODE.deserialize(getHandle().getUsage());
+        return PoreText.convert(getHandle().getUsage());
     }
 
 }

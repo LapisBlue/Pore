@@ -25,11 +25,11 @@
 package blue.lapis.pore.impl.scoreboard;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.scoreboard.NameTagVisibilityConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.util.PoreText;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.base.Preconditions;
@@ -65,7 +65,7 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     @SuppressWarnings("deprecation")
     public String getDisplayName() throws IllegalStateException {
         checkState();
-        return LEGACY_FORMATTING_CODE.serialize(getHandle().getDisplayName());
+        return PoreText.convert(getHandle().getDisplayName());
     }
 
     @Override
@@ -74,14 +74,14 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
         checkState();
         checkArgument(displayName.length() > MAX_NAME_LENGTH,
                 "Display name must not be longer than " + MAX_NAME_LENGTH + " characters");
-        getHandle().setDisplayName(LEGACY_FORMATTING_CODE.deserialize((displayName)));
+        getHandle().setDisplayName(PoreText.convert(displayName));
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public String getPrefix() throws IllegalStateException {
         checkState();
-        return LEGACY_FORMATTING_CODE.serialize(getHandle().getPrefix());
+        return PoreText.convert(getHandle().getPrefix());
     }
 
     @Override
@@ -89,14 +89,14 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     public void setPrefix(String prefix) throws IllegalStateException, IllegalArgumentException {
         checkState();
         checkArgument(prefix != null, "Prefix must not be null");
-        getHandle().setPrefix(LEGACY_FORMATTING_CODE.deserialize(prefix));
+        getHandle().setPrefix(PoreText.convert(prefix));
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public String getSuffix() throws IllegalStateException {
         checkState();
-        return LEGACY_FORMATTING_CODE.serialize(getHandle().getSuffix());
+        return PoreText.convert(getHandle().getSuffix());
     }
 
     @Override
@@ -104,7 +104,7 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     public void setSuffix(String suffix) throws IllegalStateException, IllegalArgumentException {
         checkState();
         checkArgument(suffix != null, "Suffix must not be null");
-        getHandle().setSuffix(LEGACY_FORMATTING_CODE.deserialize(suffix));
+        getHandle().setSuffix(PoreText.convert(suffix));
     }
 
     @Override
@@ -149,7 +149,7 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     public Set<OfflinePlayer> getPlayers() throws IllegalStateException {
         checkState();
         return Sets.newHashSet(Collections2.transform(getHandle().getMembers(),
-                user -> Pore.getServer().getOfflinePlayer(LEGACY_FORMATTING_CODE.serialize((user)))
+                user -> Pore.getServer().getOfflinePlayer(PoreText.convert(user))
         ));
     }
 
@@ -157,7 +157,7 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     @Override
     public Set<String> getEntries() throws IllegalStateException {
         checkState();
-        return Sets.newHashSet(Collections2.transform(getHandle().getMembers(), LEGACY_FORMATTING_CODE::serialize));
+        return Sets.newHashSet(Collections2.transform(getHandle().getMembers(), PoreText::convert));
     }
 
     @Override
@@ -183,7 +183,7 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
     public void addEntry(String entry) throws IllegalStateException, IllegalArgumentException {
         checkArgument(entry != null, "Entry cannot be null");
         checkState();
-        getHandle().addMember(LEGACY_FORMATTING_CODE.deserialize(entry));
+        getHandle().addMember(PoreText.convert(entry));
     }
 
     @SuppressWarnings("deprecation")
@@ -200,7 +200,7 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
         checkState();
         checkArgument(entry != null, "Entry cannot be null");
         for (Text user : getHandle().getMembers()) {
-            if (LEGACY_FORMATTING_CODE.serialize(user).equals(entry)) {
+            if (PoreText.convert(user).equals(entry)) {
                 return getHandle().removeMember(user);
             }
         }
@@ -227,7 +227,7 @@ public class PoreTeam extends PoreWrapper<Team> implements org.bukkit.scoreboard
         checkState();
         checkArgument(entry != null, "Entry cannot be null");
         for (Text user : getHandle().getMembers()) {
-            if (LEGACY_FORMATTING_CODE.serialize(user).equals(entry)) {
+            if (PoreText.convert(user).equals(entry)) {
                 return true;
             }
         }

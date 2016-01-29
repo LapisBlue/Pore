@@ -25,12 +25,12 @@
 package blue.lapis.pore.impl.scoreboard;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.scoreboard.DisplaySlotConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreOfflinePlayer;
+import blue.lapis.pore.util.PoreText;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.collect.Collections2;
@@ -117,7 +117,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     public Set<Score> getScores(String entry) throws IllegalArgumentException {
         checkArgument(entry != null, "Entry must not be null");
         return Sets.newHashSet(Collections2.transform(
-                getHandle().getScores(LEGACY_FORMATTING_CODE.deserialize(entry)),
+                getHandle().getScores(PoreText.convert(entry)),
                 PoreScore::of
         ));
     }
@@ -133,7 +133,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     @SuppressWarnings("deprecation")
     public void resetScores(String entry) throws IllegalArgumentException {
         checkArgument(entry != null, "Entry must not be null");
-        getHandle().removeScores(LEGACY_FORMATTING_CODE.deserialize(entry));
+        getHandle().removeScores(PoreText.convert(entry));
     }
 
     @SuppressWarnings("deprecation")
@@ -141,7 +141,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     public Team getPlayerTeam(OfflinePlayer player) throws IllegalArgumentException {
         checkArgument(player != null, "Offline player must not be null");
         return PoreTeam.of(getHandle().getMemberTeam(
-                LEGACY_FORMATTING_CODE.deserialize(((PoreOfflinePlayer) player).getHandle().getName())).orElse(null));
+                PoreText.convert(((PoreOfflinePlayer) player).getHandle().getName())).orElse(null));
     }
 
     @SuppressWarnings("deprecation")
@@ -149,7 +149,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     public Team getEntryTeam(String entry) throws IllegalArgumentException {
         for (org.spongepowered.api.scoreboard.Team team : getHandle().getTeams()) {
             for (Text text : team.getMembers()) {
-                if (LEGACY_FORMATTING_CODE.serialize(text).equals(entry)) {
+                if (PoreText.convert(text).equals(entry)) {
                     return PoreTeam.of(team);
                 }
             }

@@ -25,9 +25,9 @@
 package blue.lapis.pore.impl.scoreboard;
 
 import static com.google.common.base.Preconditions.checkArgument;
-import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.util.PoreText;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.base.Preconditions;
@@ -59,7 +59,7 @@ public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.
     @SuppressWarnings("deprecation")
     public String getDisplayName() throws IllegalStateException {
         checkState();
-        return LEGACY_FORMATTING_CODE.serialize(getHandle().getDisplayName());
+        return PoreText.convert(getHandle().getDisplayName());
     }
 
     @Override
@@ -67,7 +67,7 @@ public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.
     public void setDisplayName(String displayName) throws IllegalStateException, IllegalArgumentException {
         checkState();
         checkArgument(displayName != null, "Display name must not be null");
-        getHandle().setDisplayName(LEGACY_FORMATTING_CODE.deserialize(displayName));
+        getHandle().setDisplayName(PoreText.convert(displayName));
     }
 
     @Override
@@ -128,7 +128,7 @@ public class PoreObjective extends PoreWrapper<Objective> implements org.bukkit.
         checkState();
         checkArgument(entry != null, "Entry cannot be null");
         //noinspection ConstantConditions
-        return PoreScore.of(getHandle().getOrCreateScore(LEGACY_FORMATTING_CODE.deserialize(entry)));
+        return PoreScore.of(getHandle().getOrCreateScore(PoreText.convert(entry)));
     }
 
     private void checkState() throws IllegalStateException {

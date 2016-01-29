@@ -24,9 +24,8 @@
  */
 package blue.lapis.pore.impl;
 
-import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
-
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.util.PoreText;
 import blue.lapis.pore.util.PoreWrapper;
 
 import org.apache.commons.lang3.NotImplementedException;
@@ -66,7 +65,7 @@ public class PoreBanEntry extends PoreWrapper<Ban> implements BanEntry {
         if (!getHandle().getBanSource().isPresent()) {
             return null;
         }
-        return LEGACY_FORMATTING_CODE.serialize(getHandle().getBanSource().get());
+        return PoreText.convert(getHandle().getBanSource().get());
     }
 
     @Override

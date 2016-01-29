@@ -24,9 +24,8 @@
  */
 package blue.lapis.pore.impl.entity.minecart;
 
-import static org.spongepowered.api.text.serializer.TextSerializers.LEGACY_FORMATTING_CODE;
-
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.util.PoreText;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.entity.EntityType;
@@ -85,14 +84,14 @@ public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart
     @Override
     @SuppressWarnings("deprecation")
     public void sendMessage(String message) {
-        getHandle().sendMessage(LEGACY_FORMATTING_CODE.deserialize(message));
+        getHandle().sendMessage(PoreText.convert(message));
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void sendMessage(String[] messages) {
         Text[] texts = new Text[messages.length];
-        Arrays.stream(messages).map(LEGACY_FORMATTING_CODE::deserialize).collect(Collectors.toList()).toArray(texts);
+        Arrays.stream(messages).map(PoreText::convert).collect(Collectors.toList()).toArray(texts);
         this.getHandle().sendMessages(texts);
     }
 
