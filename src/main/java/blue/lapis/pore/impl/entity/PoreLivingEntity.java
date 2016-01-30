@@ -105,6 +105,29 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
                 getHandle().getProperty(EyeLocationProperty.class).get().getValue(), getHandle().getRotation());
     }
 
+    private static class IncludeTargetFilter implements Predicate<BlockRayHit<World>> {
+
+        private final Predicate<BlockRayHit<World>> matcher;
+        private boolean done;
+
+        private IncludeTargetFilter(Predicate<BlockRayHit<World>> matcher) {
+            this.matcher = matcher;
+        }
+
+        @Override
+        public boolean test(BlockRayHit<World> worldBlockRayHit) {
+            if (this.done) {
+                return false;
+            }
+
+            if (!this.matcher.test(worldBlockRayHit)) {
+                done = true;
+            }
+
+            return true;
+        }
+    }
+
     private static Set<Material> toMaterial(Set<Byte> uglyBytes) {
         return uglyBytes != null ? uglyBytes.stream().map(Material::getMaterial).collect(Collectors.toSet()) : null;
     }
@@ -118,7 +141,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
                     hit.getExtent().getBlockType(hit.getBlockX(), hit.getBlockY(), hit.getBlockZ())));
         }
 
-        return BlockRay.from(getHandle()).filter(filter).blockLimit(maxDistance);
+        return BlockRay.from(getHandle()).filter(new IncludeTargetFilter(filter)).blockLimit(maxDistance);
     }
 
     @SuppressWarnings("deprecation")
@@ -144,7 +167,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public Block getTargetBlock(Set<Material> transparent, int maxDistance) {
-        return PoreBlock.of(getBlockRay(transparent, maxDistance).end().get().getLocation());
+        return PoreBlock.of(getBlockRay(transparent, maxDistance).end().map(BlockRayHit::getLocation).orElse(null));
     }
 
     @SuppressWarnings("deprecation")
