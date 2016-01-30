@@ -26,27 +26,47 @@ package blue.lapis.pore.impl.event.world;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang3.NotImplementedException;
+import blue.lapis.pore.event.PoreEvent;
+import blue.lapis.pore.event.RegisterEvent;
+import blue.lapis.pore.impl.PoreWorld;
+
 import org.bukkit.World;
-import org.bukkit.event.world.WorldSaveEvent;
-import org.spongepowered.api.event.world.WorldEvent;
+import org.bukkit.event.world.WorldUnloadEvent;
+import org.spongepowered.api.event.world.UnloadWorldEvent;
 
-public class PoreWorldSaveEvent extends WorldSaveEvent {
+@RegisterEvent
+public final class PoreWorldUnloadEvent extends WorldUnloadEvent implements PoreEvent<UnloadWorldEvent> {
 
-    private final WorldEvent handle;
+    private final UnloadWorldEvent handle;
 
-    public PoreWorldSaveEvent(WorldEvent handle) {
+    public PoreWorldUnloadEvent(UnloadWorldEvent handle) {
         super(null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public WorldEvent getHandle() {
+    @Override
+    public UnloadWorldEvent getHandle() {
         return handle;
     }
 
     @Override
     public World getWorld() {
-        throw new NotImplementedException("TODO"); // TODO
+        return PoreWorld.of(handle.getTargetWorld());
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return handle.isCancelled();
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        handle.setCancelled(cancel);
+    }
+
+    @Override
+    public String toString() {
+        return toStringHelper().toString();
     }
 
 }

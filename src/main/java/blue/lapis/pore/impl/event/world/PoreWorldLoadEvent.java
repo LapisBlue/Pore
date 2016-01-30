@@ -26,37 +26,37 @@ package blue.lapis.pore.impl.event.world;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang3.NotImplementedException;
-import org.bukkit.Chunk;
+import blue.lapis.pore.event.PoreEvent;
+import blue.lapis.pore.event.RegisterEvent;
+import blue.lapis.pore.impl.PoreWorld;
+
 import org.bukkit.World;
-import org.spongepowered.api.event.world.ChunkLoadEvent;
+import org.bukkit.event.world.WorldLoadEvent;
+import org.spongepowered.api.event.world.LoadWorldEvent;
 
-public class PoreChunkLoadEvent extends org.bukkit.event.world.ChunkLoadEvent {
+@RegisterEvent
+public final class PoreWorldLoadEvent extends WorldLoadEvent implements PoreEvent<LoadWorldEvent> {
 
-    private final ChunkLoadEvent handle;
+    private final LoadWorldEvent handle;
 
-    public PoreChunkLoadEvent(ChunkLoadEvent handle) {
-        super(null, false);
+    public PoreWorldLoadEvent(LoadWorldEvent handle) {
+        super(null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public ChunkLoadEvent getHandle() {
+    @Override
+    public LoadWorldEvent getHandle() {
         return handle;
     }
 
     @Override
     public World getWorld() {
-        throw new NotImplementedException("TODO"); // TODO
+        return PoreWorld.of(handle.getTargetWorld());
     }
 
     @Override
-    public Chunk getChunk() {
-        throw new NotImplementedException("TODO"); // TODO
-    }
-
-    @Override
-    public boolean isNewChunk() {
-        throw new NotImplementedException("TODO"); // TODO
+    public String toString() {
+        return toStringHelper().toString();
     }
 
 }

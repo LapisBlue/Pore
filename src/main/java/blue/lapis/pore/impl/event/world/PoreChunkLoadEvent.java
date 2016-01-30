@@ -26,36 +26,50 @@ package blue.lapis.pore.impl.event.world;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.event.PoreEvent;
+import blue.lapis.pore.event.RegisterEvent;
+import blue.lapis.pore.impl.PoreChunk;
+import blue.lapis.pore.impl.PoreWorld;
+
 import org.apache.commons.lang3.NotImplementedException;
+import org.bukkit.Chunk;
 import org.bukkit.World;
-import org.spongepowered.api.event.world.WorldUnloadEvent;
+import org.bukkit.event.world.ChunkLoadEvent;
+import org.spongepowered.api.event.world.chunk.LoadChunkEvent;
 
-public class PoreWorldUnloadEvent extends org.bukkit.event.world.WorldUnloadEvent {
+@RegisterEvent
+public final class PoreChunkLoadEvent extends ChunkLoadEvent implements PoreEvent<LoadChunkEvent> {
 
-    private final WorldUnloadEvent handle;
+    private final LoadChunkEvent handle;
 
-    public PoreWorldUnloadEvent(WorldUnloadEvent handle) {
-        super(null);
+    public PoreChunkLoadEvent(LoadChunkEvent handle) {
+        super(null, false);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public WorldUnloadEvent getHandle() {
+    @Override
+    public LoadChunkEvent getHandle() {
         return handle;
     }
 
     @Override
     public World getWorld() {
+        return PoreWorld.of(handle.getTargetChunk().getWorld());
+    }
+
+    @Override
+    public Chunk getChunk() {
+        return PoreChunk.of(handle.getTargetChunk());
+    }
+
+    @Override
+    public boolean isNewChunk() {
         throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
-    public boolean isCancelled() {
-        throw new NotImplementedException("TODO"); // TODO
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        throw new NotImplementedException("TODO"); // TODO
+    public String toString() {
+        return toStringHelper().toString();
     }
 
 }
