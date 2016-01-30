@@ -55,11 +55,13 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.data.DataTransactionResult;
 import org.spongepowered.api.data.key.Keys;
-import org.spongepowered.api.data.manipulator.catalog.CatalogEntityData;
 import org.spongepowered.api.data.property.entity.EyeHeightProperty;
 import org.spongepowered.api.data.property.entity.EyeLocationProperty;
 import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.entity.projectile.source.ProjectileSource;
+import org.spongepowered.api.event.cause.entity.damage.DamageTypes;
+import org.spongepowered.api.event.cause.entity.damage.source.DamageSource;
+import org.spongepowered.api.event.cause.entity.damage.source.EntityDamageSource;
 import org.spongepowered.api.util.blockray.BlockRay;
 import org.spongepowered.api.util.blockray.BlockRayHit;
 import org.spongepowered.api.world.World;
@@ -422,8 +424,14 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void damage(double amount, Entity source) {
-        getHandle().offer(getHandle().get(CatalogEntityData.DAMAGING_DATA).get().damage().set(amount));
-        //TODO: source
+        if (source != null) {
+            getHandle().damage(amount, EntityDamageSource.builder()
+                    .type(DamageTypes.GENERIC)
+                    .entity(((PoreEntity) source).getHandle())
+                    .build());
+        } else {
+            getHandle().damage(amount, DamageSource.builder().type(DamageTypes.GENERIC).build());
+        }
     }
 
     @SuppressWarnings("deprecation")

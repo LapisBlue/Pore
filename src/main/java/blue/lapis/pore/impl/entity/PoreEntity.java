@@ -284,12 +284,13 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public void setLastDamageCause(EntityDamageEvent event) {
-        throw new NotImplementedException("TODO"); //TODO: Sponge counterpart planned for 1.1
+        //TODO: Sponge counterpart planned for 1.1
     }
 
     @Override
     public EntityDamageEvent getLastDamageCause() {
-        throw new NotImplementedException("TODO"); //TODO: Sponge counterpart planned for 1.1
+        // TODO: Sponge counterpart planned for 1.1
+        return null;
     }
 
     @Override
