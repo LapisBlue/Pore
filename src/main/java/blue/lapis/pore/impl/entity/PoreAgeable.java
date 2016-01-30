@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
+import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.AGEABLE_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.BREEDABLE_DATA;
 
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
@@ -68,7 +69,7 @@ public class PoreAgeable extends PoreCreature implements org.bukkit.entity.Ageab
 
     @Override
     public void setBaby() {
-        getHandle().getAgeData().baby().set(true);
+        getHandle().offer(getHandle().getOrCreate(AGEABLE_DATA).get().baby().set(true));
     }
 
     @Override

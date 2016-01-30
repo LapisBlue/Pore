@@ -68,6 +68,7 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
 import org.spongepowered.api.block.BlockTypes;
+import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.effect.sound.SoundType;
 import org.spongepowered.api.entity.living.player.Player;
@@ -185,7 +186,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void kickPlayer(String message) {
-        throw new NotImplementedException("TODO");
+        getHandle().kick(PoreText.convert(message));
     }
 
     @Override
@@ -195,7 +196,9 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public boolean performCommand(String command) {
-        throw new NotImplementedException("TODO");
+        // TODO: Does this work properly?
+        CommandResult result = Pore.getGame().getCommandManager().process(getHandle(), command);
+        return result.getSuccessCount().isPresent() && result.getSuccessCount().get() > 0;
     }
 
     @Override
