@@ -25,12 +25,11 @@
 package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.spongepowered.api.event.cause.NamedCause.SOURCE;
 
 import blue.lapis.pore.converter.type.world.DirectionConverter;
 import blue.lapis.pore.event.PoreEvent;
-import blue.lapis.pore.event.PoreEventRegistry;
 import blue.lapis.pore.event.RegisterEvent;
+import blue.lapis.pore.event.Source;
 import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
@@ -49,11 +48,12 @@ public abstract class PorePlayerInteractEvent<T extends InteractBlockEvent> exte
         implements PoreEvent<T> {
 
     private final T handle;
-    private Player player;
+    private final Player player;
 
-    public PorePlayerInteractEvent(T handle) {
+    private PorePlayerInteractEvent(T handle, @Source Player player) {
         super(null, null, null, null, null);
         this.handle = checkNotNull(handle, "handle");
+        this.player = checkNotNull(player, "player");
     }
 
     @Override
@@ -61,17 +61,9 @@ public abstract class PorePlayerInteractEvent<T extends InteractBlockEvent> exte
         return this.handle;
     }
 
-    public final Player getPlayerHandle() {
-        if (this.player == null) {
-            this.player = this.handle.getCause().get(SOURCE, Player.class).get();
-        }
-
-        return this.player;
-    }
-
     @Override
     public org.bukkit.entity.Player getPlayer() {
-        return PorePlayer.of(getPlayerHandle());
+        return PorePlayer.of(this.player);
     }
 
     @Override
@@ -92,7 +84,7 @@ public abstract class PorePlayerInteractEvent<T extends InteractBlockEvent> exte
 
     @Override
     public boolean hasItem() {
-        return getPlayerHandle().getItemInHand().isPresent();
+        return this.player.getItemInHand().isPresent();
     }
 
     @Override
@@ -146,10 +138,11 @@ public abstract class PorePlayerInteractEvent<T extends InteractBlockEvent> exte
         return toStringHelper().toString();
     }
 
+    @RegisterEvent
     public static final class Primary extends PorePlayerInteractEvent<InteractBlockEvent.Primary> {
 
-        public Primary(InteractBlockEvent.Primary handle) {
-            super(handle);
+        public Primary(InteractBlockEvent.Primary handle, @Source Player player) {
+            super(handle, player);
         }
 
         @Override
@@ -159,10 +152,11 @@ public abstract class PorePlayerInteractEvent<T extends InteractBlockEvent> exte
 
     }
 
+    @RegisterEvent
     public static final class Secondary extends PorePlayerInteractEvent<InteractBlockEvent.Secondary> {
 
-        public Secondary(InteractBlockEvent.Secondary handle) {
-            super(handle);
+        public Secondary(InteractBlockEvent.Secondary handle, @Source Player player) {
+            super(handle, player);
         }
 
         @Override
@@ -170,14 +164,6 @@ public abstract class PorePlayerInteractEvent<T extends InteractBlockEvent> exte
             return hasBlock() ? Action.RIGHT_CLICK_BLOCK : Action.RIGHT_CLICK_AIR;
         }
 
-    }
-
-    @RegisterEvent
-    public static void register() {
-        PoreEventRegistry.registerFor(Primary.class, InteractBlockEvent.Primary.class, event ->
-                event.getCause().get(SOURCE, Player.class).isPresent());
-        PoreEventRegistry.registerFor(Secondary.class, InteractBlockEvent.Secondary.class, event ->
-                event.getCause().get(SOURCE, Player.class).isPresent());
     }
 
 }

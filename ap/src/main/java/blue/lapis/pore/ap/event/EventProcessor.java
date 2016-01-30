@@ -122,6 +122,7 @@ public class EventProcessor extends AbstractProcessor {
     }
 
     private boolean validateClass(String name, Set<? extends TypeElement> annotations) {
+        name = name.replace('$', '.'); // Mirror API sucks, replace inner class signs
         TypeElement element = processingEnv.getElementUtils().getTypeElement(name);
         if (element != null) {
             return element.getAnnotationMirrors().containsAll(annotations);
@@ -150,7 +151,12 @@ public class EventProcessor extends AbstractProcessor {
     private static String getQualifiedName(Element element) {
         switch (element.getKind()) {
             case CLASS:
-                return ((QualifiedNameable) element).getQualifiedName().toString();
+                // Mirror API sucks, return proper qualified name for inner classes
+                if (element.getEnclosingElement().getKind() == ElementKind.CLASS) {
+                    return getQualifiedName(element.getEnclosingElement()) + '$' + element.getSimpleName();
+                } else {
+                    return ((QualifiedNameable) element).getQualifiedName().toString();
+                }
             case METHOD:
                 return getQualifiedName(element.getEnclosingElement()) + ':' + element.getSimpleName().toString();
             default:

@@ -29,13 +29,23 @@ public final class PoreConstructors {
     private PoreConstructors() {
     }
 
-    private static final SimpleConstructor.Provider PROVIDER = new SimpleClassConstructor.Provider();
+    private static final ClassConstructor.Provider PROVIDER = new BytecodeClassConstructor.Provider();
 
-    public static <T, P> SimpleConstructor<T, P> create(Class<T> type, Class<P> parameter) {
+    public static <T, P> SimpleClassConstructor<T, P> create(Class<T> type, Class<P> parameter) {
         try {
             return PROVIDER.create(type, parameter);
         } catch (Exception e) {
             throw new RuntimeException("Failed to create constructor for " + type + " with " + parameter, e);
+        }
+    }
+
+    public static <T, A, B> BiClassConstructor<T, A, B> create(Class<T> type,
+            Class<A> parameterA, Class<B> parameterB) {
+        try {
+            return PROVIDER.create(type, parameterA, parameterB);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create constructor for " + type + " with " + parameterA + " and "
+                    + parameterB, e);
         }
     }
 

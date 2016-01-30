@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkState;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.util.constructor.PoreConstructors;
-import blue.lapis.pore.util.constructor.SimpleConstructor;
+import blue.lapis.pore.util.constructor.SimpleClassConstructor;
 
 import com.google.common.base.Function;
 import com.google.common.cache.CacheBuilder;
@@ -158,7 +158,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
 
     static final class Converter<S, P> implements Function<S, P> {
 
-        final SimpleConstructor<P, S> constructor;
+        final SimpleClassConstructor<P, S> constructor;
         final ImmutableMap<Class<? extends S>, Converter<? extends S, ? extends P>> registry;
 
         private Converter(Class<S> sponge, Class<P> pore,
@@ -187,7 +187,7 @@ final class CachedWrapperConverter<B> implements Function<Object, B> {
 
         @Override
         public P apply(S input) {
-            return constructor.construct(input);
+            return constructor.apply(input);
         }
 
         @SuppressWarnings("unchecked")

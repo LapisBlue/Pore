@@ -100,7 +100,7 @@ public final class PoreBlockBreakEvent extends BlockBreakEvent implements PoreEv
 
     @RegisterEvent
     public static void register() {
-        PoreEventRegistry.registerWith(PoreBlockBreakEvent.class, ChangeBlockEvent.Break.class, event -> {
+        PoreEventRegistry.register(PoreBlockBreakEvent.class, ChangeBlockEvent.Break.class, event -> {
             Player player = event.getCause().get(SOURCE, Player.class).orElse(null);
             if (player != null) {
                 return event.getTransactions().stream()

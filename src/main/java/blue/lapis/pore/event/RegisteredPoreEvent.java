@@ -26,16 +26,12 @@ package blue.lapis.pore.event;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import blue.lapis.pore.util.constructor.PoreConstructors;
-import blue.lapis.pore.util.constructor.SimpleConstructor;
-
 import com.google.common.collect.ImmutableList;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.HandlerList;
 import org.spongepowered.api.event.Event;
 
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 final class RegisteredPoreEvent<P extends org.bukkit.event.Event & PoreEvent<S>, S extends Event>
         implements HandlerList.Adapter {
@@ -43,12 +39,6 @@ final class RegisteredPoreEvent<P extends org.bukkit.event.Event & PoreEvent<S>,
     private final Class<P> poreEvent;
     private final SpongeEvent<S> spongeEvent;
     private final Function<S, ImmutableList<P>> constructor;
-
-    RegisteredPoreEvent(Class<P> poreEvent, SpongeEvent<S> spongeEvent, Predicate<S> matcher) {
-        this.poreEvent = checkNotNull(poreEvent, "poreEvent");
-        this.spongeEvent = checkNotNull(spongeEvent, "spongeEvent");
-        this.constructor = new SimpleEventConstructor(matcher);
-    }
 
     RegisteredPoreEvent(Class<P> poreEvent, SpongeEvent<S> spongeEvent, Function<S, ImmutableList<P>> constructor) {
         this.poreEvent = checkNotNull(poreEvent, "poreEvent");
@@ -81,32 +71,6 @@ final class RegisteredPoreEvent<P extends org.bukkit.event.Event & PoreEvent<S>,
     @Override
     public void unregister(EventPriority priority) {
         this.spongeEvent.unregister(this, priority);
-    }
-
-    private final class SimpleEventConstructor implements Function<S, ImmutableList<P>> {
-
-        private final Predicate<S> matcher;
-
-        // Lazily loaded
-        private SimpleConstructor<P, S> constructor;
-
-        private SimpleEventConstructor(Predicate<S> matcher) {
-            this.matcher = matcher;
-        }
-
-        @Override
-        public ImmutableList<P> apply(S event) {
-            if (this.matcher != null && !this.matcher.test(event)) {
-                return ImmutableList.of();
-            }
-
-            if (this.constructor == null) {
-                this.constructor = PoreConstructors.create(poreEvent, spongeEvent.getEvent());
-            }
-
-            return ImmutableList.of(this.constructor.construct(event));
-        }
-
     }
 
 }

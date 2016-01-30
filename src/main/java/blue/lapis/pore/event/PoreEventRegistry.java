@@ -24,7 +24,6 @@
  */
 package blue.lapis.pore.event;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.Pore;
@@ -39,7 +38,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Modifier;
 import java.util.IdentityHashMap;
 import java.util.Map;
@@ -82,23 +80,7 @@ public final class PoreEventRegistry {
         return SimplePluginManager.getEventListeners(handle);
     }
 
-    public static  <P extends org.bukkit.event.Event & PoreEvent<S>, S extends Event> void registerFor(
-            Class<P> pore, Class<S> sponge, Predicate<S> matcher) {
-        checkNotNull(pore, "pore");
-        checkNotNull(sponge, "sponge");
-
-        try {
-            pore.getConstructor(sponge);
-        } catch (NoSuchMethodException e) {
-            throw new IllegalArgumentException("No event constructor found for " + sponge, e);
-        }
-
-        HandlerList handlerList = getHandlerList(pore);
-        SpongeEvent<S> spongeEvent = registerSpongeHandler(sponge);
-        handlerList.addAdapter(new RegisteredPoreEvent<>(pore, spongeEvent, matcher));
-    }
-
-    public static  <P extends org.bukkit.event.Event & PoreEvent<S>, S extends Event> void registerWith(
+    public static  <P extends org.bukkit.event.Event & PoreEvent<S>, S extends Event> void register(
             Class<P> pore, Class<S> sponge, Function<S, ImmutableList<P>> constructor) {
         checkNotNull(pore, "pore");
         checkNotNull(sponge, "sponge");
@@ -109,24 +91,12 @@ public final class PoreEventRegistry {
         handlerList.addAdapter(new RegisteredPoreEvent<>(pore, spongeEvent, constructor));
     }
 
-    @SuppressWarnings("unchecked")
-    public static <P extends org.bukkit.event.Event & PoreEvent<S>, S extends Event> void register(Class<P> pore) {
+    public static  <P extends org.bukkit.event.Event & PoreEvent<S>, S extends Event> void register(
+            Class<P> pore, Predicate<S> matcher) {
         checkNotNull(pore, "pore");
 
-        Class<S> sponge = null;
-
-        for (Constructor<?> constructor : pore.getConstructors()) {
-            Class<?>[] parameters = constructor.getParameterTypes();
-            if (parameters.length == 1) {
-                Class<?> parameter = parameters[0];
-                if (Event.class.isAssignableFrom(parameter)) {
-                    sponge = (Class<S>) parameter.asSubclass(Event.class);
-                }
-            }
-        }
-
-        checkArgument(sponge != null, "No event constructor found in %s", pore);
-        registerFor(pore, sponge, null);
+        EventConstructor<P, S> constructor = EventConstructor.create(pore, matcher);
+        register(pore, constructor.getSpongeEvent(), constructor);
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
@@ -163,7 +133,7 @@ public final class PoreEventRegistry {
                     if (method != null) {
                         poreEvent.getMethod(method).invoke(null);
                     } else {
-                        register(poreEvent);
+                        register(poreEvent, null);
                     }
                 } catch (Exception e) {
                     Pore.getLogger().warn("Failed to register class {} as an event", line, e);

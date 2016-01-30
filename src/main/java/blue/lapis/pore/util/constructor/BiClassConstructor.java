@@ -24,8 +24,8 @@
  */
 package blue.lapis.pore.util.constructor;
 
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
-public interface SimpleClassConstructor<T, P> extends ClassConstructor<T>, Function<P, T> {
+public interface BiClassConstructor<T, A, B> extends ClassConstructor<T>, BiFunction<A, B, T> {
 
 }

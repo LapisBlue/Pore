@@ -24,15 +24,16 @@
  */
 package blue.lapis.pore.util.constructor;
 
-public interface SimpleConstructor<T, P> {
+public interface ClassConstructor<T> {
 
     Class<T> getType();
 
-    T construct(P parameter);
-
     interface Provider {
 
-        <T, P> SimpleConstructor<T, P> create(Class<T> type, Class<P> parameter) throws Exception;
+        <T, P> SimpleClassConstructor<T, P> create(Class<T> type, Class<P> parameter) throws Exception;
+
+        <T, A, B> BiClassConstructor<T, A, B> create(Class<T> type, Class<A> parameterA, Class<B> parameterB)
+            throws Exception;
 
     }
 
