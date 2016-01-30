@@ -28,6 +28,7 @@ import blue.lapis.pore.PoreTests;
 import blue.lapis.pore.converter.data.AbstractDataValue;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.data.manipulator.DataManipulator;
@@ -43,6 +44,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @SuppressWarnings("rawtypes")
+@Ignore
 public class BlockTypeDataConverterTest {
 
     @Before

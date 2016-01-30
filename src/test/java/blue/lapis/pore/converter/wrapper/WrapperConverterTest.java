@@ -42,7 +42,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.BlockSnapshot;
 import org.spongepowered.api.block.tileentity.TileEntity;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
@@ -138,10 +138,9 @@ public class WrapperConverterTest {
         // this code basically assures that a NullPointerException won't be thrown while converting
         if (base.getPackage().getName().startsWith("org.spongepowered.api.block.tileentity")) {
             Location<World> loc = new Location<>(mock(World.class), 0, 0, 0);
-            BlockState state = mock(BlockState.class);
-            when(loc.getBlock()).thenReturn(state);
+            BlockSnapshot snapshot = mock(BlockSnapshot.class);
+            when(loc.createSnapshot()).thenReturn(snapshot);
             when(((TileEntity) mock).getLocation()).thenReturn(loc);
-            when(((TileEntity) mock).getBlock()).thenReturn(state);
         }
         return mock;
     }
