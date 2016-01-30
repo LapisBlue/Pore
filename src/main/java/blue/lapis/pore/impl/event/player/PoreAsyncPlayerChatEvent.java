@@ -33,7 +33,6 @@ import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreText;
 
 import com.google.common.collect.ImmutableSet;
-import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.message.MessageChannelEvent;

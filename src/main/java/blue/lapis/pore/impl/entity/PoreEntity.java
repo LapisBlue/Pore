@@ -28,7 +28,6 @@ import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.D
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.IGNITEABLE_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.PASSENGER_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.VEHICLE_DATA;
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.VELOCITY_DATA;
 
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
@@ -59,7 +58,6 @@ import org.spongepowered.api.data.manipulator.DataManipulator;
 import org.spongepowered.api.data.manipulator.mutable.DisplayNameData;
 import org.spongepowered.api.data.manipulator.mutable.entity.IgniteableData;
 import org.spongepowered.api.data.manipulator.mutable.entity.PassengerData;
-import org.spongepowered.api.data.manipulator.mutable.entity.VelocityData;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.EntitySnapshot;
 
@@ -116,20 +114,13 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public Vector getVelocity() {
-        return hasData(VELOCITY_DATA)
-                ? VectorConverter.createBukkitVector(getHandle().get(VELOCITY_DATA).get().velocity().get())
-                : new Vector(0, 0, 0);
+        return getHandle().get(Keys.VELOCITY).map(VectorConverter::createBukkitVector)
+                .orElseGet(() -> new Vector(0, 0, 0));
     }
 
     @Override
     public void setVelocity(Vector velocity) {
-        Optional<VelocityData> data = getHandle().getOrCreate(VELOCITY_DATA);
-        if (data.isPresent()) {
-            getHandle().offer(data.get().velocity().set(VectorConverter.create3d(velocity)));
-        } else {
-            throw new UnsupportedOperationException("Cannot apply velocity to entity with ID " + getEntityId()
-                    + " and type " + getType().name());
-        }
+        getHandle().offer(Keys.VELOCITY, VectorConverter.create3d(velocity));
     }
 
     @Override

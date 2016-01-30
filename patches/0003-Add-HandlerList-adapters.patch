@@ -1,4 +1,4 @@
-From 24941f4eef289606bbc2cd2734a1a3a4d673079c Mon Sep 17 00:00:00 2001
+From bf8534d43b2ab4c35284305d6632e7344662a29c Mon Sep 17 00:00:00 2001
 From: Minecrell <dev@minecrell.net>
 Date: Sat, 31 Jan 2015 19:28:20 +0100
 Subject: [PATCH] Add HandlerList adapters
@@ -148,7 +148,7 @@ index 7d5efff..b5d78df 100644
 +    }
  }
 diff --git a/src/main/java/org/bukkit/plugin/SimplePluginManager.java b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
-index e51658d..57154b8 100644
+index 5a9e50d..0b79a42 100644
 --- a/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 +++ b/src/main/java/org/bukkit/plugin/SimplePluginManager.java
 @@ -562,7 +562,7 @@ public final class SimplePluginManager implements PluginManager {
@@ -170,5 +170,5 @@ index e51658d..57154b8 100644
              clazz.getDeclaredMethod("getHandlerList");
              return clazz;
 -- 
-2.4.2
+2.7.0
 

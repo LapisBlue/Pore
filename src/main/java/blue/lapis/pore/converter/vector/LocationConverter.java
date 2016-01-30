@@ -66,6 +66,11 @@ public final class LocationConverter {
                 locationVector.getZ());
     }
 
+    public static Location fromVector3d(World world, Vector3d locationVector, Vector3d rotation) {
+        return new Location(PoreWorld.of(world), locationVector.getX(), locationVector.getY(),
+                locationVector.getZ(), (float) rotation.getY(), (float) rotation.getX());
+    }
+
     public static Location fromVector3f(World world, Vector3f locationVector) {
         return new Location(PoreWorld.of(world), locationVector.getX(), locationVector.getY(),
                 locationVector.getZ());

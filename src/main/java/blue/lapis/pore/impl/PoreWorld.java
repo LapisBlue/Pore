@@ -26,6 +26,7 @@ package blue.lapis.pore.impl;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
 import blue.lapis.pore.converter.type.world.BiomeConverter;
 import blue.lapis.pore.converter.type.world.DifficultyConverter;
@@ -82,6 +83,8 @@ import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.effect.particle.ParticleEffect;
 import org.spongepowered.api.entity.EntityTypes;
 import org.spongepowered.api.entity.living.Living;
+import org.spongepowered.api.event.cause.Cause;
+import org.spongepowered.api.event.cause.NamedCause;
 import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.extent.Extent;
 import org.spongepowered.api.world.weather.Weathers;
@@ -315,9 +318,14 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public Entity spawnEntity(Location loc, EntityType type) {
-        return PoreEntity.of(
-                getHandle().createEntity(EntityConverter.of(type), VectorConverter.create3d(loc)).orElse(null)
-        );
+        org.spongepowered.api.entity.Entity entity = getHandle().createEntity(EntityConverter.of(type),
+                VectorConverter.create3d(loc)).orElse(null);
+        if (entity == null) {
+            return null;
+        }
+
+        getHandle().spawnEntity(entity, Cause.of(NamedCause.source(Pore.getPlugin())));
+        return PoreEntity.of(entity);
     }
 
     @SuppressWarnings("deprecation")

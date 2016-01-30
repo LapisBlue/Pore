@@ -1,11 +1,11 @@
-From 1942b843072911ea4e5f7331cbdf7e652b09a7f3 Mon Sep 17 00:00:00 2001
+From 802c7ccbbbd4882ac62158962448a6d664e77d72 Mon Sep 17 00:00:00 2001
 From: caseif <caseif@caseif.net>
 Date: Mon, 30 Mar 2015 23:21:20 -0400
 Subject: [PATCH] Add method to get EntityType from Class
 
 
 diff --git a/src/main/java/org/bukkit/entity/EntityType.java b/src/main/java/org/bukkit/entity/EntityType.java
-index ccc024b..6123b9e 100644
+index ccc024b..4d13318 100644
 --- a/src/main/java/org/bukkit/entity/EntityType.java
 +++ b/src/main/java/org/bukkit/entity/EntityType.java
 @@ -181,6 +181,8 @@ public enum EntityType {
@@ -17,7 +17,7 @@ index ccc024b..6123b9e 100644
  
      static {
          for (EntityType type : values()) {
-@@ -190,6 +192,9 @@ public enum EntityType {
+@@ -190,7 +192,13 @@ public enum EntityType {
              if (type.typeId > 0) {
                  ID_MAP.put(type.typeId, type);
              }
@@ -25,9 +25,13 @@ index ccc024b..6123b9e 100644
 +                CLASS_MAP.put(type.clazz, type);
 +            }
          }
++
++        // Alias Fireball.class as FIREBALL so we don't return null
++        CLASS_MAP.put(Fireball.class, EntityType.FIREBALL);
      }
  
-@@ -259,6 +264,10 @@ public enum EntityType {
+     private EntityType(String name, Class<? extends Entity> clazz, int typeId) {
+@@ -259,6 +267,10 @@ public enum EntityType {
          return ID_MAP.get((short) id);
      }
  
@@ -39,5 +43,5 @@ index ccc024b..6123b9e 100644
       * Some entities cannot be spawned using {@link
       * World#spawnEntity(Location, EntityType)} or {@link
 -- 
-1.9.4.msysgit.2
+2.7.0
 

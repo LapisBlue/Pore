@@ -28,10 +28,12 @@ import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.B
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.LEASH_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.POTION_EFFECT_DATA;
 
+import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.type.material.PotionEffectConverter;
 import blue.lapis.pore.converter.type.material.PotionEffectTypeConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
+import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.util.ProjectileUtil;
 
 import com.google.common.collect.Collections2;
@@ -58,13 +60,19 @@ import org.spongepowered.api.data.property.entity.EyeHeightProperty;
 import org.spongepowered.api.data.property.entity.EyeLocationProperty;
 import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.entity.projectile.source.ProjectileSource;
+import org.spongepowered.api.util.blockray.BlockRay;
+import org.spongepowered.api.util.blockray.BlockRayHit;
+import org.spongepowered.api.world.World;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
@@ -94,40 +102,73 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
     @Override
     public Location getEyeLocation() {
         return LocationConverter.fromVector3d(getHandle().getWorld(),
-                getHandle().getProperty(EyeLocationProperty.class).get().getValue());
+                getHandle().getProperty(EyeLocationProperty.class).get().getValue(), getHandle().getRotation());
+    }
+
+    private static Set<Material> toMaterial(Set<Byte> uglyBytes) {
+        return uglyBytes != null ? uglyBytes.stream().map(Material::getMaterial).collect(Collectors.toSet()) : null;
+    }
+
+    private BlockRay.BlockRayBuilder<World> getBlockRay(Set<Material> transparent, int maxDistance) {
+        Predicate<BlockRayHit<World>> filter;
+        if (transparent == null) {
+            filter = BlockRay.onlyAirFilter();
+        } else {
+            filter = hit -> transparent.contains(MaterialConverter.of(
+                    hit.getExtent().getBlockType(hit.getBlockX(), hit.getBlockY(), hit.getBlockZ())));
+        }
+
+        return BlockRay.from(getHandle()).filter(filter).blockLimit(maxDistance);
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public List<Block> getLineOfSight(HashSet<Byte> transparent, int maxDistance) {
-        throw new NotImplementedException("TODO");
+        return getLineOfSight(toMaterial(transparent), maxDistance);
     }
 
     @Override
     public List<Block> getLineOfSight(Set<Material> transparent, int maxDistance) {
-        throw new NotImplementedException("TODO"); // TODO
+        List<Block> blocks = new ArrayList<>();
+        for (BlockRayHit<World> hit : getBlockRay(transparent, maxDistance)) {
+            blocks.add(PoreBlock.of(hit.getLocation()));
+        }
+        return blocks;
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public Block getTargetBlock(HashSet<Byte> transparent, int maxDistance) {
-        throw new NotImplementedException("TODO");
+        return getTargetBlock(toMaterial(transparent), maxDistance);
     }
 
     @Override
     public Block getTargetBlock(Set<Material> transparent, int maxDistance) {
-        throw new NotImplementedException("TODO"); // TODO
+        return PoreBlock.of(getBlockRay(transparent, maxDistance).end().get().getLocation());
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public List<Block> getLastTwoTargetBlocks(HashSet<Byte> transparent, int maxDistance) {
-        throw new NotImplementedException("TODO");
+        return getLastTwoTargetBlocks(toMaterial(transparent), maxDistance);
     }
 
     @Override
     public List<Block> getLastTwoTargetBlocks(Set<Material> transparent, int maxDistance) {
-        throw new NotImplementedException("TODO"); // TODO
+        BlockRayHit<World> last = null;
+        BlockRayHit<World> current = null;
+        for (BlockRayHit<World> hit : getBlockRay(transparent, maxDistance)) {
+            last = current;
+            current = hit;
+        }
+
+        if (current == null) {
+            return ImmutableList.of();
+        } else if (last == null) {
+            return ImmutableList.of(PoreBlock.of(current.getLocation()));
+        } else {
+            return ImmutableList.of(PoreBlock.of(last.getLocation()), PoreBlock.of(current.getLocation()));
+        }
     }
 
     @SuppressWarnings("deprecation")

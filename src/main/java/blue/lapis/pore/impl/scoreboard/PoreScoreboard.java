@@ -29,7 +29,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.scoreboard.DisplaySlotConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
-import blue.lapis.pore.impl.PoreOfflinePlayer;
 import blue.lapis.pore.util.PoreText;
 import blue.lapis.pore.util.PoreWrapper;
 

@@ -29,7 +29,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.EXPERIENCE_HOLDER_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.FLYING_DATA;
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.FOOD_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.GAME_MODE_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.JOIN_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.RESPAWN_LOCATION_DATA;
