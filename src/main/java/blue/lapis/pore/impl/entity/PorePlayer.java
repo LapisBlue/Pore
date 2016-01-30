@@ -740,22 +740,22 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public float getWalkSpeed() {
-        throw new NotImplementedException("TODO");
+        return getHandle().get(Keys.WALKING_SPEED).get().floatValue();
     }
 
     @Override
     public void setWalkSpeed(float value) throws IllegalArgumentException {
-        throw new NotImplementedException("TODO");
+        getHandle().offer(Keys.WALKING_SPEED, (double) value);
     }
 
     @Override
     public float getFlySpeed() {
-        throw new NotImplementedException("TODO");
+        return getHandle().get(Keys.FLYING_SPEED).get().floatValue();
     }
 
     @Override
     public void setFlySpeed(float value) throws IllegalArgumentException {
-        throw new NotImplementedException("TODO");
+        getHandle().offer(Keys.FLYING_SPEED, (double) value);
     }
 
     @Override
