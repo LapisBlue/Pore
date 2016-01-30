@@ -22,73 +22,77 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.impl.event.block;
+package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import blue.lapis.pore.converter.type.material.ItemStackConverter;
-import blue.lapis.pore.impl.block.PoreBlock;
+import blue.lapis.pore.event.PoreEvent;
+import blue.lapis.pore.event.RegisterEvent;
+import blue.lapis.pore.event.Source;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
+import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.NotImplementedException;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.event.entity.player.PlayerPlaceBlockEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.event.command.SendCommandEvent;
 
-public class PoreBlockPlaceEvent extends org.bukkit.event.block.BlockPlaceEvent {
+import java.util.Set;
 
-    private final PlayerPlaceBlockEvent handle;
+@RegisterEvent
+public final class PorePlayerCommandPreprocessEvent extends PlayerCommandPreprocessEvent
+        implements PoreEvent<SendCommandEvent> {
 
-    public PoreBlockPlaceEvent(PlayerPlaceBlockEvent handle) {
-        super(null, null, null, null, null, false);
+    private final SendCommandEvent handle;
+    private final Player source;
+
+    public PorePlayerCommandPreprocessEvent(SendCommandEvent handle, @Source Player source) {
+        super(null, null, null);
         this.handle = checkNotNull(handle, "handle");
+        this.source = checkNotNull(source, "source");
     }
 
-    public PlayerPlaceBlockEvent getHandle() {
+    @Override
+    public SendCommandEvent getHandle() {
         return handle;
     }
 
     @Override
-    public Block getBlock() {
-        return PoreBlock.of(getHandle().getLocation());
+    public org.bukkit.entity.Player getPlayer() {
+        return PorePlayer.of(source);
     }
 
     @Override
-    public Player getPlayer() {
-        return PorePlayer.of(getHandle().getUser());
-    }
-
-    @Override
-    public Block getBlockPlaced() {
-        // TODO: return PoreBlock.of(getHandle().getReplacementBlock());
-        throw new NotImplementedException("TODO");
-    }
-
-    @Override
-    public BlockState getBlockReplacedState() {
+    public void setPlayer(org.bukkit.entity.Player player) throws IllegalArgumentException {
         throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
-    public Block getBlockAgainst() {
+    public String getMessage() {
+        return getHandle().getCommand();
+    }
+
+    @Override
+    public void setMessage(String command) throws IllegalArgumentException {
         throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
-    public ItemStack getItemInHand() {
-        return ItemStackConverter.of(getHandle().getUser().getItemInHand().orNull());
-    }
-
-    @Override
-    public boolean canBuild() {
+    @SuppressWarnings("deprecation")
+    public String getFormat() {
         throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
-    public void setBuild(boolean canBuild) {
+    @SuppressWarnings("deprecation")
+    public void setFormat(String format) {
         throw new NotImplementedException("TODO"); // TODO
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public Set<org.bukkit.entity.Player> getRecipients() {
+        return ImmutableSet.of();
     }
 
     @Override
@@ -99,6 +103,11 @@ public class PoreBlockPlaceEvent extends org.bukkit.event.block.BlockPlaceEvent 
     @Override
     public void setCancelled(boolean cancel) {
         getHandle().setCancelled(cancel);
+    }
+
+    @Override
+    public String toString() {
+        return toStringHelper().toString();
     }
 
 }

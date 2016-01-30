@@ -28,12 +28,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.event.PoreEvent;
 import blue.lapis.pore.event.RegisterEvent;
+import blue.lapis.pore.event.Source;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreText;
 
 import org.apache.commons.lang3.NotImplementedException;
-import org.bukkit.entity.Player;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.message.MessageChannelEvent;
 
 import java.util.IllegalFormatException;
@@ -44,10 +45,12 @@ public final class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent
         implements PoreEvent<MessageChannelEvent.Chat> {
 
     private final MessageChannelEvent.Chat handle;
+    private final Player player;
 
-    public PoreAsyncPlayerChatEvent(MessageChannelEvent.Chat handle) {
+    public PoreAsyncPlayerChatEvent(MessageChannelEvent.Chat handle, @Source Player player) {
         super(true, null, null, null);
         this.handle = checkNotNull(handle, "handle");
+        this.player = checkNotNull(player, "player");
     }
 
     @Override
@@ -56,14 +59,13 @@ public final class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent
     }
 
     @Override
-    public Player getPlayer() {
-        return PorePlayer.of(handle.getCause()
-                .first(org.spongepowered.api.entity.living.player.Player.class).get());
+    public org.bukkit.entity.Player getPlayer() {
+        return PorePlayer.of(player);
     }
 
     @Override
     public String getMessage() {
-        return PoreText.convert(handle.getRawMessage());
+        return PoreText.convert(getHandle().getRawMessage());
     }
 
     @Override
@@ -82,7 +84,7 @@ public final class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent
     }
 
     @Override
-    public Set<Player> getRecipients() {
+    public Set<org.bukkit.entity.Player> getRecipients() {
         throw new NotImplementedException("TODO"); // TODO
     }
 

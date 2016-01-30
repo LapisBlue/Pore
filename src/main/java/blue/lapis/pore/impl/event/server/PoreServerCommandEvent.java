@@ -26,29 +26,37 @@ package blue.lapis.pore.impl.event.server;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.event.PoreEvent;
+import blue.lapis.pore.event.RegisterEvent;
+import blue.lapis.pore.event.Source;
 import blue.lapis.pore.impl.command.PoreCommandSender;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.server.ServerCommandEvent;
-import org.spongepowered.api.event.message.CommandEvent;
+import org.spongepowered.api.command.source.ConsoleSource;
+import org.spongepowered.api.event.command.SendCommandEvent;
 
-public class PoreServerCommandEvent extends ServerCommandEvent {
+@RegisterEvent
+public final class PoreServerCommandEvent extends ServerCommandEvent implements PoreEvent<SendCommandEvent> {
 
-    private final CommandEvent handle;
+    private final SendCommandEvent handle;
+    private final ConsoleSource source;
 
-    public PoreServerCommandEvent(CommandEvent handle) {
+    public PoreServerCommandEvent(SendCommandEvent handle, @Source ConsoleSource source) {
         super(null, null);
         this.handle = checkNotNull(handle, "handle");
+        this.source = checkNotNull(source, "source");
     }
 
-    public CommandEvent getHandle() {
+    @Override
+    public SendCommandEvent getHandle() {
         return handle;
     }
 
     @Override
     public CommandSender getSender() {
-        return PoreCommandSender.of(getHandle().getSource());
+        return PoreCommandSender.of(source);
     }
 
     @Override
@@ -61,12 +69,19 @@ public class PoreServerCommandEvent extends ServerCommandEvent {
         throw new NotImplementedException("TODO"); // TODO
     }
 
+    @Override
     public boolean isCancelled() {
         return getHandle().isCancelled();
     }
 
+    @Override
     public void setCancelled(boolean cancelled) {
         getHandle().setCancelled(cancelled);
+    }
+
+    @Override
+    public String toString() {
+        return toStringHelper().toString();
     }
 
 }

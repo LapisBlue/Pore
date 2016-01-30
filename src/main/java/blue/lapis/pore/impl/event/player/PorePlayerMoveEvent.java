@@ -26,70 +26,70 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.converter.vector.LocationConverter;
+import blue.lapis.pore.event.PoreEvent;
+import blue.lapis.pore.event.RegisterEvent;
+import blue.lapis.pore.impl.entity.PorePlayer;
+
 import org.apache.commons.lang3.NotImplementedException;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.spongepowered.api.event.entity.player.PlayerChatEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.spongepowered.api.event.entity.DisplaceEntityEvent;
 
-import java.util.Set;
+@RegisterEvent
+public final class PorePlayerMoveEvent extends PlayerMoveEvent
+        implements PoreEvent<DisplaceEntityEvent.Move.TargetPlayer> {
 
-@Deprecated
-@SuppressWarnings("deprecation")
-public class PorePlayerChatEvent extends org.bukkit.event.player.PlayerChatEvent {
+    private final DisplaceEntityEvent.Move.TargetPlayer handle;
 
-    private final PlayerChatEvent handle;
-
-    public PorePlayerChatEvent(PlayerChatEvent handle) {
-        super(null, null, null, null);
+    public PorePlayerMoveEvent(DisplaceEntityEvent.Move.TargetPlayer handle) {
+        super(null, null, null);
         this.handle = checkNotNull(handle, "handle");
     }
 
-    public PlayerChatEvent getHandle() {
+    public DisplaceEntityEvent.Move.TargetPlayer getHandle() {
         return handle;
     }
 
     @Override
     public Player getPlayer() {
-        throw new NotImplementedException("TODO"); // TODO
+        return PorePlayer.of(getHandle().getTargetEntity());
     }
 
     @Override
-    public void setPlayer(Player player) {
-        throw new NotImplementedException("TODO"); // TODO
+    public Location getFrom() {
+        return LocationConverter.fromTransform(getHandle().getFromTransform());
     }
 
     @Override
-    public String getMessage() {
-        throw new NotImplementedException("TODO"); // TODO
+    public void setFrom(Location from) {
+        throw new NotImplementedException("TODO");
     }
 
     @Override
-    public void setMessage(String message) {
-        throw new NotImplementedException("TODO"); // TODO
+    public Location getTo() {
+        return LocationConverter.fromTransform(getHandle().getToTransform());
     }
 
     @Override
-    public String getFormat() {
-        throw new NotImplementedException("TODO"); // TODO
-    }
-
-    @Override
-    public void setFormat(String format) {
-        throw new NotImplementedException("TODO"); // TODO
-    }
-
-    @Override
-    public Set<Player> getRecipients() {
-        throw new NotImplementedException("TODO"); // TODO
+    public void setTo(Location to) {
+        getHandle().setToTransform(LocationConverter.toTransform(to));
     }
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException("TODO"); // TODO
+        return getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException("TODO"); // TODO
+        getHandle().setCancelled(cancel);
+    }
+
+    @Override
+    public String toString() {
+        return toStringHelper().toString();
     }
 
 }

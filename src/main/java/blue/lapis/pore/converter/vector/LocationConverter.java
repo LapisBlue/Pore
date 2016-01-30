@@ -30,6 +30,7 @@ import com.flowpowered.math.vector.Vector3d;
 import com.flowpowered.math.vector.Vector3f;
 import com.flowpowered.math.vector.Vector3i;
 import org.bukkit.Location;
+import org.spongepowered.api.entity.Transform;
 import org.spongepowered.api.world.World;
 
 public final class LocationConverter {
@@ -70,26 +71,23 @@ public final class LocationConverter {
                 locationVector.getZ());
     }
 
-    //TODO: should EulerDirection be used instead of Vector3f?
-    public static Location fromVector3iWithRotation(World world, Vector3i locationVector,
-            Vector3f rotationVector) {
-        return new Location(PoreWorld.of(world), locationVector.getX(), locationVector.getY(),
-                locationVector.getZ(),
-                rotationVector.getY(), rotationVector.getX());
+    public static Vector3d toVector3d(Location location) {
+        return new Vector3d(location.getX(), location.getY(), location.getZ());
     }
 
-    public static Location fromVector3dwithRotation(World world, Vector3d locationVector,
-            Vector3f rotationVector) {
-        return new Location(PoreWorld.of(world), locationVector.getX(), locationVector.getY(),
-                locationVector.getZ(),
-                rotationVector.getY(), rotationVector.getX());
+    public static Vector3d toRotationVector3d(Location location) {
+        return new Vector3d(location.getPitch(), location.getYaw(), 0);
     }
 
-    public static Location fromVector3fwithRotation(World world, Vector3f locationVector,
-            Vector3f rotationVector) {
-        return new Location(PoreWorld.of(world), locationVector.getX(), locationVector.getY(),
-                locationVector.getZ(),
-                rotationVector.getY(), rotationVector.getX());
+    public static Location fromTransform(Transform<World> transform) {
+        return new Location(PoreWorld.of(transform.getExtent()),
+                transform.getPosition().getX(), transform.getPosition().getY(), transform.getPosition().getZ(),
+                (float) transform.getYaw(), (float) transform.getPitch());
+    }
+
+    public static Transform<World> toTransform(Location location) {
+        return new Transform<World>(((PoreWorld) location.getWorld()).getHandle(), toVector3d(location),
+                toRotationVector3d(location));
     }
 
 }

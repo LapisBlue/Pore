@@ -26,45 +26,86 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.event.PoreEvent;
+import blue.lapis.pore.event.RegisterEvent;
+import blue.lapis.pore.event.Source;
+import blue.lapis.pore.impl.entity.PorePlayer;
+import blue.lapis.pore.util.PoreText;
+
 import org.apache.commons.lang3.NotImplementedException;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerChatTabCompleteEvent;
-import org.spongepowered.api.event.entity.player.PlayerEvent;
+import org.bukkit.event.player.PlayerChatEvent;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.event.message.MessageChannelEvent;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.Set;
 
-public class PorePlayerChatTabCompleteEvent extends PlayerChatTabCompleteEvent {
+@Deprecated
+@SuppressWarnings("deprecation")
+@RegisterEvent
+public final class PorePlayerChatEvent extends PlayerChatEvent implements PoreEvent<MessageChannelEvent.Chat> {
 
-    private final PlayerEvent handle;
+    private final MessageChannelEvent.Chat handle;
+    private final Player player;
 
-    public PorePlayerChatTabCompleteEvent(PlayerEvent handle) {
-        super(null, "", Collections.<String>emptyList());
+    public PorePlayerChatEvent(MessageChannelEvent.Chat handle, @Source Player player) {
+        super(null, null, null, null);
         this.handle = checkNotNull(handle, "handle");
+        this.player = player;
     }
 
-    public PlayerEvent getHandle() {
+    @Override
+    public MessageChannelEvent.Chat getHandle() {
         return handle;
     }
 
     @Override
-    public Player getPlayer() {
+    public org.bukkit.entity.Player getPlayer() {
+        return PorePlayer.of(player);
+    }
+
+    @Override
+    public void setPlayer(org.bukkit.entity.Player player) {
         throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
-    public String getChatMessage() {
+    public String getMessage() {
+        return PoreText.convert(getHandle().getRawMessage());
+    }
+
+    @Override
+    public void setMessage(String message) {
         throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
-    public String getLastToken() {
+    public String getFormat() {
         throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
-    public Collection<String> getTabCompletions() {
+    public void setFormat(String format) {
         throw new NotImplementedException("TODO"); // TODO
+    }
+
+    @Override
+    public Set<org.bukkit.entity.Player> getRecipients() {
+        throw new NotImplementedException("TODO"); // TODO
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return getHandle().isCancelled();
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        getHandle().setCancelled(cancel);
+    }
+
+    @Override
+    public String toString() {
+        return toStringHelper().toString();
     }
 
 }

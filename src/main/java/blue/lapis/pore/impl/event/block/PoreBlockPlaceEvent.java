@@ -27,37 +27,41 @@ package blue.lapis.pore.impl.event.block;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.spongepowered.api.event.cause.NamedCause.SOURCE;
 
+import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.event.PoreEvent;
 import blue.lapis.pore.event.PoreEventRegistry;
 import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.block.PoreBlock;
+import blue.lapis.pore.impl.block.PoreBlockState;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
 import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
-import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.block.BlockState;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.inventory.ItemStack;
 import org.spongepowered.api.block.BlockSnapshot;
 import org.spongepowered.api.data.Transaction;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.block.ChangeBlockEvent;
 import org.spongepowered.api.util.GuavaCollectors;
 
-public final class PoreBlockBreakEvent extends BlockBreakEvent implements PoreEvent<ChangeBlockEvent.Break> {
+public final class PoreBlockPlaceEvent extends BlockPlaceEvent implements PoreEvent<ChangeBlockEvent.Place> {
 
-    private final ChangeBlockEvent.Break handle;
+    private final ChangeBlockEvent.Place handle;
     private final Player player;
     private final Transaction<BlockSnapshot> transaction;
 
-    public PoreBlockBreakEvent(ChangeBlockEvent.Break handle, Player player, Transaction<BlockSnapshot> transaction) {
-        super(null, null);
+    public PoreBlockPlaceEvent(ChangeBlockEvent.Place handle, Player player, Transaction<BlockSnapshot> transaction) {
+        super(null, null, null, null, null, false);
         this.handle = checkNotNull(handle, "handle");
         this.player = checkNotNull(player, "player");
         this.transaction = checkNotNull(transaction, "transaction");
     }
 
     @Override
-    public ChangeBlockEvent.Break getHandle() {
+    public ChangeBlockEvent.Place getHandle() {
         return this.handle;
     }
 
@@ -72,23 +76,43 @@ public final class PoreBlockBreakEvent extends BlockBreakEvent implements PoreEv
     }
 
     @Override
-    public int getExpToDrop() {
-        throw new NotImplementedException("TODO");
+    public Block getBlockPlaced() {
+        return getBlock();
     }
 
     @Override
-    public void setExpToDrop(int exp) {
-        throw new NotImplementedException("TODO");
+    public BlockState getBlockReplacedState() {
+        return PoreBlockState.of(this.transaction.getFinal().getExtendedState());
+    }
+
+    @Override
+    public Block getBlockAgainst() {
+        throw new NotImplementedException("TODO"); // TODO
+    }
+
+    @Override
+    public ItemStack getItemInHand() {
+        return ItemStackConverter.of(this.player.getItemInHand().orElse(null));
+    }
+
+    @Override
+    public boolean canBuild() {
+        throw new NotImplementedException("TODO"); // TODO
+    }
+
+    @Override
+    public void setBuild(boolean canBuild) {
+        throw new NotImplementedException("TODO"); // TODO
     }
 
     @Override
     public boolean isCancelled() {
-        return !this.transaction.isValid();
+        return getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        this.transaction.setValid(!cancel);
+        getHandle().setCancelled(cancel);
     }
 
     @Override
@@ -100,11 +124,11 @@ public final class PoreBlockBreakEvent extends BlockBreakEvent implements PoreEv
 
     @RegisterEvent
     public static void register() {
-        PoreEventRegistry.register(PoreBlockBreakEvent.class, ChangeBlockEvent.Break.class, event -> {
+        PoreEventRegistry.register(PoreBlockPlaceEvent.class, ChangeBlockEvent.Place.class, event -> {
             Player player = event.getCause().get(SOURCE, Player.class).orElse(null);
             if (player != null) {
                 return event.getTransactions().stream()
-                        .map(transaction -> new PoreBlockBreakEvent(event, player, transaction))
+                        .map(transaction -> new PoreBlockPlaceEvent(event, player, transaction))
                         .collect(GuavaCollectors.toImmutableList());
             } else {
                 return ImmutableList.of();

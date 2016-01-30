@@ -26,57 +26,60 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.apache.commons.lang3.NotImplementedException;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
-import org.spongepowered.api.event.entity.player.PlayerMoveEvent;
+import blue.lapis.pore.event.PoreEvent;
+import blue.lapis.pore.event.RegisterEvent;
+import blue.lapis.pore.event.Source;
+import blue.lapis.pore.impl.entity.PorePlayer;
 
-public class PorePlayerMoveEvent extends org.bukkit.event.player.PlayerMoveEvent {
+import org.apache.commons.lang3.StringUtils;
+import org.bukkit.event.player.PlayerChatTabCompleteEvent;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.event.command.TabCompleteEvent;
 
-    private final PlayerMoveEvent handle;
+import java.util.Collection;
+import java.util.Collections;
 
-    public PorePlayerMoveEvent(PlayerMoveEvent handle) {
-        super(null, null, null);
+@RegisterEvent
+public final class PorePlayerChatTabCompleteEvent extends PlayerChatTabCompleteEvent
+        implements PoreEvent<TabCompleteEvent> {
+
+    private final TabCompleteEvent handle;
+    private final Player source;
+
+    public PorePlayerChatTabCompleteEvent(TabCompleteEvent handle, @Source Player source) {
+        super(null, "", Collections.<String>emptyList());
         this.handle = checkNotNull(handle, "handle");
+        this.source = checkNotNull(source, "source");
     }
 
-    public PlayerMoveEvent getHandle() {
+    @Override
+    public TabCompleteEvent getHandle() {
         return handle;
     }
 
     @Override
-    public Player getPlayer() {
-        throw new NotImplementedException("TODO");
+    public org.bukkit.entity.Player getPlayer() {
+        return PorePlayer.of(source);
     }
 
     @Override
-    public Location getFrom() {
-        throw new NotImplementedException("TODO");
+    public String getChatMessage() {
+        return getHandle().getRawMessage();
     }
 
     @Override
-    public void setFrom(Location from) {
-        throw new NotImplementedException("TODO");
+    public String getLastToken() {
+        return StringUtils.substringAfterLast(getChatMessage(), " ");
     }
 
     @Override
-    public Location getTo() {
-        throw new NotImplementedException("TODO");
+    public Collection<String> getTabCompletions() {
+        return getHandle().getTabCompletions();
     }
 
     @Override
-    public void setTo(Location to) {
-        throw new NotImplementedException("TODO");
-    }
-
-    @Override
-    public boolean isCancelled() {
-        throw new NotImplementedException("TODO");
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        throw new NotImplementedException("TODO");
+    public String toString() {
+        return toStringHelper().toString();
     }
 
 }

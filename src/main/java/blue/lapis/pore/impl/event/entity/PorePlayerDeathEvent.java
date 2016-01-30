@@ -22,105 +22,131 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package blue.lapis.pore.impl.event.player;
+package blue.lapis.pore.impl.event.entity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.event.PoreEvent;
+import blue.lapis.pore.event.RegisterEvent;
+import blue.lapis.pore.event.Source;
+import blue.lapis.pore.impl.entity.PorePlayer;
+import blue.lapis.pore.util.PoreText;
+
 import org.apache.commons.lang3.NotImplementedException;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.entity.Player;
-import org.bukkit.event.block.Action;
+import org.bukkit.entity.EntityType;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
-import org.spongepowered.api.event.entity.player.PlayerInteractEvent;
+import org.spongepowered.api.entity.living.player.Player;
+import org.spongepowered.api.event.entity.DestructEntityEvent;
 
-public class PorePlayerInteractEvent extends org.bukkit.event.player.PlayerInteractEvent {
+import java.util.List;
 
-    private final PlayerInteractEvent handle;
+@RegisterEvent
+public final class PorePlayerDeathEvent extends PlayerDeathEvent implements PoreEvent<DestructEntityEvent.Death> {
 
-    public PorePlayerInteractEvent(PlayerInteractEvent handle) {
-        super(null, null, null, null, null);
+    private final DestructEntityEvent.Death handle;
+    private final Player player;
+
+    public PorePlayerDeathEvent(DestructEntityEvent.Death handle, @Source Player player) {
+        super(null, null, -1, null);
         this.handle = checkNotNull(handle, "handle");
-    }
-
-    public PlayerInteractEvent getHandle() {
-        return handle;
+        this.player = checkNotNull(player, "player");
     }
 
     @Override
-    public Player getPlayer() {
+    public DestructEntityEvent.Death getHandle() {
+        return this.handle;
+    }
+
+    @Override
+    public org.bukkit.entity.Player getEntity() {
+        return PorePlayer.of(this.player);
+    }
+
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.PLAYER;
+    }
+
+    @Override
+    public String getDeathMessage() {
+        return PoreText.convert(getHandle().getMessage().orElse(null));
+    }
+
+    @Override
+    public void setDeathMessage(String deathMessage) {
+        getHandle().setMessage(PoreText.convert(deathMessage));
+    }
+
+    @Override
+    public int getNewExp() {
         throw new NotImplementedException("TODO");
     }
 
     @Override
-    public Action getAction() {
+    public void setNewExp(int exp) {
         throw new NotImplementedException("TODO");
     }
 
     @Override
-    public ItemStack getItem() {
+    public int getNewLevel() {
         throw new NotImplementedException("TODO");
     }
 
     @Override
-    public Material getMaterial() {
+    public void setNewLevel(int level) {
         throw new NotImplementedException("TODO");
     }
 
     @Override
-    public boolean hasBlock() {
+    public int getNewTotalExp() {
+        //TODO: WHAT THE HELL EVEN IS THIS METHOD? DID BUKKIT HAVE LITERALLY NO STANDARDS FOR DOCUMENTATION?
         throw new NotImplementedException("TODO");
     }
 
     @Override
-    public boolean hasItem() {
+    public void setNewTotalExp(int totalExp) {
         throw new NotImplementedException("TODO");
     }
 
     @Override
-    public boolean isBlockInHand() {
+    public boolean getKeepLevel() {
         throw new NotImplementedException("TODO");
     }
 
     @Override
-    public Block getClickedBlock() {
+    public void setKeepLevel(boolean keepLevel) {
         throw new NotImplementedException("TODO");
     }
 
     @Override
-    public BlockFace getBlockFace() {
+    public boolean getKeepInventory() {
         throw new NotImplementedException("TODO");
     }
 
     @Override
-    public Result useInteractedBlock() {
+    public void setKeepInventory(boolean keepInventory) {
         throw new NotImplementedException("TODO");
     }
 
     @Override
-    public void setUseInteractedBlock(Result useInteractedBlock) {
+    public int getDroppedExp() {
         throw new NotImplementedException("TODO");
     }
 
     @Override
-    public Result useItemInHand() {
+    public void setDroppedExp(int exp) {
         throw new NotImplementedException("TODO");
     }
 
     @Override
-    public void setUseItemInHand(Result useItemInHand) {
+    public List<ItemStack> getDrops() {
         throw new NotImplementedException("TODO");
     }
 
     @Override
-    public boolean isCancelled() {
-        throw new NotImplementedException("TODO");
-    }
-
-    @Override
-    public void setCancelled(boolean cancel) {
-        throw new NotImplementedException("TODO");
+    public String toString() {
+        return toStringHelper().toString();
     }
 
 }
