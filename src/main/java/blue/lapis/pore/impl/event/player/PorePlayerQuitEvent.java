@@ -26,15 +26,17 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.event.PoreEvent;
 import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreText;
 
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.spongepowered.api.event.network.ClientConnectionEvent;
 
 @RegisterEvent
-public class PorePlayerQuitEvent extends org.bukkit.event.player.PlayerQuitEvent {
+public final class PorePlayerQuitEvent extends PlayerQuitEvent implements PoreEvent<ClientConnectionEvent.Disconnect> {
 
     private final ClientConnectionEvent.Disconnect handle;
 
@@ -43,6 +45,7 @@ public class PorePlayerQuitEvent extends org.bukkit.event.player.PlayerQuitEvent
         this.handle = checkNotNull(handle, "handle");
     }
 
+    @Override
     public ClientConnectionEvent.Disconnect getHandle() {
         return handle;
     }
@@ -60,6 +63,11 @@ public class PorePlayerQuitEvent extends org.bukkit.event.player.PlayerQuitEvent
     @Override
     public void setQuitMessage(String quitMessage) {
         handle.setMessage(PoreText.convert(quitMessage));
+    }
+
+    @Override
+    public String toString() {
+        return toStringHelper().toString();
     }
 
 }

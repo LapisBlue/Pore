@@ -26,7 +26,7 @@ package blue.lapis.pore;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import blue.lapis.pore.event.PoreEventWrapper;
+import blue.lapis.pore.event.PoreEventRegistry;
 import blue.lapis.pore.impl.PoreServer;
 import blue.lapis.pore.launch.PoreEventManager;
 import blue.lapis.pore.lib.org.slf4j.bridge.SLF4JBridgeHandler;
@@ -103,7 +103,7 @@ public final class Pore implements PoreEventManager {
         logger.info("Loading Pore server, please wait...");
 
         server = new PoreServer(game, logger);
-        PoreEventWrapper.register();
+        PoreEventRegistry.register();
 
         server.getLogger().info("Loading plugins");
         server.loadPlugins();

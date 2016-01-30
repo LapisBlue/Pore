@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.event.server;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.event.PoreEvent;
 import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.util.PoreCachedServerIcon;
 import blue.lapis.pore.util.PoreText;
@@ -39,7 +40,7 @@ import java.net.InetAddress;
 import java.util.Iterator;
 
 @RegisterEvent
-public class PoreServerListPingEvent extends ServerListPingEvent {
+public final class PoreServerListPingEvent extends ServerListPingEvent implements PoreEvent<ClientPingServerEvent> {
 
     private final ClientPingServerEvent handle;
 
@@ -48,6 +49,7 @@ public class PoreServerListPingEvent extends ServerListPingEvent {
         this.handle = checkNotNull(handle, "handle");
     }
 
+    @Override
     public ClientPingServerEvent getHandle() {
         return handle;
     }
@@ -90,6 +92,11 @@ public class PoreServerListPingEvent extends ServerListPingEvent {
     @Override
     public Iterator<Player> iterator() throws UnsupportedOperationException {
         throw new UnsupportedOperationException(); // Unsupported for now
+    }
+
+    @Override
+    public String toString() {
+        return toStringHelper().toString();
     }
 
 }

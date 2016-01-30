@@ -24,32 +24,16 @@
  */
 package blue.lapis.pore.event;
 
-import blue.lapis.pore.util.constructor.SimpleConstructor;
-
-import org.bukkit.event.EventPriority;
+import com.google.common.base.Objects;
 import org.spongepowered.api.event.Event;
-import org.spongepowered.api.event.EventListener;
 
-final class PoreEventHandler<T extends Event> implements EventListener<T> {
+public interface PoreEvent<S extends Event> {
 
-    private final EventPriority priority;
-    private final SimpleConstructor<? extends org.bukkit.event.Event, T> constructor;
+    S getHandle();
 
-    PoreEventHandler(EventPriority priority, SimpleConstructor<? extends org.bukkit.event.Event, T> constructor) {
-        this.priority = priority;
-        this.constructor = constructor;
-    }
-
-    @Override
-    public void handle(T handle) {
-        org.bukkit.event.Event event = PoreEventWrapper.get(handle);
-        if (event == null) {
-            PoreEventWrapper.set(handle, event = constructor.construct(handle));
-        }
-
-        if (event.isValid()) { // verify the Bukkit event is applicable to the particular wrapped Sponge event
-            PoreEventWrapper.call(event, priority);
-        }
+    default Objects.ToStringHelper toStringHelper() {
+        return Objects.toStringHelper(this)
+                .addValue(getHandle());
     }
 
 }

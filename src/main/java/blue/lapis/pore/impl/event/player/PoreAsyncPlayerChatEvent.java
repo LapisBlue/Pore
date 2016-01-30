@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.event.PoreEvent;
 import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreText;
@@ -39,7 +40,8 @@ import java.util.IllegalFormatException;
 import java.util.Set;
 
 @RegisterEvent
-public class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent {
+public final class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent
+        implements PoreEvent<MessageChannelEvent.Chat> {
 
     private final MessageChannelEvent.Chat handle;
 
@@ -48,6 +50,7 @@ public class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent {
         this.handle = checkNotNull(handle, "handle");
     }
 
+    @Override
     public MessageChannelEvent.Chat getHandle() {
         return handle;
     }
@@ -91,6 +94,11 @@ public class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent {
     @Override
     public void setCancelled(boolean cancel) {
         handle.setCancelled(cancel);
+    }
+
+    @Override
+    public String toString() {
+        return toStringHelper().toString();
     }
 
 }

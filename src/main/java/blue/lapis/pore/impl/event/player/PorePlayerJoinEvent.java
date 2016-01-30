@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.event.player;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import blue.lapis.pore.event.PoreEvent;
 import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreText;
@@ -35,7 +36,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.spongepowered.api.event.network.ClientConnectionEvent;
 
 @RegisterEvent
-public class PorePlayerJoinEvent extends PlayerJoinEvent {
+public final class PorePlayerJoinEvent extends PlayerJoinEvent implements PoreEvent<ClientConnectionEvent.Join> {
 
     private final ClientConnectionEvent.Join handle;
 
@@ -44,6 +45,7 @@ public class PorePlayerJoinEvent extends PlayerJoinEvent {
         this.handle = checkNotNull(handle, "handle");
     }
 
+    @Override
     public ClientConnectionEvent.Join getHandle() {
         return handle;
     }
@@ -61,6 +63,11 @@ public class PorePlayerJoinEvent extends PlayerJoinEvent {
     @Override
     public void setJoinMessage(String joinMessage) {
         handle.setMessage(PoreText.convert(joinMessage));
+    }
+
+    @Override
+    public String toString() {
+        return toStringHelper().toString();
     }
 
 }

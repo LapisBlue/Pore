@@ -37,7 +37,7 @@ import java.lang.annotation.Target;
  * unconditionally.</p>
  */
 @Retention(RetentionPolicy.SOURCE)
-@Target(ElementType.TYPE)
+@Target({ElementType.TYPE, ElementType.METHOD})
 public @interface RegisterEvent {
 
 }

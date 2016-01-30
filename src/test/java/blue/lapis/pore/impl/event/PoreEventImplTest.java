@@ -32,6 +32,7 @@ import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeTrue;
 
 import blue.lapis.pore.PoreTests;
+import blue.lapis.pore.event.PoreEvent;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableSet;
@@ -82,6 +83,11 @@ public class PoreEventImplTest {
     }
 
     @Test
+    public void checkFinal() {
+        assertTrue(eventImpl.getSimpleName() + ": should be final", Modifier.isFinal(eventImpl.getModifiers()));
+    }
+
+    @Test
     public void checkName() {
         Class<?> bukkitEvent = eventImpl.getSuperclass();
 
@@ -106,13 +112,9 @@ public class PoreEventImplTest {
     }
 
     @Test
-    public void checkHandleGetter() {
-        try {
-            Method method = eventImpl.getMethod("getHandle");
-            checkSpongeEvent(eventImpl, method.getReturnType());
-        } catch (NoSuchMethodException ignored) {
-            fail(eventImpl.getSimpleName() + ": missing getHandle() method (handle getter)");
-        }
+    public void checkImplements() {
+        assertTrue(eventImpl.getSimpleName() + ": should implement PoreEvent",
+                PoreEvent.class.isAssignableFrom(eventImpl));
     }
 
     @Test
@@ -162,7 +164,7 @@ public class PoreEventImplTest {
         Class<?> bukkitEvent = eventImpl.getSuperclass();
         for (Method method : bukkitEvent.getMethods()) {
             int modifiers = method.getModifiers();
-            if (Modifier.isStatic(modifiers) || isDefault(method)
+            if (Modifier.isStatic(modifiers) || method.isDefault()
                     || method.getDeclaringClass() == Event.class || method.getDeclaringClass() == Object.class
                     || method.getName().equals("getHandlers") || method.getName().startsWith("_INVALID_")) {
                 continue;
@@ -176,11 +178,13 @@ public class PoreEventImplTest {
         }
     }
 
-    // Taken from JDK8 for compatibility with older Java versions
-    private static boolean isDefault(Method method) {
-        // Default methods are public non-abstract instance methods declared in an interface.
-        return ((method.getModifiers() & (Modifier.ABSTRACT | Modifier.PUBLIC | Modifier.STATIC)) == Modifier.PUBLIC)
-                && method.getDeclaringClass().isInterface();
+    @Test
+    public void checkToString() {
+        try {
+            eventImpl.getDeclaredMethod("toString");
+        } catch (NoSuchMethodException e) {
+            fail(eventImpl.getSimpleName() + ": should override method toString()");
+        }
     }
 
     @Test
