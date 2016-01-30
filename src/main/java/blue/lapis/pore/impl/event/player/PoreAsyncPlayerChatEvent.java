@@ -32,10 +32,13 @@ import blue.lapis.pore.event.Source;
 import blue.lapis.pore.impl.entity.PorePlayer;
 import blue.lapis.pore.util.PoreText;
 
+import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.message.MessageChannelEvent;
+import org.spongepowered.api.text.channel.MessageChannel;
+import org.spongepowered.api.util.GuavaCollectors;
 
 import java.util.IllegalFormatException;
 import java.util.Set;
@@ -70,22 +73,30 @@ public final class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent
 
     @Override
     public void setMessage(String message) {
-        throw new NotImplementedException("TODO"); // TODO
+        // TODO
     }
 
     @Override
     public String getFormat() {
-        throw new NotImplementedException("TODO"); // TODO
+        return PoreText.convert(getHandle().getMessage().orElse(null));
     }
 
     @Override
     public void setFormat(String format) throws IllegalFormatException, NullPointerException {
-        throw new NotImplementedException("TODO"); // TODO
+        getHandle().setMessage(PoreText.convert(String.format(format, this.player.getName(), getMessage())));
     }
 
     @Override
     public Set<org.bukkit.entity.Player> getRecipients() {
-        throw new NotImplementedException("TODO"); // TODO
+        MessageChannel channel = getHandle().getChannel().orElse(null);
+        if (channel != null) {
+            return channel.getMembers().stream()
+                    .filter(receiver -> receiver instanceof Player)
+                    .map(receiver -> PorePlayer.of((Player) receiver))
+                    .collect(GuavaCollectors.toImmutableSet());
+        } else {
+            return ImmutableSet.of();
+        }
     }
 
     @Override

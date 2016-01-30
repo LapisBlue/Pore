@@ -140,8 +140,7 @@ public class PoreScoreboard extends PoreWrapper<Scoreboard> implements org.bukki
     @Override
     public Team getPlayerTeam(OfflinePlayer player) throws IllegalArgumentException {
         checkArgument(player != null, "Offline player must not be null");
-        return PoreTeam.of(getHandle().getMemberTeam(
-                PoreText.convert(((PoreOfflinePlayer) player).getHandle().getName())).orElse(null));
+        return PoreTeam.of(getHandle().getMemberTeam(Text.of(player.getName())).orElse(null));
     }
 
     @SuppressWarnings("deprecation")

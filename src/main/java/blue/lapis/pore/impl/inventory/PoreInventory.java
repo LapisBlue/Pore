@@ -29,6 +29,7 @@ import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreWrapper;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Material;
@@ -408,8 +409,8 @@ public class PoreInventory extends PoreWrapper<Inventory> implements org.bukkit.
 
     @Override
     public List<HumanEntity> getViewers() {
-        // we're waiting on SpongeAPI for this one
-        throw new NotImplementedException("TODO");
+        // TODO: We're waiting on SpongeAPI for this one
+        return ImmutableList.of();
     }
 
     @Override

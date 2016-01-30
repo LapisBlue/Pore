@@ -54,6 +54,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
+import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.manipulator.DataManipulator;
 import org.spongepowered.api.data.manipulator.mutable.DisplayNameData;
 import org.spongepowered.api.data.manipulator.mutable.entity.IgniteableData;
@@ -282,12 +283,12 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public float getFallDistance() {
-        throw new NotImplementedException("TODO");
+        return getHandle().get(Keys.FALL_DISTANCE).get();
     }
 
     @Override
     public void setFallDistance(float distance) {
-        throw new NotImplementedException("TODO");
+        getHandle().offer(Keys.FALL_DISTANCE, distance);
     }
 
     @Override

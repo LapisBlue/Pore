@@ -84,6 +84,7 @@ import org.bukkit.util.StringUtil;
 import org.bukkit.util.permissions.DefaultPermissions;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.command.source.ConsoleSource;
+import org.spongepowered.api.text.channel.MessageChannel;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -309,7 +310,9 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public int broadcastMessage(String message) {
-        return broadcast(message, BROADCAST_CHANNEL_USERS);
+        MessageChannel channel = getHandle().getBroadcastChannel();
+        channel.send(PoreText.convert(message));
+        return channel.getMembers().size();
     }
 
     @Override
