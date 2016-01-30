@@ -33,14 +33,14 @@ import static org.junit.Assume.assumeTrue;
 
 import blue.lapis.pore.PoreTests;
 import blue.lapis.pore.event.PoreEvent;
+import blue.lapis.pore.event.RegisterEvent;
+import blue.lapis.pore.event.Source;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.reflect.ClassPath;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.event.Event;
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -53,19 +53,26 @@ import java.lang.reflect.Modifier;
 import java.util.Set;
 
 @RunWith(Parameterized.class)
-@Ignore
 public class PoreEventImplTest {
 
     private static final String BUKKIT_PREFIX = BUKKIT_PACKAGE + '.';
     private static final String PORE_PREFIX = PORE_PACKAGE + '.';
 
     @Parameterized.Parameters(name = "{0}")
-    public static Set<String> getEvents() throws Exception {
-        ImmutableSet.Builder<String> events = ImmutableSet.builder();
+    public static Set<Object[]> getEvents() throws Exception {
+        ImmutableSet.Builder<Object[]> events = ImmutableSet.builder();
         for (ClassPath.ClassInfo event : PoreTests.getClassPath().getTopLevelClassesRecursive(PORE_PACKAGE)) {
             String name = event.getName();
             if (!name.endsWith("Test")) {
-                events.add(StringUtils.removeStart(event.getName(), PORE_PREFIX));
+                Class<?> eventImpl = event.load();
+                events.add(new Object[]{StringUtils.removeStart(event.getName(), PORE_PREFIX), eventImpl});
+
+                for (Class<?> innerClass : eventImpl.getClasses()) {
+                    if (Event.class.isAssignableFrom(innerClass)) {
+                        events.add(new Object[]{StringUtils.removeStart(innerClass.getName(), PORE_PREFIX),
+                                innerClass});
+                    }
+                }
             }
         }
         return events.build();
@@ -74,21 +81,26 @@ public class PoreEventImplTest {
     @Parameterized.Parameter
     public String event;
 
-    private Class<?> eventImpl;
+    @Parameterized.Parameter(1)
+    public Class<?> eventImpl;
 
-    @Before
-    public void load() throws ClassNotFoundException {
-        this.eventImpl = Class.forName(PORE_PREFIX + event, true, ClassLoader.getSystemClassLoader());
+    @Test
+    public void checkEvent() {
         assumeTrue(Event.class.isAssignableFrom(eventImpl));
     }
 
     @Test
-    public void checkFinal() {
-        assertTrue(eventImpl.getSimpleName() + ": should be final", Modifier.isFinal(eventImpl.getModifiers()));
+    public void checkFinalOrAbstract() {
+        assertTrue(eventImpl.getSimpleName() + ": should be final or abstract",
+                Modifier.isFinal(eventImpl.getModifiers()) || Modifier.isAbstract(eventImpl.getModifiers()));
     }
 
     @Test
     public void checkName() {
+        if (event.contains("$")) {
+            return; // Skip inner classes
+        }
+
         Class<?> bukkitEvent = eventImpl.getSuperclass();
 
         String poreName = event;
@@ -119,24 +131,41 @@ public class PoreEventImplTest {
 
     @Test
     public void checkHandleField() {
-        try {
-            Field field = eventImpl.getDeclaredField("handle");
-            checkSpongeEvent(eventImpl, field.getType());
-        } catch (NoSuchFieldException e) {
-            fail(eventImpl.getSimpleName() + ": missing handle field");
-        }
+        Class<?> superClass = eventImpl;
+        do {
+            try {
+                Field field = superClass.getDeclaredField("handle");
+                checkSpongeEvent(eventImpl, field.getType());
+                return;
+            } catch (NoSuchFieldException ignored) {
+            }
+
+            superClass = superClass.getSuperclass();
+        } while (superClass != null);
+
+        fail(eventImpl.getSimpleName() + ": missing handle field");
     }
 
     @Test
     public void checkConstructor() throws Throwable {
+        if (eventImpl.getAnnotation(RegisterEvent.class) == null) {
+            return;
+        }
+
         for (Constructor<?> constructor : eventImpl.getConstructors()) {
             Class<?>[] parameters = constructor.getParameterTypes();
-            if (parameters.length == 1) {
+            if (parameters.length == 1 || parameters.length == 2) {
                 Class<?> handle = parameters[0];
                 if (org.spongepowered.api.event.Event.class.isAssignableFrom(handle)) {
+                    if (parameters.length == 2) {
+                        if (constructor.getParameters()[1].getAnnotation(Source.class) == null) {
+                            continue;
+                        }
+                    }
+
                     // Check for null check
                     try {
-                        constructor.newInstance(new Object[]{null});
+                        constructor.newInstance(new Object[parameters.length]);
                     } catch (InvocationTargetException e) {
                         Throwable cause = e.getCause();
                         if (cause != null) {
@@ -156,11 +185,15 @@ public class PoreEventImplTest {
             }
         }
 
-        fail(eventImpl.getSimpleName() + ": missing handle constructor");
+        fail(eventImpl.getSimpleName() + ": missing handle/source constructor");
     }
 
     @Test
     public void checkImplementedMethods() {
+        if (Modifier.isAbstract(eventImpl.getModifiers())) {
+            return;
+        }
+
         Class<?> bukkitEvent = eventImpl.getSuperclass();
         for (Method method : bukkitEvent.getMethods()) {
             int modifiers = method.getModifiers();
@@ -171,7 +204,9 @@ public class PoreEventImplTest {
             }
 
             try {
-                eventImpl.getDeclaredMethod(method.getName(), method.getParameterTypes());
+                Method m = eventImpl.getMethod(method.getName(), method.getParameterTypes());
+                assertTrue(eventImpl.getSimpleName() + ": should override method" + method,
+                        m.getDeclaringClass().getName().startsWith(PORE_PREFIX));
             } catch (NoSuchMethodException e) {
                 fail(eventImpl.getSimpleName() + ": should override method " + method);
             }
@@ -181,7 +216,8 @@ public class PoreEventImplTest {
     @Test
     public void checkToString() {
         try {
-            eventImpl.getDeclaredMethod("toString");
+            assertTrue(eventImpl.getSimpleName() + ": should override toString()",
+                    eventImpl.getMethod("toString").getDeclaringClass().getName().startsWith(PORE_PREFIX));
         } catch (NoSuchMethodException e) {
             fail(eventImpl.getSimpleName() + ": should override method toString()");
         }

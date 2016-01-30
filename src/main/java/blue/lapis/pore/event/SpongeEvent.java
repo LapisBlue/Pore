@@ -35,7 +35,7 @@ final class SpongeEvent<S extends Event> extends SpongeEventHandler<S> {
 
     private final Class<S> event;
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private final SpongeEventHandler<S>[] handlers = new SpongeEventHandler[priorities.length - 1];
     private byte registrationCount;
 

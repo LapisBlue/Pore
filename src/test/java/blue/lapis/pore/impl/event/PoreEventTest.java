@@ -33,7 +33,6 @@ import com.google.common.collect.Sets;
 import com.google.common.reflect.ClassPath;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.event.Event;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -41,7 +40,6 @@ import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.util.Set;
 
-@Ignore
 public class PoreEventTest {
 
     static final String BUKKIT_PACKAGE = "org.bukkit.event";
