@@ -27,7 +27,6 @@ package blue.lapis.pore.impl.event.player;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.event.PoreEvent;
-import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.event.Source;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
@@ -39,7 +38,6 @@ import org.spongepowered.api.event.command.SendCommandEvent;
 
 import java.util.Set;
 
-@RegisterEvent
 public final class PorePlayerCommandPreprocessEvent extends PlayerCommandPreprocessEvent
         implements PoreEvent<SendCommandEvent> {
 
@@ -74,7 +72,7 @@ public final class PorePlayerCommandPreprocessEvent extends PlayerCommandPreproc
 
     @Override
     public void setMessage(String command) throws IllegalArgumentException {
-        throw new NotImplementedException("TODO"); // TODO
+        // TODO
     }
 
     @Override

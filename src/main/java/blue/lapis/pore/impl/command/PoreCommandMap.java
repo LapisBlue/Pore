@@ -36,7 +36,7 @@ import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.PluginCommand;
+import org.bukkit.command.PluginIdentifiableCommand;
 import org.bukkit.command.SimpleCommandMap;
 import org.spongepowered.api.command.CommandCallable;
 import org.spongepowered.api.command.CommandManager;
@@ -65,8 +65,8 @@ public class PoreCommandMap extends SimpleCommandMap {
         // TODO: Fallback prefix
 
         Object plugin = Pore.getPlugin();
-        if (command instanceof PluginCommand) {
-            plugin = Pore.getPlugin(((PluginCommand) command).getPlugin());
+        if (command instanceof PluginIdentifiableCommand) {
+            plugin = Pore.getPlugin(((PluginIdentifiableCommand) command).getPlugin());
         }
 
         List<String> aliases = Lists.newArrayList(command.getAliases());

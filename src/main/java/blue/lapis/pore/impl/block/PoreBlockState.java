@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.block;
 
 import blue.lapis.pore.converter.data.block.BlockDataConverter;
 import blue.lapis.pore.converter.type.material.MaterialConverter;
+import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreWrapper;
@@ -39,36 +40,27 @@ import org.bukkit.block.Block;
 import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
-import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.BlockSnapshot;
 import org.spongepowered.api.block.tileentity.TileEntity;
 
 import java.util.Collection;
 import java.util.List;
 
-public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukkit.block.BlockState {
+public class PoreBlockState extends PoreWrapper<BlockSnapshot> implements org.bukkit.block.BlockState {
 
-    private org.spongepowered.api.world.Location<org.spongepowered.api.world.World> block;
-    private TileEntity tileEntity;
+    private final TileEntity tileEntity;
 
-    public static PoreBlockState of(org.spongepowered.api.world.Location<org.spongepowered.api.world.World> block) {
-        PoreBlockState state = WrapperConverter.of(PoreBlockState.class, block.getBlock());
-        if (state != null) {
-            state.setBlock(block);
-        }
-        return state;
-    }
-
-    public static PoreBlockState of(org.spongepowered.api.block.BlockState handle) {
+    public static PoreBlockState of(BlockSnapshot handle) {
         return WrapperConverter.of(PoreBlockState.class, handle);
     }
 
-    protected PoreBlockState(BlockState handle) {
+    protected PoreBlockState(BlockSnapshot handle) {
         super(handle);
+        this.tileEntity = null;
     }
 
     protected PoreBlockState(TileEntity handle) {
-        super(handle.getBlock());
-        this.block = handle.getLocation();
+        super(handle.getLocation().createSnapshot());
         this.tileEntity = handle;
     }
 
@@ -76,23 +68,19 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukki
         return tileEntity;
     }
 
-    protected void setBlock(org.spongepowered.api.world.Location<org.spongepowered.api.world.World> block) {
-        this.block = block;
-    }
-
     @Override
     public Block getBlock() {
-        return PoreBlock.of(block);
+        return PoreBlock.of(getHandle().getLocation().get());
     }
 
     @Override
     public MaterialData getData() {
-        throw new NotImplementedException("TODO");
+        return new MaterialData(getBlock().getData());
     }
 
     @Override
     public Material getType() {
-        return MaterialConverter.of(getHandle().getType());
+        return MaterialConverter.of(getHandle().getExtendedState().getType());
     }
 
     @Override
@@ -109,7 +97,7 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukki
 
     @Override
     public World getWorld() {
-        return PoreWorld.of(block.getExtent());
+        return PoreWorld.of(getHandle().getLocation().get().getExtent());
     }
 
     @Override
@@ -132,12 +120,12 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukki
 
     @Override
     public Location getLocation() {
-        return isPlaced() ? getBlock().getLocation() : null;
+        return LocationConverter.of(getHandle().getLocation().get());
     }
 
     @Override
     public Location getLocation(Location loc) {
-        return isPlaced() ? getBlock().getLocation(loc) : null;
+        return LocationConverter.apply(loc, getHandle().getLocation().get());
     }
 
     @Override
@@ -185,7 +173,7 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukki
     @SuppressWarnings({"unchecked", "deprecation"})
     public byte getRawData() {
         return BlockDataConverter.INSTANCE.getDataValue((Collection) getHandle().getManipulators(),
-                getHandle().getType());
+                getHandle().getExtendedState().getType());
     }
 
     @SuppressWarnings("deprecation")
@@ -196,7 +184,7 @@ public class PoreBlockState extends PoreWrapper<BlockState> implements org.bukki
 
     @Override
     public boolean isPlaced() {
-        return block != null;
+        throw new NotImplementedException("TODO");
     }
 
     @Override

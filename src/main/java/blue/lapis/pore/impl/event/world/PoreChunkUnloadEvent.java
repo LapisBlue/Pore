@@ -31,7 +31,6 @@ import blue.lapis.pore.event.RegisterEvent;
 import blue.lapis.pore.impl.PoreChunk;
 import blue.lapis.pore.impl.PoreWorld;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.event.world.ChunkUnloadEvent;
@@ -64,12 +63,12 @@ public final class PoreChunkUnloadEvent extends ChunkUnloadEvent implements Pore
 
     @Override
     public boolean isCancelled() {
-        throw new NotImplementedException("TODO"); // TODO
+        return false; // TODO
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException("TODO"); // TODO
+        // TODO
     }
 
     @Override

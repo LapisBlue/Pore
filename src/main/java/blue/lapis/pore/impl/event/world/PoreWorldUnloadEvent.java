@@ -51,17 +51,17 @@ public final class PoreWorldUnloadEvent extends WorldUnloadEvent implements Pore
 
     @Override
     public World getWorld() {
-        return PoreWorld.of(handle.getTargetWorld());
+        return PoreWorld.of(getHandle().getTargetWorld());
     }
 
     @Override
     public boolean isCancelled() {
-        return handle.isCancelled();
+        return getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        handle.setCancelled(cancel);
+        getHandle().setCancelled(cancel);
     }
 
     @Override

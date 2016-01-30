@@ -136,7 +136,7 @@ import blue.lapis.pore.impl.util.PoreCachedServerIcon;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.base.Function;
-import org.spongepowered.api.block.BlockState;
+import org.spongepowered.api.block.BlockSnapshot;
 import org.spongepowered.api.block.tileentity.Banner;
 import org.spongepowered.api.block.tileentity.CommandBlock;
 import org.spongepowered.api.block.tileentity.Jukebox;
@@ -347,7 +347,7 @@ public final class WrapperConverter {
                 .register(Boat.class, PoreBoat.class)
 
             //.register(TileEntity.class, PoreTileEntity.class)
-            .register(BlockState.class, PoreBlockState.class)
+            .register(BlockSnapshot.class, PoreBlockState.class)
                 .register(Banner.class, PoreBanner.class)
                 .register(Beacon.class, PoreBeacon.class)
                 .register(BrewingStand.class, PoreBrewingStand.class)

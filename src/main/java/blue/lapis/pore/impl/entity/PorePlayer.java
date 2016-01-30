@@ -280,7 +280,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public <T> void playEffect(Location loc, Effect effect, T data) {
-        throw new NotImplementedException("TODO");
+        // TODO
     }
 
     @Override
@@ -483,7 +483,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public long getPlayerTime() {
-        throw new NotImplementedException("TODO");
+        return getWorld().getTime(); // TODO
     }
 
     @Override
@@ -493,7 +493,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public boolean isPlayerTimeRelative() {
-        throw new NotImplementedException("TODO");
+        return true;
     }
 
     @Override

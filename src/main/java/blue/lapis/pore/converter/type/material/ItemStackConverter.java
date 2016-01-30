@@ -24,6 +24,7 @@
  */
 package blue.lapis.pore.converter.type.material;
 
+import org.bukkit.Material;
 import org.spongepowered.api.item.ItemType;
 import org.spongepowered.api.item.inventory.ItemStack;
 
@@ -33,6 +34,10 @@ public final class ItemStackConverter {
     }
 
     public static org.bukkit.inventory.ItemStack of(org.spongepowered.api.item.inventory.ItemStack stack) {
+        if (stack == null) {
+            return new org.bukkit.inventory.ItemStack(Material.AIR);
+        }
+
         return new org.bukkit.inventory.ItemStack(
                 MaterialConverter.of(stack.getItem()),
                 stack.getQuantity(),

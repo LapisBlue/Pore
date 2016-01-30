@@ -38,7 +38,7 @@ public final class LocationConverter {
     private LocationConverter() {
     }
 
-    public static Location apply(Location loc, org.spongepowered.api.world.Location<?> spongeLocation) {
+    public static Location apply(Location loc, org.spongepowered.api.world.Location<World> spongeLocation) {
         loc.setWorld(PoreWorld.of(spongeLocation.getExtent()));
         loc.setX(spongeLocation.getPosition().getX());
         loc.setY(spongeLocation.getPosition().getY());

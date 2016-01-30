@@ -34,7 +34,6 @@ import blue.lapis.pore.impl.block.PoreBlock;
 import blue.lapis.pore.impl.entity.PorePlayer;
 
 import com.google.common.collect.ImmutableList;
-import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.block.Block;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.spongepowered.api.block.BlockSnapshot;
@@ -73,12 +72,12 @@ public final class PoreBlockBreakEvent extends BlockBreakEvent implements PoreEv
 
     @Override
     public int getExpToDrop() {
-        throw new NotImplementedException("TODO");
+        return 0; // TODO
     }
 
     @Override
     public void setExpToDrop(int exp) {
-        throw new NotImplementedException("TODO");
+        // TODO
     }
 
     @Override

@@ -74,7 +74,9 @@ public class PoreBlock extends PoreWrapper<Location<org.spongepowered.api.world.
     @SuppressWarnings("deprecation")
     @Override
     public byte getData() {
-        return BlockDataConverter.INSTANCE.getDataValue(getHandle());
+        // TODO: This is broken
+        // return BlockDataConverter.INSTANCE.getDataValue(getHandle());
+        return 0;
     }
 
     @SuppressWarnings("deprecation")
@@ -241,7 +243,7 @@ public class PoreBlock extends PoreWrapper<Location<org.spongepowered.api.world.
 
     @Override
     public BlockState getState() {
-        return PoreBlockState.of(getHandle().getBlock());
+        return PoreBlockState.of(getHandle().createSnapshot());
     }
 
     @Override

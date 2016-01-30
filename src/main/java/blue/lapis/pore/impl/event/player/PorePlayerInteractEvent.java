@@ -125,12 +125,12 @@ public abstract class PorePlayerInteractEvent<T extends InteractBlockEvent> exte
 
     @Override
     public boolean isCancelled() {
-        return handle.isCancelled();
+        return getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        handle.setCancelled(cancel);
+        getHandle().setCancelled(cancel);
     }
 
     @Override

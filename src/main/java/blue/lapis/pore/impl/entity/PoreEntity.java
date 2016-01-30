@@ -37,6 +37,7 @@ import blue.lapis.pore.impl.PoreWorld;
 import blue.lapis.pore.util.PoreText;
 import blue.lapis.pore.util.PoreWrapper;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Bukkit;
@@ -374,22 +375,22 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public void setMetadata(String s, MetadataValue metadataValue) {
-        throw new NotImplementedException("TODO");
+        // TODO
     }
 
     @Override
     public List<MetadataValue> getMetadata(String s) {
-        throw new NotImplementedException("TODO");
+        return ImmutableList.of(); // TODO
     }
 
     @Override
     public boolean hasMetadata(String s) {
-        throw new NotImplementedException("TODO");
+        return false; // TODO
     }
 
     @Override
     public void removeMetadata(String s, Plugin plugin) {
-        throw new NotImplementedException("TODO");
+        // TODO
     }
 
     @Override

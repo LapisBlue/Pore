@@ -90,12 +90,12 @@ public final class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent
 
     @Override
     public boolean isCancelled() {
-        return handle.isCancelled();
+        return getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        handle.setCancelled(cancel);
+        getHandle().setCancelled(cancel);
     }
 
     @Override

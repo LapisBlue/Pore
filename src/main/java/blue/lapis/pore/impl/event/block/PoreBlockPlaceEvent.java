@@ -82,7 +82,7 @@ public final class PoreBlockPlaceEvent extends BlockPlaceEvent implements PoreEv
 
     @Override
     public BlockState getBlockReplacedState() {
-        return PoreBlockState.of(this.transaction.getFinal().getExtendedState());
+        return PoreBlockState.of(this.transaction.getFinal());
     }
 
     @Override
@@ -107,12 +107,12 @@ public final class PoreBlockPlaceEvent extends BlockPlaceEvent implements PoreEv
 
     @Override
     public boolean isCancelled() {
-        return getHandle().isCancelled();
+        return !this.transaction.isValid();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        getHandle().setCancelled(cancel);
+        this.transaction.setValid(!cancel);
     }
 
     @Override
