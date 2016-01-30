@@ -86,7 +86,10 @@ public class PoreUnsafeValues implements UnsafeValues {
          * you think this was a bad idea.
          * - caseif
          */
-        throw new UnsupportedOperationException("Pore does not support direct NBT manipulation at this time");
+        //throw new UnsupportedOperationException("Pore does not support direct NBT manipulation at this time");
+        return stack;
+        // TODO: Some plugins use this, and break completely in that case
+        // Simply doing nothing here kind of fixes it, at least it does nothing in that case
     }
 
     @Override

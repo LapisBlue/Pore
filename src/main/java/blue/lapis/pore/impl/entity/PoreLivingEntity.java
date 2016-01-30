@@ -35,6 +35,7 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.ProjectileUtil;
 
 import com.google.common.collect.Collections2;
+import com.google.common.collect.ImmutableList;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -290,9 +291,13 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public Collection<PotionEffect> getActivePotionEffects() {
-        return Collections2.transform(getHandle().get(Keys.POTION_EFFECTS).get(),
-                PotionEffectConverter::of
-        );
+        List<org.spongepowered.api.effect.potion.PotionEffect> effects = getHandle().get(Keys.POTION_EFFECTS).
+                orElse(null);
+        if (effects == null) {
+            return ImmutableList.of();
+        }
+
+        return Collections2.transform(effects, PotionEffectConverter::of);
     }
 
     @Override

@@ -69,6 +69,7 @@ import org.bukkit.map.MapView;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.Scoreboard;
 import org.spongepowered.api.block.BlockTypes;
+import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.effect.sound.SoundType;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.entity.living.player.tab.PlayerTabInfo;
@@ -145,7 +146,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void setCompassTarget(Location loc) {
-        throw new NotImplementedException("TODO");
+        // TODO
     }
 
     @Override
@@ -568,32 +569,32 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public float getExhaustion() {
-        return getHandle().get(FOOD_DATA).get().exhaustion().get().floatValue();
+        return getHandle().get(Keys.EXHAUSTION).get().floatValue();
     }
 
     @Override
     public void setExhaustion(float value) {
-        getHandle().get(FOOD_DATA).get().exhaustion().set((double) value);
+        getHandle().offer(Keys.EXHAUSTION, (double) value);
     }
 
     @Override
     public float getSaturation() {
-        return getHandle().get(FOOD_DATA).get().saturation().get().floatValue();
+        return getHandle().get(Keys.SATURATION).get().floatValue();
     }
 
     @Override
     public void setSaturation(float value) {
-        getHandle().get(FOOD_DATA).get().saturation().set((double) value);
+        getHandle().offer(Keys.SATURATION, (double) value);
     }
 
     @Override
     public int getFoodLevel() {
-        return getHandle().get(FOOD_DATA).get().foodLevel().get();
+        return getHandle().get(Keys.FOOD_LEVEL).get();
     }
 
     @Override
     public void setFoodLevel(int value) {
-        getHandle().get(FOOD_DATA).get().foodLevel().set(value);
+        getHandle().offer(Keys.FOOD_LEVEL, value);
     }
 
     @Override
@@ -729,12 +730,12 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     //TODO: movement speeds and flight toggle will be included with the attributes API
     @Override
     public boolean getAllowFlight() {
-        throw new NotImplementedException("TODO");
+        return getHandle().get(Keys.CAN_FLY).get(); // TODO
     }
 
     @Override
     public void setAllowFlight(boolean flight) {
-        throw new NotImplementedException("TODO");
+        getHandle().offer(Keys.CAN_FLY, flight); // TODO
     }
 
     @Override
