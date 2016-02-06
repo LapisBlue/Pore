@@ -26,6 +26,7 @@ package blue.lapis.pore.impl.entity;
 
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.EXPERIENCE_HOLDER_DATA;
 
+import blue.lapis.pore.converter.type.entity.player.GameModeConverter;
 import blue.lapis.pore.converter.type.material.ItemStackConverter;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
@@ -45,6 +46,7 @@ import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.block.BlockTypes;
+import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.Humanoid;
 import org.spongepowered.api.item.inventory.Carrier;
 import org.spongepowered.api.item.inventory.entity.HumanInventory;
@@ -163,7 +165,7 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public boolean isSleeping() {
-        throw new NotImplementedException("TODO");
+        return getHandle().get(Keys.IS_SLEEPING).get();
     }
 
     @Override
@@ -173,12 +175,12 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public GameMode getGameMode() {
-        throw new UnsupportedOperationException("Cannot get gamemode of non-player human");
+        return GameModeConverter.of(getHandle().get(Keys.GAME_MODE).get());
     }
 
     @Override
     public void setGameMode(GameMode mode) {
-        throw new UnsupportedOperationException("Cannot get gamemode of non-player human");
+        getHandle().offer(Keys.GAME_MODE, GameModeConverter.of(mode));
     }
 
     @Override

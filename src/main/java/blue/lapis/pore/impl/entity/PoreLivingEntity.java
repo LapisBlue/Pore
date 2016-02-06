@@ -24,8 +24,6 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.BREATHING_DATA;
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.LEASH_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.POTION_EFFECT_DATA;
 
 import blue.lapis.pore.converter.type.material.MaterialConverter;
@@ -72,6 +70,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -107,7 +106,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
                 getHandle().getProperty(EyeLocationProperty.class).get().getValue(), getHandle().getRotation());
     }
 
-    private static class IncludeTargetFilter implements Predicate<BlockRayHit<World>> {
+    private static final class IncludeTargetFilter implements Predicate<BlockRayHit<World>> {
 
         private final Predicate<BlockRayHit<World>> matcher;
         private boolean done;
@@ -239,37 +238,37 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public int getRemainingAir() {
-        return getHandle().get(BREATHING_DATA).get().remainingAir().get();
+        return getHandle().get(Keys.REMAINING_AIR).get();
     }
 
     @Override
     public void setRemainingAir(int ticks) {
-        getHandle().offer(getHandle().get(BREATHING_DATA).get().remainingAir().set(ticks));
+        getHandle().offer(Keys.REMAINING_AIR, ticks);
     }
 
     @Override
     public int getMaximumAir() {
-        return getHandle().get(BREATHING_DATA).get().maxAir().get();
+        return getHandle().get(Keys.MAX_AIR).get();
     }
 
     @Override
     public void setMaximumAir(int ticks) {
-        getHandle().offer(getHandle().get(BREATHING_DATA).get().maxAir().set(ticks));
+        getHandle().offer(Keys.MAX_AIR, ticks);
     }
 
     @Override
     public int getMaximumNoDamageTicks() {
-        return getNoDamageTicks();
+        return getHandle().getValue(Keys.INVULNERABILITY).get().getMaxValue();
     }
 
     @Override
     public void setMaximumNoDamageTicks(int ticks) {
-        setNoDamageTicks(ticks);
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public double getLastDamage() {
-        return getHandle().getMortalData().lastDamage().or(0.0).get();
+        return getHandle().get(Keys.LAST_DAMAGE).get().orElse(0.0);
     }
 
     @SuppressWarnings("deprecation")
@@ -280,7 +279,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void setLastDamage(double damage) {
-        getHandle().getMortalData().lastDamage().setTo(damage);
+        getHandle().offer(Keys.LAST_DAMAGE, Optional.of(damage));
     }
 
     @SuppressWarnings("deprecation")
@@ -398,23 +397,21 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public boolean isLeashed() {
-        return hasData(LEASH_DATA);
+        return getHandle().get(Keys.LEASH_HOLDER).isPresent();
     }
 
     @Override
     public Entity getLeashHolder() throws IllegalStateException {
         if (isLeashed()) {
-            return PoreEntity.of(getHandle().get(LEASH_DATA).get().leashHolder().get());
+            return PoreEntity.of(getHandle().get(Keys.LEASH_HOLDER).get());
+        } else {
+            throw new IllegalStateException("Not leashed");
         }
-        return null;
     }
 
     @Override
     public boolean setLeashHolder(Entity holder) {
-        return getHandle().supports(LEASH_DATA)
-                && getHandle().offer(getHandle().getOrCreate(LEASH_DATA).get().leashHolder()
-                .set(((PoreEntity) holder).getHandle())).getType()
-                == DataTransactionResult.Type.SUCCESS;
+        return getHandle().offer(Keys.LEASH_HOLDER, ((PoreEntity) holder).getHandle().createSnapshot()).isSuccessful();
     }
 
     @Override
@@ -492,7 +489,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public void resetMaxHealth() {
-        getHandle().offer(Keys.MAX_HEALTH, getHandle().getHealthData().maxHealth().getDefault());
+        getHandle().offer(Keys.MAX_HEALTH, getHandle().getValue(Keys.MAX_HEALTH).get().getMaxValue());
     }
 
     @Override

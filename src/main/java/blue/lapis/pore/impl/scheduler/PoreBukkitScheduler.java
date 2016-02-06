@@ -27,7 +27,8 @@ package blue.lapis.pore.impl.scheduler;
 import blue.lapis.pore.Pore;
 
 import com.google.common.base.Preconditions;
-import org.apache.commons.lang3.NotImplementedException;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.MapMaker;
 import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -38,6 +39,7 @@ import org.spongepowered.api.scheduler.Scheduler;
 import org.spongepowered.api.scheduler.Task;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -48,6 +50,8 @@ public class PoreBukkitScheduler implements BukkitScheduler {
     private static final int MS_PER_TICK = 50;
 
     private static final AtomicInteger id = new AtomicInteger();
+
+    private final Map<Integer, Task> tasks = new MapMaker().weakValues().makeMap();
 
     private static Scheduler getScheduler() {
         return Pore.getGame().getScheduler();
@@ -81,7 +85,10 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 
     @Override
     public void cancelTask(int taskId) {
-        throw new NotImplementedException("TODO");
+        Task task = this.tasks.get(taskId);
+        if (task != null) {
+            task.cancel(); // TODO: Result
+        }
     }
 
     @Override
@@ -96,69 +103,74 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 
     @Override
     public boolean isCurrentlyRunning(int taskId) {
-        throw new NotImplementedException("TODO");
+        return false; // TODO
     }
 
     @Override
     public boolean isQueued(int taskId) {
-        throw new NotImplementedException("TODO");
+        return false; // TODO
     }
 
     @Override
     public List<BukkitWorker> getActiveWorkers() {
-        throw new NotImplementedException("TODO");
+        return ImmutableList.of();
     }
 
     @Override
     public List<BukkitTask> getPendingTasks() {
-        throw new NotImplementedException("TODO");
+        return ImmutableList.of();
+    }
+
+    private BukkitTask register(PoreBukkitTask task) {
+        this.tasks.put(task.getTaskId(), task.getHandle());
+        return task;
     }
 
     @Override
     public BukkitTask runTask(Plugin plugin, Runnable task) throws IllegalArgumentException {
         validate(plugin, task);
-        return new PoreBukkitTask(newTask().execute(task).submit(Pore.getPlugin(plugin)), id.incrementAndGet());
+        return register(new PoreBukkitTask(newTask().execute(task).submit(Pore.getPlugin(plugin)), id.incrementAndGet()));
     }
 
     @Override
     public BukkitTask runTaskAsynchronously(Plugin plugin, Runnable task) throws IllegalArgumentException {
         validate(plugin, task);
-        return new PoreBukkitTask(newTask().async().execute(task).submit(Pore.getPlugin(plugin)), id.incrementAndGet());
+        return register(new PoreBukkitTask(newTask().async().execute(task).submit(Pore.getPlugin(plugin)), id.incrementAndGet()));
     }
 
     @Override
     public BukkitTask runTaskLater(Plugin plugin, Runnable task, long delay) throws IllegalArgumentException {
         validate(plugin, task);
-        return new PoreBukkitTask(newTask().delay(ticksToMillis(delay), TimeUnit.MILLISECONDS).execute(task)
-                .submit(Pore.getPlugin(plugin)), id.incrementAndGet());
+        return register(new PoreBukkitTask(newTask().delay(ticksToMillis(delay), TimeUnit.MILLISECONDS).execute(task)
+                .submit(Pore.getPlugin(plugin)), id.incrementAndGet()));
     }
 
     @Override
     public BukkitTask runTaskLaterAsynchronously(Plugin plugin, Runnable task, long delay)
             throws IllegalArgumentException {
         validate(plugin, task);
-        return new PoreBukkitTask(newTask().async().delay(ticksToMillis(delay), TimeUnit.MILLISECONDS).execute(task)
-                .submit(Pore.getPlugin(plugin)), id.incrementAndGet());
+        return register(new PoreBukkitTask(newTask().async().delay(ticksToMillis(delay), TimeUnit.MILLISECONDS).execute(task)
+                .submit(Pore.getPlugin(plugin)), id.incrementAndGet()));
     }
 
     @Override
     public BukkitTask runTaskTimer(Plugin plugin, Runnable task, long delay, long period)
             throws IllegalArgumentException {
         validate(plugin, task);
-        return new PoreBukkitTask(newTask().delay(ticksToMillis(delay), TimeUnit.MILLISECONDS)
+        return register(new PoreBukkitTask(newTask().delay(ticksToMillis(delay), TimeUnit.MILLISECONDS)
                 .interval(ticksToMillis(period), TimeUnit.MILLISECONDS).execute(task)
-                .submit(Pore.getPlugin(plugin)), id.incrementAndGet());
+                .submit(Pore.getPlugin(plugin)), id.incrementAndGet()));
     }
 
     @Override
     public BukkitTask runTaskTimerAsynchronously(Plugin plugin, Runnable task, long delay, long period)
             throws IllegalArgumentException {
         validate(plugin, task);
-        return new PoreBukkitTask(newTask().async()
+        return register(new PoreBukkitTask(newTask().async()
                 .delay(ticksToMillis(delay), TimeUnit.MILLISECONDS)
                 .interval(ticksToMillis(period), TimeUnit.MILLISECONDS)
                 .execute(task)
-                .submit(Pore.getPlugin(plugin)), id.incrementAndGet());
+                .submit(Pore.getPlugin(plugin)), id.incrementAndGet()));
     }
 
     @SuppressWarnings("deprecation")

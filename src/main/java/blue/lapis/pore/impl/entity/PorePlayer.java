@@ -28,15 +28,10 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.EXPERIENCE_HOLDER_DATA;
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.FLYING_DATA;
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.GAME_MODE_DATA;
 import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.JOIN_DATA;
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.RESPAWN_LOCATION_DATA;
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.SNEAKING_DATA;
 
 import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.type.entity.EntityConverter;
-import blue.lapis.pore.converter.type.entity.player.GameModeConverter;
 import blue.lapis.pore.converter.type.material.MaterialConverter;
 import blue.lapis.pore.converter.type.statistic.AchievementConverter;
 import blue.lapis.pore.converter.type.statistic.StatisticConverter;
@@ -47,12 +42,10 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.scoreboard.PoreScoreboard;
 import blue.lapis.pore.util.PoreText;
 
-import com.flowpowered.math.vector.Vector3d;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.Achievement;
 import org.bukkit.Effect;
-import org.bukkit.GameMode;
 import org.bukkit.Instrument;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -156,7 +149,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public boolean isConversing() {
-        throw new NotImplementedException("TODO");
+        return false;
     }
 
     @Override
@@ -203,28 +196,22 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public boolean isSneaking() {
-        return hasData(SNEAKING_DATA);
+        return getHandle().get(Keys.IS_SNEAKING).get();
     }
 
     @Override
     public void setSneaking(boolean sneak) {
-        if (sneak != isSneaking()) {
-            if (sneak) {
-                getHandle().offer(getHandle().getOrCreate(SNEAKING_DATA).get().sneaking().set(true));
-            } else {
-                getHandle().remove(SNEAKING_DATA);
-            }
-        }
+        getHandle().offer(Keys.IS_SNEAKING, sneak);
     }
 
     @Override
     public boolean isSprinting() {
-        throw new NotImplementedException("TODO");
+        return getHandle().get(Keys.IS_SPRINTING).get();
     }
 
     @Override
     public void setSprinting(boolean sprinting) {
-        throw new NotImplementedException("TODO");
+        getHandle().offer(Keys.IS_SPRINTING, sprinting);
     }
 
     @Override
@@ -501,7 +488,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public void resetPlayerTime() {
-        throw new NotImplementedException("TODO");
+        // TODO
     }
 
     @Override
@@ -511,12 +498,12 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public WeatherType getPlayerWeather() {
-        throw new NotImplementedException("TODO");
+        return null;
     }
 
     @Override
     public void resetPlayerWeather() {
-        throw new NotImplementedException("TODO");
+        // TODO
     }
 
     @Override
@@ -549,24 +536,22 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public int getLevel() {
-        return hasData(EXPERIENCE_HOLDER_DATA) ? getHandle().get(EXPERIENCE_HOLDER_DATA).get().level().get() : 0;
+        return getHandle().get(Keys.EXPERIENCE_LEVEL).orElse(0);
     }
 
     @Override
     public void setLevel(int level) {
-        throw new NotImplementedException("TODO");
+        getHandle().offer(Keys.EXPERIENCE_LEVEL, level);
     }
 
     @Override
     public int getTotalExperience() {
-        return hasData(EXPERIENCE_HOLDER_DATA)
-                ? getHandle().get(EXPERIENCE_HOLDER_DATA).get().totalExperience().get()
-                : 0;
+        return getHandle().get(Keys.TOTAL_EXPERIENCE).orElse(0);
     }
 
     @Override
     public void setTotalExperience(int exp) {
-        throw new NotImplementedException("TODO");
+        getHandle().offer(Keys.TOTAL_EXPERIENCE, exp);
     }
 
     @Override
@@ -669,15 +654,13 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public boolean hasPlayedBefore() {
-        throw new NotImplementedException("TODO");
+        return !getHandle().get(Keys.FIRST_DATE_PLAYED).equals(getHandle().get(Keys.LAST_DATE_PLAYED));
     }
 
     @Override
     public Location getBedSpawnLocation() {
-        return hasData(RESPAWN_LOCATION_DATA)
-                ? LocationConverter.fromVector3d(getHandle().getWorld(),
-                getHandle().get(RESPAWN_LOCATION_DATA).get().respawnLocation().get().get(getWorld().getUID()))
-                : null;
+        return LocationConverter.fromVector3d(getHandle().getWorld(),
+                getHandle().get(Keys.RESPAWN_LOCATIONS).get().get(getHandle().getWorld().getUniqueId()));
     }
 
     @Override
@@ -690,10 +673,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
         org.spongepowered.api.world.Location<?> spongeLoc = LocationConverter.of(location);
         //noinspection ConstantConditions
         if (force || spongeLoc.getBlockType() == BlockTypes.BED) {
-            getHandle().offer(getHandle().get(RESPAWN_LOCATION_DATA).get().respawnLocation().put(
-                    location.getWorld().getUID(),
-                    new Vector3d(location.getX(), location.getY(), location.getZ())
-            ));
+            getHandle().get(Keys.RESPAWN_LOCATIONS).get().put(location.getWorld().getUID(), LocationConverter.toVector3d(location));
         }
     }
 
@@ -715,18 +695,12 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
 
     @Override
     public boolean isFlying() {
-        return hasData(FLYING_DATA) && getHandle().get(FLYING_DATA).get().flying().get();
+        return getHandle().get(Keys.IS_FLYING).get();
     }
 
     @Override
     public void setFlying(boolean value) {
-        if (value != isFlying()) {
-            if (value) {
-                getHandle().offer(getHandle().getOrCreate(FLYING_DATA).get().flying().set(true));
-            } else {
-                getHandle().remove(FLYING_DATA);
-            }
-        }
+        getHandle().offer(Keys.IS_FLYING, value);
     }
 
     //TODO: movement speeds and flight toggle will be included with the attributes API
@@ -864,13 +838,4 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
         return getHandle().getUniqueId();
     }
 
-    @Override
-    public GameMode getGameMode() {
-        return GameModeConverter.of(getHandle().getOrCreate(GAME_MODE_DATA).get().type().get());
-    }
-
-    @Override
-    public void setGameMode(GameMode mode) {
-        getHandle().offer(getHandle().getOrCreate(GAME_MODE_DATA).get().type().set(GameModeConverter.of(mode)));
-    }
 }

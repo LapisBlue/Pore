@@ -86,6 +86,7 @@ import org.spongepowered.api.entity.living.Living;
 import org.spongepowered.api.event.cause.Cause;
 import org.spongepowered.api.event.cause.NamedCause;
 import org.spongepowered.api.world.World;
+import org.spongepowered.api.world.explosion.Explosion;
 import org.spongepowered.api.world.extent.Extent;
 import org.spongepowered.api.world.weather.Weathers;
 
@@ -520,7 +521,14 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public boolean createExplosion(Location loc, float power) {
-        throw new NotImplementedException("TODO");
+        Explosion explosion = Explosion.builder()
+                .world(((PoreWorld) loc.getWorld()).getHandle())
+                .origin(LocationConverter.toVector3d(loc))
+                .radius(power)
+                .build();
+
+        explosion.getWorld().triggerExplosion(explosion);
+        return true; // TODO
     }
 
     @Override

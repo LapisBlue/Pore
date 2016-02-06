@@ -27,40 +27,47 @@ package blue.lapis.pore.impl.event.entity;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import blue.lapis.pore.converter.vector.LocationConverter;
+import blue.lapis.pore.event.PoreEvent;
+import blue.lapis.pore.event.RegisterEvent;
+import blue.lapis.pore.event.Source;
 import blue.lapis.pore.impl.entity.PoreEntity;
 
 import org.apache.commons.lang3.NotImplementedException;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.spongepowered.api.event.world.WorldExplosionEvent;
+import org.spongepowered.api.entity.Entity;
+import org.spongepowered.api.event.world.ExplosionEvent;
+import org.spongepowered.api.world.explosion.Explosion;
 
 import java.util.List;
 
-public class PoreEntityExplodeEvent extends EntityExplodeEvent {
+@RegisterEvent
+public final class PoreEntityExplodeEvent extends EntityExplodeEvent implements PoreEvent<ExplosionEvent.Pre> {
 
-    private final WorldExplosionEvent handle;
+    private final ExplosionEvent.Pre handle;
+    private final Entity exploder;
 
-    public PoreEntityExplodeEvent(WorldExplosionEvent handle) {
+    public PoreEntityExplodeEvent(ExplosionEvent.Pre handle, @Source Entity exploder) {
         super(null, null, null, -1);
         this.handle = checkNotNull(handle, "handle");
+        this.exploder = checkNotNull(exploder, "exploder");
     }
 
-    public WorldExplosionEvent getHandle() {
+    @Override
+    public ExplosionEvent.Pre getHandle() {
         return this.handle;
     }
 
     @Override
-    public Entity getEntity() {
-        return getHandle().getExplosion().getSourceExplosive().isPresent()
-                ? PoreEntity.of(getHandle().getExplosion().getSourceExplosive().get())
-                : null;
+    public org.bukkit.entity.Entity getEntity() {
+        return PoreEntity.of(this.exploder);
     }
 
     @Override
     public EntityType getEntityType() {
-        return getEntity() != null ? getEntity().getType() : null;
+        return getEntity().getType();
     }
 
     @Override
@@ -69,9 +76,8 @@ public class PoreEntityExplodeEvent extends EntityExplodeEvent {
     }
 
     @Override
-    public org.bukkit.Location getLocation() {
-        return LocationConverter.fromVector3d(getHandle().getExplosion().getWorld(),
-                getHandle().getExplosion().getOrigin());
+    public Location getLocation() {
+        return LocationConverter.fromVector3d(getHandle().getExplosion().getWorld(), getHandle().getExplosion().getOrigin());
     }
 
     @Override
@@ -81,16 +87,22 @@ public class PoreEntityExplodeEvent extends EntityExplodeEvent {
 
     @Override
     public void setYield(float yield) {
-        this.getHandle().getExplosion().setRadius(yield);
+        getHandle().setExplosion(Explosion.builder().from(getHandle().getExplosion()).radius(yield).build());
     }
 
     @Override
     public boolean isCancelled() {
-        return false; //TODO: Sponge fires this event after the entity has exploded - it can't be cancelled
+        return getHandle().isCancelled();
     }
 
     @Override
     public void setCancelled(boolean cancel) {
-        throw new NotImplementedException("TODO");
+        getHandle().setCancelled(cancel);
     }
+
+    @Override
+    public String toString() {
+        return toStringHelper().toString();
+    }
+
 }

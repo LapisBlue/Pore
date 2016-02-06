@@ -24,11 +24,7 @@
  */
 package blue.lapis.pore.impl.entity;
 
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.DISPLAY_NAME_DATA;
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.IGNITEABLE_DATA;
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.PASSENGER_DATA;
-import static org.spongepowered.api.data.manipulator.catalog.CatalogEntityData.VEHICLE_DATA;
-
+import blue.lapis.pore.Pore;
 import blue.lapis.pore.converter.vector.LocationConverter;
 import blue.lapis.pore.converter.vector.VectorConverter;
 import blue.lapis.pore.converter.wrapper.WrapperConverter;
@@ -37,9 +33,9 @@ import blue.lapis.pore.util.PoreText;
 import blue.lapis.pore.util.PoreWrapper;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.NotImplementedException;
-import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Server;
@@ -55,9 +51,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.data.manipulator.DataManipulator;
-import org.spongepowered.api.data.manipulator.mutable.DisplayNameData;
-import org.spongepowered.api.data.manipulator.mutable.entity.IgniteableData;
-import org.spongepowered.api.data.manipulator.mutable.entity.PassengerData;
 import org.spongepowered.api.entity.Entity;
 import org.spongepowered.api.entity.EntitySnapshot;
 
@@ -75,7 +68,6 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     public static PoreEntity of(EntitySnapshot snapshot) {
         Optional<UUID> uuid = snapshot.getUniqueId();
-        assert uuid.isPresent(); //TODO: not sure if this is right
         Optional<Entity> entity = snapshot.getTransform().get().getExtent().getEntity(uuid.get());
         if (!entity.isPresent()) {
             return null;
@@ -98,18 +90,12 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public Location getLocation() {
-        return LocationConverter.of(getHandle().getLocation()); //TODO: fix first parameter when possible
+        return LocationConverter.fromTransform(getHandle().getTransform());
     }
 
     @Override
     public Location getLocation(Location loc) {
-        loc.setWorld(getWorld());
-        loc.setX(getHandle().getLocation().getPosition().getX());
-        loc.setY(getHandle().getLocation().getPosition().getX());
-        loc.setZ(getHandle().getLocation().getPosition().getX());
-        loc.setPitch((float) getHandle().getRotation().getX());
-        loc.setYaw((float) getHandle().getRotation().getY());
-        return loc;
+        return LocationConverter.apply(loc, getHandle().getTransform());
     }
 
     @Override
@@ -144,7 +130,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
             return false;
         }
         if (this.eject()) {
-            getHandle().setLocation(LocationConverter.of(location));
+            getHandle().setTransform(LocationConverter.toTransform(location));
             // CraftBukkit apparently does not throw an event when this method is called
             return true;
         }
@@ -163,6 +149,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public List<org.bukkit.entity.Entity> getNearbyEntities(double x, double y, double z) {
+        // TODO: Optimize this with the SpongeAPI method
         List<org.bukkit.entity.Entity> worldEntities = getWorld().getEntities();
         List<org.bukkit.entity.Entity> nearby = Lists.newArrayList();
         for (org.bukkit.entity.Entity e : worldEntities) {
@@ -185,23 +172,17 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public int getFireTicks() {
-        return hasData(IGNITEABLE_DATA) ? getHandle().get(IGNITEABLE_DATA).get().fireTicks().get() : 0;
+        return getHandle().get(Keys.FIRE_TICKS).get();
     }
 
     @Override
     public void setFireTicks(int ticks) {
-        Optional<IgniteableData> data = getHandle().getOrCreate(IGNITEABLE_DATA);
-        if (data.isPresent()) {
-            getHandle().offer(data.get().fireTicks().set(ticks));
-        } else {
-            throw new UnsupportedOperationException("Cannot apply fire ticks to entity with ID " + getEntityId()
-                    + " and type " + getType().name());
-        }
+        getHandle().offer(Keys.FIRE_TICKS, ticks);
     }
 
     @Override
     public int getMaxFireTicks() {
-        return hasData(IGNITEABLE_DATA) ? getHandle().get(IGNITEABLE_DATA).get().fireTicks().get() : 0;
+        return getHandle().getValue(Keys.FIRE_TICKS).get().getMaxValue();
     }
 
     @Override
@@ -221,8 +202,8 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public void sendMessage(String message) {
-        //TODO: This isn't implemented in CB for the base entity class. Should we just let it silently fail?
-        throw new NotImplementedException("TODO");
+        // TODO: This isn't implemented in CB for the base entity class. Should we just let it silently fail?
+        // Yes
     }
 
     @Override
@@ -232,7 +213,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public Server getServer() {
-        return Bukkit.getServer();
+        return Pore.getServer();
     }
 
     @Override
@@ -242,29 +223,21 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public org.bukkit.entity.Entity getPassenger() {
-        return hasData(VEHICLE_DATA) ? PoreEntity.of(getHandle().get(PASSENGER_DATA).get().passenger().get()) : null;
+        return getHandle().get(Keys.PASSENGER).map(PoreEntity::of).orElse(null);
     }
 
     @Override
     public boolean setPassenger(final org.bukkit.entity.Entity passenger) {
         if (passenger != null) {
-            Optional<PassengerData> data = getHandle().getOrCreate(PASSENGER_DATA);
-            if (data.isPresent()) {
-                getHandle().offer(data.get().passenger().set(((PoreEntity) passenger).getHandle().createSnapshot()));
-            } else {
-                throw new UnsupportedOperationException("Cannot apply passenger to entity with ID " + getEntityId()
-                        + " and type " + getType().name());
-            }
+            return getHandle().offer(Keys.PASSENGER, ((PoreEntity) passenger).getHandle().createSnapshot()).isSuccessful();
         } else {
-            getHandle().remove(PASSENGER_DATA);
+            return getHandle().remove(Keys.PASSENGER).isSuccessful();
         }
-
-        return true;
     }
 
     @Override
     public boolean isEmpty() {
-        return hasData(VEHICLE_DATA);
+        return !getHandle().get(Keys.PASSENGER).isPresent();
     }
 
     @Override
@@ -315,55 +288,40 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public boolean isInsideVehicle() {
-        return hasData(VEHICLE_DATA);
+        return getHandle().get(Keys.VEHICLE).isPresent();
     }
 
     @Override
     public boolean leaveVehicle() {
-        boolean inVehicle = hasData(VEHICLE_DATA);
-        getHandle().remove(VEHICLE_DATA);
-        return inVehicle;
+        return isInsideVehicle() && getHandle().remove(Keys.VEHICLE).isSuccessful();
     }
 
     @Override
     public org.bukkit.entity.Entity getVehicle() {
-        return isInsideVehicle() ? PoreEntity.of(getHandle().get(VEHICLE_DATA).get().vehicle().get()) : null;
+        return getHandle().get(Keys.VEHICLE).map(PoreEntity::of).orElse(null);
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public String getCustomName() {
-        return hasData(DISPLAY_NAME_DATA)
-                ? PoreText.convert(getHandle().get(DISPLAY_NAME_DATA).get().displayName().get())
-                : null;
+        return getHandle().get(Keys.DISPLAY_NAME).map(PoreText::convert).orElse(null);
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public void setCustomName(String name) {
-        Optional<DisplayNameData> data = getHandle().getOrCreate(DISPLAY_NAME_DATA);
-        if (data.isPresent()) {
-            getHandle().offer(data.get().displayName().set(PoreText.convert(name)));
-        } else {
-            throw new UnsupportedOperationException("Cannot apply display name data to entity with ID " + getEntityId()
-                    + " and type " + getType().name());
-        }
+        getHandle().offer(Keys.DISPLAY_NAME, PoreText.convert(name));
     }
 
     @Override
     public boolean isCustomNameVisible() {
-        return hasData(DISPLAY_NAME_DATA) && getHandle().get(DISPLAY_NAME_DATA).get().customNameVisible().get();
+        Optional<Boolean> visible = getHandle().get(Keys.SHOWS_DISPLAY_NAME);
+        return visible.isPresent() ? visible.get() : false;
     }
 
     @Override
     public void setCustomNameVisible(boolean flag) {
-        Optional<DisplayNameData> data = getHandle().getOrCreate(DISPLAY_NAME_DATA);
-        if (data.isPresent()) {
-            getHandle().offer(data.get().customNameVisible().set(flag));
-        } else {
-            throw new UnsupportedOperationException("Cannot apply display name data to entity with ID " + getEntityId()
-                    + " and type " + getType().name());
-        }
+        getHandle().offer(Keys.SHOWS_DISPLAY_NAME, flag);
     }
 
     @Override
@@ -388,22 +346,22 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public boolean isPermissionSet(String name) {
-        throw new NotImplementedException("TODO");
+        return false;
     }
 
     @Override
     public boolean isPermissionSet(Permission perm) {
-        throw new NotImplementedException("TODO");
+        return false;
     }
 
     @Override
     public boolean hasPermission(String name) {
-        throw new NotImplementedException("TODO");
+        return false;
     }
 
     @Override
     public boolean hasPermission(Permission perm) {
-        throw new NotImplementedException("TODO");
+        return false;
     }
 
     @Override
@@ -428,17 +386,15 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public void removeAttachment(PermissionAttachment attachment) {
-        throw new NotImplementedException("TODO");
     }
 
     @Override
     public void recalculatePermissions() {
-        throw new NotImplementedException("TODO");
     }
 
     @Override
     public Set<PermissionAttachmentInfo> getEffectivePermissions() {
-        throw new NotImplementedException("TODO");
+        return ImmutableSet.of();
     }
 
     @Override
@@ -450,4 +406,5 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
     public void setOp(boolean value) {
         // do nothing
     }
+
 }

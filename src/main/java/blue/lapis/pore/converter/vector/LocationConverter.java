@@ -46,6 +46,21 @@ public final class LocationConverter {
         return loc;
     }
 
+    public static Location apply(Location loc, Transform<World> transform) {
+        loc.setWorld(PoreWorld.of(transform.getExtent()));
+        applyPosition(loc, transform.getPosition());
+        loc.setPitch((float) transform.getPitch());
+        loc.setYaw((float) transform.getYaw());
+        return loc;
+    }
+
+    public static Location applyPosition(Location loc, Vector3d vec) {
+        loc.setX(vec.getX());
+        loc.setY(vec.getY());
+        loc.setZ(vec.getZ());
+        return loc;
+    }
+
     public static Location of(org.spongepowered.api.world.Location<World> location) {
         return new Location(PoreWorld.of(location.getExtent()), location.getPosition().getX(),
                 location.getPosition().getY(), location.getPosition().getZ());
