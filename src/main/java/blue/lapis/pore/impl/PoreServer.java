@@ -84,12 +84,17 @@ import org.bukkit.util.StringUtil;
 import org.bukkit.util.permissions.DefaultPermissions;
 import org.spongepowered.api.Game;
 import org.spongepowered.api.command.source.ConsoleSource;
+import org.spongepowered.api.service.user.UserStorageService;
 import org.spongepowered.api.text.channel.MessageChannel;
+import org.spongepowered.api.util.GuavaCollectors;
+import org.spongepowered.api.util.ban.Ban;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -115,6 +120,8 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
     //TODO: use actual server directory, currently set to working directory
 
     private final BukkitScheduler scheduler = new PoreBukkitScheduler();
+    private final BanList profileBans = new PoreUserBanList();
+    private final BanList ipBans = new PoreIpBanList();
 
     public PoreServer(org.spongepowered.api.Game handle, org.slf4j.Logger logger) {
         super(handle.getServer());
@@ -595,27 +602,46 @@ public class PoreServer extends PoreWrapper<org.spongepowered.api.Server> implem
 
     @Override
     public Set<String> getIPBans() {
-        throw new NotImplementedException("TODO");
+        return PoreBanList.getBanService().getIpBans().stream().map(Ban.Ip::getAddress).map(Object::toString)
+                .collect(GuavaCollectors.toImmutableSet());
     }
 
     @Override
     public void banIP(String address) {
-        throw new NotImplementedException("TODO");
+        try {
+            PoreBanList.getBanService().addBan(Ban.builder().address(InetAddress.getByName(address)).build());
+        } catch (UnknownHostException ignored) {
+            // Ignore silently
+        }
     }
 
     @Override
     public void unbanIP(String address) {
-        throw new NotImplementedException("TODO");
+        try {
+            PoreBanList.getBanService().pardon(InetAddress.getByName(address));
+        } catch (UnknownHostException ignored) {
+            // Ignore silently
+        }
     }
 
     @Override
     public Set<OfflinePlayer> getBannedPlayers() {
-        throw new NotImplementedException("TODO");
+        return PoreBanList.getBanService().getProfileBans().stream().map(Ban.Profile::getProfile)
+                .map(game.getServiceManager().provideUnchecked(UserStorageService.class)::get)
+                .filter(Optional::isPresent).map(Optional::get).map(PoreOfflinePlayer::of)
+                .collect(GuavaCollectors.toImmutableSet());
     }
 
     @Override
     public BanList getBanList(BanList.Type type) {
-        throw new NotImplementedException("TODO");
+        switch (type) {
+            case NAME:
+                return profileBans;
+            case IP:
+                return ipBans;
+            default:
+                return null;
+        }
     }
 
     @Override

@@ -24,80 +24,96 @@
  */
 package blue.lapis.pore.impl;
 
-import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.util.PoreText;
-import blue.lapis.pore.util.PoreWrapper;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.BanEntry;
 import org.spongepowered.api.util.ban.Ban;
 
 import java.util.Date;
 
-public class PoreBanEntry extends PoreWrapper<Ban> implements BanEntry {
+final class PoreBanEntry implements BanEntry {
 
-    public static PoreBanEntry of(Ban handle) {
-        return WrapperConverter.of(PoreBanEntry.class, handle);
+    private final String target;
+    private final PoreBanList<?> banList;
+    private Date created;
+    private String source;
+    private Date expiration;
+    private String reason;
+
+    PoreBanEntry(String target, PoreBanList<?> banList) {
+        this.target = target;
+        this.banList = banList;
     }
 
-    protected PoreBanEntry(Ban handle) {
-        super(handle);
+    <T extends Ban> PoreBanEntry(T ban, PoreBanList<T> banList) {
+        this.banList = banList;
+        this.target = banList.getTarget(ban);
+        this.created = Date.from(ban.getCreationDate());
+        this.source = ban.getBanSource().map(PoreText::convert).orElse(null);
+        this.expiration = ban.getExpirationDate().map(Date::from).orElse(null);
+        this.reason = PoreText.convert(ban.getReason());
     }
 
     @Override
     public String getTarget() {
-        throw new NotImplementedException("TODO");
+        return target;
     }
 
     @Override
     public Date getCreated() {
-        return Date.from(getHandle().getCreationDate());
+        return created;
     }
 
     @Override
     public void setCreated(Date created) {
-        throw new NotImplementedException("TODO");
+        this.created = created;
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public String getSource() {
-        if (!getHandle().getBanSource().isPresent()) {
-            return null;
-        }
-        return PoreText.convert(getHandle().getBanSource().get());
+        return source;
     }
 
     @Override
     public void setSource(String source) {
-        throw new NotImplementedException("TODO");
+        this.source = source;
     }
 
     @Override
     public Date getExpiration() {
-        if (!getHandle().getExpirationDate().isPresent()) {
-            return null;
-        }
-        return Date.from(getHandle().getExpirationDate().get());
+        return expiration;
     }
 
     @Override
     public void setExpiration(Date expiration) {
-        throw new NotImplementedException("TODO");
+        this.expiration = expiration;
     }
 
     @Override
     public String getReason() {
-        return getHandle().getReason().toString();
+        return reason;
     }
 
     @Override
     public void setReason(String reason) {
-        throw new NotImplementedException("TODO");
+        this.reason = reason;
     }
 
     @Override
     public void save() {
-        throw new NotImplementedException("TODO");
+        Ban.Builder builder = Ban.builder();
+        if (!banList.setTarget(builder, target)) {
+            return;
+        }
+        if (reason != null) {
+            builder.reason(PoreText.convert(reason));
+        }
+        if (expiration != null) {
+            builder.expirationDate(expiration.toInstant());
+        }
+        if (source != null) {
+            builder.source(PoreText.convert(source));
+        }
+        PoreBanList.getBanService().addBan(builder.build());
     }
 }

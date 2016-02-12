@@ -24,38 +24,73 @@
  */
 package blue.lapis.pore.impl;
 
-import org.apache.commons.lang3.NotImplementedException;
+import blue.lapis.pore.Pore;
+import com.google.common.base.Throwables;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
+import org.spongepowered.api.service.ban.BanService;
+import org.spongepowered.api.util.ban.Ban;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
-//TODO: skeleton implementation
-public class PoreBanList implements BanList {
+public abstract class PoreBanList<T extends Ban> implements BanList {
+
+    private final Cache<String, PoreBanEntry> cache = CacheBuilder.newBuilder().weakValues().build();
 
     @Override
     public BanEntry getBanEntry(String target) {
-        throw new NotImplementedException("TODO");
+        return getBanFor(target).map(this::loadBanEntry).orElse(null);
     }
 
     @Override
     public BanEntry addBan(String target, String reason, Date expires, String source) {
-        throw new NotImplementedException("TODO");
+        try {
+            BanEntry entry = cache.get(target, () -> new PoreBanEntry(target, this));
+            entry.setCreated(new Date());
+            entry.setReason(reason);
+            entry.setExpiration(expires);
+            entry.setSource(source);
+            entry.save();
+            return entry;
+        } catch (ExecutionException e) {
+            throw Throwables.propagate(e.getCause());
+        }
     }
 
     @Override
     public Set<BanEntry> getBanEntries() {
-        throw new NotImplementedException("TODO");
+        return getBans().stream().map(this::loadBanEntry).collect(Collectors.toSet());
     }
 
     @Override
     public boolean isBanned(String target) {
-        throw new NotImplementedException("TODO");
+        return getBanFor(target).isPresent();
     }
 
-    @Override
-    public void pardon(String target) {
-        throw new NotImplementedException("TODO");
+    private BanEntry loadBanEntry(T ban) {
+        try {
+            return cache.get(getTarget(ban), () -> new PoreBanEntry(ban, this));
+        } catch (ExecutionException e) {
+            throw Throwables.propagate(e);
+        }
+    }
+
+    protected abstract Optional<T> getBanFor(String target);
+
+    protected abstract boolean setTarget(Ban.Builder builder, String target);
+
+    protected abstract Collection<T> getBans();
+
+    protected abstract String getTarget(T ban);
+
+    protected static BanService getBanService() {
+        return Pore.getGame().getServiceManager().provideUnchecked(BanService.class);
     }
 }
