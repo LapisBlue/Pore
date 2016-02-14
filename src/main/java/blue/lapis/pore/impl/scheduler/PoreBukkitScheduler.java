@@ -29,6 +29,7 @@ import blue.lapis.pore.Pore;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.MapMaker;
+import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.plugin.IllegalPluginAccessException;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -103,12 +104,12 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 
     @Override
     public boolean isCurrentlyRunning(int taskId) {
-        return false; // TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
     public boolean isQueued(int taskId) {
-        return false; // TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -118,7 +119,7 @@ public class PoreBukkitScheduler implements BukkitScheduler {
 
     @Override
     public List<BukkitTask> getPendingTasks() {
-        return ImmutableList.of();
+        throw new NotImplementedException("TODO");
     }
 
     private BukkitTask register(PoreBukkitTask task) {
