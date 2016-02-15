@@ -4,6 +4,24 @@ Pore is a plugin for the up-and-coming SpongeAPI built to provide compatibility 
 Please note that this project is still under heavy development and **is not yet considered functional**. Currently, no
 Bukkit plugins are verified to be supported.
 
+## Running Pore on Your Sponge Server
+
+If you like living on the bleeding edge and want to give Pore a try:
+
+1. Back up your existing system.
+2. Install [Sponge](https://www.spongepowered.org/), detailed instructions can be found [here](https://docs.spongepowered.org/en/server/getting-started/) .
+3. Copy the [Pore Snapshot](https://ci.caseif.net/job/Pore/lastSuccessfulBuild/) into your server's `mods` directory.
+4. Make a `bukkit-plugins` directory in your server's base directory.
+5. Copy any of the plugins you want to try into the `bukkit-plugins` directory.
+
+When you spin up your server look for messages like:
+
+```
+   [STDERR/sponge]: [name.richardson.james.bukkit.utilities.plugin.AbstractPlugin:onEnable:118]: org.apache.commons.lang3.NotImplementedException: TODO
+```   
+
+These aren't an indication that a feature is broken, but that a feature needed for the plugin you're loading hasn't been implemented yet.
+
 ## Compilation
 
 Gradle is used to handle dependencies.
