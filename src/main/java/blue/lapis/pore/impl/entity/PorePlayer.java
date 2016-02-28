@@ -673,7 +673,8 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
         org.spongepowered.api.world.Location<?> spongeLoc = LocationConverter.of(location);
         //noinspection ConstantConditions
         if (force || spongeLoc.getBlockType() == BlockTypes.BED) {
-            getHandle().get(Keys.RESPAWN_LOCATIONS).get().put(location.getWorld().getUID(), LocationConverter.toVector3d(location));
+            getHandle().get(Keys.RESPAWN_LOCATIONS).get()
+                    .put(location.getWorld().getUID(), LocationConverter.toVector3d(location));
         }
     }
 

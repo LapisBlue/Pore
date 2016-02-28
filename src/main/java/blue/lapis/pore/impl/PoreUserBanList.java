@@ -25,6 +25,7 @@
 package blue.lapis.pore.impl;
 
 import blue.lapis.pore.Pore;
+
 import org.spongepowered.api.entity.living.player.User;
 import org.spongepowered.api.profile.GameProfile;
 import org.spongepowered.api.service.user.UserStorageService;
@@ -66,6 +67,7 @@ public final class PoreUserBanList extends PoreBanList<Ban.Profile> {
     }
 
     private Optional<GameProfile> getGameProfile(String target) {
-        return Pore.getGame().getServiceManager().provideUnchecked(UserStorageService.class).get(target).map(User::getProfile);
+        return Pore.getGame().getServiceManager().provideUnchecked(UserStorageService.class).get(target)
+                .map(User::getProfile);
     }
 }

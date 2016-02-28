@@ -42,7 +42,7 @@ public class IgnoreResult implements TestRule {
         private final Statement base;
         private final Description description;
 
-        public IgnoreResultStatement(Statement base, Description description) {
+        IgnoreResultStatement(Statement base, Description description) {
             this.base = base;
             this.description = description;
         }

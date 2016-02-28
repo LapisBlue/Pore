@@ -58,7 +58,7 @@ public final class BigMushroomDataConverter extends DataTypeConverter {
 
     static class BigMushroomDataValue extends AbstractDataValue<BigMushroomData, BigMushroomType> {
 
-        public BigMushroomDataValue(BigMushroomType value) {
+        BigMushroomDataValue(BigMushroomType value) {
             super(BigMushroomData.class, value);
         }
     }

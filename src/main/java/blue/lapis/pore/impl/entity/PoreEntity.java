@@ -202,8 +202,7 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public void sendMessage(String message) {
-        // TODO: This isn't implemented in CB for the base entity class. Should we just let it silently fail?
-        // Yes
+        // silently fail
     }
 
     @Override
@@ -229,7 +228,8 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
     @Override
     public boolean setPassenger(final org.bukkit.entity.Entity passenger) {
         if (passenger != null) {
-            return getHandle().offer(Keys.PASSENGER, ((PoreEntity) passenger).getHandle().createSnapshot()).isSuccessful();
+            return getHandle().offer(Keys.PASSENGER, ((PoreEntity) passenger).getHandle().createSnapshot())
+                    .isSuccessful();
         } else {
             return getHandle().remove(Keys.PASSENGER).isSuccessful();
         }

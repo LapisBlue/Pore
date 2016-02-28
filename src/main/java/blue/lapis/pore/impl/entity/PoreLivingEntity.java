@@ -356,8 +356,8 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public Collection<PotionEffect> getActivePotionEffects() {
-        List<org.spongepowered.api.effect.potion.PotionEffect> effects = getHandle().get(Keys.POTION_EFFECTS).
-                orElse(null);
+        List<org.spongepowered.api.effect.potion.PotionEffect> effects = getHandle().get(Keys.POTION_EFFECTS)
+                .orElse(null);
         if (effects == null) {
             return ImmutableList.of();
         }

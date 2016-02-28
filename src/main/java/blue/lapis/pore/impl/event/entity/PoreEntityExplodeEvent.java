@@ -77,7 +77,8 @@ public final class PoreEntityExplodeEvent extends EntityExplodeEvent implements 
 
     @Override
     public Location getLocation() {
-        return LocationConverter.fromVector3d(getHandle().getExplosion().getWorld(), getHandle().getExplosion().getOrigin());
+        return LocationConverter.fromVector3d(getHandle().getExplosion().getWorld(),
+                getHandle().getExplosion().getOrigin());
     }
 
     @Override

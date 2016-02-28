@@ -50,7 +50,7 @@ public final class BrickDataConverter extends DataTypeConverter {
 
     static class BrickDataValue extends AbstractDataValue<BrickData, BrickType> {
 
-        public BrickDataValue(BrickType value) {
+        BrickDataValue(BrickType value) {
             super(BrickData.class, value);
         }
     }

@@ -130,13 +130,15 @@ public class PoreBukkitScheduler implements BukkitScheduler {
     @Override
     public BukkitTask runTask(Plugin plugin, Runnable task) throws IllegalArgumentException {
         validate(plugin, task);
-        return register(new PoreBukkitTask(newTask().execute(task).submit(Pore.getPlugin(plugin)), id.incrementAndGet()));
+        return register(new PoreBukkitTask(newTask().execute(task)
+                .submit(Pore.getPlugin(plugin)), id.incrementAndGet()));
     }
 
     @Override
     public BukkitTask runTaskAsynchronously(Plugin plugin, Runnable task) throws IllegalArgumentException {
         validate(plugin, task);
-        return register(new PoreBukkitTask(newTask().async().execute(task).submit(Pore.getPlugin(plugin)), id.incrementAndGet()));
+        return register(new PoreBukkitTask(newTask().async().execute(task)
+                .submit(Pore.getPlugin(plugin)), id.incrementAndGet()));
     }
 
     @Override
@@ -150,8 +152,8 @@ public class PoreBukkitScheduler implements BukkitScheduler {
     public BukkitTask runTaskLaterAsynchronously(Plugin plugin, Runnable task, long delay)
             throws IllegalArgumentException {
         validate(plugin, task);
-        return register(new PoreBukkitTask(newTask().async().delay(ticksToMillis(delay), TimeUnit.MILLISECONDS).execute(task)
-                .submit(Pore.getPlugin(plugin)), id.incrementAndGet()));
+        return register(new PoreBukkitTask(newTask().async().delay(ticksToMillis(delay), TimeUnit.MILLISECONDS)
+                .execute(task).submit(Pore.getPlugin(plugin)), id.incrementAndGet()));
     }
 
     @Override

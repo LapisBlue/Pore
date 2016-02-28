@@ -121,7 +121,8 @@ public class PoreCommandMap extends SimpleCommandMap {
 
     @Override
     public boolean dispatch(CommandSender sender, String commandLine) throws CommandException {
-        CommandResult result = handle.process(((PoreWrapper<? extends CommandSource>) sender).getHandle(), commandLine);
+        assert sender instanceof PoreCommandSender;
+        CommandResult result = handle.process(((PoreCommandSender) sender).getHandle(), commandLine);
         return result.getSuccessCount().isPresent() && result.getSuccessCount().get() > 0;
     }
 

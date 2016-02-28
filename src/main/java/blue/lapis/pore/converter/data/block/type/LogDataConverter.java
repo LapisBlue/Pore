@@ -62,14 +62,14 @@ public final class LogDataConverter extends DataTypeConverter {
 
     static class TreeDataValue extends AbstractDataValue<TreeData, TreeType> {
 
-        public TreeDataValue(TreeType value) {
+        TreeDataValue(TreeType value) {
             super(TreeData.class, value);
         }
     }
 
     static class AxisDataValue extends AbstractDataValue<AxisData, Axis> {
 
-        public AxisDataValue(Axis value) {
+        AxisDataValue(Axis value) {
             super(AxisData.class, value);
         }
     }
