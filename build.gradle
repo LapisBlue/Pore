@@ -5,10 +5,10 @@ plugins {
     id 'idea'
     id 'checkstyle'
 
+    id 'net.minecrell.licenser' version '0.1.3'
     id 'net.minecrell.gitpatcher' version '0.8'
-    id 'blue.lapis.methodremapper' version '0.1.3'
+    id 'blue.lapis.methodremapper' version '0.2'
 
-    id 'com.github.hierynomus.license' version '0.11.0'
     id 'com.github.johnrengelman.shadow' version '1.2.3'
 }
 
@@ -149,21 +149,17 @@ shadowJar {
 }
 
 configure([project, project(':ap')]) {
-    apply plugin: 'license'
+    apply plugin: 'net.minecrell.licenser'
 
     // License header formatting
     license {
         header rootProject.file('LICENSE')
 
-        include '**/*.java'
-        exclude '**/lib/**'
+        include '/*.java'
+        exclude '/lib/**'
 
         sourceSets = project.sourceSets
         ignoreFailures false
-        strictCheck true
-        mapping {
-            java = 'SLASHSTAR_STYLE'
-        }
     }
 }
 
