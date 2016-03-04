@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package blue.lapis.pore.converter.type.material;
 
 import static org.spongepowered.api.data.manipulator.catalog.CatalogItemData.COAL_ITEM_DATA;

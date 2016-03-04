@@ -155,8 +155,8 @@ configure([project, project(':ap')]) {
     license {
         header rootProject.file('LICENSE')
 
-        include '/*.java'
-        exclude '/lib/**'
+        include '**/*.java'
+        exclude '**/lib/**'
 
         sourceSets = project.sourceSets
         ignoreFailures false

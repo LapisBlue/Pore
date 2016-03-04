@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package blue.lapis.pore.impl.event;
 
 import static blue.lapis.pore.impl.event.PoreEventTest.BUKKIT_PACKAGE;

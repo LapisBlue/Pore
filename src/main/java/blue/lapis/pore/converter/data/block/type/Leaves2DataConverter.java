@@ -22,6 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package blue.lapis.pore.converter.data.block.type;
 
 import static blue.lapis.pore.converter.data.block.type.LeavesDataConverter.DecayableDataValue;
