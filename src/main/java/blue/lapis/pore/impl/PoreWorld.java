@@ -470,8 +470,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public void setStorm(boolean hasStorm) {
-        //noinspection ConstantConditions
-        getHandle().forecast(hasStorm ? Weathers.RAIN : Weathers.CLEAR);
+        getHandle().setWeather(hasStorm ? Weathers.RAIN : Weathers.CLEAR);
     }
 
     @Override
@@ -481,7 +480,7 @@ public class PoreWorld extends PoreWrapper<World> implements org.bukkit.World {
 
     @Override
     public void setWeatherDuration(int duration) {
-        getHandle().forecast(getHandle().getWeather(), duration);
+        getHandle().setWeather(getHandle().getWeather(), duration);
     }
 
     @Override

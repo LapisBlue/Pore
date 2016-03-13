@@ -52,7 +52,7 @@ final class PoreBanEntry implements BanEntry {
         this.created = Date.from(ban.getCreationDate());
         this.source = ban.getBanSource().map(PoreText::convert).orElse(null);
         this.expiration = ban.getExpirationDate().map(Date::from).orElse(null);
-        this.reason = PoreText.convert(ban.getReason());
+        this.reason = PoreText.convert(ban.getReason().orElse(null));
     }
 
     @Override

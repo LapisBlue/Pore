@@ -58,12 +58,16 @@ public final class PorePlayerQuitEvent extends PlayerQuitEvent implements PoreEv
 
     @Override
     public String getQuitMessage() {
-        return PoreText.convert(getHandle().getMessage().orElse(null));
+        return getHandle().isMessageCancelled() ? null : PoreText.convert(getHandle().getMessage());
     }
 
     @Override
     public void setQuitMessage(String quitMessage) {
-        handle.setMessage(PoreText.convert(quitMessage));
+        if (quitMessage == null) {
+            this.handle.setMessageCancelled(true);
+        } else {
+            this.handle.setMessage(PoreText.convert(quitMessage));
+        }
     }
 
     @Override

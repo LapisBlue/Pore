@@ -1,8 +1,6 @@
 // Apply Gradle plugins
 plugins {
-    id 'java'
-    id 'eclipse'
-    id 'idea'
+    id 'org.spongepowered.plugin' version '0.5.1'
     id 'checkstyle'
 
     id 'net.minecrell.licenser' version '0.1.3'
@@ -20,7 +18,7 @@ version = '1.0.0-SNAPSHOT'
 apply from: 'gradle/deploy.gradle'
 
 allprojects {
-    group = 'blue.lapis.pore'
+    group = 'blue.lapis'
 
     sourceCompatibility = '1.8'
     targetCompatibility = '1.8'
@@ -33,10 +31,6 @@ allprojects {
 // Project repositories
 repositories {
     jcenter()
-    maven {
-        name = 'sponge'
-        url = 'https://repo.spongepowered.org/maven'
-    }
     maven {
         name = 'lapis'
         url = 'http://repo.lapis.blue/releases'
@@ -79,7 +73,7 @@ dependencies {
 
     // To update, go to https://repo.spongepowered.org/maven/org/spongepowered/spongeapi/2.1-SNAPSHOT/
     // Then pick latest version (or whatever version you want)
-    compile 'org.spongepowered:spongeapi:3.0.0'
+    compile 'org.spongepowered:spongeapi:4.0.3'
     runtime 'blue.lapis.methodremapper:tweaker:0.1'
 
     shadow project('Porekit')

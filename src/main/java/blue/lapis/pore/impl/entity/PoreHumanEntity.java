@@ -38,6 +38,7 @@ import blue.lapis.pore.impl.inventory.PorePlayerInventory;
 import org.apache.commons.lang3.NotImplementedException;
 import org.bukkit.GameMode;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -49,6 +50,8 @@ import org.bukkit.plugin.Plugin;
 import org.spongepowered.api.block.BlockTypes;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.entity.living.Humanoid;
+import org.spongepowered.api.event.cause.Cause;
+import org.spongepowered.api.event.cause.NamedCause;
 import org.spongepowered.api.item.inventory.Carrier;
 import org.spongepowered.api.item.inventory.entity.HumanInventory;
 import org.spongepowered.api.service.permission.Subject;
@@ -94,11 +97,16 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public InventoryView getOpenInventory() {
-        return PoreInventoryView.builder()
-                .setPlayer(this)
-                .setTopInventory(this.getHandle().getOpenInventory().orElse(null))
-                .setBottomInventory(this.getHandle().getInventory())
-                .build();
+        if (getHandle() instanceof org.spongepowered.api.entity.living.player.Player) {
+            return PoreInventoryView.builder()
+                    .setPlayer(this)
+                    .setTopInventory(((org.spongepowered.api.entity.living.player.Player) getHandle()).getOpenInventory().orElse(null))
+                    .setBottomInventory(this.getHandle().getInventory())
+                    .build();
+        }
+
+        // TODO
+        throw new NotImplementedException("TODO");
     }
 
     @Override
@@ -141,7 +149,9 @@ public class PoreHumanEntity extends PoreLivingEntity implements HumanEntity {
 
     @Override
     public void closeInventory() {
-        this.getHandle().closeInventory();
+        if (getHandle() instanceof org.spongepowered.api.entity.living.player.Player) {
+            ((org.spongepowered.api.entity.living.player.Player) getHandle()).closeInventory(Cause.of(NamedCause.source(this)));
+        }
     }
 
     @Override

@@ -35,7 +35,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
-import org.spongepowered.api.entity.vehicle.minecart.MinecartCommandBlock;
+import org.spongepowered.api.entity.vehicle.minecart.CommandBlockMinecart;
 import org.spongepowered.api.text.Text;
 
 import java.util.Arrays;
@@ -44,17 +44,17 @@ import java.util.stream.Collectors;
 
 public class PoreCommandMinecart extends PoreMinecart implements CommandMinecart {
 
-    public static PoreCommandMinecart of(MinecartCommandBlock handle) {
+    public static PoreCommandMinecart of(CommandBlockMinecart handle) {
         return WrapperConverter.of(PoreCommandMinecart.class, handle);
     }
 
-    protected PoreCommandMinecart(MinecartCommandBlock handle) {
+    protected PoreCommandMinecart(CommandBlockMinecart handle) {
         super(handle);
     }
 
     @Override
-    public MinecartCommandBlock getHandle() {
-        return (MinecartCommandBlock) super.getHandle();
+    public CommandBlockMinecart getHandle() {
+        return (CommandBlockMinecart) super.getHandle();
     }
 
     @Override

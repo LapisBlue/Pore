@@ -59,7 +59,7 @@ public final class PoreUserBanList extends PoreBanList<Ban.Profile> {
 
     @Override
     protected String getTarget(Ban.Profile ban) {
-        return ban.getProfile().getName();
+        return ban.getProfile().getName().get();
     }
 
     @Override

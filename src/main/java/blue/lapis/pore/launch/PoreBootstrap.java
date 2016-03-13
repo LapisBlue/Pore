@@ -40,7 +40,7 @@ import org.spongepowered.api.plugin.Plugin;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-@Plugin(id = "pore", name = "Pore")
+@Plugin(id = "blue.lapis.pore", name = "Pore")
 public class PoreBootstrap implements PoreEventManager {
 
     private static final String IMPLEMENTATION_CLASS = "blue.lapis.pore.Pore";

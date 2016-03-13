@@ -71,7 +71,7 @@ public final class PorePlayerDeathEvent extends PlayerDeathEvent implements Pore
 
     @Override
     public String getDeathMessage() {
-        return PoreText.convert(getHandle().getMessage().orElse(null));
+        return PoreText.convert(getHandle().getMessage());
     }
 
     @Override

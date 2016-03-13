@@ -259,7 +259,7 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public int getMaximumNoDamageTicks() {
-        return getHandle().getValue(Keys.INVULNERABILITY).get().getMaxValue();
+        return getHandle().getValue(Keys.INVULNERABILITY_TICKS).get().getMaxValue();
     }
 
     @Override
@@ -291,12 +291,12 @@ public class PoreLivingEntity extends PoreEntity implements LivingEntity {
 
     @Override
     public int getNoDamageTicks() {
-        return getHandle().get(Keys.INVULNERABILITY).get();
+        return getHandle().get(Keys.INVULNERABILITY_TICKS).get();
     }
 
     @Override
     public void setNoDamageTicks(int ticks) {
-        getHandle().offer(Keys.INVULNERABILITY, ticks);
+        getHandle().offer(Keys.INVULNERABILITY_TICKS, ticks);
     }
 
     @Override

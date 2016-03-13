@@ -31,21 +31,21 @@ import blue.lapis.pore.impl.inventory.PoreInventory;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.inventory.Inventory;
-import org.spongepowered.api.entity.vehicle.minecart.MinecartChest;
+import org.spongepowered.api.entity.vehicle.minecart.ChestMinecart;
 
 public class PoreStorageMinecart extends PoreMinecart implements StorageMinecart {
 
-    public static PoreStorageMinecart of(MinecartChest handle) {
+    public static PoreStorageMinecart of(ChestMinecart handle) {
         return WrapperConverter.of(PoreStorageMinecart.class, handle);
     }
 
-    protected PoreStorageMinecart(MinecartChest handle) {
+    protected PoreStorageMinecart(ChestMinecart handle) {
         super(handle);
     }
 
     @Override
-    public MinecartChest getHandle() {
-        return (MinecartChest) super.getHandle();
+    public ChestMinecart getHandle() {
+        return (ChestMinecart) super.getHandle();
     }
 
     @Override

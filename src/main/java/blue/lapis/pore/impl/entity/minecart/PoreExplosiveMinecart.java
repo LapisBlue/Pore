@@ -29,21 +29,21 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.ExplosiveMinecart;
-import org.spongepowered.api.entity.vehicle.minecart.MinecartTNT;
+import org.spongepowered.api.entity.vehicle.minecart.TNTMinecart;
 
 public class PoreExplosiveMinecart extends PoreMinecart implements ExplosiveMinecart {
 
-    public static PoreExplosiveMinecart of(MinecartTNT handle) {
+    public static PoreExplosiveMinecart of(TNTMinecart handle) {
         return WrapperConverter.of(PoreExplosiveMinecart.class, handle);
     }
 
-    protected PoreExplosiveMinecart(MinecartTNT handle) {
+    protected PoreExplosiveMinecart(TNTMinecart handle) {
         super(handle);
     }
 
     @Override
-    public MinecartTNT getHandle() {
-        return (MinecartTNT) super.getHandle();
+    public TNTMinecart getHandle() {
+        return (TNTMinecart) super.getHandle();
     }
 
     @Override

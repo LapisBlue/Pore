@@ -230,14 +230,14 @@ import org.spongepowered.api.entity.projectile.explosive.WitherSkull;
 import org.spongepowered.api.entity.projectile.explosive.fireball.LargeFireball;
 import org.spongepowered.api.entity.projectile.explosive.fireball.SmallFireball;
 import org.spongepowered.api.entity.vehicle.Boat;
+import org.spongepowered.api.entity.vehicle.minecart.ChestMinecart;
+import org.spongepowered.api.entity.vehicle.minecart.CommandBlockMinecart;
+import org.spongepowered.api.entity.vehicle.minecart.FurnaceMinecart;
+import org.spongepowered.api.entity.vehicle.minecart.HopperMinecart;
 import org.spongepowered.api.entity.vehicle.minecart.Minecart;
-import org.spongepowered.api.entity.vehicle.minecart.MinecartChest;
-import org.spongepowered.api.entity.vehicle.minecart.MinecartCommandBlock;
-import org.spongepowered.api.entity.vehicle.minecart.MinecartFurnace;
-import org.spongepowered.api.entity.vehicle.minecart.MinecartHopper;
-import org.spongepowered.api.entity.vehicle.minecart.MinecartMobSpawner;
-import org.spongepowered.api.entity.vehicle.minecart.MinecartRideable;
-import org.spongepowered.api.entity.vehicle.minecart.MinecartTNT;
+import org.spongepowered.api.entity.vehicle.minecart.MobSpawnerMinecart;
+import org.spongepowered.api.entity.vehicle.minecart.RideableMinecart;
+import org.spongepowered.api.entity.vehicle.minecart.TNTMinecart;
 import org.spongepowered.api.entity.weather.Lightning;
 import org.spongepowered.api.entity.weather.WeatherEffect;
 import org.spongepowered.api.item.inventory.Carrier;
@@ -340,13 +340,13 @@ public final class WrapperConverter {
                 .register(PrimedTNT.class, PoreTNTPrimed.class)
                 .register(WeatherEffect.class, PoreWeather.class)
                 .register(Minecart.class, PoreMinecart.class)
-                    .register(MinecartChest.class, PoreStorageMinecart.class)
-                    .register(MinecartCommandBlock.class, PoreCommandMinecart.class)
-                    .register(MinecartFurnace.class, PorePoweredMinecart.class)
-                    .register(MinecartHopper.class, PoreHopperMinecart.class)
-                    .register(MinecartMobSpawner.class, PoreSpawnerMinecart.class)
-                    .register(MinecartRideable.class, PoreRideableMinecart.class)
-                    .register(MinecartTNT.class, PoreExplosiveMinecart.class)
+                    .register(ChestMinecart.class, PoreStorageMinecart.class)
+                    .register(CommandBlockMinecart.class, PoreCommandMinecart.class)
+                    .register(FurnaceMinecart.class, PorePoweredMinecart.class)
+                    .register(HopperMinecart.class, PoreHopperMinecart.class)
+                    .register(MobSpawnerMinecart.class, PoreSpawnerMinecart.class)
+                    .register(RideableMinecart.class, PoreRideableMinecart.class)
+                    .register(TNTMinecart.class, PoreExplosiveMinecart.class)
                 .register(Boat.class, PoreBoat.class)
 
             //.register(TileEntity.class, PoreTileEntity.class)

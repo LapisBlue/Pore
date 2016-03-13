@@ -66,7 +66,6 @@ import org.spongepowered.api.command.CommandResult;
 import org.spongepowered.api.data.key.Keys;
 import org.spongepowered.api.effect.sound.SoundType;
 import org.spongepowered.api.entity.living.player.Player;
-import org.spongepowered.api.entity.living.player.tab.PlayerTabInfo;
 import org.spongepowered.api.profile.GameProfile;
 import org.spongepowered.api.resourcepack.ResourcePacks;
 import org.spongepowered.api.service.ban.BanService;
@@ -76,6 +75,7 @@ import org.spongepowered.api.statistic.EntityStatistic;
 import org.spongepowered.api.statistic.StatisticGroup;
 import org.spongepowered.api.text.Text;
 import org.spongepowered.api.text.title.Title;
+import org.spongepowered.api.util.RespawnLocation;
 import org.spongepowered.api.util.ban.Ban;
 
 import java.io.FileNotFoundException;
@@ -120,17 +120,19 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     @SuppressWarnings("deprecation")
     public String getPlayerListName() {
-        Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
-        return info.isPresent() ? PoreText.convert(info.get().getDisplayName()) : this.getDisplayName();
+        throw new NotImplementedException("TODO");
+        /*Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
+        return info.isPresent() ? PoreText.convert(info.get().getDisplayName()) : this.getDisplayName();*/
     }
 
     @Override
     @SuppressWarnings("deprecation")
     public void setPlayerListName(String name) {
-        Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
+        throw new NotImplementedException("TODO");
+        /*Optional<PlayerTabInfo> info = this.getHandle().getTabList().getPlayer(this.getUniqueId());
         if (info.isPresent()) {
             info.get().setDisplayName(PoreText.convert(name));
-        }
+        }*/
     }
 
     @Override
@@ -661,7 +663,7 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
     @Override
     public Location getBedSpawnLocation() {
         return LocationConverter.fromVector3d(getHandle().getWorld(),
-                getHandle().get(Keys.RESPAWN_LOCATIONS).get().get(getHandle().getWorld().getUniqueId()));
+                getHandle().get(Keys.RESPAWN_LOCATIONS).get().get(getHandle().getWorld().getUniqueId()).getPosition());
     }
 
     @Override
@@ -674,8 +676,9 @@ public class PorePlayer extends PoreHumanEntity implements org.bukkit.entity.Pla
         org.spongepowered.api.world.Location<?> spongeLoc = LocationConverter.of(location);
         //noinspection ConstantConditions
         if (force || spongeLoc.getBlockType() == BlockTypes.BED) {
+            UUID worldId = location.getWorld().getUID();
             getHandle().get(Keys.RESPAWN_LOCATIONS).get()
-                    .put(location.getWorld().getUID(), LocationConverter.toVector3d(location));
+                    .put(location.getWorld().getUID(), RespawnLocation.builder().position(VectorConverter.create3d(location)).world(worldId).build());
         }
     }
 

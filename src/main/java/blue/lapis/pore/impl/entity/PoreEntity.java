@@ -316,13 +316,13 @@ public class PoreEntity extends PoreWrapper<Entity> implements org.bukkit.entity
 
     @Override
     public boolean isCustomNameVisible() {
-        Optional<Boolean> visible = getHandle().get(Keys.SHOWS_DISPLAY_NAME);
+        Optional<Boolean> visible = getHandle().get(Keys.CUSTOM_NAME_VISIBLE);
         return visible.isPresent() ? visible.get() : false;
     }
 
     @Override
     public void setCustomNameVisible(boolean flag) {
-        getHandle().offer(Keys.SHOWS_DISPLAY_NAME, flag);
+        getHandle().offer(Keys.CUSTOM_NAME_VISIBLE, flag);
     }
 
     @Override

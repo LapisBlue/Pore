@@ -58,7 +58,7 @@ public final class PorePlayerJoinEvent extends PlayerJoinEvent implements PoreEv
 
     @Override
     public String getJoinMessage() {
-        return PoreText.convert(handle.getMessage().orElse(null));
+        return PoreText.convert(handle.getMessage());
     }
 
     @Override

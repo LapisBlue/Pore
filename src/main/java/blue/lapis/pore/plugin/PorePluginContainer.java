@@ -45,13 +45,18 @@ public class PorePluginContainer extends PoreWrapper<Plugin> implements PluginCo
     }
 
     @Override
+    public String getUnqualifiedId() {
+        return getId();
+    }
+
+    @Override
     public String getName() {
         return getHandle().getName();
     }
 
     @Override
-    public String getVersion() {
-        return getHandle().getDescription().getVersion();
+    public Optional<String> getVersion() {
+        return Optional.ofNullable(getHandle().getDescription().getVersion());
     }
 
     @Override

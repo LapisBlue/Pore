@@ -29,23 +29,22 @@ import blue.lapis.pore.converter.wrapper.WrapperConverter;
 import blue.lapis.pore.impl.inventory.PoreInventory;
 
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.minecart.HopperMinecart;
 import org.bukkit.inventory.Inventory;
-import org.spongepowered.api.entity.vehicle.minecart.MinecartHopper;
+import org.spongepowered.api.entity.vehicle.minecart.HopperMinecart;
 
-public class PoreHopperMinecart extends PoreMinecart implements HopperMinecart {
+public class PoreHopperMinecart extends PoreMinecart implements org.bukkit.entity.minecart.HopperMinecart {
 
-    public static PoreHopperMinecart of(MinecartHopper handle) {
+    public static PoreHopperMinecart of(HopperMinecart handle) {
         return WrapperConverter.of(PoreHopperMinecart.class, handle);
     }
 
-    protected PoreHopperMinecart(MinecartHopper handle) {
+    protected PoreHopperMinecart(HopperMinecart handle) {
         super(handle);
     }
 
     @Override
-    public MinecartHopper getHandle() {
-        return (MinecartHopper) super.getHandle();
+    public HopperMinecart getHandle() {
+        return (HopperMinecart) super.getHandle();
     }
 
     @Override

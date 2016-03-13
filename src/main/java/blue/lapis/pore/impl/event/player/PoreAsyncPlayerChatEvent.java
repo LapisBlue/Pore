@@ -78,7 +78,7 @@ public final class PoreAsyncPlayerChatEvent extends AsyncPlayerChatEvent
 
     @Override
     public String getFormat() {
-        return PoreText.convert(getHandle().getMessage().orElse(null));
+        return PoreText.convert(getHandle().getMessage());
     }
 
     @Override
